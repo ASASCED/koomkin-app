@@ -1,0 +1,248 @@
+.detail-card {
+  .icono{
+    width: 85%;
+    padding-right: 0 !important;
+  }
+}
+.ios, .md {
+     page-reporte {
+         button {
+             align-items: baseline;
+             border: 2pt black;
+             padding-left: 0px !important;
+         }
+     }
+ }
+
+ .label-md {
+  margin: 0px 0px 0px 0; 
+ }
+ .item-md.item-block .item-inner {
+  padding-right: 0px; 
+  border-bottom: 1px solid #dedede;
+}
+ .encabezado{
+   padding: 0 !important;
+ }
+ .rate-header { 
+  color: #76797b;
+  font-size: 12px;
+  position: absolute;
+}
+.rate-nombre { 
+  font-size: 15px;
+  color: black; 
+  display: -webkit-inline-box;
+}
+.inf-mail{ 
+  font-size: 15px;
+  color: #00a6d4;
+  display: -webkit-inline-box;
+}
+.rate-fecha { 
+  font-size: 12px;
+  color: #a3a3a3; 
+  position: relative;
+}
+.rate-tel { 
+  font-size: 15px;
+  color: #a3a3a3; 
+  position: relative;
+}
+.rate-telefono { 
+  font-size: 12px;
+  color: #a3a3a3;
+  position: relative;
+}
+.rate-empresa {  
+  font-size: 13px;
+  color: #a3a3a3; 
+  padding-top: 2px;
+  display: -webkit-inline-box;
+}
+.inf-mensaje { 
+  font-size:11px;
+  color: black; 
+  padding-top: 4px;
+  text-align: justify;
+  overflow:hidden;
+  white-space:nowrap;
+  text-overflow: ellipsis;
+}
+.inf-mensajem { 
+  font-size:14px;
+  color: black; 
+  padding-top: 4px;
+  text-align: justify;
+  text-overflow: ellipsis;
+}
+.rate-icon {
+  position: relative;
+  color: #d1d1d1;
+}
+.rate-icon-fill{
+  position: relative;
+  color: #10cebc;
+}
+.inf-estado { 
+font-size: 13px;
+color: #a3a3a3;
+position: relative;
+}
+.circulo{
+  border-radius: 15px;
+  width: 6%;
+  text-align: center;
+  margin: 0px;
+  display: inline-table;
+  color: white;
+}
+.vendido{
+  background-color: darkturquoise;
+}
+.enProceso{
+  background-color: #6B4595;
+}
+.sinContacto{
+  background-color: #419BD6;
+}
+.descartado{
+  background-color: #F2631C;
+}
+  .vacio{
+  background-color: #d1d1d1;
+}
+ .fillv{
+background-color:darkturquoise;
+}
+.fill-v{
+background-color:#d1d1d1;
+}
+.btn-estatusv{
+  color: white;
+  width: 90%;
+  margin-left: 5%;
+  height: 25px;
+  margin-top: 7px;
+  border-color: transparent;
+  border-radius: 3px;
+  font-size: 16px;
+}
+.btn-estatusv:hover{
+  background-color:darkturquoise;
+}
+.btn-estatusv:active{
+   background-color:darkturquoise; 
+    }
+.btn-estatusp{
+  color: white;
+  width: 90%;
+  margin-left: 5%;
+  height: 25px;
+  margin-top: 7px;
+  border-color: transparent;
+  border-radius: 3px;
+  font-size: 16px;
+}
+.btn-estatusp:hover{
+  background-color:#6B4595;
+}
+.fillp{
+  background-color:#6B4595;
+}
+.btn-estatusc{
+  color: white;
+  width: 90%;
+  margin-left: 5%;
+  height: 25px;
+  margin-top: 7px;
+  border-color: transparent;
+  border-radius: 3px;
+  font-size: 16px;
+}
+.btn-estatusc:hover{
+  background-color:#419BD6; 
+}
+.fillc{
+  background-color:#419BD6; 
+}
+.btn-estatusd{
+  color: white;
+  width: 90%;
+  margin-left: 5%;
+  height: 25px;
+  margin-top: 7px;
+  border-color: transparent;
+  border-radius: 3px;
+  font-size: 16px;
+}
+.btn-estatusd:hover{
+  background-color:#F2631C; 
+}
+.filld{
+  background-color:#F2631C; 
+}
+.inf-lead { 
+  font-size: 13px;
+  color: darkturquoise; 
+  padding-left: 10px;
+  padding-right: 2%;
+  padding-top: 8%;
+  position: relative;
+}
+.inf-estatus { 
+  font-size: 13px;
+  padding-top: 3%;
+  color: darkturquoise;
+  text-align: center;
+}
+.rate-icon1 {
+  width: var(--iron-icon-width, 60px);
+  height: var(--iron-icon-height, 60px);
+  position: relative;
+  color: #d1d1d1;
+  margin-top: 20%;
+}
+.rate-icon2 {
+  width: var(--iron-icon-width, 60px);
+  height: var(--iron-icon-height, 60px);
+  position: relative;
+  color: #d1d1d1;
+  margin-top: 20%;
+}
+.rate-icon1-fill {
+  width: var(--iron-icon-width, 60px);
+  height: var(--iron-icon-height, 60px);
+  position: relative;
+  color: darkturquoise;
+  margin-top: 20%;
+}
+.rate-icon-fill2 {
+  width: var(--iron-icon-width, 60px);
+  height: var(--iron-icon-height, 60px);
+  position: relative;
+  color: darkturquoise;
+  margin-top: 20%;
+}
+.cuadro{
+  width: 100%;
+  height: 100%;
+}
+.cuadro1{
+  width: 49%;
+  height: 50%;  
+  display:inline-block;  
+  margin-top: 2%;   
+}
+.cuadro2{
+  width: 50%;
+  height: 50%; 
+  display:inline-block;   
+}
+.card-actions1{
+  width: 90%;
+  display: inline-block;
+  position: relative;
+  margin-right: 5%;
+  text-align: center;
+}

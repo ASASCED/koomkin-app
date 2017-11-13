@@ -1,0 +1,10 @@
+leads {
+       .expand-wrapper {
+           transition: 0.2s linear;
+           border: 1pt black;
+        }  
+       .collapsed {
+           height: 0 !important;
+           border: 1pt black;
+       }
+   }
