@@ -10,7 +10,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 export class ReportePage {
 
   items: any = [];
-  itemExpandHeight: number = 100;
+  itemExpandHeight: number = 300;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.items = [

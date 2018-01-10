@@ -13,12 +13,26 @@
          }
      }
  }
+ .toolbar-title-md {
+  font-size: 1.5rem;
+  padding: 0px;
+}
+
+ 
+ .grid{
+  padding-bottom: 0px !important;
+  
+ }
 
  .label-md {
   margin: 0px 0px 0px 0; 
  }
+ .col{
+   padding: 0px !important;
+   align-items: center;
+ }
  .item-md.item-block .item-inner {
-  padding-right: 0px; 
+  padding-right: 0px !important; 
   border-bottom: 1px solid #dedede;
 }
  .encabezado{
@@ -32,33 +46,31 @@
 .rate-nombre { 
   font-size: 15px;
   color: black; 
-  display: -webkit-inline-box;
 }
 .inf-mail{ 
-  font-size: 15px;
+  font-size: 13px;
   color: #00a6d4;
-  display: -webkit-inline-box;
+  padding-top: 2px;
 }
 .rate-fecha { 
   font-size: 12px;
-  color: #a3a3a3; 
-  position: relative;
+  color: #a3a3a3;
+  text-align: right; 
 }
 .rate-tel { 
-  font-size: 15px;
+  font-size: 12px;
   color: #a3a3a3; 
-  position: relative;
+  text-align: right  
 }
 .rate-telefono { 
   font-size: 12px;
   color: #a3a3a3;
-  position: relative;
+  text-align: right;
 }
 .rate-empresa {  
   font-size: 13px;
   color: #a3a3a3; 
   padding-top: 2px;
-  display: -webkit-inline-box;
 }
 .inf-mensaje { 
   font-size:11px;
@@ -85,17 +97,18 @@
   color: #10cebc;
 }
 .inf-estado { 
-font-size: 13px;
-color: #a3a3a3;
-position: relative;
+  font-size: 13px;
+  color: #a3a3a3;
+  text-align: right;
 }
 .circulo{
   border-radius: 15px;
-  width: 6%;
+  width: 90%;
   text-align: center;
   margin: 0px;
   display: inline-table;
   color: white;
+  background-color: darkturquoise;
 }
 .vendido{
   background-color: darkturquoise;
@@ -120,13 +133,11 @@ background-color:#d1d1d1;
 }
 .btn-estatusv{
   color: white;
-  width: 90%;
-  margin-left: 5%;
-  height: 25px;
-  margin-top: 7px;
+  width: 80%;
   border-color: transparent;
   border-radius: 3px;
   font-size: 16px;
+  margin-bottom: 3px;  
 }
 .btn-estatusv:hover{
   background-color:darkturquoise;
@@ -136,13 +147,11 @@ background-color:#d1d1d1;
     }
 .btn-estatusp{
   color: white;
-  width: 90%;
-  margin-left: 5%;
-  height: 25px;
-  margin-top: 7px;
+  width: 80%;
   border-color: transparent;
   border-radius: 3px;
   font-size: 16px;
+  margin-bottom: 3px;
 }
 .btn-estatusp:hover{
   background-color:#6B4595;
@@ -152,13 +161,11 @@ background-color:#d1d1d1;
 }
 .btn-estatusc{
   color: white;
-  width: 90%;
-  margin-left: 5%;
-  height: 25px;
-  margin-top: 7px;
+  width: 80%;
   border-color: transparent;
   border-radius: 3px;
   font-size: 16px;
+  margin-bottom: 3px;
 }
 .btn-estatusc:hover{
   background-color:#419BD6; 
@@ -168,13 +175,11 @@ background-color:#d1d1d1;
 }
 .btn-estatusd{
   color: white;
-  width: 90%;
-  margin-left: 5%;
-  height: 25px;
-  margin-top: 7px;
+  width: 80%;
   border-color: transparent;
   border-radius: 3px;
   font-size: 16px;
+  margin-bottom: 3px;
 }
 .btn-estatusd:hover{
   background-color:#F2631C; 
@@ -185,10 +190,8 @@ background-color:#d1d1d1;
 .inf-lead { 
   font-size: 13px;
   color: darkturquoise; 
-  padding-left: 10px;
-  padding-right: 2%;
-  padding-top: 8%;
-  position: relative;
+  padding-top: 3.8%;
+  text-align: center;
 }
 .inf-estatus { 
   font-size: 13px;
@@ -196,53 +199,77 @@ background-color:#d1d1d1;
   color: darkturquoise;
   text-align: center;
 }
-.rate-icon1 {
-  width: var(--iron-icon-width, 60px);
-  height: var(--iron-icon-height, 60px);
-  position: relative;
-  color: #d1d1d1;
-  margin-top: 20%;
+.dropbtn {
+  background-color: #fff;
+  color: black;
+  padding: 7px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  width: 170px;
 }
-.rate-icon2 {
-  width: var(--iron-icon-width, 60px);
-  height: var(--iron-icon-height, 60px);
-  position: relative;
-  color: #d1d1d1;
-  margin-top: 20%;
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+    position: relative;
+    display: inline-block;
 }
-.rate-icon1-fill {
-  width: var(--iron-icon-width, 60px);
-  height: var(--iron-icon-height, 60px);
-  position: relative;
-  color: darkturquoise;
-  margin-top: 20%;
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    cursor: pointer;
 }
-.rate-icon-fill2 {
-  width: var(--iron-icon-width, 60px);
-  height: var(--iron-icon-height, 60px);
-  position: relative;
-  color: darkturquoise;
-  margin-top: 20%;
+
+/* Links inside the dropdown */
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
 }
-.cuadro{
-  width: 100%;
-  height: 100%;
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {background-color: #2075b5}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+    display: block;
 }
-.cuadro1{
-  width: 49%;
-  height: 50%;  
-  display:inline-block;  
-  margin-top: 2%;   
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.dropdown:hover .dropbtn {
+    background-color: #fff;
+    cursor: pointer;
+
 }
-.cuadro2{
-  width: 50%;
-  height: 50%; 
-  display:inline-block;   
+label {
+  display: block;
+} 
+.icon-search{
+  float: right;
+  width: 4%;
 }
-.card-actions1{
-  width: 90%;
-  display: inline-block;
-  position: relative;
-  margin-right: 5%;
-  text-align: center;
+[type="date"] {
+  background:#fff url(https://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/calendar_2.png)  97% 50% no-repeat ;
+}
+[type="date"]::-webkit-inner-spin-button {
+  display: none;
+}
+[type="date"]::-webkit-calendar-picker-indicator {
+  opacity: 0;
+  color: #10cebc;
+}
+input {
+  border: 1px solid #c4c4c4;
+  border-radius: 5px;
+  padding: 3px 5px;
+  box-shadow: inset 0 3px 6px rgba(0,0,0,0.1);
+  width: 99%;
+  cursor: pointer;
 }

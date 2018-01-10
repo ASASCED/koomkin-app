@@ -10,6 +10,16 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { ReportePage } from '../pages/reporte/reporte';
 import { LeadsComponent } from './../components/leads/leads';
+import { PagoPage } from './../pages/pago/pago';
+import { FiscalesPage } from '../pages/fiscales/fiscales';
+import { FacturasPage } from './../pages/facturas/facturas';
+import { DatosPage } from './../pages/datos/datos';
+import { UsuarioPage } from './../pages/usuario/usuario';
+import { FacturaPage } from './../pages/factura/factura';
+import { CancelarPage } from './../pages/cancelar/cancelar';
+import { PreguntaPage } from './../pages/pregunta/pregunta';
+import { LoginPage } from '../pages/login/login';
+
 
 
 @NgModule({
@@ -18,7 +28,16 @@ import { LeadsComponent } from './../components/leads/leads';
     HomePage,
     ListPage,
     ReportePage,
-    LeadsComponent
+    LeadsComponent,
+    DatosPage,
+    FacturasPage,
+    FiscalesPage,
+    PagoPage,
+    UsuarioPage,
+    FacturaPage,
+    CancelarPage,
+    PreguntaPage,
+    LoginPage
   ],
   imports: [
     BrowserModule,
@@ -31,7 +50,16 @@ import { LeadsComponent } from './../components/leads/leads';
     HomePage,
     ListPage,
     ReportePage,
-    LeadsComponent
+    LeadsComponent,
+    DatosPage,
+    FacturasPage,
+    FiscalesPage,
+    PagoPage,
+    UsuarioPage,
+    FacturaPage,
+    CancelarPage,
+    PreguntaPage,
+    LoginPage
   ],
   providers: [
     StatusBar,

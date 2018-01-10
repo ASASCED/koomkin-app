@@ -1,0 +1,48 @@
+<ion-content class="login-content" padding>
+  <ion-row class="logo-row">
+    <ion-col col-2></ion-col>
+    <ion-col>
+      <img src="../assets/imgs/koomkin_bco.png"/>
+    </ion-col>
+    <ion-col col-2></ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col col-2></ion-col>
+    <ion-col>
+      <p class="bienvenido">Bienvenido a Mykoomkin</p>
+    </ion-col>
+    <ion-col col-2></ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      <p class="inicio">Inicio de sesión</p>
+    </ion-col>
+  </ion-row>
+  <div class="login-box">
+    <form (ngSubmit)="login()" #registerForm="ngForm">
+      <ion-row>
+        <ion-col>
+          <ion-list inset>
+            
+            <ion-item >
+              <ion-input style="text-align:center" type="text" name="email" placeholder="Correo Electrónico" required></ion-input>
+            </ion-item>
+      
+            <ion-item>
+              <ion-input type="password" name="password" placeholder="Contraseña" required></ion-input>
+            </ion-item>
+          
+          </ion-list>
+        </ion-col>
+      </ion-row>
+      
+      <ion-row>
+        <ion-col class="signup-col">
+          <button ion-button class="submit-btn" full type="submit">Iniciar Sesión</button>
+        </ion-col>
+        
+      </ion-row>
+      
+    </form>
+  </div>
+</ion-content>
