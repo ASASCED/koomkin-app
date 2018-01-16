@@ -1,11 +1,3 @@
-//import * as express from 'express';
-//import * as path from 'path';
-//import * as favicon from 'serve-favicon';
-//import * as logger from 'morgan';
-//import * as cookieParser from 'cookie-parser';
-//import * as bodyParser from 'body-parser';
-//import * as db from './db';
-//import * as _ from 'underscore';
 const express = require('express');
 const path = require('path');
 const favicon = require('serve-favicon');
@@ -15,223 +7,232 @@ const bodyParser = require('body-parser');
 const db = require('./db.js');
 const _ = require('underscore');
 
-let app = express();
+var app = express();
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 //app.use(logger('dev'));
 //app.use(cookieParser());
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(express.static(path.join(__dirname, '')));
 
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+  });
+
+app.get('/', function (req, res, next) {
+    res.sendFile('index.html', { root: __dirname });
+});
+
 app.get('/upcoming', (req, res) => {
-    res.json({'itworks': 'yes'});
+    res.json({ 'itworks': 'yes' });
 });
 
-app.get('/', (req, res, next) => {
-    res.sendFile('index.html', {root: __dirname});
-});
 
-app.get('/getLead30Dias/:id',(req, res)  =>  {
-    let id = parseInt(req.params.id, 10);
-    let command = 'SP_GetLead30Dias';
-    db.executeGetById(id, command,  (err, rows) =>  {
+app.get('/getLead30Dias/:id', function (req, res) {
+    var id = parseInt(req.params.id, 10);
+    console.log("id", id);
+    var command = 'SP_GetLead30Dias';
+    console.log("command", command);
+    db.executeGetById(id, command, function (err, rows) {
         if (err) {
-            res.status(500).json({error: err}).send();
+            res.status(500).json({ error: err }).send();
         } else {
             res.json(rows);
         }
     });
 });
 
-app.get('/getLead12Meses/:id', (req, res)  => {
-    let id = parseInt(req.params.id, 10);
-    let command = 'SP_GetLead12Meses';
-    db.executeGetById(id, command, (err, rows) =>  {
+app.get('/getLead12Meses/:id', function (req, res) {
+    var id = parseInt(req.params.id, 10);
+    var command = 'SP_GetLead12Meses';
+    db.executeGetById(id, command, function (err, rows) {
         if (err) {
-            res.status(500).json({error: err}).send();
+            res.status(500).json({ error: err }).send();
         } else {
             res.json(rows);
         }
     });
 });
 
-app.get('/getLike30Dias/:id', (req, res) => {
-    let id = parseInt(req.params.id, 10);
-    let command = 'SP_GetLike30Dias';
-    db.executeGetById(id, command, (err, rows)  => {
+app.get('/getLike30Dias/:id', function (req, res) {
+    var id = parseInt(req.params.id, 10);
+    var command = 'SP_GetLike30Dias';
+    db.executeGetById(id, command, function (err, rows) {
         if (err) {
-            res.status(500).json({error: err}).send();
+            res.status(500).json({ error: err }).send();
         } else {
             res.json(rows);
         }
     });
 });
 
-app.get('/getLeadsMapa/:id', (req, res)  =>  {
-    let id = parseInt(req.params.id, 10);
-    let command = 'SP_GetLeadsMapa';
-    db.executeGetById(id, command, (err, rows)  =>  {
+app.get('/getLeadsMapa/:id', function (req, res) {
+    var id = parseInt(req.params.id, 10);
+    var command = 'SP_GetLeadsMapa';
+    db.executeGetById(id, command, function (err, rows) {
         if (err) {
-            res.status(500).json({error: err}).send();
+            res.status(500).json({ error: err }).send();
         } else {
             res.json(rows);
         }
     });
 });
 
-app.get('/getLeadCountMonth/:id',  (req, res) =>  {
-    let id = parseInt(req.params.id, 10);
-    let command = 'SP_GetLeadCountMonth';
-    db.executeGetById(id, command,  (err, rows) =>  {
+app.get('/getLeadCountMonth/:id', function (req, res) {
+    var id = parseInt(req.params.id, 10);
+    var command = 'SP_GetLeadCountMonth';
+    db.executeGetById(id, command, function (err, rows) {
         if (err) {
-            res.status(500).json({error: err}).send();
+            res.status(500).json({ error: err }).send();
         } else {
             res.json(rows);
         }
     });
 });
 
-app.get('/getCostoCampania/:id',(req, res) =>  {
-    let id = parseInt(req.params.id, 10);
-    let command = 'SP_GetCostoCampania';
-    db.executeGetById(id, command, (err, rows) =>  {
+app.get('/getCostoCampania/:id', function (req, res) {
+    var id = parseInt(req.params.id, 10);
+    var command = 'SP_GetCostoCampania';
+    db.executeGetById(id, command, function (err, rows) {
         if (err) {
-            res.status(500).json({error: err}).send();
+            res.status(500).json({ error: err }).send();
         } else {
             res.json(rows);
         }
     });
 });
 
-app.get('/getLeadCountMonth/:id', (req, res) =>  {
-    let id = parseInt(req.params.id, 10);
-    let command = 'SP_GetLeadCountMonth';
-    db.executeGetById(id, command,  (err, rows) =>  {
+app.get('/getLeadCountMonth/:id', function (req, res) {
+    var id = parseInt(req.params.id, 10);
+    var command = 'SP_GetLeadCountMonth';
+    db.executeGetById(id, command, function (err, rows) {
         if (err) {
-            res.status(500).json({error: err}).send();
+            res.status(500).json({ error: err }).send();
         } else {
             res.json(rows);
         }
     });
 });
 
-app.get('/getLeadById/:id',(req, res) =>  {
-    let id = parseInt(req.params.id, 10);
-    let command = 'SP_GetLeadById';
-    db.executeGetById(id, command,(err, rows) =>  {
+app.get('/getLeadById/:id', function (req, res) {
+    var id = parseInt(req.params.id, 10);
+    var command = 'SP_GetLeadById';
+    db.executeGetById(id, command, function (err, rows) {
         if (err) {
-            res.status(500).json({error: err}).send();
+            res.status(500).json({ error: err }).send();
         } else {
             res.json(rows);
         }
     });
 });
 
-app.get('/getReporteWeb', (req, res) =>  {
-    let id = parseInt(req.query.param1, 10);
+app.get('/getReporteWeb', function (req, res) {
+    var id = parseInt(req.query.param1, 10);
     console.log(id);
-    let command = 'SP_GetReporteWeb';
-    db.executeGetById(id, command,(err, rows) =>  {
+    var command = 'SP_GetReporteWeb';
+    db.executeGetById(id, command, function (err, rows) {
         if (err) {
-            res.status(500).json({error: err}).send();
+            res.status(500).json({ error: err }).send();
         } else {
             res.json(rows);
         }
     });
 });
 
-app.get('/getUserById/:id',(req, res) =>  {
-    let id = parseInt(req.params.id, 10);
-    let command = 'SP_GetUsuarioById';
-    db.executeGetById(id, command, (err, rows) =>  {
+app.get('/getUserById/:id', function (req, res) {
+    var id = parseInt(req.params.id, 10);
+    var command = 'SP_GetUsuarioById';
+    db.executeGetById(id, command, function (err, rows) {
         if (err) {
-            res.status(500).json({error: err}).send();
+            res.status(500).json({ error: err }).send();
         } else {
             res.json(rows);
         }
     });
 });
 
-app.get('/getLeadsReport/:id/:finicio/:ffin/:filtro',  (req, res) =>  {
+app.get('/getLeadsReport/:id/:finicio/:ffin/:filtro', function (req, res) {
 
-    let urlArray = req.url.split('/');
-    let id = urlArray[2];
-    let finicio = urlArray[4];
-    let ffin = urlArray[3];
-    let filtroTemp = urlArray[5];
-    let filtro = filtroTemp.split('_').join(' ');
-    let command = 'SP_RPT_Leads2';
+    var urlArray = req.url.split('/');
+    var id = urlArray[2];
+    var finicio = urlArray[4];
+    var ffin = urlArray[3];
+    var filtroTemp = urlArray[5];
+    var filtro = filtroTemp.split('_').join(' ');
+    var command = 'SP_RPT_Leads2';
 
-    db.executeGetSpByDate(id, finicio, ffin, filtro, command,(err, rows) =>  {
+    db.executeGetSpByDate(id, finicio, ffin, filtro, command, function (err, rows) {
         if (err) {
-            res.status(500).json({error: err}).send();
+            res.status(500).json({ error: err }).send();
         } else {
             res.json(rows);
         }
     });
 });
 
-app.get('/getLeadsPages/:id/:finicio/:ffin/:filtro',(req, res) =>  {
+app.get('/getLeadsPages/:id/:finicio/:ffin/:filtro', function (req, res) {
 
-    let urlArray = req.url.split('/');
-    let id = urlArray[2];
-    let finicio = urlArray[4];
-    let ffin = urlArray[3];
-    let filtroTemp = urlArray[5];
-    let filtro = filtroTemp.split('_').join(' ');
-    let command = 'SP_RPT_LeadPages';
+    var urlArray = req.url.split('/');
+    var id = urlArray[2];
+    var finicio = urlArray[4];
+    var ffin = urlArray[3];
+    var filtroTemp = urlArray[5];
+    var filtro = filtroTemp.split('_').join(' ');
+    var command = 'SP_RPT_LeadPages';
 
-    db.executeGetSpByDate(id, finicio, ffin, filtro, command,(err, rows) =>  {
+    db.executeGetSpByDate(id, finicio, ffin, filtro, command, function (err, rows) {
         if (err) {
-            res.status(500).json({error: err}).send();
+            res.status(500).json({ error: err }).send();
         } else {
             res.json(rows);
         }
     });
 });
 
-app.get('/facebook', (req, res) =>  {
-    db.facebook(req.query.param1,req.query.param2, (err, rows) =>  {
-       if (err) {
-        res.send('Error');
-       } else {
-         res.send(rows);
-       }
-   });  
+app.get('/facebook', function (req, res) {
+    db.facebook(req.query.param1, req.query.param2, function (err, rows) {
+        if (err) {
+            res.send('Error');
+        } else {
+            res.send(rows);
+        }
+    });
 });
 
-app.get('/verificarPopup',  (req, res) =>  {
-   db.verificarPopup(req.query.param1, (err, rows) =>  {
-       if (err) {
-        res.send('Error');
-       } else {
-         res.send(rows);
-       }
-   }); 
+app.get('/verificarPopup', function (req, res) {
+    db.verificarPopup(req.query.param1, function (err, rows) {
+        if (err) {
+            res.send('Error');
+        } else {
+            res.send(rows);
+        }
+    });
 });
 
 
 
 //POST methods
-app.post('/calificaLead/:id/:calificacion',(req, res) =>  {
+app.post('/calificaLead/:id/:calificacion', function (req, res) {
     //var body = _.pick(req.body, 'id', 'calificacion');
-    let command = 'SP_CalificaLead';
-    db.executeModifyLead(parseInt(req.params.id, 10), req.params.calificacion, command,(err, rows) =>  {
+    var command = 'SP_CalificaLead';
+    db.executeModifyLead(parseInt(req.params.id, 10), req.params.calificacion, command, function (err, rows) {
         if (err) {
-            res.status(500).json({error: err}).send();
+            res.status(500).json({ error: err }).send();
         } else {
             res.json(rows);
         }
     });
 });
 
-app.post('/clasificaLead/:id/:calificacion',(req, res) =>  {
+app.post('/clasificaLead/:id/:calificacion', function (req, res) {
     //var body = _.pick(req.body, 'id', 'calificacion');
-    let command = 'SP_ClasificaLead';
-    let calificacion = '';
+    var command = 'SP_ClasificaLead';
+    var calificacion = '';
     //console.log(body.calificacion);
     switch (parseInt(req.params.calificacion, 10)) {
         case 0: {
@@ -252,20 +253,20 @@ app.post('/clasificaLead/:id/:calificacion',(req, res) =>  {
         }
     }
     console.log(req.params.id, calificacion);
-    db.executeModifyLead(parseInt(req.params.id, 10), calificacion, command,(err, rows) =>  {
+    db.executeModifyLead(parseInt(req.params.id, 10), calificacion, command, function (err, rows) {
         if (err) {
-            res.status(500).json({error: err}).send();
+            res.status(500).json({ error: err }).send();
         } else {
             res.json(rows);
         }
     });
 });
 
-app.post('/leerLead/:leadId/:userId',(req, res) =>  {
+app.post('/leerLead/:leadId/:userId', function (req, res) {
 
-    db.executeLeerLead(req.params.leadId, req.params.userId,(err, rows) =>  {
+    db.executeLeerLead(req.params.leadId, req.params.userId, function (err, rows) {
         if (err) {
-            res.status(500).json({error: err}).send();
+            res.status(500).json({ error: err }).send();
         } else {
             res.json(rows);
         }
@@ -280,7 +281,7 @@ app.post('/leerLead/:leadId/:userId',(req, res) =>  {
 });*/
 
 // catch 404 and forward to error handler
-app.use ((req, res)  => {
+app.use(function (req, res) {
     res.sendStatus(404);
     /*
     var err = new Error('Not Found');

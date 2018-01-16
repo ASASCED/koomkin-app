@@ -7,7 +7,18 @@
     </ion-navbar>
   </ion-header>
   
+
+
   <ion-content class="detail-card" color="fondo">
+    <ion-list>
+      <ion-item *ngFor="let lead of leads">
+        <h1>{{lead.Date}}</h1> 
+        <p>{{lead.DOWNLOADCOUNT}}</p> 
+      </ion-item>
+      <ion-item *ngFor="let estados of estado">
+          <p>{{estados.abreviacion}}</p>
+      </ion-item>
+    </ion-list>
     <ion-card>
       <ion-card-header class="encabezado">
           <ion-grid>

@@ -1,12 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
-/**
- * Generated class for the BriefPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { RestProvider } from './../../providers/rest/rest';
 
 @IonicPage({name:'brief', segment:'brief-1/:param'})
 @Component({
@@ -17,14 +11,54 @@ export class BriefPage {
 
   titulo:string;
   briefPage=BriefPage;
+  leads;
+  estado;
+  matriz=[];
   constructor(public navCtrl: NavController,
-              public navParams: NavParams) {
+              public navParams: NavParams,
+              public provedor:RestProvider) {
     this.titulo = navParams.get('numero');
+    this.getLeadsDias();
+    this.getLeadsMapa();
+  }
+
+  getLeadsDias(){
+    this.provedor.getLeadsDias()
+    .then(
+      (data)=> {
+        this.leads = data;
+        for (var k in this.leads) {
+          let matriz=[];
+          let inner = [];
+          inner.push([this.leads[k]['abreviacion']]);
+          inner.push(this.leads[k]['leads']);
+          matriz.push(inner);
+      }
+        console.log(this.leads);
+        console.log(k.abreviacion);
+
+      },
+      (error)=> {
+        console.log(error);
+      });
+  }
+
+  getLeadsMapa(){
+    this.provedor.getLeadsMapa()
+    .then(
+      (data)=> {
+        this.estado = data;
+        console.log(this.estado);  
+      },
+      (error)=> {
+        console.log(error);
+      });
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad BriefPage');
+    
   }
+  
   goBack():void{
     this.navCtrl.pop();
   }
