@@ -32,7 +32,7 @@ export class RestProvider {
     });
   }
 
-  getLeadsDias() {
+  /*getLeadsDias() {
     return new Promise(resolve => {
       this.http.get(this.apiUrl + '/getLead30Dias/2').subscribe(data => {
         resolve(data);
@@ -41,7 +41,7 @@ export class RestProvider {
         console.log(err);
       });
     });
-  }
+  }*/
 
   getLeadsMeses() {
     return new Promise(resolve => {
