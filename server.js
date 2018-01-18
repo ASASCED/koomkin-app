@@ -107,18 +107,6 @@ app.get('/getCostoCampania/:id', function (req, res) {
     });
 });
 
-app.get('/getLeadCountMonth/:id', function (req, res) {
-    var id = parseInt(req.params.id, 10);
-    var command = 'SP_GetLeadCountMonth';
-    db.executeGetById(id, command, function (err, rows) {
-        if (err) {
-            res.status(500).json({ error: err }).send();
-        } else {
-            res.json(rows);
-        }
-    });
-});
-
 app.get('/getLeadById/:id', function (req, res) {
     var id = parseInt(req.params.id, 10);
     var command = 'SP_GetLeadById';
