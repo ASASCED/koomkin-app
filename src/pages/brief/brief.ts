@@ -17,7 +17,19 @@ export class BriefPage implements OnInit {
   meses;
   dias;
   tabla;
-  age;
+  device;
+  gender;
+  public age;
+  public age0;
+  public age1;
+  public age2;
+  public age3;
+  public age4;
+  public computadora;
+  public smartphone;
+  public tablet;
+  public hombre;
+  public mujer;
   public datagraph: any;
 
   //función de la primera gráfica
@@ -103,6 +115,8 @@ export class BriefPage implements OnInit {
     this.getLeadsDias();
     this.getLeadsTabla();
     this.getFacebookAge();
+    this.getFacebookGender();
+    this.getFacebookDevice();
   }
 
 
@@ -350,15 +364,162 @@ export class BriefPage implements OnInit {
       .then(
       (data) => {
         this.age = data;
-        console.log(this.age);  
+        let total = Number(this.age[0].clicks) + Number(this.age[1].clicks) + Number(this.age[2].clicks) + Number(this.age[3].clicks) + Number(this.age[4].clicks);
+        this.age0 = Math.round((this.age[0].clicks / total) * 100);
+        this.age1 = Math.round((this.age[1].clicks / total) * 100);
+        this.age2 = Math.round((this.age[2].clicks / total) * 100);
+        this.age3 = Math.round((this.age[3].clicks / total) * 100);
+        this.age4 = Math.round((this.age[4].clicks / total) * 100);
+       /* age0 = Math.trunc((this.age[0].clicks / total) * 100);
+        console.log(age0);
+       if (age0 > 0) {
+          if (age0 < 30) {
+            age0p = "20"
+          } else {
+            if (age0 < 50) {
+              age0p = "40"
+            } else {
+              if (age0 < 70) {
+                age0p = "60"
+              } else {
+                if (age0 < 100) {
+                  age0p = "80"
+                } else {
+                  age0p = "100"
+                }
+              }
+            }
+          }
+        }*/
+     /*    age1 = Math.trunc((this.age[1].clicks / total) * 100);
+         if (age1 > 0) {
+          if (age1 < 30) {
+            age1p = "20"
+          } else {
+            if (age1 < 50) {
+              age1p = "40"
+            } else {
+              if (age1 < 70) {
+                age1p = "60"
+              } else {
+                if (age1 < 100) {
+                  age1p = "80"
+                } else {
+                  age1p = "100"
+                }
+              }
+            }
+          }
+        }*/
+     /*    age2 = Math.trunc((this.age[2].clicks / total) * 100)
+         if (age2 > 0) {
+          if (age2 < 30) {
+            age2p = "20"
+          } else {
+            if (age2 < 50) {
+              age2p = "40"
+            } else {
+              if (age2 < 70) {
+                age2p = "60"
+              } else {
+                if (age2 < 100) {
+                  age2p = "80"
+                } else {
+                  age2p = "100"
+                }
+              }
+            }
+          }
+        }*/
+     /*    age3 = Math.trunc((this.age[3].clicks / total) * 100);
+           if (age3 > 0) {
+          if (age3 < 30) {
+            age3p = "20"
+          } else {
+            if (age3 < 50) {
+              age3p = "40"
+            } else {
+              if (age3 < 70) {
+                age3p = "60"
+              } else {
+                if (age3 < 100) {
+                  age3p = "80"
+                } else {
+                  age3p = "100"
+                }
+              }
+            }
+          }
+        }*/
+      /*   age4 = Math.trunc((this.age[4].clicks / total) * 100)
+           if (age4 > 0) {
+          if (age4 < 30) {
+            age4p = "20"
+          } else {
+            if (age4 < 50) {
+              age4p = "40"
+            } else {
+              if (age4 < 70) {
+                age4p = "60"
+              } else {
+                if (age4 < 100) {
+                  age4p = "80"
+                } else {
+                  age4p = "100"
+                }
+              }
+            }
+          }
+        }
+      }*/},
+      (error) => {
+        console.log(error);
+      });
+  }
 
+  public getFacebookDevice() {
+    this.provedor.getFacebookDevice()
+      .then(
+      (data) => {
+        this.device = data;
+        let total = 0;
+        let cel = 0;
+        let escritorio = 0;
+        let otros = 0;
+        for (var k in this.device) {
+          total = total + Number(this.device[k].clicks);
+          if (this.device[k].impression_device == "android_smartphone" || this.device[k].impression_device == "iphone") {
+            cel = cel + +Number(this.device[k].clicks);
+          } else {
+            if (this.device[k].impression_device == "desktop") {
+              escritorio = escritorio + Number(this.device[k].clicks);
+            } else {
+              otros = otros + Number(this.device[k].clicks);
+            }
+          }
+        }
+        this.computadora = Math.round((escritorio / total) * 100);
+        this.smartphone = Math.round((cel / total) * 100)
+        this.tablet = Math.round((otros / total) * 100)
       },
       (error) => {
         console.log(error);
       });
-
   }
 
+  public getFacebookGender() {
+    this.provedor.getFacebookGender()
+      .then(
+      (data) => {
+        this.gender = data;
+        let total = Number(this.gender[0].clicks) + Number(this.gender[1].clicks) + Number(this.gender[2].clicks);
+        this.mujer = Math.round((this.gender[0].clicks / total) * 100);
+        this.hombre = Math.round((this.gender[1].clicks / total) * 100)
+      },
+      (error) => {
+        console.log(error);
+      });
+  }
 
   ionViewDidLoad() {
     //console.log(this.datagraph);

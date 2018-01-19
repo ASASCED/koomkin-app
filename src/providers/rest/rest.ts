@@ -37,7 +37,7 @@ export class RestProvider {
     return new Promise(resolve => {
       this.http.get(this.apiUrl + '/getLead30Dias/2').subscribe(data => {
         resolve(data);
-        console.log(data);
+       // console.log(data);
       }, err => {
         console.log(err);
       });
@@ -48,7 +48,7 @@ export class RestProvider {
     return new Promise(resolve => {
       this.http.get(this.apiUrl + '/getLead12Meses/2').subscribe(data => {
         resolve(data);
-        console.log(data);
+        //console.log(data);
       }, err => {
         console.log(err);
       });
@@ -59,7 +59,7 @@ export class RestProvider {
     return new Promise(resolve => {
       this.http.get(this.apiUrl + '/getLike30Dias/2').subscribe(data => {
         resolve(data);
-        console.log(data);
+        //console.log(data);
       }, err => {
         console.log(err);
       });
@@ -70,7 +70,7 @@ export class RestProvider {
     return new Promise(resolve => {
       this.http.get(this.apiUrl + '/getLeadsMapa/2').subscribe(data => {
         resolve(data);
-        console.log(data);
+        //console.log(data);
       }, err => {
         console.log(err);
       });
@@ -81,7 +81,7 @@ export class RestProvider {
     return new Promise(resolve => {
       this.http.get(this.apiUrl2 + '/facebook?param1=2&param2=impression_device').subscribe(data => {
         resolve(data);
-        console.log(data);
+       // console.log(data);
       }, err => {
         console.log(err);
       });
@@ -92,7 +92,7 @@ export class RestProvider {
     return new Promise(resolve => {
       this.http.get(this.apiUrl2 + '/facebook?param1=2&param2=age').subscribe(data => {
         resolve(data);
-        console.log(data);
+        //console.log(data);
       }, err => {
         console.log(err);
       });
@@ -103,7 +103,7 @@ export class RestProvider {
     return new Promise(resolve => {
       this.http.get(this.apiUrl2 + '/facebook?param1=2&param2=gender').subscribe(data => {
         resolve(data);
-        console.log(data);
+       // console.log(data);
       }, err => {
         console.log(err);
       });
@@ -114,7 +114,7 @@ export class RestProvider {
     return new Promise(resolve => {
       this.http.get(this.apiUrl + '/getLeadCountMonth/2').subscribe(data => {
         resolve(data);
-        console.log(data);
+       // console.log(data);
       }, err => {
         console.log(err);
       });
