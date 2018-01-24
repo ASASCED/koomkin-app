@@ -3,140 +3,100 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Nombre de la empresa: AGO Consultores<br>ID Cliente: 2</ion-title>
+    <ion-title>Nombre de la empresa: AGO Consultores
+      <br>ID Cliente: 2</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content class="detail-card" color="fondo">
   <ion-card>
     <ion-card-header class="encabezado">
-        <ion-grid>
-          <ion-row>
-              <ion-col col-2>      
-                <img src="../assets/imgs/iconos/DLeads.svg" style="width:55%;margin-left: 30%;" />
-              </ion-col>
-              <ion-col col-10>  
-                <h1 style="font-size: 2rem;"><strong>Detalle de Leads</strong></h1>
-                <h3 style="font-size: 1.1rem;">Descripción de las oportunidades de venta</h3>
-              </ion-col>                
-          </ion-row>    
-        </ion-grid>    
-        <hr style="background-color:black; width:90%">
+      <ion-grid>
+        <ion-row>
+          <ion-col col-2>
+            <img src="../assets/imgs/iconos/DLeads.svg" style="width:55%;margin-left: 30%;" />
+          </ion-col>
+          <ion-col col-10>
+            <h1 style="font-size: 2rem;">
+              <strong>Detalle de Leads</strong>
+            </h1>
+            <h3 style="font-size: 1.1rem;">Descripción de las oportunidades de venta</h3>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <hr style="background-color:black; width:90%">
     </ion-card-header>
 
     <ion-card-content>
-        <ion-list> 
-            <ion-grid>
-                <ion-row style="text-align:right">
-                    <ion-col col-5>      
-                        <label for="inicio"><input type="date" name="inicio" id="inicio"></label>
-                    </ion-col>
-                    <ion-col col-5>      
-                        <label for="fin"><input type="date" name="fin" id="fin"></label>   
-                      </ion-col>
-                    <ion-col col-2>  
-                        <ion-icon name="search" style="font-size: 2em;"></ion-icon>                           
-                    </ion-col>                
-                </ion-row>  
-              </ion-grid>
-                <div style="text-align: right;border: 1px solid #d0d1d1;" > Filtrar por:
-                    <div class="dropdown">
-                      <button class="dropbtn">Todos los recibidos</button>
-                      <div class="dropdown-content">
-                        <a>Todos los recibidos</a>
-                        <a>Leidos</a>
-                        <a>No Leidos</a>
-                        <a>Vendido</a>
-                        <a>En proceso de venta</a>
-                        <a>Sin Contacto</a>
-                        <a>Descartado</a>
-                      </div>
-                      <ion-icon name="arrow-dropdown"></ion-icon>
-                  </div>
-                </div>                      
-            <button detail-none (click)="expandItem(item)" ion-item *ngFor="let item of items" style="border: .15px solid #d0d1d1;">
-                <ion-grid>
-                    <ion-row style="align-items:center">
-                        <ion-col col-1>      
-                          <div class="circulo"><p class="circulo">V</p></div>
-                        </ion-col>
-                        <ion-col col-7>      
-                            <div class="rate-nombre"><strong>Mauricio Amaro</strong></div>
-                          </ion-col>
-                        <ion-col col-4>  
-                          <div class="rate-fecha">2017-11-09 12:56</div>                            
-                        </ion-col>                
-                    </ion-row>   
-                    <ion-row>
-                        <ion-col col-6>      
-                          <div class="rate-empresa">Asesores inc</div>
-                        </ion-col>
-                        <ion-col offset-5 col-1>  
-                          <ion-icon name="md-thumbs-up"></ion-icon>                           
-                        </ion-col>                
-                    </ion-row>  
-                    <ion-row>
-                        <ion-col>      
-                          <div class="inf-mensaje">Hola me gustaría una cotización </div>
-                        </ion-col>          
-                    </ion-row>  
-                  </ion-grid>   
-                <leads [expandHeight]="itemExpandHeight" [expanded]="item.expanded">
-                  <hr style="margin-bottom: 0px;">
-                  <ion-grid>
-                      <ion-row>
-                          <ion-col col-6>      
-                              <div class="rate-nombre"><strong>Mauricio Amaro</strong></div>
-                            </ion-col>
-                          <ion-col col-6>  
-                            <div class="rate-fecha">2017-11-09 12:56</div>                            
-                          </ion-col>                
-                      </ion-row>   
-                      <ion-row>
-                          <ion-col col-6>      
-                            <div class="rate-empresa">Asesores inc</div>
-                          </ion-col>
-                          <ion-col col-6>  
-                            <div class="inf-estado">Chihuahua</div>                        
-                          </ion-col>                
-                      </ion-row>   
-                      <ion-row>
-                          <ion-col col-5> 
-                              <div class="inf-mail">mauricio@aseoresinc.com</div>     
-                          </ion-col>
-                          <ion-col col-7>  
-                              <div class="rate-tel">Tel: <a href="tel:+61422010456">61422010456</a></div>                              
-                          </ion-col>                
-                      </ion-row> 
-                      <ion-row>
-                          <ion-col col-12>      
-                            <div class="inf-mensajem">Hola me gustaría una cotización </div>
-                          </ion-col>                
-                      </ion-row>  
-                      <ion-row>
-                          <ion-col col-7>      
-                            <div class="inf-estatus">¿Cuál es el estatus del Lead?</div>
-                          </ion-col>
-                          <ion-col col-5>  
-                            <div class="inf-lead">Califica este Lead</div>
-                          </ion-col>                
-                      </ion-row> 
-                      <ion-row>
-                          <ion-col col-8 style="text-align: center;">      
-                              <button class="btn-estatusv">Vendido</button><br>
-                              <button class="btn-estatusp">En Proceso</button><br>
-                              <button class="btn-estatusc">Sin Contacto</button><br>
-                              <button class="btn-estatusd">Descartado</button><br> 
-                          </ion-col>
-                          <ion-col col-4 style="text-align: center;">  
-                              <ion-icon name="md-thumbs-up" class="rate-icon1"></ion-icon>
-                              <ion-icon name="md-thumbs-down" class="rate-icon2"></ion-icon>
-                          </ion-col>                
-                      </ion-row>        
-                  </ion-grid>                     
-              </leads>
-            </button>
-          </ion-list>
+      <ion-list>
+        <ion-grid>
+          <ion-row style="text-align:right">
+            <ion-col col-5>
+              <label for="inicio">
+                <input type="date" name="inicio" id="inicio">
+              </label>
+            </ion-col>
+            <ion-col col-5>
+              <label for="fin">
+                <input type="date" name="fin" id="fin">
+              </label>
+            </ion-col>
+            <ion-col col-2>
+              <ion-icon name="search" style="font-size: 2em;"></ion-icon>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+
+        <div style="text-align: right;border: 1px solid #d0d1d1;">
+          <ion-item>
+            <ion-label>Filtrar por:</ion-label>
+            <ion-select [(ngModel)]="filtro" interface="action-sheet">
+              <ion-option value="Todos" selected>Todos los recibidos</ion-option>
+              <ion-option value="Leidos">Leidos</ion-option>
+              <ion-option value="NoLeidos">No Leidos</ion-option>
+              <ion-option value="Vendido">Vendido</ion-option>
+              <ion-option value="proceso">En proceso de venta</ion-option>
+              <ion-option value="SinContacto">Sin Contacto</ion-option>
+              <ion-option value="Descartado">Descartado</ion-option>
+            </ion-select>
+          </ion-item>
+        </div>
+        <ion-list detail-none ion-item *ngFor="let lead of leads| slice:0:10;"  style="border: .15px solid #d0d1d1;">
+          <ion-grid>
+            <ion-row style="align-items:center">
+              <ion-col col-1>
+                <div class="circulo">
+                  <p class="circulo">V</p>
+                </div>
+              </ion-col>
+              <ion-col col-7>
+                <div class="rate-nombre">
+                  <strong>{{lead.NOMBRE}}</strong>
+                </div>
+              </ion-col>
+              <ion-col col-4>
+                <div class="rate-fecha">{{lead.FECHA}}</div>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col col-6>
+                <div class="rate-empresa">{{lead.EMPRESA}}</div>
+              </ion-col>
+              <ion-col offset-5 col-1>
+                <ion-icon name="md-thumbs-up"></ion-icon>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col>
+                <div class="inf-mensaje">{{lead.MENSAJE}}</div>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-list>
+        <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+          <ion-infinite-scroll-content></ion-infinite-scroll-content>
+        </ion-infinite-scroll>
+      </ion-list>
     </ion-card-content>
   </ion-card>
 </ion-content>

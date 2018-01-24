@@ -148,8 +148,8 @@ app.get('/getLeadsReport/:id/:finicio/:ffin/:filtro', function (req, res) {
 
     var urlArray = req.url.split('/');
     var id = urlArray[2];
-    var finicio = urlArray[4];
-    var ffin = urlArray[3];
+    var finicio = "'" + urlArray[3] + "'";
+    var ffin = "'" + urlArray[4] + "'";
     var filtroTemp = urlArray[5];
     var filtro = filtroTemp.split('_').join(' ');
     var command = 'SP_RPT_Leads2';
@@ -167,8 +167,8 @@ app.get('/getLeadsPages/:id/:finicio/:ffin/:filtro', function (req, res) {
 
     var urlArray = req.url.split('/');
     var id = urlArray[2];
-    var finicio = urlArray[4];
-    var ffin = urlArray[3];
+    var finicio = "'" + urlArray[3] + "'";
+    var ffin = "'" + urlArray[4] + "'";
     var filtroTemp = urlArray[5];
     var filtro = filtroTemp.split('_').join(' ');
     var command = 'SP_RPT_LeadPages';

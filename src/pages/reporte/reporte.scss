@@ -16,14 +16,17 @@
  .toolbar-title-md {
   font-size: 1.5rem;
   padding: 0px;
-}
-
- 
- .grid{
+} 
+.grid{
   padding-bottom: 0px !important;
-  
  }
-
+ .item-md {
+  padding-left: 0; 
+   padding-top: 0; 
+}
+ion-select{
+  max-width: 65%;
+}
  .label-md {
   margin: 0px 0px 0px 0; 
  }
@@ -199,55 +202,7 @@ background-color:#d1d1d1;
   color: darkturquoise;
   text-align: center;
 }
-.dropbtn {
-  background-color: #fff;
-  color: black;
-  padding: 7px;
-  font-size: 16px;
-  border: none;
-  cursor: pointer;
-  width: 170px;
-}
 
-/* The container <div> - needed to position the dropdown content */
-.dropdown {
-    position: relative;
-    display: inline-block;
-}
-
-/* Dropdown Content (Hidden by Default) */
-.dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #fff;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
-    cursor: pointer;
-}
-
-/* Links inside the dropdown */
-.dropdown-content a {
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-}
-
-/* Change color of dropdown links on hover */
-.dropdown-content a:hover {background-color: #2075b5}
-
-/* Show the dropdown menu on hover */
-.dropdown:hover .dropdown-content {
-    display: block;
-}
-
-/* Change the background color of the dropdown button when the dropdown content is shown */
-.dropdown:hover .dropbtn {
-    background-color: #fff;
-    cursor: pointer;
-
-}
 label {
   display: block;
 } 

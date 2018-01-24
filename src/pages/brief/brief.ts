@@ -19,6 +19,7 @@ export class BriefPage implements OnInit {
   tabla;
   device;
   gender;
+  leadsr;
   public age;
   public age0;
   public age1;
@@ -117,6 +118,8 @@ export class BriefPage implements OnInit {
     this.getFacebookAge();
     this.getFacebookGender();
     this.getFacebookDevice();
+    this.getLeadsReport();
+
   }
 
 
@@ -515,6 +518,18 @@ export class BriefPage implements OnInit {
         let total = Number(this.gender[0].clicks) + Number(this.gender[1].clicks) + Number(this.gender[2].clicks);
         this.mujer = Math.round((this.gender[0].clicks / total) * 100);
         this.hombre = Math.round((this.gender[1].clicks / total) * 100)
+      },
+      (error) => {
+        console.log(error);
+      });
+  }
+
+  public getLeadsReport() {
+    this.provedor.getLeadsReport()
+      .then(
+      (data) => {
+        this.leadsr = data;
+        console.log(this.leadsr);
       },
       (error) => {
         console.log(error);

@@ -31,6 +31,9 @@ db.executeGetById = function (id, command, callback) {
         var Request = require('tedious').Request;
         var requestStr = `Execute ${command} ${id}`;
 
+        console.log(requestStr);
+
+
         request = new Request(requestStr, function (err, rowCount) {
             if (err) {
                 callback(err);

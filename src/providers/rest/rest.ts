@@ -121,4 +121,15 @@ export class RestProvider {
     });
   }
 
+  getLeadsReport() {
+    return new Promise(resolve => {
+      this.http.get(this.apiUrl + '/getLeadsReport/2/2016-06-12/2017-06-12/Todos_los_recibidos').subscribe(data => {
+        resolve(data);
+        console.log(data);
+      }, err => {
+        console.log(err);
+      });
+    });
+  }
+
 }
