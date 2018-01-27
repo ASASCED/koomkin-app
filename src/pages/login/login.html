@@ -19,17 +19,17 @@
     </ion-col>
   </ion-row>
   <div class="login-box">
-    <form (ngSubmit)="login()" #registerForm="ngForm">
+    <form [formGroup]="loginForm" (ngSubmit)="doLogin()">
       <ion-row>
         <ion-col>
           <ion-list inset>
             
             <ion-item >
-              <ion-input style="text-align:center" type="text" name="email" placeholder="Correo Electrónico" required></ion-input>
+              <ion-input style="text-align:center" id="inputEmail" type="mail" name="email" placeholder="Correo Electrónico" formControlName="email" autofocus></ion-input>
             </ion-item>
       
             <ion-item>
-              <ion-input type="password" name="password" placeholder="Contraseña" required></ion-input>
+              <ion-input id="inputPassword" type="password" name="password" formControlName="password" placeholder="Contraseña"></ion-input>
             </ion-item>
           
           </ion-list>
@@ -38,7 +38,7 @@
       
       <ion-row>
         <ion-col class="signup-col">
-          <button ion-button class="submit-btn" full type="submit">Iniciar Sesión</button>
+          <button ion-button class="submit-btn" full type="submit" [disabled]="!loginForm.valid">Iniciar Sesión</button>
         </ion-col>
         
       </ion-row>

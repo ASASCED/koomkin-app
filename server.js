@@ -144,6 +144,18 @@ app.get('/getUserById/:id', function (req, res) {
     });
 });
 
+app.get('/getUserByEmail/:email', function (req, res) {
+    var email = "'" + req.params.email + "'";
+    var command = 'SP_GetUsuarioByEmail';
+    db.executeGetById(email, command, function (err, rows) {
+        if (err) {
+            res.status(500).json({ error: err }).send();
+        } else {
+            res.json(rows);
+        }
+    });
+});
+
 app.get('/getLeadsReport/:id/:finicio/:ffin/:filtro', function (req, res) {
 
     var urlArray = req.url.split('/');

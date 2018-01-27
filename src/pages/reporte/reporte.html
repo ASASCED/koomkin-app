@@ -61,7 +61,7 @@
             </ion-select>
           </ion-item>
         </div>
-        <ion-list detail-none ion-item *ngFor="let lead of leads| slice:0:10;"  style="border: .15px solid #d0d1d1;">
+        <ion-list detail-none ion-item *ngFor="let lead of leads; let i = index;" style="border: .15px solid #d0d1d1;">
           <ion-grid>
             <ion-row style="align-items:center">
               <ion-col col-1>
@@ -94,7 +94,7 @@
           </ion-grid>
         </ion-list>
         <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
-          <ion-infinite-scroll-content></ion-infinite-scroll-content>
+          <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Cargando más Leads..."></ion-infinite-scroll-content>
         </ion-infinite-scroll>
       </ion-list>
     </ion-card-content>

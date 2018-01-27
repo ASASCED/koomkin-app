@@ -44,6 +44,17 @@ export class RestProvider {
     });
   }
 
+  getUserByEmail() {
+    return new Promise(resolve => {
+      this.http.get(this.apiUrl + '/getUserByEmail/agarcia@agoconsultores.com.mx').subscribe(data => {
+        resolve(data);
+        console.log(data);
+      }, err => {
+        console.log(err);
+      });
+    });
+  }
+
   getLeadsMeses() {
     return new Promise(resolve => {
       this.http.get(this.apiUrl + '/getLead12Meses/2').subscribe(data => {
@@ -125,7 +136,6 @@ export class RestProvider {
     return new Promise(resolve => {
       this.http.get(this.apiUrl + '/getLeadsReport/2/2016-06-12/2017-06-12/Todos_los_recibidos').subscribe(data => {
         resolve(data);
-        console.log(data);
       }, err => {
         console.log(err);
       });

@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { HttpClientModule } from '@angular/common/http';
+import { HttpModule } from '@angular/http';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
@@ -21,6 +22,7 @@ import { CancelarPage } from './../pages/cancelar/cancelar';
 import { PreguntaPage } from './../pages/pregunta/pregunta';
 import { LoginPage } from '../pages/login/login';
 import { RestProvider } from './../providers/rest/rest';
+import { AuthServiceProvider } from '../providers/auth-service/auth-service';
 
 @NgModule({
   declarations: [
@@ -42,6 +44,7 @@ import { RestProvider } from './../providers/rest/rest';
   imports: [
     BrowserModule,
     HttpClientModule,
+    HttpModule,
     IonicModule.forRoot(MyApp),
     BriefPageModule
   ],
@@ -66,6 +69,7 @@ import { RestProvider } from './../providers/rest/rest';
     StatusBar,
     SplashScreen,
     RestProvider,
+    AuthServiceProvider,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

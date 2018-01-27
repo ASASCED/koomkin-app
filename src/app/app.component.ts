@@ -22,7 +22,7 @@ import { LoginPage } from './../pages/login/login';
 export class MyApp {
   @ViewChild(Nav) nav: NavController;
 
-  rootPage: any = ReportePage;
+    rootPage: any = LoginPage;
     leads = ReportePage;
     reporte = HomePage;
     brief = BriefPage;
