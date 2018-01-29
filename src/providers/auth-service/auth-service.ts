@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import 'rxjs/add/operator/map';
+import { TIMEOUT } from 'dns';
 
 
 @Injectable()
@@ -24,10 +25,10 @@ export class AuthServiceProvider {
 
   getUserByEmail(email, password, acceso) {
     //console.log(email,password);
-    return new Promise(resolve => {
+    let datos;
       this.http.get(this.apiUrl + '/getUserByEmail/' + email).subscribe(data => {
-        resolve(data);
         //datos del usuario
+        datos = data;
         this.info = data;
         //asigno el password del usuario
         this.password = password;
@@ -37,29 +38,33 @@ export class AuthServiceProvider {
           //console.log(this.pass);
           this.login(this.pass);
           //comparo los password 
-          if (this.password === this.contrasena) {
-            console.log("entro");
-          }
+          
+          setTimeout(function() {
+            if (this.password == this.contrasena) {
+              console.log("entro");
+            }
+          }, 10);
+          
           console.log(this.password,this.contrasena);
         }  
-      }, err => {
-        console.log(err);
-      });
-    });
-  }
+      })
+      return datos;
+    }
+  
 
   login(pass) {
     this.apiUrlp2 = this.apiUrlp + this.pass;
     console.log(this.pass)
     return new Promise(resolve => {
       this.http.get(this.apiUrlp2, { responseType: 'text' }).subscribe(res => {
-        resolve(res);
         this.contrasena = res;
+        resolve(res);
       }, err => {
         console.log(err);
       });
     });
   }
 }
+
 
   //password con + sustituir con %2B o %2b 

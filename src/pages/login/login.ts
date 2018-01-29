@@ -67,7 +67,6 @@ export class LoginPage implements OnInit {
     this.loginForm.valueChanges
     .subscribe(data=> this.onValueChanged(data))
     this.onValueChanged();
-    this.getUserByEmail();
   }
 
  /* onSubmit() {
@@ -83,17 +82,9 @@ export class LoginPage implements OnInit {
     return saveUserdata;
   }
 
-  public getUserByEmail() {
-    this.authService.getUserByEmail(this.email,this.password,this.acceso)
-      .then(
-      (data) => {
-        this.datos = data;
-   //     console.log(this.datos);
-      },
-      (error) => {
-        console.log(error);
-      });
-  }
+ /* public getUserByEmail() {
+    let datos = this.authService.getUserByEmail(this.email,this.password,this.acceso)
+  }*/
 
   doLogin() {
     this.userdata = this.saveUserdata();
@@ -101,16 +92,12 @@ export class LoginPage implements OnInit {
     this.password = this.userdata.password;
     //console.log(this.email,this.password);
     this.showLoader();
-    this.authService.getUserByEmail(this.email,this.password,this.acceso).then((result) => {
+    let datos = this.authService.getUserByEmail(this.email,this.password,this.acceso)
       this.loading.dismiss();
-      this.data = result;
+      this.data = datos;
       if(this.acceso == true){
         this.navCtrl.setRoot(ReportePage);
       }
-    }, (err) => {
-      this.loading.dismiss();
-      this.presentToast(err);
-    });
   }
 
   showLoader() {
