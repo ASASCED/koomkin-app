@@ -18,6 +18,8 @@ export class LoginPage implements OnInit {
   datos;
   leads;
   email;
+  password;
+  acceso;
 
   erroresForm = {
     'email': '',
@@ -82,11 +84,11 @@ export class LoginPage implements OnInit {
   }
 
   public getUserByEmail() {
-    this.authService.getUserByEmail(this.email)
+    this.authService.getUserByEmail(this.email,this.password,this.acceso)
       .then(
       (data) => {
         this.datos = data;
-        console.log(this.datos);
+   //     console.log(this.datos);
       },
       (error) => {
         console.log(error);
@@ -96,12 +98,15 @@ export class LoginPage implements OnInit {
   doLogin() {
     this.userdata = this.saveUserdata();
     this.email = this.userdata.email;
-    console.log(this.email);
+    this.password = this.userdata.password;
+    //console.log(this.email,this.password);
     this.showLoader();
-    this.authService.getUserByEmail(this.email).then((result) => {
+    this.authService.getUserByEmail(this.email,this.password,this.acceso).then((result) => {
       this.loading.dismiss();
       this.data = result;
-      this.navCtrl.setRoot(ReportePage);
+      if(this.acceso == true){
+        this.navCtrl.setRoot(ReportePage);
+      }
     }, (err) => {
       this.loading.dismiss();
       this.presentToast(err);
