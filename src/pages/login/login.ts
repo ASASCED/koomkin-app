@@ -82,7 +82,7 @@ export class LoginPage implements OnInit {
   }
 
   public getUserByEmail() {
-    this.authService.getUserByEmail()
+    this.authService.getUserByEmail(this.email)
       .then(
       (data) => {
         this.datos = data;
@@ -95,9 +95,10 @@ export class LoginPage implements OnInit {
 
   doLogin() {
     this.userdata = this.saveUserdata();
-    console.log(this.userdata);
+    this.email = this.userdata.email;
+    console.log(this.email);
     this.showLoader();
-    this.authService.getUserByEmail(this.userdata.email).then((result) => {
+    this.authService.getUserByEmail(this.email).then((result) => {
       this.loading.dismiss();
       this.data = result;
       this.navCtrl.setRoot(ReportePage);

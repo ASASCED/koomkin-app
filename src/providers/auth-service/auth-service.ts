@@ -14,20 +14,9 @@ export class AuthServiceProvider {
   apiUrlp = 'http://187.162.208.218:5000/misc/decrypt2?pass=';
   apiUrl = 'http://localhost:3000';  
 
-  getUserByEmail() {
+  getUserByEmail(email) {
     return new Promise(resolve => {
-      this.http.get(this.apiUrl + '/getUserByEmail/agarcia@agoconsultores.com.mx').subscribe(data => {
-        resolve(data);
-      }, err => {
-        console.log(err);
-      });
-    });
-  }
-
-  getLeadsReport() {
-    return new Promise(resolve => {
-      this.http.get(this.apiUrl + '/getLeadsReport/2/2016-06-12/2017-06-12/Todos_los_recibidos')
-      .subscribe(data => {
+      this.http.get(this.apiUrl + '/getUserByEmail/' + email ).subscribe(data => {
         resolve(data);
         console.log(data);
       }, err => {
