@@ -9,6 +9,7 @@ export class RestProvider {
     console.log('Hello RestProvider Provider');
   }
 
+  private user;
   apiUrl = 'http://localhost:3000';
   apiUrl2 = 'http://www.koomkin.com:5545';
 
@@ -20,6 +21,14 @@ export class RestProvider {
         console.log(err);
       });
     });
+  }
+
+  setUser(user:any){
+    this.user = user;
+  }
+
+  public getUser(){
+    return this.user;
   }
 
   addUser(data) {
@@ -35,7 +44,7 @@ export class RestProvider {
 
   getLeadsDias() {
     return new Promise(resolve => {
-      this.http.get(this.apiUrl + '/getLead30Dias/2').subscribe(data => {
+      this.http.get(this.apiUrl + '/getLead30Dias/' + this.user).subscribe(data => {
         resolve(data);
        // console.log(data);
       }, err => {
@@ -44,20 +53,9 @@ export class RestProvider {
     });
   }
 
-  getUserByEmail() {
-    return new Promise(resolve => {
-      this.http.get(this.apiUrl + '/getUserByEmail/agarcia@agoconsultores.com.mx').subscribe(data => {
-        resolve(data);
-        console.log(data);
-      }, err => {
-        console.log(err);
-      });
-    });
-  }
-
   getLeadsMeses() {
     return new Promise(resolve => {
-      this.http.get(this.apiUrl + '/getLead12Meses/2').subscribe(data => {
+      this.http.get(this.apiUrl + '/getLead12Meses/' + this.user).subscribe(data => {
         resolve(data);
         //console.log(data);
       }, err => {
@@ -68,7 +66,7 @@ export class RestProvider {
 
   getLikeDias() {
     return new Promise(resolve => {
-      this.http.get(this.apiUrl + '/getLike30Dias/2').subscribe(data => {
+      this.http.get(this.apiUrl + '/getLike30Dias/' + this.user).subscribe(data => {
         resolve(data);
         //console.log(data);
       }, err => {
@@ -79,7 +77,7 @@ export class RestProvider {
 
   getLeadsMapa() {
     return new Promise(resolve => {
-      this.http.get(this.apiUrl + '/getLeadsMapa/2').subscribe(data => {
+      this.http.get(this.apiUrl + '/getLeadsMapa/' + this.user).subscribe(data => {
         resolve(data);
         //console.log(data);
       }, err => {
@@ -123,7 +121,7 @@ export class RestProvider {
 
   getLeadCountMonth() {
     return new Promise(resolve => {
-      this.http.get(this.apiUrl + '/getLeadCountMonth/2').subscribe(data => {
+      this.http.get(this.apiUrl + '/getLeadCountMonth/' + this.user).subscribe(data => {
         resolve(data);
        // console.log(data);
       }, err => {
@@ -134,7 +132,7 @@ export class RestProvider {
 
   getLeadsReport() {
     return new Promise(resolve => {
-      this.http.get(this.apiUrl + '/getLeadsReport/2/2016-06-12/2017-06-12/Todos_los_recibidos').subscribe(data => {
+      this.http.get(this.apiUrl + '/getLeadsReport/' + this.user + '/2016-06-12/2017-06-12/Todos_los_recibidos').subscribe(data => {
         resolve(data);
       }, err => {
         console.log(err);

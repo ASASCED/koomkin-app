@@ -47,8 +47,12 @@ ion-select{
   position: absolute;
 }
 .rate-nombre { 
-  font-size: 15px;
-  color: black; 
+  font-size: 1.1em;
+  color: dimgray;
+  height: 100%;
+  width: 100%;
+  align-items:center;
+ 
 }
 .inf-mail{ 
   font-size: 13px;
@@ -56,9 +60,14 @@ ion-select{
   padding-top: 2px;
 }
 .rate-fecha { 
-  font-size: 12px;
-  color: #a3a3a3;
+  font-size:.9em;
+  color: dimgray;
   text-align: right; 
+}
+.rate-calidad { 
+  font-size:.9em;
+  color: dimgray;
+  text-align: center; 
 }
 .rate-tel { 
   font-size: 12px;
@@ -71,14 +80,14 @@ ion-select{
   text-align: right;
 }
 .rate-empresa {  
-  font-size: 13px;
-  color: #a3a3a3; 
+  font-size:.9em;
   padding-top: 2px;
+  color:dimgray;
 }
 .inf-mensaje { 
-  font-size:11px;
-  color: black; 
-  padding-top: 4px;
+  font-size:.8em;
+  color: lightslategray; 
+  margin-top: 5px;
   text-align: justify;
   overflow:hidden;
   white-space:nowrap;
@@ -105,8 +114,8 @@ ion-select{
   text-align: right;
 }
 .circulo{
-  border-radius: 15px;
-  width: 90%;
+  border-radius: 8px;
+  width: 80%;
   text-align: center;
   margin: 0px;
   display: inline-table;
@@ -227,4 +236,56 @@ input {
   box-shadow: inset 0 3px 6px rgba(0,0,0,0.1);
   width: 99%;
   cursor: pointer;
+}
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 130px;
+  background-color: red;
+  color: #fff;
+  text-align: center;
+  border-radius: 2px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  top: 150%;
+  left: 50%;
+  margin-left: -10px;
+}
+
+.tooltip .tooltiptext::after {
+  content: "";
+  position: absolute;
+  bottom: 100%;
+  left: 5%;
+  margin-left: -1px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent transparent red transparent;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+.urgente{
+  color: red;
+  font-size: 1.4em;
+  font-weight: bold;
+}
+.like{
+  font-size: 2.5em;
+  color: #00b9bf;
+  text-align: left;
+}
+.item-md p {
+  margin: 0 0 0px;
+  overflow: inherit;
+  font-size: 1.6rem;
+  text-overflow: inherit;
+  color: white;
+  line-height: 1.5;
 }

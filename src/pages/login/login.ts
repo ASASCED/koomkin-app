@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { IonicPage, NavController, LoadingController, ToastController } from 'ionic-angular';
 import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
+import { RestProvider } from '../../providers/rest/rest';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { ReportePage } from '../reporte/reporte'
+import { Md5 } from 'ts-md5/dist/md5';
+
 
 @IonicPage()
 @Component({
@@ -20,6 +23,7 @@ export class LoginPage implements OnInit {
   email;
   password;
   acceso;
+  id;
 
   erroresForm = {
     'email': '',
@@ -39,6 +43,7 @@ export class LoginPage implements OnInit {
 
   constructor(public navCtrl: NavController,
     public authService: AuthServiceProvider,
+    public restService: RestProvider,
     public loadingCtrl: LoadingController,
     private toastCtrl: ToastController,
     private formBuilder: FormBuilder) { }
@@ -69,11 +74,6 @@ export class LoginPage implements OnInit {
     this.onValueChanged();
   }
 
- /* onSubmit() {
-    this.userdata = this.saveUserdata();
-    console.log(this.userdata);
-  }
-*/
   public saveUserdata() {
     let saveUserdata = {
       email: this.loginForm.get('email').value,
@@ -82,23 +82,44 @@ export class LoginPage implements OnInit {
     return saveUserdata;
   }
 
- /* public getUserByEmail() {
-    let datos = this.authService.getUserByEmail(this.email,this.password,this.acceso)
-  }*/
-
-  doLogin() {
+  public doLogin() {
     this.userdata = this.saveUserdata();
     this.email = this.userdata.email;
     this.password = this.userdata.password;
-    //console.log(this.email,this.password);
     this.showLoader();
-    let datos = this.authService.getUserByEmail(this.email,this.password,this.acceso)
-      this.loading.dismiss();
-      this.data = datos;
-      if(this.acceso == true){
+    this.authService.getUserByEmail(this.email).then((data) => {
+      this.leads = data;
+      this.id = this.leads[0].IDUSUARIO;
+      if(Md5.hashStr(this.password)===this.leads[0].PASSWORD2){
+        this.restService.setUser(this.id);
+        console.log(this.id);
         this.navCtrl.setRoot(ReportePage);
       }
+      this.loading.dismiss();
+    }, (err) => {
+      this.loading.dismiss();
+      this.presentToast(err);
+    });
   }
+
+/*
+  login( email: string, password: string):void {
+    this.showLoader();
+
+      this.authService.login(email, password).then((result) => {
+        if (result.ok) {
+          this.navCtrl.setRoot(ReportePage);
+        }else{
+          this.notify.toast("ERROR: " + JSON.parse(result._body).message);          
+          if(result.status == 403){
+            this.dialog.open(ValidationDialogComponent,{
+              data: email
+            });
+          }
+        }
+      }).catch(()=>{this.notify.toast('login error: verify username/password')});
+        this.submitted = true;                  
+    }*/
 
   showLoader() {
     this.loading = this.loadingCtrl.create({

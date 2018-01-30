@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 import { RestProvider } from '../../providers/rest/rest';
+import { FacturaPage } from '../factura/factura';
 
 @IonicPage()
 @Component({
@@ -17,7 +18,8 @@ export class ReportePage implements OnInit {
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
-    public provedor: RestProvider) {
+    public provedor: RestProvider,
+    public modalCtrl: ModalController) {
 
   }
 
@@ -44,7 +46,7 @@ export class ReportePage implements OnInit {
         this.leads = data;
 
         for (let k in this.leads) {
-          this.leads[k].FECHA = this.leads[k].FECHA.substring(0, 16).replace('T', ' ');
+          this.leads[k].FECHA = this.leads[k].FECHA.substring(0, 10).replace(/^(\d{4})-(\d{2})-(\d{2})$/g,'$3/$2/$1');
           if (this.leads[k].NOMBRE.split(" ").length > 1) {
             this.leads[k].NOMBRE = this.leads[k].NOMBRE.split(" ")[0] + " " + this.leads[k].NOMBRE.split(" ")[1];
             if (this.leads[k].NOMBRE.split("-").length > 1) {
@@ -53,16 +55,10 @@ export class ReportePage implements OnInit {
           }
           this.leads[k].EMPRESA = this.leads[k].EMPRESA.substring(0, 40);
         }
-
-        console.log(this.leads);
       },
       (error) => {
         console.log(error);
       });
-  }
-
-  cargar_Leads(){
-    
   }
 
   public capitalize = function () {
@@ -71,7 +67,6 @@ export class ReportePage implements OnInit {
         return p1 + p2.toUpperCase();
       });
   };
-
 
   doInfinite(infiniteScroll) {
     console.log('Cargando Leads');
@@ -86,10 +81,9 @@ export class ReportePage implements OnInit {
     }, 500);
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad ReportePage');
+  mostrar_modal(){
+    let modal = this.modalCtrl.create( FacturaPage );
+    modal.present();
   }
-
-  
 
 }
