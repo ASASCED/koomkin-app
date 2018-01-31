@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import 'rxjs/add/operator/map';
-import { Md5 } from 'ts-md5/dist/md5';
 
 
 @Injectable()
@@ -10,7 +9,6 @@ export class AuthServiceProvider {
   public info;
   pass;
   public contrasena;
-  private user:any;
 
   constructor(public http: HttpClient) {
   }

@@ -3,18 +3,16 @@ import { MenuController, Nav, NavController, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
-import { HomePage } from '../pages/home/home';
-import { ListPage } from '../pages/list/list';
-import { BriefPage } from './../pages/brief/brief';
+import { LoginPage } from './../pages/login/login';
+import { LeadsPage } from './../pages/leads/leads';
+import { LeadPage } from './../pages/lead/lead';
 import { ReportePage } from './../pages/reporte/reporte';
-import { FacturasPage } from './../pages/facturas/facturas';
 import { UsuarioPage } from './../pages/usuario/usuario';
-import { CancelarPage } from '../pages/cancelar/cancelar';
+import { FacturasPage } from './../pages/facturas/facturas';
 import { FacturaPage } from '../pages/factura/factura';
 import { DatosPage } from '../pages/datos/datos';
+import { CancelarPage } from '../pages/cancelar/cancelar';
 import { PreguntaPage } from './../pages/pregunta/pregunta';
-import { LoginPage } from './../pages/login/login';
-
 
 @Component({
   templateUrl: 'app.html'
@@ -23,9 +21,8 @@ export class MyApp {
   @ViewChild(Nav) nav: NavController;
 
     rootPage: any = LoginPage;
-    leads = ReportePage;
-    reporte = HomePage;
-    brief = BriefPage;
+    leads = LeadsPage;
+    reporte = ReportePage;
     datos = DatosPage;
     facturas = FacturasPage;
     usuario = UsuarioPage;
@@ -33,6 +30,7 @@ export class MyApp {
     cancelar = CancelarPage;
     pregunta = PreguntaPage;
     login = LoginPage;
+    lead = LeadPage;
 
 
   pages: Array<{title: string, component: any}>;
@@ -43,19 +41,16 @@ export class MyApp {
     
     // used for an example of ngFor and navigation
     this.pages = [
-      { title: 'Leads', component: HomePage },
-      { title: 'Reporte', component: ListPage },
-      { title: 'Brief', component: BriefPage },    
-      { title: 'Reporte', component: ReportePage },
+      { title: 'Reporte', component: ReportePage },    
+      { title: 'Leads', component: LeadsPage },
       { title: 'Datos', component: DatosPage },  
       { title: 'Facturas', component: FacturasPage },
       { title: 'Usuario', component: UsuarioPage },
       { title: 'Factura', component: FacturaPage },
       { title: 'Cancelar', component: CancelarPage },
       { title: 'Pregunta', component: PreguntaPage },
+      { title: 'Lead', component: LeadPage },
       { title: 'Login',component: LoginPage }
-
-
     ];
 
   }

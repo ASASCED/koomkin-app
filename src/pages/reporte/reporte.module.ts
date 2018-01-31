@@ -1,15 +1,15 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import { ReportePage } from './reporte';
-import { LeadsComponent } from '../../components/leads/leads';
+import { Ng2GoogleChartsModule } from 'ng2-google-charts';
 
 @NgModule({
   declarations: [
     ReportePage,
-    LeadsComponent
   ],
   imports: [
     IonicPageModule.forChild(ReportePage),
-  ],
+    Ng2GoogleChartsModule
+  ]
 })
 export class ReportePageModule {}

@@ -3,7 +3,7 @@ import { IonicPage, NavController, LoadingController, ToastController, AlertCont
 import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
 import { RestProvider } from '../../providers/rest/rest';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
-import { ReportePage } from '../reporte/reporte'
+import { LeadsPage } from '../leads/leads'
 import { Md5 } from 'ts-md5/dist/md5';
 
 
@@ -45,7 +45,6 @@ export class LoginPage implements OnInit {
     public authService: AuthServiceProvider,
     public restService: RestProvider,
     public loadingCtrl: LoadingController,
-    private toastCtrl: ToastController,
     private formBuilder: FormBuilder,
     public alertCtrl: AlertController
   ) { }
@@ -97,7 +96,7 @@ export class LoginPage implements OnInit {
         if (Md5.hashStr(this.password) === this.leads[0].PASSWORD2) {
           this.restService.setUser(this.id);
         //  console.log("entro");
-          this.navCtrl.setRoot(ReportePage);
+          this.navCtrl.setRoot(LeadsPage);
         } else {
           this.showError();
         }

@@ -5,12 +5,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { HttpModule } from '@angular/http';
 
 import { MyApp } from './app.component';
-import { HomePage } from '../pages/home/home';
-import { ListPage } from '../pages/list/list';
-import { BriefPageModule } from '../pages/brief/brief.module'
+import { ReportePageModule } from '../pages/reporte/reporte.module'
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import { ReportePage } from '../pages/reporte/reporte';
+import { LeadsPage } from '../pages/leads/leads';
 import { LeadsComponent } from './../components/leads/leads';
 import { PagoPage } from './../pages/pago/pago';
 import { FiscalesPage } from '../pages/fiscales/fiscales';
@@ -21,15 +19,14 @@ import { FacturaPage } from './../pages/factura/factura';
 import { CancelarPage } from './../pages/cancelar/cancelar';
 import { PreguntaPage } from './../pages/pregunta/pregunta';
 import { LoginPage } from '../pages/login/login';
+import { LeadPage } from '../pages/lead/lead';
 import { RestProvider } from './../providers/rest/rest';
 import { AuthServiceProvider } from '../providers/auth-service/auth-service';
 
 @NgModule({
   declarations: [
     MyApp,
-    HomePage,
-    ListPage,
-    ReportePage,
+    LeadsPage,
     LeadsComponent,
     DatosPage,
     FacturasPage,
@@ -39,21 +36,20 @@ import { AuthServiceProvider } from '../providers/auth-service/auth-service';
     FacturaPage,
     CancelarPage,
     PreguntaPage,
+    LeadPage,
     LoginPage
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     HttpModule,
+    ReportePageModule,
     IonicModule.forRoot(MyApp),
-    BriefPageModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage,
-    ListPage,
-    ReportePage,
+    LeadsPage,
     LeadsComponent,
     DatosPage,
     FacturasPage,
@@ -63,6 +59,7 @@ import { AuthServiceProvider } from '../providers/auth-service/auth-service';
     FacturaPage,
     CancelarPage,
     PreguntaPage,
+    LeadPage,
     LoginPage
   ],
   providers: [
