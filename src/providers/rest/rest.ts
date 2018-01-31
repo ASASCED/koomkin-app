@@ -6,7 +6,6 @@ import 'rxjs/add/operator/map';
 export class RestProvider {
 
   constructor(public http: HttpClient) {
-    console.log('Hello RestProvider Provider');
   }
 
   private user;
@@ -88,7 +87,7 @@ export class RestProvider {
 
   getFacebookDevice(){
     return new Promise(resolve => {
-      this.http.get(this.apiUrl2 + '/facebook?param1=2&param2=impression_device').subscribe(data => {
+      this.http.get(this.apiUrl2 + '/facebook?param1=' + this.user + '&param2=impression_device').subscribe(data => {
         resolve(data);
        // console.log(data);
       }, err => {
@@ -99,7 +98,7 @@ export class RestProvider {
 
   getFacebookAge(){
     return new Promise(resolve => {
-      this.http.get(this.apiUrl2 + '/facebook?param1=2&param2=age').subscribe(data => {
+      this.http.get(this.apiUrl2 + '/facebook?param1=' + this.user + '&param2=age').subscribe(data => {
         resolve(data);
         //console.log(data);
       }, err => {
@@ -110,7 +109,7 @@ export class RestProvider {
 
   getFacebookGender(){
     return new Promise(resolve => {
-      this.http.get(this.apiUrl2 + '/facebook?param1=2&param2=gender').subscribe(data => {
+      this.http.get(this.apiUrl2 + '/facebook?param1=' + this.user + '&param2=gender').subscribe(data => {
         resolve(data);
        // console.log(data);
       }, err => {

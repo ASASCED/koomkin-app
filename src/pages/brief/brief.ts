@@ -529,7 +529,7 @@ export class BriefPage implements OnInit {
       .then(
       (data) => {
         this.leadsr = data;
-        console.log(this.leadsr);
+       // console.log(this.leadsr);
       },
       (error) => {
         console.log(error);

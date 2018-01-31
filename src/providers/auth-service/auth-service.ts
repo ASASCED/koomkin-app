@@ -13,7 +13,6 @@ export class AuthServiceProvider {
   private user:any;
 
   constructor(public http: HttpClient) {
-    console.log('Hello AuthServiceProvider Provider');
   }
 
   apiUrlp = 'http://187.162.208.218:5000/misc/decrypt2?pass=';

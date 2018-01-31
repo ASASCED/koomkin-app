@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IonicPage, NavController, LoadingController, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, LoadingController, ToastController, AlertController } from 'ionic-angular';
 import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
 import { RestProvider } from '../../providers/rest/rest';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
@@ -28,7 +28,7 @@ export class LoginPage implements OnInit {
   erroresForm = {
     'email': '',
     'password': ''
-   }
+  }
 
   mensajesValidacion = {
     'email': {
@@ -46,23 +46,25 @@ export class LoginPage implements OnInit {
     public restService: RestProvider,
     public loadingCtrl: LoadingController,
     private toastCtrl: ToastController,
-    private formBuilder: FormBuilder) { }
+    private formBuilder: FormBuilder,
+    public alertCtrl: AlertController
+  ) { }
 
-    onValueChanged(data?: any) {
-      if (!this.loginForm) { return; }
-      const form = this.loginForm;
-      for (const field in this.erroresForm) {
-        
-        this.erroresForm[field] = '';
-        const control = form.get(field);
-        if (control && control.dirty && !control.valid) {
-          const messages = this.mensajesValidacion[field];
-          for (const key in control.errors) {
-            this.erroresForm[field] += messages[key] + ' ';
-           }
-         }
-       }
-     }
+  onValueChanged(data?: any) {
+    if (!this.loginForm) { return; }
+    const form = this.loginForm;
+    for (const field in this.erroresForm) {
+
+      this.erroresForm[field] = '';
+      const control = form.get(field);
+      if (control && control.dirty && !control.valid) {
+        const messages = this.mensajesValidacion[field];
+        for (const key in control.errors) {
+          this.erroresForm[field] += messages[key] + ' ';
+        }
+      }
+    }
+  }
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
@@ -70,7 +72,7 @@ export class LoginPage implements OnInit {
       'password': ['', Validators.required],
     })
     this.loginForm.valueChanges
-    .subscribe(data=> this.onValueChanged(data))
+      .subscribe(data => this.onValueChanged(data))
     this.onValueChanged();
   }
 
@@ -89,56 +91,44 @@ export class LoginPage implements OnInit {
     this.showLoader();
     this.authService.getUserByEmail(this.email).then((data) => {
       this.leads = data;
-      this.id = this.leads[0].IDUSUARIO;
-      if(Md5.hashStr(this.password)===this.leads[0].PASSWORD2){
-        this.restService.setUser(this.id);
-        console.log(this.id);
-        this.navCtrl.setRoot(ReportePage);
+      //console.log(this.leads.length);
+      if (this.leads.length > 0) {
+        this.id = this.leads[0].IDUSUARIO;
+        if (Md5.hashStr(this.password) === this.leads[0].PASSWORD2) {
+          this.restService.setUser(this.id);
+        //  console.log("entro");
+          this.navCtrl.setRoot(ReportePage);
+        } else {
+          this.showError();
+        }
+      } else if (this.leads.length == 0) {
+        this.showError();
       }
       this.loading.dismiss();
     }, (err) => {
       this.loading.dismiss();
-      this.presentToast(err);
+      this.showError();
+      console.log(err);
     });
   }
-
-/*
-  login( email: string, password: string):void {
-    this.showLoader();
-
-      this.authService.login(email, password).then((result) => {
-        if (result.ok) {
-          this.navCtrl.setRoot(ReportePage);
-        }else{
-          this.notify.toast("ERROR: " + JSON.parse(result._body).message);          
-          if(result.status == 403){
-            this.dialog.open(ValidationDialogComponent,{
-              data: email
-            });
-          }
-        }
-      }).catch(()=>{this.notify.toast('login error: verify username/password')});
-        this.submitted = true;                  
-    }*/
 
   showLoader() {
     this.loading = this.loadingCtrl.create({
       content: 'Iniciando Sesión...'
     });
     this.loading.present();
+
+    setTimeout(() => {
+      this.loading.dismiss();
+    }, 5000);
   }
 
-  presentToast(msg) {
-    let toast = this.toastCtrl.create({
-      message: msg,
-      duration: 3000,
-      position: 'bottom',
-      dismissOnPageChange: true
+  showError() {
+    let alert = this.alertCtrl.create({
+      title: "Verifica tu correo y/o contraseña",
+      subTitle: 'Intenta de nuevo.',
+      buttons: ['OK']
     });
-    toast.onDidDismiss(() => {
-      console.log('Dismissed toast');
-    });
-    toast.present();
+    alert.present();
   }
-
 }

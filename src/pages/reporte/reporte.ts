@@ -55,6 +55,8 @@ export class ReportePage implements OnInit {
           }
           this.leads[k].EMPRESA = this.leads[k].EMPRESA.substring(0, 40);
         }
+
+        console.log(this.leads);
       },
       (error) => {
         console.log(error);
@@ -68,6 +70,7 @@ export class ReportePage implements OnInit {
       });
   };
 
+
   doInfinite(infiniteScroll) {
     console.log('Cargando Leads');
 
@@ -79,6 +82,9 @@ export class ReportePage implements OnInit {
       console.log('Se acabaron de cargar los Leads');
       infiniteScroll.complete();
     }, 500);
+  }
+
+  ionViewDidLoad() {
   }
 
   mostrar_modal(){
