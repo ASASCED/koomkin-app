@@ -1,17 +1,62 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-buttons>
-      <button ion-button (click)="dismiss()">
-        <ion-icon class="back" name="arrow-back"></ion-icon>
-      </button>
-    </ion-buttons>
+
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
+    <ion-grid class="vista">
+        <ion-row align-items-center>
+          <ion-col style="text-align: center;">
+            <div class="circulo">
+              <p class="circulo">V</p>
+            </div>
+            <br>
+          </ion-col>
+          <ion-col col-6 align-self-center>
+            <div class="inf-nombre">
+              <strong>{{leadActual.NOMBRE}} </strong>
+            </div>
+          </ion-col>
+          <ion-col col-4>
+            <div class="rate-fecha">{{leadActual.FECHA}}</div>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-2>
+          </ion-col>
+          <ion-col col-8>
+              <div class="inf-empresa">{{leadActual.EMPRESA}}</div>
+            </ion-col>
+          <ion-col col-2 style="text-align:right">
+            <div class="tooltip">
+              <ion-icon class="urgente" alt="Urgente" name="ios-alert-outline"></ion-icon>
+              <span class="tooltiptext"> Urgente</span>
+            </div>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-2>
+          </ion-col>
+          <ion-col col-8>
+            <div class="inf-estado">{{leadActual.ESTADO}}</div>
+          </ion-col>
+          <ion-col col2>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-2>
+          </ion-col>
+          <ion-col col-8>
+            <div class="inf-correo">{{leadActual.EMAIL}}</div>
+          </ion-col>
+          <ion-col col2 style="text-align: right;">
+          </ion-col>
+        </ion-row>
+      </ion-grid>
   <div class="contacto">Datos fiscales</div>
   <table style="width:100%;">
     <tr>

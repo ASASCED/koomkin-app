@@ -21,22 +21,10 @@ export class LeadsPage implements OnInit {
     public navParams: NavParams,
     public provedor: RestProvider,
     public modalCtrl: ModalController) {
-
   }
 
   ngOnInit() {
     this.getLeadsReport();
-  }
-
-  expandItem(item) {
-    this.items.map((listItem) => {
-      if (item == listItem) {
-        listItem.expanded = !listItem.expanded;
-      } else {
-        listItem.expanded = false;
-      }
-      return listItem;
-    });
   }
 
   public getLeadsReport() {
@@ -71,7 +59,6 @@ export class LeadsPage implements OnInit {
       });
   };
 
-
   doInfinite(infiniteScroll) {
     console.log('Cargando Leads');
 
@@ -79,13 +66,16 @@ export class LeadsPage implements OnInit {
       for (let i = 0; i < 30; i++) {
         this.items.push(this.items.length);
       }
-
       console.log('Se acabaron de cargar los Leads');
       infiniteScroll.complete();
     }, 500);
   }
 
   ionViewDidLoad() {
+  }
+
+  verLead(lead){
+    this.navCtrl.push(LeadPage, lead);
   }
 
   mostrar_modal() {

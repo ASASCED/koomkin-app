@@ -8,7 +8,12 @@ import { IonicPage, NavController, ViewController, NavParams } from 'ionic-angul
 })
 export class LeadPage {
 
-  constructor(public viewCtrl: ViewController,public navCtrl: NavController, public navParams: NavParams) {
+  leadActual;
+
+  constructor(public viewCtrl: ViewController,
+              public navCtrl: NavController, 
+              public navParams: NavParams) {
+      this.leadActual = navParams.data;
   }
 
   ionViewDidLoad() {

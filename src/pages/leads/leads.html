@@ -61,7 +61,7 @@
             </ion-select>
           </ion-item>
         </div>
-        <ion-list detail-none ion-item *ngFor="let lead of leads; let i = index;" (click)="mostrar_modal()" style="border: .15px solid #d0d1d1;">
+        <ion-list detail-none ion-item *ngFor="let lead of leads; let i = index;" (click)="verLead(lead)" style="border: .15px solid #d0d1d1;">
           <ion-grid>
             <ion-row align-items-center>
               <ion-col style="text-align: center;">

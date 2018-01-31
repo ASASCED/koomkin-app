@@ -203,3 +203,36 @@
   .tooltip:hover .tooltiptext {
     visibility: visible;
   }
+
+  ion-icon{
+    color: #fff;
+  }
+
+  .vista {
+    padding: 0px !important;
+  }
+
+  .inf-correo{
+    color: lightskyblue;
+    font-style: italic;
+  }
+
+  .inf-nombre{
+    font-size: 1.3em;
+    color: darkslategray;
+  }
+
+  .inf-empresa{
+    font-size: 1.2em;
+    color: darkslategray;
+  }
+
+  .inf-estado{
+    font-size: 1.1em !important;
+    color: slategray !important;
+    text-align: left !important;
+  }
+
+  .circulo{
+    font-size: 1.26em;
+  }
