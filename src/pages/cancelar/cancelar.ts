@@ -9,17 +9,17 @@ import { PreguntaPage } from './../pregunta/pregunta';
 })
 export class CancelarPage {
 
-  nombre:string = "";
-  edad:number = 0;
+  nombre: string = "";
+  edad: number = 0;
 
   constructor(public viewCtrl: ViewController,
-              public navParams: NavParams, 
-              public modalCtrl: ModalController) {
+    public navParams: NavParams,
+    public modalCtrl: ModalController) {
 
     this.nombre = this.navParams.get("nombre");
     this.edad = this.navParams.get("edad");
 
-    console.log( this.nombre, this.edad );
+    console.log(this.nombre, this.edad);
 
   }
 
@@ -28,8 +28,8 @@ export class CancelarPage {
   }
 
 
-  mostrar_pregunta(){
-    let modal = this.modalCtrl.create( PreguntaPage );
+  mostrar_pregunta() {
+    let modal = this.modalCtrl.create(PreguntaPage);
     modal.present();
   }
 

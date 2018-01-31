@@ -9,7 +9,6 @@ import { ReportePageModule } from '../pages/reporte/reporte.module'
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { LeadsPage } from '../pages/leads/leads';
-import { LeadsComponent } from './../components/leads/leads';
 import { PagoPage } from './../pages/pago/pago';
 import { FiscalesPage } from '../pages/fiscales/fiscales';
 import { FacturasPage } from './../pages/facturas/facturas';
@@ -27,7 +26,6 @@ import { AuthServiceProvider } from '../providers/auth-service/auth-service';
   declarations: [
     MyApp,
     LeadsPage,
-    LeadsComponent,
     DatosPage,
     FacturasPage,
     FiscalesPage,
@@ -50,7 +48,6 @@ import { AuthServiceProvider } from '../providers/auth-service/auth-service';
   entryComponents: [
     MyApp,
     LeadsPage,
-    LeadsComponent,
     DatosPage,
     FacturasPage,
     FiscalesPage,

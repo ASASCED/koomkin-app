@@ -10,4 +10,4 @@ import { CancelarPage } from './cancelar';
     IonicPageModule.forChild(CancelarPage),
   ],
 })
-export class CancelarPageModule {}
+export class CancelarPageModule { }

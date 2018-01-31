@@ -8,7 +8,7 @@ import { IonicPage, NavController, ViewController, NavParams } from 'ionic-angul
 })
 export class FacturaPage {
 
-  constructor(public viewCtrl: ViewController,public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public viewCtrl: ViewController, public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {

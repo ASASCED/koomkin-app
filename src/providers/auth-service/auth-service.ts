@@ -30,7 +30,7 @@ export class AuthServiceProvider {
     });
   }
 
- 
+
 }
 
   //password con + sustituir con %2B o %2b 

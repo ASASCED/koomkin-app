@@ -1,9 +1,8 @@
 import { NgModule } from '@angular/core';
-import { LeadsComponent } from './leads/leads';
 
 @NgModule({
-	declarations: [LeadsComponent],
+	declarations: [],
 	imports: [],
-	exports: [LeadsComponent]
+	exports: []
 })
 export class ComponentsModule {}

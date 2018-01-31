@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { FacturasPage,PagoPage,UsuarioPage } from '../index.paginas';
+import { FacturasPage, PagoPage, UsuarioPage } from '../index.paginas';
 
 
 @IonicPage()
@@ -12,7 +12,7 @@ export class DatosPage {
 
   Facturas: any;
   Pago: any;
-  Usuario:any;
+  Usuario: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
 

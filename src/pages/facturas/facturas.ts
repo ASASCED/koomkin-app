@@ -10,20 +10,20 @@ import { FacturaPage } from '../factura/factura';
 export class FacturasPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController) {
-    
+
   }
 
- navegarPagina(){
-   this.navCtrl.push(FacturaPage);
- }
+  navegarPagina() {
+    this.navCtrl.push(FacturaPage);
+  }
 
- ionViewDidLoad() {
-  console.log('ionViewDidLoad FacturasPage');
-}
+  ionViewDidLoad() {
+    console.log('ionViewDidLoad FacturasPage');
+  }
 
-mostrar_modal(){
-  let modal = this.modalCtrl.create( FacturaPage );
-  modal.present();
-}
+  mostrar_modal() {
+    let modal = this.modalCtrl.create(FacturaPage);
+    modal.present();
+  }
 
 }

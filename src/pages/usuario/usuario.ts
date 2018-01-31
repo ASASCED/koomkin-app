@@ -11,15 +11,15 @@ import { CancelarPage } from './../cancelar/cancelar';
 })
 export class UsuarioPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController ) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad UsuarioPage');
   }
 
-  mostrar_modal(){
-    let modal = this.modalCtrl.create( CancelarPage );
+  mostrar_modal() {
+    let modal = this.modalCtrl.create(CancelarPage);
     modal.present();
   }
 

@@ -20,37 +20,37 @@ import { PreguntaPage } from './../pages/pregunta/pregunta';
 export class MyApp {
   @ViewChild(Nav) nav: NavController;
 
-    rootPage: any = LoginPage;
-    leads = LeadsPage;
-    reporte = ReportePage;
-    datos = DatosPage;
-    facturas = FacturasPage;
-    usuario = UsuarioPage;
-    factura = FacturaPage;
-    cancelar = CancelarPage;
-    pregunta = PreguntaPage;
-    login = LoginPage;
-    lead = LeadPage;
+  rootPage: any = LoginPage;
+  leads = LeadsPage;
+  reporte = ReportePage;
+  datos = DatosPage;
+  facturas = FacturasPage;
+  usuario = UsuarioPage;
+  factura = FacturaPage;
+  cancelar = CancelarPage;
+  pregunta = PreguntaPage;
+  login = LoginPage;
+  lead = LeadPage;
 
 
-  pages: Array<{title: string, component: any}>;
+  pages: Array<{ title: string, component: any }>;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, private menuCtrl: MenuController ) {
+  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, private menuCtrl: MenuController) {
     this.initializeApp();
 
-    
+
     // used for an example of ngFor and navigation
     this.pages = [
-      { title: 'Reporte', component: ReportePage },    
+      { title: 'Reporte', component: ReportePage },
       { title: 'Leads', component: LeadsPage },
-      { title: 'Datos', component: DatosPage },  
+      { title: 'Datos', component: DatosPage },
       { title: 'Facturas', component: FacturasPage },
       { title: 'Usuario', component: UsuarioPage },
       { title: 'Factura', component: FacturaPage },
       { title: 'Cancelar', component: CancelarPage },
       { title: 'Pregunta', component: PreguntaPage },
       { title: 'Lead', component: LeadPage },
-      { title: 'Login',component: LoginPage }
+      { title: 'Login', component: LoginPage }
     ];
 
   }
@@ -70,7 +70,7 @@ export class MyApp {
     this.nav.setRoot(page.component);
   }
 
-  pagina(pagina:any){
+  pagina(pagina: any) {
     this.nav.setRoot(pagina);
     this.menuCtrl.close();
   }

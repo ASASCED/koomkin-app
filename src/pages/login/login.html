@@ -2,7 +2,7 @@
   <ion-row class="logo-row">
     <ion-col col-2></ion-col>
     <ion-col>
-      <img src="../assets/imgs/koomkin_bco.png"/>
+      <img src="../assets/imgs/koomkin_bco.png" />
     </ion-col>
     <ion-col col-2></ion-col>
   </ion-row>
@@ -23,26 +23,27 @@
       <ion-row>
         <ion-col>
           <ion-list inset>
-            
-            <ion-item >
-              <ion-input style="text-align:center" id="inputEmail" type="mail" name="email" placeholder="Correo Electrónico" formControlName="email" autofocus></ion-input>
+
+            <ion-item>
+              <ion-input style="text-align:center" id="inputEmail" type="mail" name="email" placeholder="Correo Electrónico" formControlName="email"
+                autofocus></ion-input>
             </ion-item>
-      
+
             <ion-item>
               <ion-input id="inputPassword" type="password" name="password" formControlName="password" placeholder="Contraseña"></ion-input>
             </ion-item>
-          
+
           </ion-list>
         </ion-col>
       </ion-row>
-      
+
       <ion-row>
         <ion-col class="signup-col">
           <button ion-button class="submit-btn" full type="submit" [disabled]="!loginForm.valid">Iniciar Sesión</button>
         </ion-col>
-        
+
       </ion-row>
-      
+
     </form>
   </div>
 </ion-content>

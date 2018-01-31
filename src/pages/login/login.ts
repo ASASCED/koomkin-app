@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { IonicPage, NavController, LoadingController, ToastController, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, LoadingController, AlertController } from 'ionic-angular';
 import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
 import { RestProvider } from '../../providers/rest/rest';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { LeadsPage } from '../leads/leads'
 import { Md5 } from 'ts-md5/dist/md5';
-
 
 @IonicPage()
 @Component({
@@ -95,7 +94,7 @@ export class LoginPage implements OnInit {
         this.id = this.leads[0].IDUSUARIO;
         if (Md5.hashStr(this.password) === this.leads[0].PASSWORD2) {
           this.restService.setUser(this.id);
-        //  console.log("entro");
+          //  console.log("entro");
           this.navCtrl.setRoot(LeadsPage);
         } else {
           this.showError();

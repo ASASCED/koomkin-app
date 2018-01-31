@@ -22,11 +22,11 @@ export class RestProvider {
     });
   }
 
-  setUser(user:any){
+  setUser(user: any) {
     this.user = user;
   }
 
-  public getUser(){
+  public getUser() {
     return this.user;
   }
 
@@ -85,18 +85,18 @@ export class RestProvider {
     });
   }
 
-  getFacebookDevice(){
+  getFacebookDevice() {
     return new Promise(resolve => {
       this.http.get(this.apiUrl2 + '/facebook?param1=' + this.user + '&param2=impression_device').subscribe(data => {
         resolve(data);
-       // console.log(data);
+        // console.log(data);
       }, err => {
         console.log(err);
       });
     });
   }
 
-  getFacebookAge(){
+  getFacebookAge() {
     return new Promise(resolve => {
       this.http.get(this.apiUrl2 + '/facebook?param1=' + this.user + '&param2=age').subscribe(data => {
         resolve(data);
@@ -107,11 +107,11 @@ export class RestProvider {
     });
   }
 
-  getFacebookGender(){
+  getFacebookGender() {
     return new Promise(resolve => {
       this.http.get(this.apiUrl2 + '/facebook?param1=' + this.user + '&param2=gender').subscribe(data => {
         resolve(data);
-       // console.log(data);
+        // console.log(data);
       }, err => {
         console.log(err);
       });
@@ -122,7 +122,7 @@ export class RestProvider {
     return new Promise(resolve => {
       this.http.get(this.apiUrl + '/getLeadCountMonth/' + this.user).subscribe(data => {
         resolve(data);
-       // console.log(data);
+        // console.log(data);
       }, err => {
         console.log(err);
       });

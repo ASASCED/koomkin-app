@@ -3,104 +3,107 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Nombre de la empresa: AGO Consultores<br>ID Cliente: 2</ion-title>
+    <ion-title>Nombre de la empresa: AGO Consultores
+      <br>ID Cliente: 2</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content class="detail-card" color="fondo">
-        <ion-grid>
-          <ion-row>
-              <ion-col col-2>      
-                <img src="../assets/imgs/iconos/DLeads.svg" style="width:55%;margin-left: 30%;margin-top:35%;" />
-              </ion-col>
-              <ion-col col-10>  
-                <h1 style="font-size: 2rem;"><strong>Histórico de facturas</strong></h1>
-                <h3 style="font-size: 1.1rem;">Detalle de facturas generadas por periodo</h3>
-              </ion-col>                
-          </ion-row>    
-        </ion-grid>    
-        <hr style="background-color:black; width:90%">
+  <ion-grid>
+    <ion-row>
+      <ion-col col-2>
+        <img src="../assets/imgs/iconos/DLeads.svg" style="width:55%;margin-left: 30%;margin-top:35%;" />
+      </ion-col>
+      <ion-col col-10>
+        <h1 style="font-size: 2rem;">
+          <strong>Histórico de facturas</strong>
+        </h1>
+        <h3 style="font-size: 1.1rem;">Detalle de facturas generadas por periodo</h3>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <hr style="background-color:black; width:90%">
 
-    <ion-card-content>
-        <ion-list>
-            <button ion-item (click)="mostrar_modal()">
-              <table>
-                <tr>
-                  <td class="costo">$2,500</td>
-                  <td style="text-align:right">23 de Octubre, 2017</td>
-                </tr>
-                <tr>
-                  <td>Plan Mensual</td>
-                  <td class="ver">Ver Factura</td>
-                </tr>
-              </table>
-            </button>
-        
-            <button ion-item (click)="mostrar_modal()">
-                <table>
-                    <tr>
-                      <td class="costo">$2,500</td>
-                      <td style="text-align:right">23 de Octubre, 2017</td>
-                    </tr>
-                    <tr>
-                      <td>Plan Mensual</td>
-                      <td class="ver">Ver Factura</td>
-                    </tr>
-                  </table>
-            </button>
-        
-            <button ion-item>
-                <table>
-                    <tr>
-                      <td class="costo">$2,500</td>
-                      <td style="text-align:right">23 de Octubre, 2017</td>
-                    </tr>
-                    <tr>
-                      <td>Plan Mensual</td>
-                      <td class="ver">Ver Factura</td>
-                    </tr>
-                  </table>
-            </button>
-        
-            <button ion-item>
-                <table>
-                    <tr>
-                      <td class="costo">$2,500</td>
-                      <td style="text-align:right">23 de Octubre, 2017</td>
-                    </tr>
-                    <tr>
-                      <td>Plan Mensual</td>
-                      <td class="ver">Ver Factura</td>
-                    </tr>
-                  </table>
-            </button>
-        
-            <button ion-item>
-                <table>
-                    <tr>
-                      <td class="costo">$2,500</td>
-                      <td style="text-align:right">23 de Octubre, 2017</td>
-                    </tr>
-                    <tr>
-                      <td>Plan Mensual</td>
-                      <td class="ver">Ver Factura</td>
-                    </tr>
-                  </table>
-            </button>
-        
-            <button ion-item>
-                <table>
-                    <tr>
-                      <td class="costo">$2,500</td>
-                      <td style="text-align:right">23 de Octubre, 2017</td>
-                    </tr>
-                    <tr>
-                      <td>Plan Mensual</td>
-                      <td class="ver">Ver Factura</td>
-                    </tr>
-                  </table>
-            </button>
-        
-          </ion-list>
-    </ion-card-content>
+  <ion-card-content>
+    <ion-list>
+      <button ion-item (click)="mostrar_modal()">
+        <table>
+          <tr>
+            <td class="costo">$2,500</td>
+            <td style="text-align:right">23 de Octubre, 2017</td>
+          </tr>
+          <tr>
+            <td>Plan Mensual</td>
+            <td class="ver">Ver Factura</td>
+          </tr>
+        </table>
+      </button>
+
+      <button ion-item (click)="mostrar_modal()">
+        <table>
+          <tr>
+            <td class="costo">$2,500</td>
+            <td style="text-align:right">23 de Octubre, 2017</td>
+          </tr>
+          <tr>
+            <td>Plan Mensual</td>
+            <td class="ver">Ver Factura</td>
+          </tr>
+        </table>
+      </button>
+
+      <button ion-item>
+        <table>
+          <tr>
+            <td class="costo">$2,500</td>
+            <td style="text-align:right">23 de Octubre, 2017</td>
+          </tr>
+          <tr>
+            <td>Plan Mensual</td>
+            <td class="ver">Ver Factura</td>
+          </tr>
+        </table>
+      </button>
+
+      <button ion-item>
+        <table>
+          <tr>
+            <td class="costo">$2,500</td>
+            <td style="text-align:right">23 de Octubre, 2017</td>
+          </tr>
+          <tr>
+            <td>Plan Mensual</td>
+            <td class="ver">Ver Factura</td>
+          </tr>
+        </table>
+      </button>
+
+      <button ion-item>
+        <table>
+          <tr>
+            <td class="costo">$2,500</td>
+            <td style="text-align:right">23 de Octubre, 2017</td>
+          </tr>
+          <tr>
+            <td>Plan Mensual</td>
+            <td class="ver">Ver Factura</td>
+          </tr>
+        </table>
+      </button>
+
+      <button ion-item>
+        <table>
+          <tr>
+            <td class="costo">$2,500</td>
+            <td style="text-align:right">23 de Octubre, 2017</td>
+          </tr>
+          <tr>
+            <td>Plan Mensual</td>
+            <td class="ver">Ver Factura</td>
+          </tr>
+        </table>
+      </button>
+
+    </ion-list>
+  </ion-card-content>
 </ion-content>

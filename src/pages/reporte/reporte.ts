@@ -222,18 +222,6 @@ export class ReportePage implements OnInit {
           this.columnChartData.dataTable = outter
         }
       },
-
-      /* outter.push(['Mes','Leads', {"role": "style"}]);
-       for(let i=0 ; i < this.meses.length ; i++){
-         let inner = [];
-         inner.push(this.meses[i].MES);
-         inner.push(this.meses[i].LEADS);
-         inner.push("#00A6d4");
-         outter.push(inner);
-       }
-       this.columnChartData.dataTable = outter
-        console.log(this.datagraph);
-     },*/
       (error) => {
         console.log(error);
       });
@@ -527,7 +515,7 @@ export class ReportePage implements OnInit {
       .then(
       (data) => {
         this.leadsr = data;
-       // console.log(this.leadsr);
+        // console.log(this.leadsr);
       },
       (error) => {
         console.log(error);
