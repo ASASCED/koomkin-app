@@ -64,7 +64,7 @@
 
   .rate-calidad {
     font-size: 1.2em !important;
-    color: #10c2ce;
+    color: #00b9bf;
   }
 
   .inf-empresa{
@@ -138,7 +138,7 @@
   }
 
   .evaluado{
-    color: #10cebc;
+    color: #00b9bf;
     font-size: 4em;
     margin-right: .2em;
   }
@@ -165,12 +165,69 @@
     font-size: 2em;
     color: darkslategray;
     margin-right: .5em;
-    margin-left: .9em;
+    margin-left: 2.3em;
   }
 
   .phone{
     color: darkslategray;
     position: absolute;
     margin-top: 0.5em;
+    text-align: center;
+  }
+
+  //vista 3 
+
+  .paciente{
+    color: #00b9bf;
+    font-size: 1.3em;
+    margin-bottom: 0;
+  }
+
+  .edadpaciente{
+    color: #00b9bf;
+    font-weight: bold;
+    font-size: 1em;
+    margin-top: 1em;
+    margin-bottom: 0.1em;
   }
   
+  .paciented{
+    color: #00b9bf;
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-left: 0.3em;
+    margin-right: .5em;
+  }
+
+  .cita{
+    color: dimgray;
+    font-size: 1.5em;
+    margin-left: .5em;
+    margin-top: .3em;
+  }
+
+  //vista 5
+
+  .reserva{
+    color: dimgray;
+    font-size: 1.6em;
+    margin-top: .4em;
+    margin-right: .3em;
+  }
+
+  .tipo{
+    color: #00b9bf;
+    font-weight: bold;
+    font-size: 1.4em;
+    margin-top: .43em;
+    margin-bottom: 0.1em;
+    position: absolute;
+  }
+
+  //vista 6
+
+  .viaje{
+    color: dimgray;
+    font-size: 1.5em;
+    margin-top: .3em;
+  }
