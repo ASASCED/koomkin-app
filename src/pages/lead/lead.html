@@ -1,122 +1,127 @@
 <ion-header>
-
   <ion-navbar>
-
   </ion-navbar>
-
 </ion-header>
 
-
 <ion-content padding>
-    <ion-grid class="vista">
-        <ion-row align-items-center>
-          <ion-col style="text-align: center;">
-            <div class="circulo">
-              <p class="circulo">V</p>
-            </div>
-            <br>
-          </ion-col>
-          <ion-col col-6 align-self-center>
-            <div class="inf-nombre">
-              <strong>{{leadActual.NOMBRE}} </strong>
-            </div>
-          </ion-col>
-          <ion-col col-4>
-            <div class="rate-fecha">{{leadActual.FECHA}}</div>
-          </ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col col-2>
-          </ion-col>
-          <ion-col col-8>
-              <div class="inf-empresa">{{leadActual.EMPRESA}}</div>
-            </ion-col>
-          <ion-col col-2 style="text-align:right">
-            <div class="tooltip">
-              <ion-icon class="urgente" alt="Urgente" name="ios-alert-outline"></ion-icon>
-              <span class="tooltiptext"> Urgente</span>
-            </div>
-          </ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col col-2>
-          </ion-col>
-          <ion-col col-8>
-            <div class="inf-estado">{{leadActual.ESTADO}}</div>
-          </ion-col>
-          <ion-col col2>
-          </ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col col-2>
-          </ion-col>
-          <ion-col col-8>
-            <div class="inf-correo">{{leadActual.EMAIL}}</div>
-          </ion-col>
-          <ion-col col2 style="text-align: right;">
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-  <div class="contacto">Datos fiscales</div>
-  <table style="width:100%;">
-    <tr>
-      <th style="width: 36%;"></th>
-      <th></th>
-    </tr>
-    <tr>
-      <td class="receptor">Razón Social</td>
-      <td class="datosrec">Grupo Koomkin SA de CV</td>
-    </tr>
-    <tr>
-      <td class="receptor">RFC</td>
-      <td class="datosrec">GKO120503S79</td>
-    </tr>
-    <tr>
-      <td class="receptor">Domicilio Fiscal</td>
-      <td class="datosrec">Horacio 1844, 7C Polanco, Miguel Hidalgo, México DF, 11510</td>
-    </tr>
-    <tr>
-      <td class="receptor">Nombre del titular</td>
-      <td class="datosrec">Pablo García</td>
-    </tr>
-    <tr>
-      <td class="receptor">CFDI
-        <div class="tooltip">
-          <ion-icon alt="Comprobante fiscal digital por internet" name="md-information-circle"></ion-icon>
-          <span class="tooltiptext">Comprobante fiscal digital por Internet</span>
+  <ion-grid class="vista">
+    <ion-row align-items-center>
+      <ion-col>
+        <div class="circulo">
+          <p class="circulo">V</p>
         </div>
-      </td>
-      <td class="datosrec">Por definir</td>
-    </tr>
-  </table>
-  <hr>
-  <div class="contacto">Datos de pago</div>
-  <p class="texto">Unidad</p>
-  <p class="respuesta">Servicio</p>
-  <p class="texto">Cantidad Descripcion</p>
-  <p class="respuesta">1 Membresía plan mensual</p>
-  <p class="texto">Precio Unitario</p>
-  <p class="respuesta">$ 2,500</p>
-  <table style="width:100%;">
-    <tr>
-      <th style="width: 40%;"></th>
-      <th style="width: 25%; text-align: right;"></th>
-      <th style="width: 25%; text-align: right;"></th>
-    </tr>
-    <tr>
-      <td></td>
-      <td class="receptor2">Plan</td>
-      <td class="datosrec2">$2,500</td>
-    </tr>
-    <tr>
-      <td></td>
-      <td class="receptor2" style="border-bottom: 2px solid #a1a1a1;">IVA</td>
-      <td class="datosrec2" style="border-bottom: 2px solid #a1a1a1;">$400</td>
-    </tr>
-    <tr>
-      <td></td>
-      <td class="receptor2">Total</td>
-      <td class="datosrec2">$2,900</td>
-    </tr>
-  </table>
+        <br>
+      </ion-col>
+      <ion-col col-6 align-self-center>
+        <a class="inf-nombre">
+          <strong>{{leadActual.NOMBRE}} </strong>
+        </a>
+        <div class="tooltip">
+          <ion-icon class="urgente" alt="Urgente" name="ios-alert-outline"></ion-icon>
+          <span class="tooltiptext"> Urgente</span>
+        </div>
+      </ion-col>
+      <ion-col col-4>
+        <div class="rate-fechal">{{leadActual.FECHA}}</div>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-2>
+      </ion-col>
+      <ion-col col-8>
+        <div class="rate-calidad">Clasificación Lead = 85%</div>
+      </ion-col>
+      <ion-col col-2>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-2>
+      </ion-col>
+      <ion-col col-8>
+        <div class="inf-empresa">{{leadActual.EMPRESA}}</div>
+      </ion-col>
+      <ion-col col-2>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-2>
+      </ion-col>
+      <ion-col col-8>
+        <div class="inf-estado">{{leadActual.ESTADO}}</div>
+      </ion-col>
+      <ion-col col2>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-2>
+      </ion-col>
+      <ion-col col-8>
+        <div class="inf-correo">{{leadActual.EMAIL}}</div>
+      </ion-col>
+      <ion-col col2 style="text-align: right;">
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <p class="cotiza">Cotización para mi empresa</p>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <p class="mensaje">Hola,Me gustaría que me diera más información acerca de sus productos o servicios. Por favor comuníquese conmigo
+          lo antes posible. Gracias.</p>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <p class="frecuencia">Requiero: 22 cajas</p>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <p class="frecuencia">Frecuencia de compra: Mensual</p>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <p class="frecuencia">Favor de cotizar envío</p>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-icon class="download" name="md-cloud-download"></ion-icon>
+        <a class="descarga">Dercargar archivo adjunto</a>
+
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-6>
+        <p class="califica">Clasifica este Lead</p>
+      </ion-col>
+      <ion-col col-5 offset-1>
+        <p class="califica">Califica este Lead</p>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-6>
+        <button class="arribab">Vendido</button>
+        <button class="arribab">En proceso</button>
+        <br>
+        <button class="arribab">Sin Contacto</button>
+        <button class="arribab">Descartado</button>
+      </ion-col>
+      <ion-col col-5 offset-1 style="text-align:center">
+        <ion-icon class="evaluado" name="md-thumbs-up"></ion-icon>
+        <ion-icon class="noevaluado" name="md-thumbs-down"></ion-icon>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <button class="llamar">
+          <ion-icon class="telefono" name="md-call"></ion-icon>
+          <a class="phone">Llamar a Juan Pérez ID cliente 1094</a>
+        </button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

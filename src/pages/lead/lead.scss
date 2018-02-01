@@ -1,174 +1,26 @@
-.cuadro{
-    width: 100%;
-    height: 100%;
+  ion-icon{
+    color: #fff;
   }
-  .cuadro1{
-    width: 37%;
-    height: 50%;  
-    display:inline-block;  
-    margin-left: 2%; 
-    margin-top: 1%; 
+
+  .vista {
+    padding: 0px !important;
   }
-  .cuadro2{
-    width: 58%;
-    height: 50%; 
-    display:inline-block;   
-    margin-top: 1%; 
-    float: right;
-    margin-right: 2%; 
+
+  .circulo{
+    font-size: 1.26em;
   }
-  .cuadro3{
-    width: 100%;
-    height: 100%;
+
+  .inf-nombre{
+    font-size: 1.3em;
+    color: darkslategray;
   }
-  .edit{
-    background: #10cebc;
-    border: transparent;
-    font-size: 20px;
-    text-align: center;
-    color: white;
-    border-radius: 10px; 
-    cursor: pointer;
+
+  .urgente {
+    color: red;
+    font-size: 1.5em !important;
+    font-weight: bold;
   }
-  .folio{
-    margin-top: 0px;
-    color: #f26432;
-    font-size: 20px;
-  }
-  .mensual{
-    color: #a2a2a2;
-    font-size: 17px;
-  }
-  .facturas{
-    color: #00ade7;
-    font-size: 16px;
-    font-style: italic;
-    cursor: pointer;
-  }
-  .fecha{
-    color: #10cebc;;
-    font-size: 17px;
-  }
-  .plan{
-    margin: 0px;
-    font-size: 19px;
-    color: black;
-    text-align: right;
-    color: #a2a2a2;
-  }
-  .total{
-    color: #808181;
-  }
-  .cuadrores{
-    width: 100%;
-    height: 100%;
-  }
-  .cuadrores1{
-    width: 40%;
-    display:inline-block;  
-    margin-left: 2%; 
-    margin-top: 1%; 
-  }
-  .cuadrores2{
-    width: 54%;
-    display:inline-block;   
-    margin-top: 1%; 
-    margin-right: 2%;
-    text-align: right; 
-  }
-  .logo{
-    width: 100%;
-  }
-  .empresa{
-    font-size: 14px;
-  }
-  .fechares{
-    color: black;
-    font-size: 20px;
-    color: #f26432;
-    margin-top: 2px;
-    margin-bottom: 4px;
-  }
-  .foliores{
-    font-size: 20px;
-    color: #f26432;
-    margin-top: 2px;
-    margin-bottom: 4px;
-  }
-  .datos{
-    text-align: center;
-    width: 100%;
-    font-size: 18px;
-    color: white;
-    background: #10cebc;
-    border: transparent;
-  }
-  .factura{
-    font-size: 14px;
-  }
-  .emision{
-    font-size: 14px;
-  }
-  .receptor{
-    margin:0px;
-    font-size: 13px;
-    color: #b2b2b2;
-  }
-  .datosrec{
-    margin:0px;
-    font-size: 13px;
-    color: black;
-  }
-  .texto{
-    margin:1px;
-    font-size: 16px;
-    color: black;
-    margin-left: 1%;
-  }
-  .respuesta{
-    margin:0px;
-    font-size: 16px;
-    color: #10cebc;
-    margin-left: 5%;
-  }
-  .receptor2{
-    margin:0px;
-    font-size: 16px;
-    color: #a1a1a1;
-    text-align: right;
-  }
-  .datosrec2{
-    margin:0px;
-    font-size: 16px;
-    color: #a1a1a1;
-    text-align: right;
-  }
-  table {
-    border-collapse: collapse;
-  }
-  td{
-    padding-bottom: 3.8%;
-  }
-  .contacto{
-    color: #10cebc;
-    font-size: 16px;
-    margin-bottom: 5%;
-  }
-  iron-icon{
-    color: #126aff;
-    height: 20px !important;
-    width: 20px !important;
-  }
-  paper-icon-button.descargar{
-    color: #10cebc;
-    width: var(--iron-icon-width, 50px);
-    height: var(--iron-icon-height, 50px);
-  }
-  paper-icon-button.enviar{
-    color: #10cebc;
-    width: var(--iron-icon-width, 50px);
-    height: var(--iron-icon-height, 50px);
-  }
+
   .tooltip {
     position: relative;
     display: inline-block;
@@ -204,22 +56,15 @@
     visibility: visible;
   }
 
-  ion-icon{
-    color: #fff;
+  .rate-fechal {
+    font-size: 1.1em !important;
+    color: dimgray;
+    text-align: right;
   }
 
-  .vista {
-    padding: 0px !important;
-  }
-
-  .inf-correo{
-    color: lightskyblue;
-    font-style: italic;
-  }
-
-  .inf-nombre{
-    font-size: 1.3em;
-    color: darkslategray;
+  .rate-calidad {
+    font-size: 1.2em !important;
+    color: #10c2ce;
   }
 
   .inf-empresa{
@@ -233,6 +78,99 @@
     text-align: left !important;
   }
 
-  .circulo{
-    font-size: 1.26em;
+  .inf-correo{
+    color: lightskyblue;
+    font-style: italic;
+    font-size: 1.1em;
   }
+
+  .cotiza{
+    color: #00b9bf;
+    font-weight: bold;
+    font-size: 1.4em;
+    margin-top: 1em;
+    margin-bottom: 0.1em;
+  }
+
+  .mensaje{
+    color: lightslategray;
+    font-size: 1.2em;
+    margin-left: 0.5em;
+    font-weight: 500;
+    margin-bottom: 0.7em;
+    text-align: justify;
+  }
+
+  .frecuencia{
+    color: darkgray;
+    margin-bottom: 0.3em;
+    font-size: 1.2em;
+    margin-top: 0.5em;
+  }
+
+  .download{
+    color: orangered;
+    font-size: 2em;
+  }
+
+  .descarga{
+    font-size: 1.1em;
+    color: coral;
+    text-decoration: underline;
+    margin-left: .7em;
+    position: absolute;
+    margin-top: 5px;
+  }
+
+  .califica{
+    text-align: center;
+    font-size: 1.1em;
+    color: darkslategray;
+    font-weight: bold;
+  }
+
+  .arribab{
+    width: 49%;
+    border-radius: 8px;
+    font-size: .9em;
+    padding: 4%;
+    margin-bottom: .4em;
+  }
+
+  .evaluado{
+    color: #10cebc;
+    font-size: 4em;
+    margin-right: .2em;
+  }
+
+  .noevaluado{
+    color: #d0d0d0;
+    font-size: 4em;
+  }
+
+  .llamar{
+    width: 100%;
+    text-align: left;
+    border-radius: .4em;
+    font-size: 1.15em;
+    padding: 1%;
+    color: darkslategray;
+    font-weight: bold;
+    background: #ffc700;
+    position: absolute;
+    margin-top: 1.2em;
+  }
+
+  .telefono{
+    font-size: 2em;
+    color: darkslategray;
+    margin-right: .5em;
+    margin-left: .9em;
+  }
+
+  .phone{
+    color: darkslategray;
+    position: absolute;
+    margin-top: 0.5em;
+  }
+  
