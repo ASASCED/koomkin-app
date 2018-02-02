@@ -11,6 +11,7 @@ export class RestProvider {
   private user;
   apiUrl = 'http://localhost:3000';
   apiUrl2 = 'http://www.koomkin.com:5545';
+  apiUrl3 = 'http://189.205.233.70:4829/twilio_api/api/v1/forward-app/?idLead='
   date;
   datefin;
 
@@ -22,18 +23,6 @@ export class RestProvider {
 
     this.datefin = currentDate.getFullYear() + "-" + twoDigitMonth + "-" + twoDigitDate;
     this.date = DigitYear + "-" + twoDigitMonth + "-" + twoDigitDate;
-  }
-
-  
-
-  getUsers() {
-    return new Promise(resolve => {
-      this.http.get(this.apiUrl + '/users').subscribe(data => {
-        resolve(data);
-      }, err => {
-        console.log(err);
-      });
-    });
   }
 
 
@@ -125,6 +114,17 @@ export class RestProvider {
   getFacebookGender() {
     return new Promise(resolve => {
       this.http.get(this.apiUrl2 + '/facebook?param1=' + this.user + '&param2=gender').subscribe(data => {
+        resolve(data);
+        // console.log(data);
+      }, err => {
+        console.log(err);
+      });
+    });
+  }
+
+  getLlamada() {
+    return new Promise(resolve => {
+      this.http.get(this.apiUrl3 ).subscribe(data => {
         resolve(data);
         // console.log(data);
       }, err => {

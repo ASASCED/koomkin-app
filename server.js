@@ -218,7 +218,7 @@ app.get('/verificarPopup', function (req, res) {
 
 //POST methods
 app.post('/calificaLead/:id/:calificacion', function (req, res) {
-    //var body = _.pick(req.body, 'id', 'calificacion');
+    //var body = _.pick(req.body, 'claveid', 'calificacion');
     var command = 'SP_CalificaLead';
     db.executeModifyLead(parseInt(req.params.id, 10), req.params.calificacion, command, function (err, rows) {
         if (err) {
@@ -229,35 +229,19 @@ app.post('/calificaLead/:id/:calificacion', function (req, res) {
     });
 });
 
-app.post('/clasificaLead/:id/:calificacion', function (req, res) {
-    //var body = _.pick(req.body, 'id', 'calificacion');
-    var command = 'SP_ClasificaLead';
-    var calificacion = '';
+app.post('/clasificaLead', function (req, res) {
+    const body = _.pick(req.body, 'clave', 'classification');
+    const command = 'SP_ClasificaLead';
+    const classification = body.classification;
+    const clave = body.clave
+
     //console.log(body.calificacion);
-    switch (parseInt(req.params.calificacion, 10)) {
-        case 0: {
-            calificacion = 'Descartado';
-            break;
-        }
-        case 1: {
-            calificacion = 'Sin Contacto';
-            break;
-        }
-        case 2: {
-            calificacion = 'En Proceso';
-            break;
-        }
-        default: {
-            calificacion = 'Vendido';
-            break;
-        }
-    }
-    console.log(req.params.id, calificacion);
-    db.executeModifyLead(parseInt(req.params.id, 10), calificacion, command, function (err, rows) {
+    
+    db.executeModifyLead(parseInt(clave, 10), classification, command, function (err, rows) {
         if (err) {
             res.status(500).json({ error: err }).send();
         } else {
-            res.json(rows);
+            res.json(rows).status(200);
         }
     });
 });

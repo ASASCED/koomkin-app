@@ -88,7 +88,7 @@ db.executeGetSpByDate = function (id, finicio, ffin, filtro, command, callback) 
     });
 }
 
-db.executeModifyLead = function (id, calificacion, command, callback) {
+db.executeModifyLead = function (clave, classification, command, callback) {
     var connection = new Connection(config);
     var result = [];
 
@@ -96,7 +96,7 @@ db.executeModifyLead = function (id, calificacion, command, callback) {
 
         var Request = require('tedious').Request;
 
-        var requestStr = `exec ${command} '${calificacion}', ${id} `;
+        var requestStr = `exec ${command} '${classification}', ${clave} `;
 
         request = new Request(requestStr, function (err, rowCount) {
             if (err) {
