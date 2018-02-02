@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgClass } from '@angular/common';
 import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 import { RestProvider } from '../../providers/rest/rest';
 import { LeadPage } from '../lead/lead';
@@ -16,6 +17,7 @@ export class LeadsPage implements OnInit {
   leads;
   page = 1;
   user;
+  selectedLike; 
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -36,13 +38,9 @@ export class LeadsPage implements OnInit {
 
         for (let k in this.leads) {
           this.leads[k].FECHA = this.leads[k].FECHA.substring(0, 10).replace(/^(\d{4})-(\d{2})-(\d{2})$/g, '$3/$2/$1');
-          if (this.leads[k].NOMBRE.split(" ").length > 1) {
-            this.leads[k].NOMBRE = this.leads[k].NOMBRE.split(" ")[0] + " " + this.leads[k].NOMBRE.split(" ")[1];
-            if (this.leads[k].NOMBRE.split("-").length > 1) {
-              itemAux.NOMBRE = itemAux.NOMBRE.split("-")[0].capitalize;
-            }
-          }
-          this.leads[k].EMPRESA = this.leads[k].EMPRESA.substring(0, 40);
+          this.leads[k].NOMBRE = this.leads[k].NOMBRE.substring(0, 15);
+          this.leads[k].EMPRESA = this.leads[k].EMPRESA.substring(0,35);
+          this.selectedLike =  this.leads[k].calificaLead;
         }
 
         console.log(this.leads);
@@ -51,13 +49,6 @@ export class LeadsPage implements OnInit {
         console.log(error);
       });
   }
-
-  public capitalize = function () {
-    return this.toLowerCase().replace(/(^|\s)([a-z])/g,
-      function (m, p1, p2) {
-        return p1 + p2.toUpperCase();
-      });
-  };
 
   doInfinite(infiniteScroll) {
     console.log('Cargando Leads');

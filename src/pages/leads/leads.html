@@ -83,7 +83,7 @@
               <ion-col col-2>
               </ion-col>
               <ion-col col-8>
-                <div class="rate-calidad">Clasificación Lead = 85%</div>
+                <div class="rate-calidad">Calificación Lead = 85%</div>
               </ion-col>
               <ion-col col-2 style="text-align:right">
                 <div class="tooltip">
@@ -108,7 +108,9 @@
                 <div class="inf-mensaje">{{lead.MENSAJE}}</div>
               </ion-col>
               <ion-col col2 style="text-align: right;">
-                <ion-icon class="like" name="md-thumbs-up"></ion-icon>
+                <button (click)="changeLike()" class="like2">
+                  <ion-icon class="like" name="md-thumbs-up"></ion-icon>
+                </button>
               </ion-col>
             </ion-row>
           </ion-grid>

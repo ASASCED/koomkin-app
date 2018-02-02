@@ -11,6 +11,20 @@ export class RestProvider {
   private user;
   apiUrl = 'http://localhost:3000';
   apiUrl2 = 'http://www.koomkin.com:5545';
+  date;
+  datefin;
+
+  getDate(datefin,date){
+    let currentDate = new Date();
+    let twoDigitMonth=((currentDate.getMonth()+1)>=10)? (currentDate.getMonth()+1) : '0' + (currentDate.getMonth()+1);  
+    let twoDigitDate=((currentDate.getDate())>=10)? (currentDate.getDate()) : '0' + (currentDate.getDate());
+    let DigitYear=(currentDate.getFullYear() - 1);
+
+    this.datefin = currentDate.getFullYear() + "-" + twoDigitMonth + "-" + twoDigitDate;
+    this.date = DigitYear + "-" + twoDigitMonth + "-" + twoDigitDate;
+  }
+
+  
 
   getUsers() {
     return new Promise(resolve => {
@@ -21,6 +35,7 @@ export class RestProvider {
       });
     });
   }
+
 
   setUser(user: any) {
     this.user = user;
@@ -129,9 +144,17 @@ export class RestProvider {
     });
   }
 
-  getLeadsReport() {
+  getLeadsReport() { 
+    console.log(this.date);
     return new Promise(resolve => {
-      this.http.get(this.apiUrl + '/getLeadsReport/' + this.user + '/2016-06-12/2017-06-12/Todos_los_recibidos').subscribe(data => {
+      let currentDate = new Date();
+    let twoDigitMonth=((currentDate.getMonth()+1)>=10)? (currentDate.getMonth()+1) : '0' + (currentDate.getMonth()+1);  
+    let twoDigitDate=((currentDate.getDate())>=10)? (currentDate.getDate()) : '0' + (currentDate.getDate());
+    let DigitYear=(currentDate.getFullYear() - 1);
+
+    this.datefin = currentDate.getFullYear() + "-" + twoDigitMonth + "-" + twoDigitDate;
+    this.date = DigitYear + "-" + twoDigitMonth + "-" + twoDigitDate;
+      this.http.get(this.apiUrl + '/getLeadsReport/' + this.user + '/' + this.date + '/'+ this.datefin +'/Todos_los_recibidos').subscribe(data => {
         resolve(data);
       }, err => {
         console.log(err);
