@@ -41,7 +41,7 @@ export class LeadPage {
 
   public getLlamada() {
     return new Promise(resolve => {
-      this.http.get(this.apiUrl3 + '217355').subscribe(data => {
+      this.http.get(this.apiUrl3 + this.leadActual.clave).subscribe(data => {
         resolve(data);
       }, err => {
         console.log(err);
@@ -79,7 +79,7 @@ export class LeadPage {
       clave: this.leadActual.clave,
       classification: clasifica
     }
-    this.http.post(this.apiUrl + "/clasificaLeads", json).subscribe(data => {
+    this.http.post(this.apiUrl + "/clasificaLead", json).subscribe(data => {
 
     })
 
