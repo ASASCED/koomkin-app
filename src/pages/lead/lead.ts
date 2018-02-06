@@ -3,7 +3,6 @@ import { IonicPage, NavController, ViewController, NavParams } from 'ionic-angul
 import { RestProvider } from './../../providers/rest/rest';
 import { HttpClient } from '@angular/common/http';
 
-
 @IonicPage()
 @Component({
   selector: 'page-lead',
@@ -41,7 +40,7 @@ export class LeadPage {
 
   public getLlamada() {
     return new Promise(resolve => {
-      this.http.get(this.apiUrl3 + this.leadActual.clave).subscribe(data => {
+      this.http.get(this.apiUrl3 + '217355').subscribe(data => {
         resolve(data);
       }, err => {
         console.log(err);
@@ -54,7 +53,7 @@ export class LeadPage {
     switch (classification) {
       case 'V': {
         this.leadActual.clasificaLead = 'Vendido';
-        clasifica = 'Vendido'
+        clasifica = 'Vendido';
         break;
       }
       case 'D': {
@@ -67,21 +66,62 @@ export class LeadPage {
         clasifica = 'En proceso de venta'
         break;
       }
-      case 'P': {
+      case 'C': {
         this.leadActual.clasificaLead = 'Sin Contacto';
         clasifica = 'Sin Contacto'
         break;
       }
-
+      default:
+      clasifica = ''
     }
-
-    const json = {
+    console.log(clasifica);
+    const body = {
       clave: this.leadActual.clave,
       classification: clasifica
     }
-    this.http.post(this.apiUrl + "/clasificaLead", json).subscribe(data => {
+    console.log(body);
 
-    })
+    this.http.post(this.apiUrl + "/clasificaLead", JSON.stringify(body) )
+    .subscribe(data => {
+      console.log(data);
+    },
+    err => {
+      console.log("Error occured");
+    });
 
   }
+
+  public changeLike(classification: string) {
+    let califica
+    switch (classification) {
+      case 'L': {
+        this.leadActual.calificaLead = 'TRUE';
+        califica = 'TRUE';
+        break;
+      }
+      case 'DL': {
+        this.leadActual.calificaLead = 'FALSE';
+        califica = 'FALSE'
+        break;
+      }
+      default:
+      califica = ''
+    }
+    console.log(califica);
+    const body = {
+      clave: this.leadActual.clave,
+      classification: califica
+    }
+    console.log(body);
+
+    this.http.post(this.apiUrl + "/calificaLead", JSON.stringify(body) )
+    .subscribe(data => {
+      console.log(data);
+    },
+    err => {
+      console.log("Error occured");
+    });
+
+  }
+
 }

@@ -14,7 +14,7 @@ var app = express();
 //app.use(logger('dev'));
 //app.use(cookieParser());
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(express.static(path.join(__dirname, '')));
 
@@ -235,7 +235,7 @@ app.post('/clasificaLead', function (req, res) {
     const classification = body.classification;
     const clave = body.clave
 
-    //console.log(body.calificacion);
+    console.log(classification,clave);
     
     db.executeModifyLead(parseInt(clave, 10), classification, command, function (err, rows) {
         if (err) {
