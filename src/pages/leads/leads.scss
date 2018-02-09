@@ -13,31 +13,54 @@
          }
      }
  }
- .toolbar-title-md {
-  font-size: 1.5rem;
-  padding: 0px;
-} 
-.grid{
-  padding-bottom: 0px !important;
- }
- .item-md {
-  padding-left: 0; 
-   padding-top: 0; 
+ .card-content-md {
+  padding: 0px 0px; 
+  font-size: 1.4rem;
+  line-height: 1.5;
 }
-ion-select{
-  max-width: 65%;
-}
- .label-md {
-  margin: 0px 0px 0px 0; 
- }
- .col{
-   padding: 0px !important;
-   align-items: center;
- }
- .item-md.item-block .item-inner {
-  padding-right: 0px !important; 
-  border-bottom: 1px solid #dedede;
-}
+  .label-ios {
+    margin: 2px 0px 4px 0;
+  }
+  .card-content-ios {
+    padding: 0px 6px 0px;
+    font-size: 1.4rem;
+    line-height: 1.4;
+  }
+  .item-ios {
+    padding-left: 0px !important; 
+    border-radius: 0;
+    position: relative;
+    font-size: 1.7rem;
+    color: #000;
+    background-color: #fff;
+    -webkit-transition: background-color 200ms linear;
+    transition: background-color 200ms linear;
+  }
+  .toolbar-title-md {
+    font-size: 1.5rem;
+    padding: 0px;
+  } 
+  .grid{
+    padding-bottom: 0px !important;
+  }
+  .item-md {
+    padding-left: 0; 
+    padding-top: 0; 
+  }
+  ion-select{
+    max-width: 65%;
+  }
+  .label-md {
+    margin: 0px 0px 0px 0; 
+  }
+  .col{
+    padding: 0px !important;
+    align-items: center;
+  }
+  .item-md.item-block .item-inner {
+    padding-right: 0px !important; 
+    border-bottom: 1px solid #dedede;
+  }
  .encabezado{
    padding: 0 !important;
  }
@@ -52,7 +75,9 @@ ion-select{
   height: 100%;
   width: 100%;
   align-items:center;
- 
+  overflow:hidden;
+  white-space:nowrap;
+  text-overflow: ellipsis;
 }
 .inf-mail{ 
   font-size: 13px;
@@ -64,9 +89,11 @@ ion-select{
   color: dimgray;
   text-align: right; 
 }
-.rate-calidad { 
+.rate-calidads { 
   font-size:1em;
   color: #10c2ce;
+  margin-left: .3em;
+  margin-top: .1em;
 }
 .rate-tel { 
   font-size: 12px;
@@ -81,9 +108,11 @@ ion-select{
 .rate-empresa {  
   font-size:1em;
   color:dimgray;
+  margin-left: .3em;
 }
 .inf-mensaje { 
-  font-size:.8em;
+  font-size:.9em;
+  margin-left: .3em;
   color: lightslategray; 
   margin-top: 5px;
   text-align: justify;
@@ -287,4 +316,7 @@ input {
   text-overflow: inherit;
   color: white;
   line-height: 1.5;
+}
+.evaluado2{
+  font-size: 2.2em;
 }

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component,OnInit,OnChanges } from '@angular/core';
 import { IonicPage, NavController, ViewController, NavParams } from 'ionic-angular';
 import { RestProvider } from './../../providers/rest/rest';
 import { HttpClient } from '@angular/common/http';
@@ -8,12 +8,17 @@ import { HttpClient } from '@angular/common/http';
   selector: 'page-lead',
   templateUrl: 'lead.html',
 })
-export class LeadPage {
+export class LeadPage implements OnInit {
 
   leadActual;
   apiUrl = 'http://localhost:3000';
 
   apiUrl3 = 'http://189.205.233.70:4829/twilio_api/api/v1/forward-app/?idLead='
+  public color = ''
+  public clasifica;
+  public clasificacion;
+  public califica;
+  public calificacion;
 
   constructor(public viewCtrl: ViewController,
     public navCtrl: NavController,
@@ -21,6 +26,14 @@ export class LeadPage {
     public provedor: RestProvider,
     public http: HttpClient) {
     this.leadActual = navParams.data;
+  }
+
+  ngOnChanges(){
+    this.changeClassification;
+    console.log(this.changeClassification);
+  }
+
+  ngOnInit(){
   }
 
   ionViewDidLoad() {
@@ -49,79 +62,111 @@ export class LeadPage {
   }
 
   public changeClassification(classification: string) {
-    let clasifica
     switch (classification) {
       case 'V': {
         this.leadActual.clasificaLead = 'Vendido';
-        clasifica = 'Vendido';
+        this.clasifica = 'Vendido';
         break;
       }
       case 'D': {
         this.leadActual.clasificaLead = 'Descartado';
-        clasifica = 'Descartado'
+        this.clasifica = 'Descartado'
         break;
       }
       case 'P': {
         this.leadActual.clasificaLead = 'En proceso de venta';
-        clasifica = 'En proceso de venta'
+        this.clasifica = 'En proceso de venta'
         break;
       }
       case 'C': {
         this.leadActual.clasificaLead = 'Sin Contacto';
-        clasifica = 'Sin Contacto'
+        this.clasifica = 'Sin Contacto'
         break;
       }
       default:
-      clasifica = ''
+        this.clasifica = ''
     }
-    console.log(clasifica);
     const body = {
       clave: this.leadActual.clave,
-      classification: clasifica
+      classification: this.clasifica
     }
-    console.log(body);
 
-    this.http.post(this.apiUrl + "/clasificaLead", JSON.stringify(body) )
-    .subscribe(data => {
-      console.log(data);
-    },
-    err => {
-      console.log("Error occured");
-    });
+    this.http.get(this.apiUrl + "/clasificaLead/" + body.clave + '/' + body.classification)
+      .subscribe(data => {
+        this.clasificacion = data[0].clasificaLead;
+        console.log(this.clasificacion);
+
+      },
+      err => {
+        console.log("Error occured");
+      });
 
   }
 
+  public ColorV(calification: string) {
+    calification = this.clasificacion;
+    if (calification === 'Vendido') {
+      return '#00bcaa';
+    } else {
+      return '#d1d1d1';
+    }
+  }
+
+  public ColorP(calification: string) {
+    calification = this.clasificacion;
+    if (calification === 'En proceso de venta') {
+      return '#6B4595';
+    } else {
+      return '#d1d1d1';
+    }
+  }
+
+  public ColorC(calification: string) {
+    calification = this.clasificacion;
+    if (calification === 'Sin Contacto') {
+      return '#419BD6';
+    } else {
+      return '#d1d1d1';
+    }
+  }
+
+  public ColorD(calification: string) {
+    calification = this.clasificacion;
+    if (calification === 'Descartado') {
+      return '#F2631C';
+    } else {
+      return '#d1d1d1';
+    }
+  }
+
+
   public changeLike(classification: string) {
-    let califica
     switch (classification) {
       case 'L': {
-        this.leadActual.calificaLead = 'TRUE';
-        califica = 'TRUE';
+        this.leadActual.calificaLead = 'true';
+        this.califica = 'l';
         break;
       }
       case 'DL': {
-        this.leadActual.calificaLead = 'FALSE';
-        califica = 'FALSE'
+        this.leadActual.calificaLead = 'false';
+        this.califica = 'd';
         break;
       }
       default:
-      califica = ''
+        this.califica = null;
     }
-    console.log(califica);
     const body = {
       clave: this.leadActual.clave,
-      classification: califica
+      classification: this.califica
     }
-    console.log(body);
-
-    this.http.post(this.apiUrl + "/calificaLead", JSON.stringify(body) )
-    .subscribe(data => {
-      console.log(data);
-    },
-    err => {
-      console.log("Error occured");
-    });
+    this.http.get(this.apiUrl + "/calificaLead/" + body.clave + '/' + body.classification)
+      .subscribe(data => {
+        this.calificacion = data[0].calificaLead;
+        console.log(this.calificacion);
+      },
+      err => {
+        console.log("Error occured");
+      });
 
   }
-
 }

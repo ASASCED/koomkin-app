@@ -217,7 +217,7 @@ app.get('/verificarPopup', function (req, res) {
 
 
 //POST methods
-app.post('/calificaLead/:id/:calificacion', function (req, res) {
+/*app.post('/calificaLead/:id/:calificacion', function (req, res) {
     //var body = _.pick(req.body, 'claveid', 'calificacion');
     var command = 'SP_CalificaLead';
     db.executeModifyLead(parseInt(req.params.id, 10), req.params.calificacion, command, function (err, rows) {
@@ -227,17 +227,17 @@ app.post('/calificaLead/:id/:calificacion', function (req, res) {
             res.json(rows);
         }
     });
-});
+});*/
 
-app.post('/clasificaLead', function (req, res) {
-    const body = _.pick(req.body, 'clave', 'classification');
-    const command = 'SP_ClasificaLead';
-    const classification = body.classification;
-    const clave = body.clave
-
-    console.log(classification,clave);
+app.get('/calificaLead/:clave/:classification', function (req, res) {
+    /* console.log('pinche putita', req);
+    const body = _.pick(req.body, 'clave', 'classification'); */
     
-    db.executeModifyLead(parseInt(clave, 10), classification, command, function (err, rows) {
+    const command = 'SP_CalificaLead';
+    const classification = req.params.classification;
+    const clave = req.params.clave
+    
+    db.executeModifyLead(clave, classification, command, function (err, rows) {
         if (err) {
             res.status(500).json({ error: err }).send();
         } else {
@@ -245,6 +245,24 @@ app.post('/clasificaLead', function (req, res) {
         }
     });
 });
+
+app.get('/clasificaLead/:clave/:classification', function (req, res) {
+    /* console.log('pinche putita', req);
+    const body = _.pick(req.body, 'clave', 'classification'); */
+    
+    const command = 'SP_ClasificaLead';
+    const classification = req.params.classification;
+    const clave = req.params.clave
+    
+    db.executeModifyLead(clave, classification, command, function (err, rows) {
+        if (err) {
+            res.status(500).json({ error: err }).send();
+        } else {
+            res.json(rows).status(200);
+        }
+    });
+});
+//POST methods
 
 app.post('/leerLead/:leadId/:userId', function (req, res) {
 

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { NgClass } from '@angular/common';
 import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 import { RestProvider } from '../../providers/rest/rest';
 import { LeadPage } from '../lead/lead';
@@ -33,12 +32,10 @@ export class LeadsPage implements OnInit {
     this.provedor.getLeadsReport()
       .then(
       (data) => {
-        let itemAux
         this.leads = data;
-
         for (let k in this.leads) {
           this.leads[k].FECHA = this.leads[k].FECHA.substring(0, 10).replace(/^(\d{4})-(\d{2})-(\d{2})$/g, '$3/$2/$1');
-          this.leads[k].NOMBRE = this.leads[k].NOMBRE.substring(0, 15);
+          this.leads[k].NOMBRE = this.leads[k].NOMBRE.substring(0, 18);
           this.leads[k].EMPRESA = this.leads[k].EMPRESA.substring(0,35);
           this.selectedLike =  this.leads[k].calificaLead;
         }
