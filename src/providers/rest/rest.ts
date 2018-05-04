@@ -49,7 +49,7 @@ export class RestProvider {
     return new Promise(resolve => {
       this.http.get(this.apiUrl + '/getLead30Dias/' + this.user).subscribe(data => {
         resolve(data);
-        console.log(data);
+        //console.log(data);
       }, err => {
         console.log(err);
       });
@@ -60,7 +60,7 @@ export class RestProvider {
     return new Promise(resolve => {
       this.http.get(this.apiUrl + '/getLead12Meses/' + this.user).subscribe(data => {
         resolve(data);
-        console.log(data);
+        //console.log(data);
       }, err => {
         console.log(err);
       });
@@ -71,7 +71,7 @@ export class RestProvider {
     return new Promise(resolve => {
       this.http.get(this.apiUrl + '/getLike30Dias/' + this.user).subscribe(data => {
         resolve(data);
-        console.log(data);
+        //console.log(data);
       }, err => {
         console.log(err);
       });
@@ -82,7 +82,7 @@ export class RestProvider {
     return new Promise(resolve => {
       this.http.get(this.apiUrl + '/getLeadsMapa/' + this.user).subscribe(data => {
         resolve(data);
-        console.log(data);
+        //console.log(data);
       }, err => {
         console.log(err);
       });
@@ -122,6 +122,17 @@ export class RestProvider {
     });
   }
 
+  getCostoCampania(){
+    return new Promise(resolve => {
+      this.http.get(this.apiUrl + '/getCostoCampania?id=' + this.user).subscribe(data => {
+        resolve(data);
+        console.log(data);
+      }, err => {
+        console.log(err);
+      });
+    });
+  }
+
   getLlamada() {
     return new Promise(resolve => {
       this.http.get(this.apiUrl3 ).subscribe(data => {
@@ -145,7 +156,7 @@ export class RestProvider {
   }
 
   getLeadsReport() { 
-    console.log(this.date);
+    //console.log(this.date);
     return new Promise(resolve => {
       let currentDate = new Date();
     let twoDigitMonth=((currentDate.getMonth()+1)>=10)? (currentDate.getMonth()+1) : '0' + (currentDate.getMonth()+1);  
@@ -156,6 +167,7 @@ export class RestProvider {
     this.date = DigitYear + "-" + twoDigitMonth + "-" + twoDigitDate;
       this.http.get(this.apiUrl + '/getLeadsReport/' + this.user + '/' + this.date + '/'+ this.datefin +'/Todos_los_recibidos').subscribe(data => {
         resolve(data);
+        console.log(data);
       }, err => {
         console.log(err);
       });

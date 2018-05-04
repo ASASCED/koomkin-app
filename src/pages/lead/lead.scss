@@ -2,22 +2,31 @@
     color: #fff;
   }
 
+  ion-app.ios [padding] .scroll-content{
+    padding: 10px;
+  }
+
+  ion-app.md [padding] .scroll-content{
+    padding: 10px;
+  }
+  
   .vista {
     padding: 0px !important;
   }
-
+  //
   .circulo{
     font-size: 1.26em;
     background-color: lightgrey;
   }
-
+  //Nombre del Lead
   .inf-nombre{
-    font-size: 1.3em;
+    font-size: 5vw;
     color: darkslategray;
     overflow:hidden;
     white-space:nowrap;
     text-overflow: ellipsis;
   }
+  //Linea de separación
   hr { 
     width: 100%;
     display: block;
@@ -26,77 +35,43 @@
     border-top: 0px solid black;
     padding: 0;
   }  
-
+  //Icono Urgencia
   .urgente {
     color: red;
-    font-size: 1.5em !important;
+    font-size: 6vw !important;
     font-weight: bold;
+    margin-left: 15%;
   }
-
-  .tooltip {
-    position: relative;
-    display: inline-block;
-  }
-
-  .tooltip .tooltiptext {
-    visibility: hidden;
-    width: 230px;
-    background-color: #126aff;
-    color: #fff;
-    text-align: center;
-    border-radius: 2px;
-    padding: 5px 0;
-    position: absolute;
-    z-index: 1;
-    top: 150%;
-    left: 50%;
-    margin-left: -10px;
-  }
-
-  .tooltip .tooltiptext::after {
-    content: "";
-    position: absolute;
-    bottom: 100%;
-    left: 5%;
-    margin-left: -5px;
-    border-width: 5px;
-    border-style: solid;
-    border-color: transparent transparent #126aff transparent;
-  }
-
-  .tooltip:hover .tooltiptext {
-    visibility: visible;
-  }
-
+  //Fecha del Lead
   .rate-fechal {
-    font-size: 1.1em !important;
+    font-size: 4.2vw !important;
     color: dimgray;
     text-align: right;
   }
-
+  //Calidad del Lead
   .rate-calidad {
-    font-size: 1.1em !important;
+    font-size: 4.8vw !important;
     color: #00b9bf;
     margin-top: .2em;
   }
-
+  //Nombre de la empresa Lead
   .inf-empresa{
-    font-size: 1.2em;
+    font-size: 5vw;
     color: darkslategray;
   }
-
+  //Estado del Lead
   .inf-estado{
-    font-size: 1.1em !important;
+    font-size: 4.8vw  !important;
     color: slategray !important;
     text-align: left !important;
   }
-
+  //Correo del Lead
   .inf-correo{
     color: lightskyblue;
     font-style: italic;
-    font-size: 1.1em;
+    font-size: 4.8vw  !important;
   }
-
+  //
   .cotiza{
     color: #00b9bf;
     font-weight: bold;
@@ -104,29 +79,29 @@
     margin-top: 1em;
     margin-bottom: 0.1em;
   }
-
+  //Mensaje del Lead
   .mensaje{
     color: lightslategray;
-    font-size: 1.2em;
+    font-size: 4.5vw;
     margin-left: 0.5em;
     font-weight: 500;
     margin-top: 0.4em;
     margin-bottom: .4em;
     text-align: justify;
   }
-
+  //
   .frecuencia{
     color: darkgray;
     margin-bottom: 0.3em;
     font-size: 1.2em;
     margin-top: 0.5em;
   }
-
+  //Icono de Descarga
   .download{
     color: orangered;
     font-size: 2em;
   }
-
+  //Mensaje de Descarga
   .descarga{
     font-size: 1.1em;
     color: coral;
@@ -135,7 +110,7 @@
     position: absolute;
     margin-top: 5px;
   }
-
+  //
   .califica{
     text-align: center;
     font-size: 1.1em;
@@ -144,27 +119,27 @@
     margin-top: .5em;
     margin-bottom: .5em;
   }
-
+  //
   .arribab{
     width: 48%;
     border-radius: 8px;
-    font-size: 0.82em;
+    font-size: 3.2vw;
     padding: 4%;
     margin-bottom: .4em;
     color: white;
   }
-
+  //
   .evaluado{
     color: #00b9bf;
     font-size: 4em;
     margin-right: .2em;
   }
-
+  //
   .noevaluado{
     color: #d0d0d0;
     font-size: 4em;
   }
-
+  //
   .llamar{
     width: 100%;
     text-align: left;
@@ -177,14 +152,14 @@
     position: absolute;
     margin-top: 0.5em;
   }
-
+  //
   .telefono{
     font-size: 2em;
     color: white;
     margin-right: .5em;
     margin-left: 1.1em;
   }
-
+  //
   .phone{
     color: white;
     position: absolute;
@@ -196,10 +171,10 @@
 
   .paciente{
     color: #00b9bf;
-    font-size: 1.3em;
+    font-size: 5vw;
     margin-bottom: 0;
   }
-
+  //
   .edadpaciente{
     color: #00b9bf;
     font-weight: bold;
@@ -207,7 +182,7 @@
     margin-top: 1em;
     margin-bottom: 0.1em;
   }
-  
+  //  
   .paciented{
     color: #00b9bf;
     font-size: 1.2em;
@@ -215,7 +190,7 @@
     margin-left: 0.3em;
     margin-right: .5em;
   }
-
+  //
   .cita{
     color: dimgray;
     font-size: 1.5em;
@@ -230,15 +205,15 @@
     font-size: 1.6em;
     margin-right: .3em;
   }
-
+  //
   .tipo{
     color: #00b9bf;
     font-weight: bold;
-    font-size: 1.4em;
+    font-size: 5.2vw;
     margin-bottom: 0.1em;
     position: absolute;
   }
-
+  //
   //vista 6
 
   .viaje{

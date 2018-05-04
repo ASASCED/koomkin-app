@@ -21,8 +21,10 @@ export class AuthServiceProvider {
       this.http.get(this.apiUrl + '/getUserByEmail/' + email).subscribe(data => {
         resolve(data);
         this.info = data;
+       // console.log(this.info);
         if (this.info.length > 0) {
           this.contrasena = this.info[0].PASSWORD2;
+          //console.log(this.contrasena);
         }
       }, err => {
         console.log(err);

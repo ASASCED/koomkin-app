@@ -95,16 +95,21 @@ app.get('/getLeadCountMonth/:id', function (req, res) {
     });
 });
 
-app.get('/getCostoCampania/:id', function (req, res) {
-    var id = parseInt(req.params.id, 10);
-    var command = 'SP_GetCostoCampania';
-    db.executeGetById(id, command, function (err, rows) {
-        if (err) {
-            res.status(500).json({ error: err }).send();
-        } else {
+app.get('/getCostoCampania', function (req, res) {
+
+    const id = req.query.id
+    const command = 'SP_GetCostoCampania'
+
+    db.executeSPById(command, id)
+        .then(rows => {
             res.json(rows);
-        }
-    });
+            res.status(200);
+        }, (err) => {
+            res.status(500).json({error: err}).send();
+        })
+        .catch(err => {
+            res.status(500).json({error: err}).send();
+        });
 });
 
 app.get('/getLeadById/:id', function (req, res) {

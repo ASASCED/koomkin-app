@@ -13,12 +13,14 @@ export class LeadPage implements OnInit {
   leadActual;
   apiUrl = 'http://localhost:3000';
 
+  CALLING= 'http://www.koomkin.com:4829/twilio_api/api/v1/forward-app-lead/?idLead=';
   apiUrl3 = 'http://189.205.233.70:4829/twilio_api/api/v1/forward-app/?idLead='
   public color = ''
   public clasifica;
   public clasificacion;
   public califica;
   public calificacion;
+  public uuid;
 
   constructor(public viewCtrl: ViewController,
     public navCtrl: NavController,
@@ -139,6 +141,12 @@ export class LeadPage implements OnInit {
     }
   }
 
+  public callingLead(uuid) {
+    console.log(this.uuid);
+    this.http.get(this.CALLING + this.uuid).subscribe(data => {
+      console.log('llamando');
+    });
+  }
 
   public changeLike(classification: string) {
     switch (classification) {
@@ -155,6 +163,7 @@ export class LeadPage implements OnInit {
       default:
         this.califica = null;
     }
+    
     const body = {
       clave: this.leadActual.clave,
       classification: this.califica

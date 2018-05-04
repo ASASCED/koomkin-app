@@ -33,6 +33,7 @@ export class LeadsPage implements OnInit {
       .then(
       (data) => {
         this.leads = data;
+        //console.log(this.leads);
         for (let k in this.leads) {
           this.leads[k].FECHA = this.leads[k].FECHA.substring(0, 10).replace(/^(\d{4})-(\d{2})-(\d{2})$/g, '$3/$2/$1');
           this.leads[k].NOMBRE = this.leads[k].NOMBRE.substring(0, 18);
@@ -40,7 +41,7 @@ export class LeadsPage implements OnInit {
           this.selectedLike =  this.leads[k].calificaLead;
         }
 
-        console.log(this.leads);
+        //console.log(this.leads);
       },
       (error) => {
         console.log(error);

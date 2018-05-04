@@ -12,8 +12,8 @@ var config = {
     options: {
         port: 1439,
         //port:1433,
-        //database: 'AGO_KOOMKIN'
-        database: 'aaa'
+        database: 'AGO_KOOMKIN'
+        //database: 'aaa'
     },
   
     FB_API_VERSION: "2.10"

@@ -20,6 +20,7 @@ export class ReportePage implements OnInit {
   device;
   gender;
   leadsr;
+  costo;
   public age;
   public age0;
   public age1;
@@ -521,6 +522,19 @@ export class ReportePage implements OnInit {
         console.log(error);
       });
   }
+
+  public getCostoCampania() {
+    this.provedor.getCostoCampania()
+      .then(
+      (data) => {
+        this.costo = data;
+        console.log(this.costo);
+      },
+      (error) => {
+        console.log(error);
+      });
+  }
+
 
   ionViewDidLoad() {
     //console.log(this.datagraph);

@@ -1,7 +1,10 @@
 page-login {
  
     .login-content {
-        background: linear-gradient(#037BB9, darkturquoise);
+        background: url("../../assets/imgs/login/4.svg");
+        background-attachment: fixed;
+        background-repeat: no-repeat;
+        background-size: cover;
    
       .logo-row {
         padding-top: 30%;

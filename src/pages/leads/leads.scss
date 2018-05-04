@@ -4,6 +4,12 @@
     padding-right: 0 !important;
   }
 }
+
+.carta{
+  width: 60% !important;
+  margin-left: 20% !important;
+}
+
 .ios, .md {
      page-reporte {
          button {
@@ -13,64 +19,77 @@
          }
      }
  }
- .card-content-md {
+.card-content-md {
   padding: 0px 0px; 
   font-size: 1.4rem;
   line-height: 1.5;
 }
-  .label-ios {
-    margin: 2px 0px 4px 0;
-  }
-  .card-content-ios {
-    padding: 0px 6px 0px;
-    font-size: 1.4rem;
-    line-height: 1.4;
-  }
-  .item-ios {
-    padding-left: 0px !important; 
-    border-radius: 0;
-    position: relative;
-    font-size: 1.7rem;
-    color: #000;
-    background-color: #fff;
-    -webkit-transition: background-color 200ms linear;
-    transition: background-color 200ms linear;
-  }
-  .toolbar-title-md {
-    font-size: 1.5rem;
-    padding: 0px;
-  } 
-  .grid{
-    padding-bottom: 0px !important;
-  }
-  .item-md {
-    padding-left: 0; 
-    padding-top: 0; 
-  }
-  ion-select{
-    max-width: 65%;
-  }
-  .label-md {
-    margin: 0px 0px 0px 0; 
-  }
-  .col{
-    padding: 0px !important;
-    align-items: center;
-  }
-  .item-md.item-block .item-inner {
-    padding-right: 0px !important; 
-    border-bottom: 1px solid #dedede;
-  }
- .encabezado{
-   padding: 0 !important;
- }
- .rate-header { 
+
+.label-ios {
+  margin: 2px 0px 4px 0;
+}
+
+.card-content-ios {
+  padding: 0px 6px 0px;
+  font-size: 1.4rem;
+  line-height: 1.4;
+}
+  
+.item-ios {
+  padding-left: 0px !important; 
+  border-radius: 0;
+  position: relative;
+  font-size: 1.7rem;
+  color: #000;
+  background-color: #fff;
+  -webkit-transition: background-color 200ms linear;
+  transition: background-color 200ms linear;
+}
+
+.toolbar-title-md {
+  font-size: 1.5rem;
+  padding: 0px;
+} 
+  
+.grid{
+  padding-bottom: 0px !important;
+}
+  
+.item-md {
+  padding-left: 0; 
+  padding-top: 0; 
+}
+  
+ion-select{
+  max-width: 65%;
+}
+  
+.label-md {
+  margin: 0px 0px 0px 0; 
+}
+  
+.col{
+  padding: 0px !important;
+  align-items: center;
+}
+
+.item-md.item-block .item-inner {
+  padding-right: 0px !important; 
+  border-bottom: 1px solid #dedede;
+}
+ 
+.encabezado{
+  padding: 0 !important;
+}
+ 
+.rate-header { 
   color: #76797b;
   font-size: 12px;
   position: absolute;
 }
+
 .rate-nombre { 
-  font-size: 1.3em;
+  font-size: 5vw;
   color: dimgray;
   height: 100%;
   width: 100%;
@@ -79,39 +98,28 @@
   white-space:nowrap;
   text-overflow: ellipsis;
 }
-.inf-mail{ 
-  font-size: 13px;
-  color: #00a6d4;
-  padding-top: 2px;
-}
+
 .rate-fecha { 
-  font-size:.9em;
+  font-size:4.4vw;
   color: dimgray;
   text-align: right; 
 }
+
 .rate-calidads { 
-  font-size:1em;
+  font-size:5vw;
   color: #10c2ce;
   margin-left: .3em;
-  margin-top: .1em;
+  margin-top: .5vw;
 }
-.rate-tel { 
-  font-size: 12px;
-  color: #a3a3a3; 
-  text-align: right  
-}
-.rate-telefono { 
-  font-size: 12px;
-  color: #a3a3a3;
-  text-align: right;
-}
+
 .rate-empresa {  
-  font-size:1em;
+  font-size:5vw;
   color:dimgray;
   margin-left: .3em;
 }
+
 .inf-mensaje { 
-  font-size:.9em;
+  font-size: 4.4vw;
   margin-left: .3em;
   color: lightslategray; 
   margin-top: 5px;
@@ -120,26 +128,17 @@
   white-space:nowrap;
   text-overflow: ellipsis;
 }
-.inf-mensajem { 
-  font-size:14px;
-  color: black; 
-  padding-top: 4px;
-  text-align: justify;
-  text-overflow: ellipsis;
-}
+
 .rate-icon {
   position: relative;
   color: #d1d1d1;
 }
+
 .rate-icon-fill{
   position: relative;
   color: #10cebc;
 }
-.inf-estado { 
-  font-size: 13px;
-  color: #a3a3a3;
-  text-align: right;
-}
+
 .circulo{
   border-radius: 8px;
   width: 80%;
@@ -149,18 +148,23 @@
   color: white;
   background-color: #d1d1d1;
 }
+
 .vendido{
   background-color: darkturquoise;
 }
-  .vacio{
+
+.vacio{
   background-color: #d1d1d1;
 }
- .fillv{
-background-color:darkturquoise;
+
+.fillv{
+  background-color:darkturquoise;
 }
+
 .fill-v{
-background-color:#d1d1d1;
+  background-color:#d1d1d1;
 }
+
 .btn-estatusv{
   color: white;
   width: 80%;
@@ -169,12 +173,15 @@ background-color:#d1d1d1;
   font-size: 16px;
   margin-bottom: 3px;  
 }
+
 .btn-estatusv:hover{
   background-color:darkturquoise;
 }
+
 .btn-estatusv:active{
    background-color:darkturquoise; 
-    }
+}
+
 .btn-estatusp{
   color: white;
   width: 80%;
@@ -183,12 +190,15 @@ background-color:#d1d1d1;
   font-size: 16px;
   margin-bottom: 3px;
 }
+
 .btn-estatusp:hover{
   background-color:#6B4595;
 }
+
 .fillp{
   background-color:#6B4595;
 }
+
 .btn-estatusc{
   color: white;
   width: 80%;
@@ -197,12 +207,15 @@ background-color:#d1d1d1;
   font-size: 16px;
   margin-bottom: 3px;
 }
+
 .btn-estatusc:hover{
   background-color:#419BD6; 
 }
+
 .fillc{
   background-color:#419BD6; 
 }
+
 .btn-estatusd{
   color: white;
   width: 80%;
@@ -211,42 +224,37 @@ background-color:#d1d1d1;
   font-size: 16px;
   margin-bottom: 3px;
 }
+
 .btn-estatusd:hover{
   background-color:#F2631C; 
 }
+
 .filld{
   background-color:#F2631C; 
-}
-.inf-lead { 
-  font-size: 13px;
-  color: darkturquoise; 
-  padding-top: 3.8%;
-  text-align: center;
-}
-.inf-estatus { 
-  font-size: 13px;
-  padding-top: 3%;
-  color: darkturquoise;
-  text-align: center;
 }
 
 label {
   display: block;
 } 
+
 .icon-search{
   float: right;
   width: 4%;
 }
+
 [type="date"] {
   background:#fff url(https://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/calendar_2.png)  97% 50% no-repeat ;
 }
+
 [type="date"]::-webkit-inner-spin-button {
   display: none;
 }
+
 [type="date"]::-webkit-calendar-picker-indicator {
   opacity: 0;
   color: #10cebc;
 }
+
 input {
   border: 1px solid #c4c4c4;
   border-radius: 5px;
@@ -255,60 +263,31 @@ input {
   width: 99%;
   cursor: pointer;
 }
-.tooltip {
-  position: relative;
-  display: inline-block;
-}
 
-.tooltip .tooltiptext {
-  visibility: hidden;
-  width: 130px;
-  background-color: red;
-  color: #fff;
-  text-align: center;
-  border-radius: 2px;
-  padding: 5px 0;
-  position: absolute;
-  z-index: 1;
-  top: 150%;
-  left: 50%;
-  margin-left: -10px;
-}
-
-.tooltip .tooltiptext::after {
-  content: "";
-  position: absolute;
-  bottom: 100%;
-  left: 5%;
-  margin-left: -1px;
-  border-width: 5px;
-  border-style: solid;
-  border-color: transparent transparent red transparent;
-}
-
-.tooltip:hover .tooltiptext {
-  visibility: visible;
-}
 .urgente{
   color: red;
   font-size: 1.4em;
   font-weight: bold;
 }
+
 .like{
-  font-size: 2.5em;
+  font-size: 10vw;
   color: #00b9bf;
   text-align: left;
 }
+
 .like2{
   text-align: center;
-  font-size: 1.1em;
+  font-size: 1.5vw;
   font-weight: bold;
   background: transparent;
 }
+
 .dislike{
-  font-size: 2.5em;
+  font-size: 10vw;
   text-align: left;
 }
+
 .item-md p {
   margin: 0 0 0px;
   overflow: inherit;
@@ -318,5 +297,5 @@ input {
   line-height: 1.5;
 }
 .evaluado2{
-  font-size: 2.2em;
+  font-size: 8vw;
 }

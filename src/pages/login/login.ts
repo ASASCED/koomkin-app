@@ -89,7 +89,7 @@ export class LoginPage implements OnInit {
     this.showLoader();
     this.authService.getUserByEmail(this.email).then((data) => {
       this.leads = data;
-      //console.log(this.leads.length);
+      //console.log(this.leads);
       if (this.leads.length > 0) {
         this.id = this.leads[0].IDUSUARIO;
         if (Md5.hashStr(this.password) === this.leads[0].PASSWORD2) {
