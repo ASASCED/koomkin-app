@@ -1,4 +1,4 @@
-import { Component,OnInit,OnChanges } from '@angular/core';
+import { Component,OnInit } from '@angular/core';
 import { IonicPage, NavController, ViewController, NavParams } from 'ionic-angular';
 import { RestProvider } from './../../providers/rest/rest';
 import { HttpClient } from '@angular/common/http';
@@ -28,11 +28,6 @@ export class LeadPage implements OnInit {
     public provedor: RestProvider,
     public http: HttpClient) {
     this.leadActual = navParams.data;
-  }
-
-  ngOnChanges(){
-    this.changeClassification;
-    console.log(this.changeClassification);
   }
 
   ngOnInit(){

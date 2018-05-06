@@ -34,10 +34,11 @@ export class ReportePage implements OnInit {
   today;
   inicio;
   diasTranscurridos;
+  calificacion;
   public costoFinal;
   public result;
   public calif;
-  calificacion;
+  public share;
   public age;
   public age0;
   public age1;
@@ -581,6 +582,29 @@ export class ReportePage implements OnInit {
           } else {
             this.costoFinal = "$" + second;
           }
+
+          if (this.costo > 0) {
+            if (this.costo <= 5000) {
+              this.share = '10%';
+            }
+            else {
+              if (this.costo <= 7500) {
+                this.share = '20%';
+              }
+              else {
+                if (this.costo <= 10000) {
+                  this.share = '30%';
+                }
+                else {
+                  this.share = '40%';
+                }
+              }
+            }
+          }
+          else {
+            this.share = '0%';
+          }
+
         },
         (error) => {
           console.log(error);
