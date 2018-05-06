@@ -5,13 +5,16 @@
     display: inline-block;
 }
 
+.item-ios p{
+    vertical-align: top;
+    margin-top: 2.3% !important;
+}
+
 .text{
     padding: 0 !important;
     color: slategrey !important;
     font-size: 3.8vh !important;
     display: inline-block !important;
-    vertical-align: top;
-    margin-top: 2.5% !important;
 }
 
 ion-icon {
