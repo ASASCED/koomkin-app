@@ -45,6 +45,17 @@ export class RestProvider {
     });
   }
 
+  getCostoCampania(){
+    return new Promise(resolve => {
+      this.http.get(this.apiUrl + '/getCostoCampania/' + this.user).subscribe(data => {
+        resolve(data);
+        //console.log(data);
+      }, err => {
+        console.log(err);
+      });
+    });
+  }
+
   getLeadsDias() {
     return new Promise(resolve => {
       this.http.get(this.apiUrl + '/getLead30Dias/' + this.user).subscribe(data => {
@@ -115,18 +126,7 @@ export class RestProvider {
     return new Promise(resolve => {
       this.http.get(this.apiUrl2 + '/facebook?param1=' + this.user + '&param2=gender').subscribe(data => {
         resolve(data);
-        // console.log(data);
-      }, err => {
-        console.log(err);
-      });
-    });
-  }
-
-  getCostoCampania(){
-    return new Promise(resolve => {
-      this.http.get(this.apiUrl + '/getCostoCampania?id=' + this.user).subscribe(data => {
-        resolve(data);
-        console.log(data);
+        //console.log(data);
       }, err => {
         console.log(err);
       });
@@ -167,7 +167,7 @@ export class RestProvider {
     this.date = DigitYear + "-" + twoDigitMonth + "-" + twoDigitDate;
       this.http.get(this.apiUrl + '/getLeadsReport/' + this.user + '/' + this.date + '/'+ this.datefin +'/Todos_los_recibidos').subscribe(data => {
         resolve(data);
-        console.log(data);
+        //console.log(data);
       }, err => {
         console.log(err);
       });

@@ -1,5 +1,41 @@
 .iconos-m{
-    font-size: 30px !important;
-    color: black !important;
+    font-size: 40px !important;
+    color: #0079bc !important;
     margin-left: 2% !important;
+    display: inline-block;
+}
+
+.text{
+    padding: 0 !important;
+    color: slategrey !important;
+    font-size: 3.8vh !important;
+    display: inline-block !important;
+    vertical-align: top;
+    margin-top: 2.5% !important;
+}
+
+ion-icon {
+    &[class*="appname-"] {
+        // Instead of using the font-based icons
+        // We're applying SVG masks
+        mask-size: contain;
+        mask-position: 50% 50%;
+        mask-repeat: no-repeat;
+        background: currentColor;
+        width: 1em;
+        height: 1em;
+    }
+    // custom icons
+    &[class*="appname-bandeja"] {
+        mask-image: url(../assets/imgs/menu/bandeja.svg);
+    }
+    &[class*="appname-datos"] {
+        mask-image: url(../assets/imgs/menu/datos.svg);
+    }
+    &[class*="appname-reporte"] {
+        mask-image: url(../assets/imgs/menu/reporte.svg);
+    }
+    &[class*="appname-logout"] {
+        mask-image: url(../assets/imgs/menu/logout.svg);
+    }
 }

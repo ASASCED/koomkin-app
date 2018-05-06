@@ -61,6 +61,7 @@ app.get('/getLead12Meses/:id', function (req, res) {
 
 app.get('/getLike30Dias/:id', function (req, res) {
     var id = parseInt(req.params.id, 10);
+    console.log("id", id);
     var command = 'SP_GetLike30Dias';
     db.executeGetById(id, command, function (err, rows) {
         if (err) {
@@ -95,21 +96,18 @@ app.get('/getLeadCountMonth/:id', function (req, res) {
     });
 });
 
-app.get('/getCostoCampania', function (req, res) {
+app.get('/getCostoCampania/:id', function (req, res) {
 
-    const id = req.query.id
-    const command = 'SP_GetCostoCampania'
+    var id = parseInt(req.params.id, 10);
+    var command = 'SP_GetCostoCampania'
 
-    db.executeSPById(command, id)
-        .then(rows => {
+    db.executeGetById(id, command, function (err, rows) {
+        if (err) {
+            res.status(500).json({ error: err }).send();
+        } else {
             res.json(rows);
-            res.status(200);
-        }, (err) => {
-            res.status(500).json({error: err}).send();
-        })
-        .catch(err => {
-            res.status(500).json({error: err}).send();
-        });
+        }
+    });
 });
 
 app.get('/getLeadById/:id', function (req, res) {

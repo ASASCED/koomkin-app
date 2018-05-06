@@ -21,6 +21,23 @@ export class ReportePage implements OnInit {
   gender;
   leadsr;
   costo;
+  likes;
+  total;
+  rated;
+  dislike;
+  like;
+  monto;
+  montoTotal;
+  diasPagados;
+  diasRegalados;
+  diasTotales;
+  today;
+  inicio;
+  diasTranscurridos;
+  public costoFinal;
+  public result;
+  public calif;
+  calificacion;
   public age;
   public age0;
   public age1;
@@ -120,246 +137,247 @@ export class ReportePage implements OnInit {
     this.getFacebookGender();
     this.getFacebookDevice();
     this.getLeadsReport();
-
+    this.getLikeDias();
+    this.getCostoCampania()
   }
 
   //Llena la grafica de columnas (primer grafico)
   public getLeadsMeses() {
     this.provedor.getLeadsMeses()
       .then(
-      (data) => {
+        (data) => {
 
-        let dictionary = new Object();
+          let dictionary = new Object();
 
-        dictionary["January"] = "ENE";
-        dictionary["February"] = "FEB";
-        dictionary["March"] = "MAR";
-        dictionary["April"] = "ABR";
-        dictionary["May"] = "MAY";
-        dictionary["June"] = "JUN";
-        dictionary["July"] = "JUL";
-        dictionary["August"] = "AGO";
-        dictionary["September"] = "SEP";
-        dictionary["October"] = "OCT";
-        dictionary["November"] = "NOV";
-        dictionary["December"] = "DIC";
+          dictionary["January"] = "ENE";
+          dictionary["February"] = "FEB";
+          dictionary["March"] = "MAR";
+          dictionary["April"] = "ABR";
+          dictionary["May"] = "MAY";
+          dictionary["June"] = "JUN";
+          dictionary["July"] = "JUL";
+          dictionary["August"] = "AGO";
+          dictionary["September"] = "SEP";
+          dictionary["October"] = "OCT";
+          dictionary["November"] = "NOV";
+          dictionary["December"] = "DIC";
 
-        let dictionary2 = new Object();
+          let dictionary2 = new Object();
 
-        dictionary2["January"] = "0";
-        dictionary2["February"] = "1";
-        dictionary2["March"] = "2";
-        dictionary2["April"] = "3";
-        dictionary2["May"] = "4";
-        dictionary2["June"] = "5";
-        dictionary2["July"] = "6";
-        dictionary2["August"] = "7";
-        dictionary2["September"] = "8";
-        dictionary2["October"] = "9";
-        dictionary2["November"] = "10";
-        dictionary2["December"] = "11";
+          dictionary2["January"] = "0";
+          dictionary2["February"] = "1";
+          dictionary2["March"] = "2";
+          dictionary2["April"] = "3";
+          dictionary2["May"] = "4";
+          dictionary2["June"] = "5";
+          dictionary2["July"] = "6";
+          dictionary2["August"] = "7";
+          dictionary2["September"] = "8";
+          dictionary2["October"] = "9";
+          dictionary2["November"] = "10";
+          dictionary2["December"] = "11";
 
-        let dictionary3 = new Object();
+          let dictionary3 = new Object();
 
-        dictionary3["0"] = "ENE";
-        dictionary3["1"] = "FEB";
-        dictionary3["2"] = "MAR";
-        dictionary3["3"] = "ABR";
-        dictionary3["4"] = "MAY";
-        dictionary3["5"] = "JUN";
-        dictionary3["6"] = "JUL";
-        dictionary3["7"] = "AGO";
-        dictionary3["8"] = "SEP";
-        dictionary3["9"] = "OCT";
-        dictionary3["10"] = "NOV";
-        dictionary3["11"] = "DIC";
+          dictionary3["0"] = "ENE";
+          dictionary3["1"] = "FEB";
+          dictionary3["2"] = "MAR";
+          dictionary3["3"] = "ABR";
+          dictionary3["4"] = "MAY";
+          dictionary3["5"] = "JUN";
+          dictionary3["6"] = "JUL";
+          dictionary3["7"] = "AGO";
+          dictionary3["8"] = "SEP";
+          dictionary3["9"] = "OCT";
+          dictionary3["10"] = "NOV";
+          dictionary3["11"] = "DIC";
 
-        let outter = [];
-        this.meses = data;
+          let outter = [];
+          this.meses = data;
 
-        if (this.meses.length > 0) {
-          let dt = new Date(this.meses[0].fechaReporte);
-          dt.setDate(1);
+          if (this.meses.length > 0) {
+            let dt = new Date(this.meses[0].fechaReporte);
+            dt.setDate(1);
 
-          outter.push(['Mes', 'Leads', { "role": "style" }]);
+            outter.push(['Mes', 'Leads', { "role": "style" }]);
 
-          let intAux = 0;
-          let max = 0;
+            let intAux = 0;
+            let max = 0;
 
-          for (let i = 1; i <= 12; i++) {
-            dt.setMonth(dt.getMonth() + 1);
-            let inner = [];
-            inner.push(dictionary3[dt.getMonth()]);
-            //inner.push(5);
-            if (this.meses.length > intAux) {
-              if (dt.getMonth() == dictionary2[this.meses[intAux].MES]) {
-                inner.push(this.meses[intAux].LEADS);
+            for (let i = 1; i <= 12; i++) {
+              dt.setMonth(dt.getMonth() + 1);
+              let inner = [];
+              inner.push(dictionary3[dt.getMonth()]);
+              //inner.push(5);
+              if (this.meses.length > intAux) {
+                if (dt.getMonth() == dictionary2[this.meses[intAux].MES]) {
+                  inner.push(this.meses[intAux].LEADS);
 
-                if (this.meses[intAux].LEADS > max) {
-                  max = this.meses[intAux].LEADS;
+                  if (this.meses[intAux].LEADS > max) {
+                    max = this.meses[intAux].LEADS;
+                  }
+
+                  intAux++;
+                } else {
+                  inner.push(0);
                 }
-
-                intAux++;
               } else {
                 inner.push(0);
               }
-            } else {
-              inner.push(0);
+              inner.push("#00A6d4");
+              outter.push(inner);
             }
-            inner.push("#00A6d4");
-            outter.push(inner);
-          }
 
-          if (this.meses[0].fechaReporte == this.meses[0].hoy) {
-            let dt2 = new Date(this.meses[0].fechaReporte);
-            let diastranscurridos = dt2.getDate()
-            let estimado = Math.ceil((outter[outter.length - 1][1] / diastranscurridos) * 31)
-            let inner = [];
-            inner.push("ESTIM");
-            inner.push(estimado);
-            inner.push("#10cebc");
-            outter.push(inner);
+            if (this.meses[0].fechaReporte == this.meses[0].hoy) {
+              let dt2 = new Date(this.meses[0].fechaReporte);
+              let diastranscurridos = dt2.getDate()
+              let estimado = Math.ceil((outter[outter.length - 1][1] / diastranscurridos) * 31)
+              let inner = [];
+              inner.push("ESTIM");
+              inner.push(estimado);
+              inner.push("#10cebc");
+              outter.push(inner);
+            }
+            this.columnChartData.dataTable = outter
           }
-          this.columnChartData.dataTable = outter
-        }
-      },
-      (error) => {
-        console.log(error);
-      });
+        },
+        (error) => {
+          console.log(error);
+        });
   }
 
   //Llena el mapa de estados (2do grafico)
   public getLeadsMapa() {
     this.provedor.getLeadsMapa()
       .then(
-      (data) => {
+        (data) => {
 
-        let outter = [];
-        this.estado = data;
-        outter.push(['Estado', 'Leads']);
-        for (let i = 0; i < this.estado.length; i++) {
-          let inner = [];
-          inner.push(this.estado[i].nombre);
-          inner.push(this.estado[i].leads);
-          outter.push(inner);
-        }
-        this.geoChartData.dataTable = outter
-      },
-      (error) => {
-        console.log(error);
-      });
+          let outter = [];
+          this.estado = data;
+          outter.push(['Estado', 'Leads']);
+          for (let i = 0; i < this.estado.length; i++) {
+            let inner = [];
+            inner.push(this.estado[i].nombre);
+            inner.push(this.estado[i].leads);
+            outter.push(inner);
+          }
+          this.geoChartData.dataTable = outter
+        },
+        (error) => {
+          console.log(error);
+        });
   }
   //Llena la minitabla de estados (3er grafico)
 
   public getLeadsTabla() {
     this.provedor.getLeadsMapa()
       .then(
-      (data) => {
-        var dictionary = new Object();
+        (data) => {
+          var dictionary = new Object();
 
-        dictionary["AGS."] = "Aguascalientes";
-        dictionary["B.C."] = "Baja California";
-        dictionary["B.C.S."] = "Baja California Sur";
-        dictionary["CAMP."] = "Campeche";
-        dictionary["CHIS."] = "Chiapas";
-        dictionary["CHIH."] = "Chihuahua";
-        dictionary["CDMX"] = "CDMX";
-        dictionary["COAH."] = "Coahuila";
-        dictionary["COL."] = "Colima";
-        dictionary["DGO"] = "Durango";
-        dictionary["GTO."] = "Guanajuato";
-        dictionary["GRO."] = "Guerrero";
-        dictionary["HGO."] = "Hidalgo";
-        dictionary["JAL."] = "Jalisco";
-        dictionary["MEX."] = "Edo. de México";
-        dictionary["MICH."] = "Michoacán";
-        dictionary["MOR."] = "Morelos";
-        dictionary["NAY."] = "Nayarit";
-        dictionary["N.L."] = "Nuevo León";
-        dictionary["OAX."] = "Oaxaca";
-        dictionary["PUE."] = "Puebla";
-        dictionary["QRO."] = "Querétaro";
-        dictionary["Q.R."] = "Quintana Roo";
-        dictionary["S.L.P."] = "San Luis Potosí";
-        dictionary["SIN."] = "Sinaloa";
-        dictionary["SON."] = "Sonora";
-        dictionary["TAB."] = "Tabasco";
-        dictionary["TAMPS."] = "Tamaulipas";
-        dictionary["TLAX."] = "Tlaxcala";
-        dictionary["VER."] = "Veracruz";
-        dictionary["YUC."] = "Yucatán";
-        dictionary["ZAC."] = "Zacatecas";
+          dictionary["AGS."] = "Aguascalientes";
+          dictionary["B.C."] = "Baja California";
+          dictionary["B.C.S."] = "Baja California Sur";
+          dictionary["CAMP."] = "Campeche";
+          dictionary["CHIS."] = "Chiapas";
+          dictionary["CHIH."] = "Chihuahua";
+          dictionary["CDMX"] = "CDMX";
+          dictionary["COAH."] = "Coahuila";
+          dictionary["COL."] = "Colima";
+          dictionary["DGO"] = "Durango";
+          dictionary["GTO."] = "Guanajuato";
+          dictionary["GRO."] = "Guerrero";
+          dictionary["HGO."] = "Hidalgo";
+          dictionary["JAL."] = "Jalisco";
+          dictionary["MEX."] = "Edo. de México";
+          dictionary["MICH."] = "Michoacán";
+          dictionary["MOR."] = "Morelos";
+          dictionary["NAY."] = "Nayarit";
+          dictionary["N.L."] = "Nuevo León";
+          dictionary["OAX."] = "Oaxaca";
+          dictionary["PUE."] = "Puebla";
+          dictionary["QRO."] = "Querétaro";
+          dictionary["Q.R."] = "Quintana Roo";
+          dictionary["S.L.P."] = "San Luis Potosí";
+          dictionary["SIN."] = "Sinaloa";
+          dictionary["SON."] = "Sonora";
+          dictionary["TAB."] = "Tabasco";
+          dictionary["TAMPS."] = "Tamaulipas";
+          dictionary["TLAX."] = "Tlaxcala";
+          dictionary["VER."] = "Veracruz";
+          dictionary["YUC."] = "Yucatán";
+          dictionary["ZAC."] = "Zacatecas";
 
-        let outter = [];
-        this.tabla = data;
-        outter.push(['Estado', 'Leads']);
-        let i = 1;
+          let outter = [];
+          this.tabla = data;
+          outter.push(['Estado', 'Leads']);
+          let i = 1;
 
-        for (let k in this.tabla) {
-          if (i <= 5) {
-            var inner = [];
-            inner.push(dictionary[this.tabla[k]['abreviacion']]);
-            inner.push(this.tabla[k]['leads']);
-            outter.push(inner);
+          for (let k in this.tabla) {
+            if (i <= 5) {
+              var inner = [];
+              inner.push(dictionary[this.tabla[k]['abreviacion']]);
+              inner.push(this.tabla[k]['leads']);
+              outter.push(inner);
+            }
+            i++;
           }
-          i++;
-        }
-        this.tableChartData.dataTable = outter
-      },
-      (error) => {
-        console.log(error);
-      });
+          this.tableChartData.dataTable = outter
+        },
+        (error) => {
+          console.log(error);
+        });
   }
   //Llena la grafica de puntos (4to grafico)
   public getLeadsDias() {
     this.provedor.getLeadsDias()
       .then(
-      (data) => {
-        let outter = [];
-        this.dias = data;
-        outter.push(['Día', 'Leads']);
-        let max = 0;
+        (data) => {
+          let outter = [];
+          this.dias = data;
+          outter.push(['Día', 'Leads']);
+          let max = 0;
 
-        for (let k in this.dias) {
-          let inner = [];
-          this.dias[k]['Date'] = this.dias[k]['Date'].substring(8, 10) + this.dias[k]['Date'].substring(4, 7)
-          this.dias[k]['Date'] = this.dias[k]['Date'].replace('-01', '-Ene');
-          this.dias[k]['Date'] = this.dias[k]['Date'].replace('-02', '-Feb');
-          this.dias[k]['Date'] = this.dias[k]['Date'].replace('-03', '-Mar');
-          this.dias[k]['Date'] = this.dias[k]['Date'].replace('-04', '-Abr');
-          this.dias[k]['Date'] = this.dias[k]['Date'].replace('-05', '-May');
-          this.dias[k]['Date'] = this.dias[k]['Date'].replace('-06', '-Jun');
-          this.dias[k]['Date'] = this.dias[k]['Date'].replace('-07', '-Jul');
-          this.dias[k]['Date'] = this.dias[k]['Date'].replace('-08', '-Ago');
-          this.dias[k]['Date'] = this.dias[k]['Date'].replace('-09', '-Sep');
-          this.dias[k]['Date'] = this.dias[k]['Date'].replace('-10', '-Oct');
-          this.dias[k]['Date'] = this.dias[k]['Date'].replace('-11', '-Nov');
-          this.dias[k]['Date'] = this.dias[k]['Date'].replace('-12', '-Dic');
-          inner.push(this.dias[k]['Date']);
-          if (this.dias[k]['DOWNLOADCOUNT'] > max) {
-            max = this.dias[k]['DOWNLOADCOUNT'];
+          for (let k in this.dias) {
+            let inner = [];
+            this.dias[k]['Date'] = this.dias[k]['Date'].substring(8, 10) + this.dias[k]['Date'].substring(4, 7)
+            this.dias[k]['Date'] = this.dias[k]['Date'].replace('-01', '-Ene');
+            this.dias[k]['Date'] = this.dias[k]['Date'].replace('-02', '-Feb');
+            this.dias[k]['Date'] = this.dias[k]['Date'].replace('-03', '-Mar');
+            this.dias[k]['Date'] = this.dias[k]['Date'].replace('-04', '-Abr');
+            this.dias[k]['Date'] = this.dias[k]['Date'].replace('-05', '-May');
+            this.dias[k]['Date'] = this.dias[k]['Date'].replace('-06', '-Jun');
+            this.dias[k]['Date'] = this.dias[k]['Date'].replace('-07', '-Jul');
+            this.dias[k]['Date'] = this.dias[k]['Date'].replace('-08', '-Ago');
+            this.dias[k]['Date'] = this.dias[k]['Date'].replace('-09', '-Sep');
+            this.dias[k]['Date'] = this.dias[k]['Date'].replace('-10', '-Oct');
+            this.dias[k]['Date'] = this.dias[k]['Date'].replace('-11', '-Nov');
+            this.dias[k]['Date'] = this.dias[k]['Date'].replace('-12', '-Dic');
+            inner.push(this.dias[k]['Date']);
+            if (this.dias[k]['DOWNLOADCOUNT'] > max) {
+              max = this.dias[k]['DOWNLOADCOUNT'];
+            }
+            inner.push(this.dias[k]['DOWNLOADCOUNT']);
+            outter.push(inner);
           }
-          inner.push(this.dias[k]['DOWNLOADCOUNT']);
-          outter.push(inner);
-        }
-        this.lineChartData.dataTable = outter
-      },
-      (error) => {
-        console.log(error);
-      });
+          this.lineChartData.dataTable = outter
+        },
+        (error) => {
+          console.log(error);
+        });
   }
 
   public getFacebookAge() {
     this.provedor.getFacebookAge()
       .then(
-      (data) => {
-        this.age = data;
-        let total = Number(this.age[0].clicks) + Number(this.age[1].clicks) + Number(this.age[2].clicks) + Number(this.age[3].clicks) + Number(this.age[4].clicks);
-        this.age0 = Math.round((this.age[0].clicks / total) * 100);
-        this.age1 = Math.round((this.age[1].clicks / total) * 100);
-        this.age2 = Math.round((this.age[2].clicks / total) * 100);
-        this.age3 = Math.round((this.age[3].clicks / total) * 100);
-        this.age4 = Math.round((this.age[4].clicks / total) * 100);
+        (data) => {
+          this.age = data;
+          let total = Number(this.age[0].clicks) + Number(this.age[1].clicks) + Number(this.age[2].clicks) + Number(this.age[3].clicks) + Number(this.age[4].clicks);
+          this.age0 = Math.round((this.age[0].clicks / total) * 100);
+          this.age1 = Math.round((this.age[1].clicks / total) * 100);
+          this.age2 = Math.round((this.age[2].clicks / total) * 100);
+          this.age3 = Math.round((this.age[3].clicks / total) * 100);
+          this.age4 = Math.round((this.age[4].clicks / total) * 100);
        /* age0 = Math.trunc((this.age[0].clicks / total) * 100);
         console.log(age0);
        if (age0 > 0) {
@@ -462,77 +480,168 @@ export class ReportePage implements OnInit {
           }
         }
       }*/},
-      (error) => {
-        console.log(error);
-      });
+        (error) => {
+          console.log(error);
+        });
   }
 
   public getFacebookDevice() {
     this.provedor.getFacebookDevice()
       .then(
-      (data) => {
-        this.device = data;
-        let total = 0;
-        let cel = 0;
-        let escritorio = 0;
-        let otros = 0;
-        for (var k in this.device) {
-          total = total + Number(this.device[k].clicks);
-          if (this.device[k].impression_device == "android_smartphone" || this.device[k].impression_device == "iphone") {
-            cel = cel + +Number(this.device[k].clicks);
-          } else {
-            if (this.device[k].impression_device == "desktop") {
-              escritorio = escritorio + Number(this.device[k].clicks);
+        (data) => {
+          this.device = data;
+          let total = 0;
+          let cel = 0;
+          let escritorio = 0;
+          let otros = 0;
+          for (var k in this.device) {
+            total = total + Number(this.device[k].clicks);
+            if (this.device[k].impression_device == "android_smartphone" || this.device[k].impression_device == "iphone") {
+              cel = cel + +Number(this.device[k].clicks);
             } else {
-              otros = otros + Number(this.device[k].clicks);
+              if (this.device[k].impression_device == "desktop") {
+                escritorio = escritorio + Number(this.device[k].clicks);
+              } else {
+                otros = otros + Number(this.device[k].clicks);
+              }
             }
           }
-        }
-        this.computadora = Math.round((escritorio / total) * 100);
-        this.smartphone = Math.round((cel / total) * 100)
-        this.tablet = Math.round((otros / total) * 100)
-      },
-      (error) => {
-        console.log(error);
-      });
+          this.computadora = Math.round((escritorio / total) * 100);
+          this.smartphone = Math.round((cel / total) * 100)
+          this.tablet = Math.round((otros / total) * 100)
+        },
+        (error) => {
+          console.log(error);
+        });
   }
 
   public getFacebookGender() {
     this.provedor.getFacebookGender()
       .then(
-      (data) => {
-        this.gender = data;
-        let total = Number(this.gender[0].clicks) + Number(this.gender[1].clicks) + Number(this.gender[2].clicks);
-        this.mujer = Math.round((this.gender[0].clicks / total) * 100);
-        this.hombre = Math.round((this.gender[1].clicks / total) * 100)
-      },
-      (error) => {
-        console.log(error);
-      });
+        (data) => {
+          this.gender = data;
+          let total = Number(this.gender[0].clicks) + Number(this.gender[1].clicks) + Number(this.gender[2].clicks);
+          this.mujer = Math.round((this.gender[0].clicks / total) * 100);
+          this.hombre = Math.round((this.gender[1].clicks / total) * 100)
+        },
+        (error) => {
+          console.log(error);
+        });
   }
 
   public getLeadsReport() {
     this.provedor.getLeadsReport()
       .then(
-      (data) => {
-        this.leadsr = data;
-        // console.log(this.leadsr);
-      },
-      (error) => {
-        console.log(error);
-      });
+        (data) => {
+          this.leadsr = data;
+          //console.log(this.leadsr);
+        },
+        (error) => {
+          console.log(error);
+        });
   }
 
   public getCostoCampania() {
     this.provedor.getCostoCampania()
       .then(
-      (data) => {
-        this.costo = data;
-        console.log(this.costo);
-      },
-      (error) => {
-        console.log(error);
-      });
+        (data) => {
+          this.costo = data;
+          console.log(this.costo);
+          this.monto = this.costo[0].monto;
+          this.diasPagados = this.costo[0].DiasPagados;
+          this.diasRegalados = this.costo[0].DiasRegalados;
+          this.diasTotales = this.diasPagados + this.diasRegalados;
+          this.montoTotal = this.monto + ((this.diasRegalados * this.monto) / this.diasPagados)
+          this.today = new Date(this.costo[0].today)
+          this.inicio = new Date(this.costo[0].Finicio)
+          this.diasTranscurridos = Math.floor((this.today - this.inicio) / (1000 * 60 * 60 * 24));
+
+          if (this.diasTranscurridos == 0) {
+            this.diasTranscurridos = 1;
+          }
+          this.costo = ((this.diasTranscurridos * this.montoTotal) / this.diasTotales);
+
+          var first = Math.trunc(this.costo / 1000);
+          var second = Math.trunc(this.costo - (first * 1000));
+
+          if (first > 0) {
+            if (second == 0) {
+              this.costoFinal = "$" + first + ",000"
+            } else {
+              if (second < 10) {
+                this.costoFinal = "$" + first + ",00" + second
+              } else {
+                if (second < 100) {
+                  this.costoFinal = "$" + first + ",0" + second
+                } else {
+                  this.costoFinal = "$" + first + "," + second
+                }
+              }
+            }
+          } else {
+            this.costoFinal = "$" + second;
+          }
+        },
+        (error) => {
+          console.log(error);
+        });
+  }
+
+  public getLikeDias() {
+    this.provedor.getLikeDias()
+      .then(
+        (data) => {
+          this.likes = data;
+          const total = this.likes[0].Total;
+          const rated = this.likes[0].Rated;
+          const like = this.likes[0].Like;
+          const dislike = this.likes[0].Dislike;
+          //Leads calificados
+          if (total === 0 && rated === 0) {
+            this.result = '0%';
+            this.rated = 'not-rated';
+          } else {
+            let result = (rated * 100) / total;
+
+            if (result > 0 && result < 50) {
+              this.result = Math.ceil(result) + '%';
+              this.rated = 'rated';
+            } else if (result >= 50) {
+              this.result = Math.floor(result) + '%';
+              this.rated = 'rated';
+            } else {
+              this.result = '0%';
+              this.rated = 'not-rated';
+            }
+          }
+          //Leads con like
+          if (like === 0 && dislike === 0) {
+            this.calif = 'Sin Información';
+            this.rated = 'not-rated';
+          } else {
+
+            let calif = (like * 100) / (like + dislike);
+
+            if (calif > 0 && calif < 50) {
+              this.calif = Math.ceil(calif) + '%';
+              this.rated = 'rated';
+            } else if (calif >= 50) {
+              this.calif = Math.floor(calif) + '%';
+              this.rated = 'rated';
+            } else {
+              this.calif = '0%';
+              this.rated = 'not-rated';
+            }
+          }
+        },
+        (error) => {
+          console.log(error);
+          //Leads calificados
+          this.result = '0%';
+          //Leads con like
+          this.calif = '0%';
+          this.rated = 'not-rated';
+        });
   }
 
 
