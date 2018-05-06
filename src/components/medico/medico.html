@@ -3,16 +3,15 @@
 <ion-row>
   <ion-col>
     <p class="paciente">Información paciente:
-      <a class="edadpaciente"> Mujer 32 años</a>
+      <a class="edadpaciente"> {{genero}} {{edad}} años</a>
     </p>
 
   </ion-col>
 </ion-row>
 <ion-row>
   <ion-col>
-    <p class="mensaje">Buen día, me gustaría agendar una cita para consulta con usted. Quedo atento a la respuesta de acuerdo a su disponibilidad.
-      Gracias.
-    </p>
+      <p class="mensaje">“{{mensaje}}”</p>
+
   </ion-col>
 </ion-row>
 <ion-row>
@@ -23,9 +22,9 @@
 <ion-row>
   <ion-col>
     <ion-icon class="cita" name="md-calendar"></ion-icon>
-    <a class="paciented">18/02/18</a>
+    <a class="paciented">{{fechaCita}}</a>
     <ion-icon class="cita" name="md-alarm"></ion-icon>
-    <a class="paciented">16:35</a>
+    <a class="paciented">{{horaCita}} hrs.</a>
   </ion-col>
 </ion-row>
 <ion-row>
