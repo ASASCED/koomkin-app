@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { RestProvider } from './../../providers/rest/rest';
 
-
 @IonicPage({ name: 'reporte', segment: 'reporte-1/:param' })
 @Component({
   selector: 'page-reporte',

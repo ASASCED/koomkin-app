@@ -22,6 +22,9 @@ export class LeadPage implements OnInit {
   public calificacion;
   public uuid;
 
+  page: string = "Lead";
+  isAndroid: boolean = false;
+
   constructor(public viewCtrl: ViewController,
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -173,4 +176,5 @@ export class LeadPage implements OnInit {
       });
 
   }
+  
 }

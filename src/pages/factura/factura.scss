@@ -21,6 +21,7 @@
     width: 100%;
     height: 100%;
   }
+
   .edit{
     background: #10cebc;
     border: transparent;
@@ -202,4 +203,11 @@
 
   .tooltip:hover .tooltiptext {
     visibility: visible;
+  }
+  .back-button-icon-ios {
+    margin: -1px 0 0;
+    display: inherit;
+    min-width: 18px;
+    font-size: 3.4rem;
+    color: black;
   }

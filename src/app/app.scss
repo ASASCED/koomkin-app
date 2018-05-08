@@ -1,20 +1,45 @@
 .iconos-m{
     font-size: 40px !important;
-    color: #0079bc !important;
+    color: #10cebc !important;
     margin-left: 2% !important;
     display: inline-block;
 }
 
+.ios ion-nav{
+    background-color: #10cebc !important;
+}
+
+.toolbar-ios {
+    padding: 4px;
+    padding-left: 4px;
+    padding-right: 4px;
+    min-height: 44px;
+    background-color: #10cebc !important;
+}
+
 .item-ios p{
     vertical-align: top;
-    margin-top: 2.3% !important;
+    margin-top: 1.7% !important;
 }
 
 .text{
     padding: 0 !important;
     color: slategrey !important;
-    font-size: 3.8vh !important;
+    font-size: 3.3vh !important;
     display: inline-block !important;
+}
+
+.toolbar-ios-azul .toolbar-background-ios {
+    background: linear-gradient(to right, #3CCDBB, #33a4bc);
+}
+
+.header-ios .toolbar-ios:last-child .toolbar-background-ios {
+     border-width: 0 0 0; 
+}
+
+.segment-md .segment-button.segment-activated {
+    border-color: white;
+    opacity: 1;
 }
 
 ion-icon {
@@ -26,7 +51,7 @@ ion-icon {
         mask-repeat: no-repeat;
         background: currentColor;
         width: 1em;
-        height: 1em;
+        height: 5vh;
     }
     // custom icons
     &[class*="appname-bandeja"] {

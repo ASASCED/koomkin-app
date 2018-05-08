@@ -3,3 +3,24 @@ page-datos {
         color: blueviolet;
     }
 }
+
+.tabs-ios-azul .tabbar {
+    border-color: transparent !important; 
+    background-color: #10cebc !important;
+}
+
+.tabs-md-azul .tabbar {
+    background-color: #10cebc !important;
+}
+
+.ios ion-nav{
+    background-color: #10cebc !important;
+}
+
+.toolbar-ios {
+    padding: 4px;
+    padding-left: 4px;
+    padding-right: 4px;
+    min-height: 44px;
+    background-color: #10cebc !important;
+}

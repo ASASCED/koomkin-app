@@ -1,11 +1,5 @@
 import { Component } from '@angular/core';
 
-/**
- * Generated class for the HotelComponent component.
- *
- * See https://angular.io/api/core/Component for more info on Angular
- * Components.
- */
 @Component({
   selector: 'hotel',
   templateUrl: 'hotel.html'
@@ -18,5 +12,7 @@ export class HotelComponent {
     console.log('Hello HotelComponent Component');
     this.text = 'Hello World';
   }
+
+
 
 }

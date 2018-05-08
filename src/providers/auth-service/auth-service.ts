@@ -9,6 +9,8 @@ export class AuthServiceProvider {
   public info;
   pass;
   public contrasena;
+  public id;
+  public empresa;
 
   constructor(public http: HttpClient) {
   }
@@ -24,6 +26,8 @@ export class AuthServiceProvider {
        // console.log(this.info);
         if (this.info.length > 0) {
           this.contrasena = this.info[0].PASSWORD2;
+          this.id = this.info[0].IDUSUARIO;
+          this.empresa = this.info[0].NOMEMPRESACOMPRADOR
           //console.log(this.contrasena);
         }
       }, err => {
