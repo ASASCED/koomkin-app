@@ -43,7 +43,7 @@ import { AuthServiceProvider } from '../providers/auth-service/auth-service';
     HttpModule,
     ReportePageModule,
     IonicModule.forRoot(MyApp,{
-      backButtonText: 'Atras',
+      backButtonText: 'Regresar',
       backButtonIcon: 'ios-arrow-back',
       iconMode: 'md'
     })

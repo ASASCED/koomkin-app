@@ -17,84 +17,76 @@
   <div [ngSwitch]="page">
     <ion-list *ngSwitchCase="'Lead'">
       <ion-grid class="vista">
-        <ion-row align-items-center>
-          <ion-col>
-            <div class="circulo" [ngStyle]="">
-              <p class="circulo" [ngStyle]="">V</p>
-            </div>
-            <br>
-          </ion-col>
-          <ion-col col-7 align-self-center>
-            <a class="inf-nombre">
-              <strong>{{leadActual.NOMBRE}} </strong>
-            </a>
-            <div class="tooltip">
-              <ion-icon class="urgente" alt="Urgente" name="ios-alert-outline"></ion-icon>
-              <span class="tooltiptext"> Urgente</span>
-            </div>
-          </ion-col>
-          <ion-col col-3>
-            <div class="rate-fechal">{{leadActual.FECHA}}</div>
-          </ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col col-12>
-            <div class="rate-calidad">Clasificación Lead = 85%</div>
-          </ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col col-12>
-            <div class="inf-empresa">{{leadActual.EMPRESA}}</div>
-          </ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col col-12>
-            <div class="inf-estado">{{leadActual.ESTADO}}</div>
-          </ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col col-12>
-            <div class="inf-correo">{{leadActual.EMAIL}}</div>
-          </ion-col>
-        </ion-row>
-        <hr>
+        <ion-card class="datoslead">
+          <ion-card-content style="padding: 2% !important; border-left: 20px solid #00b9bf !important;">
+            <ion-row align-items-center>
+              <ion-col col-8 align-self-center>
+                <a class="inf-nombre">
+                  <strong>{{leadActual.NOMBRE}} </strong>
+                </a>
+                <div class="tooltip">
+                  <ion-icon class="urgente" alt="Urgente" name="ios-alert-outline"></ion-icon>
+                  <span class="tooltiptext"> Urgente</span>
+                </div>
+              </ion-col>
+              <ion-col col-4>
+                <div class="rate-fechal">{{leadActual.FECHA}}</div>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col col-5>
+                <div class="inf-empresa">{{leadActual.EMPRESA}}</div>
+              </ion-col>
+              <ion-col col-7>
+                <div class="inf-estado">{{leadActual.ESTADO}}</div>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col col-10>
+                <div class="inf-correo">{{leadActual.EMAIL}}</div>
+              </ion-col>
+              <ion-col col-2>
+                <div class="inf-estado" style="text-align: right !important;">85%</div>
+              </ion-col>
+            </ion-row>
+          </ion-card-content>
+        </ion-card>
+        <br>
         <!-- Esto es lo que cambia -->
-        <ion-row>
+        <ion-row class="salto">
           <ion-col>
             <ion-icon class="reserva" name="md-briefcase"></ion-icon>
             <a class="tipo">Viaje de Placer</a>
           </ion-col>
         </ion-row>
-        <ion-row>
+        <ion-row class="salto">
           <ion-col>
             <ion-icon class="reserva" name="ios-people"></ion-icon>
             <a class="tipo">2 huéspedes</a>
           </ion-col>
         </ion-row>
-        <ion-row>
+        <ion-row class="salto">
           <ion-col>
             <p class="mensaje">Buen día, me gustaría hacer una reservación. Gracias.
             </p>
           </ion-col>
         </ion-row>
-        <ion-row>
+        <ion-row class="salto">
           <ion-col>
             <a class="paciente">Fecha de la reservacion</a>
           </ion-col>
         </ion-row>
-        <ion-row>
+        <ion-row class="salto">
           <ion-col>
             <ion-icon class="cita" name="md-calendar"></ion-icon>
             <ion-icon class="viaje" name="md-arrow-round-down"></ion-icon>
-    
             <a class="paciented">18/02/18</a>
             <ion-icon class="cita" name="md-calendar"></ion-icon>
             <ion-icon class="viaje" name="md-arrow-round-up"></ion-icon>
-    
             <a class="paciented">28/02/18</a>
           </ion-col>
         </ion-row>
-        <ion-row>
+        <ion-row class="salto">
           <ion-col style="margin-top: 1em;">
             <ion-icon class="download" name="md-pin"></ion-icon>
             <a class="descarga">El cliente revisó tu dirección</a>
@@ -105,7 +97,7 @@
           <ion-col col-6>
             <p class="califica">Status Lead</p>
           </ion-col>
-          <ion-col col-5 offset-1>
+          <ion-col col-6>
             <p class="califica">Califica este Lead</p>
           </ion-col>
         </ion-row>
@@ -117,16 +109,16 @@
             <button class="arribab" [style.background-color]="ColorC('Sin Contacto')" (click)="changeClassification('C')">Sin Contacto</button>
             <button class="arribab" [style.background-color]="ColorD('Descartado')" (click)="changeClassification('D')">Descartado</button>
           </ion-col>
-          <ion-col col-5 offset-1 style="text-align:center">
-            <ion-icon class="evaluado" [ngStyle]="{'color': leadActual.calificaLead === 'true' ? '#00b9bf;' : '#d1d1d1' || leadActual.calificaLead === 'null' ? '#d1d1d1' : '#d1d1d1'}" name="md-thumbs-up"
-              (click)="changeLike('L')"></ion-icon>
+          <ion-col col-6 style="text-align:center">
+            <ion-icon class="evaluado" [ngStyle]="{'color': leadActual.calificaLead === 'true' ? '#00b9bf;' : '#d1d1d1' || leadActual.calificaLead === 'null' ? '#d1d1d1' : '#d1d1d1'}"
+              name="md-thumbs-up" (click)="changeLike('L')"></ion-icon>
             <ion-icon class="noevaluado" [ngStyle]="{'color': leadActual.calificaLead === 'false' ? '#00b9bf;' : '#d1d1d1'}" name="md-thumbs-down"
               (click)="changeLike('DL')"></ion-icon>
           </ion-col>
         </ion-row>
 
       </ion-grid>
-    
+
     </ion-list>
 
     <ion-list *ngSwitchCase="'Llamadas'">

@@ -10,10 +10,18 @@
     padding: 10px;
   }
 
+  .row{
+    margin-bottom: 1%;
+  }
+
+  .salto{
+    margin-bottom: 2% !important;
+  }
+
   .toolbar-background-ios {
     //background: linear-gradient(to right, #3CCDBB, #33a4bc);
     background: white;
-}
+  }
 
   .toolbar.md{
     min-height: 20px !important;
@@ -41,9 +49,18 @@
     opacity: 1;
     -webkit-transition: 100ms all linear;
     transition: 100ms all linear;
-    border-color: #00b9bf;;
+    border-color: #00b9bf;
     background: white;
     font-size: 5vw;
+  }
+
+  .datoslead{
+    margin: 0px !important; 
+    border-radius: 2px;
+    width: calc(100% - 1%) !important;
+    background: #F7F7F7 !important;
+    -webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
   }
 
   .back-button-icon-ios {
@@ -60,7 +77,6 @@
     font-size: 2.8vh;
     line-height: 2.5rem;
   }
-
 
   .segment-md .segment-button {
     -webkit-box-flex: 1;
@@ -118,7 +134,7 @@
   }
   //Fecha del Lead
   .rate-fechal {
-    font-size: 4.2vw !important;
+    font-size: 4.5vw !important;
     color: dimgray;
     text-align: right;
   }
@@ -130,20 +146,20 @@
   }
   //Nombre de la empresa Lead
   .inf-empresa{
-    font-size: 5vw;
+    font-size: 4.5vw;
     color: darkslategray;
   }
   //Estado del Lead
   .inf-estado{
-    font-size: 4.8vw  !important;
+    font-size: 4.5vw  !important;
     color: slategray !important;
-    text-align: left !important;
+    text-align: right !important;
   }
   //Correo del Lead
   .inf-correo{
     color: lightskyblue;
     font-style: italic;
-    font-size: 4.8vw  !important;
+    font-size: 4.5vw  !important;
   }
   //
   .cotiza{
@@ -156,7 +172,7 @@
   //Mensaje del Lead
   .mensaje{
     color: lightslategray;
-    font-size: 4.5vw;
+    font-size: 5vw;
     margin-left: 0.5em;
     font-weight: 500;
     margin-top: 0.4em;
@@ -177,17 +193,17 @@
   }
   //Mensaje de Descarga
   .descarga{
-    font-size: 1.1em;
+    font-size: 5vw;
     color: coral;
     text-decoration: underline;
     margin-left: .7em;
     position: absolute;
-    margin-top: 5px;
+    margin-top: 2px;
   }
   //
   .califica{
     text-align: center;
-    font-size: 1.1em;
+    font-size: 4.8vw;
     color: darkslategray;
     font-weight: bold;
     margin-top: .5em;
@@ -221,7 +237,7 @@
     padding: 1%;
     color: white;
     font-weight: bold;
-    background: #00b9bf;
+    background: coral;
   }
   //
   .telefono{
@@ -240,7 +256,7 @@
 
   .paciente{
     color: #00b9bf;
-    font-size: 5vw;
+    font-size: 5.5vw;
     margin-bottom: 0;
   }
   //
@@ -254,7 +270,7 @@
   //  
   .paciented{
     color: #00b9bf;
-    font-size: 1.2em;
+    font-size: 5.5vw;
     font-weight: bold;
     margin-left: 0.3em;
     margin-right: .5em;
@@ -262,7 +278,7 @@
   //
   .cita{
     color: dimgray;
-    font-size: 1.5em;
+    font-size: 6.5vw;
     margin-left: .5em;
     margin-top: .3em;
   }
@@ -271,7 +287,7 @@
 
   .reserva{
     color: dimgray;
-    font-size: 1.6em;
+    font-size: 6.5vw;
     margin-right: .3em;
   }
   //
@@ -287,6 +303,6 @@
 
   .viaje{
     color: dimgray;
-    font-size: 1.5em;
+    font-size: 6.5vw;
     margin-top: .3em;
   }
