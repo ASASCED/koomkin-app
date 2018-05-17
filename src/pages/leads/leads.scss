@@ -119,8 +119,7 @@ ion-select{
 }
 
 .inf-mensaje { 
-  font-size: 4.4vw;
-  margin-left: .3em;
+  font-size: 4vw;
   color: lightslategray; 
   margin-top: 5px;
   text-align: justify;
@@ -158,9 +157,7 @@ ion-select{
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
 }
 
-.vendido{
-  background-color: #00b9bf;;
-}
+
 
 .vacio{
   background-color: #d1d1d1;
@@ -279,24 +276,6 @@ input {
   font-weight: bold;
 }
 
-.like{
-  font-size: 10vw;
-  color: #00b9bf;
-  text-align: left;
-}
-
-.like2{
-  text-align: center;
-  font-size: 1.5vw;
-  font-weight: bold;
-  background: transparent;
-}
-
-.dislike{
-  font-size: 10vw;
-  text-align: left;
-}
-
 .item-md p {
   margin: 0 0 0px;
   overflow: inherit;
@@ -305,6 +284,51 @@ input {
   color: white;
   line-height: 1.5;
 }
+
 .evaluado2{
   font-size: 8vw;
+  cursor: pointer;
+}
+
+.banda{
+  padding: 2% !important; 
+  border-left: 20px solid #76797b !important;
+}
+
+.V{
+  padding: 2% !important; 
+  border-left: 20px solid #00b9bf !important;
+}
+
+.P{
+  padding: 2% !important; 
+  border-left: 20px solid #6B4595 !important;
+}
+
+.D{
+  padding: 2% !important; 
+  border-left: 20px solid #F2631C !important;
+}
+
+.S{
+  padding: 2% !important; 
+  border-left: 20px solid #419BD6 !important;
+}
+
+.like{
+  color: #00b9bf !important;
+  font-size: 8vw;
+  cursor: pointer;
+}
+
+.dislike{
+  color: rgb(209, 209, 209) !important;
+  font-size: 8vw;
+  cursor: pointer;
+}
+
+.vacio{
+  color: rgb(209, 209, 209) !important;
+  font-size: 8vw;
+  cursor: pointer;
 }

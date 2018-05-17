@@ -45,52 +45,42 @@
           </ion-item>
         </div>
         <ion-list detail-none ion-item *ngFor="let lead of leads; let i = index;" (click)="verLead(lead)" style="border-top: 1.15px solid #d0d1d1;border-bottom: 1.15px solid #d0d1d1;">
-          <ion-grid>
-            <ion-row align-items-center>
-              <ion-col col-2 style="text-align: center;">
-                <div class="circulo" [ngStyle]="{'background-color': lead.clasificaLead === 'Vendido' ? 'lightseagreen' : '#d1d1d1' || 
-                                                                     lead.clasificaLead === 'Descartado' ? '#F2631C' : '#d1d1d1'}">
-                  <p class="circulo" [ngStyle]="{'background-color': lead.clasificaLead === 'Vendido' ? 'lightseagreen' : '#d1d1d1' || 
-                                                                     lead.clasificaLead === 'Descartado' ? '#F2631C' : '#d1d1d1'}">V</p>
-                </div>
-                <br>
-              </ion-col>
-              <ion-col col-7 align-self-center>
-                <div class="rate-nombre">
-                  <strong>{{lead.NOMBRE}} </strong>
-                </div>
-              </ion-col>
-              <ion-col col-3 style="text-align:right">
-                <div class="rate-fecha">{{lead.FECHA}}</div>
-              </ion-col>
-            </ion-row>
-            <ion-row>
-              <ion-col col-10>
-                <div class="rate-calidads">Calificación Lead = 85%</div>
-              </ion-col>
-              <ion-col col-2 style="text-align:right">
-                  <div class="tooltip">
+          <ion-grid style="padding: 2px;padding-bottom: 3px !important;">
+            <ion-card class="datoslead">
+              <ion-card-content class="{{lead.clasificaLead}}">
+                <ion-row align-items-center>
+                  <ion-col col-8 align-self-center>
+                    <a class="inf-nombre">
+                      <strong>{{lead.NOMBRE}} </strong>
+                    </a>
+
+                    <div class="tooltip">
                       <ion-icon class="urgente" alt="Urgente" name="ios-alert-outline"></ion-icon>
                       <span class="tooltiptext"> Urgente</span>
                     </div>
-              </ion-col>
-            </ion-row>
-            <ion-row>
-              <ion-col col-10>
-                <div class="rate-empresa">{{lead.EMPRESA}}</div>
-              </ion-col>
-              <ion-col col2>
-              </ion-col>
-            </ion-row>
-            <ion-row>
-              <ion-col col-10>
-                <div class="inf-mensaje">{{lead.MENSAJE}}</div>
-              </ion-col>
-              <ion-col col2 style="text-align: right;">
-                <ion-icon class="evaluado2" [ngStyle]="{'color': lead.calificaLead === 'true' ? 'lightseagreen' : '#d1d1d1'}" name="md-thumbs-up"
-                  (click)="changeLike('L')"></ion-icon>
-              </ion-col>
-            </ion-row>
+                  </ion-col>
+                  <ion-col col-4>
+                    <div class="rate-fechal">{{lead.FECHA}}</div>
+                  </ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col col-10>
+                    <div class="inf-empresa">{{lead.EMPRESA}}</div>
+                  </ion-col>
+                  <ion-col col-2 style="text-align: right;">
+                    <div class="inf-estado">85%</div>
+                  </ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col col-10>
+                    <div class="inf-mensaje">{{lead.MENSAJE}}</div>
+                  </ion-col>
+                  <ion-col col-2 style="text-align: right;">
+                    <ion-icon class="{{lead.calificaLead}} icon icon-md ion-md-thumbs-up" name="md-thumbs-up" (click)="changeLike('L',lead)"></ion-icon>
+                  </ion-col>
+                </ion-row>
+              </ion-card-content>
+            </ion-card>
           </ion-grid>
         </ion-list>
         <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
