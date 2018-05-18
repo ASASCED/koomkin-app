@@ -65,8 +65,9 @@ export class LeadsPage implements OnInit {
               this.leads[k].clasificaLead = "S";
             } else{
               this.leads[k].clasificaLead = "banda";
-            }
+            }console.log(this.leads[k].NOMBRE,this.leads[k].calificaLead);
           }
+          
         },
         (error) => {
           console.log(error);
