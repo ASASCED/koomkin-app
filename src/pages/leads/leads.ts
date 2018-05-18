@@ -47,6 +47,7 @@ export class LeadsPage implements OnInit {
             this.leads[k].FECHA = this.leads[k].FECHA.substring(0, 10).replace(/^(\d{4})-(\d{2})-(\d{2})$/g, '$3/$2/$1');
             this.leads[k].NOMBRE = this.leads[k].NOMBRE.substring(0, 16);
             this.leads[k].EMPRESA = this.leads[k].EMPRESA.substring(0, 35);
+
             if(this.leads[k].calificaLead == 'True'){
               this.leads[k].calificaLead = "like";
             }else if(this.leads[k].calificaLead == 'False'){
@@ -63,10 +64,9 @@ export class LeadsPage implements OnInit {
             }else if(this.leads[k].clasificaLead == 'Sin Contacto'){
               this.leads[k].clasificaLead = "S";
             } else{
-              this.leads[k].calificaLead = "banda";
+              this.leads[k].clasificaLead = "banda";
             }
           }
-          console.log(this.leads);
         },
         (error) => {
           console.log(error);

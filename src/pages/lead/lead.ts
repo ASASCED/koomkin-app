@@ -21,6 +21,7 @@ export class LeadPage implements OnInit {
   public califica;
   public calificacion;
   public uuid;
+ 
 
   page: string = "Lead";
   isAndroid: boolean = false;
@@ -64,22 +65,22 @@ export class LeadPage implements OnInit {
   public changeClassification(classification: string) {
     switch (classification) {
       case 'V': {
-        this.leadActual.clasificaLead = 'Vendido';
+        this.leadActual.clasificaLead = 'V';
         this.clasifica = 'Vendido';
         break;
       }
       case 'D': {
-        this.leadActual.clasificaLead = 'Descartado';
+        this.leadActual.clasificaLead = 'D';
         this.clasifica = 'Descartado'
         break;
       }
       case 'P': {
-        this.leadActual.clasificaLead = 'En proceso de venta';
+        this.leadActual.clasificaLead = 'P';
         this.clasifica = 'En proceso de venta'
         break;
       }
       case 'C': {
-        this.leadActual.clasificaLead = 'Sin Contacto';
+        this.leadActual.clasificaLead = 'S';
         this.clasifica = 'Sin Contacto'
         break;
       }
@@ -103,42 +104,6 @@ export class LeadPage implements OnInit {
 
   }
 
-  public ColorV(calification: string) {
-    calification = this.clasificacion;
-    if (calification === 'Vendido') {
-      return '#00bcaa';
-    } else {
-      return '#d1d1d1';
-    }
-  }
-
-  public ColorP(calification: string) {
-    calification = this.clasificacion;
-    if (calification === 'En proceso de venta') {
-      return '#6B4595';
-    } else {
-      return '#d1d1d1';
-    }
-  }
-
-  public ColorC(calification: string) {
-    calification = this.clasificacion;
-    if (calification === 'Sin Contacto') {
-      return '#419BD6';
-    } else {
-      return '#d1d1d1';
-    }
-  }
-
-  public ColorD(calification: string) {
-    calification = this.clasificacion;
-    if (calification === 'Descartado') {
-      return '#F2631C';
-    } else {
-      return '#d1d1d1';
-    }
-  }
-
   public callingLead(uuid) {
     console.log(this.uuid);
     this.http.get(this.CALLING + this.uuid).subscribe(data => {
@@ -146,35 +111,39 @@ export class LeadPage implements OnInit {
     });
   }
 
-  public changeLike(classification: string) {
+  public changeLike(classification: string, lead) {
     switch (classification) {
       case 'L': {
         this.leadActual.calificaLead = 'true';
         this.califica = 'l';
+        this.leadActual.calificaLead = 'like';
         break;
       }
       case 'DL': {
         this.leadActual.calificaLead = 'false';
         this.califica = 'd';
+        this.leadActual.calificaLead = 'dislike';
         break;
       }
       default:
         this.califica = null;
+        lead.calificaLead = 'vacio'
     }
-    
+
     const body = {
-      clave: this.leadActual.clave,
+      clave: this.leadActual.clave,      
       classification: this.califica
     }
-    this.http.get(this.apiUrl + "/calificaLead/" + body.clave + '/' + body.classification)
+    this.http.get(this.apiUrl + "/calificaLead/" +  body.clave + '/' + body.classification)
       .subscribe(data => {
         this.calificacion = data[0].calificaLead;
         console.log(this.calificacion);
       },
-      err => {
-        console.log("Error occured");
-      });
+        err => {
+          console.log("Error occured");
+        });
 
   }
+
   
 }
