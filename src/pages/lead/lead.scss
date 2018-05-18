@@ -218,16 +218,56 @@
     margin-bottom: .4em;
     color: white;
   }
+
+  .vendido{
+    width: 48%;
+    border-radius: 8px;
+    font-size: 3.2vw;
+    padding: 4%;
+    margin-bottom: .4em;
+    color: white;
+    background-color: #00b9bf !important
+  }
+  .proceso{
+    width: 48%;
+    border-radius: 8px;
+    font-size: 3.2vw;
+    padding: 4%;
+    margin-bottom: .4em;
+    color: white;
+    background-color: #6B4595 !important
+  }
+  .descartado{
+    width: 48%;
+    border-radius: 8px;
+    font-size: 3.2vw;
+    padding: 4%;
+    margin-bottom: .4em;
+    color: white;
+    background-color: #F2631C  !important
+  }
+
+  .sincontacto{
+    width: 48%;
+    border-radius: 8px;
+    font-size: 3.2vw;
+    padding: 4%;
+    margin-bottom: .4em;
+    color: white;
+    background-color: #419BD6 !important
+  }
+  
   //
-  .evaluado{
+  .like{
     color: #00b9bf;
-    font-size: 4em;
-    margin-right: .2em;
   }
   //
-  .noevaluado{
-    color: #d0d0d0;
-    font-size: 4em;
+  .dislike{
+    color: #d0d0d0 !important;
+  }
+  //
+  .sin{
+    color: #d0d0d0 !important;
   }
   //
   .llamar {
