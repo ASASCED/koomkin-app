@@ -18,11 +18,12 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(express.static(path.join(__dirname, '')));
 
-app.use(function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+app.use(function (req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
     next();
-  });
+});
 
 app.get('/', function (req, res, next) {
     res.sendFile('index.html', { root: __dirname });
@@ -235,11 +236,11 @@ app.get('/verificarPopup', function (req, res) {
 app.get('/calificaLead/:clave/:classification', function (req, res) {
     /* console.log('pinche putita', req);
     const body = _.pick(req.body, 'clave', 'classification'); */
-    
+
     const command = 'SP_CalificaLead';
     const classification = req.params.classification;
     const clave = req.params.clave
-    
+
     db.executeModifyLead(clave, classification, command, function (err, rows) {
         if (err) {
             res.status(500).json({ error: err }).send();
@@ -252,11 +253,11 @@ app.get('/calificaLead/:clave/:classification', function (req, res) {
 app.get('/clasificaLead/:clave/:classification', function (req, res) {
     /* console.log('pinche putita', req);
     const body = _.pick(req.body, 'clave', 'classification'); */
-    
+
     const command = 'SP_ClasificaLead';
     const classification = req.params.classification;
     const clave = req.params.clave
-    
+
     db.executeModifyLead(clave, classification, command, function (err, rows) {
         if (err) {
             res.status(500).json({ error: err }).send();
@@ -267,7 +268,7 @@ app.get('/clasificaLead/:clave/:classification', function (req, res) {
 });
 //POST methods
 
-app.post('/leerLead/:leadId/:userId', function (req, res) {
+app.get('/leerLead/:leadId/:userId', function (req, res) {
 
     db.executeLeerLead(req.params.leadId, req.params.userId, function (err, rows) {
         if (err) {

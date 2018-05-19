@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 import { RestProvider } from '../../providers/rest/rest';
 import { LeadPage } from '../lead/lead';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 
 @IonicPage()
@@ -42,39 +42,40 @@ export class LeadsPage implements OnInit {
       .then(
         (data) => {
           this.leads = data;
-          //console.log(this.leads);
+          console.log(this.leads);
           for (let k in this.leads) {
             this.leads[k].FECHA = this.leads[k].FECHA.substring(0, 10).replace(/^(\d{4})-(\d{2})-(\d{2})$/g, '$3/$2/$1');
             this.leads[k].NOMBRE = this.leads[k].NOMBRE.substring(0, 16);
-            this.leads[k].EMPRESA = this.leads[k].EMPRESA.substring(0, 35);
-
-            if(this.leads[k].calificaLead == 'True'){
+            this.leads[k].EMPRESA = this.leads[k].EMPRESA.substring(0, 30);
+            if (this.leads[k].calificaLead == 'True') {
               this.leads[k].calificaLead = "like";
-            }else if(this.leads[k].calificaLead == 'False'){
+            } else if (this.leads[k].calificaLead == 'False') {
               this.leads[k].calificaLead = "dislike";
-            } else{
+            } else {
               this.leads[k].calificaLead = "vacio";
             }
-            if(this.leads[k].clasificaLead == 'En proceso de venta'){
+            if (this.leads[k].leido == 'True' || this.leads[k].leido == true) {
+              this.leads[k].leido = "leido";
+            } else
+              this.leads[k].leido = "noleido";
+            if (this.leads[k].clasificaLead == 'En proceso de venta') {
               this.leads[k].clasificaLead = "P";
-            }else if(this.leads[k].clasificaLead == 'Descartado'){
+            } else if (this.leads[k].clasificaLead == 'Descartado') {
               this.leads[k].clasificaLead = "D";
-            }else if(this.leads[k].clasificaLead == 'Vendido'){
+            } else if (this.leads[k].clasificaLead == 'Vendido') {
               this.leads[k].clasificaLead = "V";
-            }else if(this.leads[k].clasificaLead == 'Sin Contacto'){
+            } else if (this.leads[k].clasificaLead == 'Sin Contacto') {
               this.leads[k].clasificaLead = "S";
-            } else{
+            } else {
               this.leads[k].clasificaLead = "banda";
-            }console.log(this.leads[k].NOMBRE,this.leads[k].calificaLead);
+            }
           }
-          
+          //console.log(this.leads);
         },
         (error) => {
           console.log(error);
         });
   }
-
-  
 
   doInfinite(infiniteScroll) {
     console.log('Cargando Leads');
@@ -127,6 +128,14 @@ export class LeadsPage implements OnInit {
 
   verLead(lead) {
     this.navCtrl.push(LeadPage, lead);
+    const url = this.apiUrl + "/leerLead/" + lead.clave + '/' + lead.ID;
+    //console.log(lead.clave,lead.ID);
+    this.http.get(url).subscribe(data => {
+      console.log(data);
+    },
+      err => {
+        console.log("Error occured");
+      });
   }
 
   mostrar_modal() {

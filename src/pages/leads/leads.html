@@ -46,7 +46,7 @@
         </div>
         <ion-list detail-none ion-item *ngFor="let lead of leads; let i = index;" (click)="verLead(lead)" style="border-top: 1.15px solid #d0d1d1;border-bottom: 1.15px solid #d0d1d1;">
           <ion-grid style="padding: 2px;padding-bottom: 3px !important;">
-            <ion-card class="datoslead">
+            <ion-card class="{{lead.leido}}">
               <ion-card-content class="{{lead.clasificaLead}}">
                 <ion-row align-items-center>
                   <ion-col col-8 align-self-center>
@@ -56,7 +56,6 @@
 
                     <div class="tooltip">
                       <ion-icon class="urgente" alt="Urgente" name="ios-alert-outline"></ion-icon>
-                      <span class="tooltiptext"> Urgente</span>
                     </div>
                   </ion-col>
                   <ion-col col-4>
