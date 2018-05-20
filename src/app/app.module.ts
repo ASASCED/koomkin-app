@@ -3,6 +3,9 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpModule } from '@angular/http';
+import { NativeAudio } from '@ionic-native/native-audio';
+import { StreamingMedia } from '@ionic-native/streaming-media';
+
 
 import { MyApp } from './app.component';
 import { ReportePageModule } from '../pages/reporte/reporte.module'
@@ -68,6 +71,8 @@ import { AuthServiceProvider } from '../providers/auth-service/auth-service';
     SplashScreen,
     RestProvider,
     AuthServiceProvider,
+    NativeAudio,
+    StreamingMedia,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

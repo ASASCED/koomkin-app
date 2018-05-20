@@ -120,6 +120,10 @@
     <ion-list *ngSwitchCase="'Llamadas'">
       <ion-item>
         <h2>Llamada 1</h2>
+        <ion-content padding>
+          <button ion-button (click)="startAudio()">Start Audio</button>
+          <button ion-button (click)="stopAudio()" color="danger">Stop Audio</button>
+        </ion-content>
       </ion-item>
       <ion-item>
         <h2>Llamada 2</h2>
