@@ -331,3 +331,16 @@ input {
   cursor: pointer;
   background-color: transparent;
 }
+
+.badge-md,.badge-ios{
+  position: absolute;
+  top: -2px;
+  left: 25px;
+  border-radius: 10px;
+  color: #fff;
+  background-color: red;
+  font-size: 3vw;
+  padding: 3px;
+  border: transparent;
+  vertical-align: middle;
+}

@@ -21,7 +21,7 @@ export class LeadPage implements OnInit {
   public califica;
   public calificacion;
   public uuid;
- 
+  public noleidos;
 
   page: string = "Lead";
   isAndroid: boolean = false;
@@ -144,6 +144,5 @@ export class LeadPage implements OnInit {
         });
 
   }
-
   
 }

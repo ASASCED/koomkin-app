@@ -15,7 +15,6 @@ export class AuthServiceProvider {
   constructor(public http: HttpClient) {
   }
 
-  apiUrlp = 'http://187.162.208.218:5000/misc/decrypt2?pass=';
   apiUrl = 'http://localhost:3000';
 
   getUserByEmail(email) {
@@ -23,13 +22,14 @@ export class AuthServiceProvider {
       this.http.get(this.apiUrl + '/getUserByEmail/' + email).subscribe(data => {
         resolve(data);
         this.info = data;
-       // console.log(this.info);
         if (this.info.length > 0) {
           this.contrasena = this.info[0].PASSWORD2;
           this.id = this.info[0].IDUSUARIO;
           this.empresa = this.info[0].NOMEMPRESACOMPRADOR
           //console.log(this.contrasena);
         }
+        //console.log(this.id,this.empresa);
+
       }, err => {
         console.log(err);
       });

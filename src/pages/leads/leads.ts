@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 import { RestProvider } from '../../providers/rest/rest';
 import { LeadPage } from '../lead/lead';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 
 
 @IonicPage()
@@ -13,18 +13,15 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 export class LeadsPage implements OnInit {
 
-  items: any = [];
-  itemExpandHeight: number = 200;
   leads;
   page = 1;
-  user;
   selectedLike;
   public califica;
   public calificacion;
   public clave;
-
+  public noleidos;
+  public id = '';
   apiUrl = 'http://localhost:3000';
-
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -35,6 +32,7 @@ export class LeadsPage implements OnInit {
 
   ngOnInit() {
     this.getLeadsReport();
+    this.checkNoleidos();
   }
 
   public getLeadsReport() {
@@ -42,7 +40,7 @@ export class LeadsPage implements OnInit {
       .then(
         (data) => {
           this.leads = data;
-          console.log(this.leads);
+          this.id = this.leads[0].ID;
           for (let k in this.leads) {
             this.leads[k].FECHA = this.leads[k].FECHA.substring(0, 10).replace(/^(\d{4})-(\d{2})-(\d{2})$/g, '$3/$2/$1');
             this.leads[k].NOMBRE = this.leads[k].NOMBRE.substring(0, 16);
@@ -70,7 +68,8 @@ export class LeadsPage implements OnInit {
               this.leads[k].clasificaLead = "banda";
             }
           }
-          //console.log(this.leads);
+          this.checkNoleidos();
+          console.log(this.leads);
         },
         (error) => {
           console.log(error);
@@ -81,9 +80,6 @@ export class LeadsPage implements OnInit {
     console.log('Cargando Leads');
 
     setTimeout(() => {
-      for (let i = 0; i < 30; i++) {
-        this.items.push(this.items.length);
-      }
       console.log('Se acabaron de cargar los Leads');
       infiniteScroll.complete();
     }, 500);
@@ -120,7 +116,6 @@ export class LeadsPage implements OnInit {
         err => {
           console.log("Error occured");
         });
-
   }
 
   ionViewDidLoad() {
@@ -128,13 +123,18 @@ export class LeadsPage implements OnInit {
 
   verLead(lead) {
     this.navCtrl.push(LeadPage, lead);
+  }
+
+  public changeLeido(lead) {
     const url = this.apiUrl + "/leerLead/" + lead.clave + '/' + lead.ID;
-    //console.log(lead.clave,lead.ID);
     this.http.get(url).subscribe(data => {
-      console.log(data);
+      this.noleidos = data[0].NoLeidos;
+      if (this.noleidos > 99) {
+        this.noleidos = "99+";
+      }
     },
       err => {
-        console.log("Error occured");
+        //console.log("Error occured");
       });
   }
 
@@ -143,4 +143,16 @@ export class LeadsPage implements OnInit {
     modal.present();
   }
 
+  public checkNoleidos() {
+    const url = this.apiUrl + '/leerLead/0/' + this.id;
+    this.http.get(url).subscribe(data => {
+      this.noleidos = data[0].NoLeidos;
+      if (this.noleidos > 99) {
+        this.noleidos = "99+";
+      }
+    },
+      err => {
+        //console.log("Error occured");
+      });
+  }
 }

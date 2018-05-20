@@ -2,9 +2,10 @@
   <ion-navbar color="azul">
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
+      <ion-badge>{{noleidos}}</ion-badge>
     </button>
     <ion-title>Nombre de la empresa: AGO Consultores
-      <br>ID Cliente: 2</ion-title>
+      <br>ID Cliente: {{id}}</ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -35,7 +36,7 @@
             <ion-label style="margin-left: .5em;">Filtrar por:</ion-label>
             <ion-select [(ngModel)]="filtro" interface="action-sheet">
               <ion-option value="Todos" selected>Todos los recibidos</ion-option>
-              <ion-option value="Leidos">Leidos</ion-option>
+              <ion-option *ngFor="let employee of employees" [value]="employee" value="Leidos">Leidos</ion-option>
               <ion-option value="NoLeidos">No Leidos</ion-option>
               <ion-option value="Vendido">Vendido</ion-option>
               <ion-option value="proceso">En proceso de venta</ion-option>
@@ -44,16 +45,15 @@
             </ion-select>
           </ion-item>
         </div>
-        <ion-list detail-none ion-item *ngFor="let lead of leads; let i = index;" (click)="verLead(lead)" style="border-top: 1.15px solid #d0d1d1;border-bottom: 1.15px solid #d0d1d1;">
+        <ion-list detail-none ion-item *ngFor="let lead of leads; let i = index;" (click)="verLead(lead);changeLeido(lead);" style="border-top: 1.15px solid #d0d1d1;border-bottom: 1.15px solid #d0d1d1;">
           <ion-grid style="padding: 2px;padding-bottom: 3px !important;">
-            <ion-card class="{{lead.leido}}">
+            <ion-card [ngClass]="{'leido':lead.leido === 'leido','noleido':lead.leido === 'noleido'}">
               <ion-card-content class="{{lead.clasificaLead}}">
                 <ion-row align-items-center>
                   <ion-col col-8 align-self-center>
                     <a class="inf-nombre">
                       <strong>{{lead.NOMBRE}} </strong>
                     </a>
-
                     <div class="tooltip">
                       <ion-icon class="urgente" alt="Urgente" name="ios-alert-outline"></ion-icon>
                     </div>

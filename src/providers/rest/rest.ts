@@ -158,7 +158,7 @@ export class RestProvider {
   getLeadsReport() { 
     //console.log(this.date);
     return new Promise(resolve => {
-      let currentDate = new Date();
+    let currentDate = new Date();
     let twoDigitMonth=((currentDate.getMonth()+1)>=10)? (currentDate.getMonth()+1) : '0' + (currentDate.getMonth()+1);  
     let twoDigitDate=((currentDate.getDate())>=10)? (currentDate.getDate()) : '0' + (currentDate.getDate());
     let DigitYear=(currentDate.getFullYear() - 1);
