@@ -88,6 +88,25 @@ db.executeGetSpByDate = function (id, finicio, ffin, filtro, command, callback) 
     });
 }
 
+db.executeGetLeadsPagination = function (id, finicio, ffin, filtro, command, min, max) {
+
+    const requestStr = `exec ${command} ${ffin}, ${finicio}, ${id}, '${filtro}', ${min}, ${max}`;
+
+    console.log(requestStr);
+
+    return new Promise((resolve, reject) => {
+        tp.sql(requestStr)
+            .execute()
+            .then(results => {
+                resolve(results);
+            })
+            .fail(err => {
+                console.log(err);
+                reject(err);
+            });
+    });
+};
+
 db.executeModifyLead = function (clave, classification, command, callback) {
     var connection = new Connection(config);
     var result = [];

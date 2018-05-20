@@ -165,7 +165,7 @@ export class RestProvider {
 
     this.datefin = currentDate.getFullYear() + "-" + twoDigitMonth + "-" + twoDigitDate;
     this.date = DigitYear + "-" + twoDigitMonth + "-" + twoDigitDate;
-      this.http.get(this.apiUrl + '/getLeadsReport/' + this.user + '/' + this.date + '/'+ this.datefin +'/Todos_los_recibidos').subscribe(data => {
+      this.http.get(this.apiUrl + '/getLeadsReport/' + this.user + '/' + this.date + '/' + this.datefin + '/Todos_los_recibidos').subscribe(data => {
         resolve(data);
         //console.log(data);
       }, err => {

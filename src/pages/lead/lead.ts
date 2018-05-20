@@ -14,13 +14,13 @@ export class LeadPage implements OnInit {
   apiUrl = 'http://localhost:3000';
 
   CALLING= 'http://www.koomkin.com:4829/twilio_api/api/v1/forward-app-lead/?idLead=';
+  AUDIO = 'http://www.koomkin.com:4829/twilio_api/api/v1/data-app/0/?idLead='
   apiUrl3 = 'http://189.205.233.70:4829/twilio_api/api/v1/forward-app/?idLead='
   public color = ''
   public clasifica;
   public clasificacion;
   public califica;
   public calificacion;
-  public uuid;
   public noleidos;
 
   page: string = "Lead";
@@ -54,7 +54,17 @@ export class LeadPage implements OnInit {
 
   public getLlamada() {
     return new Promise(resolve => {
-      this.http.get(this.apiUrl3 + '217355').subscribe(data => {
+      this.http.get(this.apiUrl3 + this.leadActual.uuid).subscribe(data => {
+        resolve(data);
+      }, err => {
+        console.log(err);
+      });
+    });
+  }
+
+  public getAudio() {
+    return new Promise(resolve => {
+      this.http.get(this.AUDIO + this.leadActual.uuid).subscribe(data => {
         resolve(data);
       }, err => {
         console.log(err);
@@ -104,9 +114,8 @@ export class LeadPage implements OnInit {
 
   }
 
-  public callingLead(uuid) {
-    console.log(this.uuid);
-    this.http.get(this.CALLING + this.uuid).subscribe(data => {
+  public callingLead() {
+    this.http.get(this.CALLING + this.leadActual.uuid).subscribe(data => {
       console.log('llamando');
     });
   }

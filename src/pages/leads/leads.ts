@@ -76,13 +76,18 @@ export class LeadsPage implements OnInit {
         });
   }
 
-  doInfinite(infiniteScroll) {
-    console.log('Cargando Leads');
+  doInfinite(): Promise<any> {
+    console.log('Begin async operation');
 
-    setTimeout(() => {
-      console.log('Se acabaron de cargar los Leads');
-      infiniteScroll.complete();
-    }, 500);
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        for (var i = 0; i < 30; i++) {
+          this.leads.push( this.leads.length );
+        }
+        console.log('Async operation has ended');
+        resolve();
+      }, 500);
+    })
   }
 
   public changeLike(classification: string, lead) {

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IonicPage, NavController, LoadingController, AlertController } from 'ionic-angular';
+import { MenuController, IonicPage, NavController, LoadingController, AlertController } from 'ionic-angular';
 import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
 import { RestProvider } from '../../providers/rest/rest';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
@@ -45,8 +45,19 @@ export class LoginPage implements OnInit {
     public restService: RestProvider,
     public loadingCtrl: LoadingController,
     private formBuilder: FormBuilder,
-    public alertCtrl: AlertController
-  ) { }
+    public alertCtrl: AlertController, 
+    private menuCtrl: MenuController
+  ) { 
+  }
+
+  ionViewDidEnter() {
+    this.menuCtrl.swipeEnable(false);
+  }
+
+  ionViewWillLeave() {
+    this.menuCtrl.swipeEnable(true);
+   }
+
 
   onValueChanged(data?: any) {
     if (!this.loginForm) { return; }
@@ -129,4 +140,5 @@ export class LoginPage implements OnInit {
     });
     alert.present();
   }
+
 }

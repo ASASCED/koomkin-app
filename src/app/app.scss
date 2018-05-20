@@ -33,6 +33,15 @@
     background: linear-gradient(to right, #3CCDBB, #33a4bc);
 }
 
+.toolbar-title-ios {
+    text-align: left !important;
+    font-size: 3.5vw !important;
+    font-weight: 600;
+    color: black;
+    pointer-events: auto;
+    margin-left: 4% !important;
+}
+
 .header-ios .toolbar-ios:last-child .toolbar-background-ios {
      border-width: 0 0 0; 
 }

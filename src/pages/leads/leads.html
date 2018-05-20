@@ -82,7 +82,7 @@
             </ion-card>
           </ion-grid>
         </ion-list>
-        <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+        <ion-infinite-scroll (ionInfinite)="$event.waitFor(doInfinite())">
           <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Cargando más Leads..."></ion-infinite-scroll-content>
         </ion-infinite-scroll>
       </ion-list>

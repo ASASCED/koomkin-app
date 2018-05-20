@@ -179,7 +179,8 @@ app.get('/getLeadsReport/:id/:finicio/:ffin/:filtro', function (req, res) {
     });
 });
 
-app.get('/getLeadsPages/:id/:finicio/:ffin/:filtro', function (req, res) {
+app.get('/getLeadsReportPagination/:id/:finicio/:ffin/:filtro/:min/:max', function (req, res) {
+
 
     var urlArray = req.url.split('/');
     var id = urlArray[2];
@@ -187,15 +188,27 @@ app.get('/getLeadsPages/:id/:finicio/:ffin/:filtro', function (req, res) {
     var ffin = "'" + urlArray[4] + "'";
     var filtroTemp = urlArray[5];
     var filtro = filtroTemp.split('_').join(' ');
-    var command = 'SP_RPT_LeadPages';
+    const min = urlArray[6];
+    const max = urlArray[7];
+    const command = 'SP_RPT_LeadsPagination';
+    /*const id = req.params.id;
+    const finicio = '' + req.params.finicio;
+    const ffin = '' + req.params.ffin;
+    const filtro = req.params.filter;
+    const min = req.params.min;
+    const max = req.params.max;
+    const command = 'SP_RPT_LeadsPagination';*/
 
-    db.executeGetSpByDate(id, finicio, ffin, filtro, command, function (err, rows) {
-        if (err) {
-            res.status(500).json({ error: err }).send();
-        } else {
+    db.executeGetLeadsPagination(id, finicio, ffin, filtro, command, min, max)
+        .then(rows => {
             res.json(rows);
-        }
-    });
+            res.status(200);
+        }, (err) => {
+            res.status(500).json({error: err}).send();
+        })
+        .catch(err => {
+            res.status(500).json({error: err}).send();
+        });
 });
 
 app.get('/facebook', function (req, res) {
