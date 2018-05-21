@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { RestProvider } from './../../providers/rest/rest';
+import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
 
 @IonicPage({ name: 'reporte', segment: 'reporte-1/:param' })
 @Component({
@@ -50,7 +51,8 @@ export class ReportePage implements OnInit {
   public hombre;
   public mujer;
   public datagraph: any;
-
+  public empresa;
+  public id;
   //función de la primera gráfica
   public columnChartData = {
     chartType: 'ColumnChart',
@@ -124,7 +126,10 @@ export class ReportePage implements OnInit {
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
-    public provedor: RestProvider) {
+    public provedor: RestProvider,
+    public authService: AuthServiceProvider) {
+      this.empresa = this.authService.empresa;
+      this.id = this.authService.id;
   }
 
   ngOnInit() {
@@ -139,6 +144,7 @@ export class ReportePage implements OnInit {
     this.getLeadsReport();
     this.getLikeDias();
     this.getCostoCampania()
+    
   }
 
   //Llena la grafica de columnas (primer grafico)
@@ -546,7 +552,7 @@ export class ReportePage implements OnInit {
       .then(
         (data) => {
           this.costo = data;
-          console.log(this.costo);
+          //console.log(this.costo);
           this.monto = this.costo[0].monto;
           this.diasPagados = this.costo[0].DiasPagados;
           this.diasRegalados = this.costo[0].DiasRegalados;

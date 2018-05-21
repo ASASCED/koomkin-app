@@ -3,7 +3,7 @@ import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angu
 import { RestProvider } from '../../providers/rest/rest';
 import { LeadPage } from '../lead/lead';
 import { HttpClient } from '@angular/common/http';
-
+import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
 
 @IonicPage()
 @Component({
@@ -13,26 +13,30 @@ import { HttpClient } from '@angular/common/http';
 
 export class LeadsPage implements OnInit {
 
-  leads;
+  leads:any = [];
+  leadsfiltro;
   page = 1;
   selectedLike;
   public califica;
   public calificacion;
   public clave;
   public noleidos;
-  public id = '';
+  public id;
+  public empresa;
   apiUrl = 'http://localhost:3000';
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public provedor: RestProvider,
     public modalCtrl: ModalController,
-    public http: HttpClient) {
+    public http: HttpClient,    
+    public authService: AuthServiceProvider) {
+      this.empresa = this.authService.empresa;
+      this.id = this.authService.id;
   }
 
   ngOnInit() {
     this.getLeadsReport();
-    this.checkNoleidos();
   }
 
   public getLeadsReport() {
@@ -40,7 +44,7 @@ export class LeadsPage implements OnInit {
       .then(
         (data) => {
           this.leads = data;
-          this.id = this.leads[0].ID;
+          this.leadsfiltro = this.leads;
           for (let k in this.leads) {
             this.leads[k].FECHA = this.leads[k].FECHA.substring(0, 10).replace(/^(\d{4})-(\d{2})-(\d{2})$/g, '$3/$2/$1');
             this.leads[k].NOMBRE = this.leads[k].NOMBRE.substring(0, 16);
@@ -69,7 +73,7 @@ export class LeadsPage implements OnInit {
             }
           }
           this.checkNoleidos();
-          console.log(this.leads);
+          console.log(this.leadsfiltro);
         },
         (error) => {
           console.log(error);
@@ -81,9 +85,9 @@ export class LeadsPage implements OnInit {
 
     return new Promise((resolve) => {
       setTimeout(() => {
-        for (var i = 0; i < 30; i++) {
+       /* for (var i = 0; i < 10; i++) {
           this.leads.push( this.leads.length );
-        }
+        }*/
         console.log('Async operation has ended');
         resolve();
       }, 500);
@@ -112,11 +116,11 @@ export class LeadsPage implements OnInit {
     const body = {
       classification: this.califica
     }
-    console.log(lead.clave);
+    //console.log(lead.clave);
     this.http.get(this.apiUrl + "/calificaLead/" + lead.clave + '/' + body.classification)
       .subscribe(data => {
         this.calificacion = data[0].calificaLead;
-        console.log(this.calificacion);
+        //console.log(this.calificacion);
       },
         err => {
           console.log("Error occured");
@@ -131,12 +135,14 @@ export class LeadsPage implements OnInit {
   }
 
   public changeLeido(lead) {
+    //console.log(lead);
     const url = this.apiUrl + "/leerLead/" + lead.clave + '/' + lead.ID;
     this.http.get(url).subscribe(data => {
       this.noleidos = data[0].NoLeidos;
       if (this.noleidos > 99) {
         this.noleidos = "99+";
       }
+      lead.leido = "leido";
     },
       err => {
         //console.log("Error occured");

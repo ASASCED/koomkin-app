@@ -182,22 +182,13 @@ app.get('/getLeadsReport/:id/:finicio/:ffin/:filtro', function (req, res) {
 app.get('/getLeadsReportPagination/:id/:finicio/:ffin/:filtro/:min/:max', function (req, res) {
 
 
-    var urlArray = req.url.split('/');
-    var id = urlArray[2];
-    var finicio = "'" + urlArray[3] + "'";
-    var ffin = "'" + urlArray[4] + "'";
-    var filtroTemp = urlArray[5];
-    var filtro = filtroTemp.split('_').join(' ');
-    const min = urlArray[6];
-    const max = urlArray[7];
-    const command = 'SP_RPT_LeadsPagination';
-    /*const id = req.params.id;
+    const id = req.params.id;
     const finicio = '' + req.params.finicio;
     const ffin = '' + req.params.ffin;
-    const filtro = req.params.filter;
+    const filtro = req.params.filtro;
     const min = req.params.min;
     const max = req.params.max;
-    const command = 'SP_RPT_LeadsPagination';*/
+    const command = 'SP_RPT_LeadsPagination';
 
     db.executeGetLeadsPagination(id, finicio, ffin, filtro, command, min, max)
         .then(rows => {
