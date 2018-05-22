@@ -3,7 +3,7 @@
     <name>Koomkin</name>
     <description>Te presentamos el canal de Ventas Nº1 para empresas en México.</description>
     <author email="dlvalle@koomkin.com" href="http://koomkin.com.mx/">Koomkin</author>
-    <content src="index.html" />
+    <content original-src="index.html" src="http://192.168.0.171:8100" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
@@ -83,6 +83,6 @@
     <plugin name="cordova-plugin-ionic-keyboard" spec="2.0.5" />
     <plugin name="cordova-plugin-nativeaudio" spec="^3.0.9" />
     <plugin name="com.hutchind.cordova.plugins.streamingmedia" spec="~0.1.4" />
-    <engine name="android" spec="~7.0.0" />
     <allow-navigation href="http://192.168.0.171:8100" />
+    <engine name="android" spec="7.0.0" />
 </widget>
