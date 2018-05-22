@@ -7,8 +7,12 @@ const bodyParser = require('body-parser');
 const db = require('./db.js');
 const _ = require('underscore');
 
-var app = express();
+var app = express()
 
+if ('development' == app.get('env')) {
+    console.log("Rejecting node tls");
+    process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
+}
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 //app.use(logger('dev'));
