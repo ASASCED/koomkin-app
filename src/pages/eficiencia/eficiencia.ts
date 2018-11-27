@@ -27,16 +27,16 @@ export class EficienciaPage implements OnInit {
   public thirtyprogress = "0";
   public hola: number = 0;
   public idcuarta;
-  clientes: number = 0;
-  clientes2: number = 0;
+  clientes;
+  clientes2;
   clientesrep: number = 0;
   clientes2rep: number = 0;
 
   public empresa;
   public id;
   public clientUUID = this.authService.getClientUUID();
-  public empresa_tiempo = "N/A";
-  public empresas_tiempo = "N/A";
+  public empresa_tiempo;
+  public empresas_tiempo;
   public empresa_atendidos = "N/A";
   public empresas_atendidos = "N/A";
   public empresa_acciones = "N/A";
@@ -242,18 +242,20 @@ export class EficienciaPage implements OnInit {
           this.top = JSON.stringify(this.datos[0].top * 100) + "%";
           this.posicion = "#" + JSON.stringify(this.datos[0].Lugar);
 
-          this.clientes = this.datos[0].avg_HorasAtencion_5.toFixed();
-          this.clientes2 = this.datos[0].avg_HorasAtencionTotal.toFixed();
+          this.clientesrep = this.datos[0].avg_HorasAtencion_5 * 60;
+          this.clientes2rep = this.datos[0].avg_HorasAtencionTotal * 60;
 
-          this.clientesrep = this.datos[0].avg_HorasAtencion_5.toFixed();
-          this.clientes2rep = this.datos[0].avg_HorasAtencionTotal.toFixed();
+          this.clientes = this.clientesrep.toFixed();
+          this.clientes2 = this.clientes2rep.toFixed();
+          console.log(this.clientes,this.clientes2);
 
           this.fiveprogress = JSON.stringify(this.datos[0].pAtendidos_5 * 100);
           this.thirtyprogress = JSON.stringify(
             this.datos[0].pAtendidos_2hrs * 100
           );
 
-          this.empresa_tiempo = this.datos[0].avg_HorasAtencion.toFixed();
+          this.empresa_tiempo = this.datos[0].avg_HorasAtencion * 60;
+          this.empresa_tiempo = this.empresa_tiempo.toFixed()
           this.empresa_atendidos =
             JSON.stringify(this.datos[0].pAtendidos.toFixed(2) * 100) + "%";
           this.empresa_acciones =
@@ -294,11 +296,10 @@ export class EficienciaPage implements OnInit {
         this.datos = data;
         if (this.datos.length > 0) {
        //    console.log(this.datos);
-          this.empresas_tiempo = this.datos[0].avg_HorasAtencion.toFixed();
-          this.empresas_atendidos =
-            JSON.stringify(this.datos[0].pAtendidos.toFixed(2) * 100) + "%";
-          this.empresas_acciones =
-            JSON.stringify(this.datos[0].pContestaAccionesK.toFixed(2) * 100) +
+          this.empresas_tiempo = this.datos[0].avg_HorasAtencion * 60;
+          this.empresas_tiempo = this.empresas_tiempo.toFixed()
+          this.empresas_atendidos = JSON.stringify(this.datos[0].pAtendidos.toFixed(2) * 100) + "%";
+          this.empresas_acciones = JSON.stringify(this.datos[0].pContestaAccionesK.toFixed(2) * 100) +
             "%";
           this.cempresas_atendidos = this.datos[0].pAtendidos.toFixed(2) * 100;
           this.cempresas_acciones =

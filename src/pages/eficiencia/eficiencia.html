@@ -380,13 +380,13 @@
                                     <hr style="background-color:rgba(112,112,112,0.3); width:94%;height: 1px;margin-top: 0;margin-bottom: 0; ">
                                 </div>
                                 <div class="section2-leads">
-                                    <img *ngIf="clientes > 0 && clientes2  > 0 && clientes < 120 && clientes2  < 120 " src="assets/imgs/eficiencia/feliz.svg " style="width: 80%;margin-left: 10%; " />
+                                    <img *ngIf="clientes > 0 && clientes2  > 0 && clientes <= 120 && clientes2  <= 120 " src="assets/imgs/eficiencia/feliz.svg " style="width: 80%;margin-left: 10%; " />
                                     <img *ngIf="clientes > 120 && clientes2  > 120 " src="assets/imgs/eficiencia/triste.svg " style="width: 80%;margin-left: 10%; " />
-                                    <img *ngIf="clientes == 0 && clientes2 == 0 " src="assets/imgs/eficiencia/neutral.svg " style="width: 80%;margin-left: 10%; " />
+                                    <img *ngIf="clientes == 0 && clientes2 == 0 || clientes <= 120 && clientes2 > 120  || clientes > 120 && clientes2 <= 120" src="assets/imgs/eficiencia/neutral.svg " style="width: 80%;margin-left: 10%; " />
                                 </div>
                                 <div class="section3-leads">
                                     <ion-list>
-                                        <ion-item *ngIf="clientes < 120">
+                                        <ion-item *ngIf="clientes <= 120">
                                             <ion-range class="azul" debounce="10" step="1" min="0" max="120" [(ngModel)]="clientes" color="barra" pin="true" disabled>
                                                 <ion-label range-left>
                                                     < 1min </ion-label>
@@ -409,7 +409,7 @@
                                 </div>
                                 <div class="section5-leads">
                                     <ion-list>
-                                        <ion-item *ngIf="clientes2 < 120">
+                                        <ion-item *ngIf="clientes2 <= 120">
                                             <ion-range class="azul" step="1" min="0" max="120" [(ngModel)]="clientes2" color="barra" pin="true" disabled>
                                                 <ion-label range-left>
                                                     < 1min </ion-label>
