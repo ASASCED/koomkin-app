@@ -1,0 +1,56 @@
+<ion-header>
+    <ion-navbar color="azul">
+        <div style="text-align: center">
+            <img src="assets/imgs/login/logo_koomkin.svg" width="45%" />
+        </div>
+    </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+    <ion-grid padding>
+        <ion-row>
+            <ion-col justify-content-center align-items-center (click)="pagina(leads)">
+                <div class="grande">
+                    <img style="margin-top: 7%;" src="assets/imgs/inicio/leads.svg" width="20%" />
+                    <br>
+                    <span>Leads o Clientes Potenciales</span>
+                </div>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col (click)="pagina(reporte)">
+                <div class="grande dos">
+                    <img style="margin-top: 7%;" src="assets/imgs/inicio/reporte.svg" width="20%" />
+                    <br>
+                    <span>Reporte</span>
+                </div>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col (click)="pagina(eficiencia)">
+                <div class="grande tres">
+                    <img style="margin-top: 7%;" src="assets/imgs/inicio/eficiencia.svg" width="20%" />
+                    <br>
+                    <span>Eficiencia Comercial</span>
+                </div>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col (click)="pagina(datos)">
+                <div class="grande">
+                    <img style="margin-top: 7%;" src="assets/imgs/inicio/ajustes.svg" width="20%" />
+                    <br>
+                    <span>Configuración</span>
+                </div>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>
+
+<ion-footer>
+    <div class="footer">
+        <div class="left"></div>
+        <div class="right"></div>
+    </div>
+</ion-footer>

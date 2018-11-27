@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component,Input,OnInit } from '@angular/core';
 
 /**
  * Generated class for the ProveedorComponent component.
@@ -10,13 +10,24 @@ import { Component } from '@angular/core';
   selector: 'proveedor',
   templateUrl: 'proveedor.html'
 })
-export class ProveedorComponent {
+export class ProveedorComponent implements OnInit{
+  @Input() frecuenciaproveedor;
+  @Input() usoproveedor;
+  @Input() mensajeproveedor;
+  @Input() mensaje;
+  @Input() unidadesproveedor;
+  @Input() cantidadproveedor;
+  @Input() envioproveedor;
+  @Input() urgenciaproveedor;
 
   text: string;
 
   constructor() {
-    console.log('Hello ProveedorComponent Component');
-    this.text = 'Hello World';
+    // console.log('Proveedor');
+  }
+
+  ngOnInit(){
+    // console.log(this.usoproveedor,typeof(this.usoproveedor));
   }
 
 }

@@ -1,181 +1,214 @@
-.cuadro{
+.cuadro {
     width: 100%;
     height: 100%;
-  }
-  .cuadro1{
-    width: 37%;
-    height: 50%;  
-    display:inline-block;  
-    margin-left: 2%; 
-    margin-top: 1%; 
-  }
-  .cuadro2{
-    width: 58%;
-    height: 50%; 
-    display:inline-block;   
-    margin-top: 1%; 
-    float: right;
-    margin-right: 2%; 
-  }
-  .cuadro3{
-    width: 100%;
-    height: 100%;
-  }
+}
 
-  .edit{
+.cuadro1 {
+    width: 37%;
+    height: 50%;
+    display: inline-block;
+    margin-left: 2%;
+    margin-top: 1%;
+}
+
+.cuadro2 {
+    width: 58%;
+    height: 50%;
+    display: inline-block;
+    margin-top: 1%;
+    float: right;
+    margin-right: 2%;
+}
+
+.cuadro3 {
+    width: 100%;
+    height: 100%;
+}
+
+.edit {
     background: #10cebc;
     border: transparent;
     font-size: 20px;
     text-align: center;
     color: white;
-    border-radius: 10px; 
+    border-radius: 10px;
     cursor: pointer;
-  }
-  .folio{
+}
+
+.folio {
     margin-top: 0px;
     color: #f26432;
     font-size: 20px;
-  }
-  .mensual{
+}
+
+.mensual {
     color: #a2a2a2;
     font-size: 17px;
-  }
-  .facturas{
+}
+
+.facturas {
     color: #00ade7;
     font-size: 16px;
     font-style: italic;
     cursor: pointer;
-  }
-  .fecha{
-    color: #10cebc;;
+}
+
+.fecha {
+    color: #10cebc;
+    ;
     font-size: 17px;
-  }
-  .plan{
+}
+
+.plan {
     margin: 0px;
     font-size: 19px;
     color: black;
     text-align: right;
     color: #a2a2a2;
-  }
-  .total{
+}
+
+.total {
     color: #808181;
-  }
-  .cuadrores{
+}
+
+.cuadrores {
     width: 100%;
     height: 100%;
-  }
-  .cuadrores1{
+}
+
+.cuadrores1 {
     width: 40%;
-    display:inline-block;  
-    margin-left: 2%; 
-    margin-top: 1%; 
-  }
-  .cuadrores2{
+    display: inline-block;
+    margin-left: 2%;
+    margin-top: 1%;
+}
+
+.cuadrores2 {
     width: 54%;
-    display:inline-block;   
-    margin-top: 1%; 
+    display: inline-block;
+    margin-top: 1%;
     margin-right: 2%;
-    text-align: right; 
-  }
-  .logo{
+    text-align: right;
+}
+
+.logo {
     width: 100%;
-  }
-  .empresa{
+}
+
+.empresa {
     font-size: 14px;
-  }
-  .fechares{
+}
+
+.fechares {
     color: black;
     font-size: 20px;
     color: #f26432;
     margin-top: 2px;
     margin-bottom: 4px;
-  }
-  .foliores{
+}
+
+.foliores {
     font-size: 20px;
     color: #f26432;
     margin-top: 2px;
     margin-bottom: 4px;
-  }
-  .datos{
+}
+
+.datos {
     text-align: center;
     width: 100%;
     font-size: 18px;
     color: white;
     background: #10cebc;
     border: transparent;
-  }
-  .factura{
+}
+
+.factura {
     font-size: 14px;
-  }
-  .emision{
+}
+
+.emision {
     font-size: 14px;
-  }
-  .receptor{
-    margin:0px;
+}
+
+.receptor {
+    margin: 0px;
     font-size: 13px;
     color: #b2b2b2;
-  }
-  .datosrec{
-    margin:0px;
+}
+
+.datosrec {
+    margin: 0px;
     font-size: 13px;
     color: black;
-  }
-  .texto{
-    margin:1px;
+}
+
+.texto {
+    margin: 1px;
     font-size: 16px;
     color: black;
     margin-left: 1%;
-  }
-  .respuesta{
-    margin:0px;
+}
+
+.respuesta {
+    margin: 0px;
     font-size: 16px;
     color: #10cebc;
     margin-left: 5%;
-  }
-  .receptor2{
-    margin:0px;
+}
+
+.receptor2 {
+    margin: 0px;
     font-size: 16px;
     color: #a1a1a1;
     text-align: right;
-  }
-  .datosrec2{
-    margin:0px;
+}
+
+.datosrec2 {
+    margin: 0px;
     font-size: 16px;
     color: #a1a1a1;
     text-align: right;
-  }
-  table {
+}
+
+table {
     border-collapse: collapse;
-  }
-  td{
+}
+
+td {
     padding-bottom: 3.8%;
-  }
-  .contacto{
+}
+
+.contacto {
     color: #10cebc;
     font-size: 16px;
     margin-bottom: 5%;
-  }
-  iron-icon{
+}
+
+iron-icon {
     color: #126aff;
     height: 20px !important;
     width: 20px !important;
-  }
-  paper-icon-button.descargar{
+}
+
+paper-icon-button.descargar {
     color: #10cebc;
     width: var(--iron-icon-width, 50px);
     height: var(--iron-icon-height, 50px);
-  }
-  paper-icon-button.enviar{
+}
+
+paper-icon-button.enviar {
     color: #10cebc;
     width: var(--iron-icon-width, 50px);
     height: var(--iron-icon-height, 50px);
-  }
-  .tooltip {
+}
+
+.tooltip {
     position: relative;
     display: inline-block;
-  }
+}
 
-  .tooltip .tooltiptext {
+.tooltip .tooltiptext {
     visibility: hidden;
     width: 230px;
     background-color: #126aff;
@@ -188,9 +221,9 @@
     top: 150%;
     left: 50%;
     margin-left: -10px;
-  }
+}
 
-  .tooltip .tooltiptext::after {
+.tooltip .tooltiptext::after {
     content: "";
     position: absolute;
     bottom: 100%;
@@ -199,15 +232,16 @@
     border-width: 5px;
     border-style: solid;
     border-color: transparent transparent #126aff transparent;
-  }
+}
 
-  .tooltip:hover .tooltiptext {
+.tooltip:hover .tooltiptext {
     visibility: visible;
-  }
-  .back-button-icon-ios {
+}
+
+.back-button-icon-ios {
     margin: -1px 0 0;
     display: inherit;
     min-width: 18px;
     font-size: 3.4rem;
     color: black;
-  }
+}

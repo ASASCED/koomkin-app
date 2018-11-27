@@ -1,22 +1,25 @@
-import { Component } from '@angular/core';
+import { Component,Input, OnInit } from '@angular/core';
 
-/**
- * Generated class for the InmobiliariaComponent component.
- *
- * See https://angular.io/api/core/Component for more info on Angular
- * Components.
- */
 @Component({
   selector: 'inmobiliaria',
   templateUrl: 'inmobiliaria.html'
 })
-export class InmobiliariaComponent {
+export class InmobiliariaComponent implements OnInit{
+  @Input() mensajeinmobiliaria: any;
+  @Input() personasinmobiliaria: any;
+  @Input() edadinmobiliaria: any;
+  @Input() fechaCitainmobiliaria: any;
+  @Input() horaCitainmobiliaria: any;
+  @Input() urgenciainmobiliaria: any;
 
   text: string;
 
   constructor() {
-    console.log('Hello InmobiliariaComponent Component');
-    this.text = 'Hello World';
+    // console.log('inmobiliaria');
+  }
+
+  ngOnInit(): void {
+
   }
 
 }

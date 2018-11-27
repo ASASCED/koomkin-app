@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component,Input,OnInit } from '@angular/core';
 
 /**
  * Generated class for the PuntoventaComponent component.
@@ -10,13 +10,20 @@ import { Component } from '@angular/core';
   selector: 'puntoventa',
   templateUrl: 'puntoventa.html'
 })
-export class PuntoventaComponent {
+export class PuntoventaComponent implements OnInit{
+  @Input() usoventa: any;
+  @Input() mensajeventa: any;
+  @Input() urgenciaventa: any;
+
 
   text: string;
 
   constructor() {
-    console.log('Hello PuntoventaComponent Component');
-    this.text = 'Hello World';
+    // console.log('Punto de venta');
+  }
+
+  ngOnInit(){
+
   }
 
 }

@@ -1,0 +1,17 @@
+<ion-card (click)="mostrar_modal(notificacion);registrarEntradaBanner();" [style.background]="fondito">
+    <ion-card-content>
+        <ion-grid>
+            <ion-row>
+                <ion-col col-2>
+                    <img src="assets/imgs/banner/{{imagen}}.svg" class="icono_banner" />
+                </ion-col>
+                <ion-col col-10>
+                    <h1 class="titulo">
+                        <strong>{{titulo}}</strong>
+                    </h1>
+                    <h3 class="mensaje">{{mensaje}}</h3>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </ion-card-content>
+</ion-card>

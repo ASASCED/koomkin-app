@@ -7,6 +7,7 @@ import { PuntoventaComponent } from './puntoventa/puntoventa';
 import { RestauranteComponent } from './restaurante/restaurante';
 import { HotelComponent } from './hotel/hotel';
 import { InmobiliariaComponent } from './inmobiliaria/inmobiliaria';
+import { BannerComponent } from './banner/banner';
 
 @NgModule({
 	declarations: [ProveedorComponent,
@@ -16,7 +17,8 @@ import { InmobiliariaComponent } from './inmobiliaria/inmobiliaria';
     PuntoventaComponent,
     RestauranteComponent,
     HotelComponent,
-    InmobiliariaComponent],
+    InmobiliariaComponent,
+    BannerComponent],
 	imports: [],
 	exports: [ProveedorComponent,
     ServicioComponent,
@@ -25,6 +27,7 @@ import { InmobiliariaComponent } from './inmobiliaria/inmobiliaria';
     PuntoventaComponent,
     RestauranteComponent,
     HotelComponent,
-    InmobiliariaComponent]
+    InmobiliariaComponent,
+    BannerComponent]
 })
 export class ComponentsModule {}

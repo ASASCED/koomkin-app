@@ -1,68 +1,196 @@
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>usuario</ion-title>
-  </ion-navbar>
+    <ion-navbar>
+        <ion-title>usuario</ion-title>
+    </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-  <table>
-    <tr>
-      <th class="contacto" colspan="2">Datos de contacto</th>
-    </tr>
-    <tr>
-      <td>Nombre</td>
-      <td>Mauricio García</td>
-    </tr>
-    <tr>
-      <td>Empresa</td>
-      <td>Grupo Koomkin</td>
-    </tr>
-    <tr>
-      <td>Mail de contacto</td>
-      <td>mgarcia@koomkin.com</td>
-    </tr>
-    <tr>
-      <td>Contraseña</td>
-      <td>Grupokoomkin@1</td>
-    </tr>
-    <tr>
-      <td>Teléfono</td>
-      <td>5535 0499</td>
-    </tr>
-    <tr>
-      <td>Móvil</td>
-      <td>55 4056 4567</td>
-    </tr>
-  </table>
-  <hr>
-  <table>
+    <table *ngIf="vista == 'informacion'">
+        <tr>
+            <th class="contacto" colspan="2">Datos de contacto</th>
+        </tr>
+        <tr>
+            <td class="campos">Nombre</td>
+            <td class="datos">{{nombre}} {{paterno}} {{materno}}</td>
+        </tr>
+        <tr>
+            <td class="campos">Empresa</td>
+            <td class="datos">{{empresa}}</td>
+        </tr>
+        <tr>
+            <td class="campos">Mail de contacto</td>
+            <td class="datos">{{email}}</td>
+        </tr>
+        <tr>
+            <td class="campos">Teléfono</td>
+            <td class="datos">{{telefono}}</td>
+        </tr>
+        <tr>
+            <td class="campos">Móvil (Calltracking)</td>
+            <td class="datos">{{celular}}</td>
+        </tr>
+        <tr>
+            <td class="campos">Saludo automático chat</td>
+            <td class="datos" style="text-align: justify">{{mensaje}}</td>
+        </tr>
+    </table>
+    <!--<hr *ngIf="vista == 'informacion'">
+  <table *ngIf="vista == 'informacion'">
     <tr>
       <th class="contacto" colspan="2">Datos fiscales</th>
     </tr>
     <tr>
+      <td>Nombre del titular</td>
+      <td>{{f_nombre}} {{f_paterno}} {{f_materno}}</td>
+    </tr>
+    <tr>
       <td>Razón social</td>
-      <td>Grupo Koomkin SA de CV</td>
+      <td>{{razon}}</td>
     </tr>
     <tr>
       <td>RFC</td>
-      <td>GKO120503S79</td>
+      <td>{{rfc}}</td>
     </tr>
     <tr>
       <td>Domicilio Fiscal</td>
-      <td>Horacio 1844, 7C Polanco, Miguel Hidalgo, México DF, 11510</td>
+      <td>{{calle}} {{numeroexterior}} {{numerointerior}}, {{colonia}}, {{ciudad}} {{cp}}</td>
+    </tr>
+  </table>-->
+    <table *ngIf="vista === 'editar'">
+        <tr>
+            <th class="contacto" colspan="2">Datos de contacto</th>
+        </tr>
+        <tr>
+            <td class="campos">Nombre *</td>
+            <input type="text" name="Nombre del titular" [(ngModel)]="nombre" required>
+        </tr>
+        <tr>
+            <td class="campos">Apellido Paterno *</td>
+            <input type="text" [(ngModel)]="paterno" required>
+        </tr>
+        <tr>
+            <td class="campos">Apellido Materno *</td>
+            <input type="text" [(ngModel)]="materno" required>
+        </tr>
+        <tr>
+            <td class="campos">Email *</td>
+            <input type="email" name="Mail de contacto" [(ngModel)]="email" required>
+        </tr>
+        <tr>
+            <td class="campos">Teléfono *</td>
+            <input type="tel" name="Teléfono" [(ngModel)]="telefono" required>
+        </tr>
+        <tr>
+            <td class="campos">Móvil (Calltracking)*</td>
+            <input type="tel" name="Móvil" [(ngModel)]="celular" required>
+        </tr>
+        <tr>
+            <td class="campos">Saludo automático chat (150 caracteres)</td>
+            <textarea class="msg" rows="8" cols="50" maxlength="150" [(ngModel)]="mensaje" required></textarea>
+        </tr>
+    </table>
+    <!-- <hr *ngIf="vista === 'editar'">
+  <table *ngIf="vista === 'editar'">
+    <tr>
+      <th class="contacto" colspan="2">Datos fiscales</th>
     </tr>
     <tr>
       <td>Nombre del titular</td>
-      <td>Pablo García</td>
+      <input type="text" name="Nombre del titular" [(ngModel)]="f_nombre" required>
     </tr>
-  </table>
-  <div class="cuadro">
-    <button class="edit">Modificar Datos</button>
-  </div>
-  <div class="cuadro1">
+    <tr>
+      <td>Apellido Paterno *</td>
+      <input type="text" name="Nombre del titular" [(ngModel)]="f_paterno" required>
+    </tr>
+    <tr>
+      <td>Apellido Materno *</td>
+      <input type="text" name="Nombre del titular" [(ngModel)]="f_materno" required>
+    </tr>
+    <tr>
+      <td>Razón social</td>
+      <input type="text" name="Razón social" [(ngModel)]="razon" required>
+    </tr>
+    <tr>
+      <td>RFC</td>
+      <input type="text" name="RFC" [(ngModel)]="rfc" required>
+    </tr>
+    <tr>
+      <td>Calle *</td>
+      <input type="text" name="RFC" [(ngModel)]="calle" required>
+    </tr>
+    <tr>
+      <td>No. Exterior *</td>
+      <input type="text" name="RFC" [(ngModel)]="numeroexterior" required>
+    </tr>
+    <tr>
+      <td>No. Interior *</td>
+      <input type="text" name="RFC" [(ngModel)]="numerointerior" required>
+    </tr>
+    <tr>
+      <td>Codigo Postal *</td>
+      <input type="text" name="RFC" [(ngModel)]="cp" required>
+    </tr>
+    <tr>
+      <td>Colonia *</td>
+      <input type="text" name="RFC" [(ngModel)]="colonia" required>
+    </tr>
+    <tr>
+      <td>Ciudad *</td>
+      <input type="text" name="RFC" [(ngModel)]="ciudad" required>
+    </tr>
+    <tr>
+      <td>Delegación *</td>
+      <input type="text" name="RFC" [(ngModel)]="delegacion" required>
+    </tr>
+    <tr>
+      <td class="campo">Estado *</td>
+      <select type="text" [(ngModel)]="stateId" [name]="dictionary[getState(estado)]">
+        <option value="0">Seleccionar estado</option>
+        <option value="2537">Aguascalientes</option>
+        <option value="2538">Baja California N</option>
+        <option value="2539">Baja California S</option>
+        <option value="2540">Campeche</option>
+        <option value="2541">Chiapas</option>
+        <option value="2542">Chihuahua</option>
+        <option value="2543">Coahuila</option>
+        <option value="2544">Colima</option>
+        <option value="2545">Ciudad de México</option>
+        <option value="2546">Durango</option>
+        <option value="2547">Guanajuato</option>
+        <option value="2548">Guerrero</option>
+        <option value="2549">Hidalgo</option>
+        <option value="2550">Jalisco</option>
+        <option value="2551">Estado de México</option>
+        <option value="2552">Michoacán</option>
+        <option value="2553">Morelos</option>
+        <option value="2554">Nayarit</option>
+        <option value="2555">Nuevo León</option>
+        <option value="2556">Oaxaca</option>
+        <option value="2557">Puebla</option>
+        <option value="2558">Querétaro</option>
+        <option value="2559">Quintana Roo</option>
+        <option value="2560">San Luis Potosí</option>
+        <option value="2561">Sinaloa</option>
+        <option value="2562">Sonora</option>
+        <option value="2563">Tabasco</option>
+        <option value="2564">Tamaulipas</option>
+        <option value="2565">Tlaxcala</option>
+        <option value="2566">Veracruz</option>
+        <option value="2567">Yucatán</option>
+        <option value="2568">Zacatecas</option>
+      </select>
+    </tr>
+
+  </table>-->
+    <div class="cuadro">
+        <button *ngIf="vista == 'informacion'" class="edit" (click)="changePage('editar')">Modificar Datos</button>
+        <button *ngIf="vista === 'editar'" class="edit" (click)="changePage('informacion');">Cancelar</button>
+        <button *ngIf="vista === 'editar'" class="edit" (click)="changePage('informacion');updateUser();updateMessage(mensaje);cambiarMensaje(mensaje)">Guardar</button>
+    </div>
+    <!--<div class="cuadro1">
     <button class="cancelar" (click)="mostrar_modal()">Cancelar Suscripción</button>
-  </div>
+  </div>-->
 </ion-content>

@@ -1,308 +1,335 @@
 <ion-header>
-  <ion-navbar color="azul">
-    <button ion-button menuToggle>
+    <ion-navbar color="azul">
+        <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Nombre de la empresa: {{empresa}}
-      <br>ID Cliente: {{id}}</ion-title>
-  </ion-navbar>
+        <ion-title>Empresa: {{empresa}}
+            <br>ID Cliente: {{id}}</ion-title>
+    </ion-navbar>
 </ion-header>
 
 <ion-content class="detail-card" color="fondo">
-  <ion-card>
-    <ion-card-header class="encabezado">
-      <ion-grid>
-        <ion-row>
-          <ion-col col-2>
-            <img src="../assets/imgs/iconos/RLeads.svg" style="width:60%;margin-left: 20%;margin-top: 6%;" />
-          </ion-col>
-          <ion-col col-10>
-            <h1 style="font-size: 5.5vw;">
-              <strong>Reporte de Leads</strong>
-            </h1>
-            <h3 style="font-size: 3.2vw;">Oportunidades de venta últimos 12 meses</h3>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-      <hr style="background-color:black; width:90%">
-    </ion-card-header>
+    <ion-card>
+        <ion-card-header class="encabezado">
+            <ion-grid>
+                <ion-row>
+                    <ion-col col-2>
+                        <img src="assets/imgs/iconos/RLeads.svg" style="width:60%;margin-left: 20%;margin-top: 6%;" />
+                    </ion-col>
+                    <ion-col col-10>
+                        <h1 style="font-size: 5vw;">
+                            <strong>Reporte de Leads</strong>
+                        </h1>
+                        <h3 style="font-size: 3.2vw;color:#707070">Oportunidades de venta últimos 12 meses</h3>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+            <hr style="background-color:rgba(112,112,112,0.3); width:90%;height: 2px;margin-top: 0;">
+        </ion-card-header>
 
-    <ion-card-content>
-      <google-chart [data]="columnChartData"></google-chart>
-    </ion-card-content>
-  </ion-card>
-  <ion-card>
-    <ion-card-header class="encabezado">
-      <ion-grid>
-        <ion-row>
-          <ion-col col-2>
-            <img src="../assets/imgs/iconos/REstado.svg" style="width:50%;margin-left: 30%;margin-top: 6%;" />
-          </ion-col>
-          <ion-col col-10>
-            <h1 style="font-size: 5.5vw;">
-              <strong>Reporte de Leads por Estado</strong>
-            </h1>
-            <h3 style="font-size: 3.1vw;">Oportunidades de venta por Estado últimos 12 meses</h3>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-      <hr style="background-color:black; width:90%">
-    </ion-card-header>
+        <ion-card-content>
+            <google-chart [data]="columnChartData"></google-chart>
+        </ion-card-content>
+    </ion-card>
+    <ion-card>
+        <ion-card-header class="encabezado">
+            <ion-grid>
+                <ion-row>
+                    <ion-col col-2>
+                        <img src="assets/imgs/iconos/REstado.svg" style="width:60%;margin-left: 20%;" />
+                    </ion-col>
+                    <ion-col col-10>
+                        <h1 style="font-size: 5vw;">
+                            <strong>Reporte de Leads por Estado</strong>
+                        </h1>
+                        <h3 style="font-size: 3.1vw;color:#707070">Oportunidades de venta por Estado últimos 12 meses</h3>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+            <hr style="background-color:rgba(112,112,112,0.3); width:90%;height: 2px;margin-top: 0;">
+        </ion-card-header>
 
-    <ion-card-content>
-      <google-chart [data]="geoChartData"></google-chart>
-      <div class="tabla">
-        <google-chart [data]="tableChartData"></google-chart>
-      </div>
-    </ion-card-content>
-  </ion-card>
-  <ion-card>
-    <ion-card-header class="encabezado">
-      <ion-grid>
-        <ion-row>
-          <ion-col col-2>
-            <img src="../assets/imgs/iconos/Cotizaciones.svg" style="width:58%;margin-left: 20%;margin-top: 9%;" />
-          </ion-col>
-          <ion-col col-10>
-            <h1 style="font-size: 5.5vw;">
-              <strong>Cotizaciones</strong>
-            </h1>
-            <h3 style="font-size: 3.2vw;">Oportunidades de Venta (30 días)</h3>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-      <hr style="background-color:black; width:90%">
-    </ion-card-header>
+        <ion-card-content>
+            <google-chart [data]="geoChartData"></google-chart>
+            <div class="tabla">
+                <google-chart [data]="tableChartData"></google-chart>
+            </div>
+        </ion-card-content>
+    </ion-card>
+    <ion-card>
+        <ion-card-header class="encabezado">
+            <ion-grid>
+                <ion-row>
+                    <ion-col col-2>
+                        <img src="assets/imgs/iconos/Cotizaciones.svg" style="width:60%;margin-left: 20%;" />
+                    </ion-col>
+                    <ion-col col-10>
+                        <h1 style="font-size: 5vw;">
+                            <strong>Cotizaciones</strong>
+                        </h1>
+                        <h3 style="font-size: 3.2vw;color:#707070">Oportunidades de Venta (30 días)</h3>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+            <hr style="background-color:rgba(112,112,112,0.3); width:90%;height: 2px;margin-top: 0;">
+        </ion-card-header>
 
-    <ion-card-content>
-      <google-chart [data]="lineChartData"></google-chart>
-    </ion-card-content>
-  </ion-card>
-  <ion-card>
-    <ion-card-header class="encabezado">
-      <ion-grid>
-        <ion-row>
-          <ion-col col-2>
-            <img src="../assets/imgs/iconos/Dispositivos.svg" style="width:65%;margin-left: 20%;margin-top: 11%;" />
-          </ion-col>
-          <ion-col col-10>
-            <h1 style="font-size: 5.5vw;">
-              <strong>Dispositivos de consulta</strong>
-            </h1>
-            <h3 style="font-size: 3.2vw;">% de Vistas según Dispositivo (30 días)</h3>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-      <hr style="background-color:black; width:90%">
-    </ion-card-header>
+        <ion-card-content>
+            <google-chart [data]="lineChartData"></google-chart>
+        </ion-card-content>
+    </ion-card>
+    <ion-card>
+        <ion-card-header class="encabezado">
+            <ion-grid>
+                <ion-row>
+                    <ion-col col-2>
+                        <img src="assets/imgs/iconos/Dispositivos.svg" style="width:65%;margin-left: 20%;" />
+                    </ion-col>
+                    <ion-col col-10>
+                        <h1 style="font-size: 5vw;">
+                            <strong>Dispositivos de consulta</strong>
+                        </h1>
+                        <h3 style="font-size: 3.2vw;color:#707070">% de Vistas según Dispositivo (30 días)</h3>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+            <hr style="background-color:rgba(112,112,112,0.3); width:90%;height: 2px;margin-top: 0;">
+        </ion-card-header>
 
-    <ion-card-content>
-      <ion-grid style="text-align: center;">
-        <ion-row>
-          <ion-col col-4>
-            <img src="../assets/imgs/dispositivos/Smartphone.svg" style="width:90%;margin-left: 5%;" />
-            <p class="dispositivo">
-              <strong>Smartphone</strong>
-            </p>
-            <p class="cel">{{smartphone}}%</p>
-          </ion-col>
-          <ion-col col-4>
-            <img src="../assets/imgs/dispositivos/Desktop.svg" style="width:90%;margin-left: 5%;" />
-            <p class="dispositivo">
-              <strong>Computadora</strong>
-            </p>
-            <p class="pc">{{computadora}}%</p>
-          </ion-col>
-          <ion-col col-4>
-            <img src="../assets/imgs/dispositivos/Tablet.svg" style="width:90%;margin-left: 5%;" />
-            <p class="dispositivo">
-              <strong>Tablet</strong>
-            </p>
-            <p class="tb">{{tablet}}%</p>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </ion-card-content>
-  </ion-card>
-  <ion-card>
-    <ion-card-header class="encabezado">
-      <ion-grid>
-        <ion-row>
-          <ion-col col-2>
-            <img src="../assets/imgs/iconos/Edades.svg" style="width:65%;margin-left: 20%;margin-top: 11%;" />
-          </ion-col>
-          <ion-col col-10>
-            <h1 style="font-size: 5.5vw;">
-              <strong>Edades de los visitantes</strong>
-            </h1>
-            <h3 style="font-size: 3.2vw;">% de Vistas según Dispositivo (30 días)</h3>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-      <hr style="background-color:black; width:90%">
-    </ion-card-header>
+        <ion-card-content>
+            <ion-grid style="text-align: center;">
+                <ion-row>
+                    <ion-col col-4>
+                        <img src="assets/imgs/dispositivos/Smartphone.svg" style="width:90%;margin-left: 5%;" />
+                        <p class="dispositivo">
+                            <strong>Smartphone</strong>
+                        </p>
+                        <p class="cel">{{smartphone}}%</p>
+                    </ion-col>
+                    <ion-col col-4>
+                        <img src="assets/imgs/dispositivos/Desktop.svg" style="width:90%;margin-left: 5%;" />
+                        <p class="dispositivo">
+                            <strong>Computadora</strong>
+                        </p>
+                        <p class="pc">{{computadora}}%</p>
+                    </ion-col>
+                    <ion-col col-4>
+                        <img src="assets/imgs/dispositivos/Tablet.svg" style="width:90%;margin-left: 5%;" />
+                        <p class="dispositivo">
+                            <strong>Tablet</strong>
+                        </p>
+                        <p class="tb">{{tablet}}%</p>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-card-content>
+    </ion-card>
+    <ion-card>
+        <ion-card-header class="encabezado">
+            <ion-grid>
+                <ion-row>
+                    <ion-col col-2>
+                        <img src="assets/imgs/iconos/Edades.svg" style="width:65%;margin-left: 20%;" />
+                    </ion-col>
+                    <ion-col col-10>
+                        <h1 style="font-size: 5vw;">
+                            <strong>Edades de los visitantes</strong>
+                        </h1>
+                        <h3 style="font-size: 3.2vw;color:#707070">% de Vistas según Dispositivo (30 días)</h3>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+            <hr style="background-color:rgba(112,112,112,0.3); width:90%;height: 2px;margin-top: 0;">
+        </ion-card-header>
 
-    <ion-card-content>
-      <ion-grid style="text-align: center;height: 150px !important;margin-bottom: 6%;">
-        <ion-row>
-          <ion-col col-1>
-          </ion-col>
-          <ion-col col-2>
-            <p class="leads">{{age0}}%</p>
-            <img src="../assets/imgs/edad/1_0.svg" alt="Edad de 25-34" style="height: 80%;" />
-            <p>25-34</p>
-          </ion-col>
-          <ion-col col-2>
-            <p class="leads">{{age1}}%</p>
-            <img src="../assets/imgs/edad/2_0.svg" alt="Edad de 35-44" style="height: 80%;" />
-            <p>35-44</p>
-          </ion-col>
-          <ion-col col-2>
-            <p class="leads">{{age2}}%</p>
-            <img src="../assets/imgs/edad/3_0.svg" alt="Edad de 45-54" style="height: 80%;" />
-            <p>45-54</p>
-          </ion-col>
-          <ion-col col-2>
-            <p class="leads">{{age3}}%</p>
-            <img src="../assets/imgs/edad/4_0.svg" alt="Edad de 55-64" style="height: 80%;" />
-            <p>55-64</p>
-          </ion-col>
-          <ion-col col-2>
-            <p class="leads">{{age4}}%</p>
-            <img src="../assets/imgs/edad/5_0.svg" alt="Edad de 65+" style="height:80%;" />
-            <p>65+</p>
-          </ion-col>
-          <ion-col col-1>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </ion-card-content>
-  </ion-card>
-  <ion-card>
-    <ion-card-header class="encabezado">
-      <ion-grid>
-        <ion-row>
-          <ion-col col-2>
-            <img src="../assets/imgs/iconos/Genero.svg" style="width:60%;margin-left: 20%;margin-top: 11%;" />
-          </ion-col>
-          <ion-col col-10>
-            <h1 style="font-size: 5.5vw;">
-              <strong>Género de visitantes</strong>
-            </h1>
-            <h3 style="font-size: 3.2vw;">% de Vistas según Género (30 días)</h3>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-      <hr style="background-color:black; width:90%">
-    </ion-card-header>
+        <ion-card-content>
+            <ion-grid style="text-align: center;height: 150px !important;margin-bottom: 6%;">
+                <ion-row>
+                    <ion-col col-1>
+                    </ion-col>
+                    <ion-col col-2>
+                        <p class="leads">{{age0}}%</p>
+                        <img src="assets/imgs/edad/1_{{age0p}}.svg" alt="Edad de 25-34" style="height: 80%;" />
+                        <p>25-34</p>
+                    </ion-col>
+                    <ion-col col-2>
+                        <p class="leads">{{age1}}%</p>
+                        <img src="assets/imgs/edad/2_{{age1p}}.svg" alt="Edad de 35-44" style="height: 80%;" />
+                        <p>35-44</p>
+                    </ion-col>
+                    <ion-col col-2>
+                        <p class="leads">{{age2}}%</p>
+                        <img src="assets/imgs/edad/3_{{age2p}}.svg" alt="Edad de 45-54" style="height: 80%;" />
+                        <p>45-54</p>
+                    </ion-col>
+                    <ion-col col-2>
+                        <p class="leads">{{age3}}%</p>
+                        <img src="assets/imgs/edad/4_{{age3p}}.svg" alt="Edad de 55-64" style="height: 80%;" />
+                        <p>55-64</p>
+                    </ion-col>
+                    <ion-col col-2>
+                        <p class="leads">{{age4}}%</p>
+                        <img src="assets/imgs/edad/5_{{age4p}}.svg" alt="Edad de 65+" style="height:80%;" />
+                        <p>65+</p>
+                    </ion-col>
+                    <ion-col col-1>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-card-content>
+    </ion-card>
+    <ion-card>
+        <ion-card-header class="encabezado">
+            <ion-grid>
+                <ion-row>
+                    <ion-col col-2>
+                        <img src="assets/imgs/iconos/Genero.svg" style="width:60%;margin-left: 26%;" />
+                    </ion-col>
+                    <ion-col col-10>
+                        <h1 style="font-size: 5vw;">
+                            <strong>Género de visitantes</strong>
+                        </h1>
+                        <h3 style="font-size: 3.2vw;color:#707070">% de Vistas según Género (30 días)</h3>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+            <hr style="background-color:rgba(112,112,112,0.3); width:90%;height: 2px;margin-top: 0;">
+        </ion-card-header>
 
-    <ion-card-content>
-      <ion-grid style="text-align: center;height: 180px !important;">
-        <ion-row>
-          <ion-col col-6>
-            <p class="leads">{{hombre}}%</p>
-            <img src="../assets/imgs/genero/H20.svg" style="width: 22%;margin-left: 39%;" />
-            <p class="dispositivo">
-              <strong>Hombre</strong>
-            </p>
-          </ion-col>
-          <ion-col col-6>
-            <p class="leads">{{mujer}}%</p>
-            <img src="../assets/imgs/genero/M80.svg" style="width: 21%;margin-left: 39.5%;" />
-            <p class="dispositivo">
-              <strong>Mujer</strong>
-            </p>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </ion-card-content>
-  </ion-card>
-  <ion-card>
-    <ion-card-header class="encabezado">
-      <ion-grid>
-        <ion-row>
-          <ion-col col-2>
-            <img src="../assets/imgs/iconos/Rimpresiones.svg" style="width:60%;margin-left: 20%;margin-top: 11%;" />
-          </ion-col>
-          <ion-col col-10>
-            <h1 style="font-size: 5vw;">
-              <strong>Leads con Calificación (30 días)</strong>
-            </h1>
-            <h3 style="font-size: 3.2vw;">Califica tus Leads para Optimizar tu campaña</h3>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-      <hr style="background-color:black; width:90%">
-    </ion-card-header>
+        <ion-card-content>
+            <ion-grid style="text-align: center;height: 180px !important;">
+                <ion-row>
+                    <ion-col col-6>
+                        <p class="leads">{{hombre}}%</p>
+                        <img src="assets/imgs/genero/H{{hombrep}}.svg" style="width: 22%;margin-left: 39%;" />
+                        <p class="dispositivo">
+                            <strong>Hombre</strong>
+                        </p>
+                    </ion-col>
+                    <ion-col col-6>
+                        <p class="leads">{{mujer}}%</p>
+                        <img src="assets/imgs/genero/M{{mujerp}}.svg" style="width: 21%;margin-left: 39.5%;" />
+                        <p class="dispositivo">
+                            <strong>Mujer</strong>
+                        </p>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-card-content>
+    </ion-card>
+    <ion-card>
+        <ion-card-header class="encabezado">
+            <ion-grid>
+                <ion-row>
+                    <ion-col col-2>
+                        <img src="assets/imgs/iconos/App.svg" style="width: 40%;margin-left: 35%;" />
+                    </ion-col>
+                    <ion-col col-10>
+                        <h1 style="font-size: 5vw;">
+                            <strong>App descargada </strong>
+                        </h1>
+                        <h3 style="font-size: 3.2vw;color:#707070">
+                            Atiende a tus leads de manera más fácil
+                        </h3>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+            <hr style="background-color:rgba(112,112,112,0.3); width:90%;height: 2px;margin-top: 0;">
+        </ion-card-header>
 
-    <ion-card-content>
-      <p class="datos2">{{result}}</p>
-    </ion-card-content>
-  </ion-card>
-  <ion-card>
-    <ion-card-header class="encabezado">
-      <ion-grid>
-        <ion-row>
-          <ion-col col-2>
-            <img src="../assets/imgs/iconos/RClicks.svg" style="width:50%;margin-left: 26%;margin-top: 11%;" />
-          </ion-col>
-          <ion-col col-10>
-            <h1 style="font-size: 5.5vw;">
-              <strong>Leads con Like (30 días)</strong>
-            </h1>
-            <h3 style="font-size: 3.2vw;">Optimiza tu campaña al perfil que deseas</h3>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-      <hr style="background-color:black; width:90%">
-    </ion-card-header>
+        <ion-card-content>
+            <p class="datos2">{{app}}</p>
+        </ion-card-content>
+    </ion-card>
+    <ion-card>
+        <ion-card-header class="encabezado">
+            <ion-grid>
+                <ion-row>
+                    <ion-col col-2>
+                        <img src="assets/imgs/iconos/Atendido.svg" style="width:55%;margin-left: 28%;" />
+                    </ion-col>
+                    <ion-col col-10>
+                        <h1 style="font-size: 5vw;">
+                            <strong> % de leads atendidos (90 días) </strong>
+                        </h1>
+                        <h3 style="font-size: 3.2vw;color:#707070">
+                            Leads atendidos en menos de 2hrs.
+                        </h3>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+            <hr style="background-color:rgba(112,112,112,0.3); width:90%;height: 2px;margin-top: 0;">
+        </ion-card-header>
 
-    <ion-card-content>
-      <p class="datos2">{{calif}}</p>
-    </ion-card-content>
-  </ion-card>
-  <ion-card>
-    <ion-card-header class="encabezado">
-      <ion-grid>
-        <ion-row>
-          <ion-col col-2>
-            <img src="../assets/imgs/iconos/Costo.svg" style="width:60%;margin-left: 20%;margin-top: 11%;" />
-          </ion-col>
-          <ion-col col-10>
-            <h1 style="font-size: 5.5vw;">
-              <strong>Costo de Campaña</strong>
-            </h1>
-            <h3 style="font-size: 3.2vw;">Inversión en tu Campaña al momento</h3>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-      <hr style="background-color:black; width:90%">
-    </ion-card-header>
+        <ion-card-content>
+            <p class="datos2">{{resultexito}}</p>
+        </ion-card-content>
+    </ion-card>
+    <ion-card>
+        <ion-card-header class="encabezado">
+            <ion-grid>
+                <ion-row>
+                    <ion-col col-2>
+                        <img src="assets/imgs/iconos/Calificados.svg" style="width:55%;margin-left: 28%;" />
+                    </ion-col>
+                    <ion-col col-10>
+                        <h1 style="font-size: 5vw;">
+                            <strong> % de leads calificados (90 días)</strong>
+                        </h1>
+                        <h3 style="font-size: 3.2vw;color:#707070">
+                            Califica tus leads para optimizar tu campaña
+                        </h3>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+            <hr style="background-color:rgba(112,112,112,0.3); width:90%;height: 2px;margin-top: 0;">
+        </ion-card-header>
 
-    <ion-card-content>
-      <p class="datos2">{{costoFinal}}</p>
-    </ion-card-content>
-  </ion-card>
-  <ion-card>
-    <ion-card-header class="encabezado">
-      <ion-grid>
-        <ion-row>
-          <ion-col col-2>
-            <img src="../assets/imgs/iconos/IShare.svg" style="width:60%;margin-left: 20%;margin-top: 11%;" />
-          </ion-col>
-          <ion-col col-10>
-            <h1 style="font-size: 5.5vw;">
-              <strong>Impression Share</strong>
-            </h1>
-            <h3 style="font-size: 3.2vw;">Porcentaje de alcance de tu Campaña</h3>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-      <hr style="background-color:black; width:90%">
-    </ion-card-header>
+        <ion-card-content>
+            <p class="datos2">{{result}}</p>
+        </ion-card-content>
+    </ion-card>
+    <ion-card>
+        <ion-card-header class="encabezado">
+            <ion-grid>
+                <ion-row>
+                    <ion-col col-2>
+                        <img src="assets/imgs/iconos/Costo.svg" style="width:60%;margin-left: 20%;" />
+                    </ion-col>
+                    <ion-col col-10>
+                        <h1 style="font-size: 5vw;">
+                            <strong>Costo de Campaña</strong>
+                        </h1>
+                        <h3 style="font-size: 3.2vw;color:#707070">Inversión en tu Campaña al momento</h3>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+            <hr style="background-color:rgba(112,112,112,0.3); width:90%;height: 2px;margin-top: 0;">
+        </ion-card-header>
 
-    <ion-card-content>
-      <p class="datos2">{{share}}</p>
-    </ion-card-content>
-  </ion-card>
-</ion-content>
+        <ion-card-content>
+            <p class="datos2">{{costoFinal}}</p>
+        </ion-card-content>
+    </ion-card>
+    <ion-card>
+        <ion-card-header class="encabezado">
+            <ion-grid>
+                <ion-row>
+                    <ion-col col-2>
+                        <img src="assets/imgs/iconos/IShare.svg" style="width:60%;margin-left: 20%;" />
+                    </ion-col>
+                    <ion-col col-10>
+                        <h1 style="font-size: 5vw;">
+                            <strong>Días Restantes de Campaña</strong>
+                        </h1>
+                        <h3 style="font-size: 3.2vw;color:#707070">Muestra los días restantes de tu campaña</h3>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+            <hr style="background-color:rgba(112,112,112,0.3); width:90%;height: 2px;margin-top: 0;">
+        </ion-card-header>
+
+        <ion-card-content>
+            <p class="datos2">{{share}}</p>
+        </ion-card-content>
+    </ion-card>

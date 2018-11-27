@@ -1,33 +1,51 @@
 <!-- Generated template for the ProfesionistaComponent component -->
 <!-- Esto es lo que cambia -->
-<ion-row>
+<ion-row *ngIf="usoprofesionista.length > 0">
   <ion-col>
-    <p class="paciente">Cotización para: {{uso}}</p>
+    <p class="paciente">Cotización para: {{usoprofesionista}}</p>
   </ion-col>
 </ion-row>
 <ion-row>
   <ion-col>
-    <p class="mensaje">“{{mensaje}}”</p>
+    <p class="mensaje">“{{mensajeprofesionista}}”</p>
   </ion-col>
 </ion-row>
-<ion-row>
+
+<ion-row *ngIf="fechaCitaP.length > 0 && horaCitaP.length > 0">
   <ion-col>
-    <a class="paciente">Hora y fecha de la cita</a>
+    <a class="paciente">Fecha y hora de la cita</a>
   </ion-col>
 </ion-row>
-<ion-row>
+<ion-row *ngIf="fechaCitaP.length > 0 && horaCitaP.length > 0">
   <ion-col>
-    <ion-col>
-      <ion-icon class="cita" name="md-calendar"></ion-icon>
-      <a class="paciented">{{fechaCita}}</a>
-      <ion-icon class="cita" name="md-alarm"></ion-icon>
-      <a class="paciented">{{horaCita}} hrs.</a>
-    </ion-col>
+    <ion-icon class="cita" name="md-calendar"></ion-icon>
+    <a class="paciented">{{fechaCitaP | date: 'dd/MM/yyyy' }}</a>
+    <ion-icon class="cita" name="md-alarm"></ion-icon>
+    <a class="paciented">{{horaCitaP}} hrs.</a>
+  </ion-col>
 </ion-row>
-<ion-row>
+
+<ion-row *ngIf="fechaCitaP.length > 0 && horaCitaP.length == 0">
   <ion-col>
-    <ion-icon class="download" name="md-cloud-download"></ion-icon>
-    <a class="descarga">Dercargar archivo adjunto</a>
+    <a class="paciente">Fecha de la cita</a>
+  </ion-col>
+</ion-row>
+<ion-row *ngIf="fechaCitaP.length > 0  && horaCitaP.length == 0">
+  <ion-col>
+    <ion-icon class="cita" name="md-calendar"></ion-icon>
+    <a class="paciented">{{fechaCitaP | date: 'dd/MM/yyyy' }}</a>
+  </ion-col>
+</ion-row>
+
+<ion-row *ngIf="fechaCitaP.length == 0  && horaCitaP.length > 0">
+  <ion-col>
+    <a class="paciente">Hora de la cita</a>
+  </ion-col>
+</ion-row>
+<ion-row *ngIf="fechaCitaP.length == 0  && horaCitaP.length > 0">
+  <ion-col>
+    <ion-icon class="cita" name="md-alarm"></ion-icon>
+    <a class="paciented">{{horaCitaP}} hrs.</a>
   </ion-col>
 </ion-row>
 <!-- Termina lo que cambia -->

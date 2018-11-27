@@ -1,26 +1,56 @@
-.item-md{
+.item-md {
     padding-left: 0;
     padding-top: 4%;
 }
-table{
+
+table {
     width: 100%;
 }
-td{
-    width: 55%;
+
+td {
+    width: 45%;
     padding-bottom: 0%;
+    font-size: 5vw;
 }
 
-.costo{
-    color:  #10cebc;
+.costo {
+    color: #10cebc;
 }
-.ver{
-    color:  #126aff;
-    text-align: right;
+
+.ver {
+    color: #00b2e3;
+    text-align: left;
+    padding-left: 10%;
 }
+
 .back-button-icon-ios {
     margin: -1px 0 0;
     display: inherit;
     min-width: 18px;
     font-size: 3.4rem;
     color: black;
-  }
+}
+
+.titulo {
+    color: #10cebc;
+    margin: 0;
+    font-size: 5vw;
+    font-weight: normal;
+    padding-left: 3%;
+    margin-top: 3%;
+}
+
+.izq {
+    width: 49%;
+    display: inline-block;
+    text-align: right;
+    font-size: 5vw;
+    color: #606060;
+    font-weight: 700;
+}
+
+.der {
+    width: 49%;
+    display: inline-block;
+    font-size: 5vw;
+}

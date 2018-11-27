@@ -18,7 +18,7 @@ export class PreguntaPage {
     this.nombre = this.navParams.get("nombre");
     this.edad = this.navParams.get("edad");
 
-    console.log( this.nombre, this.edad );
+   // console.log( this.nombre, this.edad );
 
   }
 
@@ -47,6 +47,7 @@ export class PreguntaPage {
     let alert = this.alertCtrl.create({
       title: 'Lamentamos decir adiós',
       subTitle: 'Vamos a trabajar en nuestras áreas de oportunidad esperamos verte de nuevo en el futuro',
+      
       buttons: [
         {
           text: 'Cerrar',

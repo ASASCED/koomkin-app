@@ -1,0 +1,159 @@
+page-modal-notification {
+    @import "../../assets/styles.scss";
+    body {
+        height: 100%;
+    }
+    .navbar {
+        height: 50px;
+        background: linear-gradient(to right, $koomkin-green, $koomkin-aqua);
+        color: white;
+        .logo {
+            height: 100%;
+            display: flex;
+            align-items: center;
+            img {
+                margin-left: 25px;
+                width: auto;
+                height: 25px;
+            }
+        }
+    }
+    .activity-container {
+        display: grid;
+        height: 100%;
+        width: 95%;
+        // grid-template-rows: 130px auto 75px;
+        grid-template-rows: 170px auto 18vh;
+        .activity-header {
+            grid-row: 1 / 2;
+            background-repeat: no-repeat;
+            background-size: contain;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            .activity-title {
+                position: absolute;
+                height: 45px;
+                width: 93%;
+                background-color: white;
+                display: flex;
+                color: $koomkin-blue;
+                bottom: 2px;
+                align-items: center;
+                justify-content: center;
+                font-weight: 900;
+                border-radius: 10px;
+                font-size: 5.3vw;
+                box-shadow: 2px 2px 5px -1px $koomkin-grey-light;
+            }
+        }
+        .map-content-container {
+            grid-row: 1 / 3 !important;
+            display: grid !important;
+            grid-template-rows: auto 50px !important;
+            .map-component {
+                grid-row: 1 / 2;
+                height: 100%;
+            }
+            .progress-bar {
+                grid-row: 2 / 3 !important;
+            }
+        }
+        .activity-content-container {
+            grid-row: 2 / 3;
+            display: grid;
+            grid-template-rows: 15px auto;
+            .progress-bar {
+                grid-row: 1 / 2;
+                height: 100%;
+            }
+            .progress-bar-item>brief-progress-bar {
+                width: 100%;
+                justify-content: center;
+                display: flex;
+            }
+            .activity-content-title.three {
+                grid-row: 2 / 3;
+                height: 113%;
+                word-wrap: break-word;
+                color: $koomkin-grey-light;
+                padding: 0 10px;
+                font-weight: 500;
+                font-size: 4.8vw;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+            }
+            .activity-content-title {
+                grid-row: 2 / 3;
+                height: 100%;
+                word-wrap: break-word;
+                color: $koomkin-grey-light;
+                padding: 0 10px;
+                font-weight: 500;
+                font-size: 5.8vw;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+            }
+            .activity-component {
+                grid-row-start: 3;
+                height: 100%;
+            }
+            .no-title-component {
+                grid-row: 2 / 4;
+                height: 100%;
+            }
+        }
+        .activity-footer {
+            grid-row-start: 3;
+        }
+        .button-footer-container {
+            height: 100%;
+            width: 100%;
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            .renovacion-positivo {
+                background-color: $koomkin-green;
+                color: white;
+                border: 1.1px solid $koomkin-green;
+                width: 45%;
+                height: 9vh;
+                font-size: 3vh;
+                border-radius: 10px;
+                font-weight: 500;
+            }
+            .renovacion-negativo {
+                background-color: white;
+                color: $koomkin-green;
+                border: 1.1px solid $koomkin-green;
+                width: 45%;
+                height: 9vh;
+                font-size: 3vh;
+                border-radius: 10px;
+                font-weight: 500;
+            }
+        }
+    }
+    .activity-container>div {
+        height: 100%;
+    }
+    .footer {
+        display: -webkit-box;
+        width: 100%;
+        height: 10px;
+        .left {
+            background-color: $koomkin-aqua;
+        }
+        .right {
+            background-color: $koomkin-green;
+        }
+    }
+    .footer div {
+        height: 10px;
+        width: 50%;
+    }
+}

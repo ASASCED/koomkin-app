@@ -1,0 +1,107 @@
+<ion-header>
+
+    <ion-toolbar>
+        <ion-title>{{title}}</ion-title>
+    </ion-toolbar>
+
+</ion-header>
+<ion-content padding>
+    <br>
+    <ion-grid>
+        <ion-row>
+            <ion-col col-4>
+            </ion-col>
+            <ion-col col-4>
+                <img src="assets/imgs/eficiencia/{{image}}.svg" width="100%" />
+            </ion-col>
+            <ion-col col-4>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col col-12 *ngIf="message===1">
+                <div>
+                    <p class="message-modal">
+                        Toma en cuenta las variables que más hacen diferencia entre que una empresa venda mucho o no:
+                    </p>
+                    <p class="message-modal-small">
+                        <strong>1)</strong> <span class="blue"> Inmediatez </span> en el tiempo de atención
+                        <br> <strong>2)</strong> <span class="blue">Explicación</span> del servicio y resolución de la necesidad
+                        <br> <strong>3)</strong> <span class="blue">Esfuerzo comercial</span> por concretar la venta
+                    </p>
+                </div>
+            </ion-col>
+            <ion-col col-12 *ngIf="message===2">
+                <div>
+                    <p class="message-modal text-center">
+                        Empresas en el top 10 <span class="blue"> venden tres veces más </span> que el promedio.
+                    </p>
+                    <p class="message-modal text-center">
+                        <span class="blue"> (Rendimiento 3x) </span>
+                    </p>
+                </div>
+            </ion-col>
+            <ion-col col-12 *ngIf="message===3">
+                <div>
+                    <p class="message-modal text-center">
+                        Tiempo promedio que tardas en intentar atender a un lead.
+                    </p>
+                    <p class="message-modal text-center">
+                        <span class="blue"> (Llamadas ó mensajes de chat) </span>
+                    </p>
+                </div>
+            </ion-col>
+            <ion-col col-12 *ngIf="message===4">
+                <div>
+                    <p class="message-modal text-center">
+                        Porcentaje de leads que intentaste contactar <span class="blue"> (con o sin éxito) </span> a través de llamadas o mensajes de chat.
+                    </p>
+                </div>
+            </ion-col>
+            <ion-col col-12 *ngIf="message===5">
+                <div>
+                    <p class="message-modal text-center">
+                        Porcentaje de <span class="blue"> llamadas automáticas </span> y mensajes del <span class="blue"> Koomkin Bot </span> que atiendes.
+                    </p>
+                </div>
+            </ion-col>
+            <ion-col col-12 *ngIf="message===6">
+                <div>
+                    <p class="message-modal text-center">
+                        Calificación al tiempo que inviertes en una venta, incluye la <span class="blue"> duración de tus llamadas </span> y el <span class="blue"> número de mensajes </span> que envías.
+                    </p>
+                </div>
+            </ion-col>
+            <ion-col col-12 *ngIf="message===7">
+                <div>
+                    <p class="message-modal text-center">
+                        Número de veces que intentaste contactar con llamadas o mensajes a un lead que <span class="blue"> NO </span> contestó.
+                    </p>
+                </div>
+            </ion-col>
+            <ion-col col-12 *ngIf="message===8">
+                <div>
+                    <p class="message-modal text-center">
+                        <span class="blue"> Palabras </span> más utilizadas por tí contra las más utilizadas por los <span class="blue"> 10 mejores vendedores. </span>.
+                    </p>
+                </div>
+            </ion-col>
+            <ion-col col-12 *ngIf="message===9">
+                <div>
+                    <p class="message-modal text-center">
+                        Compara la atención de tus <span class="blue"> últimos cinco clientes potenciales </span> contra tu atención a los clientes que has recibido el último mes.
+                    </p>
+                </div>
+            </ion-col>
+        </ion-row>
+        <br>
+        <ion-row>
+            <ion-col col-2>
+            </ion-col>
+            <ion-col col-8>
+                <button ion-button class="btn-modal" style="width: 100%;text-transform: none;" (click)="closeModal()">Aceptar</button>
+            </ion-col>
+            <ion-col col-2>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>

@@ -1,0 +1,101 @@
+/* You can add global styles to this file, and also import other style files */
+$koomkin-green: #3CCDBB;
+$koomkin-aqua: #33a4bc;
+$koomkin-middle: #38B7BC;
+$koomkin-blue: #288AC1;
+$koomkin-yellow: #f9b234;
+$koomkin-grey-dark: #494949;
+$koomkin-grey-light: #777777;
+$koomkin-orange: #ff7d00;
+$koomkin-error: #EA2027;
+$koomkin-background: #F8F8F8;
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html, body {
+  height: 100%;
+  width: 100%;
+  margin: 0 !important;
+  font-family: roboto-local, "Helvetica Neue", sans-serif;
+}
+
+textarea:focus, input:focus, button:focus {
+  outline: none;
+}
+
+.nsm-content {
+  padding: 0 !important;
+}
+
+
+.kmk-btn {
+
+}
+
+.next {
+  background-color: $koomkin-blue;
+  color: white;
+  border: none;
+}
+
+.upgrade-negativo {
+  background-color: white;
+  color: $koomkin-blue;
+  border: 1.1px solid $koomkin-blue;
+
+  width: 45%;
+  // height: 50px;
+  height: 6vh;
+  font-size: 6vw;
+  border-radius: 25px;
+}
+
+.upgrade-positivo {
+  background-color: $koomkin-blue;
+  color: white;
+  border: 1.1px solid $koomkin-blue;
+
+  width: 45%;
+  // height: 50px;
+  height: 6vh;
+  font-size: 6vw;
+  border-radius: 25px;
+}
+
+.renovacion-negativo {
+  background-color: white;
+  color: $koomkin-blue;
+  border: 1.1px solid $koomkin-blue;
+
+  width: 45%;
+  // height: 50px;
+  height: 7.5vh;
+  font-size: 3vh;
+  border-radius: 10px;
+}
+
+.renovacion-positivo {
+  background-color: $koomkin-blue;
+  color: white;
+  border: 1.1px solid $koomkin-blue;
+
+  width: 45%;
+  // height: 50px;
+  height: 7.5vh;
+  font-size: 3vh;
+  border-radius: 10px;
+}
+
+.previous:hover {
+  background-color: $koomkin-blue;
+  color: white;
+  border: none;
+}
+
+.next:hover {
+  background-color: darken($koomkin-blue, 5%);
+}

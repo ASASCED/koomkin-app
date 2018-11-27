@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component,Input, OnInit } from '@angular/core';
 
 /**
  * Generated class for the ProfesionistaComponent component.
@@ -10,13 +10,21 @@ import { Component } from '@angular/core';
   selector: 'profesionista',
   templateUrl: 'profesionista.html'
 })
-export class ProfesionistaComponent {
+export class ProfesionistaComponent implements OnInit{
+  @Input() mensajeprofesionista: any;
+  @Input() usoprofesionista: any;
+  @Input() fechaCitaP: any;
+  @Input() horaCitaP: any;
+  @Input() urgenciaprofesionista: any;
 
   text: string;
 
   constructor() {
-    console.log('Hello ProfesionistaComponent Component');
-    this.text = 'Hello World';
+   // console.log('profesionista');
   }
 
+  ngOnInit(){
+  //  console.log(this.fechaCitaP);
+
+  }
 }

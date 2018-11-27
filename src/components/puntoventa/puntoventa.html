@@ -2,22 +2,16 @@
 <!-- Esto es lo que cambia -->
 <ion-row>
   <ion-col>
-    <p class="cotiza">Cotización para: {{uso}}</p>
+    <p class="mensaje">“{{mensajeventa}}"</p>
   </ion-col>
 </ion-row>
-<ion-row>
-  <ion-col>
-    <p class="mensaje">“{{mensaje}}”</p>
+<ion-row class="complemento">
+  <ion-col col-2 *ngIf="usoventa.length > 0">
+    <img class="icono" src="assets/imgs/complementos/cotizacion.svg">
   </ion-col>
-</ion-row>
-<ion-row>
-  <ion-col>
-    <p class="frecuencia">Requiero: {{cantidad}} {{unidades}}</p>
-  </ion-col>
-</ion-row>
-<ion-row>
-  <ion-col>
-    <p class="frecuencia">Frecuencia de compra: {{frecuencia}}</p>
+  <ion-col col-10 *ngIf="usoventa.length > 0">
+    <p class="cotiza">Cotización para: </p>
+    <p class="cotizagris"> {{usoventa}}</p>
   </ion-col>
 </ion-row>
 <ion-row>

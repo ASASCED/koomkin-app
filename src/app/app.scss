@@ -1,12 +1,17 @@
-.iconos-m{
-    font-size: 40px !important;
+.iconos-m {
+    font-size: 28px !important;
     color: #10cebc !important;
-    margin-left: 2% !important;
+    margin-left: 4% !important;
+    margin-right: 3% !important;
     display: inline-block;
 }
 
-.ios ion-nav{
+.ios ion-nav {
     background-color: #10cebc !important;
+}
+
+.toolbar-background-md.fondo_blanco {
+    background: white !important;
 }
 
 .toolbar-ios {
@@ -17,12 +22,12 @@
     background-color: #10cebc !important;
 }
 
-.item-ios p{
+.item-ios p {
     vertical-align: top;
     margin-top: 1.7% !important;
 }
 
-.text{
+.text {
     padding: 0 !important;
     color: slategrey !important;
     font-size: 3.3vh !important;
@@ -33,17 +38,8 @@
     background: linear-gradient(to right, #3CCDBB, #33a4bc);
 }
 
-.toolbar-title-ios {
-    text-align: left !important;
-    font-size: 3.5vw !important;
-    font-weight: 600;
-    color: black;
-    pointer-events: auto;
-    margin-left: 4% !important;
-}
-
 .header-ios .toolbar-ios:last-child .toolbar-background-ios {
-     border-width: 0 0 0; 
+    border-width: 0 0 0;
 }
 
 .segment-md .segment-button.segment-activated {
@@ -62,10 +58,9 @@
     align-items: center;
     color: white;
     text-transform: capitalize;
-
 }
 
-.salir{
+.salir {
     position: absolute !important;
     bottom: 0 !important;
 }
@@ -73,6 +68,24 @@
 .back-button-text-ios {
     letter-spacing: -.01em;
     color: black;
+}
+
+.alert-md .alert-message {
+    max-height: 240px;
+    font-size: 15px;
+    text-align: justify !important;
+}
+
+.alert-md .alert-button-group {
+    -webkit-flex-wrap: wrap-reverse;
+    -ms-flex-wrap: wrap-reverse;
+    flex-wrap: wrap-reverse;
+    -webkit-box-pack: end;
+    -webkit-justify-content: center !important;
+    -ms-flex-pack: end;
+    justify-content: center !important;
+    padding: 0px 24px 8px 24px !important;
+    text-align: center !important;
 }
 
 ion-icon {
@@ -87,7 +100,7 @@ ion-icon {
         height: 5vh;
     }
     // custom icons
-    &[class*="appname-bandeja"] {
+    /* &[class*="appname-bandeja"] {
         mask-image: url(../assets/imgs/menu/bandeja.svg);
     }
     &[class*="appname-datos"] {
@@ -98,5 +111,146 @@ ion-icon {
     }
     &[class*="appname-logout"] {
         mask-image: url(../assets/imgs/menu/logout.svg);
+    }*/
+    // custom icons
+    &[class*="appname-bandeja"] {
+        mask-image: url(../assets/imgs/inicio/leads.svg);
     }
+    &[class*="appname-datos"] {
+        mask-image: url(../assets/imgs/inicio/ajustes.svg);
+    }
+    &[class*="appname-reporte"] {
+        mask-image: url(../assets/imgs/inicio/reporte.svg);
+    }
+    &[class*="appname-eficiencia"] {
+        mask-image: url(../assets/imgs/inicio/eficiencia.svg);
+    }
+    &[class*="appname-logout"] {
+        mask-image: url(../assets/imgs/menu/logout.svg);
+    }
+}
+
+.buttonCss {
+    button.alert-button.exit-button {
+        text-align: center;
+        border-radius: 5px;
+        position: relative;
+        overflow: hidden;
+        font-weight: 500;
+        text-transform: none;
+        color: white;
+        margin: 0 0 0 0;
+        padding: 10px;
+        background: #00b9bf;
+    }
+    .alert-md .alert-button-group {
+        -webkit-flex-wrap: wrap-reverse;
+        -ms-flex-wrap: wrap-reverse;
+        flex-wrap: wrap-reverse;
+        -webkit-box-pack: end;
+        -webkit-justify-content: center !important;
+        -ms-flex-pack: end;
+        justify-content: center !important;
+        padding: 0px 24px 8px 24px !important;
+        text-align: center !important;
+    }
+    button.alert-button.cancel-button {
+        text-align: center;
+        border-radius: 5px;
+        position: relative;
+        overflow: hidden;
+        font-weight: 500;
+        text-transform: none;
+        color: white;
+        margin: 0 0 0 0;
+        padding: 10px;
+        background: white !important;
+        border: 1px solid #00b9bf !important;
+        color: #00b9bf !important;
+    }
+    .alert-md .alert-input:focus {
+        margin-bottom: 4px;
+        border-bottom: 2px solid #00b9bf !important;
+    }
+    .alert-input {
+        padding: 10px !important;
+        border: 0;
+        background: inherit;
+    }
+    .alert-md .alert-sub-title {
+        font-size: 16px !important;
+        text-align: start !important;
+        padding: 0px 14px 0px !important;
+    }
+}
+
+.buttonCss2 {
+    button.alert-button.exit-button {
+        text-align: center;
+        border-radius: 5px;
+        position: relative;
+        overflow: hidden;
+        font-weight: 500;
+        text-transform: none;
+        color: white;
+        margin: 0 8px 0 0;
+        padding: 10px;
+        background: linear-gradient(to right, #10cebc 0%, #00a3bf 100%);
+    }
+    .alert-md .alert-button-group {
+        -webkit-flex-wrap: wrap-reverse;
+        -ms-flex-wrap: wrap-reverse;
+        flex-wrap: wrap-reverse;
+        -webkit-box-pack: end;
+        -webkit-justify-content: center !important;
+        -ms-flex-pack: end;
+        justify-content: center !important;
+        padding: 0px 24px 8px 24px !important;
+        text-align: center !important;
+    }
+    button.alert-button.cancel-button {
+        text-align: center;
+        border-radius: 5px;
+        position: relative;
+        overflow: hidden;
+        font-weight: 500;
+        text-transform: none;
+        color: white;
+        margin: 0 0 0 0;
+        padding: 10px;
+        background: white !important;
+        border: 1px solid #00b9bf !important;
+        color: #00b9bf !important;
+    }
+    .alert-md .alert-input:focus {
+        margin-bottom: 4px;
+        border-bottom: 2px solid #00b9bf !important;
+    }
+    .alert-input {
+        padding: 10px !important;
+        border: 0;
+        background: inherit;
+    }
+    .alert-md .alert-sub-title {
+        font-size: 16px !important;
+        text-align: start !important;
+        padding: 0px 14px 0px !important;
+    }
+    .alert-md .alert-message {
+        max-height: 240px;
+        font-size: 15px;
+        text-align: justify !important;
+    }
+}
+
+.range-md .range-knob-handle .range-pin {
+    transform: translate3d(0, 0, 0) scale(1);
+}
+
+.range-md:not(.range-has-pin) .range-knob-handle .range-knob {
+    transform: scale(1);
+}
+
+.range-ios .range-knob-handle .range-pin {
+    transform: translate3d(0, 0, 0) scale(1);
 }

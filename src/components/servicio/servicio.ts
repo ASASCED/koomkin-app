@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component,Input } from '@angular/core';
 
 /**
  * Generated class for the ServicioComponent component.
@@ -12,11 +12,15 @@ import { Component } from '@angular/core';
 })
 export class ServicioComponent {
 
+  @Input() frecuenciaservicio;
+  @Input() usoservicio;
+  @Input() mensajeservicio;
+  @Input() urgenciaservicio;
+
   text: string;
 
   constructor() {
-    console.log('Hello ServicioComponent Component');
-    this.text = 'Hello World';
+    // console.log('Servicio');
   }
 
 }

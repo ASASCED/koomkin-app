@@ -1,34 +1,41 @@
 <ion-menu id="myMenu" [content]="content">
-  <ion-header>
-    <ion-toolbar color="azul" >
-      <img src="../assets/imgs/iconos/infinito.png" style="margin-left: 45%;" />
-    </ion-toolbar>
-  </ion-header>
+    <ion-header>
+        <ion-toolbar color="azul">
+            <div style="text-align: center">
+                <img src="assets/imgs/iconos/infinito.svg" width="25%" />
+            </div>
+        </ion-toolbar>
+    </ion-header>
 
-  <ion-content color="azul">
-    <ion-list>
-      <button ion-item (click)="pagina(leads)">
-        <ion-icon name="appname-bandeja" class="iconos-m"> 
-        </ion-icon>
-        <p class="text">Leads</p>
-      </button>
-      <button ion-item (click)="pagina(reporte)">
-        <ion-icon name="appname-reporte" class="iconos-m">
-        </ion-icon>
-        <p class="text">Reporte</p>
-      </button>
-      <button ion-item (click)="pagina(datos)">
-        <ion-icon name="appname-datos" class="iconos-m">
-        </ion-icon>
-        <p class="text">Datos</p>
-      </button>
-      <button ion-item (click)="pagina(login)" class="salir">
-        <ion-icon name="appname-logout" class="iconos-m">
-        </ion-icon>
-        <p class="text">Cerrar Sesión</p>
-      </button>
-    </ion-list>
-  </ion-content>
+    <ion-content color="azul">
+        <ion-list>
+            <button ion-item (click)="pagina(leads)">
+                <ion-icon name="appname-bandeja" class="iconos-m">
+                </ion-icon>
+                <p class="text">Leads</p>
+            </button>
+            <button ion-item (click)="pagina(reporte)">
+                <ion-icon name="appname-reporte" class="iconos-m">
+                </ion-icon>
+                <p class="text">Reporte</p>
+            </button>
+            <button ion-item (click)="pagina(eficiencia)">
+                <ion-icon name="appname-eficiencia" class="iconos-m">
+                </ion-icon>
+                <p class="text">Eficiencia</p>
+            </button>
+            <button ion-item (click)="pagina(datos)">
+                <ion-icon name="appname-datos" class="iconos-m">
+                </ion-icon>
+                <p class="text">Configuración</p>
+            </button>
+            <button ion-item (click)="pagina(login); cerrarSesion();" class="salir">
+                <ion-icon name="appname-logout" class="iconos-m">
+                </ion-icon>
+                <p class="text">Cerrar Sesión</p>
+            </button>
+        </ion-list>
+    </ion-content>
 </ion-menu>
 
 <!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->

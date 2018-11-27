@@ -1,79 +1,152 @@
 page-login {
- 
     .login-content {
-        background: url("../../assets/imgs/login/4.svg");
+        background: url("../assets/imgs/login/6.svg");
         background-attachment: fixed;
         background-repeat: no-repeat;
         background-size: cover;
-   
-      .logo-row {
-        padding-top: 30%;
-      }
-
-      ::placeholder { 
-          color: white;
-          text-align: center;  
-      }
-
-      .bienvenido{
-          font-size: 1.6rem;
-          color: white;
-          padding: 0%;
-      }
-
-      .inicio{
-          color:white;
-          font-size: 3.3rem;
-          font-weight: bold;
-          margin:5%;
-      }
-
-      .item-md {
-        padding-left: 0;
-        padding-top: 0; 
-      }
-
-      .text-input-md{
-        box-shadow: none !important;
-        color:white;
-        text-align: center;
-      }
-
-      ion-input{
-          border: none !important;
-          box-shadow: none !important;
-      }
-
-      .text-input-ios{
-        box-shadow: none !important;
-        color:white;
-      }
-   
-      ion-row {
-         align-items: center;
-         text-align: center;
-       }
-   
-       ion-item {
-           border-radius: 15px !important;
-           margin-bottom: 10px;
-           border: 3px solid #ffffff !important;
-           background: transparent;
-       }
-   
-       .signup-col {
-         margin: 0px 16px 0px 16px;
-         padding-bottom: 20px;
-       }
-      
-       .submit-btn {
-         background: #00b9bf;;
-       }
-   
-       .register-btn {
-         color: #ffffff;
-         font-size: 0.8em;
-       }
+        .logo-row {
+            padding-top: 30%;
+        }
+        .alert-md .alert-button-group {
+            -webkit-flex-wrap: wrap-reverse;
+            -ms-flex-wrap: wrap-reverse;
+            flex-wrap: wrap-reverse;
+            -webkit-box-pack: end;
+            -webkit-justify-content: center !important;
+            -ms-flex-pack: end;
+            justify-content: center !important;
+            padding: 0px 24px 8px 24px !important;
+            text-align: center;
+        }
+         ::placeholder {
+            color: white;
+            text-align: center;
+        }
+        .bienvenido {
+            font-size: 1.6rem;
+            color: white;
+            padding: 0%;
+        }
+        .inicio {
+            color: white;
+            font-size: 3.3rem;
+            font-weight: bold;
+            margin: 5%;
+        }
+        .olvidaste {
+            color: white;
+            font-size: 1.5rem;
+            font-style: italic;
+            text-align: right !important;
+            margin: 2%;
+            background: none;
+            border: none;
+        }
+        .item-md {
+            padding-left: 0;
+            padding-top: 0;
+        }
+        .alert-md .alert-input:focus {
+            margin-bottom: 4px;
+            border-bottom: 2px solid #00b9bf !important;
+        }
+        .text-input-md {
+            box-shadow: none !important;
+            color: white;
+            text-align: center;
+        }
+        ion-input {
+            border: none !important;
+            box-shadow: none !important;
+            margin-left: 2% !important;
+        }
+        .text-input-ios {
+            box-shadow: none !important;
+            color: white !important;
+        }
+        .lower {
+            text-transform: lowercase !important;
+        }
+        ion-row {
+            align-items: center;
+            text-align: center;
+        }
+        ion-item {
+            border-radius: 15px !important;
+            margin-bottom: 10px;
+            border: 3px solid #ffffff !important;
+            background: transparent;
+        }
+        .signup-col {
+            margin: 0px 16px 0px 16px;
+            padding-bottom: 20px;
+        }
+        .submit-btn {
+            background: #00b9bf;
+            ;
+        }
+        .register-btn {
+            color: #ffffff;
+            font-size: 0.8em;
+        }
     }
-   
-  }
+}
+
+.buttonCss2 {
+    button.alert-button.exit-button {
+        text-align: center;
+        border-radius: 5px;
+        position: relative;
+        overflow: hidden;
+        font-weight: 500;
+        text-transform: none;
+        color: white;
+        margin: 0 8px 0 0;
+        padding: 10px;
+        background: #00b9bf;
+    }
+    .alert-md .alert-button-group {
+        -webkit-flex-wrap: wrap-reverse;
+        -ms-flex-wrap: wrap-reverse;
+        flex-wrap: wrap-reverse;
+        -webkit-box-pack: end;
+        -webkit-justify-content: center !important;
+        -ms-flex-pack: end;
+        justify-content: center !important;
+        padding: 0px 24px 8px 24px !important;
+        text-align: center !important;
+    }
+    button.alert-button.cancel-button {
+        text-align: center;
+        border-radius: 5px;
+        position: relative;
+        overflow: hidden;
+        font-weight: 500;
+        text-transform: none;
+        color: white;
+        margin: 0 8px 0 0;
+        padding: 10px;
+        background: white !important;
+        border: 1px solid #00b9bf !important;
+        color: #00b9bf !important;
+    }
+    .alert-md .alert-input:focus {
+        margin-bottom: 4px;
+        border-bottom: 2px solid #00b9bf !important;
+    }
+    .alert-input {
+        padding: 10px !important;
+        border: 0;
+        background: inherit;
+    }
+    .alert-md .alert-sub-title {
+        font-size: 16px !important;
+        text-align: start !important;
+        padding: 0px 14px 0px !important;
+    }
+    .alert-md .alert-message {
+        max-height: 240px;
+        font-size: 15px;
+        text-align: justify !important;
+    }
+}

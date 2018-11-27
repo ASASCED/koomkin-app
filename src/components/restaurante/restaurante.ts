@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component,Input, OnInit } from '@angular/core';
 
 /**
  * Generated class for the RestauranteComponent component.
@@ -10,13 +10,21 @@ import { Component } from '@angular/core';
   selector: 'restaurante',
   templateUrl: 'restaurante.html'
 })
-export class RestauranteComponent {
+export class RestauranteComponent implements OnInit {
+
+  @Input() fechaCitarestaurante;
+  @Input() horaCitarestaurante;
+  @Input() mensajerestaurante;
+  @Input() personasrestaurante;
 
   text: string;
 
   constructor() {
-    console.log('Hello RestauranteComponent Component');
-    this.text = 'Hello World';
+    // console.log('Restaurante');
+  }
+
+  ngOnInit(){
+   // console.log(this.horaCitarestaurante,this.fechaCitarestaurante);
   }
 
 }

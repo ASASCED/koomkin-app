@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 75 75">
+  <defs>
+    <style>
+      .cls-1, .cls-4 {
+        fill: #3dcdbb;
+      }
+
+      .cls-2 {
+        fill: #fff;
+      }
+
+      .cls-3 {
+        fill: none;
+        stroke: #3dcdbb;
+        stroke-width: 2px;
+      }
+
+      .cls-4 {
+        font-size: 15px;
+        font-family: Roboto-Bold, Roboto;
+        font-weight: 700;
+      }
+    </style>
+  </defs>
+  <g id="Group_6899" data-name="Group 6899" transform="translate(-11126 -3697)">
+    <circle id="Ellipse_315" data-name="Ellipse 315" class="cls-1" cx="37.5" cy="37.5" r="37.5" transform="translate(11126 3697)"/>
+    <path id="Path_13274" data-name="Path 13274" class="cls-2" d="M0,0H28V39.515l-4.4-3.074-4.69,3.074-4.667-3.074L9.455,39.515S4.545,36.485,4.5,36.441c.046-.017-4.5,3.074-4.5,3.074Z" transform="translate(11150 3715)"/>
+    <path id="Path_13275" data-name="Path 13275" class="cls-3" d="M8162.5,3742.5H8180" transform="translate(2992 -21.485)"/>
+    <path id="Path_13278" data-name="Path 13278" class="cls-3" d="M8162.5,3742.5H8180" transform="translate(2992 -15.485)"/>
+    <path id="Path_13276" data-name="Path 13276" class="cls-3" d="M8162.5,3742.758h6.5" transform="translate(2992 -9.742)"/>
+    <path id="Path_13277" data-name="Path 13277" class="cls-3" d="M8162.5,3742.758h6.5" transform="translate(2992 -3.742)"/>
+    <path id="Path_13279" data-name="Path 13279" class="cls-3" d="M8162.5,3742.758h6.5" transform="translate(2992 2.258)"/>
+    <text id="_" data-name="$" class="cls-4" transform="translate(11163 3745)"><tspan x="0" y="0">$</tspan></text>
+  </g>
+</svg>
