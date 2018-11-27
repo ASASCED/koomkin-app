@@ -270,7 +270,7 @@ page-eficiencia {
         background-color: white;
         display: grid !important;
         grid-template-areas: "section1-ranking section2-ranking" "section3-ranking section3-ranking" "section4-ranking section4-ranking";
-        grid-template-rows: 21% 25% 39%;
+        grid-template-rows: 21% 25% 38%;
         grid-template-columns: 48% 48%;
         grid-column-gap: 1%;
         grid-row-gap: 1.5%;
@@ -642,7 +642,7 @@ page-eficiencia {
             order: 1;
         }
         .tema {
-            font-size: .6em;
+            font-size: 2.8vw;
             color: #33A2BD;
             margin-top: 7%;
         }
@@ -663,7 +663,7 @@ page-eficiencia {
             order: 1;
         }
         .tema {
-            font-size: .6em;
+            font-size: 2.8vw;
             color: #33A2BD;
             margin-top: 7%;
         }
@@ -684,7 +684,7 @@ page-eficiencia {
             order: 1;
         }
         .tema {
-            font-size: .6em;
+            font-size: 2.8vw;
             color: #33A2BD;
             margin-top: 7%;
         }
@@ -705,7 +705,7 @@ page-eficiencia {
             order: 1;
         }
         .tema {
-            font-size: .6em;
+            font-size: 2.8vw;
             color: #33A2BD;
             margin-top: 7%;
         }
@@ -726,7 +726,7 @@ page-eficiencia {
             order: 1;
         }
         .tema {
-            font-size: .6em;
+            font-size: 2.8vw;
             color: #33A2BD;
             margin-top: 7%;
         }
@@ -747,7 +747,7 @@ page-eficiencia {
             order: 1;
         }
         .tema {
-            font-size: .6em;
+            font-size: 2.8vw;
             color: #33A2BD;
             margin-top: 7%;
         }
@@ -1197,4 +1197,31 @@ div.google-visualization-tooltip ul.google-visualization-tooltip-item-list li.go
     background: #288AC1;
     color: white !important;
     border: none !important;
+}
+
+.azul.range-md.range-disabled .range-bar-active {
+    background-color: #288AC1;
+}
+
+.rojo.range-md.range-disabled .range-bar-active {
+    background-color: red;
+}
+
+.range-md .range-knob-handle {
+    left: 0;
+    top: 21px;
+    margin-left: -21px;
+    margin-top: -21px;
+    text-align: center;
+    position: absolute;
+    width: .1px;
+    height: .1px;
+}
+
+.range-md.range-disabled .range-knob {
+    outline: none;
+    background-color: #bdbdbd;
+    -webkit-transform: scale(0.55);
+    transform: scale(0.55);
+    width: .1px;
 }

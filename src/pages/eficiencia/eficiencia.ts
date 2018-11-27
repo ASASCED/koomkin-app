@@ -25,10 +25,12 @@ export class EficienciaPage implements OnInit {
 
   public fiveprogress = "0";
   public thirtyprogress = "0";
-
+  public hola: number = 0;
   public idcuarta;
   clientes: number = 0;
   clientes2: number = 0;
+  clientesrep: number = 0;
+  clientes2rep: number = 0;
 
   public empresa;
   public id;
@@ -39,42 +41,20 @@ export class EficienciaPage implements OnInit {
   public empresas_atendidos = "N/A";
   public empresa_acciones = "N/A";
   public empresas_acciones = "N/A";
+  public cempresa_atendidos: number = 0;
+  public cempresas_atendidos: number = 0;
+  public cempresa_acciones: number = 0;
+  public cempresas_acciones: number = 0;
   public empresa_negociacion = "N/A";
   public empresas_negociacion = "N/A";
   public empresa_contacto = "N/A";
   public empresas_contacto = "N/A";
   public ganadores;
 
-  public columnChartData: any = {
-    chartType: "ColumnChart",
-    dataTable: [
-      ["Country", "Performance", "Profits"],
-      ["Germany", 700, 1200],
-      ["USA", 300, 600],
-      ["Brazil", 400, 500],
-      ["Canada", 500, 1000],
-      ["France", 600, 1100],
-      ["RU", 800, 1000]
-    ],
-    options: { title: "Countries" }
-  };
 
   public bar_ChartData: any = {
     chartType: "BarChart",
-    dataTable: [
-      ["Posición", "Leads", { role: "style" }],
-      ["1", 11.04, "color: #f5a623"],
-      ["100", 10.14, "color: #3DCDBB"],
-      ["200", 8.51, "color: #3DCDBB"],
-      ["300", 7.08, "color: #3DCDBB"],
-      ["400", 5.86, "color: #3DCDBB"],
-      ["500", 3.89, "color: #3DCDBB"],
-      ["600", 2.94, "color: #3DCDBB"],
-      ["700", 1.49, "color: #3DCDBB"],
-      ["800", 0.68, "color: #3DCDBB"],
-      ["900", 0.13, "color: #3DCDBB"],
-      ["+1000", 0, "color: #3DCDBB"]
-    ],
+    dataTable: [],
     options: {
       tooltip: { isHtml: true },
       chartArea: { width: "75%", heigth: "100%" },
@@ -202,35 +182,38 @@ export class EficienciaPage implements OnInit {
     myModal.onDidDismiss(() => {});
   }
 
-  opentipventa(tip) {
+  openTipVenta(tip, variable) {
     if (tip === "tip1") {
-      this.tip1 = true;
-      this.tip2 = false;
-      this.tip3 = false;
+      if (variable == false) {
+        this.tip1 = true;
+        this.tip2 = false;
+        this.tip3 = false;
+      } else {
+        this.tip1 = false;
+        this.tip2 = false;
+        this.tip3 = false;
+      }
     } else if (tip === "tip2") {
-      this.tip1 = false;
-      this.tip2 = true;
-      this.tip3 = false;
+      if (variable == false) {
+        this.tip1 = false;
+        this.tip2 = true;
+        this.tip3 = false;
+      } else {
+        this.tip1 = false;
+        this.tip2 = false;
+        this.tip3 = false;
+      }
     } else if (tip === "tip3") {
-      this.tip1 = false;
-      this.tip2 = false;
-      this.tip3 = true;
+      if (variable == false) {
+        this.tip1 = false;
+        this.tip2 = false;
+        this.tip3 = true;
+      } else {
+        this.tip1 = false;
+        this.tip2 = false;
+        this.tip3 = false;
+      }
     }
-  }
-
-  rangeCtrl = new FormControl({ value: "66", disabled: true });
-  dualRangeCtrl = new FormControl({
-    value: { lower: 33, upper: 60 },
-    disabled: true
-  });
-
-  rangeForm = new FormGroup({
-    range: this.rangeCtrl,
-    dualRange: this.dualRangeCtrl
-  });
-
-  rangeChange(range: Range) {
-    console.log(`range, change, ratio: ${range.ratio}, value: ${range.value}`);
   }
 
   public getInsertClickPagina() {
@@ -262,6 +245,9 @@ export class EficienciaPage implements OnInit {
           this.clientes = this.datos[0].avg_HorasAtencion_5.toFixed();
           this.clientes2 = this.datos[0].avg_HorasAtencionTotal.toFixed();
 
+          this.clientesrep = this.datos[0].avg_HorasAtencion_5.toFixed();
+          this.clientes2rep = this.datos[0].avg_HorasAtencionTotal.toFixed();
+
           this.fiveprogress = JSON.stringify(this.datos[0].pAtendidos_5 * 100);
           this.thirtyprogress = JSON.stringify(
             this.datos[0].pAtendidos_2hrs * 100
@@ -273,6 +259,9 @@ export class EficienciaPage implements OnInit {
           this.empresa_acciones =
             JSON.stringify(this.datos[0].pContestaAccionesK.toFixed(2) * 100) +
             "%";
+          this.cempresa_atendidos = this.datos[0].pAtendidos.toFixed(2) * 100;
+          this.cempresa_acciones =
+            this.datos[0].pContestaAccionesK.toFixed(2) * 100;
           this.empresa_negociacion = this.datos[0].TiempoNegociacion;
           this.empresa_contacto = this.datos[0].IntentosNoEx.toFixed(2);
           if (this.idcuarta) {
@@ -286,10 +275,10 @@ export class EficienciaPage implements OnInit {
             this.empresas_contacto = "N/A";
           }
         }
-        console.log(this.datos);
+       //  console.log(this.datos);
       },
       err => {
-        console.log("error");
+      //   console.log("error");
         this.empresas_tiempo = "N/A";
         this.empresas_atendidos = "N/A";
         this.empresas_acciones = "N/A";
@@ -304,13 +293,16 @@ export class EficienciaPage implements OnInit {
       data => {
         this.datos = data;
         if (this.datos.length > 0) {
-          console.log(this.datos);
+       //    console.log(this.datos);
           this.empresas_tiempo = this.datos[0].avg_HorasAtencion.toFixed();
           this.empresas_atendidos =
             JSON.stringify(this.datos[0].pAtendidos.toFixed(2) * 100) + "%";
           this.empresas_acciones =
             JSON.stringify(this.datos[0].pContestaAccionesK.toFixed(2) * 100) +
             "%";
+          this.cempresas_atendidos = this.datos[0].pAtendidos.toFixed(2) * 100;
+          this.cempresas_acciones =
+            this.datos[0].pContestaAccionesK.toFixed(2) * 100;
           this.empresas_negociacion = this.datos[0].TiempoNegociacion;
           this.empresas_contacto = this.datos[0].IntentosNoEx.toFixed(2);
         } else {
@@ -359,7 +351,65 @@ export class EficienciaPage implements OnInit {
     this.provedor.getEficiencyRanking().then(
       data => {
         this.datos = data;
-        console.log(this.datos);
+        let lugar = [ { posicion: "1" }, { posicion: "100" }, { posicion: "200" }, { posicion: "300" },{ posicion: "400" }, { posicion: "500" },{ posicion: "600" }, { posicion: "700" },{ posicion: "800" }, { posicion: "900" },  { posicion: "+1000" }, ]
+        let outter = [];
+        outter.push(['Posición', 'Leads', { "role": "style" }]);
+          for (let i = 0; i < this.datos.length; i++) {
+            let inner = [];
+            inner.push(lugar[i].posicion);
+            inner.push(this.datos[i].CierredeVenta);
+            if(this.datos[i].Clientes == 1){
+              inner.push("#f5a623");
+            }else {
+              inner.push("#3DCDBB");
+            }
+            outter.push(inner);
+          }
+
+          this.bar_ChartData = {
+            chartType: "BarChart",
+            dataTable: outter,
+            options: {
+              tooltip: { isHtml: true },
+              chartArea: { width: "75%", heigth: "100%" },
+              legend: { position: "none" },
+              bars: "horizontal",
+              is3D: true,
+              hAxis: {
+                title: "Leads en cierre de venta",
+                textStyle: {
+                  color: "#288AC1",
+                  fontSize: 8,
+                  fontName: "Arial",
+                  italic: true
+                },
+                titleTextStyle: {
+                  color: "#288AC1",
+                  fontSize: 10,
+                  fontName: "Arial",
+                  bold: true,
+                  italic: true
+                }
+              },
+              vAxis: {
+                title: "Posición",
+                textStyle: {
+                  color: "#288AC1",
+                  fontSize: 8,
+                  fontName: "Arial",
+                  italic: true
+                },
+                titleTextStyle: {
+                  color: "#288AC1",
+                  fontSize: 10,
+                  fontName: "Arial",
+                  bold: true,
+                  italic: true
+                }
+              },
+              bar: { groupWidth: "60%" }
+            }
+          };
       },
       err => {
         console.log("error");
@@ -372,11 +422,12 @@ export class EficienciaPage implements OnInit {
       data => {
         this.datos = data;
         this.ganadores = this.datos;
-        console.log(this.datos);
+        // console.log(this.datos);
       },
       err => {
         console.log("error");
       }
     );
   }
+
 }

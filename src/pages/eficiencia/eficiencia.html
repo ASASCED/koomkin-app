@@ -9,7 +9,7 @@
 </ion-header>
 
 <ion-content class="detail-card" color="fondo">
-    <ion-card style="height: 80%;">
+    <ion-card style="height: 80%;" *ngIf="hola == 1">
         <ion-card-header class="encabezado">
             <ion-grid>
                 <ion-row>
@@ -85,7 +85,7 @@
             </main>
         </ion-card-content>
     </ion-card>
-    <ion-card style="height:130% !important; ">
+    <ion-card style="height:115% !important; ">
         <ion-card-header class="encabezado ">
             <ion-grid>
                 <ion-row>
@@ -244,8 +244,8 @@
                                 </ion-col>
                                 <ion-col col-3 style="display: grid; ">
                                     <img *ngIf="empresa_atendidos == empresas_atendidos || empresa_atendidos == 'N/A'" src="assets/imgs/eficiencia/neutral.svg " style="width: 80%;margin-left: 10%; " />
-                                    <img *ngIf="empresa_atendidos > empresas_atendidos" src="assets/imgs/eficiencia/feliz.svg " style="width: 80%;margin-left: 10%; " />
-                                    <img *ngIf="empresa_atendidos < empresas_atendidos" src="assets/imgs/eficiencia/triste.svg " style="width: 80%;margin-left: 10%; " /> </ion-col>
+                                    <img *ngIf="cempresa_atendidos > cempresas_acciones" src="assets/imgs/eficiencia/feliz.svg " style="width: 80%;margin-left: 10%; " />
+                                    <img *ngIf="cempresa_atendidos < cempresas_acciones" src="assets/imgs/eficiencia/triste.svg " style="width: 80%;margin-left: 10%; " /> </ion-col>
                             </ion-row>
                         </ion-grid>
                         <hr style="background-color:rgba(112,112,112,0.3); width:94%;height: 2px;margin-top: 0;margin-bottom: 0; ">
@@ -266,8 +266,8 @@
                                 </ion-col>
                                 <ion-col col-3 style="display: grid; ">
                                     <img *ngIf="empresa_acciones == empresas_acciones || empresa_acciones == 'N/A'" src="assets/imgs/eficiencia/neutral.svg " style="width: 80%;margin-left: 10%; " />
-                                    <img *ngIf="empresa_acciones > empresas_acciones" src="assets/imgs/eficiencia/feliz.svg " style="width: 80%;margin-left: 10%; " />
-                                    <img *ngIf="empresa_acciones < empresas_acciones" src="assets/imgs/eficiencia/triste.svg " style="width: 80%;margin-left: 10%; " />
+                                    <img *ngIf="cempresa_acciones > cempresas_acciones" src="assets/imgs/eficiencia/feliz.svg " style="width: 80%;margin-left: 10%; " />
+                                    <img *ngIf="cempresa_acciones < cempresas_acciones" src="assets/imgs/eficiencia/triste.svg " style="width: 80%;margin-left: 10%; " />
                                 </ion-col>
                             </ion-row>
                         </ion-grid>
@@ -387,14 +387,14 @@
                                 <div class="section3-leads">
                                     <ion-list>
                                         <ion-item *ngIf="clientes < 120">
-                                            <ion-range step="1" min="0" max="120" [(ngModel)]="clientes" color="barra" pin="true">
+                                            <ion-range class="azul" debounce="10" step="1" min="0" max="120" [(ngModel)]="clientes" color="barra" pin="true" disabled>
                                                 <ion-label range-left>
                                                     < 1min </ion-label>
                                                         <ion-label range-right> > 120min </ion-label>
                                             </ion-range>
                                         </ion-item>
                                         <ion-item *ngIf="clientes > 120">
-                                            <ion-range step="1" min="120" max="999" [(ngModel)]="clientes" color="danger" pin="true">
+                                            <ion-range class="rojo" debounce="500" step="1" min="120" max="999" [ngModel]="clientes" color="danger" pin="true" disabled>
                                                 <ion-label range-left>
                                                     < 120min </ion-label>
                                                         <ion-label range-right>
@@ -410,14 +410,14 @@
                                 <div class="section5-leads">
                                     <ion-list>
                                         <ion-item *ngIf="clientes2 < 120">
-                                            <ion-range step="1" min="0" max="120" [(ngModel)]="clientes2" color="barra" pin="true">
+                                            <ion-range class="azul" step="1" min="0" max="120" [(ngModel)]="clientes2" color="barra" pin="true" disabled>
                                                 <ion-label range-left>
                                                     < 1min </ion-label>
                                                         <ion-label range-right> > 120min </ion-label>
                                             </ion-range>
                                         </ion-item>
                                         <ion-item *ngIf="clientes2 > 120">
-                                            <ion-range step="1" min="120" max="999" [(ngModel)]="clientes2" color="danger" pin="true">
+                                            <ion-range class="rojo" step="1" min="120" max="999" [(ngModel)]="clientes2" color="danger" pin="true" disabled>
                                                 <ion-label range-left>
                                                     < 120min </ion-label>
                                                         <ion-label range-right>
@@ -443,7 +443,8 @@
                                 </div>
                                 <div class="section2-leads">
                                     <img *ngIf="fiveprogress > 70 && thirtyprogress > 70" src="assets/imgs/eficiencia/feliz.svg " style="width: 80%;margin-left: 10%; " />
-                                    <img *ngIf="fiveprogress < 70 && thirtyprogress < 70" src="assets/imgs/eficiencia/triste.svg " style="width: 80%;margin-left: 10%; " />
+                                    <img *ngIf="fiveprogress >= 30 && thirtyprogress >= 30 && fiveprogress <= 70 && thirtyprogress <= 70 || fiveprogress == 0 && thirtyprogress == 0" src="assets/imgs/eficiencia/triste.svg " style="width: 80%;margin-left: 10%; " />
+                                    <img *ngIf="fiveprogress < 30 && thirtyprogress < 30 && fiveprogress > 0 && thirtyprogress > 0" src="assets/imgs/eficiencia/triste.svg " style="width: 80%;margin-left: 10%; " />
                                 </div>
                                 <div class="section3-leads">
                                     <ion-grid>
@@ -515,7 +516,7 @@
         <ion-card-content>
             <main class="cuadros-tips">
                 <div class="section1-tips">
-                    <button type="button" class="collapsible" [ngClass]="{'expand':tip1 == false}" (click)="opentipventa('tip1')"> 
+                    <button type="button" class="collapsible" [ngClass]="{'expand':tip1 == false}" (click)="openTipVenta('tip1',tip1);"> 
                         <ion-icon *ngIf="tip1 == false" class="flecha" name="md-arrow-dropright"></ion-icon>
                         <ion-icon *ngIf="tip1 == true" class="flecha" name="md-arrow-dropdown"></ion-icon>
                         Conoce el secreto para subir en el ranking de vendedores.</button>
@@ -527,7 +528,7 @@
                             </div>
                         </div>
                     </div>
-                    <button type="button" class="collapsible" [ngClass]="{'expand':tip2 == false}" (click)="opentipventa('tip2')">
+                    <button type="button" class="collapsible" [ngClass]="{'expand':tip2 == false}" (click)="openTipVenta('tip2',tip2)">
                             <ion-icon *ngIf="tip2 == false" class="flecha" name="md-arrow-dropright"></ion-icon>
                             <ion-icon *ngIf="tip2 == true" class="flecha" name="md-arrow-dropdown"></ion-icon>
                             Aumenta tus ventas al atender más rápido al cliente</button>
@@ -538,7 +539,7 @@
                             </div>
                         </div>
                     </div>
-                    <button type="button" class="collapsible" [ngClass]="{'expand':tip3 == false}" (click)="opentipventa('tip3')">
+                    <button type="button" class="collapsible" [ngClass]="{'expand':tip3 == false}" (click)="openTipVenta('tip3',tip3)">
                             <ion-icon *ngIf="tip3 == false" class="flecha" name="md-arrow-dropright"></ion-icon>
                             <ion-icon *ngIf="tip3 == true" class="flecha" name="md-arrow-dropdown"></ion-icon>
                             Deja una buena primera impresión personalizando tu mensaje de saludo automático. </button>
