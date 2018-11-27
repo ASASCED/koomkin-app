@@ -27,8 +27,8 @@ export class EficienciaPage implements OnInit {
   public thirtyprogress = "0";
   public hola: number = 0;
   public idcuarta;
-  clientes;
-  clientes2;
+  clientes: any = 0;
+  clientes2: any = 0;
   clientesrep: number = 0;
   clientes2rep: number = 0;
 
