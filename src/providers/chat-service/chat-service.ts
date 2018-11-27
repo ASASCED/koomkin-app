@@ -1,6 +1,5 @@
 import { Injectable  } from '@angular/core';
 import {AlertController, Events, LoadingController} from 'ionic-angular';
-import { map } from 'rxjs/operators/map';
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs/Observable";
 import { BehaviorSubject} from "rxjs";

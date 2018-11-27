@@ -3,7 +3,6 @@ import { MenuController, IonicPage, NavController, LoadingController, AlertContr
 import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
 import { RestProvider } from '../../providers/rest/rest';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
-import { LeadsPage } from '../leads/leads'
 import { Md5 } from 'ts-md5/dist/md5';
 import { Storage } from '@ionic/storage';
 import { Network } from '@ionic-native/network';
@@ -145,17 +144,16 @@ export class LoginPage implements OnInit {
       this.leads = data;
      
       if (this.leads.length > 0) {
-       if (this.plt.is('ios') || this.plt.is('android')) {
+     /*   if (this.plt.is('ios') || this.plt.is('android')) {
           window["plugins"].OneSignal.sendTag("email_error", "");
-        } 
+        } */
 
         this.id = this.leads[0].IDUSUARIO;
         if (Md5.hashStr(this.password) === this.leads[0].PASSWORD2) {
-          //console.log(this.leads);
 
           this.restService.setUser(this.id);
 
-         if (this.plt.is('ios') || this.plt.is('android')) {
+      /*   if (this.plt.is('ios') || this.plt.is('android')) {
 
             window["plugins"].OneSignal.getPermissionSubscriptionState((status) => {
 
@@ -167,7 +165,7 @@ export class LoginPage implements OnInit {
             window["plugins"].OneSignal.sendTag("email", "");
             window["plugins"].OneSignal.sendTag("id_usuario", this.id);
 
-          } 
+          } */
 
           //Appsee.setUserId(this.id);
 
@@ -183,16 +181,16 @@ export class LoginPage implements OnInit {
 
         } else {
 
-          if (this.plt.is('ios') || this.plt.is('android')) {
+      /*    if (this.plt.is('ios') || this.plt.is('android')) {
             window["plugins"].OneSignal.sendTag("email", this.email);
             window["plugins"].OneSignal.sendTag("pwd_error", this.password);
-          } 
+          } */
           this.showError('Verifica tu correo y/o contraseña', 'Intenta de nuevo.');
         }
       } else if (this.leads.length == 0) {
-        if (this.plt.is('ios') || this.plt.is('android')) {
+      /*  if (this.plt.is('ios') || this.plt.is('android')) {
           window["plugins"].OneSignal.sendTag("email_error", this.email);
-        } 
+        } */
         this.showError('Verifica tu correo y/o contraseña', 'Intenta de nuevo.');
       }
 
@@ -221,12 +219,12 @@ export class LoginPage implements OnInit {
                 if (Md5.hashStr(this.password) === this.leads[0].PASSWORD2) {
                   
                   this.app = this.leads[0].app;
-                  // console.log(this.leads);
+                //  console.log("entro");
                   this.authService.setUserIsLogged(true);
                   this.restService.setUser(this.id);
                 // this.restService.setApp(this.app);
                   console.log(this.app);
-                   if (this.plt.is('ios') || this.plt.is('android')) {
+                  /*  if (this.plt.is('ios') || this.plt.is('android')) {
                     window["plugins"].OneSignal.getPermissionSubscriptionState((status) => {
                       const deviceId = status.subscriptionStatus.userId;
                       this.restService.registerDeviceID(deviceId);
@@ -235,7 +233,7 @@ export class LoginPage implements OnInit {
 
                     window["plugins"].OneSignal.sendTag("id_usuario", this.id);
 
-                  } 
+                   } */
                   this.storage.set('email', this.email);
                   this.storage.set('password', this.password);
 
@@ -253,12 +251,6 @@ export class LoginPage implements OnInit {
                         this.iniciarClienteChatTwilio(data[0]['uuid']);
                       }
                     });
-;
-                    /*this.navCtrl.setRoot(LeadsPage).then(()=>{
-                      if(data[0]['uuid']){
-                        this.iniciarClienteChatTwilio(data[0]['uuid']);
-                      }
-                    });*/
                   }
 
                 }
