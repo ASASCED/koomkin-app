@@ -270,7 +270,7 @@ page-eficiencia {
         background-color: white;
         display: grid !important;
         grid-template-areas: "section1-ranking section2-ranking" "section3-ranking section3-ranking" "section4-ranking section4-ranking";
-        grid-template-rows: 21% 25% 38%;
+        grid-template-rows: 23% 19% 40%;
         grid-template-columns: 48% 48%;
         grid-column-gap: 1%;
         grid-row-gap: 1.5%;
@@ -342,7 +342,7 @@ page-eficiencia {
             }
             .koomkin-empresa {
                 margin: 0 0 2px;
-                font-size: 1.2rem;
+                font-size: 5vw;
                 font-weight: normal;
                 line-height: 1.5;
                 color: #707070;
@@ -432,7 +432,7 @@ page-eficiencia {
             background-color: white;
             display: grid !important;
             grid-template-areas: "section1-koomkin section1-koomkin" "section2-koomkin section2-koomkin";
-            grid-template-rows: 15% auto;
+            grid-template-rows: 20% auto;
             grid-template-columns: 50% auto;
             width: 100%;
             margin-left: auto;
@@ -482,7 +482,7 @@ page-eficiencia {
             }
             .koomkin-empresa {
                 margin: 0 0 2px;
-                font-size: 1.3rem;
+                font-size: 5vw;
                 font-weight: normal;
                 line-height: 1.5;
                 color: #707070;
@@ -504,7 +504,7 @@ page-eficiencia {
             background-color: white;
             display: grid !important;
             grid-template-areas: "section1-grafica section1-grafica" "section2-grafica section2-grafica";
-            grid-template-rows: 15% auto;
+            grid-template-rows: 20% auto;
             grid-template-columns: 50% auto;
             width: 100%;
             margin-left: auto;
@@ -586,7 +586,7 @@ page-eficiencia {
         display: grid !important;
         grid-template-areas: "section1-sector section2-sector" "section3-sector section3-sector" "section4-sector section4-sector" "section5-sector section5-sector" "section6-sector section6-sector" "section7-sector section7-sector" "section8-sector section8-sector";
         grid-template-columns: 50% 50%;
-        grid-template-rows: 5% 16% 16% 16% 16% 16% 16%;
+        grid-template-rows: 5% 15% 15% 15% 15% 15% 16%;
         width: 94%;
         align-items: center;
         @media (max-width: 36rem) {
@@ -642,9 +642,9 @@ page-eficiencia {
             order: 1;
         }
         .tema {
-            font-size: 2.8vw;
+            font-size: 4vw;
             color: #33A2BD;
-            margin-top: 7%;
+            margin-bottom: 3%;
         }
         .tiempo {
             color: black;
@@ -663,9 +663,9 @@ page-eficiencia {
             order: 1;
         }
         .tema {
-            font-size: 2.8vw;
+            font-size: 4vw;
             color: #33A2BD;
-            margin-top: 7%;
+            margin-bottom: 3%;
         }
         .tiempo {
             color: black;
@@ -684,9 +684,9 @@ page-eficiencia {
             order: 1;
         }
         .tema {
-            font-size: 2.8vw;
+            font-size: 4vw;
             color: #33A2BD;
-            margin-top: 7%;
+            margin-bottom: 3%;
         }
         .tiempo {
             color: black;
@@ -705,9 +705,9 @@ page-eficiencia {
             order: 1;
         }
         .tema {
-            font-size: 2.8vw;
+            font-size: 4vw;
             color: #33A2BD;
-            margin-top: 7%;
+            margin-bottom: 3%;
         }
         .tiempo {
             color: black;
@@ -726,9 +726,9 @@ page-eficiencia {
             order: 1;
         }
         .tema {
-            font-size: 2.8vw;
+            font-size: 4vw;
             color: #33A2BD;
-            margin-top: 7%;
+            margin-bottom: 3%;
         }
         .tiempo {
             color: black;
@@ -747,16 +747,16 @@ page-eficiencia {
             order: 1;
         }
         .tema {
-            font-size: 2.8vw;
+            font-size: 4vw;
             color: #33A2BD;
-            margin-top: 7%;
+            margin-bottom: 3%;
         }
         .tiempo {
             color: black;
             margin: 0;
             font-size: 1em;
             font-weight: normal;
-            text-align: center;
+            text-align: left;
         }
     }
     .cuadros-tendencia {
@@ -858,8 +858,10 @@ page-eficiencia {
                 }
                 .naranja {
                     color: rgba(254, 112, 63, 0.87);
-                    font-size: 1.2em;
+                    font-size: 3.6vw;
                     font-weight: bold;
+                    text-align: left;
+                    margin-left: 2%;
                 }
             }
             .section2-leads {
@@ -879,6 +881,13 @@ page-eficiencia {
                 @media (max-width: 36rem) {
                     order: 1;
                 }
+                .titulo {
+                    font-size: 1.3em;
+                    line-height: 17px;
+                    color: #33A2BD;
+                    font-family: Helvetica;
+                    margin-top: 0;
+                }
             }
             .section4-leads {
                 grid-area: section4-leads;
@@ -891,8 +900,10 @@ page-eficiencia {
                 }
                 .naranja {
                     color: rgba(254, 112, 63, 0.87);
-                    font-size: 1.2em;
+                    font-size: 3.6vw;
                     font-weight: bold;
+                    text-align: left;
+                    margin-left: 2%;
                 }
             }
             .section5-leads {
@@ -902,6 +913,13 @@ page-eficiencia {
                 display: grid;
                 @media (max-width: 36rem) {
                     order: 1;
+                }
+                .titulo {
+                    font-size: 1.3em;
+                    line-height: 17px;
+                    color: #33A2BD;
+                    font-family: Helvetica;
+                    margin-top: 0;
                 }
             }
         }
@@ -1000,8 +1018,10 @@ page-eficiencia {
                 }
                 .naranja {
                     color: rgba(254, 112, 63, 0.87);
-                    font-size: 1.2em;
+                    font-size: 3.6vw;
                     font-weight: bold;
+                    text-align: left;
+                    margin-left: 2%;
                 }
             }
             .section2-leads {
@@ -1033,8 +1053,10 @@ page-eficiencia {
                 }
                 .naranja {
                     color: rgba(254, 112, 63, 0.87);
-                    font-size: 1.2em;
+                    font-size: 3.6vw;
                     font-weight: bold;
+                    text-align: left;
+                    margin-left: 2%;
                 }
             }
             .section5-leads {
@@ -1204,7 +1226,7 @@ div.google-visualization-tooltip ul.google-visualization-tooltip-item-list li.go
 }
 
 .rojo.range-md.range-disabled .range-bar-active {
-    background-color: red;
+    background-color: red !important;
 }
 
 .range-md .range-knob-handle {

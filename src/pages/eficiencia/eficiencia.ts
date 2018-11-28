@@ -4,12 +4,10 @@ import {
   NavController,
   NavParams,
   AlertController,
-  ModalController,
-  Range
+  ModalController
 } from "ionic-angular";
 import { RestProvider } from "../../providers/rest/rest";
 import { AuthServiceProvider } from "../../providers/auth-service/auth-service";
-import { FormControl, FormGroup } from "@angular/forms";
 
 @IonicPage()
 @Component({
@@ -50,8 +48,13 @@ export class EficienciaPage implements OnInit {
   public empresa_contacto = "N/A";
   public empresas_contacto = "N/A";
   public ganadores;
-
-
+  public month = new Date();
+  public year = new Date();
+  public years = this.year.getFullYear();
+  public mes:any = this.month.getMonth();
+  public months;
+  monthNames = [ "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
+  "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" ];
   public bar_ChartData: any = {
     chartType: "BarChart",
     dataTable: [],
@@ -96,7 +99,6 @@ export class EficienciaPage implements OnInit {
       bar: { groupWidth: "60%" }
     }
   };
-
   public premios = [
     "20,000",
     "18,000",
@@ -111,36 +113,36 @@ export class EficienciaPage implements OnInit {
   ];
   public palabrasempresa = [
     {
-      palabra: "N/A"
+      palabra: "Sin info"
     },
     {
-      palabra: "N/A"
+      palabra: "Sin info"
     },
     {
-      palabra: "N/A"
+      palabra: "Sin info"
     },
     {
-      palabra: "N/A"
+      palabra: "Sin info"
     },
     {
-      palabra: "N/A"
+      palabra: "Sin info"
     }
   ];
   public palabrasempresas = [
     {
-      palabra: "N/A"
+      palabra: "Sin info"
     },
     {
-      palabra: "N/A"
+      palabra: "Sin info"
     },
     {
-      palabra: "N/A"
+      palabra: "Sin info"
     },
     {
-      palabra: "N/A"
+      palabra: "Sin info"
     },
     {
-      palabra: "N/A"
+      palabra: "Sin info"
     }
   ];
 
@@ -162,6 +164,9 @@ export class EficienciaPage implements OnInit {
   ) {
     this.empresa = this.authService.empresa;
     this.id = this.authService.id;
+    if(this.mes > 0 && this.mes < 12) {
+      this.months = this.monthNames[this.mes];
+    }
   }
 
   ngOnInit() {
@@ -305,7 +310,7 @@ export class EficienciaPage implements OnInit {
           this.cempresas_acciones =
             this.datos[0].pContestaAccionesK.toFixed(2) * 100;
           this.empresas_negociacion = this.datos[0].TiempoNegociacion;
-          this.empresas_contacto = this.datos[0].IntentosNoEx.toFixed(2);
+          this.empresas_contacto = this.datos[0].IntentosNoEx.toFixed(1);
         } else {
           this.empresas_tiempo = "N/A";
           this.empresas_atendidos = "N/A";

@@ -96,7 +96,7 @@
                         <h1 style="font-size: 5vw; ">
                             <strong>Ranking de ventas</strong>
                         </h1>
-                        <h3 style="font-size: 3.8vw;color:#707070 ">Noviembre 2018</h3>
+                        <h3 style="font-size: 3.8vw;color:#707070 ">{{months}} {{years}}</h3>
                     </ion-col>
                     <ion-col col-2>
                         <img src="assets/imgs/eficiencia/info.svg " style="width:60%;margin-left: 20%;margin-top: 5%; " (click)="openModalFuncionalidadPrueba( 'grafica', 'Ranking de Ventas',1) " />
@@ -123,7 +123,16 @@
                 <div class="section2-ranking ">
                     <div class="wrapper-restante ">
                         <div class="section1-restante ">
-                            <span class="titulo ">Perteneces al TOP</span>
+                            <ion-grid style="padding: 0px;padding-bottom: 0 !important;">
+                                <ion-row style="margin-bottom: 0 !important;">
+                                    <ion-col col-10>
+                                        <span class="titulo ">Perteneces al TOP</span>
+                                    </ion-col>
+                                    <ion-col col-2>
+                                        <img src="assets/imgs/eficiencia/info.svg " style="margin-left: 20%;margin-top: 25%;" (click)="openModalFuncionalidadPrueba( 'top', 'Perteneces al TOP',2) " />
+                                    </ion-col>
+                                </ion-row>
+                            </ion-grid>
                         </div>
                         <div class="section2-restante ">
                             <ion-grid style="padding:0 ">
@@ -147,9 +156,9 @@
                         </div>
                         <div class="section2-koomkin ">
                             <ion-grid style="padding:0;height: 100%;">
-                                <ion-row *ngFor="let ganador of ganadores; let i = index;" style="height: 15%;">
+                                <ion-row *ngFor="let ganador of ganadores; let i = index;" style="height: 100%;">
                                     <ion-col col-2 style="display: grid;">
-                                        <img *ngIf="ganador.lugar <= 3" src="assets/imgs/eficiencia/{{ganador.lugar}}.svg" style="width: 28%;margin-left: 37%;height: 90%;" />
+                                        <img *ngIf="ganador.lugar <= 3" src="assets/imgs/eficiencia/{{ganador.lugar}}.svg" style="width: 30%;margin-left: 37%;height: 90%;" />
                                         <span *ngIf="ganador.lugar > 3 && ganador.lugar <= 10">{{ganador.lugar}}</span>
                                     </ion-col>
                                     <ion-col col-8 style="display: grid;">
@@ -163,7 +172,6 @@
                             </ion-grid>
                         </div>
                     </div>
-
                 </div>
                 <div class="section4-ranking ">
                     <div class="wrapper-grafica ">
@@ -207,11 +215,11 @@
                     </div>
                     <div class="section3-sector ">
                         <ion-grid>
+                            <p class="tema ">Tiempo de atención promedio por lead</p>
                             <ion-row>
                                 <ion-col col-3 style="display: grid; " (click)="openModalFuncionalidadPrueba( 'tiempo', 'Tiempo de atención promedio por Lead',3) ">
                                     <img src="assets/imgs/eficiencia/tiempo.svg " style="width:60%;margin-left: 20%;display: inline-block " />
                                     <img src="assets/imgs/eficiencia/info.svg " style="width: 20%;display: inline-block;position: absolute;right: 0;top: 0; " />
-                                    <p class="tema ">Tiempo de atención promedio por lead</p>
                                 </ion-col>
                                 <ion-col col-3 style="display: grid; ">
                                     <span class="tiempo ">{{empresa_tiempo}} min</span>
@@ -230,11 +238,11 @@
                     </div>
                     <div class="section4-sector ">
                         <ion-grid>
+                            <p class="tema ">% de Leads atendidos</p>
                             <ion-row>
-                                <ion-col col-3 style="display: grid; " (click)="openModalFuncionalidadPrueba( 'atendidos', 'Leads atendidos (%)',4) ">
+                                <ion-col col-3 style="display: grid; " (click)="openModalFuncionalidadPrueba( 'atendidos', '% de Leads atendidos',4) ">
                                     <img src="assets/imgs/eficiencia/atendidos.svg " style="width:60%;margin-left: 20%;display: inline-block " />
                                     <img src="assets/imgs/eficiencia/info.svg " style="width: 20%;display: inline-block;position: absolute;right: 0;top: 0; " />
-                                    <p class="tema ">Leads atendidos (%)</p>
                                 </ion-col>
                                 <ion-col col-3 style="display: grid; ">
                                     <span class="tiempo ">{{empresa_atendidos}}</span>
@@ -252,11 +260,11 @@
                     </div>
                     <div class="section5-sector ">
                         <ion-grid>
+                            <p class="tema ">% de Respuesta a acciones de Koomkin</p>
                             <ion-row>
-                                <ion-col col-3 style="display: grid; " (click)="openModalFuncionalidadPrueba( 'koomkin', 'Respuesta a acciones de Koomkin (%)',5) ">
+                                <ion-col col-3 style="display: grid; " (click)="openModalFuncionalidadPrueba( 'koomkin', '% de Respuesta a acciones de Koomkin',5) ">
                                     <img src="assets/imgs/eficiencia/koomkin.svg " style="width:60%;margin-left: 20%;display: inline-block " />
                                     <img src="assets/imgs/eficiencia/info.svg " style="width: 20%;display: inline-block;position: absolute;right: 0;top: 0; " />
-                                    <p class="tema ">Respuesta a acciones de Koomkin (%)</p>
                                 </ion-col>
                                 <ion-col col-3 style="display: grid; ">
                                     <span class="tiempo ">{{empresa_acciones}}</span>
@@ -275,11 +283,11 @@
                     </div>
                     <div class="section6-sector ">
                         <ion-grid>
+                            <p class="tema ">Tiempo de negociación</p>
                             <ion-row>
-                                <ion-col col-3 style="display: grid; " (click)="openModalFuncionalidadPrueba( 'negocios', 'Calificación de negociación',6) ">
+                                <ion-col col-3 style="display: grid; " (click)="openModalFuncionalidadPrueba( 'negocios', 'Tiempo de negociación',6) ">
                                     <img src="assets/imgs/eficiencia/negocios.svg " style="width:60%;margin-left: 20%;display: inline-block " />
                                     <img src="assets/imgs/eficiencia/info.svg " style="width: 20%;display: inline-block;position: absolute;right: 0;top: 0; " />
-                                    <p class="tema ">Calificación de negociación</p>
                                 </ion-col>
                                 <ion-col col-3 style="display: grid; ">
                                     <span class="tiempo ">{{empresa_negociacion}}</span>
@@ -297,11 +305,11 @@
                     </div>
                     <div class="section7-sector ">
                         <ion-grid>
+                            <p class="tema ">Intento de contacto con Leads no exitosos</p>
                             <ion-row>
                                 <ion-col col-3 style="display: grid; " (click)="openModalFuncionalidadPrueba( 'noexitosos', 'Intento de contacto con Leads no exitosos',7) ">
                                     <img src="assets/imgs/eficiencia/noexitosos.svg " style="width:60%;margin-left: 20%;display: inline-block " />
                                     <img src="assets/imgs/eficiencia/info.svg " style="width: 20%;display: inline-block;position: absolute;right: 0;top: 0; " />
-                                    <p class="tema ">Intento de contacto con Leads no exitosos</p>
                                 </ion-col>
                                 <ion-col col-3 style="display: grid; ">
                                     <span class="tiempo ">{{empresa_contacto}} veces</span>
@@ -319,24 +327,27 @@
                     </div>
                     <div class="section8-sector ">
                         <ion-grid>
+                            <p class="tema ">Palabras clave en negociaciones</p>
                             <ion-row>
                                 <ion-col col-3 style="display: grid; " (click)="openModalFuncionalidadPrueba( 'key', 'Palabras clave en negociaciones',8) ">
                                     <img src="assets/imgs/eficiencia/key.svg " style="width:60%;margin-left: 20%;display: inline-block " />
                                     <img src="assets/imgs/eficiencia/info.svg " style="width: 20%;display: inline-block;position: absolute;right: 0;top: 0; " />
-                                    <p class="tema ">Palabras clave en negociaciones</p>
+                                </ion-col>
+                                <ion-col col-1 style="display: grid; ">
+
                                 </ion-col>
                                 <ion-col col-3 style="display: grid; ">
                                     <ion-list class="tiempo " *ngFor="let empresa_palabras of palabrasempresa; let i = index; ">
                                         <span class="tiempo ">{{empresa_palabras.palabra}}</span>
                                     </ion-list>
                                 </ion-col>
+                                <ion-col col-1 style="display: grid; ">
+
+                                </ion-col>
                                 <ion-col col-3 style="display: grid; ">
                                     <ion-list class="tiempo " *ngFor="let empresas_palabras of palabrasempresas; let i = index; ">
                                         <span class="tiempo ">{{empresas_palabras.palabra}}</span>
                                     </ion-list>
-                                </ion-col>
-                                <ion-col col-3 style="display: grid; ">
-
                                 </ion-col>
                             </ion-row>
                         </ion-grid>
@@ -376,17 +387,17 @@
                         <div class="section2-tiempo">
                             <div class="wrapper-leads">
                                 <div class="section1-leads">
-                                    <span class="naranja">Últimos 5 clientes en 30 días</span>
+                                    <span class="naranja">Últimos 5 leads</span>
                                     <hr style="background-color:rgba(112,112,112,0.3); width:94%;height: 1px;margin-top: 0;margin-bottom: 0; ">
                                 </div>
                                 <div class="section2-leads">
-                                    <img *ngIf="clientes > 0 && clientes2  > 0 && clientes <= 120 && clientes2  <= 120 " src="assets/imgs/eficiencia/feliz.svg " style="width: 80%;margin-left: 10%; " />
-                                    <img *ngIf="clientes > 120 && clientes2  > 120 " src="assets/imgs/eficiencia/triste.svg " style="width: 80%;margin-left: 10%; " />
-                                    <img *ngIf="clientes == 0 && clientes2 == 0 || clientes <= 120 && clientes2 > 120  || clientes > 120 && clientes2 <= 120" src="assets/imgs/eficiencia/neutral.svg " style="width: 80%;margin-left: 10%; " />
+                                    <img *ngIf="clientes < clientes2" src="assets/imgs/eficiencia/feliz.svg " style="width: 80%;margin-left: 10%; " />
+                                    <img *ngIf="clientes > clientes2" src="assets/imgs/eficiencia/triste.svg " style="width: 80%;margin-left: 10%; " />
+                                    <img *ngIf="clientes == clientes2" src="assets/imgs/eficiencia/neutral.svg " style="width: 80%;margin-left: 10%; " />
                                 </div>
                                 <div class="section3-leads">
                                     <ion-list>
-                                        <ion-item *ngIf="clientes <= 120">
+                                        <ion-item *ngIf="clientes < 120">
                                             <ion-range class="azul" debounce="10" step="1" min="0" max="120" [(ngModel)]="clientes" color="barra" pin="true" disabled>
                                                 <ion-label range-left>
                                                     < 1min </ion-label>
@@ -394,22 +405,22 @@
                                             </ion-range>
                                         </ion-item>
                                         <ion-item *ngIf="clientes > 120">
-                                            <ion-range class="rojo" debounce="500" step="1" min="120" max="999" [ngModel]="clientes" color="danger" pin="true" disabled>
+                                            <ion-range class="rojo" step="1" min="0" max="120" [(ngModel)]="clientes" color="danger" pin="true" disabled>
                                                 <ion-label range-left>
-                                                    < 120min </ion-label>
-                                                        <ion-label range-right>
-                                                            > 999min </ion-label>
+                                                    < 1min </ion-label>
+                                                        <ion-label range-right> > 120min </ion-label>
                                             </ion-range>
                                         </ion-item>
+                                        <span class="titulo">Zona Garantia</span>
                                     </ion-list>
                                 </div>
                                 <div class="section4-leads">
-                                    <span class="naranja">Últimos 30 días</span>
+                                    <span class="naranja">Total de leads en los últimos 30 días                                        </span>
                                     <hr style="background-color:rgba(112,112,112,0.3); width:94%;height: 1px;margin-top: 0;margin-bottom: 0; ">
                                 </div>
                                 <div class="section5-leads">
                                     <ion-list>
-                                        <ion-item *ngIf="clientes2 <= 120">
+                                        <ion-item *ngIf="clientes2 < 120">
                                             <ion-range class="azul" step="1" min="0" max="120" [(ngModel)]="clientes2" color="barra" pin="true" disabled>
                                                 <ion-label range-left>
                                                     < 1min </ion-label>
@@ -417,13 +428,13 @@
                                             </ion-range>
                                         </ion-item>
                                         <ion-item *ngIf="clientes2 > 120">
-                                            <ion-range class="rojo" step="1" min="120" max="999" [(ngModel)]="clientes2" color="danger" pin="true" disabled>
+                                            <ion-range class="rojo" step="1" min="0" max="120" [(ngModel)]="clientes2" color="danger" pin="true" disabled>
                                                 <ion-label range-left>
-                                                    < 120min </ion-label>
-                                                        <ion-label range-right>
-                                                            > 999min </ion-label>
+                                                    < 1min </ion-label>
+                                                        <ion-label range-right> > 120min </ion-label>
                                             </ion-range>
                                         </ion-item>
+                                        <span class="titulo">Zona Garantia</span>
                                     </ion-list>
                                 </div>
                             </div>
@@ -442,9 +453,9 @@
                                     <hr style="background-color:rgba(112,112,112,0.3); width:94%;height: 1px;margin-top: 0;margin-bottom: 0; ">
                                 </div>
                                 <div class="section2-leads">
-                                    <img *ngIf="fiveprogress > 70 && thirtyprogress > 70" src="assets/imgs/eficiencia/feliz.svg " style="width: 80%;margin-left: 10%; " />
-                                    <img *ngIf="fiveprogress >= 30 && thirtyprogress >= 30 && fiveprogress <= 70 && thirtyprogress <= 70 || fiveprogress == 0 && thirtyprogress == 0" src="assets/imgs/eficiencia/triste.svg " style="width: 80%;margin-left: 10%; " />
-                                    <img *ngIf="fiveprogress < 30 && thirtyprogress < 30 && fiveprogress > 0 && thirtyprogress > 0" src="assets/imgs/eficiencia/triste.svg " style="width: 80%;margin-left: 10%; " />
+                                    <img *ngIf="fiveprogress > thirtyprogress" src="assets/imgs/eficiencia/feliz.svg " style="width: 80%;margin-left: 10%; " />
+                                    <img *ngIf="fiveprogress == thirtyprogress" src="assets/imgs/eficiencia/neutral.svg " style="width: 80%;margin-left: 10%; " />
+                                    <img *ngIf="fiveprogress < thirtyprogress" src="assets/imgs/eficiencia/triste.svg " style="width: 80%;margin-left: 10%; " />
                                 </div>
                                 <div class="section3-leads">
                                     <ion-grid>
@@ -517,9 +528,17 @@
             <main class="cuadros-tips">
                 <div class="section1-tips">
                     <button type="button" class="collapsible" [ngClass]="{'expand':tip1 == false}" (click)="openTipVenta('tip1',tip1);"> 
-                        <ion-icon *ngIf="tip1 == false" class="flecha" name="md-arrow-dropright"></ion-icon>
-                        <ion-icon *ngIf="tip1 == true" class="flecha" name="md-arrow-dropdown"></ion-icon>
-                        Conoce el secreto para subir en el ranking de vendedores.</button>
+                        <ion-grid style="padding: 0px;padding-bottom: 0 !important;">
+                                <ion-row style="margin-bottom: 0 !important;">
+                                    <ion-col col-1>
+                                        <ion-icon *ngIf="tip1 == false" class="flecha" name="md-arrow-dropright"></ion-icon>
+                                        <ion-icon *ngIf="tip1 == true" class="flecha" name="md-arrow-dropdown"></ion-icon>                                       
+                                    </ion-col>
+                                    <ion-col col-11>
+                                            Conoce el secreto para subir en el ranking de vendedores.
+                                        </ion-col>
+                                </ion-row>
+                            </ion-grid></button>
                     <div *ngIf="tip1 == true" class="card card-block card-header" [ngClass]="{'expand':tip1 == true}">
                         <div class="tip">
                             <div class="text-tip">
@@ -529,9 +548,18 @@
                         </div>
                     </div>
                     <button type="button" class="collapsible" [ngClass]="{'expand':tip2 == false}" (click)="openTipVenta('tip2',tip2)">
-                            <ion-icon *ngIf="tip2 == false" class="flecha" name="md-arrow-dropright"></ion-icon>
-                            <ion-icon *ngIf="tip2 == true" class="flecha" name="md-arrow-dropdown"></ion-icon>
-                            Aumenta tus ventas al atender más rápido al cliente</button>
+                            <ion-grid style="padding: 0px;padding-bottom: 0 !important;">
+                                    <ion-row style="margin-bottom: 0 !important;">
+                                        <ion-col col-1>
+                                            <ion-icon *ngIf="tip2 == false" class="flecha" name="md-arrow-dropright"></ion-icon>
+                                            <ion-icon *ngIf="tip2 == true" class="flecha" name="md-arrow-dropdown"></ion-icon>                                       
+                                        </ion-col>
+                                        <ion-col col-11>
+                                                Aumenta tus ventas al atender más rápido al cliente
+                                        </ion-col>
+                                    </ion-row>
+                                </ion-grid>
+                            </button>
                     <div *ngIf="tip2 == true" class="card card-block card-header" [ngClass]="{'expand':tip2 == true}">
                         <div class="tip">
                             <div class="text-tip">
@@ -540,9 +568,18 @@
                         </div>
                     </div>
                     <button type="button" class="collapsible" [ngClass]="{'expand':tip3 == false}" (click)="openTipVenta('tip3',tip3)">
-                            <ion-icon *ngIf="tip3 == false" class="flecha" name="md-arrow-dropright"></ion-icon>
-                            <ion-icon *ngIf="tip3 == true" class="flecha" name="md-arrow-dropdown"></ion-icon>
-                            Deja una buena primera impresión personalizando tu mensaje de saludo automático. </button>
+                        <ion-grid style="padding: 0px;padding-bottom: 0 !important;">
+                            <ion-row style="margin-bottom: 0 !important;">
+                                <ion-col col-1>
+                                    <ion-icon *ngIf="tip3 == false" class="flecha" name="md-arrow-dropright"></ion-icon>
+                                    <ion-icon *ngIf="tip3 == true" class="flecha" name="md-arrow-dropdown"></ion-icon>                                       
+                                </ion-col>
+                                <ion-col col-11>
+                                    Deja una buena primera impresión personalizando tu mensaje de saludo automático. 
+                                </ion-col>
+                            </ion-row>
+                        </ion-grid>
+                    </button>
                     <div *ngIf="tip3 == true" class="card card-block card-header" [ngClass]="{'expand':tip3 == true}">
                         <div class="tip">
                             <div class="text-tip">
