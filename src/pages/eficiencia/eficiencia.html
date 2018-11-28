@@ -179,6 +179,14 @@
                             <span class="titulo ">Leads en cierre de venta al mes por lugar en el ranking</span>
                         </div>
                         <div class="section2-grafica ">
+                            <div class="cuadro-posicion">
+                                Posición: {{place}}
+                                <br> Leads: {{leads}}
+                            </div>
+                            <div class="cuadro-tuposicion">
+                                Tu posición: {{posicion}}
+                                <br> Leads: {{yourleads}}
+                            </div>
                             <google-chart [data]="bar_ChartData"></google-chart>
                         </div>
                     </div>
@@ -404,7 +412,7 @@
                                                         <ion-label range-right> > 120min </ion-label>
                                             </ion-range>
                                         </ion-item>
-                                        <ion-item *ngIf="clientes > 120">
+                                        <ion-item *ngIf="clientes >= 120">
                                             <ion-range class="rojo" step="1" min="0" max="120" [(ngModel)]="clientes" color="danger" pin="true" disabled>
                                                 <ion-label range-left>
                                                     < 1min </ion-label>
@@ -427,7 +435,7 @@
                                                         <ion-label range-right> > 120min </ion-label>
                                             </ion-range>
                                         </ion-item>
-                                        <ion-item *ngIf="clientes2 > 120">
+                                        <ion-item *ngIf="clientes2 >= 120">
                                             <ion-range class="rojo" step="1" min="0" max="120" [(ngModel)]="clientes2" color="danger" pin="true" disabled>
                                                 <ion-label range-left>
                                                     < 1min </ion-label>

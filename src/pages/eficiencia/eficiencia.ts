@@ -18,6 +18,12 @@ export class EficienciaPage implements OnInit {
   public datosenvio;
   public datos;
 
+  public place = '#1';
+  public leads;
+
+  public yourplace;
+  public yourleads;
+  
   public top = "N/A";
   public posicion = "N/A";
 
@@ -64,6 +70,7 @@ export class EficienciaPage implements OnInit {
       legend: { position: "none" },
       bars: "horizontal",
       is3D: true,
+      enableInteractivity: false,
       hAxis: {
         title: "Leads en cierre de venta",
         textStyle: {
@@ -172,9 +179,12 @@ export class EficienciaPage implements OnInit {
   ngOnInit() {
     this.getInsertClickPagina();
     this.getEficiency();
-    this.getEficiencyRanking();
     this.getWords();
     this.getTopTen();
+    setTimeout(()=>{
+      this.getEficiencyRanking();
+    }, 300);
+    ;
   }
 
   openModalFuncionalidadPrueba(image, title, message) {
@@ -243,16 +253,15 @@ export class EficienciaPage implements OnInit {
 
         if (this.datos.length > 0) {
           this.idcuarta = this.datos[0].tipocuartapantalla;
-
+          this.yourleads = this.datos[0].Exitosos;
           this.top = JSON.stringify(this.datos[0].top * 100) + "%";
-          this.posicion = "#" + JSON.stringify(this.datos[0].Lugar);
-
+          this.yourplace = JSON.stringify(this.datos[0].Lugar);
+          this.posicion = "#" + this.yourplace; 
           this.clientesrep = this.datos[0].avg_HorasAtencion_5 * 60;
           this.clientes2rep = this.datos[0].avg_HorasAtencionTotal * 60;
 
           this.clientes = this.clientesrep.toFixed();
           this.clientes2 = this.clientes2rep.toFixed();
-          console.log(this.clientes,this.clientes2);
 
           this.fiveprogress = JSON.stringify(this.datos[0].pAtendidos_5 * 100);
           this.thirtyprogress = JSON.stringify(
@@ -302,7 +311,7 @@ export class EficienciaPage implements OnInit {
         if (this.datos.length > 0) {
        //    console.log(this.datos);
           this.empresas_tiempo = this.datos[0].avg_HorasAtencion * 60;
-          this.empresas_tiempo = this.empresas_tiempo.toFixed()
+          this.empresas_tiempo = this.empresas_tiempo.toFixed();
           this.empresas_atendidos = JSON.stringify(this.datos[0].pAtendidos.toFixed(2) * 100) + "%";
           this.empresas_acciones = JSON.stringify(this.datos[0].pContestaAccionesK.toFixed(2) * 100) +
             "%";
@@ -358,14 +367,19 @@ export class EficienciaPage implements OnInit {
       data => {
         this.datos = data;
         let lugar = [ { posicion: "1" }, { posicion: "100" }, { posicion: "200" }, { posicion: "300" },{ posicion: "400" }, { posicion: "500" },{ posicion: "600" }, { posicion: "700" },{ posicion: "800" }, { posicion: "900" },  { posicion: "+1000" }, ]
+        let lugar2 = [ { posicion: "0" }, { posicion: "2" }, { posicion: "101" }, { posicion: "201" },{ posicion: "301" }, { posicion: "401" },{ posicion: "501" }, { posicion: "601" },{ posicion: "701" }, { posicion: "801" },  { posicion: "901" }, ]
+        this.leads = this.datos[0].CierredeVenta;
         let outter = [];
         outter.push(['Posición', 'Leads', { "role": "style" }]);
           for (let i = 0; i < this.datos.length; i++) {
+            
             let inner = [];
             inner.push(lugar[i].posicion);
             inner.push(this.datos[i].CierredeVenta);
-            if(this.datos[i].Clientes == 1){
+            if(this.yourplace <= lugar[i].posicion && this.yourplace >= lugar2[i].posicion){
               inner.push("#f5a623");
+            }else if(this.datos[i].Clientes == 1){
+              inner.push("#288AC1");
             }else {
               inner.push("#3DCDBB");
             }
@@ -381,6 +395,8 @@ export class EficienciaPage implements OnInit {
               legend: { position: "none" },
               bars: "horizontal",
               is3D: true,
+              enableInteractivity: false,
+
               hAxis: {
                 title: "Leads en cierre de venta",
                 textStyle: {
