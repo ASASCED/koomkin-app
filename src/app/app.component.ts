@@ -180,7 +180,7 @@ export class MyApp {
           }
         }
       });
-    /*  if (this.plt.is('ios')) {
+      if (this.plt.is('ios')) {
         window["plugins"].OneSignal
           // iOS
           .startInit("45c5c7f2-ada0-4af8-8770-15f6d23b748a")
@@ -194,7 +194,7 @@ export class MyApp {
           .inFocusDisplaying(window["plugins"].OneSignal.OSInFocusDisplayOption.Notification)
           .handleNotificationOpened(notificationOpenedCallback)
           .endInit();
-      } */
+      } 
     });
   }
 

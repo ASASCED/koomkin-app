@@ -144,16 +144,16 @@ export class LoginPage implements OnInit {
       this.leads = data;
      
       if (this.leads.length > 0) {
-     /*   if (this.plt.is('ios') || this.plt.is('android')) {
+        if (this.plt.is('ios') || this.plt.is('android')) {
           window["plugins"].OneSignal.sendTag("email_error", "");
-        } */
+        } 
 
         this.id = this.leads[0].IDUSUARIO;
         if (Md5.hashStr(this.password) === this.leads[0].PASSWORD2) {
 
           this.restService.setUser(this.id);
 
-      /*   if (this.plt.is('ios') || this.plt.is('android')) {
+         if (this.plt.is('ios') || this.plt.is('android')) {
 
             window["plugins"].OneSignal.getPermissionSubscriptionState((status) => {
 
@@ -165,7 +165,7 @@ export class LoginPage implements OnInit {
             window["plugins"].OneSignal.sendTag("email", "");
             window["plugins"].OneSignal.sendTag("id_usuario", this.id);
 
-          } */
+          } 
 
           //Appsee.setUserId(this.id);
 
@@ -181,16 +181,16 @@ export class LoginPage implements OnInit {
 
         } else {
 
-      /*    if (this.plt.is('ios') || this.plt.is('android')) {
+          if (this.plt.is('ios') || this.plt.is('android')) {
             window["plugins"].OneSignal.sendTag("email", this.email);
             window["plugins"].OneSignal.sendTag("pwd_error", this.password);
-          } */
+          } 
           this.showError('Verifica tu correo y/o contraseña', 'Intenta de nuevo.');
         }
       } else if (this.leads.length == 0) {
-      /*  if (this.plt.is('ios') || this.plt.is('android')) {
+        if (this.plt.is('ios') || this.plt.is('android')) {
           window["plugins"].OneSignal.sendTag("email_error", this.email);
-        } */
+        } 
         this.showError('Verifica tu correo y/o contraseña', 'Intenta de nuevo.');
       }
 
@@ -224,7 +224,7 @@ export class LoginPage implements OnInit {
                   this.restService.setUser(this.id);
                 // this.restService.setApp(this.app);
                   console.log(this.app);
-                  /*  if (this.plt.is('ios') || this.plt.is('android')) {
+                   if (this.plt.is('ios') || this.plt.is('android')) {
                     window["plugins"].OneSignal.getPermissionSubscriptionState((status) => {
                       const deviceId = status.subscriptionStatus.userId;
                       this.restService.registerDeviceID(deviceId);
@@ -233,7 +233,7 @@ export class LoginPage implements OnInit {
 
                     window["plugins"].OneSignal.sendTag("id_usuario", this.id);
 
-                   } */
+                   } 
                   this.storage.set('email', this.email);
                   this.storage.set('password', this.password);
 

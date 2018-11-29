@@ -48,9 +48,9 @@ export class AuthServiceProvider {
           this.empresa = this.info[0].NOMEMPRESACOMPRADOR;
           this.mensajebot = this.info[0].mensajebot;
          // console.log(this.mensajebot);
-         /* if (this.plt.is('ios') || this.plt.is('android')) {
+          if (this.plt.is('ios') || this.plt.is('android')) {
             window["plugins"].OneSignal.sendTag("chat", this.info[0]['chat']);
-          } */
+          } 
 
         }
       }, err => {
