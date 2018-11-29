@@ -29,12 +29,12 @@ export class EficienciaPage implements OnInit {
 
   public fiveprogress = "0";
   public thirtyprogress = "0";
-  public hola: number = 0;
+  public hola: any = 0;
   public idcuarta;
   clientes: any = 0;
   clientes2: any = 0;
-  clientesrep: number = 0;
-  clientes2rep: number = 0;
+  clientesrep: any = 0;
+  clientes2rep: any = 0;
 
   public empresa;
   public id;
@@ -45,10 +45,10 @@ export class EficienciaPage implements OnInit {
   public empresas_atendidos = "N/A";
   public empresa_acciones = "N/A";
   public empresas_acciones = "N/A";
-  public cempresa_atendidos: number = 0;
-  public cempresas_atendidos: number = 0;
-  public cempresa_acciones: number = 0;
-  public cempresas_acciones: number = 0;
+  public cempresa_atendidos: any = 0;
+  public cempresas_atendidos: any = 0;
+  public cempresa_acciones: any = 0;
+  public cempresas_acciones: any = 0;
   public empresa_negociacion = "N/A";
   public empresas_negociacion = "N/A";
   public empresa_contacto = "N/A";
@@ -253,6 +253,7 @@ export class EficienciaPage implements OnInit {
 
         if (this.datos.length > 0) {
           this.idcuarta = this.datos[0].tipocuartapantalla;
+          
           this.yourleads = this.datos[0].Exitosos;
           this.top = JSON.stringify(this.datos[0].top * 100) + "%";
           this.yourplace = JSON.stringify(this.datos[0].Lugar);
@@ -262,24 +263,55 @@ export class EficienciaPage implements OnInit {
 
           this.clientes = this.clientesrep.toFixed();
           this.clientes2 = this.clientes2rep.toFixed();
-
+          console.log(typeof(this.clientesrep));
           this.fiveprogress = JSON.stringify(this.datos[0].pAtendidos_5 * 100);
           this.thirtyprogress = JSON.stringify(
             this.datos[0].pAtendidos_2hrs * 100
           );
 
           this.empresa_tiempo = this.datos[0].avg_HorasAtencion * 60;
-          this.empresa_tiempo = this.empresa_tiempo.toFixed()
-          this.empresa_atendidos =
-            JSON.stringify(this.datos[0].pAtendidos.toFixed(2) * 100) + "%";
-          this.empresa_acciones =
-            JSON.stringify(this.datos[0].pContestaAccionesK.toFixed(2) * 100) +
-            "%";
+          this.empresa_tiempo = this.empresa_tiempo.toFixed();
+
+          if(this.empresa_tiempo == null){
+            this.empresa_tiempo = "N/A";
+          }
+
+          this.empresa_atendidos =  JSON.stringify(this.datos[0].pAtendidos.toFixed(2) * 100) + "%";
+
+          if(this.empresa_atendidos == null){
+            this.empresa_atendidos = "N/A";
+          }
+
+          this.empresa_acciones =  JSON.stringify(this.datos[0].pContestaAccionesK.toFixed(2) * 100) + "%";
+
+          if(this.empresa_acciones == null){
+            this.empresa_acciones = "N/A";
+          }
+
           this.cempresa_atendidos = this.datos[0].pAtendidos.toFixed(2) * 100;
-          this.cempresa_acciones =
-            this.datos[0].pContestaAccionesK.toFixed(2) * 100;
+
+          if(this.cempresa_atendidos == null){
+            this.cempresa_atendidos = "N/A";
+          }
+
+          this.cempresa_acciones = this.datos[0].pContestaAccionesK.toFixed(2) * 100;
+
+          if(this.cempresa_acciones == null){
+            this.cempresa_acciones = "N/A";
+          }
+
           this.empresa_negociacion = this.datos[0].TiempoNegociacion;
-          this.empresa_contacto = this.datos[0].IntentosNoEx.toFixed(2);
+
+          if(this.empresa_negociacion == null){
+            this.empresa_negociacion = "N/A";
+          }
+
+          this.empresa_contacto = this.datos[0].IntentosNoEx.toFixed(1);
+
+          if(this.empresa_contacto == null){
+            this.empresa_contacto = "N/A";
+          }
+
           if (this.idcuarta) {
             this.getEficiencyType(this.idcuarta);
             this.getWordsType(this.idcuarta);
@@ -310,7 +342,7 @@ export class EficienciaPage implements OnInit {
         this.datos = data;
         if (this.datos.length > 0) {
        //    console.log(this.datos);
-          this.empresas_tiempo = this.datos[0].avg_HorasAtencion * 60;
+          this.empresas_tiempo = this.datos[0].avg_HorasAtencion * 60 ;
           this.empresas_tiempo = this.empresas_tiempo.toFixed();
           this.empresas_atendidos = JSON.stringify(this.datos[0].pAtendidos.toFixed(2) * 100) + "%";
           this.empresas_acciones = JSON.stringify(this.datos[0].pContestaAccionesK.toFixed(2) * 100) +
@@ -377,9 +409,9 @@ export class EficienciaPage implements OnInit {
             inner.push(lugar[i].posicion);
             inner.push(this.datos[i].CierredeVenta);
             if(this.yourplace <= lugar[i].posicion && this.yourplace >= lugar2[i].posicion){
-              inner.push("#f5a623");
-            }else if(this.datos[i].Clientes == 1){
               inner.push("#288AC1");
+            }else if(this.datos[i].Clientes == 1){
+              inner.push("#f5a623");
             }else {
               inner.push("#3DCDBB");
             }
