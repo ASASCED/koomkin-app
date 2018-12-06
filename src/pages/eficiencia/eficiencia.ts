@@ -18,17 +18,30 @@ export class EficienciaPage implements OnInit {
   public datosenvio;
   public datos;
 
+  public tip1_id;
+  public tip2_id;
+  public tip3_id;
+  public tip1_titulo;
+  public tip2_titulo;
+  public tip3_titulo;
+  public tip1_descripcion;
+  public tip2_descripcion;
+  public tip3_descripcion;
+
   public place = '#1';
   public leads;
 
   public yourplace;
   public yourleads;
-  
+
   public top = "N/A";
   public posicion = "N/A";
 
-  public fiveprogress = "0";
-  public thirtyprogress = "0";
+  public fiveprogress:any = "0";
+  public thirtyprogress:any = "0";
+
+  public fiveprogressbar = "0";
+  public thirtyprogressbar = "0";
   public hola: any = 0;
   public idcuarta;
   clientes: any = 0;
@@ -41,18 +54,18 @@ export class EficienciaPage implements OnInit {
   public clientUUID = this.authService.getClientUUID();
   public empresa_tiempo;
   public empresas_tiempo;
-  public empresa_atendidos = "N/A";
-  public empresas_atendidos = "N/A";
-  public empresa_acciones = "N/A";
-  public empresas_acciones = "N/A";
+  public empresa_atendidos:any = 0;
+  public empresas_atendidos:any = 0;
+  public empresa_acciones:any = 0;
+  public empresas_acciones:any = 0;
   public cempresa_atendidos: any = 0;
   public cempresas_atendidos: any = 0;
   public cempresa_acciones: any = 0;
   public cempresas_acciones: any = 0;
-  public empresa_negociacion = "N/A";
-  public empresas_negociacion = "N/A";
-  public empresa_contacto = "N/A";
-  public empresas_contacto = "N/A";
+  public empresa_negociacion:any = "N/A";
+  public empresas_negociacion:any = "N/A";
+  public empresa_contacto:any = "N/A";
+  public empresas_contacto:any = "N/A";
   public ganadores;
   public month = new Date();
   public year = new Date();
@@ -60,7 +73,7 @@ export class EficienciaPage implements OnInit {
   public mes:any = this.month.getMonth();
   public months;
   monthNames = [ "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
-  "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" ];
+    "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" ];
   public bar_ChartData: any = {
     chartType: "BarChart",
     dataTable: [],
@@ -88,7 +101,7 @@ export class EficienciaPage implements OnInit {
         }
       },
       vAxis: {
-        title: "Posición",
+        title: "Ranking",
         textStyle: {
           color: "#288AC1",
           fontSize: 8,
@@ -253,21 +266,22 @@ export class EficienciaPage implements OnInit {
 
         if (this.datos.length > 0) {
           this.idcuarta = this.datos[0].tipocuartapantalla;
-          
+
           this.yourleads = this.datos[0].Exitosos;
           this.top = JSON.stringify(this.datos[0].top * 100) + "%";
           this.yourplace = JSON.stringify(this.datos[0].Lugar);
-          this.posicion = "#" + this.yourplace; 
+          this.posicion = "#" + this.yourplace;
           this.clientesrep = this.datos[0].avg_HorasAtencion_5 * 60;
           this.clientes2rep = this.datos[0].avg_HorasAtencionTotal * 60;
 
           this.clientes = this.clientesrep.toFixed();
           this.clientes2 = this.clientes2rep.toFixed();
           console.log(typeof(this.clientesrep));
-          this.fiveprogress = JSON.stringify(this.datos[0].pAtendidos_5 * 100);
-          this.thirtyprogress = JSON.stringify(
-            this.datos[0].pAtendidos_2hrs * 100
-          );
+          this.fiveprogress = this.datos[0].pAtendidos_5;
+          this.thirtyprogress = this.datos[0].pAtendidos_2hrs;
+
+          this.fiveprogressbar = JSON.stringify(this.datos[0].pAtendidos_5 * 100);
+          this.thirtyprogressbar = JSON.stringify(this.datos[0].pAtendidos_2hrs * 100);
 
           this.empresa_tiempo = this.datos[0].avg_HorasAtencion * 60;
           this.empresa_tiempo = this.empresa_tiempo.toFixed();
@@ -276,16 +290,16 @@ export class EficienciaPage implements OnInit {
             this.empresa_tiempo = "N/A";
           }
 
-          this.empresa_atendidos =  JSON.stringify(this.datos[0].pAtendidos.toFixed(2) * 100) + "%";
+          this.empresa_atendidos =  this.datos[0].pAtendidos.toFixed(2);
 
           if(this.empresa_atendidos == null){
-            this.empresa_atendidos = "N/A";
+            this.empresa_atendidos = 0;
           }
 
-          this.empresa_acciones =  JSON.stringify(this.datos[0].pContestaAccionesK.toFixed(2) * 100) + "%";
+          this.empresa_acciones =  this.datos[0].pContestaAccionesK.toFixed(2);
 
           if(this.empresa_acciones == null){
-            this.empresa_acciones = "N/A";
+            this.empresa_acciones = 0;
           }
 
           this.cempresa_atendidos = this.datos[0].pAtendidos.toFixed(2) * 100;
@@ -312,6 +326,8 @@ export class EficienciaPage implements OnInit {
             this.empresa_contacto = "N/A";
           }
 
+          this.getTips(this.datos[0].tip1, this.datos[0].tip2, this.datos[0].tip3);
+
           if (this.idcuarta) {
             this.getEficiencyType(this.idcuarta);
             this.getWordsType(this.idcuarta);
@@ -323,10 +339,10 @@ export class EficienciaPage implements OnInit {
             this.empresas_contacto = "N/A";
           }
         }
-       //  console.log(this.datos);
+        //  console.log(this.datos);
       },
       err => {
-      //   console.log("error");
+        //   console.log("error");
         this.empresas_tiempo = "N/A";
         this.empresas_atendidos = "N/A";
         this.empresas_acciones = "N/A";
@@ -341,12 +357,11 @@ export class EficienciaPage implements OnInit {
       data => {
         this.datos = data;
         if (this.datos.length > 0) {
-       //    console.log(this.datos);
+          //    console.log(this.datos);
           this.empresas_tiempo = this.datos[0].avg_HorasAtencion * 60 ;
           this.empresas_tiempo = this.empresas_tiempo.toFixed();
-          this.empresas_atendidos = JSON.stringify(this.datos[0].pAtendidos.toFixed(2) * 100) + "%";
-          this.empresas_acciones = JSON.stringify(this.datos[0].pContestaAccionesK.toFixed(2) * 100) +
-            "%";
+          this.empresas_atendidos = this.datos[0].pAtendidos.toFixed(2);
+          this.empresas_acciones = this.datos[0].pContestaAccionesK.toFixed(2);
           this.cempresas_atendidos = this.datos[0].pAtendidos.toFixed(2) * 100;
           this.cempresas_acciones =
             this.datos[0].pContestaAccionesK.toFixed(2) * 100;
@@ -397,76 +412,106 @@ export class EficienciaPage implements OnInit {
   public getEficiencyRanking() {
     this.provedor.getEficiencyRanking().then(
       data => {
-        this.datos = data;
-        let lugar = [ { posicion: "1" }, { posicion: "100" }, { posicion: "200" }, { posicion: "300" },{ posicion: "400" }, { posicion: "500" },{ posicion: "600" }, { posicion: "700" },{ posicion: "800" }, { posicion: "900" },  { posicion: "+1000" }, ]
-        let lugar2 = [ { posicion: "0" }, { posicion: "2" }, { posicion: "101" }, { posicion: "201" },{ posicion: "301" }, { posicion: "401" },{ posicion: "501" }, { posicion: "601" },{ posicion: "701" }, { posicion: "801" },  { posicion: "901" }, ]
-        this.leads = this.datos[0].CierredeVenta;
-        let outter = [];
-        outter.push(['Posición', 'Leads', { "role": "style" }]);
+        if (data) {
+          this.datos = data;
+          const lugar = [
+            { posicion: '1' },
+            { posicion: '100' },
+            { posicion: '200' },
+            { posicion: '300' },
+            { posicion: '400' },
+            { posicion: '500' },
+            { posicion: '600' },
+            { posicion: '700' },
+            { posicion: '800' },
+            { posicion: '900' },
+            { posicion: '+1000' }
+          ];
+          const lugar2 = [
+            { posicion: '0' },
+            { posicion: '2' },
+            { posicion: '101' },
+            { posicion: '201' },
+            { posicion: '301' },
+            { posicion: '401' },
+            { posicion: '501' },
+            { posicion: '601' },
+            { posicion: '701' },
+            { posicion: '801' },
+            { posicion: '901' }
+          ];
+
+          this.leads = this.datos[0].CierredeVenta.toFixed(2);
+          let outter = [];
+          outter.push(['Posición', 'Leads', { role: 'style' }]);
           for (let i = 0; i < this.datos.length; i++) {
-            
             let inner = [];
             inner.push(lugar[i].posicion);
             inner.push(this.datos[i].CierredeVenta);
-            if(this.yourplace <= lugar[i].posicion && this.yourplace >= lugar2[i].posicion){
-              inner.push("#288AC1");
-            }else if(this.datos[i].Clientes == 1){
-              inner.push("#f5a623");
-            }else {
-              inner.push("#3DCDBB");
+
+            const inicio = parseInt(lugar[i].posicion);
+            const fin = parseInt(lugar2[i].posicion);
+
+            if (this.yourplace <= inicio && this.yourplace >= fin) {
+              inner.push('#288AC1');
+            } else if (this.datos[i].Clientes === 1) {
+              inner.push('#f5a623');
+            } else {
+              inner.push('#3DCDBB');
             }
             outter.push(inner);
           }
 
           this.bar_ChartData = {
-            chartType: "BarChart",
+            chartType: 'BarChart',
             dataTable: outter,
             options: {
               tooltip: { isHtml: true },
-              chartArea: { width: "75%", heigth: "100%" },
-              legend: { position: "none" },
-              bars: "horizontal",
+              chartArea: { width: '75%', heigth: '100%' },
+              legend: { position: 'none' },
+              bars: 'horizontal',
               is3D: true,
               enableInteractivity: false,
 
               hAxis: {
-                title: "Leads en cierre de venta",
+                title: 'Leads en cierre de venta',
                 textStyle: {
-                  color: "#288AC1",
+                  color: '#288AC1',
                   fontSize: 8,
-                  fontName: "Arial",
+                  fontName: 'Arial',
                   italic: true
                 },
                 titleTextStyle: {
-                  color: "#288AC1",
+                  color: '#288AC1',
                   fontSize: 10,
-                  fontName: "Arial",
+                  fontName: 'Arial',
                   bold: true,
                   italic: true
                 }
               },
               vAxis: {
-                title: "Posición",
+                title: 'Ranking',
                 textStyle: {
-                  color: "#288AC1",
+                  color: '#288AC1',
                   fontSize: 8,
-                  fontName: "Arial",
+                  fontName: 'Arial',
                   italic: true
                 },
                 titleTextStyle: {
-                  color: "#288AC1",
+                  color: '#288AC1',
                   fontSize: 10,
-                  fontName: "Arial",
+                  fontName: 'Arial',
                   bold: true,
                   italic: true
                 }
               },
-              bar: { groupWidth: "60%" }
+              bar: { groupWidth: '60%' }
             }
           };
+        }
       },
       err => {
-        console.log("error");
+        console.log('error');
       }
     );
   }
@@ -480,6 +525,43 @@ export class EficienciaPage implements OnInit {
       },
       err => {
         console.log("error");
+      }
+    );
+  }
+
+  public getTips(idtip1, idtip2, idtip3) {
+    this.provedor.getTips(idtip1, idtip2, idtip3).then(
+      data => {
+        this.datos = data;
+        console.log(this.datos);
+        this.tip1_id = this.datos[0].TipId;
+        this.tip2_id = this.datos[1].TipId;
+        this.tip3_id = this.datos[2].TipId;
+        this.tip1_titulo = this.datos[0].Title;
+        this.tip2_titulo = this.datos[1].Title;
+        this.tip3_titulo = this.datos[2].Title;
+        this.tip1_descripcion = this.datos[0].Description;
+        this.tip2_descripcion = this.datos[1].Description;
+        this.tip3_descripcion = this.datos[2].Description;
+      },
+      err => {
+        console.log('error');
+      }
+    );
+  }
+
+  public getInsertClickTips(idtip) {
+    console.log(idtip);
+    const usuario = this.id;
+    const tipid = idtip;
+    const acceso = 'App';
+    //  console.log(usuario, pagina, acceso);
+    this.provedor.getInsertClickTip(usuario, tipid, acceso).then(
+      data => {
+        this.datosenvio = data;
+      },
+      err => {
+        console.log('error');
       }
     );
   }

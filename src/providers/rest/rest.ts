@@ -411,4 +411,27 @@ export class RestProvider {
       });
     });
   }
+
+  getTips(idtip1, idtip2, idtip3) {
+    return new Promise(resolve => {
+      this.http.get(this.apiUrl + '/getTips/' + idtip1 + '/' + idtip2 + '/' + idtip3).subscribe(data => {
+        resolve(data);
+       // console.log(data);
+      }, err => {
+        console.log(err);
+      });
+    });
+  }
+
+  getInsertClickTip(usuario, tipid, acceso) {
+    return new Promise(resolve => {
+      this.http.get(this.apiUrl + '/clickTip/' + usuario + '/' + tipid + '/' + acceso)
+        .subscribe(data => {
+          resolve(data);
+        }, err => {
+          // console.log(err);
+        });
+    });
+  }
+
 }
