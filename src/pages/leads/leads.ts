@@ -103,7 +103,13 @@ export class LeadsPage implements OnInit {
       leadsArray[k].EMPRESA = leadsArray[k].EMPRESA.substring(0, 28);
       leadsArray[k].urgencia = "No";
       leadsArray[k].status = "exitosa";
+      this.callMissed(leadsArray[k].uuid).then(status => {
+        leadsArray[k].status = status;
+      
+      });
+      console.log(leadsArray[k].status);
       leadsArray[k].perdida = "";
+
       leadsArray[k].url = "sinaudio";
 
       this.getCheckLeadComplement(leadsArray[k].clave)
@@ -174,7 +180,7 @@ export class LeadsPage implements OnInit {
         leadsArray[k].clasificaLead = "P";
       }
     }
-
+    console.log(leadsArray);
     this.checkNoleidos();
     return leadsArray;
   }
@@ -264,19 +270,21 @@ export class LeadsPage implements OnInit {
   }
 
   public callMissed(uuid) {
+    console.log(uuid);
+    const urlcallmissed = this.apiUrl4 + uuid;
+    console.log(urlcallmissed);
     return new Promise(resolve => {
-      this.http.get(this.apiUrl4 + uuid).subscribe(
+      this.http.get(urlcallmissed).subscribe(
         data => {
           if (data == null) {
             status = "exitosa";
-            //console.log(status);
+            console.log(status);
             resolve(status);
-            //console.log(this.status);
-          } else if (data == 1) {
+          } else if (data == 1 || data == 2) {
             status = "perdida";
-            //console.log(status);
+            console.log(status);
             resolve(status);
-          }
+          } 
         },
         err => {
           console.log(err);

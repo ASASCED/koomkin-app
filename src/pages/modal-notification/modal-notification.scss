@@ -20,7 +20,7 @@ page-modal-notification {
     }
     .activity-container {
         display: grid;
-        height: 100%;
+        height: 97%;
         width: 95%;
         // grid-template-rows: 130px auto 75px;
         grid-template-rows: 170px auto 18vh;
@@ -61,8 +61,10 @@ page-modal-notification {
         }
         .activity-content-container {
             grid-row: 2 / 3;
-            display: grid;
+            display: flex;
             grid-template-rows: 15px auto;
+            justify-content: center;
+            align-items: center;
             .progress-bar {
                 grid-row: 1 / 2;
                 height: 100%;
@@ -73,17 +75,19 @@ page-modal-notification {
                 display: flex;
             }
             .activity-content-title.three {
-                grid-row: 2 / 3;
-                height: 113%;
-                word-wrap: break-word;
-                color: $koomkin-grey-light;
-                padding: 0 10px;
+                height: 100%;
+                overflow-wrap: normal;
+                color: rgb(119, 119, 119);
                 font-weight: 500;
                 font-size: 4.8vw;
-                display: flex;
+                display: grid;
+                -webkit-box-align: center;
                 align-items: center;
+                -webkit-box-pack: center;
                 justify-content: center;
                 text-align: center;
+                grid-row: 2 / 3;
+                padding: 0px 10px;
             }
             .activity-content-title {
                 grid-row: 2 / 3;

@@ -30,6 +30,18 @@ export class ModalNotificationPage implements OnInit {
   public parrafo1;
   public parrafo2;
 
+  public aceptar_color_notificacion;
+  public cancelar_color_notificacion;
+  public modal_titulo_notificacion;
+  public modal_subtitulo_notificacion;
+  public modal_mensaje_notificacion;
+  public modal_titulo_no_notificacion;
+  public modal_subtitulo_no_notificacion;
+  public modal_mensaje_no_notificacion;
+
+  public p1_estilo_notificacion;
+  public p2_estilo_notificacion;
+  public p3_estilo_notificacion;
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -58,7 +70,18 @@ export class ModalNotificationPage implements OnInit {
     this.mensaje_notificacion = this.notificacion.mensaje;
     this.titulo_notificacion = this.notificacion.titulo;
     this.imagen_notificacion = this.notificacion.img;
-    console.log();
+    this.aceptar_color_notificacion = this.notificacion.aceptar_color;
+    this.cancelar_color_notificacion = this.notificacion.cancelar_color;
+    this.modal_titulo_notificacion = this.notificacion.modal_titulo;
+    this.modal_subtitulo_notificacion = this.notificacion.modal_subtitulo;
+    this.modal_mensaje_notificacion = this.notificacion.modal_mensaje;
+    this.modal_titulo_no_notificacion = this.notificacion.modal_titulo_no;
+    this.modal_subtitulo_no_notificacion = this.notificacion.modal_subtitulo_no;
+    this.modal_mensaje_no_notificacion = this.notificacion.modal_mensaje_no;
+    this.p1_estilo_notificacion = this.notificacion.p1_estilo;
+    this.p2_estilo_notificacion = this.notificacion.p2_estilo;
+    this.p3_estilo_notificacion = this.notificacion.p3_estilo;
+  
     this.parrafos = this.mensaje_notificacion.split("-*");
 
     if (this.parrafos.length == 3) {
@@ -98,17 +121,18 @@ export class ModalNotificationPage implements OnInit {
 
   showAlert() {
     const alert = this.alertCtrl.create({
-      title: "¡Gracias!",
-      subTitle: "Pronto nos pondremos en contacto contigo.",
-      buttons: ["OK"]
+      title: this.modal_titulo_notificacion,
+      subTitle: this.modal_subtitulo_notificacion,
+      buttons: [this.modal_mensaje_notificacion]
     });
     alert.present();
   }
 
   showAlertNo() {
     const alert = this.alertCtrl.create({
-      title: "¡Gracias por tu respuesta!",
-      buttons: ["OK"]
+      title: this.modal_titulo_no_notificacion,
+      subTitle: this.modal_subtitulo_no_notificacion,
+      buttons: [this.modal_mensaje_no_notificacion]
     });
     alert.present();
   }

@@ -566,4 +566,20 @@ export class EficienciaPage implements OnInit {
     );
   }
 
+  public getInsertClickTooltip(tooltip) {
+    console.log(tooltip);
+    const usuario = this.id;
+    const tooltipname = tooltip;
+    const acceso = 'App';
+    //  console.log(usuario, pagina, acceso);
+    this.provedor.getInsertClickTooltip(usuario, acceso, tooltipname).then(
+      data => {
+        this.datosenvio = data;
+      },
+      err => {
+        console.log('error');
+      }
+    );
+  }
+
 }

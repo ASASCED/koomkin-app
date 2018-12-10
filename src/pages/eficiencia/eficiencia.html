@@ -99,7 +99,7 @@
                         <h3 style="font-size: 3.8vw;color:#707070 ">{{months}} {{years}}</h3>
                     </ion-col>
                     <ion-col col-2>
-                        <img src="assets/imgs/eficiencia/info.svg " style="width:60%;margin-left: 20%;margin-top: 5%; " (click)="openModalFuncionalidadPrueba( 'grafica', 'Ranking de Ventas',1) " />
+                        <img src="assets/imgs/eficiencia/info.svg " style="width:60%;margin-left: 20%;margin-top: 5%; " (click)="openModalFuncionalidadPrueba( 'grafica', 'Ranking de Ventas',1);getInsertClickTooltip('Ranking') " />
                     </ion-col>
                 </ion-row>
             </ion-grid>
@@ -129,7 +129,7 @@
                                         <span class="titulo ">Perteneces al TOP</span>
                                     </ion-col>
                                     <ion-col col-2>
-                                        <img src="assets/imgs/eficiencia/info.svg " style="margin-left: 15%;width:60%" (click)="openModalFuncionalidadPrueba( 'top', 'Perteneces al TOP',2) " />
+                                        <img src="assets/imgs/eficiencia/info.svg " style="margin-left: 15%;width:60%" (click)="openModalFuncionalidadPrueba( 'top', 'Perteneces al TOP',2);getInsertClickTooltip('Top') " />
                                     </ion-col>
                                 </ion-row>
                             </ion-grid>
@@ -227,7 +227,7 @@
                         <ion-grid>
                             <p class="tema ">Tiempo de atención promedio por lead</p>
                             <ion-row>
-                                <ion-col col-3 style="display: grid; " (click)="openModalFuncionalidadPrueba( 'tiempo', 'Tiempo de atención promedio por Lead',3) ">
+                                <ion-col col-3 style="display: grid; " (click)="openModalFuncionalidadPrueba( 'tiempo', 'Tiempo de atención promedio por Lead',3);getInsertClickTooltip('Tiempo') ">
                                     <img src="assets/imgs/eficiencia/tiempo.svg " style="width:60%;margin-left: 20%;display: inline-block " />
                                     <img src="assets/imgs/eficiencia/info.svg " style="width: 20%;display: inline-block;position: absolute;right: 0;top: 0; " />
                                 </ion-col>
@@ -250,7 +250,7 @@
                         <ion-grid>
                             <p class="tema ">% de Leads atendidos</p>
                             <ion-row>
-                                <ion-col col-3 style="display: grid; " (click)="openModalFuncionalidadPrueba( 'atendidos', '% de Leads atendidos',4) ">
+                                <ion-col col-3 style="display: grid; " (click)="openModalFuncionalidadPrueba( 'atendidos', '% de Leads atendidos',4);getInsertClickTooltip('Atendidos') ">
                                     <img src="assets/imgs/eficiencia/atendidos.svg " style="width:60%;margin-left: 20%;display: inline-block " />
                                     <img src="assets/imgs/eficiencia/info.svg " style="width: 20%;display: inline-block;position: absolute;right: 0;top: 0; " />
                                 </ion-col>
@@ -272,7 +272,7 @@
                         <ion-grid>
                             <p class="tema ">% de Respuesta a acciones de Koomkin</p>
                             <ion-row>
-                                <ion-col col-3 style="display: grid; " (click)="openModalFuncionalidadPrueba( 'koomkin', '% de Respuesta a acciones de Koomkin',5) ">
+                                <ion-col col-3 style="display: grid; " (click)="openModalFuncionalidadPrueba( 'koomkin', '% de Respuesta a acciones de Koomkin',5);getInsertClickTooltip('Acciones') ">
                                     <img src="assets/imgs/eficiencia/koomkin.svg " style="width:60%;margin-left: 20%;display: inline-block " />
                                     <img src="assets/imgs/eficiencia/info.svg " style="width: 20%;display: inline-block;position: absolute;right: 0;top: 0; " />
                                 </ion-col>
@@ -295,7 +295,7 @@
                         <ion-grid>
                             <p class="tema ">Tiempo de negociación</p>
                             <ion-row>
-                                <ion-col col-3 style="display: grid; " (click)="openModalFuncionalidadPrueba( 'negocios', 'Tiempo de negociación',6) ">
+                                <ion-col col-3 style="display: grid; " (click)="openModalFuncionalidadPrueba( 'negocios', 'Tiempo de negociación',6);getInsertClickTooltip('Negociacion')">
                                     <img src="assets/imgs/eficiencia/negocios.svg " style="width:60%;margin-left: 20%;display: inline-block " />
                                     <img src="assets/imgs/eficiencia/info.svg " style="width: 20%;display: inline-block;position: absolute;right: 0;top: 0; " />
                                 </ion-col>
@@ -317,7 +317,7 @@
                         <ion-grid>
                             <p class="tema ">Intento de contacto con Leads no exitosos</p>
                             <ion-row>
-                                <ion-col col-3 style="display: grid; " (click)="openModalFuncionalidadPrueba( 'noexitosos', 'Intento de contacto con Leads no exitosos',7) ">
+                                <ion-col col-3 style="display: grid; " (click)="openModalFuncionalidadPrueba( 'noexitosos', 'Intento de contacto con Leads no exitosos',7);getInsertClickTooltip('Intento') ">
                                     <img src="assets/imgs/eficiencia/noexitosos.svg " style="width:60%;margin-left: 20%;display: inline-block " />
                                     <img src="assets/imgs/eficiencia/info.svg " style="width: 20%;display: inline-block;position: absolute;right: 0;top: 0; " />
                                 </ion-col>
@@ -339,7 +339,7 @@
                         <ion-grid>
                             <p class="tema ">Palabras clave en negociaciones</p>
                             <ion-row>
-                                <ion-col col-3 style="display: grid; " (click)="openModalFuncionalidadPrueba( 'key', 'Palabras clave en negociaciones',8) ">
+                                <ion-col col-3 style="display: grid; " (click)="openModalFuncionalidadPrueba( 'key', 'Palabras clave en negociaciones',8);getInsertClickTooltip('Palabras') ">
                                     <img src="assets/imgs/eficiencia/key.svg " style="width:60%;margin-left: 20%;display: inline-block " />
                                     <img src="assets/imgs/eficiencia/info.svg " style="width: 20%;display: inline-block;position: absolute;right: 0;top: 0; " />
                                 </ion-col>
@@ -380,7 +380,7 @@
                         <h3 style="font-size: 3.8vw;color:#707070 ">Atención al cliente</h3>
                     </ion-col>
                     <ion-col col-2>
-                        <img src="assets/imgs/eficiencia/info.svg " style="width:60%;margin-left: 20%;margin-top: 5%; " (click)="openModalFuncionalidadPrueba( 'tendencia', 'Tendencia',9) " />
+                        <img src="assets/imgs/eficiencia/info.svg " style="width:60%;margin-left: 20%;margin-top: 5%; " (click)="openModalFuncionalidadPrueba( 'tendencia', 'Tendencia',9);getInsertClickTooltip('Tendencia') " />
                     </ion-col>
                 </ion-row>
             </ion-grid>

@@ -15,9 +15,9 @@
             </div>
             <div class="activity-content-container" [ngClass]="{'map-content-container' : uiState?.screen === 3}">
                 <div [ngClass]="{'three' : parrafos.length === 3}" class="activity-content-title">
-                    {{parrafo}}
-                    <br><br> {{parrafo1}}
-                    <br><br> {{parrafo2}}
+                    <p [style.color]="p1_estilo_notificacion">{{parrafo}}</p>
+                    <p [style.color]="p2_estilo_notificacion">{{parrafo1}}</p>
+                    <p [style.color]="p3_estilo_notificacion">{{parrafo2}}</p>
                 </div>
             </div>
             <div class="activity-footer">
@@ -26,10 +26,6 @@
                     <button class="renovacion-positivo" (click)="registrarInteres(1);showAlert()">{{aceptar_notificacion}}</button>
                 </div>
             </div>
-        </div>
-        <div class="footer">
-            <div class="left"></div>
-            <div class="right"></div>
         </div>
     </body>
 </ion-content>
