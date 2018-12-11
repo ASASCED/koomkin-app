@@ -1,17 +1,13 @@
-<ion-card (click)="mostrar_modal(notificacion);registrarEntradaBanner();" [style.background]="fondito">
-    <ion-card-content>
-        <ion-grid>
-            <ion-row>
-                <ion-col col-2>
-                    <img src="assets/imgs/banner/{{imagen}}.svg" class="icono_banner" />
-                </ion-col>
-                <ion-col col-10>
-                    <h1 class="titulo">
-                        <strong>{{titulo}}</strong>
-                    </h1>
-                    <h3 class="mensaje">{{mensaje}}</h3>
+<div class="anuncio">
+    <div class="anuncio-mensaje" (click)="mostrar_modal(notification);">
+        <img src="assets/imgs/banner/{{img}}.svg" width="100%" class="anuncio-img" />
+        <ion-grid class="anuncio-grid">
+            <ion-row style="width: 97%;margin-bottom: 0%;">
+                <ion-col col-12>
+                    <span class="anuncio-titulo">{{title}}</span>
+                    <span class="anuncio-contenido">{{subtitle}}</span>
                 </ion-col>
             </ion-row>
         </ion-grid>
-    </ion-card-content>
-</ion-card>
+    </div>
+</div>

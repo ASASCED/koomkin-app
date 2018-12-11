@@ -1,10 +1,43 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 496">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 68 68">
   <defs>
     <style>
       .cls-1 {
+        fill: #fe703f;
+        stroke: #707070;
+        stroke-width: 3px;
+      }
+
+      .cls-2 {
         fill: #fff;
       }
+
+      .cls-3 {
+        stroke: none;
+      }
+
+      .cls-4 {
+        fill: none;
+      }
+
+      .cls-5 {
+        filter: url(#Ellipse_291);
+      }
     </style>
+    <filter id="Ellipse_291" x="0" y="0" width="68" height="68" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
   </defs>
-  <path id="arrow-circle-up" class="cls-1" d="M8,256C8,119,119,8,256,8S504,119,504,256,393,504,256,504,8,393,8,256Zm143.6,28.9L224,209.4V392a23.942,23.942,0,0,0,24,24h16a23.942,23.942,0,0,0,24-24V209.4l72.4,75.5a24.027,24.027,0,0,0,34.3.4l10.9-11a23.9,23.9,0,0,0,0-33.9L273,107.7a23.9,23.9,0,0,0-33.9,0L106.3,240.4a23.9,23.9,0,0,0,0,33.9l10.9,11A24.145,24.145,0,0,0,151.6,284.9Z" transform="translate(-8 -8)"/>
+  <g id="Group_9161" data-name="Group 9161" transform="translate(-3092 -1554)">
+    <g class="cls-5" transform="matrix(1, 0, 0, 1, 3092, 1554)">
+      <g id="Ellipse_291-2" data-name="Ellipse 291" class="cls-1" transform="translate(9 6)">
+        <circle class="cls-3" cx="25" cy="25" r="25"/>
+        <circle class="cls-4" cx="25" cy="25" r="23.5"/>
+      </g>
+    </g>
+    <path id="upgrade" class="cls-2" d="M8,23.2A15.2,15.2,0,1,1,23.2,38.4,15.2,15.2,0,0,1,8,23.2Zm8.8,1.771,4.437-4.627V31.535a1.467,1.467,0,0,0,1.471,1.471h.981a1.467,1.467,0,0,0,1.471-1.471V20.344L29.6,24.971A1.473,1.473,0,0,0,31.7,25l.668-.674a1.465,1.465,0,0,0,0-2.078l-8.127-8.133a1.465,1.465,0,0,0-2.078,0l-8.139,8.133a1.465,1.465,0,0,0,0,2.078l.668.674a1.48,1.48,0,0,0,2.108-.025Z" transform="translate(3103 1562)"/>
+  </g>
 </svg>

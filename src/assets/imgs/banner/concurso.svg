@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 68 68">
+  <defs>
+    <style>
+      .cls-1, .cls-3 {
+        fill: #fe703f;
+      }
+
+      .cls-1 {
+        stroke: #707070;
+        stroke-width: 3px;
+      }
+
+      .cls-2 {
+        fill: #fff;
+      }
+
+      .cls-4 {
+        stroke: none;
+      }
+
+      .cls-5 {
+        fill: none;
+      }
+
+      .cls-6 {
+        filter: url(#Ellipse_291);
+      }
+    </style>
+    <filter id="Ellipse_291" x="0" y="0" width="68" height="68" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="Group_9166" data-name="Group 9166" transform="translate(-3167 -1400)">
+    <g class="cls-6" transform="matrix(1, 0, 0, 1, 3167, 1400)">
+      <g id="Ellipse_291-2" data-name="Ellipse 291" class="cls-1" transform="translate(9 6)">
+        <circle class="cls-4" cx="25" cy="25" r="25"/>
+        <circle class="cls-5" cx="25" cy="25" r="23.5"/>
+      </g>
+    </g>
+    <g id="Group_9165" data-name="Group 9165" transform="translate(95 12.446)">
+      <path id="Path_17755" data-name="Path 17755" class="cls-2" d="M209.465,351.237H204.8l.795-1.7.689-1.591h1.7l.689,1.591Z" transform="translate(2898.59 1075.257)"/>
+      <path id="Path_17756" data-name="Path 17756" class="cls-2" d="M137.053,412.73h-10.6a1.063,1.063,0,0,0-1.06,1.06v3.446h12.67V413.79A.988.988,0,0,0,137.053,412.73Z" transform="translate(2973.972 1013.764)"/>
+      <path id="Path_17757" data-name="Path 17757" class="cls-2" d="M223.554,348.544a13.486,13.486,0,0,1-1.272.583l-.265.053-.265-.106a13.493,13.493,0,0,1-1.272-.583l.689-1.591h1.643Z" transform="translate(2883.706 1076.254)"/>
+      <g id="Group_9164" data-name="Group 9164" transform="translate(3093 1405.554)">
+        <path id="Path_17758" data-name="Path 17758" class="cls-2" d="M0,57.47v2.173A12.777,12.777,0,0,0,7.9,71.412a12.241,12.241,0,0,0,4.824.954,12.241,12.241,0,0,0,4.824-.954,12.777,12.777,0,0,0,7.9-11.769V57.47Zm23.325,2.173a10.483,10.483,0,0,1-2.439,6.732,10.668,10.668,0,0,1-8.164,3.87,10.5,10.5,0,0,1-8.164-3.87,10.669,10.669,0,0,1-2.439-6.732v-.053H23.272v.053Z" transform="translate(0 -54.554)"/>
+        <path id="Path_17759" data-name="Path 17759" class="cls-2" d="M92.406,0H75.866a.645.645,0,0,0-.636.636.657.657,0,0,0,.636.689h16.54a.645.645,0,0,0,.636-.636A.658.658,0,0,0,92.406,0Z" transform="translate(-71.413)"/>
+      </g>
+      <path id="Path_17760" data-name="Path 17760" class="cls-2" d="M104.319,26.12v5.725a12.918,12.918,0,0,1-8.27,12.034,12.989,12.989,0,0,1-8.27-12.087V26.12Z" transform="translate(3009.673 1380.76)"/>
+      <path id="Path_17761" data-name="Path 17761" class="cls-3" d="M163.486,73.14l1.113,3.393h3.552l-2.863,2.12,1.06,3.393-2.862-2.121-2.863,2.121,1.06-3.393-2.863-2.12h3.552Z" transform="translate(2942.238 1336.125)"/>
+      <rect id="Rectangle_131" data-name="Rectangle 131" class="cls-2" width="16.486" height="0.795" transform="translate(3097.453 1406.88)"/>
+    </g>
+  </g>
+</svg>

@@ -1,19 +1,4 @@
 page-inicio {
-    .col {
-        padding: 5px !important;
-        position: relative;
-        width: 100%;
-        margin: 0;
-        min-height: 1px;
-        -webkit-flex-basis: 0;
-        -ms-flex-preferred-size: 0;
-        flex-basis: 0;
-        -webkit-box-flex: 1;
-        -webkit-flex-grow: 1;
-        -ms-flex-positive: 1;
-        flex-grow: 1;
-        max-width: 100%;
-    }
     .flex-col {
         display: flex;
         justify-content: center;
@@ -26,22 +11,23 @@ page-inicio {
         font-size: 5vw;
         font-weight: 700;
         margin-top: 2%;
+        text-align: left;
     }
     .row {
         margin-bottom: 1%;
-        text-align: center;
         height: 100%;
         display: flex;
         vertical-align: middle;
         justify-content: center;
+        text-align: left;
     }
     .grande {
-        height: 120px;
+        height: 90px;
         background: #3DCDBB;
-        border-top-right-radius: 10px;
-        border-top-left-radius: 10px;
+        border-radius: 10px;
         vertical-align: middle;
-        margin-bottom: 2%;
+        margin-bottom: 5%;
+        align-items: center;
     }
     .dos {
         background: #288AC1;

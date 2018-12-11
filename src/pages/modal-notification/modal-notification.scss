@@ -101,6 +101,7 @@ page-modal-notification {
                 align-items: center;
                 justify-content: center;
                 text-align: center;
+                display: grid;
             }
             .activity-component {
                 grid-row-start: 3;

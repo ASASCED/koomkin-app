@@ -105,9 +105,11 @@ export class LeadsPage implements OnInit {
       leadsArray[k].status = "exitosa";
       this.callMissed(leadsArray[k].uuid).then(status => {
         leadsArray[k].status = status;
-      
+       /* if(leadsArray[k].status == 'perdida') {
+          leadsArray[k].clasificaLead = "M";
+        } */
       });
-      console.log(leadsArray[k].status);
+      // console.log(leadsArray[k].status);
       leadsArray[k].perdida = "";
 
       leadsArray[k].url = "sinaudio";
@@ -180,7 +182,7 @@ export class LeadsPage implements OnInit {
         leadsArray[k].clasificaLead = "P";
       }
     }
-    console.log(leadsArray);
+    // console.log(leadsArray);
     this.checkNoleidos();
     return leadsArray;
   }
@@ -270,19 +272,15 @@ export class LeadsPage implements OnInit {
   }
 
   public callMissed(uuid) {
-    console.log(uuid);
     const urlcallmissed = this.apiUrl4 + uuid;
-    console.log(urlcallmissed);
     return new Promise(resolve => {
       this.http.get(urlcallmissed).subscribe(
         data => {
           if (data == null) {
             status = "exitosa";
-            console.log(status);
             resolve(status);
           } else if (data == 1 || data == 2) {
             status = "perdida";
-            console.log(status);
             resolve(status);
           } 
         },
@@ -644,6 +642,7 @@ export class LeadsPage implements OnInit {
       return data.leido == criterioFiltro;
     });
   }
+
   showConfirm(lead) {
     let btnCancel = {
       text: "Cancelar",

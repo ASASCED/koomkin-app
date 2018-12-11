@@ -8,43 +8,56 @@
 
 
 <ion-content>
+    <banner *ngIf="mostrar == 1" [title]='title' [subtitle]='subtitle' [img]='img' [fondo]='fondo' [notification]='notification' [idReportBanner]='idReportBanner' [uuidPass]='uuidPass' (click)="clickBanner();"></banner>
     <ion-grid padding>
-        <ion-row>
-            <ion-col justify-content-center align-items-center (click)="pagina(leads)">
-                <div class="grande">
-                    <img style="margin-top: 7%;" src="assets/imgs/inicio/leads.svg" width="20%" />
-                    <br>
-                    <span>Leads o Clientes Potenciales</span>
-                </div>
+        <ion-row class="grande" (click)="pagina(leads)">
+            <ion-col col-3>
+                <img src="assets/imgs/inicio/leads.svg" width="100%" />
+            </ion-col>
+            <ion-col col-7>
+                <span>Leads o Clientes Potenciales</span>
+            </ion-col>
+            <ion-col col-2 style="text-align:center">
+                <ion-icon name="ios-arrow-forward" style="font-size: 4em;"></ion-icon>
             </ion-col>
         </ion-row>
-        <ion-row>
-            <ion-col (click)="pagina(reporte)">
-                <div class="grande dos">
-                    <img style="margin-top: 7%;" src="assets/imgs/inicio/reporte.svg" width="20%" />
-                    <br>
-                    <span>Reporte</span>
-                </div>
+
+        <ion-row class="grande dos" (click)="pagina(reporte)">
+            <ion-col col-3>
+                <img src="assets/imgs/inicio/reporte.svg" width="100%" />
+            </ion-col>
+            <ion-col col-7>
+                <span>Reporte</span>
+            </ion-col>
+            <ion-col col-2 style="text-align:center">
+                <ion-icon name="ios-arrow-forward" style="font-size: 4em;"></ion-icon>
             </ion-col>
         </ion-row>
-        <ion-row>
-            <ion-col (click)="pagina(eficiencia)">
-                <div class="grande tres">
-                    <img style="margin-top: 7%;" src="assets/imgs/inicio/eficiencia.svg" width="20%" />
-                    <br>
-                    <span>Eficiencia Comercial</span>
-                </div>
+
+        <ion-row class="grande tres" (click)="pagina(eficiencia)">
+            <ion-col col-3>
+                <img src="assets/imgs/inicio/eficiencia.svg" width="100%" />
+            </ion-col>
+            <ion-col col-7>
+                <span>Eficiencia Comercial</span>
+            </ion-col>
+            <ion-col col-2 style="text-align:center">
+                <ion-icon name="ios-arrow-forward" style="font-size: 4em;"></ion-icon>
             </ion-col>
         </ion-row>
-        <ion-row>
-            <ion-col (click)="pagina(datos)">
-                <div class="grande">
-                    <img style="margin-top: 7%;" src="assets/imgs/inicio/ajustes.svg" width="20%" />
-                    <br>
-                    <span>Configuración</span>
-                </div>
+
+        <ion-row class="grande" (click)="pagina(datos)">
+            <ion-col col-3>
+                <img src="assets/imgs/inicio/ajustes.svg" width="100%" />
+            </ion-col>
+            <ion-col col-7>
+                <span>Ajustes</span>
+            </ion-col>
+            <ion-col col-2 style="text-align:center">
+                <ion-icon name="ios-arrow-forward" style="font-size: 4em;"></ion-icon>
             </ion-col>
         </ion-row>
+
     </ion-grid>
 </ion-content>
 

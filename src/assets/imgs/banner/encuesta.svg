@@ -31,13 +31,19 @@
       <feComposite in="SourceGraphic"/>
     </filter>
   </defs>
-  <g id="Group_9163" data-name="Group 9163" transform="translate(-2970 -1552)">
-    <g class="cls-5" transform="matrix(1, 0, 0, 1, 2970, 1552)">
+  <g id="Group_9169" data-name="Group 9169" transform="translate(-3092 -1398)">
+    <g class="cls-5" transform="matrix(1, 0, 0, 1, 3092, 1398)">
       <g id="Ellipse_291-2" data-name="Ellipse 291" class="cls-1" transform="translate(9 6)">
         <circle class="cls-3" cx="25" cy="25" r="25"/>
         <circle class="cls-4" cx="25" cy="25" r="23.5"/>
       </g>
     </g>
-    <path id="renovacion" class="cls-2" d="M22,9.935A6.383,6.383,0,1,0,26.516,11.8,6.387,6.387,0,0,0,22,9.935ZM24.837,16.6a.433.433,0,0,1-.43.43H21.719a.434.434,0,0,1-.43-.43V13.2a.433.433,0,0,1,.43-.43h.559a.434.434,0,0,1,.43.43v2.408h1.7a.434.434,0,0,1,.43.43V16.6Zm-10.645-.279A7.779,7.779,0,0,1,15,12.884a5.91,5.91,0,0,0-1.091-.111h-.741a7.721,7.721,0,0,1-6.467,0H5.961A5.963,5.963,0,0,0,0,18.735V20.58a2.129,2.129,0,0,0,2.129,2.129H17.524A7.806,7.806,0,0,1,14.193,16.322ZM9.935,11.354A5.677,5.677,0,1,0,4.258,5.677a5.677,5.677,0,0,0,5.677,5.677Z" transform="translate(2990.965 1570.708)"/>
+    <g id="Group_9168" data-name="Group 9168" transform="translate(-1 -8.932)">
+      <g id="Group_9167" data-name="Group 9167" transform="translate(3112 1424.932)">
+        <path id="Path_17762" data-name="Path 17762" class="cls-2" d="M152.8,0H139V10.263h13.8Zm-7.735,8.772-2.711-2.711,1.251-1.251,1.46,1.46L148.2,3.142l1.251,1.251Z" transform="translate(-130.801)"/>
+        <path id="Path_17763" data-name="Path 17763" class="cls-2" d="M27,95H23.771v6.429H6.429V95H3.2L0,104.349v.088H30.2v-.088Z" transform="translate(0 -89.396)"/>
+        <rect id="Rectangle_132" data-name="Rectangle 132" class="cls-2" width="30.2" height="8.258" transform="translate(0 16.811)"/>
+      </g>
+    </g>
   </g>
 </svg>
