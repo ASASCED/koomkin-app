@@ -88,7 +88,7 @@ export class InicioPage implements OnInit {
 
   pagina(pagina: any) {
     console.log(pagina);
-    this.navCtrl.setRoot(pagina);
+    this.navCtrl.push(pagina);
     this.menuCtrl.close();
   }
 

@@ -16,6 +16,7 @@ import { PreguntaPage } from './../pages/pregunta/pregunta';
 import { InicioPage } from '../pages/inicio/inicio';
 import { EficienciaPage } from '../pages/eficiencia/eficiencia';
 
+import { ScreenOrientation } from '@ionic-native/screen-orientation';
 
 import { AuthServiceProvider } from "../providers/auth-service/auth-service";
 import { RestProvider } from "../providers/rest/rest";
@@ -62,7 +63,8 @@ export class MyApp {
     public authService: AuthServiceProvider,
     public provedor: RestProvider,
     public http: HttpClient,
-    public storage: Storage) {
+    public storage: Storage,
+    private screenOrientation: ScreenOrientation) {
 
     this.initializeApp();
 
@@ -85,6 +87,10 @@ export class MyApp {
 
 
   initializeApp() {
+    if (this.platform.is('cordova')) {
+      this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.LANDSCAPE);
+    }
+
     this.platform.ready().then(() => {
 
       //UXCam.startWithKey('d9f707635967f38', function () { alert('start ssss') }, function (err) { alert(err) });

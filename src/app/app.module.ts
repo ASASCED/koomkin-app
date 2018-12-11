@@ -11,6 +11,7 @@ import { IonicStorageModule } from '@ionic/storage';
 import { Network } from '@ionic-native/network';
 //plugin
 //import { OneSignal } from '@ionic-native/onesignal';
+import { ScreenOrientation } from '@ionic-native/screen-orientation';
 
 import { MyApp } from './app.component';
 import { ReportePageModule } from '../pages/reporte/reporte.module'
@@ -123,6 +124,7 @@ import { CapitalizePipe } from '../pipes/capitalize/capitalize';
     AuthServiceProvider,
     UserProvider,
     StreamingMedia,
+    ScreenOrientation,
    // OneSignal,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     ChatServiceProvider,
