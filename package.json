@@ -39,6 +39,7 @@
         "connect-ensure-login": "^0.1.1",
         "cookie-parser": "~1.4.3",
         "cordova-android": "^7.1.4",
+        "cordova-android-support-gradle-release": "^2.0.1",
         "cordova-ios": "4.5.5",
         "cordova-plugin-device": "^2.0.2",
         "cordova-plugin-file": "^6.0.1",
@@ -98,7 +99,10 @@
             "cordova-uxcam": {},
             "cordova-plugin-file-opener2": {},
             "cordova-plugin-file": {},
-            "cordova-plugin-nativeaudio": {}
+            "cordova-plugin-nativeaudio": {},
+            "cordova-android-support-gradle-release": {
+                "ANDROID_SUPPORT_VERSION": "27.+"
+            }
         },
         "platforms": [
             "android"
