@@ -52,20 +52,30 @@ export class EficienciaPage implements OnInit {
   public empresa;
   public id;
   public clientUUID = this.authService.getClientUUID();
+
+
   public empresa_tiempo;
   public empresas_tiempo;
+  public comparative_empresa_tiempo;
+  public comparative_empresas_tiempo;
+  
   public empresa_atendidos:any = 0;
   public empresas_atendidos:any = 0;
+  public comparative_empresa_atendidos: any = 0;
+  public comparative_empresas_atendidos: any = 0;
+
   public empresa_acciones:any = 0;
   public empresas_acciones:any = 0;
-  public cempresa_atendidos: any = 0;
-  public cempresas_atendidos: any = 0;
-  public cempresa_acciones: any = 0;
-  public cempresas_acciones: any = 0;
+  public comparative_empresa_acciones: any = 0;
+  public comparative_empresas_acciones: any = 0;
+
   public empresa_negociacion:any = "N/A";
   public empresas_negociacion:any = "N/A";
+
   public empresa_contacto:any = "N/A";
   public empresas_contacto:any = "N/A";
+
+
   public ganadores;
   public month = new Date();
   public year = new Date();
@@ -271,24 +281,34 @@ export class EficienciaPage implements OnInit {
           this.top = JSON.stringify(this.datos[0].top * 100) + "%";
           this.yourplace = JSON.stringify(this.datos[0].Lugar);
           this.posicion = "#" + this.yourplace;
-          this.clientesrep = this.datos[0].avg_HorasAtencion_5 * 60;
+
+          if (this.datos[0].avg_HorasAtencion_5 != null ) {
+            this.clientesrep = this.datos[0].avg_HorasAtencion_5 * 60;
+          } else {
+            this.clientesrep = 12000;
+          }
           this.clientes2rep = this.datos[0].avg_HorasAtencionTotal * 60;
 
           this.clientes = this.clientesrep.toFixed();
           this.clientes2 = this.clientes2rep.toFixed();
-          console.log(typeof(this.clientesrep));
-          this.fiveprogress = this.datos[0].pAtendidos_5;
-          this.thirtyprogress = this.datos[0].pAtendidos_2hrs;
 
+          this.fiveprogress = this.datos[0].pAtendidos_5.toFixed(4);
+          this.thirtyprogress = this.datos[0].pAtendidos_2hrs.toFixed(4);
+          
           this.fiveprogressbar = JSON.stringify(this.datos[0].pAtendidos_5 * 100);
           this.thirtyprogressbar = JSON.stringify(this.datos[0].pAtendidos_2hrs * 100);
 
+          // Tiempo de atención promedio por lead
           this.empresa_tiempo = this.datos[0].avg_HorasAtencion * 60;
           this.empresa_tiempo = this.empresa_tiempo.toFixed();
 
           if(this.empresa_tiempo == null){
             this.empresa_tiempo = "N/A";
           }
+      
+          this.comparative_empresa_tiempo = this.datos[0].avg_HorasAtencion * 60;
+
+          // % de Leads atendidos
 
           this.empresa_atendidos =  this.datos[0].pAtendidos.toFixed(2);
 
@@ -296,22 +316,23 @@ export class EficienciaPage implements OnInit {
             this.empresa_atendidos = 0;
           }
 
+          this.comparative_empresa_atendidos = this.datos[0].pAtendidos.toFixed(2) * 100;
+
+          if(this.comparative_empresa_atendidos == null){
+            this.comparative_empresa_atendidos = "N/A";
+          }
+
+          // % de Respuesta a acciones de Koomkin
           this.empresa_acciones =  this.datos[0].pContestaAccionesK.toFixed(2);
 
           if(this.empresa_acciones == null){
             this.empresa_acciones = 0;
           }
 
-          this.cempresa_atendidos = this.datos[0].pAtendidos.toFixed(2) * 100;
+          this.comparative_empresa_acciones = this.datos[0].pContestaAccionesK.toFixed(2) * 100;
 
-          if(this.cempresa_atendidos == null){
-            this.cempresa_atendidos = "N/A";
-          }
-
-          this.cempresa_acciones = this.datos[0].pContestaAccionesK.toFixed(2) * 100;
-
-          if(this.cempresa_acciones == null){
-            this.cempresa_acciones = "N/A";
+          if(this.comparative_empresa_acciones == null){
+            this.comparative_empresa_acciones = "N/A";
           }
 
           this.empresa_negociacion = this.datos[0].TiempoNegociacion;
@@ -360,11 +381,11 @@ export class EficienciaPage implements OnInit {
           //    console.log(this.datos);
           this.empresas_tiempo = this.datos[0].avg_HorasAtencion * 60 ;
           this.empresas_tiempo = this.empresas_tiempo.toFixed();
+          this.comparative_empresas_tiempo = this.datos[0].avg_HorasAtencion * 60;
           this.empresas_atendidos = this.datos[0].pAtendidos.toFixed(2);
           this.empresas_acciones = this.datos[0].pContestaAccionesK.toFixed(2);
-          this.cempresas_atendidos = this.datos[0].pAtendidos.toFixed(2) * 100;
-          this.cempresas_acciones =
-            this.datos[0].pContestaAccionesK.toFixed(2) * 100;
+          this.comparative_empresas_atendidos = this.datos[0].pAtendidos.toFixed(2) * 100;
+          this.comparative_empresas_acciones = this.datos[0].pContestaAccionesK.toFixed(2) * 100;
           this.empresas_negociacion = this.datos[0].TiempoNegociacion;
           this.empresas_contacto = this.datos[0].IntentosNoEx.toFixed(1);
         } else {

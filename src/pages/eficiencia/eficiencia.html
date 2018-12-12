@@ -238,9 +238,9 @@
                                     <span class="tiempo ">{{empresas_tiempo}} min</span>
                                 </ion-col>
                                 <ion-col col-3 style="display: grid; ">
-                                    <img *ngIf="empresa_tiempo == empresas_tiempo || empresa_tiempo == 'N/A'" src="assets/imgs/eficiencia/neutral.svg " style="width: 80%;margin-left: 10%; " />
-                                    <img *ngIf="empresa_tiempo < empresas_tiempo" src="assets/imgs/eficiencia/feliz.svg " style="width: 80%;margin-left: 10%; " />
-                                    <img *ngIf="empresa_tiempo > empresas_tiempo" src="assets/imgs/eficiencia/triste.svg " style="width: 80%;margin-left: 10%; " />
+                                    <img *ngIf="comparative_empresa_tiempo == comparative_empresas_tiempo || comparative_empresa_tiempo == 'N/A'" src="assets/imgs/eficiencia/neutral.svg " style="width: 80%;margin-left: 10%; " />
+                                    <img *ngIf="comparative_empresa_tiempo < comparative_empresas_tiempo" src="assets/imgs/eficiencia/feliz.svg " style="width: 80%;margin-left: 10%; " />
+                                    <img *ngIf="comparative_empresa_tiempo > comparative_empresas_tiempo" src="assets/imgs/eficiencia/triste.svg " style="width: 80%;margin-left: 10%; " />
                                 </ion-col>
                             </ion-row>
                         </ion-grid>
@@ -308,7 +308,7 @@
                                 <ion-col col-3 style="display: grid; ">
                                     <img *ngIf="empresa_negociacion == 'Bajo'" src="assets/imgs/eficiencia/triste.svg " style="width: 80%;margin-left: 10%; " />
                                     <img *ngIf="empresa_negociacion == 'Alto'" src="assets/imgs/eficiencia/feliz.svg " style="width: 80%;margin-left: 10%; " />
-                                    <img *ngIf="empresa_negociacion == 'N/A'" src="assets/imgs/eficiencia/neutral.svg " style="width: 80%;margin-left: 10%; " /> </ion-col>
+                                    <img *ngIf="empresa_negociacion == 'N/A' || empresa_negociacion == 'Medio'" src="assets/imgs/eficiencia/neutral.svg " style="width: 80%;margin-left: 10%; " /> </ion-col>
                             </ion-row>
                         </ion-grid>
                         <hr style="background-color:rgba(112,112,112,0.3); width:94%;height: 2px;margin-top: 0;margin-bottom: 0; ">
