@@ -114,7 +114,7 @@
                                             </div>
                                         </ion-col>
                                         <ion-col col-4>
-                                            <img *ngIf="lead.status == 'perdida'" src="assets/imgs/llamadas/callmissed.svg" style="vertical-align: middle;width: 15% !important;max-width:150px !important;display: inline-block;" (click)="showConfirm(lead)" />
+                                            <img *ngIf="lead.status == 'perdida'" src="assets/imgs/llamadas/callmissed.svg" style="vertical-align: middle;width: 15% !important;max-width:150px !important;display: inline-block;margin-top: 6%;" (click)="showConfirm(lead)" />
                                         </ion-col>
                                         <ion-col col-2 style="text-align: right;">
                                             <ion-icon class="{{lead.calificaLead}} icon icon-md ion-md-thumbs-up" name="md-thumbs-up" (click)="changeLike('L',lead)"></ion-icon>
