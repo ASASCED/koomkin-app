@@ -4,12 +4,15 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpModule } from '@angular/http';
 import { File } from '@ionic-native/file';
-import { FileOpener } from '@ionic-native/file-opener';
 import { StreamingMedia } from '@ionic-native/streaming-media'
 import { SwipeSegmentDirective } from '../directives/swipe-segment/swipe-segment';
 import { IonicStorageModule } from '@ionic/storage';
 import { Network } from '@ionic-native/network';
-//plugin
+
+import {FileOpener } from '@ionic-native/file-opener';
+import {FileChooser} from '@ionic-native/file-chooser';
+import {FilePath} from '@ionic-native/file-path';
+
 //import { OneSignal } from '@ionic-native/onesignal';
 import { ScreenOrientation } from '@ionic-native/screen-orientation';
 
@@ -47,6 +50,8 @@ import { InicioPage } from '../pages/inicio/inicio';
 import { EficienciaPage } from '../pages/eficiencia/eficiencia';
 import { Ng2GoogleChartsModule } from 'ng2-google-charts';
 import { CapitalizePipe } from '../pipes/capitalize/capitalize';
+
+import { Transfer, FileUploadOptions, TransferObject } from '@ionic-native/transfer';
 
 @NgModule({
   declarations: [
@@ -130,7 +135,10 @@ import { CapitalizePipe } from '../pipes/capitalize/capitalize';
     ChatServiceProvider,
     UserProvider,
     File,
-    FileOpener
+    FileOpener,
+    FileChooser,
+    FilePath,
+    Transfer,
     //PushnotificationProvider
   ]
 })
