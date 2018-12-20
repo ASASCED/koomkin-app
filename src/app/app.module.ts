@@ -47,6 +47,8 @@ import { InicioPage } from '../pages/inicio/inicio';
 import { EficienciaPage } from '../pages/eficiencia/eficiencia';
 import { Ng2GoogleChartsModule } from 'ng2-google-charts';
 import { CapitalizePipe } from '../pipes/capitalize/capitalize';
+import { Market } from '@ionic-native/market';
+import { ModalSurveyPage } from '../pages/modal-survey/modal-survey';
 
 @NgModule({
   declarations: [
@@ -75,7 +77,8 @@ import { CapitalizePipe } from '../pipes/capitalize/capitalize';
     SwipeSegmentDirective,
     RelativeTimePipe,
     CapitalizePipe,
-    ModalNotificationPage
+    ModalNotificationPage,
+    ModalSurveyPage
   ],
   imports: [
     BrowserModule,
@@ -114,7 +117,8 @@ import { CapitalizePipe } from '../pipes/capitalize/capitalize';
     RestauranteComponent,
     ProveedorComponent,
     BannerComponent,
-    ModalNotificationPage
+    ModalNotificationPage,
+    ModalSurveyPage
   ],
   providers: [
     Network,
@@ -125,6 +129,7 @@ import { CapitalizePipe } from '../pipes/capitalize/capitalize';
     UserProvider,
     StreamingMedia,
     ScreenOrientation,
+    Market,
    // OneSignal,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     ChatServiceProvider,

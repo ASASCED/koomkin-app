@@ -5,7 +5,6 @@ import {
   NavController,
   NavParams
 } from "ionic-angular";
-import { ModalNotificationPage } from '../../pages/modal-notification/modal-notification';
 
 import { LoginPage } from '../../pages/login/login';
 import { LeadsPage } from '../../pages/leads/leads';
@@ -54,6 +53,7 @@ export class InicioPage implements OnInit {
   public notification;
   public tipoBanner;
   public fondo;
+  public description;
 
   constructor(
     public navCtrl: NavController,
@@ -110,8 +110,9 @@ export class InicioPage implements OnInit {
             this.img = datos[0].descripcionBanner;
             this.idReportBanner = datos[0].idReporteBanner;
             this.uuidPass = datos[0].uuidPase;
-           
+            this.description = datos[0].descripcionBanner;
             this.notification = JSON.parse(datos[0].dataPage);
+            console.log(this.description);
             resolve();
           }
         },
@@ -148,9 +149,5 @@ export class InicioPage implements OnInit {
         }
       );
     });
-  }
-
-  mostrar_modal() {
-    this.navCtrl.push(ModalNotificationPage, { notificacion: this.notification, idReporteBanner: this.idReportBanner, uuidPase:this.uuidPass });
   }
 }
