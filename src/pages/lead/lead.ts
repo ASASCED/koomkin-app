@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone} from '@angular/core';
 import { IonicPage, NavController, ViewController, NavParams, Platform } from 'ionic-angular';
 import { RestProvider } from './../../providers/rest/rest';
 import { HttpClient } from '@angular/common/http';
@@ -11,6 +11,15 @@ import { ElementRef, ViewChild, ViewChildren } from '@angular/core';
 import { Content } from 'ionic-angular';
 import { ChatServiceProvider, ChatMessage, UserInfo } from "../../providers/chat-service/chat-service";
 import { HttpHeaders } from '@angular/common/http';
+import {FileOpener } from '@ionic-native/file-opener';
+import {FileChooser} from '@ionic-native/file-chooser';
+import {FilePath} from '@ionic-native/file-path';
+import { File } from '@ionic-native/file';
+import { Transfer, FileUploadOptions, TransferObject } from '@ionic-native/transfer';
+
+import {DomSanitizer} from '@angular/platform-browser';
+
+declare var cordova:any;
 
 @IonicPage()
 @Component({
@@ -168,6 +177,7 @@ export class LeadPage implements OnInit {
     return document.querySelector('.falling');
   }
 
+
   private scrollDown() {
     if (this.content && this.page === 'Chat') {
       this.content.resize();
@@ -256,17 +266,7 @@ export class LeadPage implements OnInit {
     }
   }
 
-  public setStorage(settingName, value) {
-    return this.storage.set(`temporizador:${settingName}`, value);
-  }
 
-  public async getStorage(settingName) {
-    return await this.storage.get(`temporizador:${settingName}`);
-  }
-
-  public async removeStorage(settingName) {
-    return await this.storage.remove(`temporizador:${settingName}`);
-  }
 
   mostrarAlertaInicioSesionRequerido() {
 
@@ -291,43 +291,17 @@ export class LeadPage implements OnInit {
   onFocus() {
     this.showEmojiPicker = false;
     this.content.resize();
-    this.scrollDown();
+    this.scrollDown.bind(this);
   }
 
-  switchEmojiPicker() {
-    this.showEmojiPicker = !this.showEmojiPicker;
-    if (!this.showEmojiPicker) {
-      this.focus();
-    } else {
-      this.setTextareaScroll();
-    }
-    this.content.resize();
-    this.scrollToBottom("switchemojipickerr");
-  }
 
   sendMsg() {
     if (!this.editorMsg.trim()) return;
-
     if (this.chatService.tc.currentChannel) {
 
-      // Mock message
-      const id = Date.now().toString();
-      let newMsg: ChatMessage = {
-        messageId: Date.now().toString(),
-        userId: this.user.id,
-        userName: this.user.name,
-        userAvatar: this.user.avatar,
-        toUserId: this.toUser.id,
-        time: Date.now(),
-        message: this.editorMsg,
-        status: 'pending'
-      };
-
       this.chatService.tc.currentChannel.sendMessage(this.editorMsg).then(() => {
-
+        this.editorMsg = '';
       });
-
-      this.editorMsg = '';
 
       if (!this.showEmojiPicker) {
         this.focus();
@@ -337,91 +311,20 @@ export class LeadPage implements OnInit {
 
   }
 
-
-  pushNewMsg(msg: ChatMessage) {
-    const userId = this.user.id,
-      toUserId = this.toUser.id;
-    // Verify user relationships
-    if (msg.userId === userId && msg.toUserId === toUserId) {
-      this.msgListLead.push(msg);
-    } else if (msg.toUserId === userId && msg.userId === toUserId) {
-      this.msgListLead.push(msg);
-    }
-    this.scrollToBottom("pushnewmsg");
-  }
-
-  getMsgIndexById(id: string) {
-    return this.msgListLead.findIndex(e => e.messageId === id)
-  }
-
-  scrollToBottom(fromstring: string) {
-
-  }
-
   private focus() {
     if (this.messageInput && this.messageInput.nativeElement) {
       this.messageInput.nativeElement.focus();
     }
   }
 
-  private setTextareaScroll() {
-    const textarea = this.messageInput.nativeElement;
-    textarea.scrollTop = textarea.scrollHeight;
-  }
-
-
-  connectChat() {
-
-    if(!this.clientUUID){
-      this.clientUUID = this.authService.getClientUUID();
-    }
-    this.chatService.updateMsgList([]);
-    if (this.authService.getUserIsLogged()) {
-      if (this.chatService.chatClientStarted === true) {
-        this.chatService.joinChannel2(this.leadActual.uuid).then((channel) => {
-        }).catch(function (error) {
-
-          if (this.page === 'Chat') {
-            window.location.reload();
-          }
-          if(!this.clientUUID){
-            this.clientUUID = this.authService.getClientUUID();
-          }
-          this.chatService.startChatService(this.clientUUID).then(()=>{
-            this.chatSertice.joinChannel2(this.leadActual.uuid).then(()=>{
-            });
-          });
-
-          this.chatService.loadMessages("2").then((array) => {
-          }).catch(function (error) {
-
-            if(!this.clientUUID){
-              this.clientUUID = this.authService.getClientUUID();
-            }
-
-            this.chatService.startChatService(this.clientUUID).then(()=>{
-              //alert("yes");
-              this.chatSertice.joinChannel2(this.leadActual.uuid).then(()=>{
-                //alert('yes yes yes');
-              });
-            });
-
-          });
-        });
-      } else {
-        console.log("user has not started twilio service");
-      }
-    }
-  }
-
 
   public leerChat() {
-    // console.log(this.leadActual.uuid);
+
     const url = 'http://www.koomkin.com:4835/api/read-messages/';
     return new Promise((resolve, reject) => {
       this.http.post(url + this.leadActual.uuid, { device: "app" })
         .subscribe(data => {
-          //   console.log('Abrio el chat',data);
+
           return resolve();
         }, err => {
 
@@ -432,18 +335,60 @@ export class LeadPage implements OnInit {
 
   onTabChanged(tabName) {
     this.page = tabName;
-
   }
 
   ngOnInit() {
     this.chatService.msgListActualizada.subscribe(
       result => {
-        this.msgListLead = result;
+
+
+        if(result.length===0){
+
+          this.msgListLead = result;
+        }
+
+        if(result.length>1){
+
+          this.ngz.run(()=>{
+
+            this.msgListLead = result;
+
+            setTimeout(()=>{ this.scrollDown.bind(this)}, 5000);
+
+          });
+
+
+        }else{
+
+          var temp = result[0];
+
+          if(temp){
+
+            if(temp.type === 'media'){
+
+              this.ngz.run(()=>{
+                setTimeout(()=>{ this.scrollDown.bind(this)}, 2500);
+              });
+
+            }else{
+
+            }
+
+          }
+
+          this.ngz.run(()=>{
+            this.msgListLead = this.msgListLead.concat(result);
+          });
+
+        }
       }
     )
 
     this.chatService.loadingMessagesActualizado.subscribe(
       result => {
+
+        this.ngz.run(()=>{});
+
         this.loadingMessages = result;
       }
     );
@@ -464,15 +409,17 @@ export class LeadPage implements OnInit {
       this.chatPageExecutelogic()
     }
     if (this.chatService.chatClientStarted === true) {
-      this.connectChat();
+      this.chatService.connectToChatChannel(this.leadActual.uuid);
     } else {
       setTimeout(() => {
         if (this.chatService.chatClientStarted === true) {
-          this.connectChat();
+          this.chatService.connectToChatChannel(this.leadActual.uuid);
         }
       }, 580);
     }
   }
+
+  public fileTransfers: TransferObject = this.transfer.create();
 
   ionViewDidLoad() { }
 
@@ -489,11 +436,13 @@ export class LeadPage implements OnInit {
     public authService: AuthServiceProvider,
     public chatService: ChatServiceProvider,
     private streamingMedia: StreamingMedia,
-    public storage: Storage
+    public storage: Storage,
+    public file:File,
+    private fileChooser: FileChooser, private fileOpener: FileOpener, private filePath: FilePath, private transfer: Transfer,private sanitizer:DomSanitizer, public ngz:NgZone
   ) {
 
     this.leadActual = navParams.data; // Obtenemos parametros de la página de LEADS
-    this.chatService.updateMsgList([]); // Limpiamos el arreglo de mensajes por si hay de conversaciones anteriores
+    //this.chatService.updateMsgList([]); // Limpiamos el arreglo de mensajes por si hay de conversaciones anteriores
     if (this.leadActual.fechaContacto) {
       this.leadActual.fechaContacto = this.leadActual.fechaContacto.substring(0, 16)
       .replace(/^(\d{4})-(\d{2})-(\d{2})T(\d{5})$/g, '$3/$2/$1$4');
@@ -1181,7 +1130,7 @@ export class LeadPage implements OnInit {
   public getUrlAudio() {
     this.http.get(this.apiUrl + '/getUrlAudio/' + this.leadActual.clave).subscribe(data => {
       this.audio = data;
-      //console.log(this.audio);
+
       for (let k in this.audio) {
         if (this.audio.length > 0) {
           this.url = this.audio[k].recordingsid;
@@ -1193,7 +1142,7 @@ export class LeadPage implements OnInit {
         } else {
           this.audio = 'sinaudio';
         }
-        //console.log(this.url,this.mostrar);
+
       }
 
     });
@@ -1235,21 +1184,7 @@ export class LeadPage implements OnInit {
   }
 
 
-  public mandarSolicitudChat() {
-    const url = 'http://www.koomkin.com:4835/api/send-sms/';
-    return new Promise((resolve, reject) => {
-      this.http.post(url + this.leadActual.uuid,
-        { mensaje: "https://u.nu/q1oe" })
-        .subscribe(data => {
 
-          // console.log('Abrio el chat',data);
-          return resolve();
-        }, err => {
-
-          return resolve(err);
-        });
-    });
-  }
 
   getCircularReplacer = () => {
     const seen = new WeakSet();
@@ -1263,6 +1198,79 @@ export class LeadPage implements OnInit {
       return value;
     };
   };
+
+
+  chooseFile(){
+
+    (async () => {
+      const file = await (<any>window).chooser.getFile("");
+
+      var formData = new FormData();
+      var blob = new Blob([file.data],{type: file.mediaType});
+      formData.append(file.name,blob,file.name);
+
+      this.chatService.tc.currentChannel.sendMessage( formData ).then(()=>{
+
+        this.chatService.tc.currentChannel.getMessages().then((messagesPaginator)=> {
+
+          const message = messagesPaginator.items[messagesPaginator.items.length-1];
+
+          if (message.type === 'media') {
+
+
+            console.log('Media attributes', message.media);
+
+            message.media.getContentUrl().then((url)=>{
+
+              this.http.post('http://www.koomkin.com:4835/api/twilio-media-message', { channelsid: this.chatService.tc.currentChannel.sid, url: url, mime: file.mediaType})
+                .subscribe(data => {
+
+                  //alert('enviado a whatsapp'+ JSON.stringify(data));
+
+                }, err => {
+
+                  //alert('not good '+ JSON.stringify(err));
+
+                });
+
+            });
+
+          }
+
+        });
+
+      });
+
+
+    })();
+
+  }
+
+
+
+  openFile(url,contentType){
+
+    url.then((resultUrl)=>{
+      var filename= 'koomkinfile';
+      this.fileTransfers.download( resultUrl["changingThisBreaksApplicationSecurity"], this.file.dataDirectory + filename,true ).then((entry) => {
+        this.fileOpener.open( this.file.dataDirectory + filename, contentType
+        ).then(() => { } ).catch(e => console.log('Open error' + e));
+      }).catch(e => console.log('Save error' + JSON.stringify(e)));
+
+      }, (error) => {
+          console.log('hello '+JSON.stringify(error));
+      });
+
+  }
+
+
+
+
+
+
+
+
+
 
 
 }

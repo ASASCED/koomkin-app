@@ -103,10 +103,11 @@ export class MyApp {
 
       var notificationOpenedCallback = ((jsonData) => {
 
+
         var notif_additional_data = jsonData.notification.payload.additionalData;
         const actionButtonPressed = jsonData.action.actionID;
 
-        if (notif_additional_data.leadInfo) {
+        if (notif_additional_data) {
 
           if (actionButtonPressed) {
             if (actionButtonPressed === 'like-button') {
@@ -125,7 +126,10 @@ export class MyApp {
           }
 
           if (this.authService.getUserIsLogged() === true) {
-            notif_additional_data.leadInfo["desdeNotificacion"] = true;
+
+            if(notif_additional_data.leadInfo){
+              notif_additional_data.leadInfo["desdeNotificacion"] = true;
+            }
            // console.log(JSON.stringify(notif_additional_data.leadInfo));
             this.zone.run(() => {
               if(notif_additional_data.chatMessage){
@@ -137,6 +141,12 @@ export class MyApp {
                 }else{
                   this.nav.push(this.lead, notif_additional_data.leadInfo);
                 }
+              } else if (notif_additional_data.efcom) {
+
+                this.nav.push(this.eficiencia).then(()=>{
+
+                });
+
               }else{
                 if(this.nav.getActive().name === 'LeadPage'){
                   this.nav.pop().then(()=>{
@@ -150,8 +160,11 @@ export class MyApp {
               }
             });
           } else {
-            notif_additional_data.leadInfo["desdeNotificacion"] = true;
-            notif_additional_data.leadInfo["loggedout"] = true;
+
+            if(notif_additional_data.leadInfo){
+              notif_additional_data.leadInfo["desdeNotificacion"] = true;
+              notif_additional_data.leadInfo["loggedout"] = true;
+            }
           //  console.log(JSON.stringify(notif_additional_data.leadInfo));
             this.zone.run(() => {
 
@@ -168,9 +181,7 @@ export class MyApp {
                     this.nav.push(this.lead, notif_additional_data.leadInfo);
                   }, 400);
                 }
-
               } else {
-
                 //setTimeout(function(){ this.nav.push(this.lead, notif_additional_data.leadInfo); }, 2000);
                 if(this.nav.getActive().name === 'LeadPage'){
                   this.nav.pop().then(()=>{
@@ -200,7 +211,7 @@ export class MyApp {
           .inFocusDisplaying(window["plugins"].OneSignal.OSInFocusDisplayOption.Notification)
           .handleNotificationOpened(notificationOpenedCallback)
           .endInit();
-      } 
+      }
     });
   }
 

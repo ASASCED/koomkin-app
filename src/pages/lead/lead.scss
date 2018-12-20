@@ -507,7 +507,7 @@ $toUserBackgroundColor: red;
 .chat-footer {
     box-shadow: 0 0 4px rgba(0, 0, 0, 0.11);
     background-color: white;
-    padding-left: 3%;
+    padding-left: 0.5%;
     height: 255px;
     .chat-emojis {
         color: red;
@@ -754,4 +754,44 @@ ion-icon {
 .help .toolbar-content-md {
     background: white !important;
     height: 45px;
+}
+
+audio::-webkit-media-controls-mute-button{
+  display: none;
+}
+
+audio::-webkit-media-controls-fullscreen-button, video::-webkit-media-controls-fullscreen-button {
+  -webkit-appearance: media-enter-fullscreen-button;
+  display: flex;
+  flex: none;
+  border: none;
+  box-sizing: border-box;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  margin-left: -5px;
+  margin-right: 9px;
+  padding: 0;
+  background-color: initial;
+  color: inherit;
+}
+
+audio::-internal-media-controls-cast-button, video::-internal-media-controls-cast-button {
+  -webkit-appearance: -internal-media-cast-off-button;
+  display: flex;
+  flex: none;
+  border: none;
+  box-sizing: border-box;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  margin-left: -5px;
+  margin-right: 9px;
+  padding: 0;
+  background-color: initial;
+  color: inherit;
+}
+
+audio::-webkit-media-controls-toggle-closed-captions-button {
+  display: none;
 }

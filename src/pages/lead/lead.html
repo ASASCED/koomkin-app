@@ -33,16 +33,18 @@
             </ion-row>
         </ion-grid>
 
+
     </ion-toolbar>
     <!--
       <ion-toolbar class="reset-this" style="background: red !important;" id="chatheader" *ngIf="page=='Chat'">
       </ion-toolbar>
       <ion-navbar>
         <ion-title>Header</ion-title>
-      </ion-navbar> -->
+      </ion-navbar> <div><ion-spinner  style="" name="dots" *ngIf="true"></ion-spinner></div>  -->
 </ion-header>
 
 <ion-content padding class="falling">
+
     <div [ngSwitch]="page" swipeSegment [tabsList]="pages" [(currentTab)]="page" (tabChanged)="onTabChanged($event)" class="swipe-area">
         <ion-list *ngSwitchCase="'Lead'">
             <ion-grid class="vista">
@@ -232,24 +234,60 @@
 
             <div class="message-wrap">
 
-                <div *ngFor="let msg of msgListLead;" class="message" [class.koomkin-gen]="msg.userId === 'koomkin-gen'" [class.left]=" msg.userId === leadActual.uuid" [class.system]="msg.userId === 'system'" [class.rightcoach]=" msg.userId === 'koomkin-coach'" [class.right]=" (msg.userId === clientUUID) || ((msg.userId != 'koomkin-gen') && (msg.userId != leadActual.uuid) && (msg.userId != 'system') && (msg.userId != 'koomkin-coach'))">
+                <div *ngFor="let msg of msgListLead;"
+                     class="message"
+                     [class.koomkin-gen]="msg.userId === 'koomkin-gen'"
+                     [class.left]=" msg.userId === leadActual.uuid || msg.userId==='system'"
+                     [class.system]="msg.userId === 'system'"
+                     [class.rightcoach]=" msg.userId === 'koomkin-coach'"
+                     [class.right]=" (msg.userId === clientUUID) || ((msg.userId != 'koomkin-gen') && (msg.userId != leadActual.uuid) && (msg.userId != 'system') && (msg.userId != 'koomkin-coach'))">
 
-                    <ion-spinner name="dots" *ngIf="msg.status === 'pending'"></ion-spinner>
                     <div class="msg-detail">
                         <div class="msg-info">
                             <p>{{msg.userName | capitalize}}&nbsp;&nbsp;&nbsp;{{msg.time | relativeTime}}</p>
                         </div>
-                        <div class="msg-content">
+                        <div *ngIf="msg.type === 'text'" class="msg-content">
                             <span class="triangle"></span>
                             <p class="line-breaker ">{{msg.message}}</p>
                         </div>
+
+
+                      <div  *ngIf="msg.type === 'media' && msg.contentType.startsWith('image')    "class="msg-content">
+                        <span class="triangle"></span> <!-- attributes {{msg.attributes.mime}} -->
+                        <img #spy  class="twilioImage" style="max-width: 180px; max-height: 180px; cursor: pointer" (click)="openFile(msg.url ,msg.contentType)"   [src]="msg.url | async" >
+                      </div>
+
+
+                      <div *ngIf="msg.type === 'media' && msg.contentType.startsWith('image') == false" class="msg-content">
+                        <span class="triangle"  *ngIf="!msg.contentType.startsWith('audio')"></span> <!-- {{msg.contentType}}-->
+                        <!-- <br> not file url -->
+                        <div *ngIf="(msg.contentType.startsWith('video') || msg.contentType.startsWith('application/pdf'))"   (click)="openFile(msg.url ,msg.contentType)"  style=" display: flex; align-items: center; cursor: pointer;">
+                          <ion-icon style="padding-left: 4%;  font-size:24px; color:#30a3bc" name="document"></ion-icon>
+                          <p class="for-fontsize" style=" justify-content: space-around; text-align: center; display: flex; align-items: center; text-decoration: none;">&nbsp;&nbsp;&nbsp;{{msg.filename }}</p>
+                        </div>
+
+                        <div *ngIf="msg.contentType.startsWith('video') == false && msg.contentType.startsWith('application/pdf') == false && msg.contentType.startsWith('audio')== false"    style=" cursor: pointer;">
+                          <a style="padding-left: 4%; justify-content: space-around; text-align: center; display: flex; align-items: center; text-decoration: none; color: #707070;" [href]="msg.url | async" download  target="_blank"><span style="font-size:24px; color:#30a3bc" class="fa fa-file"></span><ion-icon style="font-size:24px; color:#30a3bc" name="document"></ion-icon>
+                            <p class="for-fontsize" style="">&nbsp;&nbsp;{{msg.filename }}</p></a>
+                        </div>
+
+                        <div style="box-shadow:rgba(0, 0, 0, 0.13) 0px 0px 0px;  background: transparent">
+                          <audio #spy2  *ngIf="msg.contentType.startsWith('audio')" style="width: 67vw" controls [src]="msg.url | async" crossorigin="anonymous" controlsList="nodownload">
+                            Tu navegador no soporta achivos de audio.
+                          </audio>
+                        </div>
+
+                        <p class="line-breaker "></p>
+                      </div>
+
+
                     </div>
                 </div>
             </div>
         </ion-list>
     </div>
-</ion-content>
 
+</ion-content>
 <ion-footer *ngIf="(tel.substr(0, 3) == 'tel') && (page!='Chat')">
     <a href="tel:{{leadActual.TELEFONO}}">
         <button class="llamar" (click)="getInsertClickLlamar();">
@@ -271,13 +309,18 @@
     </button>
 </ion-footer>
 
-
 <ion-footer class="chat-footer" *ngIf="page=='Chat'" no-border [style.height]="'55px'">
+
+
     <div class="input-wrap">
-        <textarea id="chat_input" placeholder="Escribe un mensaje" [placeholder]="false ? '' : 'Escribe un mensaje'" [(ngModel)]="editorMsg" (keyup.enter)="sendMsg()" (focusin)="onFocus()">
+      <button class="chat-send-message" ion-button clear icon-only item-right (click)="chooseFile()">
+        <ion-icon style=" position: relative;  display: inline-block; vertical-align: middle; text-align: center; font-size: 2em; color:#37B9BB;" name="add" ios="ios-add" md="md-add"></ion-icon>
+      </button>
+      <textarea id="chat_input" placeholder="Escribe un mensaje" [placeholder]="false ? '' : 'Escribe un mensaje'" [(ngModel)]="editorMsg" (keyup.enter)="sendMsg()" (focusin)="onFocus()">
       </textarea>
-        <button class="chat-send-message" ion-button clear icon-only item-right (click)="sendMsg()">
+      <button class="chat-send-message" ion-button clear icon-only item-right (click)="sendMsg()">
         <ion-icon style="color:#37B9BB;" name="ios-add-circle-outline" ios="ios-send" md="md-send"></ion-icon>
       </button>
     </div>
+
 </ion-footer>

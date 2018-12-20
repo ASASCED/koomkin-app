@@ -95,10 +95,14 @@ export class LeadsPage implements OnInit {
 
   public stylizeLeads(leadsArray: any) {
     for (let k in leadsArray) {
+      //leadsArray[k].FECHA = this.agregarHoras(leadsArray[k].FECHA).toString();
       leadsArray[k].FECHA = leadsArray[k].FECHA.substring(0, 16).replace(
         /^(\d{4})-(\d{2})-(\d{2})T(\d{5})$/g,
         "$3/$2/$1$4"
       );
+
+
+
       leadsArray[k].NOMBRE = leadsArray[k].NOMBRE.substring(0, 16);
       leadsArray[k].EMPRESA = leadsArray[k].EMPRESA.substring(0, 28);
       leadsArray[k].urgencia = "No";
@@ -282,7 +286,7 @@ export class LeadsPage implements OnInit {
           } else if (data == 1 || data == 2) {
             status = "perdida";
             resolve(status);
-          } 
+          }
         },
         err => {
           console.log(err);
@@ -749,7 +753,7 @@ export class LeadsPage implements OnInit {
             this.img = datos[0].descripcionBanner;
             this.idReportBanner = datos[0].idReporteBanner;
             this.uuidPass = datos[0].uuidPase;
-           
+
             this.notification = JSON.parse(datos[0].dataPage);
             resolve();
           }
@@ -788,6 +792,18 @@ export class LeadsPage implements OnInit {
       );
     });
   }
+
+  agregarHoras(time){
+
+    let date = new Date(time);
+    date.setTime(date.getTime() + (6*60*60*1000));
+    return date.toISOString();
+
+
+  }
+
+
+
 }
 
 

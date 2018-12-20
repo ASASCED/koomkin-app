@@ -1,11 +1,12 @@
 import { Injectable  } from '@angular/core';
 import {AlertController, Events, LoadingController} from 'ionic-angular';
-import { HttpClient } from "@angular/common/http";
+import { HttpClient , HttpHeaders} from "@angular/common/http";
 import { Observable } from "rxjs/Observable";
 import { BehaviorSubject} from "rxjs";
 import {LeadPage} from "../../pages/lead/lead";
 import {take} from "rxjs/operator/take";
 // import { LeadPage} from "../../pages/lead/lead";
+import {DomSanitizer} from '@angular/platform-browser';
 
 
 @Injectable()
@@ -47,12 +48,10 @@ export class ChatServiceProvider {
 
   public loadingMessages;
 
-
-
   constructor(private http: HttpClient,
               private events: Events,
               public loadingCtrl: LoadingController,
-              public alertCtrl: AlertController) {
+              public alertCtrl: AlertController, public sanitizer: DomSanitizer) {
 
     this.tc = {
       messagingClient: null,
@@ -64,13 +63,10 @@ export class ChatServiceProvider {
     };
 
 
-
-
-
   }
 
   updateMsgList(data: any){
-
+    //alert('cleaning');
     this.msgListSource.next(data);
   }
 
@@ -81,9 +77,6 @@ export class ChatServiceProvider {
 
       this.chatClientStarted = true;
 
-
-
-
     }).catch(function(error) {
       //alert(error);
       window.location.reload();
@@ -93,35 +86,7 @@ export class ChatServiceProvider {
 
   }
 
-  mockNewMsg(msg) {
-    const mockMsg: ChatMessage = {
-      messageId: Date.now().toString(),
-      userId: '210000198410281948',
-      userName: 'Hancock',
-      userAvatar: './assets/to-user.jpg',
-      toUserId: '140000198202211138',
-      time: Date.now(),
-      message: msg.message,
-      status: 'success'
-    };
 
-    setTimeout(() => {
-      this.events.publish('chat:received', mockMsg, Date.now())
-    }, Math.random() * 1800)
-  }
-
-  //getMsgList(): Observable<ChatMessage[]> {
-
-
-  //  const msgListUrl = './assets/mock/msg-list.json';
-   // return this.http.get<any>(msgListUrl).pipe(map(response => response.array));
-  //}
-
-  sendMsg(msg: ChatMessage) {
-    this.mockNewMsg(msg);
-    return new Promise(resolve => setTimeout(() => resolve(msg), Math.random() * 1000))
-      .then(() => this.mockNewMsg(msg));
-  }
 
   getUserInfo(): Promise<UserInfo> {
     const userInfo: UserInfo = {
@@ -154,14 +119,10 @@ export class ChatServiceProvider {
   fetchAccessToken(username, handler) {
 
     return new Promise((resolve, reject)=> {
-
-
       this.http.post('http://www.koomkin.com:4835/token' , {device: "mobile", identity: username})
         .subscribe(data => {
 
           var token = data['token'];
-
-          //alert(token);
 
           handler(token);
 
@@ -169,52 +130,34 @@ export class ChatServiceProvider {
 
         }, err => {
 
-
           console.log(JSON.stringify(err));
           return reject(err);
 
         });
 
-
     });
-
 
   }
 
 
   connectMessagingClient(token) {
 
-
-
-
     var self = this;
-    // Initialize the IP messaging client
     self.tc.messagingClient = new window["TwilioChat"].Client(token);
     self.accessManager = window["TwilioCommon"].AccessManager(token);
     return self.tc.messagingClient.initialize()
       .then(() => {
 
         this.chatClientStarted = true;
-
-
         //self.accessManager.on('tokenExpired', function() {
-
           //window.location.reload();
           // get new token from AccessManager and pass it to the library instance
           //self.tc.messagingClient.updateToken(am.token);
         //});
-
-
-
         //accessManager.on('tokenUpdated', function(am) {
           // get new token from AccessManager and pass it to the library instance
         //  chatClient.updateToken(am.token);
         //});
-
-
-
-
-
         //this.updateConnectedUI();
         //this.loadChannelList(this.joinGeneralChannel.bind(this));
         //tc.messagingClient.on('channelAdded', $.throttle(tc.loadChannelList));
@@ -236,200 +179,137 @@ export class ChatServiceProvider {
 
   setNewToken(token) {
     var self = this;
-
-
-    //if (typeof self.tc.messagingClient.updateToken === 'function'){
-
-
-    //}else{
-
-
-
-    //}
-
-
-    //self.accessManager.on('tokenExpired', function() {
-      // generate new token here and set it to the accessManager
-      // const updatedToken = generateToken();
       self.accessManager.updateToken(token);
-    //});
-
-    window.location.reload();
-
-
-    //self.tc.messagingClient.updateToken(token);
-
+      window.location.reload();
   }
 
 
 
-  joinChannel2(channel_uniqueName){
+  connectToChatChannel(channel_uniqueName: string) {
 
-    var self = this;
+    let self = this;
+    this.updateMsgList([]);
+    self.tc.messagingClient.getChannelByUniqueName(channel_uniqueName).then((channel) => {
+      self.loadingMessagesSource.next(true);
+      //alert('spinner active: getting channel');
+      this.leaveCurrentChannel().then(() => {
+        this.joinChannel(channel).then(() => {
+          this.tc.currentChannel.removeAllListeners();
+          self.tc.currentChannel.on('messageAdded', (message) => {
 
-    //alert(channel_uniqueName);
+            let messageGUI: ChatMessage;
 
-    return self.tc.messagingClient.getChannelByUniqueName(channel_uniqueName).then((channelR)=>{
+            if(message.type === 'media'){
 
-      //alert("success");
+              if(message.attributes.file_url){
+
+                messageGUI = {
+                  userId: message.author,
+                  time: message.timestamp,
+                  message: message.body,
+                  type: message.type,
+                  url: this.getAwsLeadImageUrl(message).then((url)=>{return url }).catch((url)=>{ return url}),
+                  attributes: message.attributes,
+                  contentType: message.attributes.mime,
+                  filename: message.attributes.filename
+
+                }
+
+              }else{
+
+                messageGUI = {
+                  userId: message.author,
+                  time: message.timestamp,
+                  message: message.body,
+                  type: message.type,
+                  url: this.getTwilioImageUrl(message),
+                  attributes: message.attributes,
+                  contentType: message.media.state.contentType,
+                  filename: message.media.filename
+                };
+
+              }
+            }else{
+              messageGUI = {
+                userId: message.author,
+                time: message.timestamp,
+                message: message.body,
+                type: message.type,
+                url: null,
+                attributes: message.attributes,
+                contentType: null,
+                filename: null
+              };
+            }
 
 
-      return self.setupChannel(channelR).then(()=>{
+            this.msgListSource.next([messageGUI]);
+          });
 
-        return Promise.resolve();
-
-      }).catch(function(error) {
-        console.log(("YOUR" +JSON.stringify(error, Object.getOwnPropertyNames(error))))
-        return Promise.reject("problem setting channel 2");
+          this.loadMessages('setupchannel');
+        }).catch((error) => {
+          self.loadingMessagesSource.next(false);
+          //alert('spinner INactive:'+ error);
+          // console.log(('joinChannel' + JSON.stringify(error, Object.getOwnPropertyNames(error))));
+        });
+      }).catch((error) => {
+        self.loadingMessagesSource.next(false);
+        //alert('spinner INactive:'+ error);
+        //  console.log(('leaveCurrentChannel' + JSON.stringify(error, Object.getOwnPropertyNames(error))));
       });
-
-
-
-    }).catch(function(error) {
-
-      //alert(("YOUR" +JSON.stringify(error, Object.getOwnPropertyNames(error))));
-
-      return Promise.reject(error);
+    }).catch((error) => {
+      self.loadingMessagesSource.next(false);
+      //alert('spinner INactive:'+ error);
+      // console.log(('getChannelByUniqueName' + JSON.stringify(error, Object.getOwnPropertyNames(error))));
     });
 
 
   }
 
-
-  setupChannel(channel) {
-
-    // return Promise.resolve();
-
-
-    return this.leaveCurrentChannel().then(()=>{
-      this.joinChannel(channel).then(()=>{
-        this.initChannelEvents();
-        this.loadMessages("setupchannel");
-
-
-
-      })
-    })
-
-    //  .then(()=> {
-
-    //    return this.initChannel(channel);
-
-    //  })
-    //  .catch(function(error) {
-    //    console.log(("" +JSON.stringify(error, Object.getOwnPropertyNames(error))));
-    //  })
-    //  .then((_channel)=> {
-
-    //    return this.joinChannel(_channel);
-    //  }).catch(function(error) {
-    //    console.log(("XXXXXXXXXXXXXXXXXXX" +JSON.stringify(error, Object.getOwnPropertyNames(error))));
-    //  }).then(()=>{
-
-    //    return this.initChannelEvents()}).catch(function(error) {
-
-    //   console.log(("" +JSON.stringify(error, Object.getOwnPropertyNames(error))))});
-  }
-
-
-  initChannel(channel) {
-
-    //var selectedChannel = this.tc.channelArray.filter((channel)=> {
-    //  return channel.uniqueName === "830B6F41-2A67-4891-8FAF-98FC2145202F";
-    //})[0];
-
-    return this.tc.messagingClient.getChannelBySid(channel.sid);
-  }
 
   joinChannel(_channel) {
-
-
-    var self = this;
-
-    return _channel.join().then((joinedChannel)=> {
-
-
-      //this.updateChannelUI(_channel);
+    const self = this;
+    return _channel.join().then((joinedChannel) => {
       self.tc.currentChannel = _channel;
-      //self.loadMessages();
-
       return joinedChannel;
-
-    }).catch(function(error) {
-
-      //console.log(("hello3" +JSON.stringify(error, Object.getOwnPropertyNames(error))));
-
-      //this.updateChannelUI(_channel)
+    }).catch(function (error) {
       self.tc.currentChannel = _channel;
-      //self.loadMessages();
-
       return _channel;
-
     });
-
-
   }
 
-
   leaveCurrentChannel() {
-    var self = this;
-
+    let self = this;
 
     if (this.tc.currentChannel) {
-      return this.tc.currentChannel.leave().then((leftChannel)=> {
+      return this.tc.currentChannel.leave().then((leftChannel) => {
         // this.longitudConversacionSource.next(0);
+        leftChannel.removeListener('messageAdded', () => { console.log("leaving current channel") });
 
-        leftChannel.removeListener('messageAdded', ()=>{self.loadMessages("loading fromleavecurrentchannel")});
-        // leftChannel.removeListener('typingStarted', this.loadMessages );
-        //leftChannel.removeListener('typingEnded', this.hideTypingStarted);
-        //leftChannel.removeListener('memberJoined', this.notifyMemberJoined);
-        //leftChannel.removeListener('memberLeft', this.notifyMemberLeft);
-        //return Promise.reject("WAT");
-      }).catch(function(error) {
-
-        console.log(("leave error" +JSON.stringify(error, Object.getOwnPropertyNames(error))));
+        return Promise.resolve();
+      }).catch(function (error) {
+        console.log(('leave error' + JSON.stringify(error, Object.getOwnPropertyNames(error))));
+        //alert('hey boy');
       });
     } else {
-
+      //alert('no hay ningún canal');
       return Promise.resolve();
     }
   }
 
 
-  initChannelEvents() {
-
-    var self = this;
-
-    self.tc.currentChannel.on('messageAdded', ()=>{self.loadMessages("loading from innitchannelevents")});
-    //this.tc.currentChannel.on('typingStarted', this.showTypingStarted);
-    //this.tc.currentChannel.on('typingEnded', this.hideTypingStarted);
-    //this.tc.currentChannel.on('memberJoined', this.notifyMemberJoined);
-    //this.tc.currentChannel.on('memberLeft', this.notifyMemberLeft);
-    // $inputText.prop('disabled', false).focus();
-  }
-
 
   loadMessages(fromstring: string): any {
-
-    // this.refreshToken();
-
-
 
     var arr : Array<ChatMessage>;
     arr = [];
     var self = this;
 
-    // self.refreshToken
-
-
     if(fromstring === "setupchannel"){
       this.loadingMessagesSource.next(true);
     }
 
-
     return self.tc.currentChannel.getMessages(self.MESSAGES_HISTORY_LIMIT).then( (messages)=> {
-
-
 
       if(fromstring === "setupchannel"){
 
@@ -437,60 +317,73 @@ export class ChatServiceProvider {
 
       }
 
-      //messages.items.forEach(addMessageToList);
-
-      //console.log("zzzzzzzzzzzz"+JSON.stringify(messages.items,this.getCircularReplacer()));
-
-
-
       const totalMessages = messages.items.length;
-
-
-      //console.log("LLLLLLLLLLLLLLLOOOOOOOOOOOOOOOOOOOAAAAAAAAAAAADDDDDDDDDIIIIIIINNNNNNNNNNGGGGGGGGGG");
-
-      //console.log("SIZE: "+ messages.items.length);
-
-      //this.indicadorLongitudConversacion = messages.items.length;
-
 
       this.longitudConversacionSource.next(totalMessages);
 
-      for (var i = 0; i < totalMessages; i++) {
+      for (let i = 0; i < totalMessages; i++) { //iterar sobre mensajes
 
-        const message = messages.items[i];
+        const message = messages.items[i]; //Extrae mensaje
 
-        var messageGUI: ChatMessage;
+        let messageGUI: ChatMessage;
 
-        messageGUI = {
-          messageId: "90",
-          userId: message.author,
-          userName: "",
-          userAvatar: null,
-          toUserId: null,
-          time: message.timestamp,
-          message: message.body,
-          status: ""
+        if(message.type === 'media'){
+
+          //console.log(message.media);
+          //console.log(message.attributes)
+          //console.log(message.author)
+
+          if(message.attributes.file_url){
+
+            messageGUI = {
+              userId: message.author,
+              time: message.timestamp,
+              message: message.body,
+              type: message.type,
+              url: this.getAwsLeadImageUrl(message),
+              attributes: message.attributes,
+              contentType: message.attributes.mime,
+              filename: this.getFileName(message.attributes.file_url)
+            }
+
+          }else{
+
+            messageGUI = {
+              userId: message.author,
+              time: message.timestamp,
+              message: message.body,
+              type: message.type,
+              url: this.getTwilioImageUrl(message),
+              attributes: message.attributes,
+              contentType: message.media.state.contentType,
+              filename: message.media.state.filename
+
+            };
+
+          }
+
+
+        }else{
+          messageGUI = {
+            userId: message.author,
+            time: message.timestamp,
+            message: message.body,
+            type: message.type,
+            url: null,
+            attributes: message.attributes,
+            contentType: null,
+            filename: null
+          };
         }
-
         arr.push(messageGUI);
-
-        //msgList.push(messageGUI);
-
-        // console.log("help" + JSON.stringify(messages.items[i],this.getCircularReplacer()));
-        console.log(message.author);
 
       }
 
       console.log('Total Messages:' + totalMessages);
 
-      // self.msgList = arr;
 
       this.msgListSource.next(arr);
 
-      //self.scrollToBottom("loadmessages NEW");
-      //self.content.scrollToBottom();
-      // self.scrollToBottom("self");
-      // this.scrollToBottom("this")
       return Promise.resolve(arr);
 
     }).catch(function(error) {
@@ -509,59 +402,6 @@ export class ChatServiceProvider {
 
   };
 
-  addChannel(channel) {
-
-
-    if (channel.uniqueName === this.GENERAL_CHANNEL_UNIQUE_NAME) {
-      this.tc.generalChannel = channel;
-    }
-    /*
-    //var rowDiv = $('<div>').addClass('row channel-row');
-    rowDiv.loadTemplate('#channel-template', {
-      channelName: channel.friendlyName
-    });
-
-    var channelP = rowDiv.children().children().first();
-
-    rowDiv.on('click', selectChannel);
-    channelP.data('sid', channel.sid);
-    if (tc.currentChannel && channel.sid === tc.currentChannel.sid) {
-      //tc.currentChannelContainer = channelP;
-      channelP.addClass('selected-channel');
-    }
-    else {
-      channelP.addClass('unselected-channel')
-    }
-
-    $channelList.append(rowDiv);
-
-      */
-  }
-
-
-  actualizarmensajes(fromstring:string){
-
-    var self = this;
-
-
-
-    self.loadMessages("3").then((array)=>{
-
-      self.msgList = array;
-      //self.scrollToBottom("actualizarmensajes");
-
-
-    }).catch(function(error) {
-      console.log(("loadmessages" +JSON.stringify(error, Object.getOwnPropertyNames(error))));
-    });
-
-
-
-
-
-
-  }
-
   //showLoader() {
   //  this.loading = this.loadingCtrl.create({
   //    content: 'Cargando Mensajes...'
@@ -569,7 +409,6 @@ export class ChatServiceProvider {
   //  this.loading.present();
 
   //}
-
 
   getCircularReplacer = () => {
     const seen = new WeakSet();
@@ -608,18 +447,81 @@ export class ChatServiceProvider {
   }
 
 
+  getAwsLeadImageUrl(message){
+
+    var url = message.attributes.file_url;
+    var mime = message.attributes.mime;
+
+    return new Promise((resolve, reject) => {
+
+      this.http.get(url,{  headers: new HttpHeaders({
+          'Content-Type': mime,
+          'Origin': 'http://localhost:4200/leads'
+        }) , responseType: 'blob'}).subscribe(data => {
+
+        const blob = new Blob([data],{type:mime});
+        const result = window.URL.createObjectURL(blob);
+        resolve(this.sanitizer.bypassSecurityTrustResourceUrl(url));
+
+      }, (err) => {
+
+        console.log(err);
+        reject(err.url);
+
+      });
+    });
+
+  }
+
+  getTwilioImageUrl(message){
+
+    return new Promise((resolve, reject) => {
+
+      message.media.getContentUrl().then((url)=> {
+
+        this.http.get(url,{responseType: 'blob'}).subscribe(data => {
+
+          const blob = new Blob([data],{type: message.media.contentType});
+
+          const result = window.URL.createObjectURL(blob);
+
+          resolve(this.sanitizer.bypassSecurityTrustResourceUrl(url));
+
+        }, (err) => {
+
+          console.log(err);
+          reject();
+
+        });
+
+      }).catch((error)=>{
+
+        console.log(error);
+        reject(error);
+
+      });
+    });
+  }
+
+  getFileName(url){
+
+      let fileName = url.substr(url.lastIndexOf('/')+1);
+      return fileName
+
+  }
 
 }
 
 export class ChatMessage {
-  messageId: string;
   userId: string;
-  userName: string;
-  userAvatar: string;
-  toUserId: string;
   time: number | string;
   message: string;
-  status: string;
+  type: string;
+  url: any;
+  attributes: any;
+  contentType: any;
+  filename: any;
+
 }
 
 export class UserInfo {
