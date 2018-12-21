@@ -204,20 +204,20 @@
             <!--Listado de llamadas-->
             <ion-item style="border-bottom:none" *ngFor="let call of llamadas; let i = index;">
                 <ion-row style="display: flex !important; align-content: center !important; align-items: center !important;margin-top: 1%;">
-                    <ion-col col-3>
+                    <ion-col col-3 *ngIf="call.CallStatus !== 'no-answer'">
                         <p style="color:gray;">{{call.FechaLlamada}}</p>
                     </ion-col>
                     <ion-col col-9>
                     </ion-col>
                 </ion-row>
                 <ion-row style="display: flex !important; align-content: center !important; align-items: center !important;margin-bottom: 2% !important;">
-                    <ion-col col-1>
+                    <ion-col *ngIf="call.CallStatus !== 'no-answer'" col-1>
                         <img src="assets/imgs/llamadas/{{call.CallStatus}}.svg" width="70%" style="vertical-align: middle;margin-left: 1%;" />
                     </ion-col>
-                    <ion-col col-7>
+                    <ion-col *ngIf="call.CallStatus !== 'no-answer'" col-7>
                         <a style="color:#606060">{{leadActual.NOMBRE | capitalize}}</a>
                     </ion-col>
-                    <ion-col col-4 style="text-align: right;">
+                    <ion-col *ngIf="call.CallStatus !== 'no-answer'" col-4 style="text-align: right;">
                         <a style="color:#606060">{{call.horallamada}}</a>
                     </ion-col>
                 </ion-row>
@@ -234,13 +234,8 @@
 
             <div class="message-wrap">
 
-                <div *ngFor="let msg of msgListLead;"
-                     class="message"
-                     [class.koomkin-gen]="msg.userId === 'koomkin-gen'"
-                     [class.left]=" msg.userId === leadActual.uuid || msg.userId==='system'"
-                     [class.system]="msg.userId === 'system'"
-                     [class.rightcoach]=" msg.userId === 'koomkin-coach'"
-                     [class.right]=" (msg.userId === clientUUID) || ((msg.userId != 'koomkin-gen') && (msg.userId != leadActual.uuid) && (msg.userId != 'system') && (msg.userId != 'koomkin-coach'))">
+                <div *ngFor="let msg of msgListLead;" class="message" [class.koomkin-gen]="msg.userId === 'koomkin-gen'" [class.left]=" msg.userId === leadActual.uuid || msg.userId==='system'" [class.system]="msg.userId === 'system'" [class.rightcoach]=" msg.userId === 'koomkin-coach'"
+                    [class.right]=" (msg.userId === clientUUID) || ((msg.userId != 'koomkin-gen') && (msg.userId != leadActual.uuid) && (msg.userId != 'system') && (msg.userId != 'koomkin-coach'))">
 
                     <div class="msg-detail">
                         <div class="msg-info">
@@ -252,33 +247,35 @@
                         </div>
 
 
-                      <div  *ngIf="msg.type === 'media' && msg.contentType.startsWith('image')    "class="msg-content">
-                        <span class="triangle"></span> <!-- attributes {{msg.attributes.mime}} -->
-                        <img #spy  class="twilioImage" style="max-width: 180px; max-height: 180px; cursor: pointer" (click)="openFile(msg.url ,msg.contentType)"   [src]="msg.url | async" >
-                      </div>
-
-
-                      <div *ngIf="msg.type === 'media' && msg.contentType.startsWith('image') == false" class="msg-content">
-                        <span class="triangle"  *ngIf="!msg.contentType.startsWith('audio')"></span> <!-- {{msg.contentType}}-->
-                        <!-- <br> not file url -->
-                        <div *ngIf="(msg.contentType.startsWith('video') || msg.contentType.startsWith('application/pdf'))"   (click)="openFile(msg.url ,msg.contentType)"  style=" display: flex; align-items: center; cursor: pointer;">
-                          <ion-icon style="padding-left: 4%;  font-size:24px; color:#30a3bc" name="document"></ion-icon>
-                          <p class="for-fontsize" style=" justify-content: space-around; text-align: center; display: flex; align-items: center; text-decoration: none;">&nbsp;&nbsp;&nbsp;{{msg.filename }}</p>
+                        <div *ngIf="msg.type === 'media' && msg.contentType.startsWith('image')    " class="msg-content">
+                            <span class="triangle"></span>
+                            <!-- attributes {{msg.attributes.mime}} -->
+                            <img #spy class="twilioImage" style="max-width: 180px; max-height: 180px; cursor: pointer" (click)="openFile(msg.url ,msg.contentType)" [src]="msg.url | async">
                         </div>
 
-                        <div *ngIf="msg.contentType.startsWith('video') == false && msg.contentType.startsWith('application/pdf') == false && msg.contentType.startsWith('audio')== false"    style=" cursor: pointer;">
-                          <a style="padding-left: 4%; justify-content: space-around; text-align: center; display: flex; align-items: center; text-decoration: none; color: #707070;" [href]="msg.url | async" download  target="_blank"><span style="font-size:24px; color:#30a3bc" class="fa fa-file"></span><ion-icon style="font-size:24px; color:#30a3bc" name="document"></ion-icon>
-                            <p class="for-fontsize" style="">&nbsp;&nbsp;{{msg.filename }}</p></a>
-                        </div>
 
-                        <div style="box-shadow:rgba(0, 0, 0, 0.13) 0px 0px 0px;  background: transparent">
-                          <audio #spy2  *ngIf="msg.contentType.startsWith('audio')" style="width: 67vw" controls [src]="msg.url | async" crossorigin="anonymous" controlsList="nodownload">
+                        <div *ngIf="msg.type === 'media' && msg.contentType.startsWith('image') == false" class="msg-content">
+                            <span class="triangle" *ngIf="!msg.contentType.startsWith('audio')"></span>
+                            <!-- {{msg.contentType}}-->
+                            <!-- <br> not file url -->
+                            <div *ngIf="(msg.contentType.startsWith('video') || msg.contentType.startsWith('application/pdf'))" (click)="openFile(msg.url ,msg.contentType)" style=" display: flex; align-items: center; cursor: pointer;">
+                                <ion-icon style="padding-left: 4%;  font-size:24px; color:#30a3bc" name="document"></ion-icon>
+                                <p class="for-fontsize" style=" justify-content: space-around; text-align: center; display: flex; align-items: center; text-decoration: none;">&nbsp;&nbsp;&nbsp;{{msg.filename }}</p>
+                            </div>
+
+                            <div *ngIf="msg.contentType.startsWith('video') == false && msg.contentType.startsWith('application/pdf') == false && msg.contentType.startsWith('audio')== false" style=" cursor: pointer;">
+                                <a style="padding-left: 4%; justify-content: space-around; text-align: center; display: flex; align-items: center; text-decoration: none; color: #707070;" (click)="launch(msg.url ,msg.contentType)" download target="_blank"><span style="font-size:24px; color:#30a3bc" class="fa fa-file"></span><ion-icon style="font-size:24px; color:#30a3bc" name="document"></ion-icon>
+                                  <p class="for-fontsize">&nbsp;&nbsp;{{msg.filename }}</p></a>
+                            </div>
+
+                            <div style="box-shadow:rgba(0, 0, 0, 0.13) 0px 0px 0px;  background: transparent">
+                                <audio #spy2 *ngIf="msg.contentType.startsWith('audio')" style="width: 67vw" controls [src]="msg.url | async" crossorigin="anonymous" controlsList="nodownload">
                             Tu navegador no soporta achivos de audio.
                           </audio>
-                        </div>
+                            </div>
 
-                        <p class="line-breaker "></p>
-                      </div>
+                            <p class="line-breaker "></p>
+                        </div>
 
 
                     </div>
@@ -313,12 +310,12 @@
 
 
     <div class="input-wrap">
-      <button class="chat-send-message" ion-button clear icon-only item-right (click)="chooseFile()">
+        <button class="chat-send-message" ion-button clear icon-only item-right (click)="chooseFile()">
         <ion-icon style=" position: relative;  display: inline-block; vertical-align: middle; text-align: center; font-size: 2em; color:#37B9BB;" name="add" ios="ios-add" md="md-add"></ion-icon>
       </button>
-      <textarea id="chat_input" placeholder="Escribe un mensaje" [placeholder]="false ? '' : 'Escribe un mensaje'" [(ngModel)]="editorMsg" (keyup.enter)="sendMsg()" (focusin)="onFocus()">
+        <textarea id="chat_input" placeholder="Escribe un mensaje" [placeholder]="false ? '' : 'Escribe un mensaje'" [(ngModel)]="editorMsg" (keyup.enter)="sendMsg()" (focusin)="onFocus()">
       </textarea>
-      <button class="chat-send-message" ion-button clear icon-only item-right (click)="sendMsg()">
+        <button class="chat-send-message" ion-button clear icon-only item-right (click)="sendMsg()">
         <ion-icon style="color:#37B9BB;" name="ios-add-circle-outline" ios="ios-send" md="md-send"></ion-icon>
       </button>
     </div>

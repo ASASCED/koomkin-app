@@ -596,7 +596,7 @@ export class LeadPage implements OnInit {
         //console.log('entro');
         for (let k in this.llamadas) {
           this.llamadas[k].CallStatus = this.llamadas[k].CallStatus;
-          if (this.llamadas[k].CallStatus == 'no-answer' || this.llamadas[k].CallStatus == 'failed') {
+          if (this.llamadas[k].CallStatus == 'failed') {
             this.llamadas[k].CallStatus = 'perdida';
           }
           if (this.llamadas[k].CallStatus == 'inv-lead' || this.llamadas[k].CallStatus == 'inv-cliente') {
@@ -1183,9 +1183,6 @@ export class LeadPage implements OnInit {
     this.streamingMedia.stopAudio();
   }
 
-
-
-
   getCircularReplacer = () => {
     const seen = new WeakSet();
     return (key, value) => {
@@ -1210,46 +1207,27 @@ export class LeadPage implements OnInit {
       formData.append(file.name,blob,file.name);
 
       this.chatService.tc.currentChannel.sendMessage( formData ).then(()=>{
-
         this.chatService.tc.currentChannel.getMessages().then((messagesPaginator)=> {
-
           const message = messagesPaginator.items[messagesPaginator.items.length-1];
-
           if (message.type === 'media') {
-
-
             console.log('Media attributes', message.media);
-
             message.media.getContentUrl().then((url)=>{
-
               this.http.post('http://www.koomkin.com:4835/api/twilio-media-message', { channelsid: this.chatService.tc.currentChannel.sid, url: url, mime: file.mediaType})
                 .subscribe(data => {
-
                   //alert('enviado a whatsapp'+ JSON.stringify(data));
-
                 }, err => {
-
                   //alert('not good '+ JSON.stringify(err));
-
                 });
-
             });
-
           }
-
         });
-
       });
-
-
     })();
-
   }
 
 
 
   openFile(url,contentType){
-
     url.then((resultUrl)=>{
       var filename= 'koomkinfile';
       this.fileTransfers.download( resultUrl["changingThisBreaksApplicationSecurity"], this.file.dataDirectory + filename,true ).then((entry) => {
@@ -1260,18 +1238,16 @@ export class LeadPage implements OnInit {
       }, (error) => {
           console.log('hello '+JSON.stringify(error));
       });
-
   }
 
-
-
-
-
-
-
-
-
-
-
+  launch(url) {
+    url.then((url2)=>{
+      this.platform.ready().then(() => {
+        cordova.InAppBrowser.open(url2["changingThisBreaksApplicationSecurity"], "_system", "location=no");
+      });
+ 
+    });
+ 
+  }
 }
 

@@ -8,7 +8,7 @@
 
 
 <ion-content>
-    <banner *ngIf="mostrar == 1" [title]='title' [subtitle]='subtitle' [img]='img' [fondo]='fondo' [notification]='notification' [idReportBanner]='idReportBanner' [uuidPass]='uuidPass' [description]='description' (click)="clickBanner();"></banner>
+    <banner *ngIf="mostrar == 1" [title]='title' [subtitle]='subtitle' [img]='img' [fondo]='fondo' [notification]='notification' [idReportBanner]='idReportBanner' [uuidPass]='uuidPass' [tipoBanner]='tipoBanner' [description]='description' (click)="clickBanner();"></banner>
     <ion-grid padding>
         <ion-row class="grande" (click)="pagina(leads)">
             <ion-col col-3>

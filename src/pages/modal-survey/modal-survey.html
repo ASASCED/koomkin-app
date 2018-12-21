@@ -7,7 +7,7 @@
 <ion-content>
     <div class="encuesta-container">
         <div class="activity-header">
-            <img src="https://firebasestorage.googleapis.com/v0/b/chatcintanegra.appspot.com/o/7.svg?alt=media&token=3637c28f-085b-4dab-8a6f-865b63348d5b">
+            <img src="https://firebasestorage.googleapis.com/v0/b/chatcintanegra.appspot.com/o/img_encuesta.svg?alt=media&token=d573e9e2-b5f5-4371-82df-39b1bd3ff414" width="100%">
             <div class="encabezado-encuesta">Encuesta</div>
         </div>
         <div class="activity-content-container">
@@ -19,4 +19,11 @@
             <button class="encuesta-comenzar">Comenzar</button>
         </div>
     </div>
+    <ion-list detail-none ion-item *ngFor="let pregunta of preguntas; let i = index;" style="margin-bottom: 1.5%; box-shadow: 0px 1px 2px 0.5px #ccc;">
+        <ion-item-sliding #item>
+            <ion-item no-lines>
+                {{pregunta.Pregunta}}
+            </ion-item>
+        </ion-item-sliding>
+    </ion-list>
 </ion-content>

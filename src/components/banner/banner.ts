@@ -18,10 +18,12 @@ export class BannerComponent implements OnInit {
   @Input() idReportBanner: string;
   @Input() fondo: string;
   @Input() description: string;
-  
+  @Input() tipoBanner;
+
   public notificacion;
   public idReporteBanner;
   public uuidPase;
+  public tipo;
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -34,14 +36,15 @@ export class BannerComponent implements OnInit {
     this.notificacion = this.notification;
     this.idReporteBanner = this.idReportBanner;
     this.uuidPase = this.uuidPass;
+    this.tipo = this.tipoBanner;
   }
 
   mostrar_modal() {
-    this.navCtrl.push(ModalNotificationPage, { notificacion: this.notificacion, idReporteBanner: this.idReporteBanner, uuidPase:this.uuidPase });
+    this.navCtrl.push(ModalNotificationPage, { notificacion: this.notificacion, idReporteBanner: this.idReporteBanner,tipo: this.tipo, uuidPase:this.uuidPase });
   }
 
   mostrar_encuesta() {
-    this.navCtrl.push(ModalSurveyPage, { notificacion: this.notificacion, idReporteBanner: this.idReporteBanner, uuidPase:this.uuidPase });
+    this.navCtrl.push(ModalSurveyPage, { notificacion: this.notificacion, idReporteBanner: this.idReporteBanner,tipo: this.tipo, uuidPase:this.uuidPase });
   }
 
   goStore(){
