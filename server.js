@@ -43,9 +43,9 @@ app.get('/upcoming', (req, res) => {
 
 app.get('/getLead30Dias/:id', function (req, res) {
     var id = parseInt(req.params.id, 10);
-    console.log("id", id);
+    //console.log("id", id);
     var command = 'SP_GetLead30Dias';
-    console.log("command", command);
+    //console.log("command", command);
     db.executeGetById(id, command, function (err, rows) {
         if (err) {
             res.status(500).json({ error: err }).send();
@@ -69,7 +69,7 @@ app.get('/getLead12Meses/:id', function (req, res) {
 
 app.get('/getLike30Dias/:id', function (req, res) {
     var id = parseInt(req.params.id, 10);
-    console.log("id", id);
+    //console.log("id", id);
     var command = 'SP_GetLike30Dias';
     db.executeGetById(id, command, function (err, rows) {
         if (err) {
@@ -132,7 +132,7 @@ app.get('/getLeadById/:id', function (req, res) {
 
 app.get('/getReporteWeb', function (req, res) {
     var id = parseInt(req.query.param1, 10);
-    console.log(id);
+    //console.log(id);
     var command = 'SP_GetReporteWeb';
     db.executeGetById(id, command, function (err, rows) {
         if (err) {

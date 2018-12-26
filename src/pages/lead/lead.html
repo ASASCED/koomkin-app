@@ -267,12 +267,12 @@
                         </div>
 
                         <div *ngIf="msg.contentType.startsWith('video') == false && msg.contentType.startsWith('application/pdf') == false && msg.contentType.startsWith('audio')== false"    style=" cursor: pointer;">
-                          <a style="padding-left: 4%; justify-content: space-around; text-align: center; display: flex; align-items: center; text-decoration: none; color: #707070;" [href]="msg.url | async" download  target="_blank"><span style="font-size:24px; color:#30a3bc" class="fa fa-file"></span><ion-icon style="font-size:24px; color:#30a3bc" name="document"></ion-icon>
+                          <a style="padding-left: 4%; justify-content: space-around; text-align: center; display: flex; align-items: center; text-decoration: none; color: #707070;" (click)="launch(msg.url ,msg.contentType)" download  target="_blank"><span style="font-size:24px; color:#30a3bc" class="fa fa-file"></span><ion-icon style="font-size:24px; color:#30a3bc" name="document"></ion-icon>
                             <p class="for-fontsize" style="">&nbsp;&nbsp;{{msg.filename }}</p></a>
                         </div>
 
                         <div style="box-shadow:rgba(0, 0, 0, 0.13) 0px 0px 0px;  background: transparent">
-                          <audio #spy2  *ngIf="msg.contentType.startsWith('audio')" style="width: 67vw" controls [src]="msg.url | async" crossorigin="anonymous" controlsList="nodownload">
+                          <audio #spy2  *ngIf="msg.contentType.startsWith('audio')" style="width: 67vw" controls [src]="msg.url | async" crossOrigin="anonymous" controlsList="nodownload">
                             Tu navegador no soporta achivos de audio.
                           </audio>
                         </div>

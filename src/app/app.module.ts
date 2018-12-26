@@ -10,8 +10,8 @@ import { IonicStorageModule } from '@ionic/storage';
 import { Network } from '@ionic-native/network';
 
 import {FileOpener } from '@ionic-native/file-opener';
-import {FileChooser} from '@ionic-native/file-chooser';
-import {FilePath} from '@ionic-native/file-path';
+//import {FileChooser} from '@ionic-native/file-chooser';
+//import {FilePath} from '@ionic-native/file-path';
 
 //import { OneSignal } from '@ionic-native/onesignal';
 import { ScreenOrientation } from '@ionic-native/screen-orientation';
@@ -136,8 +136,8 @@ import { Transfer, FileUploadOptions, TransferObject } from '@ionic-native/trans
     UserProvider,
     File,
     FileOpener,
-    FileChooser,
-    FilePath,
+    //FileChooser,
+    //FilePath,
     Transfer,
     //PushnotificationProvider
   ]

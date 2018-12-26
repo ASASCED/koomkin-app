@@ -2,7 +2,7 @@ import { Component, OnInit, NgZone} from '@angular/core';
 import { IonicPage, NavController, ViewController, NavParams, Platform } from 'ionic-angular';
 import { RestProvider } from './../../providers/rest/rest';
 import { HttpClient } from '@angular/common/http';
-import { AlertController, ModalController } from 'ionic-angular';
+import { AlertController, ModalController , LoadingController} from 'ionic-angular';
 import { LeadsPage } from "../leads/leads";
 import { AuthServiceProvider } from "../../providers/auth-service/auth-service";
 import { StreamingMedia, StreamingAudioOptions } from '@ionic-native/streaming-media';
@@ -12,10 +12,11 @@ import { Content } from 'ionic-angular';
 import { ChatServiceProvider, ChatMessage, UserInfo } from "../../providers/chat-service/chat-service";
 import { HttpHeaders } from '@angular/common/http';
 import {FileOpener } from '@ionic-native/file-opener';
-import {FileChooser} from '@ionic-native/file-chooser';
-import {FilePath} from '@ionic-native/file-path';
+//import {FileChooser} from '@ionic-native/file-chooser';
+//import {FilePath} from '@ionic-native/file-path';
 import { File } from '@ionic-native/file';
 import { Transfer, FileUploadOptions, TransferObject } from '@ionic-native/transfer';
+
 
 import {DomSanitizer} from '@angular/platform-browser';
 
@@ -29,8 +30,6 @@ declare var cordova:any;
 
 
 export class LeadPage implements OnInit {
-
-
 
   leadActual;
   //url de producción
@@ -337,7 +336,20 @@ export class LeadPage implements OnInit {
     this.page = tabName;
   }
 
+  ngOnDestroy(){
+
+    //this.chatService.loadingMessagesActualizado.unsubscribe();
+    //this.chatService.loadingMessages.unsubscribe();
+    //this.chatService.msgList.unsubscribe();
+    //this.chatService.msgListActualizada.unsubscribe();
+
+  }
+
+
+
   ngOnInit() {
+
+
     this.chatService.msgListActualizada.subscribe(
       result => {
 
@@ -438,7 +450,13 @@ export class LeadPage implements OnInit {
     private streamingMedia: StreamingMedia,
     public storage: Storage,
     public file:File,
-    private fileChooser: FileChooser, private fileOpener: FileOpener, private filePath: FilePath, private transfer: Transfer,private sanitizer:DomSanitizer, public ngz:NgZone
+    //private fileChooser: FileChooser,
+    private fileOpener: FileOpener,
+    //private filePath: FilePath,
+    private transfer: Transfer,
+    private sanitizer:DomSanitizer,
+    public ngz:NgZone,
+    public loadingCtrl: LoadingController
   ) {
 
     this.leadActual = navParams.data; // Obtenemos parametros de la página de LEADS
@@ -1209,6 +1227,8 @@ export class LeadPage implements OnInit {
       var blob = new Blob([file.data],{type: file.mediaType});
       formData.append(file.name,blob,file.name);
 
+      //alert(file.name);
+
       this.chatService.tc.currentChannel.sendMessage( formData ).then(()=>{
 
         this.chatService.tc.currentChannel.getMessages().then((messagesPaginator)=> {
@@ -1217,12 +1237,12 @@ export class LeadPage implements OnInit {
 
           if (message.type === 'media') {
 
-
             console.log('Media attributes', message.media);
 
             message.media.getContentUrl().then((url)=>{
 
-              this.http.post('http://www.koomkin.com:4835/api/twilio-media-message', { channelsid: this.chatService.tc.currentChannel.sid, url: url, mime: file.mediaType})
+
+              this.http.post('http://www.koomkin.com:4835/api/twilio-media-message', { channelsid: this.chatService.tc.currentChannel.sid, url: url, mime: file.mediaType, filename: file.name})
                 .subscribe(data => {
 
                   //alert('enviado a whatsapp'+ JSON.stringify(data));
@@ -1250,27 +1270,60 @@ export class LeadPage implements OnInit {
 
   openFile(url,contentType){
 
-    url.then((resultUrl)=>{
-      var filename= 'koomkinfile';
-      this.fileTransfers.download( resultUrl["changingThisBreaksApplicationSecurity"], this.file.dataDirectory + filename,true ).then((entry) => {
-        this.fileOpener.open( this.file.dataDirectory + filename, contentType
-        ).then(() => { } ).catch(e => console.log('Open error' + e));
-      }).catch(e => console.log('Save error' + JSON.stringify(e)));
 
-      }, (error) => {
-          console.log('hello '+JSON.stringify(error));
-      });
+    let loading = this.loadingCtrl.create({
+      content: 'Cargando archivo multimedia...'
+    });
+
+
+    loading.present().then(()=>{
+
+
+     url.then((resultUrl)=>{
+       var filename= 'koomkinfile';
+       this.fileTransfers.download( resultUrl["changingThisBreaksApplicationSecurity"], this.file.dataDirectory + filename,true ).then((entry) => {
+         this.fileOpener.open( this.file.dataDirectory + filename, contentType
+         ).then(() => {
+           loading.dismiss();
+           console.log('then');
+         }).catch(e =>{
+           loading.dismiss();
+           console.log('catch');
+           console.log('Open error' + e);
+
+         });
+       }).catch(e => {
+         console.log('Save error' + JSON.stringify(e));
+         loading.dismiss();
+
+       });
+
+     }, (error) => {
+       console.log('hello '+JSON.stringify(error));
+       loading.dismiss();
+     });
+
+
+   }).catch((err)=>{
+      //loading.dismiss();
+     alert(err);
+
+   });
+
+
 
   }
 
+  launch(url) {
 
+    url.then((url2)=>{
+      this.platform.ready().then(() => {
+        cordova.InAppBrowser.open(url2["changingThisBreaksApplicationSecurity"], "_system", "location=no");
+      });
 
+    });
 
-
-
-
-
-
+  }
 
 
 }
