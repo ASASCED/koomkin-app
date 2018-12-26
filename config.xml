@@ -112,5 +112,6 @@
     <plugin name="cordova-plugin-file-transfer" spec="^1.7.1" />
     <allow-navigation href="http://192.168.43.83:8100" sessionid="62f51fc5" />
     <plugin name="cordova-plugin-inappbrowser" spec="^3.0.0" />
+    <plugin name="cordova-plugin-market" spec="1.2.0" />
     <engine name="android" spec="7.1.4" />
 </widget>

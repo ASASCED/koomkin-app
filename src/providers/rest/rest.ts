@@ -444,4 +444,14 @@ export class RestProvider {
         });
     });
   }
+
+  getSurvey(tipo) {
+    return new Promise(resolve => {
+      this.http.get(this.apiUrl + '/getSurvey/' + tipo).subscribe(data => {
+        resolve(data);
+      }, err => {
+        console.log(err);
+      });
+    });
+  }
 }

@@ -614,7 +614,7 @@ export class LeadPage implements OnInit {
         //console.log('entro');
         for (let k in this.llamadas) {
           this.llamadas[k].CallStatus = this.llamadas[k].CallStatus;
-          if (this.llamadas[k].CallStatus == 'no-answer' || this.llamadas[k].CallStatus == 'failed') {
+          if (this.llamadas[k].CallStatus == 'failed') {
             this.llamadas[k].CallStatus = 'perdida';
           }
           if (this.llamadas[k].CallStatus == 'inv-lead' || this.llamadas[k].CallStatus == 'inv-cliente') {

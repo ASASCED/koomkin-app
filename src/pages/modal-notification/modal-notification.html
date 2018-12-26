@@ -13,10 +13,14 @@
                     {{titulo_notificacion}}
                 </div>
             </div>
-            <div class="activity-content-container" [ngClass]="{'map-content-container' : uiState?.screen === 3}">
-                <div [ngClass]="{'three' : parrafos.length === 3}" class="activity-content-title">
+            <div class="activity-content-container">
+                <div class="activity-content-title p1_estilo_notificacion">
                     <p [style.color]="p1_estilo_notificacion">{{parrafo}}</p>
+                </div>
+                <div class="activity-content-parrafo">
                     <p [style.color]="p2_estilo_notificacion">{{parrafo1}}</p>
+                </div>
+                <div class="activity-content-parrafos">
                     <p [style.color]="p3_estilo_notificacion">{{parrafo2}}</p>
                 </div>
             </div>

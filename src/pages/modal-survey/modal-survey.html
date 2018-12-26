@@ -1,0 +1,29 @@
+<ion-header>
+    <ion-navbar color="azul">
+    </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+    <div class="encuesta-container">
+        <div class="activity-header">
+            <img src="https://firebasestorage.googleapis.com/v0/b/chatcintanegra.appspot.com/o/img_encuesta.svg?alt=media&token=d573e9e2-b5f5-4371-82df-39b1bd3ff414" width="100%">
+            <div class="encabezado-encuesta">Encuesta</div>
+        </div>
+        <div class="activity-content-container">
+            <p class="azul">¡Tu opinión es muy importante!</p>
+            <p class="gris">Te pedimos que completes la siguiente encuesta para poder ofrecerte un mejor servicio</p>
+            <p class="gris">Evalúe en una escala del 1 al 5, donde 1 es Totalmente Desacuerdo y 5 es Totalmente de Acuerdo</p>
+        </div>
+        <div class="activity-footer">
+            <button class="encuesta-comenzar">Comenzar</button>
+        </div>
+    </div>
+    <ion-list detail-none ion-item *ngFor="let pregunta of preguntas; let i = index;" style="margin-bottom: 1.5%; box-shadow: 0px 1px 2px 0.5px #ccc;">
+        <ion-item-sliding #item>
+            <ion-item no-lines>
+                {{pregunta.Pregunta}}
+            </ion-item>
+        </ion-item-sliding>
+    </ion-list>
+</ion-content>

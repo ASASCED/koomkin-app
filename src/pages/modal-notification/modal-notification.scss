@@ -22,15 +22,17 @@ page-modal-notification {
         display: grid;
         height: 97%;
         width: 95%;
-        // grid-template-rows: 130px auto 75px;
+        grid-template-areas: "activity-header" "activity-content-container" "activity-footer";
         grid-template-rows: 170px auto 18vh;
         .activity-header {
+            grid-area: activity-header;
             grid-row: 1 / 2;
             background-repeat: no-repeat;
             background-size: contain;
             position: relative;
             display: flex;
             justify-content: center;
+            width: 95vw;
             .activity-title {
                 position: absolute;
                 height: 45px;
@@ -60,60 +62,82 @@ page-modal-notification {
             }
         }
         .activity-content-container {
+            grid-area: activity-content-container;
             grid-row: 2 / 3;
-            display: flex;
-            grid-template-rows: 15px auto;
+            display: grid;
+            grid-template-rows: 33% 33% 33%;
             justify-content: center;
             align-items: center;
-            .progress-bar {
-                grid-row: 1 / 2;
-                height: 100%;
-            }
-            .progress-bar-item>brief-progress-bar {
-                width: 100%;
-                justify-content: center;
-                display: flex;
-            }
-            .activity-content-title.three {
+            width: 95vw;
+            grid-template-areas: "activity-content-title" "activity-content-parrafo" "activity-content-parrafos";
+            .activity-content-title {
+                grid-area: activity-content-title;
                 height: 100%;
                 overflow-wrap: normal;
                 color: rgb(119, 119, 119);
                 font-weight: 500;
                 font-size: 4.8vw;
                 display: grid;
-                -webkit-box-align: center;
                 align-items: center;
-                -webkit-box-pack: center;
                 justify-content: center;
                 text-align: center;
-                grid-row: 2 / 3;
                 padding: 0px 10px;
+                width: 94vw;
+                p {
+                    width: 94vw !important;
+                    overflow-wrap: break-word;
+                    justify-content: center;
+                    align-items: center;
+                    font-size: 4.7vw;
+                }
             }
-            .activity-content-title {
-                grid-row: 2 / 3;
+            .activity-content-parrafo {
+                grid-area: activity-content-parrafo;
                 height: 100%;
-                word-wrap: break-word;
-                color: $koomkin-grey-light;
-                padding: 0 10px;
+                overflow-wrap: normal;
+                color: rgb(119, 119, 119);
                 font-weight: 500;
-                font-size: 5.8vw;
-                display: flex;
+                font-size: 4.8vw;
+                display: grid;
                 align-items: center;
                 justify-content: center;
                 text-align: center;
+                padding: 0px 10px;
+                width: 94vw;
+                p {
+                    width: 94vw !important;
+                    overflow-wrap: break-word;
+                    justify-content: center;
+                    align-items: center;
+                    font-size: 4.7vw;
+                }
+            }
+            .activity-content-parrafos {
+                grid-area: activity-content-parrafos;
+                height: 100%;
+                overflow-wrap: normal;
+                color: rgb(119, 119, 119);
+                font-weight: 500;
+                font-size: 4.8vw;
                 display: grid;
-            }
-            .activity-component {
-                grid-row-start: 3;
-                height: 100%;
-            }
-            .no-title-component {
-                grid-row: 2 / 4;
-                height: 100%;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+                padding: 0px 10px;
+                width: 94vw;
+                p {
+                    width: 94vw !important;
+                    overflow-wrap: break-word;
+                    justify-content: center;
+                    align-items: center;
+                    font-size: 4.7vw;
+                }
             }
         }
         .activity-footer {
             grid-row-start: 3;
+            grid-area: activity-footer;
+            width: 94vw;
         }
         .button-footer-container {
             height: 100%;
@@ -122,22 +146,22 @@ page-modal-notification {
             justify-content: space-evenly;
             align-items: center;
             .renovacion-positivo {
-                background-color: $koomkin-green;
+                background-color: #f06922;
                 color: white;
-                border: 1.1px solid $koomkin-green;
+                border: 1.1px solid #f06922;
                 width: 45%;
                 height: 9vh;
-                font-size: 3vh;
+                font-size: 4vw;
                 border-radius: 10px;
                 font-weight: 500;
             }
             .renovacion-negativo {
                 background-color: white;
-                color: $koomkin-green;
-                border: 1.1px solid $koomkin-green;
+                color: #f06922;
+                border: 1.1px solid #f06922;
                 width: 45%;
                 height: 9vh;
-                font-size: 3vh;
+                font-size: 4vw;
                 border-radius: 10px;
                 font-weight: 500;
             }

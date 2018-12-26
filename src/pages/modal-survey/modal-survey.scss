@@ -1,0 +1,64 @@
+page-modal-survey {
+    .encuesta-container {
+        display: grid;
+        height: 100%;
+        width: 100%;
+        grid-template-areas: "activity-header" "activity-content-container" "activity-footer";
+        grid-template-rows: 30% auto 20%;
+        .activity-header {
+            grid-area: activity-header;
+            height: 100%;
+            width: 100%;
+            .encabezado-encuesta {
+                height: 40px;
+                position: absolute;
+                top: 22%;
+                width: 40%;
+                margin-left: 30%;
+                border-radius: 10px;
+                background: white;
+                text-align: center;
+                color: #FE703F;
+                display: grid;
+                justify-content: center;
+                align-items: center;
+                font-size: 6vw;
+                font-weight: bold;
+                box-shadow: 10px 10px 13px -8px rgba(0, 0, 0, 0.45);
+            }
+        }
+        .activity-content-container {
+            grid-area: activity-content-container;
+            height: 100%;
+            width: 100%;
+            text-align: center;
+            padding: 4%;
+            .azul {
+                color: #288AC1;
+                font-weight: bold;
+                font-size: 5.5vw;
+            }
+            .gris {
+                color: rgb(119, 119, 119);
+                font-weight: 400;
+                font-size: 5.2vw;
+            }
+        }
+        .activity-footer {
+            grid-area: activity-footer;
+            height: 100%;
+            width: 100%;
+            text-align: center;
+            .encuesta-comenzar {
+                background-color: #f06922;
+                color: white;
+                border: 1.1px solid #f06922;
+                width: 45%;
+                height: 40%;
+                font-size: 5vw;
+                border-radius: 10px;
+                font-weight: 500;
+            }
+        }
+    }
+}
