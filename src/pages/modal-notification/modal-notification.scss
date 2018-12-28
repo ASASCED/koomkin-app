@@ -20,23 +20,24 @@ page-modal-notification {
     }
     .activity-container {
         display: grid;
-        height: 97%;
-        width: 95%;
+        height: 100%;
+        width: 100%;
         grid-template-areas: "activity-header" "activity-content-container" "activity-footer";
-        grid-template-rows: 170px auto 18vh;
+        grid-template-rows: 23.2vh auto 18vh;
         .activity-header {
             grid-area: activity-header;
             grid-row: 1 / 2;
             background-repeat: no-repeat;
-            background-size: contain;
+            background-size: cover;
             position: relative;
             display: flex;
             justify-content: center;
-            width: 95vw;
+            width: 100vw;
             .activity-title {
                 position: absolute;
                 height: 45px;
                 width: 93%;
+                top: 86%;
                 background-color: white;
                 display: flex;
                 color: $koomkin-blue;
@@ -68,7 +69,8 @@ page-modal-notification {
             grid-template-rows: 33% 33% 33%;
             justify-content: center;
             align-items: center;
-            width: 95vw;
+            width: 100vw;
+            margin-top: 5%;
             grid-template-areas: "activity-content-title" "activity-content-parrafo" "activity-content-parrafos";
             .activity-content-title {
                 grid-area: activity-content-title;
@@ -82,7 +84,7 @@ page-modal-notification {
                 justify-content: center;
                 text-align: center;
                 padding: 0px 10px;
-                width: 94vw;
+                width: 100vw;
                 p {
                     width: 94vw !important;
                     overflow-wrap: break-word;
@@ -103,7 +105,7 @@ page-modal-notification {
                 justify-content: center;
                 text-align: center;
                 padding: 0px 10px;
-                width: 94vw;
+                width: 100vw;
                 p {
                     width: 94vw !important;
                     overflow-wrap: break-word;
@@ -124,7 +126,7 @@ page-modal-notification {
                 justify-content: center;
                 text-align: center;
                 padding: 0px 10px;
-                width: 94vw;
+                width: 100vw;
                 p {
                     width: 94vw !important;
                     overflow-wrap: break-word;
@@ -137,7 +139,7 @@ page-modal-notification {
         .activity-footer {
             grid-row-start: 3;
             grid-area: activity-footer;
-            width: 94vw;
+            width: 100vw;
         }
         .button-footer-container {
             height: 100%;

@@ -102,8 +102,6 @@ export class LeadsPage implements OnInit {
         "$3/$2/$1$4"
       );
 
-
-
       leadsArray[k].NOMBRE = leadsArray[k].NOMBRE.substring(0, 16);
       leadsArray[k].EMPRESA = leadsArray[k].EMPRESA.substring(0, 28);
       leadsArray[k].urgencia = "No";
@@ -114,7 +112,6 @@ export class LeadsPage implements OnInit {
           leadsArray[k].clasificaLead = "M";
         } */
       });
-      // console.log(leadsArray[k].status);
       leadsArray[k].perdida = "";
 
       leadsArray[k].url = "sinaudio";
