@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { IonicPage, NavController, NavParams } from "ionic-angular";
 import { RestProvider } from "../../providers/rest/rest";
 import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
+import { InicioPage } from "../inicio/inicio";
 
 @IonicPage()
 @Component({
@@ -16,6 +17,8 @@ export class ModalSurveyPage implements OnInit {
   public eleccion = 0;
   public id;
   public apagado = true;
+  public comentario = '';
+  public comentarios = '';
 
   constructor(
     public navCtrl: NavController,
@@ -36,16 +39,12 @@ export class ModalSurveyPage implements OnInit {
     this.provedor.getSurvey(tipo).then(
       data => {
         this.preguntas = data;
-        console.log(this.preguntas.length);
+       // console.log(this.preguntas.length);
       },
       error => {
         console.log(error);
       }
     );
-  }
-
-  public startSurvey() {
-    this.pagina = 2;
   }
 
   public nextQuestion() {
@@ -78,15 +77,23 @@ export class ModalSurveyPage implements OnInit {
     for (let i = 0; i < this.preguntas.length; i++) { 
       if (caso == i) {
         this.preguntas[i].respuesta = respuesta;
-        console.log(this.preguntas[i]);
+        this.preguntas[i].comentario = '';
+        if(i == 5){
+          this.preguntas[i].comentario = this.comentario;
+        }
+        if(i == 7){
+          this.preguntas[i].comentario = this.comentarios;
+        }
+       // console.log(this.preguntas[i]);
       }
    }
   }
 
   public enviarRespuestas(){
     for (let i = 0; i < this.preguntas.length; i++) { 
-      console.log(this.id,this.preguntas[i].respuesta,this.preguntas[i].idPregunta);
+     // console.log(this.id,this.preguntas[i].respuesta,this.preguntas[i].comentario,this.preguntas[i].idPregunta);
    }
+   this.navCtrl.setRoot(InicioPage);
   }
 }
   

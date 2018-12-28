@@ -70,14 +70,10 @@ export class LoginPage implements OnInit {
     public http: HttpClient,
               public chatService: ChatServiceProvider
   ) {
-
     let disconnectSubscription = this.network.onDisconnect().subscribe(() => {
       this.showError("Error de conexión.", "Verifica tu conexión a internet.");
      // console.log(disconnectSubscription);
     });
-
-
-
   }
 
   verificarConexionInternet(){
@@ -120,7 +116,6 @@ export class LoginPage implements OnInit {
     .subscribe(data => this.onValueChanged(data))
     this.onValueChanged();
     this.getSesion();
-    console.log(this.loginForm.valueChanges);
   }
 
   public saveUserdata() {
@@ -139,32 +134,23 @@ export class LoginPage implements OnInit {
     this.getIntentoSesion(this.email, this.password);
     this.showLoader();
     this.authService.getUserByEmail(this.email).then((data) => {
-
       this.loading.dismiss();
       this.leads = data;
-     
       if (this.leads.length > 0) {
         if (this.plt.is('ios') || this.plt.is('android')) {
           window["plugins"].OneSignal.sendTag("email_error", "");
         } 
-
         this.id = this.leads[0].IDUSUARIO;
         if (Md5.hashStr(this.password) === this.leads[0].PASSWORD2) {
-
           this.restService.setUser(this.id);
-
          if (this.plt.is('ios') || this.plt.is('android')) {
-
             window["plugins"].OneSignal.getPermissionSubscriptionState((status) => {
-
               const deviceId = status.subscriptionStatus.userId;
               this.restService.registerDeviceID(deviceId);
-
             });
             window["plugins"].OneSignal.sendTag("pwd_error", "");
             window["plugins"].OneSignal.sendTag("email", "");
             window["plugins"].OneSignal.sendTag("id_usuario", this.id);
-
           } 
 
           //Appsee.setUserId(this.id);
@@ -178,9 +164,7 @@ export class LoginPage implements OnInit {
           }
           this.navCtrl.setRoot(InicioPage);
           // this.navCtrl.setRoot(LeadsPage);
-
         } else {
-
           if (this.plt.is('ios') || this.plt.is('android')) {
             window["plugins"].OneSignal.sendTag("email", this.email);
             window["plugins"].OneSignal.sendTag("pwd_error", this.password);
@@ -193,7 +177,6 @@ export class LoginPage implements OnInit {
         } 
         this.showError('Verifica tu correo y/o contraseña', 'Intenta de nuevo.');
       }
-
     }, (err) => {
       this.loading.dismiss();
       this.showError("Error de conexión.", "No fue posible establecer una conexión con el servidor.\n Verifique su conexión a internet.");
@@ -213,36 +196,27 @@ export class LoginPage implements OnInit {
             this.authService.getUserByEmail(this.email).then((data) => {
               this.loading.dismiss();
               this.leads = data;
-
               if (this.leads.length > 0) {
                 this.id = this.leads[0].IDUSUARIO;
-                if (Md5.hashStr(this.password) === this.leads[0].PASSWORD2) {
-                  
-                  this.app = this.leads[0].app;
+                if (Md5.hashStr(this.password) === this.leads[0].PASSWORD2) {  
+                this.app = this.leads[0].app;
                 //  console.log("entro");
                   this.authService.setUserIsLogged(true);
                   this.restService.setUser(this.id);
                 // this.restService.setApp(this.app);
-                  console.log(this.app);
                    if (this.plt.is('ios') || this.plt.is('android')) {
                     window["plugins"].OneSignal.getPermissionSubscriptionState((status) => {
                       const deviceId = status.subscriptionStatus.userId;
                       this.restService.registerDeviceID(deviceId);
-
                     });
-
                     window["plugins"].OneSignal.sendTag("id_usuario", this.id);
-
                    } 
                   this.storage.set('email', this.email);
                   this.storage.set('password', this.password);
-
                   if(this.authService.getNotificationActive()){
-
                     if(data[0]['uuid']){
                       this.iniciarClienteChatTwilio(data[0]['uuid']);
                     }
-
                     this.authService.setNotificationActive(false);
 
                   }else{
@@ -370,7 +344,6 @@ export class LoginPage implements OnInit {
   }
 
   enviarCorreo(data) {
-    console.log(data.email);
     let email = data.email
     this.http.get(this.apiUrl + "/API/SendPasswordEmail?email=" + email)
       .subscribe(data => {
@@ -381,7 +354,6 @@ export class LoginPage implements OnInit {
         } else if (this.resultado.result == 'OK') {
           this.prompt.dismiss();
           this.showSucess();
-          console.log('enviando correo');
         }
       },
         err => {
@@ -390,9 +362,7 @@ export class LoginPage implements OnInit {
   }
 
   iniciarClienteChatTwilio(uuid: string){
-
     this.chatService.startChatService(uuid);
-
   }
 
 }

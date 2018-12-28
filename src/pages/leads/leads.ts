@@ -56,6 +56,7 @@ export class LeadsPage implements OnInit {
   public notification;
   public tipoBanner;
   public fondo;
+  public description;
 
   apiUrl = "http://www.koomkin.com:4859";
   apiUrl3 = "http://www.koomkin.com:4829/twilio_api/api/v1/forward-app/";
@@ -753,8 +754,9 @@ export class LeadsPage implements OnInit {
             this.img = datos[0].descripcionBanner;
             this.idReportBanner = datos[0].idReporteBanner;
             this.uuidPass = datos[0].uuidPase;
-
+            this.description = datos[0].descripcionBanner;
             this.notification = JSON.parse(datos[0].dataPage);
+            // console.log(this.description);
             resolve();
           }
         },
@@ -777,7 +779,6 @@ export class LeadsPage implements OnInit {
   }
 
   public clickBanner() {
-    console.log('entro');
     return new Promise((resolve, reject) => {
       const urlBanner = "http://www.koomkin.com:4859/clickBanner/" + this.id + '/App/' + this.tipoBanner;
       this.http.get(urlBanner).subscribe(
@@ -794,15 +795,10 @@ export class LeadsPage implements OnInit {
   }
 
   agregarHoras(time){
-
     let date = new Date(time);
     date.setTime(date.getTime() + (6*60*60*1000));
     return date.toISOString();
-
-
   }
-
-
 
 }
 

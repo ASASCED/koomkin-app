@@ -87,7 +87,6 @@ export class InicioPage implements OnInit {
   }
 
   pagina(pagina: any) {
-    console.log(pagina);
     this.navCtrl.push(pagina);
     this.menuCtrl.close();
   }
@@ -112,7 +111,7 @@ export class InicioPage implements OnInit {
             this.uuidPass = datos[0].uuidPase;
             this.description = datos[0].descripcionBanner;
             this.notification = JSON.parse(datos[0].dataPage);
-            console.log(this.description);
+            // console.log(this.description);
             resolve();
           }
         },
@@ -135,7 +134,6 @@ export class InicioPage implements OnInit {
   }
 
   public clickBanner() {
-    console.log('entro');
     return new Promise((resolve, reject) => {
       const urlBanner = "http://www.koomkin.com:4859/clickBanner/" + this.id + '/App/' + this.tipoBanner;
       this.http.get(urlBanner).subscribe(

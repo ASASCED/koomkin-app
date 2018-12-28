@@ -3,7 +3,6 @@
     </ion-navbar>
 </ion-header>
 
-
 <ion-content *ngIf="tipoBanner == 10">
     <div class="encuesta-container" *ngIf="pagina == 1">
         <div class="activity-header">
@@ -16,7 +15,7 @@
             <p class="gris">Evalúe en una escala del 1 al 5, donde 1 es Totalmente Desacuerdo y 5 es Totalmente de Acuerdo</p>
         </div>
         <div class="activity-footer">
-            <button class="encuesta-comenzar" (click)="startSurvey();setChoice(1)">Comenzar</button>
+            <button class="encuesta-comenzar" (click)="nextQuestion();setChoice(0)">Comenzar</button>
         </div>
     </div>
     <div class="encuesta-container" *ngIf="pagina == 2">
@@ -46,7 +45,7 @@
                 </div>
             </div>
             <button class="encuesta-regresar" (click)="previousQuestion();">Regresar</button>
-            <button [disabled]="apagado === true" class="encuesta-siguiente" (click)="nextQuestion();saveAnswer(0,eleccion);changeChoice();setChoice(2);disabledButton();">Siguiente</button>
+            <button [disabled]="apagado === true" class="encuesta-siguiente" (click)="nextQuestion();saveAnswer(0,eleccion);changeChoice();setChoice(1);disabledButton();">Siguiente</button>
         </div>
     </div>
     <div class="encuesta-container" *ngIf="pagina == 3">
@@ -76,7 +75,7 @@
                 </div>
             </div>
             <button class="encuesta-regresar" (click)="previousQuestion();setChoice(0);">Regresar</button>
-            <button [disabled]="apagado === true" class="encuesta-siguiente" (click)="nextQuestion();saveAnswer(1,eleccion);changeChoice();setChoice(3);disabledButton();">Siguiente</button>
+            <button [disabled]="apagado === true" class="encuesta-siguiente" (click)="nextQuestion();saveAnswer(1,eleccion);changeChoice();setChoice(2);disabledButton();">Siguiente</button>
         </div>
     </div>
     <div class="encuesta-container" *ngIf="pagina == 4">
@@ -106,7 +105,7 @@
                 </div>
             </div>
             <button class="encuesta-regresar" (click)="previousQuestion();setChoice(1);">Regresar</button>
-            <button [disabled]="apagado === true" class="encuesta-siguiente" (click)="nextQuestion();saveAnswer(2,eleccion);changeChoice();setChoice(4);disabledButton();">Siguiente</button>
+            <button [disabled]="apagado === true" class="encuesta-siguiente" (click)="nextQuestion();saveAnswer(2,eleccion);changeChoice();setChoice(3);disabledButton();">Siguiente</button>
         </div>
     </div>
     <div class="encuesta-container" *ngIf="pagina == 5">
@@ -136,7 +135,7 @@
                 </div>
             </div>
             <button class="encuesta-regresar" (click)="previousQuestion();setChoice(2);">Regresar</button>
-            <button [disabled]="apagado === true" class="encuesta-siguiente" (click)="nextQuestion();saveAnswer(3,eleccion);changeChoice();setChoice(5);disabledButton();">Siguiente</button>
+            <button [disabled]="apagado === true" class="encuesta-siguiente" (click)="nextQuestion();saveAnswer(3,eleccion);changeChoice();setChoice(4);disabledButton();">Siguiente</button>
         </div>
     </div>
     <div class="encuesta-container" *ngIf="pagina == 6">
@@ -179,10 +178,9 @@
             <p class="gris">Tomaremos en cuenta todas tus respuestas.</p>
         </div>
         <div class="activity-footer">
-            <button class="encuesta-comenzar" (click)="startSurvey();enviarRespuestas()">Finalizar</button>
+            <button class="encuesta-comenzar" (click)="enviarRespuestas()">Finalizar</button>
         </div>
     </div>
-
 </ion-content>
 
 <ion-content *ngIf="tipoBanner == 11">
@@ -197,7 +195,7 @@
             <p class="gris">Evalúe en una escala del 1 al 10, donde 1 es Muy improbable y 10 es Definitivamente</p>
         </div>
         <div class="activity-footer">
-            <button class="encuesta-comenzar" (click)="startSurvey();setChoice(1)">Comenzar</button>
+            <button class="encuesta-comenzar" (click)="nextQuestion();setChoice(0)">Comenzar</button>
         </div>
     </div>
     <div class="encuesta-container" *ngIf="pagina == 2">
@@ -205,8 +203,7 @@
             <img src="https://firebasestorage.googleapis.com/v0/b/chatcintanegra.appspot.com/o/img_encuesta.svg?alt=media&token=d573e9e2-b5f5-4371-82df-39b1bd3ff414" width="100%">
             <div class="encabezado-encuesta">Encuesta</div>
         </div>
-        <div class="activity-content-container" style="    display: grid;
-        align-items: center;">
+        <div class="activity-content-container" style="display: grid;align-items: center;">
             <p class="azul">1. ¿Qué tan probable es que recomiende el producto o servicio a un colega o amigo?</p>
             <ul class="grade">
                 <li class="zero" [ngClass]="{'selection':eleccion === 0}" (click)="changeChoice(0)">
@@ -246,7 +243,7 @@
         </div>
         <div class="activity-footer">
             <button class="encuesta-regresar" (click)="previousQuestion();">Regresar</button>
-            <button class="encuesta-siguiente" (click)="nextQuestion();saveAnswer(1,eleccion);">Siguiente</button>
+            <button [disabled]="apagado === true" class="encuesta-siguiente" (click)="nextQuestion();saveAnswer(0,eleccion);">Siguiente</button>
         </div>
     </div>
     <div class="encuesta-container" *ngIf="pagina == 3">
@@ -259,7 +256,7 @@
             <p class="gris">Tomaremos en cuenta todas tus respuestas.</p>
         </div>
         <div class="activity-footer">
-            <button class="encuesta-comenzar" (click)="startSurvey();enviarRespuestas()">Finalizar</button>
+            <button class="encuesta-comenzar" (click)="enviarRespuestas()">Finalizar</button>
         </div>
     </div>
 </ion-content>
@@ -275,7 +272,7 @@
             <p class="gris">Te pedimos que completes la siguiente encuesta para poder ofrecerte un mejor servicio</p>
         </div>
         <div class="activity-footer">
-            <button class="encuesta-comenzar" (click)="startSurvey();setChoice(1)">Comenzar</button>
+            <button class="encuesta-comenzar" (click)="nextQuestion();setChoice(0)">Comenzar</button>
         </div>
     </div>
     <div class="encuesta-container" *ngIf="pagina == 2">
@@ -322,8 +319,26 @@
             </ul>
         </div>
         <div class="activity-footer">
+            <div class="progress-bar-container-eight">
+                <div class="section1 selection">
+                </div>
+                <div class="section2">
+                </div>
+                <div class="section3">
+                </div>
+                <div class="section4">
+                </div>
+                <div class="section5">
+                </div>
+                <div class="section6">
+                </div>
+                <div class="section7">
+                </div>
+                <div class="section8">
+                </div>
+            </div>
             <button class="encuesta-regresar" (click)="previousQuestion();">Regresar</button>
-            <button [disabled]="apagado === true" class="encuesta-siguiente" (click)="nextQuestion();saveAnswer(1,eleccion);changeChoice();disabledButton();">Siguiente</button>
+            <button [disabled]="apagado === true" class="encuesta-siguiente" (click)="nextQuestion();saveAnswer(0,eleccion);changeChoice();disabledButton();">Siguiente</button>
         </div>
     </div>
     <div class="encuesta-container" *ngIf="pagina == 3">
@@ -370,8 +385,26 @@
             </ul>
         </div>
         <div class="activity-footer">
-            <button class="encuesta-regresar" (click)="previousQuestion();setChoice(1);">Regresar</button>
-            <button [disabled]="apagado === true" class="encuesta-siguiente" (click)="nextQuestion();saveAnswer(2,eleccion);changeChoice();disabledButton();">Siguiente</button>
+            <div class="progress-bar-container-eight">
+                <div class="section1 selection">
+                </div>
+                <div class="section2 selection">
+                </div>
+                <div class="section3">
+                </div>
+                <div class="section4">
+                </div>
+                <div class="section5">
+                </div>
+                <div class="section6">
+                </div>
+                <div class="section7">
+                </div>
+                <div class="section8">
+                </div>
+            </div>
+            <button class="encuesta-regresar" (click)="previousQuestion();setChoice(0);">Regresar</button>
+            <button [disabled]="apagado === true" class="encuesta-siguiente" (click)="nextQuestion();saveAnswer(1,eleccion);changeChoice();disabledButton();">Siguiente</button>
         </div>
     </div>
     <div class="encuesta-container" *ngIf="pagina == 4">
@@ -418,8 +451,26 @@
             </ul>
         </div>
         <div class="activity-footer">
-            <button class="encuesta-regresar" (click)="previousQuestion();setChoice(2);">Regresar</button>
-            <button [disabled]="apagado === true" class="encuesta-siguiente" (click)="nextQuestion();saveAnswer(3,eleccion);changeChoice();disabledButton();">Siguiente</button>
+            <div class="progress-bar-container-eight">
+                <div class="section1 selection">
+                </div>
+                <div class="section2 selection">
+                </div>
+                <div class="section3 selection">
+                </div>
+                <div class="section4">
+                </div>
+                <div class="section5">
+                </div>
+                <div class="section6">
+                </div>
+                <div class="section7">
+                </div>
+                <div class="section8">
+                </div>
+            </div>
+            <button class="encuesta-regresar" (click)="previousQuestion();setChoice(1);">Regresar</button>
+            <button [disabled]="apagado === true" class="encuesta-siguiente" (click)="nextQuestion();saveAnswer(2,eleccion);changeChoice();disabledButton();">Siguiente</button>
         </div>
     </div>
     <div class="encuesta-container" *ngIf="pagina == 5">
@@ -466,8 +517,26 @@
             </ul>
         </div>
         <div class="activity-footer">
-            <button class="encuesta-regresar" (click)="previousQuestion();setChoice(3);">Regresar</button>
-            <button [disabled]="apagado === true" class="encuesta-siguiente" (click)="nextQuestion();saveAnswer(4,eleccion);changeChoice();disabledButton();">Siguiente</button>
+            <div class="progress-bar-container-eight">
+                <div class="section1 selection">
+                </div>
+                <div class="section2 selection">
+                </div>
+                <div class="section3 selection">
+                </div>
+                <div class="section4 selection">
+                </div>
+                <div class="section5">
+                </div>
+                <div class="section6">
+                </div>
+                <div class="section7">
+                </div>
+                <div class="section8">
+                </div>
+            </div>
+            <button class="encuesta-regresar" (click)="previousQuestion();setChoice(2);">Regresar</button>
+            <button [disabled]="apagado === true" class="encuesta-siguiente" (click)="nextQuestion();saveAnswer(3,eleccion);changeChoice();disabledButton();">Siguiente</button>
         </div>
     </div>
     <div class="encuesta-container" *ngIf="pagina == 6">
@@ -514,8 +583,26 @@
             </ul>
         </div>
         <div class="activity-footer">
-            <button class="encuesta-regresar" (click)="previousQuestion();setChoice(4);">Regresar</button>
-            <button [disabled]="apagado === true" class="encuesta-siguiente" (click)="nextQuestion();saveAnswer(5,eleccion);changeChoice();disabledButton();">Siguiente</button>
+            <div class="progress-bar-container-eight">
+                <div class="section1 selection">
+                </div>
+                <div class="section2 selection">
+                </div>
+                <div class="section3 selection">
+                </div>
+                <div class="section4 selection">
+                </div>
+                <div class="section5 selection">
+                </div>
+                <div class="section6">
+                </div>
+                <div class="section7">
+                </div>
+                <div class="section8">
+                </div>
+            </div>
+            <button class="encuesta-regresar" (click)="previousQuestion();setChoice(3);">Regresar</button>
+            <button [disabled]="apagado === true" class="encuesta-siguiente" (click)="nextQuestion();saveAnswer(4,eleccion);changeChoice();disabledButton();">Siguiente</button>
         </div>
     </div>
     <div class="encuesta-container" *ngIf="pagina == 7">
@@ -525,45 +612,32 @@
         </div>
         <div class="activity-content-container" style="display: grid;align-items: center;">
             <p class="azul">6. ¿Ya está trabajando con alguna otra Agencia Digital?</p>
-            <ul class="grade">
-                <li class="zero" [ngClass]="{'selection':eleccion === 0}" (click)="changeChoice(0)">
-                    <span>0</span>
-                </li>
-                <li class="zero" [ngClass]="{'selection':eleccion === 1}" (click)="changeChoice(1)">
-                    <span>1</span>
-                </li>
-                <li class="zero" [ngClass]="{'selection':eleccion === 2}" (click)="changeChoice(2)">
-                    <span>2</span>
-                </li>
-                <li class="zero" [ngClass]="{'selection':eleccion === 3}" (click)="changeChoice(3)">
-                    <span>3</span>
-                </li>
-                <li class="zero" [ngClass]="{'selection':eleccion === 4}" (click)="changeChoice(4)">
-                    <span>4</span>
-                </li>
-                <li class="zero" [ngClass]="{'selection':eleccion === 5}" (click)="changeChoice(5)">
-                    <span>5</span>
-                </li>
-                <li class="zero" [ngClass]="{'selection':eleccion === 6}" (click)="changeChoice(6)">
-                    <span>6</span>
-                </li>
-                <li class="zero " [ngClass]="{'selection':eleccion === 7}" (click)="changeChoice(7)">
-                    <span>7</span>
-                </li>
-                <li class="zero" [ngClass]="{'selection':eleccion === 8}" (click)="changeChoice(8)">
-                    <span>8</span>
-                </li>
-                <li class="zero" [ngClass]="{'selection':eleccion === 9}" (click)="changeChoice(9)">
-                    <span>9</span>
-                </li>
-                <li class="zero" [ngClass]="{'selection':eleccion === 10}" (click)="changeChoice(10)">
-                    <span>10</span>
-                </li>
-            </ul>
+            <button class="encuesta-opcion" [ngClass]="{'elegida':eleccion === 1}" (click)="changeChoice(1)">Sí</button>
+            <button class="encuesta-opcion" [ngClass]="{'elegida':eleccion === 2}" (click)="changeChoice(2)">No</button>
+            <p class="azul">¿Quién?</p>
+            <textarea class="comentario" rows="2" cols="50" maxlength="150" [(ngModel)]="comentario" required placeholder="Escribe el nombre de la Agencia"></textarea>
         </div>
         <div class="activity-footer">
-            <button class="encuesta-regresar" (click)="previousQuestion();setChoice(5);">Regresar</button>
-            <button [disabled]="apagado === true" class="encuesta-siguiente" (click)="nextQuestion();saveAnswer(6,eleccion);changeChoice();">Siguiente</button>
+            <div class="progress-bar-container-eight">
+                <div class="section1 selection">
+                </div>
+                <div class="section2 selection">
+                </div>
+                <div class="section3 selection">
+                </div>
+                <div class="section4 selection">
+                </div>
+                <div class="section5 selection">
+                </div>
+                <div class="section6 selection">
+                </div>
+                <div class="section7">
+                </div>
+                <div class="section8">
+                </div>
+            </div>
+            <button class="encuesta-regresar" (click)="previousQuestion();setChoice(4);">Regresar</button>
+            <button [disabled]="apagado === true" class="encuesta-siguiente" (click)="nextQuestion();saveAnswer(5,eleccion);changeChoice();disabledButton();">Siguiente</button>
         </div>
     </div>
     <div class="encuesta-container" *ngIf="pagina == 8">
@@ -572,46 +646,32 @@
             <div class="encabezado-encuesta">Encuesta</div>
         </div>
         <div class="activity-content-container" style="display: grid;align-items: center;">
-            <p class="azul">7. Comparado con otras Agencias o posbiles Competidores… Nuestra Campaña Digital fue….</p>
-            <ul class="grade">
-                <li class="zero" [ngClass]="{'selection':eleccion === 0}" (click)="changeChoice(0)">
-                    <span>0</span>
-                </li>
-                <li class="zero" [ngClass]="{'selection':eleccion === 1}" (click)="changeChoice(1)">
-                    <span>1</span>
-                </li>
-                <li class="zero" [ngClass]="{'selection':eleccion === 2}" (click)="changeChoice(2)">
-                    <span>2</span>
-                </li>
-                <li class="zero" [ngClass]="{'selection':eleccion === 3}" (click)="changeChoice(3)">
-                    <span>3</span>
-                </li>
-                <li class="zero" [ngClass]="{'selection':eleccion === 4}" (click)="changeChoice(4)">
-                    <span>4</span>
-                </li>
-                <li class="zero" [ngClass]="{'selection':eleccion === 5}" (click)="changeChoice(5)">
-                    <span>5</span>
-                </li>
-                <li class="zero" [ngClass]="{'selection':eleccion === 6}" (click)="changeChoice(6)">
-                    <span>6</span>
-                </li>
-                <li class="zero " [ngClass]="{'selection':eleccion === 7}" (click)="changeChoice(7)">
-                    <span>7</span>
-                </li>
-                <li class="zero" [ngClass]="{'selection':eleccion === 8}" (click)="changeChoice(8)">
-                    <span>8</span>
-                </li>
-                <li class="zero" [ngClass]="{'selection':eleccion === 9}" (click)="changeChoice(9)">
-                    <span>9</span>
-                </li>
-                <li class="zero" [ngClass]="{'selection':eleccion === 10}" (click)="changeChoice(10)">
-                    <span>10</span>
-                </li>
-            </ul>
+            <p class="azul">7. Comparado con otras Agencias o posbiles Competidores. Nuestra Campaña Digital fue...</p>
+            <button class="encuesta-opcion" [ngClass]="{'elegida':eleccion === 1}" (click)="changeChoice(1)">a) Mejor</button>
+            <button class="encuesta-opcion" [ngClass]="{'elegida':eleccion === 2}" (click)="changeChoice(2)">b) Igual</button>
+            <button class="encuesta-opcion" [ngClass]="{'elegida':eleccion === 3}" (click)="changeChoice(3)">c) Peor</button>
         </div>
         <div class="activity-footer">
-            <button class="encuesta-regresar" (click)="previousQuestion();setChoice(6);">Regresar</button>
-            <button [disabled]="apagado === true" class="encuesta-siguiente" (click)="nextQuestion();saveAnswer(7,eleccion);changeChoice();disabledButton();">Siguiente</button>
+            <div class="progress-bar-container-eight">
+                <div class="section1 selection">
+                </div>
+                <div class="section2 selection">
+                </div>
+                <div class="section3 selection">
+                </div>
+                <div class="section4 selection">
+                </div>
+                <div class="section5 selection">
+                </div>
+                <div class="section6 selection">
+                </div>
+                <div class="section7 selection">
+                </div>
+                <div class="section8">
+                </div>
+            </div>
+            <button class="encuesta-regresar" (click)="previousQuestion();setChoice(5);">Regresar</button>
+            <button [disabled]="apagado === true" class="encuesta-siguiente" (click)="nextQuestion();saveAnswer(6,eleccion);changeChoice();disabledButton();">Siguiente</button>
         </div>
     </div>
     <div class="encuesta-container" *ngIf="pagina == 9">
@@ -621,45 +681,29 @@
         </div>
         <div class="activity-content-container" style="display: grid;align-items: center;">
             <p class="azul">8. ¿Algún otro comentario que desee agregar? Esto con el objetivo de que la Dirección de Servicio al Cliente lo tome en cuenta</p>
-            <ul class="grade">
-                <li class="zero" [ngClass]="{'selection':eleccion === 0}" (click)="changeChoice(0)">
-                    <span>0</span>
-                </li>
-                <li class="zero" [ngClass]="{'selection':eleccion === 1}" (click)="changeChoice(1)">
-                    <span>1</span>
-                </li>
-                <li class="zero" [ngClass]="{'selection':eleccion === 2}" (click)="changeChoice(2)">
-                    <span>2</span>
-                </li>
-                <li class="zero" [ngClass]="{'selection':eleccion === 3}" (click)="changeChoice(3)">
-                    <span>3</span>
-                </li>
-                <li class="zero" [ngClass]="{'selection':eleccion === 4}" (click)="changeChoice(4)">
-                    <span>4</span>
-                </li>
-                <li class="zero" [ngClass]="{'selection':eleccion === 5}" (click)="changeChoice(5)">
-                    <span>5</span>
-                </li>
-                <li class="zero" [ngClass]="{'selection':eleccion === 6}" (click)="changeChoice(6)">
-                    <span>6</span>
-                </li>
-                <li class="zero " [ngClass]="{'selection':eleccion === 7}" (click)="changeChoice(7)">
-                    <span>7</span>
-                </li>
-                <li class="zero" [ngClass]="{'selection':eleccion === 8}" (click)="changeChoice(8)">
-                    <span>8</span>
-                </li>
-                <li class="zero" [ngClass]="{'selection':eleccion === 9}" (click)="changeChoice(9)">
-                    <span>9</span>
-                </li>
-                <li class="zero" [ngClass]="{'selection':eleccion === 10}" (click)="changeChoice(10)">
-                    <span>10</span>
-                </li>
-            </ul>
+            <textarea class="comentario" rows="8" cols="50" maxlength="250" [(ngModel)]="comentarios" placeholder="Escribe tu comentario..." (click)="changeChoice(1)" required></textarea>
         </div>
         <div class="activity-footer">
-            <button class="encuesta-regresar" (click)="previousQuestion();setChoice(7);">Regresar</button>
-            <button [disabled]="apagado === true" class="encuesta-siguiente" (click)="nextQuestion();saveAnswer(8,eleccion);changeChoice();disabledButton();">Siguiente</button>
+            <div class="progress-bar-container-eight">
+                <div class="section1 selection">
+                </div>
+                <div class="section2 selection">
+                </div>
+                <div class="section3 selection">
+                </div>
+                <div class="section4 selection">
+                </div>
+                <div class="section5 selection">
+                </div>
+                <div class="section6 selection">
+                </div>
+                <div class="section7 selection">
+                </div>
+                <div class="section8 selection">
+                </div>
+            </div>
+            <button class="encuesta-regresar" (click)="previousQuestion();setChoice(6);">Regresar</button>
+            <button [disabled]="apagado === true" class="encuesta-siguiente" (click)="nextQuestion();saveAnswer(7,eleccion);changeChoice();disabledButton();">Siguiente</button>
         </div>
     </div>
     <div class="encuesta-container" *ngIf="pagina == 10">
@@ -672,15 +716,7 @@
             <p class="gris">Tomaremos en cuenta todas tus respuestas.</p>
         </div>
         <div class="activity-footer">
-            <button class="encuesta-comenzar" (click)="startSurvey();enviarRespuestas()">Finalizar</button>
+            <button class="encuesta-comenzar" (click)="nextQuestion();enviarRespuestas()">Finalizar</button>
         </div>
     </div>
 </ion-content>
-
-<!-- <ion-list detail-none ion-item *ngFor="let pregunta of preguntas; let i = index;" style="margin-bottom: 1.5%; box-shadow: 0px 1px 2px 0.5px #ccc;">
-                <ion-item-sliding #item>
-                    <ion-item no-lines>
-                        {{pregunta.Pregunta}}
-                    </ion-item>
-                </ion-item-sliding>
-            </ion-list>-->
