@@ -484,4 +484,14 @@ export class RestProvider {
       });
     });
   }
+
+  getUpdateBanner(idReporteBanner){
+    return new Promise(resolve => {
+      this.http.get(this.apiUrl + '/getUpdateBanner/' + idReporteBanner ).subscribe(data => {
+        resolve(data);
+      }, err => {
+        console.log(err);
+      });
+    });
+  }
 }

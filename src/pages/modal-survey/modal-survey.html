@@ -178,7 +178,7 @@
             <p class="gris">Tomaremos en cuenta todas tus respuestas.</p>
         </div>
         <div class="activity-footer">
-            <button class="encuesta-comenzar" (click)="enviarRespuestas()">Finalizar</button>
+            <button class="encuesta-comenzar" (click)="enviarRespuestas();getUpdateBanner()">Finalizar</button>
         </div>
     </div>
 </ion-content>
@@ -256,7 +256,7 @@
             <p class="gris">Tomaremos en cuenta todas tus respuestas.</p>
         </div>
         <div class="activity-footer">
-            <button class="encuesta-comenzar" (click)="enviarRespuestas()">Finalizar</button>
+            <button class="encuesta-comenzar" (click)="enviarRespuestas();getUpdateBanner()">Finalizar</button>
         </div>
     </div>
 </ion-content>
@@ -716,7 +716,7 @@
             <p class="gris">Tomaremos en cuenta todas tus respuestas.</p>
         </div>
         <div class="activity-footer">
-            <button class="encuesta-comenzar" (click)="nextQuestion();enviarRespuestas()">Finalizar</button>
+            <button class="encuesta-comenzar" (click)="getUpdateBanner();enviarRespuestas()">Finalizar</button>
         </div>
     </div>
 </ion-content>

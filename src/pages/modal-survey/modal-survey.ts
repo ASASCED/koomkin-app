@@ -168,11 +168,11 @@ export class ModalSurveyPage implements OnInit {
 
     fecha = res;
 
-    if ((this.tipoBanner = 10)) {
+    if (this.tipoBanner == 10) {
       descripcion = "Responde encuesta General";
-    } else if ((this.tipoBanner = 11)) {
+    } else if (this.tipoBanner == 11) {
       descripcion = "Responde encuesta Net Promoter Score";
-    } else if ((this.tipoBanner = 12)) {
+    } else if (this.tipoBanner == 12) {
       descripcion = "Responde encuesta Churn";
     }
 
@@ -208,5 +208,16 @@ export class ModalSurveyPage implements OnInit {
           });
       });
 
-    }
+  }
+
+  public getUpdateBanner() {
+    this.provedor.getUpdateBanner(this.idReporteBanner).then(
+      data => {
+        console.log(data);
+      },
+      error => {
+        console.log(error);
+      }
+    );
+  }
 }

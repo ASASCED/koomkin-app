@@ -54,6 +54,7 @@ export class InicioPage implements OnInit {
   public tipoBanner;
   public fondo;
   public description;
+  public habilitado;
 
   constructor(
     public navCtrl: NavController,
@@ -101,6 +102,7 @@ export class InicioPage implements OnInit {
             this.mostrar = 0;
           } else if (data) {
             datos = data;
+            
             this.title = datos[0].titulo;
             this.subtitle = datos[0].subtitulo;
             this.fondo = datos[0].fondo;
@@ -109,8 +111,10 @@ export class InicioPage implements OnInit {
             this.idReportBanner = datos[0].idReporteBanner;
             this.uuidPass = datos[0].uuidPase;
             this.description = datos[0].descripcionBanner;
+            this.habilitado = datos[0].habilitado;
             this.notification = JSON.parse(datos[0].dataPage);
             // console.log(this.description);
+            console.log(this.tipoBanner,this.habilitado);
             resolve();
           }
         },
