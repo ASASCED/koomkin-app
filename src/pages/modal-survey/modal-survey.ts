@@ -25,6 +25,7 @@ export class ModalSurveyPage implements OnInit {
   public apagado = true;
   public comentario = "";
   public comentarios = "";
+  public idReporteBanner;
 
   constructor(
     public navCtrl: NavController,
@@ -34,12 +35,34 @@ export class ModalSurveyPage implements OnInit {
     public http: HttpClient, 
   ) {
     this.tipoBanner = navParams.get("tipo");
+    this.idReporteBanner = navParams.get("idReporteBanner");
+
     console.log(this.tipoBanner,typeof(this.tipoBanner));
     this.id = this.authService.id;
   }
 
   ngOnInit() {
     this.getSurvey(this.tipoBanner);
+    this.registrarEntradaBanner();
+  }
+
+  public registrarEntradaBanner() {
+    return new Promise((resolve, reject) => {
+      const urlEntradaBanner =
+        'http://www.koomkin.com:4859/registrarEntradaBanner/' +
+        this.idReporteBanner +
+        '/app';
+      this.http.get(urlEntradaBanner).subscribe(
+        data => {
+          //  console.log(urlEntradaBanner);
+          resolve();
+        },
+        err => {
+          console.log(err);
+          reject(err);
+        }
+      );
+    });
   }
 
   public getSurvey(tipo) {
