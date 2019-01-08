@@ -37,7 +37,6 @@ export class ModalSurveyPage implements OnInit {
     this.tipoBanner = navParams.get("tipo");
     this.idReporteBanner = navParams.get("idReporteBanner");
 
-    console.log(this.tipoBanner,typeof(this.tipoBanner));
     this.id = this.authService.id;
   }
 
@@ -109,14 +108,12 @@ export class ModalSurveyPage implements OnInit {
         this.preguntas[i].respuesta = respuesta;
         this.preguntas[i].comentario = "Sin comentarios";
         if (i == 5) {
-          console.log(this.comentario)
           this.preguntas[i].comentario = this.comentario;
           if(this.preguntas[i].comentario  == '' || this.preguntas[i].comentario  == ' '){
             this.preguntas[i].comentario = "Sin comentarios";
           }
         }
         if (i == 7) {
-          console.log(this.comentarios)
           this.preguntas[i].comentario = this.comentarios;
           if(this.preguntas[i].comentario  == ''){
             this.preguntas[i].comentario = "Sin comentarios";
@@ -149,7 +146,6 @@ export class ModalSurveyPage implements OnInit {
         .then(
           data => {
             this.respuestas = data;
-            console.log(this.respuestas);
           },
           error => {
             console.log(error);
@@ -184,7 +180,6 @@ export class ModalSurveyPage implements OnInit {
       data => {
         this.ticket = data[0].idTicket;
         this.getRequirementTicket(this.ticket);
-        console.log(this.ticket);
       },
       error => {
         console.log(error);
@@ -204,11 +199,9 @@ export class ModalSurveyPage implements OnInit {
 
       let url = 'http://www.koomkin.com:4859/getRequirementTicket/';
       return new Promise((resolve, reject) => {
-        console.log('entro')
         this.http.post(url ,body.toString() , options)
           .subscribe(data => {
             this.ticketfinal = data;
-            console.log(this.ticketfinal);
             return resolve();
           }, err => {
             return reject(err);

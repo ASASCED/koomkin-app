@@ -101,7 +101,6 @@ export class InicioPage implements OnInit {
             this.mostrar = 0;
           } else if (data) {
             datos = data;
-            console.log(datos);
             this.title = datos[0].titulo;
             this.subtitle = datos[0].subtitulo;
             this.fondo = datos[0].fondo;
