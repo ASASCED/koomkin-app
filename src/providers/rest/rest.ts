@@ -454,4 +454,34 @@ export class RestProvider {
       });
     });
   }
+
+  getAnswer(idUsuario,idPregunta,respuesta,comentario,canal) {
+    return new Promise(resolve => {
+      this.http.get(this.apiUrl + '/getAnswer/' + idUsuario + '/' + idPregunta + '/' + respuesta + '/' + comentario + '/' + canal).subscribe(data => {
+        resolve(data);
+      }, err => {
+        console.log(err);
+      });
+    });
+  }
+
+  getTicket(idUsuario,fecha,descripcion) {
+    return new Promise(resolve => {
+      this.http.get(this.apiUrl + '/getTicket/' + idUsuario + '/' + fecha + '/' + descripcion).subscribe(data => {
+        resolve(data);
+      }, err => {
+        console.log(err);
+      });
+    });
+  }
+
+  getRequirementTicket(idTicket,descripcion) {
+    return new Promise(resolve => {
+      this.http.get(this.apiUrl + '/getTicket/' + idTicket + '/' + descripcion ).subscribe(data => {
+        resolve(data);
+      }, err => {
+        console.log(err);
+      });
+    });
+  }
 }
