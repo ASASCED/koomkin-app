@@ -8,6 +8,8 @@ import {take} from "rxjs/operator/take";
 // import { LeadPage} from "../../pages/lead/lead";
 import {DomSanitizer} from '@angular/platform-browser';
 
+import {HTTP} from '@ionic-native/http'
+
 
 @Injectable()
 
@@ -49,6 +51,7 @@ export class ChatServiceProvider {
   public loadingMessages;
 
   constructor(private http: HttpClient,
+              private http2: HTTP,
               private events: Events,
               public loadingCtrl: LoadingController,
               public alertCtrl: AlertController, public sanitizer: DomSanitizer) {
@@ -454,21 +457,23 @@ export class ChatServiceProvider {
 
     return new Promise((resolve, reject) => {
 
-      this.http.get(url,{  headers: new HttpHeaders({
-          'Content-Type': mime,
-          'Origin': 'http://localhost:4200/leads'
-        }) , responseType: 'blob'}).subscribe(data => {
+      this.http2.get(url, {}, {'Content-Type': mime})
+        .then(data => {
 
-        const blob = new Blob([data],{type:mime});
-        const result = window.URL.createObjectURL(blob);
-        resolve(this.sanitizer.bypassSecurityTrustResourceUrl(url));
+          const blob = new Blob([data.data],{type:mime});
+          const result = window.URL.createObjectURL(blob);
 
-      }, (err) => {
+          resolve(this.sanitizer.bypassSecurityTrustResourceUrl(url));
 
-        console.log(err);
-        reject(err.url);
+        })
+        .catch(error => {
 
-      });
+          console.log(JSON.stringify(error));
+          reject(error.url);
+
+
+        });
+
     });
 
   }
@@ -477,19 +482,21 @@ export class ChatServiceProvider {
 
     return new Promise((resolve, reject) => {
 
-      message.media.getContentUrl().then((url)=> {
+      message.media.getContentUrl().then((url) => {
 
-        this.http.get(url,{responseType: 'blob'}).subscribe(data => {
+        this.http2.get(url,{},{'Content-Type': message.media.contentType}).then(data => {
 
-          const blob = new Blob([data],{type: message.media.contentType});
+          const blob = new Blob([data.data],{type: message.media.contentType});
 
           const result = window.URL.createObjectURL(blob);
 
+
           resolve(this.sanitizer.bypassSecurityTrustResourceUrl(url));
 
-        }, (err) => {
 
-          console.log(err);
+        }).catch((err) => {
+
+          console.log(JSON.stringify(err));
           reject();
 
         });

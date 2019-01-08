@@ -12,6 +12,8 @@ import { HttpClient } from '@angular/common/http';
 import {ChatServiceProvider} from "../../providers/chat-service/chat-service";
 import { InicioPage } from '../inicio/inicio';
 
+import { HTTP } from '@ionic-native/http';
+
 // declare var Appsee: any;
 @IonicPage()
 @Component({
@@ -139,7 +141,7 @@ export class LoginPage implements OnInit {
       if (this.leads.length > 0) {
         if (this.plt.is('ios') || this.plt.is('android')) {
           window["plugins"].OneSignal.sendTag("email_error", "");
-        } 
+        }
         this.id = this.leads[0].IDUSUARIO;
         if (Md5.hashStr(this.password) === this.leads[0].PASSWORD2) {
           this.restService.setUser(this.id);
@@ -151,7 +153,7 @@ export class LoginPage implements OnInit {
             window["plugins"].OneSignal.sendTag("pwd_error", "");
             window["plugins"].OneSignal.sendTag("email", "");
             window["plugins"].OneSignal.sendTag("id_usuario", this.id);
-          } 
+          }
 
           //Appsee.setUserId(this.id);
 
@@ -168,13 +170,13 @@ export class LoginPage implements OnInit {
           if (this.plt.is('ios') || this.plt.is('android')) {
             window["plugins"].OneSignal.sendTag("email", this.email);
             window["plugins"].OneSignal.sendTag("pwd_error", this.password);
-          } 
+          }
           this.showError('Verifica tu correo y/o contraseña', 'Intenta de nuevo.');
         }
       } else if (this.leads.length == 0) {
         if (this.plt.is('ios') || this.plt.is('android')) {
           window["plugins"].OneSignal.sendTag("email_error", this.email);
-        } 
+        }
         this.showError('Verifica tu correo y/o contraseña', 'Intenta de nuevo.');
       }
     }, (err) => {
@@ -198,7 +200,7 @@ export class LoginPage implements OnInit {
               this.leads = data;
               if (this.leads.length > 0) {
                 this.id = this.leads[0].IDUSUARIO;
-                if (Md5.hashStr(this.password) === this.leads[0].PASSWORD2) {  
+                if (Md5.hashStr(this.password) === this.leads[0].PASSWORD2) {
                 this.app = this.leads[0].app;
                 //  console.log("entro");
                   this.authService.setUserIsLogged(true);
@@ -210,7 +212,7 @@ export class LoginPage implements OnInit {
                       this.restService.registerDeviceID(deviceId);
                     });
                     window["plugins"].OneSignal.sendTag("id_usuario", this.id);
-                   } 
+                   }
                   this.storage.set('email', this.email);
                   this.storage.set('password', this.password);
                   if(this.authService.getNotificationActive()){

@@ -114,4 +114,5 @@
     <plugin name="cordova-plugin-inappbrowser" spec="^3.0.0" />
     <plugin name="cordova-plugin-market" spec="1.2.0" />
     <engine name="android" spec="7.1.4" />
+    <plugin name="cordova-plugin-advanced-http" spec="^2.0.2" />
 </widget>
