@@ -24,7 +24,7 @@
             <div class="encabezado-encuesta">Encuesta</div>
         </div>
         <div class="activity-content-container">
-            <p class="azul">1. ¿La cantidad leads o clientes potenciales que ha recibido es satisfactoria?</p>
+            <p class="azul">1. ¿La cantidad de clientes potenciales que recibes es satisfactoria?</p>
             <button class="encuesta-opcion" [ngClass]="{'elegida':eleccion === 1}" (click)="changeChoice(1)">(1) Totalmente en desacuerdo</button>
             <button class="encuesta-opcion" [ngClass]="{'elegida':eleccion === 2}" (click)="changeChoice(2)">(2) En desacuerdo</button>
             <button class="encuesta-opcion" [ngClass]="{'elegida':eleccion === 3}" (click)="changeChoice(3)">(3) Ni estoy de acuerdo, ni desacuerdo</button>
@@ -54,7 +54,7 @@
             <div class="encabezado-encuesta">Encuesta</div>
         </div>
         <div class="activity-content-container">
-            <p class="azul">2. ¿El perfil o calidad de estos leads ha sido de su agrado?</p>
+            <p class="azul">2. ¿El perfil o la calidad de estos clientes potenciales ha sido de tu agrado?</p>
             <button class="encuesta-opcion" [ngClass]="{'elegida':eleccion === 1}" (click)="changeChoice(1)">(1) Totalmente en desacuerdo</button>
             <button class="encuesta-opcion" [ngClass]="{'elegida':eleccion === 2}" (click)="changeChoice(2)">(2) En desacuerdo</button>
             <button class="encuesta-opcion" [ngClass]="{'elegida':eleccion === 3}" (click)="changeChoice(3)">(3) Ni estoy de acuerdo, ni desacuerdo</button>
@@ -84,7 +84,7 @@
             <div class="encabezado-encuesta">Encuesta</div>
         </div>
         <div class="activity-content-container">
-            <p class="azul">3. ¿Considera buena la Atención brindada por parte del personal de Servicio a Cliente?</p>
+            <p class="azul">3. ¿Consideras buena la atención brindada por nuestro personal de Servicio al Cliente?</p>
             <button class="encuesta-opcion" [ngClass]="{'elegida':eleccion === 1}" (click)="changeChoice(1)">(1) Totalmente en desacuerdo</button>
             <button class="encuesta-opcion" [ngClass]="{'elegida':eleccion === 2}" (click)="changeChoice(2)">(2) En desacuerdo</button>
             <button class="encuesta-opcion" [ngClass]="{'elegida':eleccion === 3}" (click)="changeChoice(3)">(3) Ni estoy de acuerdo, ni desacuerdo</button>
@@ -114,7 +114,7 @@
             <div class="encabezado-encuesta">Encuesta</div>
         </div>
         <div class="activity-content-container">
-            <p class="azul">4. ¿El nivel o calidad de las Tecnologías que Koomkin pone a su alcance es de su agrado?</p>
+            <p class="azul">4. ¿La calidad de las tecnologías que Koomkin pone a tu alcance es de tu agrado?</p>
             <button class="encuesta-opcion" [ngClass]="{'elegida':eleccion === 1}" (click)="changeChoice(1)">(1) Totalmente en desacuerdo</button>
             <button class="encuesta-opcion" [ngClass]="{'elegida':eleccion === 2}" (click)="changeChoice(2)">(2) En desacuerdo</button>
             <button class="encuesta-opcion" [ngClass]="{'elegida':eleccion === 3}" (click)="changeChoice(3)">(3) Ni estoy de acuerdo, ni desacuerdo</button>
@@ -144,7 +144,7 @@
             <div class="encabezado-encuesta">Encuesta</div>
         </div>
         <div class="activity-content-container">
-            <p class="azul">5. ¿Hasta el momento, consideraría como bueno el valor generado por la Campaña Digital de Koomkin?</p>
+            <p class="azul">5. Hasta el momento, ¿Consideras como bueno el valor generado por la campaña digital de Koomkin?</p>
             <button class="encuesta-opcion" [ngClass]="{'elegida':eleccion === 1}" (click)="changeChoice(1)">(1) Totalmente en desacuerdo</button>
             <button class="encuesta-opcion" [ngClass]="{'elegida':eleccion === 2}" (click)="changeChoice(2)">(2) En desacuerdo</button>
             <button class="encuesta-opcion" [ngClass]="{'elegida':eleccion === 3}" (click)="changeChoice(3)">(3) Ni estoy de acuerdo, ni desacuerdo</button>
@@ -174,7 +174,7 @@
             <div class="encabezado-encuesta">Encuesta</div>
         </div>
         <div class="activity-content-container">
-            <p class="azul-encuesta">Gracias por tomarte el tiempo y compartirnos tu experiencia con nosotros</p>
+            <p class="azul-encuesta">Gracias por tomarte el tiempo y compartir tu experiencia con nosotros</p>
             <p class="gris">Tomaremos en cuenta todas tus respuestas.</p>
         </div>
         <div class="activity-footer">
@@ -206,9 +206,7 @@
         <div class="activity-content-container" style="display: grid;align-items: center;">
             <p class="azul">1. ¿Qué tan probable es que recomiende el producto o servicio a un colega o amigo?</p>
             <ul class="grade">
-                <li class="zero" [ngClass]="{'selection':eleccion === 0}" (click)="changeChoice(0)">
-                    <span>0</span>
-                </li>
+
                 <li class="zero" [ngClass]="{'selection':eleccion === 1}" (click)="changeChoice(1)">
                     <span>1</span>
                 </li>
@@ -252,7 +250,7 @@
             <div class="encabezado-encuesta">Encuesta</div>
         </div>
         <div class="activity-content-container">
-            <p class="azul-encuesta">Gracias por tomarte el tiempo y compartirnos tu experiencia con nosotros</p>
+            <p class="azul-encuesta">Gracias por tomarte el tiempo y compartir tu experiencia con nosotros</p>
             <p class="gris">Tomaremos en cuenta todas tus respuestas.</p>
         </div>
         <div class="activity-footer">
@@ -281,11 +279,8 @@
             <div class="encabezado-encuesta">Encuesta</div>
         </div>
         <div class="activity-content-container" style="display: grid;align-items: center;">
-            <p class="azul">1. Del 1 al 10, ¿Cómo calificaría su campaña digital con Koomkin?</p>
+            <p class="azul">1. Del 1 al 10, ¿Cómo calificarías tu campaña digital con Koomkin?</p>
             <ul class="grade">
-                <li class="zero" [ngClass]="{'selection':eleccion === 0}" (click)="changeChoice(0)">
-                    <span>0</span>
-                </li>
                 <li class="zero" [ngClass]="{'selection':eleccion === 1}" (click)="changeChoice(1)">
                     <span>1</span>
                 </li>
@@ -347,11 +342,8 @@
             <div class="encabezado-encuesta">Encuesta</div>
         </div>
         <div class="activity-content-container" style="display: grid;align-items: center;">
-            <p class="azul">2. Del 1 al 10, ¿Cómo calificaría la Cantidad de Leads que recibió? {{apagado}}</p>
+            <p class="azul">2. Del 1 al 10, ¿Cómo calificarías la cantidad de Leads que recibió?</p>
             <ul class="grade">
-                <li class="zero" [ngClass]="{'selection':eleccion === 0}" (click)="changeChoice(0)">
-                    <span>0</span>
-                </li>
                 <li class="zero" [ngClass]="{'selection':eleccion === 1}" (click)="changeChoice(1)">
                     <span>1</span>
                 </li>
@@ -413,11 +405,8 @@
             <div class="encabezado-encuesta">Encuesta</div>
         </div>
         <div class="activity-content-container" style="display: grid;align-items: center;">
-            <p class="azul">3. Del 1 al 10, ¿Cómo calificaría el Perfil o Calidad de estos leads?</p>
+            <p class="azul">3. Del 1 al 10, ¿Cómo calificarías el perfil o calidad de estos leads?</p>
             <ul class="grade">
-                <li class="zero" [ngClass]="{'selection':eleccion === 0}" (click)="changeChoice(0)">
-                    <span>0</span>
-                </li>
                 <li class="zero" [ngClass]="{'selection':eleccion === 1}" (click)="changeChoice(1)">
                     <span>1</span>
                 </li>
@@ -479,11 +468,9 @@
             <div class="encabezado-encuesta">Encuesta</div>
         </div>
         <div class="activity-content-container" style="display: grid;align-items: center;">
-            <p class="azul">4. Del 1 al 10, ¿Cómo calificaría Tecnología/Plataforma?</p>
+            <p class="azul">4. Del 1 al 10, ¿Cómo calificarías nuestra tecnología/plataforma?</p>
             <ul class="grade">
-                <li class="zero" [ngClass]="{'selection':eleccion === 0}" (click)="changeChoice(0)">
-                    <span>0</span>
-                </li>
+
                 <li class="zero" [ngClass]="{'selection':eleccion === 1}" (click)="changeChoice(1)">
                     <span>1</span>
                 </li>
@@ -545,11 +532,8 @@
             <div class="encabezado-encuesta">Encuesta</div>
         </div>
         <div class="activity-content-container" style="display: grid;align-items: center;">
-            <p class="azul">5. Del 1 al 10, ¿Cómo calificaría la atención por parte del área de Servicio al Cliente?</p>
+            <p class="azul">5. Del 1 al 10, ¿Cómo calificarías la atención por parte del área de Servicio al Cliente?</p>
             <ul class="grade">
-                <li class="zero" [ngClass]="{'selection':eleccion === 0}" (click)="changeChoice(0)">
-                    <span>0</span>
-                </li>
                 <li class="zero" [ngClass]="{'selection':eleccion === 1}" (click)="changeChoice(1)">
                     <span>1</span>
                 </li>
@@ -611,10 +595,10 @@
             <div class="encabezado-encuesta">Encuesta</div>
         </div>
         <div class="activity-content-container" style="display: grid;align-items: center;">
-            <p class="azul">6. ¿Ya está trabajando con alguna otra Agencia Digital?</p>
+            <p class="azul">6. ¿Estás trabajando con alguna otra agencia digital?</p>
             <button class="encuesta-opcion" [ngClass]="{'elegida':eleccion === 1}" (click)="changeChoice(1)">Sí</button>
             <button class="encuesta-opcion" [ngClass]="{'elegida':eleccion === 2}" (click)="changeChoice(2)">No</button>
-            <p class="azul">¿Quién?</p>
+            <p class="azul">¿Cuál?</p>
             <textarea class="comentario" rows="2" cols="50" maxlength="150" [(ngModel)]="comentario" required placeholder="Escribe el nombre de la Agencia"></textarea>
         </div>
         <div class="activity-footer">
@@ -646,7 +630,7 @@
             <div class="encabezado-encuesta">Encuesta</div>
         </div>
         <div class="activity-content-container" style="display: grid;align-items: center;">
-            <p class="azul">7. Comparado con otras Agencias o posbiles Competidores. Nuestra Campaña Digital fue...</p>
+            <p class="azul">7. Comparado con otras agencias o competidores, nuestra campaña digital fue...</p>
             <button class="encuesta-opcion" [ngClass]="{'elegida':eleccion === 1}" (click)="changeChoice(1)">a) Mejor</button>
             <button class="encuesta-opcion" [ngClass]="{'elegida':eleccion === 2}" (click)="changeChoice(2)">b) Igual</button>
             <button class="encuesta-opcion" [ngClass]="{'elegida':eleccion === 3}" (click)="changeChoice(3)">c) Peor</button>
@@ -680,7 +664,7 @@
             <div class="encabezado-encuesta">Encuesta</div>
         </div>
         <div class="activity-content-container" style="display: grid;align-items: center;">
-            <p class="azul">8. ¿Algún otro comentario que desee agregar? Esto con el objetivo de que la Dirección de Servicio al Cliente lo tome en cuenta</p>
+            <p class="azul">8. ¿Deseas agregar algún comentario? Esto con el objetivo de que la Dirección de Servicio al Cliente lo tome en cuenta</p>
             <textarea class="comentario" rows="8" cols="50" maxlength="250" [(ngModel)]="comentarios" placeholder="Escribe tu comentario..." (click)="changeChoice(1)" required></textarea>
         </div>
         <div class="activity-footer">
@@ -712,7 +696,7 @@
             <div class="encabezado-encuesta">Encuesta</div>
         </div>
         <div class="activity-content-container">
-            <p class="azul-encuesta">Gracias por tomarte el tiempo y compartirnos tu experiencia con nosotros</p>
+            <p class="azul-encuesta">Gracias por tomarte el tiempo y compartir tu experiencia con nosotros</p>
             <p class="gris">Tomaremos en cuenta todas tus respuestas.</p>
         </div>
         <div class="activity-footer">
