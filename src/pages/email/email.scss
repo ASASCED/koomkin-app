@@ -1,0 +1,89 @@
+page-email {
+    .cuadro {
+        text-align: center;
+        height: auto;
+    }
+    .cuadro1 {
+        text-align: right;
+        width: 100%;
+        height: auto;
+        margin-top: 20%;
+    }
+    .cancelar {
+        color: gray;
+        text-decoration: underline;
+        background: transparent;
+    }
+    .contacto {
+        text-align: center !important;
+        color: #10cebc;
+        font-size: 5.5vw;
+        margin-bottom: 4%;
+        font-weight: bold !important;
+    }
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+    td {
+        width: 45%;
+        padding-bottom: 5.8%;
+        font-size: 4vw;
+    }
+    tr {
+        padding: 5px;
+    }
+    th {
+        text-align: left !important;
+        font-weight: normal !important;
+        padding-bottom: 4%;
+        padding-top: 1%;
+        margin-left: 0% !important;
+    }
+    .edit {
+        background: #10cebc;
+        border: transparent;
+        font-size: 5vw;
+        text-align: center;
+        color: white;
+        border-radius: 10px;
+        cursor: pointer;
+        padding: 3%;
+        width: 45%;
+    }
+    .campos {
+        font-size: 5vw;
+        color: #606060;
+        font-weight: 700;
+    }
+    .datos {
+        font-size: 4vw;
+        color: #606060;
+        font-weight: 350;
+        background: transparent;
+    }
+    .msg {
+        width: 99%;
+        border: 1px solid #c4c4c4;
+        border-radius: 5px;
+        padding: 3px 5px;
+        -webkit-box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.1);
+        box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.1);
+        cursor: pointer;
+        text-align: justify;
+    }
+    .maximo {
+        font-size: 4vw;
+        color: #c4c4c4;
+        font-weight: 500;
+    }
+    .saludos {
+        text-align: justify !important;
+        border: 1px solid #c4c4c4;
+        border-radius: 5px;
+        font-size: 4vw;
+        color: #606060;
+        font-weight: 350;
+        padding: 2%;
+    }
+}

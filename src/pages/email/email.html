@@ -1,0 +1,65 @@
+<ion-header>
+
+    <ion-navbar>
+        <ion-title>email</ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <table *ngIf="vista == 'informacion'">
+        <tr>
+            <th class="contacto" colspan="2">Configura tu email de presentación</th>
+        </tr>
+        <tr>
+            <td class="campos">Mail de atención</td>
+            <td class="datos">{{email}}</td>
+        </tr>
+        <tr>
+            <td class="campos">Mensaje<br><span class="maximo">(Máximo 240 caracteres)</span></td>
+            <td class="datos">
+                <div class="saludos">
+                    {{saludo}}
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td class="campos">Carta de Presentación<br><span class="maximo">(Máximo 20 MB)</span></td>
+            <td class="datos">
+                <div class="saludos">
+                    {{pdf}}
+                </div>
+            </td>
+        </tr>
+
+    </table>
+    <table *ngIf="vista === 'editar'">
+        <tr>
+            <th class="contacto" colspan="2">Configura tu email de presentación</th>
+        </tr>
+        <tr>
+            <td class="campos">Mail de atención</td>
+            <td class="datos">{{email}}</td>
+        </tr>
+        <tr>
+            <td class="campos">Mensaje<br><span class="maximo">(Máximo 240 caracteres)</span></td>
+            <td class="datos">
+                <textarea class="msg" rows="8" cols="50" maxlength="150" [(ngModel)]="saludo" required></textarea>
+            </td>
+        </tr>
+        <tr>
+            <td class="campos">Carta de Presentación<br><span class="maximo">(Máximo 20 MB)</span></td>
+            <td class="datos">
+                <input type="text" [(ngModel)]="pdf" required>
+            </td>
+        </tr>
+    </table>
+
+    <div class="cuadro">
+        <button *ngIf="vista == 'informacion'" class="edit" (click)="changePage('editar')">Modificar Datos</button>
+        <button *ngIf="vista === 'editar'" class="edit" (click)="changePage('informacion');">Cancelar</button>
+        <button *ngIf="vista === 'editar'" class="edit" (click)="changePage('informacion');">Guardar</button>
+    </div>
+
+</ion-content>

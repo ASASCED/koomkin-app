@@ -494,4 +494,14 @@ export class RestProvider {
       });
     });
   }
+
+  getMailCliente(idUsuario) {
+    return new Promise(resolve => {
+      this.http.get(this.apiUrl + '/getMailCliente/' + idUsuario ).subscribe(data => {
+        resolve(data);
+      }, err => {
+        console.log(err);
+      });
+    });
+  }
 }

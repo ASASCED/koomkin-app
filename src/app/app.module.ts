@@ -9,9 +9,6 @@ import { SwipeSegmentDirective } from '../directives/swipe-segment/swipe-segment
 import { IonicStorageModule } from '@ionic/storage';
 import { Network } from '@ionic-native/network';
 import {FileOpener } from '@ionic-native/file-opener';
-//import {FileChooser} from '@ionic-native/file-chooser';
-//import {FilePath} from '@ionic-native/file-path';
-//import { OneSignal } from '@ionic-native/onesignal';
 import { ScreenOrientation } from '@ionic-native/screen-orientation';
 import { MyApp } from './app.component';
 import { ReportePageModule } from '../pages/reporte/reporte.module'
@@ -40,7 +37,6 @@ import { ServicioComponent } from '../components/servicio/servicio';
 import { ChatServiceProvider } from '../providers/chat-service/chat-service';
 import { RelativeTimePipe} from "../pipes/relative-time/relative-time";
 import { UserProvider } from '../providers/user/user';
-//import { PushnotificationProvider } from '../providers/pushnotification/pushnotification';
 import { BannerComponent } from '../components/banner/banner';
 import { ModalNotificationPage } from '../pages/modal-notification/modal-notification';
 import { InicioPage } from '../pages/inicio/inicio';
@@ -49,9 +45,11 @@ import { Ng2GoogleChartsModule } from 'ng2-google-charts';
 import { CapitalizePipe } from '../pipes/capitalize/capitalize';
 import { Market } from '@ionic-native/market';
 import { ModalSurveyPage } from '../pages/modal-survey/modal-survey';
-import { Transfer, FileUploadOptions, TransferObject } from '@ionic-native/transfer';
+import { Transfer } from '@ionic-native/transfer';
 
 import {HTTP} from '@ionic-native/http';
+import { EmailPage } from '../pages/email/email';
+import { SocialPage } from '../pages/social/social';
 
 
 @NgModule({
@@ -70,6 +68,8 @@ import {HTTP} from '@ionic-native/http';
     InicioPage,
     EficienciaPage,
     HotelComponent,
+    SocialPage,
+    EmailPage,
     PuntoventaComponent,
     MedicoComponent,
     InmobiliariaComponent,
@@ -112,6 +112,8 @@ import {HTTP} from '@ionic-native/http';
     LoginPage,
     InicioPage,
     EficienciaPage,
+    SocialPage,
+    EmailPage,
     HotelComponent,
     PuntoventaComponent,
     MedicoComponent,
@@ -134,17 +136,13 @@ import {HTTP} from '@ionic-native/http';
     StreamingMedia,
     ScreenOrientation,
     Market,
-   // OneSignal,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     ChatServiceProvider,
     UserProvider,
     File,
     FileOpener,
-    //FileChooser,
-    //FilePath,
     Transfer,
     HTTP
-    //PushnotificationProvider
   ]
 })
 export class AppModule {}

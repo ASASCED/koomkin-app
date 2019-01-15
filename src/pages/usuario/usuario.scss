@@ -15,9 +15,11 @@ page-usuario {
         background: transparent;
     }
     .contacto {
+        text-align: center !important;
         color: #10cebc;
-        font-size: 5vw;
+        font-size: 5.5vw;
         margin-bottom: 4%;
+        font-weight: bold !important;
     }
     table {
         border-collapse: collapse;
@@ -55,7 +57,7 @@ page-usuario {
         font-weight: 700;
     }
     .datos {
-        font-size: 5vw;
+        font-size: 4vw;
         color: #606060;
         font-weight: 350;
         background: transparent;
