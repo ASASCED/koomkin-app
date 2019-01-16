@@ -16,27 +16,28 @@
         </tr>
         <tr>
             <td class="social">
-                <div class="redsocial">
-                    Facebook
+                <div class="redsocial" [ngClass]="{'nocuento':facebook == 'No cuento con esta red'}">
+                    {{facebook}}
                 </div>
             </td>
             <td class="socialicon">
-                <img src="assets/imgs/ajustes/copiar.svg" width="30%" style="margin-right: 10%;margin-left: 10%;" />
-                <img src="assets/imgs/ajustes/tengo.svg" width="30%" />
-            </td>
+                <img src="assets/imgs/ajustes/copiar.svg" width="30%" style="margin-right: 10%;margin-left: 10%;margin-bottom: 10%;cursor: pointer" (click)="copiarAlPortapapeles('facebook');" />
+                <img *ngIf="facebook !== '' && facebook !== 'No cuento con esta red'" src="assets/imgs/ajustes/tengo.svg" width="30%" style="margin-bottom: 10%;" />
+                <img *ngIf="facebook === 'No cuento con esta red'" src="assets/imgs/ajustes/notengo.svg" width="30%" style="margin-bottom: 10%;"> </td>
         </tr>
         <tr>
             <td class="campos">Instagram</td>
         </tr>
         <tr>
             <td class="social">
-                <div class="redsocial">
-                    Instagram
+                <div class="redsocial" [ngClass]="{'nocuento':instagram == 'No cuento con esta red'}">
+                    {{instagram}}
                 </div>
             </td>
             <td class="socialicon">
-                <img src="assets/imgs/ajustes/copiar.svg" width="30%" style="margin-right: 10%;margin-left: 10%;" />
-                <img src="assets/imgs/ajustes/tengo.svg" width="30%" />
+                <img src="assets/imgs/ajustes/copiar.svg" width="30%" style="margin-right: 10%;margin-left: 10%;margin-bottom: 10%;cursor: pointer" (click)="copiarAlPortapapeles('instagram');" />
+                <img *ngIf="instagram !== '' && instagram !== 'No cuento con esta red'" src="assets/imgs/ajustes/tengo.svg" width="30%" style="margin-bottom: 10%;" />
+                <img *ngIf="instagram === 'No cuento con esta red'" src="assets/imgs/ajustes/notengo.svg" width="30%" style="margin-bottom: 10%;">
             </td>
         </tr>
         <tr>
@@ -44,13 +45,14 @@
         </tr>
         <tr>
             <td class="social">
-                <div class="redsocial">
-                    Twitter
+                <div class="redsocial" [ngClass]="{'nocuento':twitter == 'No cuento con esta red'}">
+                    {{twitter}}
                 </div>
             </td>
             <td class="socialicon">
-                <img src="assets/imgs/ajustes/copiar.svg" width="30%" style="margin-right: 10%;margin-left: 10%;" />
-                <img src="assets/imgs/ajustes/tengo.svg" width="30%" />
+                <img src="assets/imgs/ajustes/copiar.svg" width="30%" style="margin-right: 10%;margin-left: 10%;margin-bottom: 10%;cursor: pointer" (click)="copiarAlPortapapeles('twitter');" />
+                <img *ngIf="twitter !== '' && twitter !== 'No cuento con esta red'" src="assets/imgs/ajustes/tengo.svg" width="30%" style="margin-bottom: 10%;" />
+                <img *ngIf="twitter === 'No cuento con esta red'" src="assets/imgs/ajustes/notengo.svg" width="30%" style="margin-bottom: 10%;">
             </td>
         </tr>
         <tr>
@@ -58,28 +60,28 @@
         </tr>
         <tr>
             <td class="social">
-                <div class="redsocial">
-                    LinkedIn
+                <div class="redsocial" [ngClass]="{'nocuento':linkedIn == 'No cuento con esta red'}">
+                    {{linkedIn}}
                 </div>
             </td>
             <td class="socialicon">
-                <img src="assets/imgs/ajustes/copiar.svg" width="30%" style="margin-right: 10%;margin-left: 10%;" />
-                <img src="assets/imgs/ajustes/tengo.svg" width="30%" />
-            </td>
+                <img src="assets/imgs/ajustes/copiar.svg" width="30%" style="margin-right: 10%;margin-left: 10%;margin-bottom: 10%;cursor: pointer" (click)="copiarAlPortapapeles('linkedIn');" />
+                <img *ngIf="linkedIn !== '' && linkedIn !== 'No cuento con esta red'" src="assets/imgs/ajustes/tengo.svg" width="30%" style="margin-bottom: 10%;" />
+                <img *ngIf="linkedIn === 'No cuento con esta red'" src="assets/imgs/ajustes/notengo.svg" width="30%" style="margin-bottom: 10%;"> </td>
         </tr>
         <tr>
             <td class="campos">Web</td>
         </tr>
         <tr>
             <td class="social">
-                <div class="redsocial">
-                    Web
+                <div class="redsocial" [ngClass]="{'nocuento':web == 'No cuento con esta red'}">
+                    {{web}}
                 </div>
             </td>
             <td class="socialicon">
-                <img src="assets/imgs/ajustes/copiar.svg" width="30%" style="margin-right: 10%;margin-left: 10%;" />
-                <img src="assets/imgs/ajustes/tengo.svg" width="30%" />
-            </td>
+                <img src="assets/imgs/ajustes/copiar.svg" width="30%" style="margin-right: 10%;margin-left: 10%;margin-bottom: 10%;cursor: pointer" (click)="copiarAlPortapapeles('web');" />
+                <img *ngIf="web !== '' && web !== 'No cuento con esta red'" src="assets/imgs/ajustes/tengo.svg" width="30%" style="margin-bottom: 10%;" />
+                <img *ngIf="web === 'No cuento con esta red'" src="assets/imgs/ajustes/notengo.svg" width="30%" style="margin-bottom: 10%;"> </td>
         </tr>
     </table>
     <table *ngIf="vista === 'editar'">
@@ -88,24 +90,65 @@
         </tr>
         <tr>
             <td class="campos">Facebook</td>
-            <input type="text" name="Nombre del titular" required>
+        </tr>
+        <tr>
+            <td class="social">
+                <input type="text" name="Facebook" style="padding: 2.7%;" [(ngModel)]="facebook">
+            </td>
+            <td class="socialicon">
+                <img src="assets/imgs/ajustes/copiar.svg" width="30%" style="margin-right: 10%;margin-left: 10%;margin-bottom: 10%;" />
+                <img src="assets/imgs/ajustes/tengo.svg" width="30%" style="margin-bottom: 10%;" />
+            </td>
         </tr>
         <tr>
             <td class="campos">Instagram</td>
-            <input type="text" required>
+        </tr>
+        <tr>
+            <td class="social">
+                <input type="text" name="Instagram" style="padding: 2.7%;" [(ngModel)]="instagram">
+            </td>
+            <td class="socialicon">
+                <img src="assets/imgs/ajustes/copiar.svg" width="30%" style="margin-right: 10%;margin-left: 10%;margin-bottom: 10%;" />
+                <img src="assets/imgs/ajustes/tengo.svg" width="30%" style="margin-bottom: 10%;" />
+            </td>
         </tr>
         <tr>
             <td class="campos">Twitter</td>
-            <input type="text" required>
+        </tr>
+        <tr>
+            <td class="social">
+                <input type="text" name="Twitter" style="padding: 2.7%;" [(ngModel)]="twitter">
+            </td>
+            <td class="socialicon">
+                <img src="assets/imgs/ajustes/copiar.svg" width="30%" style="margin-right: 10%;margin-left: 10%;margin-bottom: 10%;" />
+                <img src="assets/imgs/ajustes/tengo.svg" width="30%" style="margin-bottom: 10%;" />
+            </td>
         </tr>
         <tr>
             <td class="campos">LinkedIn</td>
-            <input type="email" name="Mail de contacto" required>
+        </tr>
+        <tr>
+            <td class="social">
+                <input type="text" name="LinkedIn" style="padding: 2.7%;" [(ngModel)]="linkedIn">
+            </td>
+            <td class="socialicon">
+                <img src="assets/imgs/ajustes/copiar.svg" width="30%" style="margin-right: 10%;margin-left: 10%;margin-bottom: 10%;cursor: pointer" (click)="copiarAlPortapapeles();" />
+                <img src="assets/imgs/ajustes/tengo.svg" width="30%" style="margin-bottom: 10%;" />
+            </td>
         </tr>
         <tr>
             <td class="campos">Web</td>
-            <input type="tel" name="Teléfono" required>
         </tr>
+        <tr>
+            <td class="social">
+                <input type="text" name="Web" style="padding: 2.7%;" [(ngModel)]="web">
+            </td>
+            <td class="socialicon">
+                <img src="assets/imgs/ajustes/copiar.svg" width="30%" style="margin-right: 10%;margin-left: 10%;margin-bottom: 10%;" />
+                <img src="assets/imgs/ajustes/tengo.svg" width="30%" style="margin-bottom: 10%;" />
+            </td>
+        </tr>
+
     </table>
 
     <div class="cuadro">

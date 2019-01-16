@@ -10,7 +10,7 @@
 <ion-content padding>
     <table *ngIf="vista == 'informacion'">
         <tr>
-            <th class="contacto" colspan="2">Datos de contacto</th>
+            <th class="contacto" colspan="2">Configuración General</th>
         </tr>
         <tr>
             <td class="campos">Nombre</td>
@@ -29,8 +29,14 @@
             <td class="datos">{{telefono}}</td>
         </tr>
         <tr>
-            <td class="campos">Móvil (Calltracking)</td>
+            <th class="contacto" colspan="2">Configuración de Call Tracking</th>
+        </tr>
+        <tr>
+            <td class="campos">Móvil </td>
             <td class="datos">{{celular}}</td>
+        </tr>
+        <tr>
+            <th class="contacto" colspan="2">Configuración de Chat Bot</th>
         </tr>
         <tr>
             <td class="campos">Saludo automático chat</td>

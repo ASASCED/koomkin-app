@@ -45,13 +45,13 @@
         <tr>
             <td class="campos">Mensaje<br><span class="maximo">(Máximo 240 caracteres)</span></td>
             <td class="datos">
-                <textarea class="msg" rows="8" cols="50" maxlength="150" [(ngModel)]="saludo" required></textarea>
+                <textarea class="msg" rows="8" cols="50" maxlength="240" [(ngModel)]="saludo"></textarea>
             </td>
         </tr>
         <tr>
             <td class="campos">Carta de Presentación<br><span class="maximo">(Máximo 20 MB)</span></td>
             <td class="datos">
-                <input type="text" [(ngModel)]="pdf" required>
+                <input type="text" [(ngModel)]="pdf">
             </td>
         </tr>
     </table>

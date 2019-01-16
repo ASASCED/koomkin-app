@@ -50,6 +50,7 @@ import { Transfer } from '@ionic-native/transfer';
 import {HTTP} from '@ionic-native/http';
 import { EmailPage } from '../pages/email/email';
 import { SocialPage } from '../pages/social/social';
+import { Clipboard } from '@ionic-native/clipboard';
 
 
 @NgModule({
@@ -136,6 +137,7 @@ import { SocialPage } from '../pages/social/social';
     StreamingMedia,
     ScreenOrientation,
     Market,
+    Clipboard,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     ChatServiceProvider,
     UserProvider,

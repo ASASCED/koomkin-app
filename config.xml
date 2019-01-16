@@ -115,4 +115,5 @@
     <plugin name="cordova-plugin-market" spec="1.2.0" />
     <plugin name="cordova-plugin-advanced-http" spec="2.0.2" />
     <engine name="android" spec="7.1.4" />
+    <plugin name="cordova-clipboard" spec="1.2.1" />
 </widget>

@@ -26,6 +26,7 @@
         "@angular/platform-browser": "4.4.4",
         "@angular/platform-browser-dynamic": "4.4.4",
         "@ionic-native/chooser": "^4.18.0",
+        "@ionic-native/clipboard": "^4.19.0",
         "@ionic-native/core": "^4.3.3",
         "@ionic-native/file": "^4.18.0",
         "@ionic-native/file-chooser": "^4.18.0",
@@ -49,6 +50,7 @@
         "cookie-parser": "~1.4.3",
         "cordova-android": "7.1.4",
         "cordova-android-support-gradle-release": "^2.0.1",
+        "cordova-clipboard": "1.2.1",
         "cordova-ios": "4.5.5",
         "cordova-plugin-advanced-http": "2.0.2",
         "cordova-plugin-chooser": "^1.2.4",
@@ -128,7 +130,8 @@
             "cordova-plugin-file-transfer": {},
             "cordova-plugin-inappbrowser": {},
             "cordova-plugin-market": {},
-            "cordova-plugin-advanced-http": {}
+            "cordova-plugin-advanced-http": {},
+            "cordova-clipboard": {}
         },
         "platforms": [
             "android"
