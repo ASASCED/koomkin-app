@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { Clipboard } from '@ionic-native/clipboard';
 import { RestProvider } from './../../providers/rest/rest';
 import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
@@ -20,9 +20,12 @@ export class SocialPage implements OnInit{
   public web;
   public twitter;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,private clipboard: Clipboard,
+  constructor(public navCtrl: NavController, 
+    public navParams: NavParams,
+    private clipboard: Clipboard,
     public provedor: RestProvider,
-    public authService: AuthServiceProvider) {
+    public authService: AuthServiceProvider,
+    public toastCtrl: ToastController) {
       this.id = this.authService.id;
   }
 
@@ -60,6 +63,73 @@ export class SocialPage implements OnInit{
       default:
       this.clipboard.copy('vacio');
   } 
+}
+
+pegarAlPortapapeles(caso) {
+  switch (caso) {
+    case "facebook": { 
+      this.clipboard.paste().then(
+        (resolve: string) => {
+            this.facebook = resolve;
+            console.log(this.facebook);
+         },
+         (reject: string) => {
+          this.showError('bottom');
+         }
+       );
+      break;
+    }
+    case "instagram": { 
+      this.clipboard.paste().then(
+        (resolve: string) => {
+            this.instagram = resolve;
+            console.log(this.instagram);
+         },
+         (reject: string) => {
+          this.showError('bottom');
+         }
+       );
+       break;
+    }
+    case "linkedIn": { 
+      this.clipboard.paste().then(
+        (resolve: string) => {
+            this.linkedIn = resolve;
+            console.log(this.linkedIn);
+         },
+         (reject: string) => {
+          this.showError('bottom');
+         }
+       );
+       break;
+    }
+    case "twitter": { 
+      this.clipboard.paste().then(
+        (resolve: string) => {
+            this.twitter = resolve;
+            console.log(this.twitter);
+         },
+         (reject: string) => {
+          this.showError('bottom');
+         }
+       );
+       break;
+    }
+    case "web": { 
+      this.clipboard.paste().then(
+        (resolve: string) => {
+            this.web = resolve;
+            console.log(this.web);
+         },
+         (reject: string) => {
+          this.showError('bottom');
+         }
+       );
+       break;
+    }
+    default:
+    this.clipboard.copy('vacio');
+} 
 }
 
   getMailCliente(idUsuario) {
@@ -101,5 +171,25 @@ export class SocialPage implements OnInit{
        
       }
     );
+  }
+
+  showToast(position: string) {
+    let toast = this.toastCtrl.create({
+      message: 'El texto se ha copiado al portapapeles',
+      duration: 2000,
+      position: position
+    });
+
+    toast.present(toast);
+  }
+
+  showError(position: string) {
+    let toast = this.toastCtrl.create({
+      message: 'No hay nada en el portapapeles',
+      duration: 2000,
+      position: position
+    });
+
+    toast.present(toast);
   }
 }

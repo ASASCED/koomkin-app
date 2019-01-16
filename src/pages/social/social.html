@@ -7,154 +7,218 @@
 </ion-header>
 
 <ion-content padding>
-    <table *ngIf="vista == 'informacion'">
-        <tr>
-            <th class="contacto" colspan="2">Escribe o pega el URL de tus redes sociales</th>
-        </tr>
-        <tr>
-            <td class="campos">Facebook</td>
-        </tr>
-        <tr>
-            <td class="social">
+    <section *ngIf="vista == 'informacion'">
+        <ion-row>
+            <ion-col col-12>
+                <p class="contacto" colspan="2">Escribe o pega el URL de tus redes sociales</p>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col col-12>
+                <p class="campos">Facebook</p>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col col-10>
                 <div class="redsocial" [ngClass]="{'nocuento':facebook == 'No cuento con esta red'}">
-                    {{facebook}}
+                    <div class="puntos">{{facebook}}</div>
                 </div>
-            </td>
-            <td class="socialicon">
-                <img src="assets/imgs/ajustes/copiar.svg" width="30%" style="margin-right: 10%;margin-left: 10%;margin-bottom: 10%;cursor: pointer" (click)="copiarAlPortapapeles('facebook');" />
-                <img *ngIf="facebook !== '' && facebook !== 'No cuento con esta red'" src="assets/imgs/ajustes/tengo.svg" width="30%" style="margin-bottom: 10%;" />
-                <img *ngIf="facebook === 'No cuento con esta red'" src="assets/imgs/ajustes/notengo.svg" width="30%" style="margin-bottom: 10%;"> </td>
-        </tr>
-        <tr>
-            <td class="campos">Instagram</td>
-        </tr>
-        <tr>
-            <td class="social">
-                <div class="redsocial" [ngClass]="{'nocuento':instagram == 'No cuento con esta red'}">
-                    {{instagram}}
+            </ion-col>
+            <ion-col col-1>
+                <img src="assets/imgs/ajustes/copiar.svg " width="90% " style="margin: 15%;cursor: pointer " (click)="copiarAlPortapapeles( 'facebook');showToast( 'bottom') " />
+            </ion-col>
+            <ion-col col-1>
+                <img *ngIf="facebook !=='' && facebook !=='No cuento con esta red' " src="assets/imgs/ajustes/tengo.svg " width="90% " style="margin: 15%; " />
+                <img *ngIf="facebook==='No cuento con esta red' " src="assets/imgs/ajustes/notengo.svg " width="90% " style="margin: 15%; ">
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col col-12>
+                <p class="campos ">Instagram</p>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col col-10 class="social ">
+                <div class="redsocial " [ngClass]="{ 'nocuento':instagram=='No cuento con esta red' } ">
+                    <div class="puntos">{{instagram}}</div>
                 </div>
-            </td>
-            <td class="socialicon">
-                <img src="assets/imgs/ajustes/copiar.svg" width="30%" style="margin-right: 10%;margin-left: 10%;margin-bottom: 10%;cursor: pointer" (click)="copiarAlPortapapeles('instagram');" />
-                <img *ngIf="instagram !== '' && instagram !== 'No cuento con esta red'" src="assets/imgs/ajustes/tengo.svg" width="30%" style="margin-bottom: 10%;" />
-                <img *ngIf="instagram === 'No cuento con esta red'" src="assets/imgs/ajustes/notengo.svg" width="30%" style="margin-bottom: 10%;">
-            </td>
-        </tr>
-        <tr>
-            <td class="campos">Twitter</td>
-        </tr>
-        <tr>
-            <td class="social">
-                <div class="redsocial" [ngClass]="{'nocuento':twitter == 'No cuento con esta red'}">
-                    {{twitter}}
-                </div>
-            </td>
-            <td class="socialicon">
-                <img src="assets/imgs/ajustes/copiar.svg" width="30%" style="margin-right: 10%;margin-left: 10%;margin-bottom: 10%;cursor: pointer" (click)="copiarAlPortapapeles('twitter');" />
-                <img *ngIf="twitter !== '' && twitter !== 'No cuento con esta red'" src="assets/imgs/ajustes/tengo.svg" width="30%" style="margin-bottom: 10%;" />
-                <img *ngIf="twitter === 'No cuento con esta red'" src="assets/imgs/ajustes/notengo.svg" width="30%" style="margin-bottom: 10%;">
-            </td>
-        </tr>
-        <tr>
-            <td class="campos">LinkedIn</td>
-        </tr>
-        <tr>
-            <td class="social">
-                <div class="redsocial" [ngClass]="{'nocuento':linkedIn == 'No cuento con esta red'}">
-                    {{linkedIn}}
-                </div>
-            </td>
-            <td class="socialicon">
-                <img src="assets/imgs/ajustes/copiar.svg" width="30%" style="margin-right: 10%;margin-left: 10%;margin-bottom: 10%;cursor: pointer" (click)="copiarAlPortapapeles('linkedIn');" />
-                <img *ngIf="linkedIn !== '' && linkedIn !== 'No cuento con esta red'" src="assets/imgs/ajustes/tengo.svg" width="30%" style="margin-bottom: 10%;" />
-                <img *ngIf="linkedIn === 'No cuento con esta red'" src="assets/imgs/ajustes/notengo.svg" width="30%" style="margin-bottom: 10%;"> </td>
-        </tr>
-        <tr>
-            <td class="campos">Web</td>
-        </tr>
-        <tr>
-            <td class="social">
-                <div class="redsocial" [ngClass]="{'nocuento':web == 'No cuento con esta red'}">
-                    {{web}}
-                </div>
-            </td>
-            <td class="socialicon">
-                <img src="assets/imgs/ajustes/copiar.svg" width="30%" style="margin-right: 10%;margin-left: 10%;margin-bottom: 10%;cursor: pointer" (click)="copiarAlPortapapeles('web');" />
-                <img *ngIf="web !== '' && web !== 'No cuento con esta red'" src="assets/imgs/ajustes/tengo.svg" width="30%" style="margin-bottom: 10%;" />
-                <img *ngIf="web === 'No cuento con esta red'" src="assets/imgs/ajustes/notengo.svg" width="30%" style="margin-bottom: 10%;"> </td>
-        </tr>
-    </table>
-    <table *ngIf="vista === 'editar'">
-        <tr>
-            <th class="contacto" colspan="2">Escribe o pega el URL de tus redes sociales</th>
-        </tr>
-        <tr>
-            <td class="campos">Facebook</td>
-        </tr>
-        <tr>
-            <td class="social">
-                <input type="text" name="Facebook" style="padding: 2.7%;" [(ngModel)]="facebook">
-            </td>
-            <td class="socialicon">
-                <img src="assets/imgs/ajustes/copiar.svg" width="30%" style="margin-right: 10%;margin-left: 10%;margin-bottom: 10%;" />
-                <img src="assets/imgs/ajustes/tengo.svg" width="30%" style="margin-bottom: 10%;" />
-            </td>
-        </tr>
-        <tr>
-            <td class="campos">Instagram</td>
-        </tr>
-        <tr>
-            <td class="social">
-                <input type="text" name="Instagram" style="padding: 2.7%;" [(ngModel)]="instagram">
-            </td>
-            <td class="socialicon">
-                <img src="assets/imgs/ajustes/copiar.svg" width="30%" style="margin-right: 10%;margin-left: 10%;margin-bottom: 10%;" />
-                <img src="assets/imgs/ajustes/tengo.svg" width="30%" style="margin-bottom: 10%;" />
-            </td>
-        </tr>
-        <tr>
-            <td class="campos">Twitter</td>
-        </tr>
-        <tr>
-            <td class="social">
-                <input type="text" name="Twitter" style="padding: 2.7%;" [(ngModel)]="twitter">
-            </td>
-            <td class="socialicon">
-                <img src="assets/imgs/ajustes/copiar.svg" width="30%" style="margin-right: 10%;margin-left: 10%;margin-bottom: 10%;" />
-                <img src="assets/imgs/ajustes/tengo.svg" width="30%" style="margin-bottom: 10%;" />
-            </td>
-        </tr>
-        <tr>
-            <td class="campos">LinkedIn</td>
-        </tr>
-        <tr>
-            <td class="social">
-                <input type="text" name="LinkedIn" style="padding: 2.7%;" [(ngModel)]="linkedIn">
-            </td>
-            <td class="socialicon">
-                <img src="assets/imgs/ajustes/copiar.svg" width="30%" style="margin-right: 10%;margin-left: 10%;margin-bottom: 10%;cursor: pointer" (click)="copiarAlPortapapeles();" />
-                <img src="assets/imgs/ajustes/tengo.svg" width="30%" style="margin-bottom: 10%;" />
-            </td>
-        </tr>
-        <tr>
-            <td class="campos">Web</td>
-        </tr>
-        <tr>
-            <td class="social">
-                <input type="text" name="Web" style="padding: 2.7%;" [(ngModel)]="web">
-            </td>
-            <td class="socialicon">
-                <img src="assets/imgs/ajustes/copiar.svg" width="30%" style="margin-right: 10%;margin-left: 10%;margin-bottom: 10%;" />
-                <img src="assets/imgs/ajustes/tengo.svg" width="30%" style="margin-bottom: 10%;" />
-            </td>
-        </tr>
+            </ion-col>
+            <ion-col col-1>
+                <img src="assets/imgs/ajustes/copiar.svg " width="90% " style="margin: 15%;cursor: pointer " (click)="copiarAlPortapapeles( 'instagram');showToast( 'bottom') " />
+            </ion-col>
+            <ion-col col-1>
+                <img *ngIf="instagram !=='' && instagram !=='No cuento con esta red' " src="assets/imgs/ajustes/tengo.svg " width="90% " style="margin: 15%; " />
+                <img *ngIf="instagram==='No cuento con esta red' " src="assets/imgs/ajustes/notengo.svg " width="90% " style="margin: 15%; ">
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col col-12>
+                <p class="campos ">Twitter</p>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col col-10 class="social ">
+                <div class="redsocial " [ngClass]="{ 'nocuento':twitter=='No cuento con esta red' } ">
+                    <div class="puntos">{{twitter}}</div>
 
-    </table>
+                </div>
+            </ion-col>
+            <ion-col col-1>
+                <img src="assets/imgs/ajustes/copiar.svg " width="90% " style="margin: 15%;cursor: pointer " (click)="copiarAlPortapapeles( 'twitter');showToast( 'bottom') " />
+            </ion-col>
+            <ion-col col-1>
+                <img *ngIf="twitter !=='' && twitter !=='No cuento con esta red' " src="assets/imgs/ajustes/tengo.svg " width="90% " style="margin: 15%; " />
+                <img *ngIf="twitter==='No cuento con esta red' " src="assets/imgs/ajustes/notengo.svg " width="90% " style="margin: 15%; ">
+            </ion-col>
 
-    <div class="cuadro">
-        <button *ngIf="vista == 'informacion'" class="edit" (click)="changePage('editar')">Modificar Datos</button>
-        <button *ngIf="vista === 'editar'" class="edit" (click)="changePage('informacion');">Cancelar</button>
-        <button *ngIf="vista === 'editar'" class="edit" (click)="changePage('informacion');">Guardar</button>
+        </ion-row>
+        <ion-row>
+            <ion-col col-12>
+                <p class="campos ">LinkedIn</p>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col col-10 class="social ">
+                <div class="redsocial " [ngClass]="{ 'nocuento':linkedIn=='No cuento con esta red' } ">
+                    <div class="puntos">{{linkedIn}}</div>
+
+                </div>
+            </ion-col>
+            <ion-col col-1>
+                <img src="assets/imgs/ajustes/copiar.svg " width="90% " style="margin: 15%;cursor: pointer " (click)="copiarAlPortapapeles( 'linkedIn');showToast( 'bottom') " />
+            </ion-col>
+            <ion-col col-1>
+                <img *ngIf="linkedIn !=='' && linkedIn !=='No cuento con esta red' " src="assets/imgs/ajustes/tengo.svg " width="90% " style="margin: 15%; " />
+                <img *ngIf="linkedIn==='No cuento con esta red' " src="assets/imgs/ajustes/notengo.svg " width="90% " style="margin: 15%; ">
+            </ion-col>
+
+        </ion-row>
+        <ion-row>
+            <ion-col col-12>
+                <p class="campos ">Web</p>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col col-10 class="social ">
+                <div class="redsocial " [ngClass]="{ 'nocuento':web=='No cuento con esta red' } ">
+                    <div class="puntos">{{web}}</div>
+                </div>
+            </ion-col>
+            <ion-col col-1>
+                <img src="assets/imgs/ajustes/copiar.svg " width="90% " style="margin: 15%;cursor: pointer " (click)="copiarAlPortapapeles( 'web');showToast( 'bottom') " />
+            </ion-col>
+            <ion-col col-1>
+                <img *ngIf="web !=='' && web !=='No cuento con esta red' " src="assets/imgs/ajustes/tengo.svg " width="90% " style="margin: 15%; " />
+                <img *ngIf="web==='No cuento con esta red' " src="assets/imgs/ajustes/notengo.svg " width="90% " style="margin: 15%; ">
+            </ion-col>
+        </ion-row>
+    </section>
+    <section *ngIf="vista==='editar' ">
+        <ion-row>
+            <ion-col col-12>
+                <p class="contacto " colspan="2 ">Escribe o pega el URL de tus redes sociales</p>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col col-12>
+                <p class="campos ">Facebook</p>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col col-10>
+                <input type="text " name="Facebook " style="padding: 2.7%; " [(ngModel)]="facebook ">
+            </ion-col>
+            <ion-col col-1>
+                <img src="assets/imgs/ajustes/copiar.svg " width="90% " style="margin: 15%;cursor: pointer " (click)="pegarAlPortapapeles( 'facebook'); " />
+            </ion-col>
+            <ion-col col-1>
+                <img *ngIf=" facebook !=='' && facebook !=='No cuento con esta red' " src="assets/imgs/ajustes/tengo.svg " width="90% " style="margin: 15%; " />
+                <img *ngIf="facebook==='No cuento con esta red' " src="assets/imgs/ajustes/notengo.svg " width="90% " style="margin: 15%; ">
+            </ion-col>
+        </ion-row>
+
+        <ion-row>
+            <ion-col col-12>
+                <p class="campos ">Instagram</p>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col col-10>
+                <input type="text " name="Instagram " style="padding: 2.7%; " [(ngModel)]="instagram ">
+            </ion-col>
+            <ion-col col-1>
+                <img src="assets/imgs/ajustes/copiar.svg " width="90% " style="margin: 15%;cursor: pointer " (click)="pegarAlPortapapeles( 'instagram'); " />
+            </ion-col>
+            <ion-col col-1>
+                <img *ngIf="instagram !=='' && instagram !=='No cuento con esta red' " src="assets/imgs/ajustes/tengo.svg " width="90% " style="margin: 15%; " />
+                <img *ngIf="instagram==='No cuento con esta red' " src="assets/imgs/ajustes/notengo.svg " width="90% " style="margin: 15%; ">
+            </ion-col>
+        </ion-row>
+
+
+        <ion-row>
+            <ion-col col-12>
+                <p class="campos ">Twitter</p>
+            </ion-col>
+
+        </ion-row>
+        <ion-row>
+            <ion-col col-10>
+                <input type="text " name="Twitter " style="padding: 2.7%; " [(ngModel)]="twitter ">
+            </ion-col>
+            <ion-col col-1>
+                <img src="assets/imgs/ajustes/copiar.svg " width="90% " style="margin: 15%;cursor: pointer " (click)="pegarAlPortapapeles( 'twitter'); " />
+            </ion-col>
+            <ion-col col-1>
+                <img *ngIf=" twitter !=='' && twitter !=='No cuento con esta red' " src="assets/imgs/ajustes/tengo.svg " width="90% " style="margin: 15%; " />
+                <img *ngIf="twitter==='No cuento con esta red' " src="assets/imgs/ajustes/notengo.svg " width="90% " style="margin: 15%; ">
+            </ion-col>
+        </ion-row>
+
+        <ion-row>
+
+            <ion-col col-12>
+                <p class="campos ">LinkedIn</p>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col col-10>
+                <input type="text " name="LinkedIn " style="padding: 2.7%; " [(ngModel)]="linkedIn ">
+            </ion-col>
+            <ion-col col-1>
+                <img src="assets/imgs/ajustes/copiar.svg " width="90% " style="margin: 15%;cursor: pointer " (click)="pegarAlPortapapeles( 'linkedIn'); " />
+            </ion-col>
+            <ion-col col-1>
+                <img *ngIf="linkedIn !=='' && linkedIn !=='No cuento con esta red' " src="assets/imgs/ajustes/tengo.svg " width="90% " style="margin: 15%; " />
+                <img *ngIf="linkedIn==='No cuento con esta red' " src="assets/imgs/ajustes/notengo.svg " width="90% " style="margin: 15%; ">
+            </ion-col>
+        </ion-row>
+
+        <ion-row>
+
+            <ion-col col-12>
+                <p class="campos ">Web</p>
+            </ion-col>
+        </ion-row>
+
+        <ion-row>
+            <ion-col col-10>
+                <input type="text " name="Web " style="padding: 2.7%; " [(ngModel)]="web ">
+            </ion-col>
+            <ion-col col-1>
+                <img src="assets/imgs/ajustes/copiar.svg " width="90% " style="margin: 15%;cursor: pointer " (click)="pegarAlPortapapeles( 'web'); " />
+            </ion-col>
+            <ion-col col-1>
+                <img *ngIf=" web !=='' && web !=='No cuento con esta red' " src="assets/imgs/ajustes/tengo.svg " width="90% " style="margin: 15%; " />
+                <img *ngIf="web==='No cuento con esta red' " src="assets/imgs/ajustes/notengo.svg " width="90% " style="margin: 15%; ">
+            </ion-col>
+        </ion-row>
+    </section>
+
+    <div class="cuadro " style="margin-top: 5% ">
+        <button *ngIf="vista=='informacion' " class="edit " (click)="changePage( 'editar') ">Modificar Datos</button>
+        <button *ngIf="vista==='editar' " class="edit " (click)="changePage( 'informacion'); ">Cancelar</button>
+        <button *ngIf="vista==='editar' " class="edit " (click)="changePage( 'informacion'); ">Guardar</button>
     </div>
 
 </ion-content>

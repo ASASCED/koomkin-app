@@ -62,7 +62,7 @@ page-social {
     .edit {
         background: #10cebc;
         border: transparent;
-        font-size: 5vw;
+        font-size: 4.5vw;
         text-align: center;
         color: white;
         border-radius: 10px;
@@ -74,6 +74,8 @@ page-social {
         font-size: 5vw;
         color: #606060;
         font-weight: 700;
+        margin-bottom: 1%;
+        margin-top: 2%;
     }
     .datos {
         font-size: 4vw;
@@ -93,5 +95,12 @@ page-social {
     }
     .nocuento {
         color: red;
+    }
+    .puntos {
+        overflow: hidden;
+        /* Escondemos la parte sobrante */
+        white-space: nowrap;
+        /* Indicamos que no realice salto de linea si no cabe en la anchura indicada */
+        text-overflow: ellipsis;
     }
 }
