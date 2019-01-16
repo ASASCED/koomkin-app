@@ -39,13 +39,13 @@
             <th class="contacto" colspan="2">Configuración de Chat Bot</th>
         </tr>
         <tr>
-            <td class="campos">Saludo automático chat</td>
+            <td class="campos">Saludo automático <br><span class="maximo">(Máximo 150 caracteres)</span></td>
             <td class="datos" style="text-align: justify">{{mensaje}}</td>
         </tr>
     </table>
     <table *ngIf="vista === 'editar'">
         <tr>
-            <th class="contacto" colspan="2">Datos de contacto</th>
+            <th class="contacto" colspan="2">Configuración General</th>
         </tr>
         <tr>
             <td class="campos">Nombre *</td>
@@ -76,13 +76,19 @@
             </td>
         </tr>
         <tr>
-            <td class="campos">Móvil (Calltracking)*</td>
+            <th class="contacto" colspan="2">Configuración de Call Tracking</th>
+        </tr>
+        <tr>
+            <td class="campos">Móvil*</td>
             <td class="datos" style="text-align: justify">
                 <input type="tel" name="Móvil" [(ngModel)]="celular" required>
             </td>
         </tr>
         <tr>
-            <td class="campos">Saludo automático chat (150 caracteres)</td>
+            <th class="contacto" colspan="2">Configuración de Chat Bot</th>
+        </tr>
+        <tr>
+            <td class="campos">Saludo automático <br><span class="maximo">(Máximo 150 caracteres)</span></td>
             <td class="datos" style="text-align: justify">
                 <textarea class="msg" rows="8" cols="50" maxlength="150" [(ngModel)]="mensaje" required></textarea>
             </td>
