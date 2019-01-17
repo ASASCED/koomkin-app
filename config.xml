@@ -115,6 +115,6 @@
     <plugin name="cordova-plugin-market" spec="1.2.0" />
     <plugin name="cordova-plugin-advanced-http" spec="2.0.2" />
     <plugin name="cordova-clipboard" spec="1.2.1" />
-    <allow-navigation href="http://192.168.0.170:8100" sessionid="3c17125d" />
+    <allow-navigation href="http://192.168.0.170:8100" sessionid="736a3022" />
     <engine name="android" spec="7.1.4" />
 </widget>

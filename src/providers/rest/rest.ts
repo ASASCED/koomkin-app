@@ -6,13 +6,16 @@ import { Platform } from 'ionic-angular';
 @Injectable()
 export class RestProvider {
 
-  constructor(public http: HttpClient, public plt: Platform) {
+  constructor(
+    public http: HttpClient, 
+    public plt: Platform) {
   }
 
   private user;
   apiUrl = 'http://www.koomkin.com:4859';
   apiUrl1 = 'http://189.205.233.70:4829/twilio_api/api/v1/forward-app/?idLead=';
   apiUrl2 = 'http://187.162.208.218:5000/facebook/checkLeadComplement?user_id=';
+  apiUrl3 = 'http://18.235.164.159/call-tracking/api/v1/mailing/'
   date;
   datefin;
   email;
@@ -504,4 +507,5 @@ export class RestProvider {
       });
     });
   }
+  
 }

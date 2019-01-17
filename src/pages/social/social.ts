@@ -40,23 +40,23 @@ export class SocialPage implements OnInit{
 
   copiarAlPortapapeles(caso) {
     switch (caso) {
-      case "facebook": { 
+      case 'facebook': { 
         this.clipboard.copy(this.facebook);
         break;
       }
-      case "instagram": { 
+      case 'instagram': { 
         this.clipboard.copy(this.instagram);
         break;
       }
-      case "linkedIn": { 
+      case 'linkedIn': { 
         this.clipboard.copy(this.linkedIn);
         break;
       }
-      case "twitter": { 
+      case 'twitter': { 
         this.clipboard.copy(this.twitter);
         break;
       }
-      case "web": { 
+      case 'web': { 
         this.clipboard.copy(this.web);
         break;
       }
@@ -67,7 +67,7 @@ export class SocialPage implements OnInit{
 
 pegarAlPortapapeles(caso) {
   switch (caso) {
-    case "facebook": { 
+    case 'facebook': { 
       this.clipboard.paste().then(
         (resolve: string) => {
             this.facebook = resolve;
@@ -79,7 +79,7 @@ pegarAlPortapapeles(caso) {
        );
       break;
     }
-    case "instagram": { 
+    case 'instagram': { 
       this.clipboard.paste().then(
         (resolve: string) => {
             this.instagram = resolve;
@@ -91,7 +91,7 @@ pegarAlPortapapeles(caso) {
        );
        break;
     }
-    case "linkedIn": { 
+    case 'linkedIn': { 
       this.clipboard.paste().then(
         (resolve: string) => {
             this.linkedIn = resolve;
@@ -103,7 +103,7 @@ pegarAlPortapapeles(caso) {
        );
        break;
     }
-    case "twitter": { 
+    case 'twitter': { 
       this.clipboard.paste().then(
         (resolve: string) => {
             this.twitter = resolve;
@@ -115,7 +115,7 @@ pegarAlPortapapeles(caso) {
        );
        break;
     }
-    case "web": { 
+    case 'web': { 
       this.clipboard.paste().then(
         (resolve: string) => {
             this.web = resolve;
@@ -193,5 +193,7 @@ pegarAlPortapapeles(caso) {
     toast.present(toast);
   }
 
-  
+
 }
+  
+

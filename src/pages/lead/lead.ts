@@ -3,7 +3,6 @@ import { IonicPage, NavController, ViewController, NavParams, Platform } from 'i
 import { RestProvider } from './../../providers/rest/rest';
 import { HttpClient } from '@angular/common/http';
 import { AlertController, ModalController , LoadingController} from 'ionic-angular';
-import { LeadsPage } from "../leads/leads";
 import { AuthServiceProvider } from "../../providers/auth-service/auth-service";
 import { StreamingMedia, StreamingAudioOptions } from '@ionic-native/streaming-media';
 import { Storage } from '@ionic/storage';
@@ -12,8 +11,6 @@ import { Content } from 'ionic-angular';
 import { ChatServiceProvider, ChatMessage, UserInfo } from "../../providers/chat-service/chat-service";
 import { HttpHeaders } from '@angular/common/http';
 import {FileOpener } from '@ionic-native/file-opener';
-//import {FileChooser} from '@ionic-native/file-chooser';
-//import {FilePath} from '@ionic-native/file-path';
 import { File } from '@ionic-native/file';
 import { Transfer, FileUploadOptions, TransferObject } from '@ionic-native/transfer';
 
@@ -450,9 +447,7 @@ export class LeadPage implements OnInit {
     private streamingMedia: StreamingMedia,
     public storage: Storage,
     public file:File,
-    //private fileChooser: FileChooser,
     private fileOpener: FileOpener,
-    //private filePath: FilePath,
     private transfer: Transfer,
     private sanitizer:DomSanitizer,
     public ngz:NgZone,
@@ -1201,9 +1196,6 @@ export class LeadPage implements OnInit {
     this.streamingMedia.stopAudio();
   }
 
-
-
-
   getCircularReplacer = () => {
     const seen = new WeakSet();
     return (key, value) => {
@@ -1216,7 +1208,6 @@ export class LeadPage implements OnInit {
       return value;
     };
   };
-
 
   chooseFile(){
 
@@ -1265,8 +1256,6 @@ export class LeadPage implements OnInit {
     })();
 
   }
-
-
 
   openFile(url,contentType){
 

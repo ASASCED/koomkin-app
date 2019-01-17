@@ -51,7 +51,10 @@
         <tr>
             <td class="campos">Carta de Presentación<br><span class="maximo">(Máximo 20 MB)</span></td>
             <td class="datos">
-                <input type="text" [(ngModel)]="pdf">
+                <div style="border: 1px solid #c4c4c4;border-radius: 5px;">
+                    <span class="datos">{{pdf}}</span>
+                    <button class="subirarchivo" ion-button clear icon-only item-right (click)="chooseFile()">Subir Archivo</button>
+                </div>
             </td>
         </tr>
     </table>

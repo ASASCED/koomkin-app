@@ -1,12 +1,8 @@
 import { Injectable  } from '@angular/core';
-import {AlertController, Events, LoadingController} from 'ionic-angular';
-import { HttpClient , HttpHeaders} from "@angular/common/http";
-import { Observable } from "rxjs/Observable";
+import { AlertController, Events, LoadingController } from 'ionic-angular';
+import { HttpClient } from "@angular/common/http";
 import { BehaviorSubject} from "rxjs";
-import {LeadPage} from "../../pages/lead/lead";
-import {take} from "rxjs/operator/take";
-// import { LeadPage} from "../../pages/lead/lead";
-import {DomSanitizer} from '@angular/platform-browser';
+import { DomSanitizer } from '@angular/platform-browser';
 
 import {HTTP} from '@ionic-native/http'
 
@@ -17,42 +13,26 @@ import {HTTP} from '@ionic-native/http'
 export class ChatServiceProvider {
 
   public chatClientStarted = false;
-
   loading: boolean = false;
-
   public msgList: ChatMessage[] = [];
-
   private msgListSource = new BehaviorSubject<any>(this.msgList);
-
   msgListActualizada = this.msgListSource.asObservable();
-
-
   private loadingMessagesSource = new BehaviorSubject<any>(this.loading);
-
   loadingMessagesActualizado = this.loadingMessagesSource.asObservable();
-
   indicadorLongitudConversacion = null;
-
   private longitudConversacionSource = new BehaviorSubject<any>(this.indicadorLongitudConversacion);
-
   longitudConversacion = this.longitudConversacionSource.asObservable();
-
 
   GENERAL_CHANNEL_UNIQUE_NAME = 'general';
   GENERAL_CHANNEL_NAME = 'General Channel';
   MESSAGES_HISTORY_LIMIT = 50;
 
   public tc: any;
-
   public accessManager: any;
-
-
-
   public loadingMessages;
 
   constructor(private http: HttpClient,
               private http2: HTTP,
-              private events: Events,
               public loadingCtrl: LoadingController,
               public alertCtrl: AlertController, public sanitizer: DomSanitizer) {
 
@@ -69,7 +49,6 @@ export class ChatServiceProvider {
   }
 
   updateMsgList(data: any){
-    //alert('cleaning');
     this.msgListSource.next(data);
   }
 
