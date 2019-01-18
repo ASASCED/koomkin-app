@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angu
 import { Clipboard } from '@ionic-native/clipboard';
 import { RestProvider } from './../../providers/rest/rest';
 import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
+import { HttpHeaders, HttpClient } from '@angular/common/http';
 
 @IonicPage()
 @Component({
@@ -16,16 +17,18 @@ export class SocialPage implements OnInit{
   public vista;
   public facebook;
   public instagram;
-  public linkedIn = 'https://www.linkedin.com/in/daniel-alberto-del-valle-armas-80962b124/';
+  public linkedIn;
   public web;
   public twitter;
+  public saludo;
 
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
     private clipboard: Clipboard,
     public provedor: RestProvider,
     public authService: AuthServiceProvider,
-    public toastCtrl: ToastController) {
+    public toastCtrl: ToastController,
+    public http: HttpClient) {
       this.id = this.authService.id;
   }
 
@@ -38,100 +41,6 @@ export class SocialPage implements OnInit{
     this.vista = pagina;
   }
 
-  copiarAlPortapapeles(caso) {
-    switch (caso) {
-      case 'facebook': { 
-        this.clipboard.copy(this.facebook);
-        break;
-      }
-      case 'instagram': { 
-        this.clipboard.copy(this.instagram);
-        break;
-      }
-      case 'linkedIn': { 
-        this.clipboard.copy(this.linkedIn);
-        break;
-      }
-      case 'twitter': { 
-        this.clipboard.copy(this.twitter);
-        break;
-      }
-      case 'web': { 
-        this.clipboard.copy(this.web);
-        break;
-      }
-      default:
-      this.clipboard.copy('vacio');
-  } 
-}
-
-pegarAlPortapapeles(caso) {
-  switch (caso) {
-    case 'facebook': { 
-      this.clipboard.paste().then(
-        (resolve: string) => {
-            this.facebook = resolve;
-            console.log(this.facebook);
-         },
-         (reject: string) => {
-          this.showError('bottom');
-         }
-       );
-      break;
-    }
-    case 'instagram': { 
-      this.clipboard.paste().then(
-        (resolve: string) => {
-            this.instagram = resolve;
-            console.log(this.instagram);
-         },
-         (reject: string) => {
-          this.showError('bottom');
-         }
-       );
-       break;
-    }
-    case 'linkedIn': { 
-      this.clipboard.paste().then(
-        (resolve: string) => {
-            this.linkedIn = resolve;
-            console.log(this.linkedIn);
-         },
-         (reject: string) => {
-          this.showError('bottom');
-         }
-       );
-       break;
-    }
-    case 'twitter': { 
-      this.clipboard.paste().then(
-        (resolve: string) => {
-            this.twitter = resolve;
-            console.log(this.twitter);
-         },
-         (reject: string) => {
-          this.showError('bottom');
-         }
-       );
-       break;
-    }
-    case 'web': { 
-      this.clipboard.paste().then(
-        (resolve: string) => {
-            this.web = resolve;
-            console.log(this.web);
-         },
-         (reject: string) => {
-          this.showError('bottom');
-         }
-       );
-       break;
-    }
-    default:
-    this.clipboard.copy('vacio');
-} 
-}
-
   getMailCliente(idUsuario) {
     this.provedor.getMailCliente(idUsuario).then(
       data => {
@@ -140,9 +49,10 @@ pegarAlPortapapeles(caso) {
         if (this.datos) {
           this.facebook = this.datos[0].facebook;
           this.instagram = this.datos[0].instagram;
-          this.linkedIn = this.datos[0].linkedIn;
+          this.linkedIn = this.datos[0].linkedin;
           this.web = this.datos[0].web;
           this.twitter = this.datos[0].twitter;
+          this.saludo = this.datos[0].saludo;
 
           if (this.facebook == null || this.facebook == '') {
             this.facebook = 'No cuento con esta red';
@@ -173,26 +83,37 @@ pegarAlPortapapeles(caso) {
     );
   }
 
-  showToast(position: string) {
-    let toast = this.toastCtrl.create({
-      message: 'El texto se ha copiado al portapapeles',
-      duration: 2000,
-      position: position
-    });
+  changeInfo() {
+    console.log('entro');
 
-    toast.present(toast);
+    const body = new URLSearchParams();
+    body.set('id_usuario', this.id);
+    body.set('saludo', this.saludo);
+    body.set('instagram', this.instagram);
+    body.set('facebook', this.facebook);
+    body.set('web', this.web);
+    body.set('linkedin', this.linkedIn);
+    body.set('twitter', this.twitter);
+    body.set('tipo', '2');
+    const options = {
+      headers: new HttpHeaders().set(
+        'Content-Type',
+        'application/x-www-form-urlencoded'
+      )
+    };
+
+    const url = 'http://18.235.164.159/call-tracking/api/v1/mailing/';
+    console.log(url, body.toString(), options);
+      this.http.post(url, body.toString(), options).subscribe(
+        data => {
+          console.log(JSON.stringify(data));
+          
+        },
+        err => {
+          console.log(err);
+        }
+      );
   }
-
-  showError(position: string) {
-    let toast = this.toastCtrl.create({
-      message: 'No hay nada en el portapapeles',
-      duration: 2000,
-      position: position
-    });
-
-    toast.present(toast);
-  }
-
 
 }
   
