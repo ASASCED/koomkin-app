@@ -294,17 +294,13 @@ export class LeadPage implements OnInit {
   sendMsg() {
     if (!this.editorMsg.trim()) return;
     if (this.chatService.tc.currentChannel) {
-
       this.chatService.tc.currentChannel.sendMessage(this.editorMsg).then(() => {
         this.editorMsg = '';
       });
-
       if (!this.showEmojiPicker) {
         this.focus();
       }
-
     }
-
   }
 
   private focus() {
@@ -313,17 +309,14 @@ export class LeadPage implements OnInit {
     }
   }
 
-
   public leerChat() {
 
     const url = 'http://www.koomkin.com:4835/api/read-messages/';
     return new Promise((resolve, reject) => {
       this.http.post(url + this.leadActual.uuid, { device: "app" })
         .subscribe(data => {
-
           return resolve();
         }, err => {
-
           return resolve(err);
         });
     });
@@ -334,57 +327,29 @@ export class LeadPage implements OnInit {
   }
 
   ngOnDestroy(){
-
-    //this.chatService.loadingMessagesActualizado.unsubscribe();
-    //this.chatService.loadingMessages.unsubscribe();
-    //this.chatService.msgList.unsubscribe();
-    //this.chatService.msgListActualizada.unsubscribe();
-
   }
 
-
-
   ngOnInit() {
-
-
     this.chatService.msgListActualizada.subscribe(
       result => {
-
-
         if(result.length===0){
-
           this.msgListLead = result;
         }
-
         if(result.length>1){
-
           this.ngz.run(()=>{
-
             this.msgListLead = result;
-
             setTimeout(()=>{ this.scrollDown.bind(this)}, 5000);
-
           });
-
-
         }else{
-
           var temp = result[0];
-
           if(temp){
-
             if(temp.type === 'media'){
-
               this.ngz.run(()=>{
                 setTimeout(()=>{ this.scrollDown.bind(this)}, 2500);
               });
-
             }else{
-
             }
-
           }
-
           this.ngz.run(()=>{
             this.msgListLead = this.msgListLead.concat(result);
           });
@@ -395,9 +360,7 @@ export class LeadPage implements OnInit {
 
     this.chatService.loadingMessagesActualizado.subscribe(
       result => {
-
         this.ngz.run(()=>{});
-
         this.loadingMessages = result;
       }
     );
@@ -408,8 +371,6 @@ export class LeadPage implements OnInit {
     this.getUrlAudio();
     this.showCall();
   }
-
-
 
   ionViewDidEnter() {
     this.autoScroller = this.autoScroll();
@@ -486,7 +447,7 @@ export class LeadPage implements OnInit {
   }
 
   FbotonOn() {
-    var uno = document.getElementById('tel');
+    let uno = document.getElementById('tel');
     uno.innerHTML = 'Llamando a ' + this.leadActual.NOMBRE;
     //  console.log(this.leadActual);
   }
@@ -501,7 +462,6 @@ export class LeadPage implements OnInit {
       });
     });
   }
-
 
   public showCall() {
     const options = {
@@ -599,14 +559,11 @@ export class LeadPage implements OnInit {
   }
 
   public getLeadCalls() {
-    //console.log(this.apiUrl,this.leadActual.clave);
-    //this.http.get(this.apiUrl + '/getLeadCalls/265850').subscribe(data => {
     this.http.get(this.apiUrl + '/getLeadCalls/' + this.leadActual.clave).subscribe(data => {
       //console.log(data);
       this.llamadas = data;
       //console.log(this.llamadas);
       if (this.llamadas) {
-        //console.log('entro');
         for (let k in this.llamadas) {
           this.llamadas[k].CallStatus = this.llamadas[k].CallStatus;
           if (this.llamadas[k].CallStatus == 'failed') {
@@ -626,12 +583,11 @@ export class LeadPage implements OnInit {
 
           this.llamadas[k].horallamada = this.llamadas[k].FechaLlamada.substring(11, 16);
           this.llamadas[k].FechaLlamada = this.llamadas[k].FechaLlamada.substring(0, 10).replace(/^(\d{4})-(\d{2})-(\d{2})$/g, '$3/$2/$1');
-          var f = new Date();
-          var fecha = f.getDate() + "/" + (f.getMonth() + 1) + "/" + f.getFullYear();
+          let f = new Date();
+          let fecha = f.getDate() + "/" + (f.getMonth() + 1) + "/" + f.getFullYear();
           if (this.llamadas[k].FechaLlamada == fecha) {
             this.llamadas[k].FechaLlamada = 'Hoy';
           }
-          //console.log(this.llamadas[k].CallStatus, this.llamadas[k].LlamadaLead, this.llamadas[k].FechaLlamada,this.llamadas[k].horallamada);
         }
       }
     });
@@ -1213,61 +1169,33 @@ export class LeadPage implements OnInit {
 
     (async () => {
       const file = await (<any>window).chooser.getFile("");
-
       var formData = new FormData();
       var blob = new Blob([file.data],{type: file.mediaType});
       formData.append(file.name,blob,file.name);
-
-      //alert(file.name);
-
       this.chatService.tc.currentChannel.sendMessage( formData ).then(()=>{
-
         this.chatService.tc.currentChannel.getMessages().then((messagesPaginator)=> {
-
           const message = messagesPaginator.items[messagesPaginator.items.length-1];
-
           if (message.type === 'media') {
-
             console.log('Media attributes', message.media);
-
             message.media.getContentUrl().then((url)=>{
-
-
               this.http.post('http://www.koomkin.com:4835/api/twilio-media-message', { channelsid: this.chatService.tc.currentChannel.sid, url: url, mime: file.mediaType, filename: file.name})
                 .subscribe(data => {
-
                   //alert('enviado a whatsapp'+ JSON.stringify(data));
-
                 }, err => {
-
                   //alert('not good '+ JSON.stringify(err));
-
                 });
-
             });
-
           }
-
         });
-
       });
-
-
     })();
-
   }
 
   openFile(url,contentType){
-
-
     let loading = this.loadingCtrl.create({
       content: 'Cargando archivo multimedia...'
     });
-
-
     loading.present().then(()=>{
-
-
      url.then((resultUrl)=>{
        var filename= 'koomkinfile';
        this.fileTransfers.download( resultUrl["changingThisBreaksApplicationSecurity"], this.file.dataDirectory + filename,true ).then((entry) => {
@@ -1279,41 +1207,27 @@ export class LeadPage implements OnInit {
            loading.dismiss();
            console.log('catch');
            console.log('Open error' + e);
-
          });
        }).catch(e => {
          console.log('Save error' + JSON.stringify(e));
          loading.dismiss();
-
        });
-
      }, (error) => {
        console.log('hello '+JSON.stringify(error));
        loading.dismiss();
      });
-
-
    }).catch((err)=>{
       //loading.dismiss();
      alert(err);
-
    });
-
-
-
   }
 
   launch(url) {
-
     url.then((url2)=>{
       this.platform.ready().then(() => {
         cordova.InAppBrowser.open(url2["changingThisBreaksApplicationSecurity"], "_system", "location=no");
       });
-
     });
-
   }
-
-
 }
 

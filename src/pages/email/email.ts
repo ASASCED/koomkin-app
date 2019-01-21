@@ -4,6 +4,7 @@ import { RestProvider } from './../../providers/rest/rest';
 import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
 import { HttpClient } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
+import { ChatServiceProvider } from "../../providers/chat-service/chat-service";
 
 @IonicPage()
 @Component({
@@ -30,7 +31,9 @@ export class EmailPage implements OnInit {
     public navParams: NavParams,
     public provedor: RestProvider,
     public authService: AuthServiceProvider,
-    public http: HttpClient
+    public http: HttpClient,
+    public chatService: ChatServiceProvider,
+
   ) {
     this.id = this.authService.id;
     this.email = this.authService.email;
@@ -149,6 +152,32 @@ export class EmailPage implements OnInit {
          console.log('Error', err);
        }
      );
+    })();
+  }
+
+  chooseFile2(){
+
+    (async () => {
+      const file = await (<any>window).chooser.getFile("");
+      var formData = new FormData();
+      var blob = new Blob([file.data],{type: file.mediaType});
+      formData.append(file.name,blob,file.name);
+      this.chatService.tc.currentChannel.sendMessage( formData ).then(()=>{
+        this.chatService.tc.currentChannel.getMessages().then((messagesPaginator)=> {
+          const message = messagesPaginator.items[messagesPaginator.items.length-1];
+          if (message.type === 'media') {
+            console.log('Media attributes', message.media);
+            message.media.getContentUrl().then((url)=>{
+              this.http.post('http://www.koomkin.com:4835/api/twilio-media-message', { channelsid: this.chatService.tc.currentChannel.sid, url: url, mime: file.mediaType, filename: file.name})
+                .subscribe(data => {
+                  //alert('enviado a whatsapp'+ JSON.stringify(data));
+                }, err => {
+                  //alert('not good '+ JSON.stringify(err));
+                });
+            });
+          }
+        });
+      });
     })();
   }
 }

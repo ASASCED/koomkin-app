@@ -1,14 +1,11 @@
 import { Injectable  } from '@angular/core';
 import { AlertController, Events, LoadingController } from 'ionic-angular';
-import { HttpClient } from "@angular/common/http";
-import { BehaviorSubject} from "rxjs";
+import { HttpClient } from '@angular/common/http';
+import { BehaviorSubject} from 'rxjs';
 import { DomSanitizer } from '@angular/platform-browser';
-
 import {HTTP} from '@ionic-native/http'
 
-
 @Injectable()
-
 
 export class ChatServiceProvider {
 
@@ -27,6 +24,10 @@ export class ChatServiceProvider {
   GENERAL_CHANNEL_NAME = 'General Channel';
   MESSAGES_HISTORY_LIMIT = 50;
 
+  channelsid = 'CHbc465fbe83434937b7382db97e8896b1';
+  unique_name = 'auxiliar';
+  friendly_name = 'auxiliar';
+
   public tc: any;
   public accessManager: any;
   public loadingMessages;
@@ -35,7 +36,6 @@ export class ChatServiceProvider {
               private http2: HTTP,
               public loadingCtrl: LoadingController,
               public alertCtrl: AlertController, public sanitizer: DomSanitizer) {
-
     this.tc = {
       messagingClient: null,
       channelArray: [],
@@ -44,31 +44,20 @@ export class ChatServiceProvider {
       messageList: [],
       username: null
     };
-
-
   }
-
   updateMsgList(data: any){
     this.msgListSource.next(data);
   }
 
-
   startChatService(uuid:string){
-
     this.connectClientWithUsername(uuid).then(()=>{
-
       this.chatClientStarted = true;
-
     }).catch(function(error) {
       //alert(error);
       window.location.reload();
-      console.log(("connectclient" +JSON.stringify(error, Object.getOwnPropertyNames(error))));
+      console.log(('connectclient' +JSON.stringify(error, Object.getOwnPropertyNames(error))));
     });
-
-
   }
-
-
 
   getUserInfo(): Promise<UserInfo> {
     const userInfo: UserInfo = {
@@ -79,16 +68,11 @@ export class ChatServiceProvider {
     return new Promise(resolve => resolve(userInfo));
   }
 
-
-
 // ==========================================
 
   connectClientWithUsername(username) {
     var self = this;
-    // var usernameText = $usernameInput.val();
-    // $usernameInput.val('');
     if (username == '') {
-
       return;
     }
     self.tc.username = username;
@@ -96,95 +80,67 @@ export class ChatServiceProvider {
     //return Promise.resolve();
   }
 
-
-
   fetchAccessToken(username, handler) {
-
     return new Promise((resolve, reject)=> {
-      this.http.post('http://www.koomkin.com:4835/token' , {device: "mobile", identity: username})
+      this.http.post('http://www.koomkin.com:4835/token' , {device: 'mobile', identity: username})
         .subscribe(data => {
-
           var token = data['token'];
-
           handler(token);
-
           return resolve();
-
         }, err => {
-
           console.log(JSON.stringify(err));
           return reject(err);
-
         });
-
     });
-
   }
-
 
   connectMessagingClient(token) {
 
     var self = this;
-    self.tc.messagingClient = new window["TwilioChat"].Client(token);
-    self.accessManager = window["TwilioCommon"].AccessManager(token);
+
+    self.tc.messagingClient = new window['TwilioChat'].Client(token);
+    self.accessManager = window['TwilioCommon'].AccessManager(token);
     return self.tc.messagingClient.initialize()
       .then(() => {
 
         this.chatClientStarted = true;
-        //self.accessManager.on('tokenExpired', function() {
-          //window.location.reload();
-          // get new token from AccessManager and pass it to the library instance
-          //self.tc.messagingClient.updateToken(am.token);
-        //});
-        //accessManager.on('tokenUpdated', function(am) {
-          // get new token from AccessManager and pass it to the library instance
-        //  chatClient.updateToken(am.token);
-        //});
-        //this.updateConnectedUI();
-        //this.loadChannelList(this.joinGeneralChannel.bind(this));
-        //tc.messagingClient.on('channelAdded', $.throttle(tc.loadChannelList));
-        //tc.messagingClient.on('channelRemoved', $.throttle(tc.loadChannelList));
         self.tc.messagingClient.on('tokenExpired', ()=>{self.refreshToken()});
-        //this.joinChannel2("HEY HEY");
-        // console.log("MessageList:  "+  JSON.stringify(this.tc.channelArray, this.getCircularReplacer()));
       }).catch(function(error) {
-        console.log(("" +JSON.stringify(error, Object.getOwnPropertyNames(error))));
+        console.log(('' +JSON.stringify(error, Object.getOwnPropertyNames(error))));
       });
   }
 
 
   refreshToken() {
+
     var self = this;
 
     self.fetchAccessToken(self.tc.username, self.setNewToken.bind(self));
   }
 
   setNewToken(token) {
+
     var self = this;
+
       self.accessManager.updateToken(token);
       window.location.reload();
   }
 
-
-
   connectToChatChannel(channel_uniqueName: string) {
 
     let self = this;
+
     this.updateMsgList([]);
     self.tc.messagingClient.getChannelByUniqueName(channel_uniqueName).then((channel) => {
       self.loadingMessagesSource.next(true);
-      //alert('spinner active: getting channel');
       this.leaveCurrentChannel().then(() => {
         this.joinChannel(channel).then(() => {
           this.tc.currentChannel.removeAllListeners();
           self.tc.currentChannel.on('messageAdded', (message) => {
 
             let messageGUI: ChatMessage;
-
             if(message.type === 'media'){
-
               if(message.attributes.file_url){
-
                 messageGUI = {
                   userId: message.author,
                   time: message.timestamp,
@@ -194,11 +150,8 @@ export class ChatServiceProvider {
                   attributes: message.attributes,
                   contentType: message.attributes.mime,
                   filename: message.attributes.filename
-
                 }
-
               }else{
-
                 messageGUI = {
                   userId: message.author,
                   time: message.timestamp,
@@ -209,7 +162,6 @@ export class ChatServiceProvider {
                   contentType: message.media.state.contentType,
                   filename: message.media.filename
                 };
-
               }
             }else{
               messageGUI = {
@@ -223,34 +175,26 @@ export class ChatServiceProvider {
                 filename: null
               };
             }
-
-
             this.msgListSource.next([messageGUI]);
           });
 
           this.loadMessages('setupchannel');
         }).catch((error) => {
           self.loadingMessagesSource.next(false);
-          //alert('spinner INactive:'+ error);
-          // console.log(('joinChannel' + JSON.stringify(error, Object.getOwnPropertyNames(error))));
         });
       }).catch((error) => {
         self.loadingMessagesSource.next(false);
-        //alert('spinner INactive:'+ error);
-        //  console.log(('leaveCurrentChannel' + JSON.stringify(error, Object.getOwnPropertyNames(error))));
       });
     }).catch((error) => {
       self.loadingMessagesSource.next(false);
-      //alert('spinner INactive:'+ error);
-      // console.log(('getChannelByUniqueName' + JSON.stringify(error, Object.getOwnPropertyNames(error))));
     });
-
-
   }
 
 
   joinChannel(_channel) {
+
     const self = this;
+    
     return _channel.join().then((joinedChannel) => {
       self.tc.currentChannel = _channel;
       return joinedChannel;
@@ -261,25 +205,20 @@ export class ChatServiceProvider {
   }
 
   leaveCurrentChannel() {
+
     let self = this;
 
     if (this.tc.currentChannel) {
       return this.tc.currentChannel.leave().then((leftChannel) => {
-        // this.longitudConversacionSource.next(0);
-        leftChannel.removeListener('messageAdded', () => { console.log("leaving current channel") });
-
+        leftChannel.removeListener('messageAdded', () => { console.log('leaving current channel') });
         return Promise.resolve();
       }).catch(function (error) {
         console.log(('leave error' + JSON.stringify(error, Object.getOwnPropertyNames(error))));
-        //alert('hey boy');
       });
     } else {
-      //alert('no hay ningún canal');
       return Promise.resolve();
     }
   }
-
-
 
   loadMessages(fromstring: string): any {
 
@@ -287,36 +226,21 @@ export class ChatServiceProvider {
     arr = [];
     var self = this;
 
-    if(fromstring === "setupchannel"){
+    if(fromstring === 'setupchannel'){
       this.loadingMessagesSource.next(true);
     }
-
     return self.tc.currentChannel.getMessages(self.MESSAGES_HISTORY_LIMIT).then( (messages)=> {
-
-      if(fromstring === "setupchannel"){
-
+      if(fromstring === 'setupchannel'){
         this.loadingMessagesSource.next(false);
-
       }
 
       const totalMessages = messages.items.length;
-
       this.longitudConversacionSource.next(totalMessages);
-
       for (let i = 0; i < totalMessages; i++) { //iterar sobre mensajes
-
         const message = messages.items[i]; //Extrae mensaje
-
         let messageGUI: ChatMessage;
-
         if(message.type === 'media'){
-
-          //console.log(message.media);
-          //console.log(message.attributes)
-          //console.log(message.author)
-
           if(message.attributes.file_url){
-
             messageGUI = {
               userId: message.author,
               time: message.timestamp,
@@ -339,12 +263,8 @@ export class ChatServiceProvider {
               attributes: message.attributes,
               contentType: message.media.state.contentType,
               filename: message.media.state.filename
-
             };
-
           }
-
-
         }else{
           messageGUI = {
             userId: message.author,
@@ -358,44 +278,25 @@ export class ChatServiceProvider {
           };
         }
         arr.push(messageGUI);
-
       }
-
-      console.log('Total Messages:' + totalMessages);
-
-
       this.msgListSource.next(arr);
-
       return Promise.resolve(arr);
-
     }).catch(function(error) {
-
-      if(fromstring === "setupchannel"){
-
+      if(fromstring === 'setupchannel'){
         this.loadingMessagesSource.next(false);
-
       }
-
-      console.log(("PROBLEM" +JSON.stringify(error, Object.getOwnPropertyNames(error))));
-
-      //self.content.scrollToBottom(   "hey"  );
+      console.log(('PROBLEM' +JSON.stringify(error, Object.getOwnPropertyNames(error))));
       return Promise.resolve(arr);
     });
 
   };
 
-  //showLoader() {
-  //  this.loading = this.loadingCtrl.create({
-  //    content: 'Cargando Mensajes...'
-  //  });
-  //  this.loading.present();
-
-  //}
-
   getCircularReplacer = () => {
+
     const seen = new WeakSet();
+
     return (key, value) => {
-      if (typeof value === "object" && value !== null) {
+      if (typeof value === 'object' && value !== null) {
         if (seen.has(value)) {
           return;
         }
@@ -414,12 +315,6 @@ export class ChatServiceProvider {
         {
           text: 'Enviar Solicitud',
           handler: data => {
-            //this.mandarSolicitudChat();
-            //this.setStorage(this.leadActual.clave,Date.now()+ 1*1800000).then(()=>{
-
-            //});
-
-            // this.page='Lead';
           }
         }
       ]
@@ -435,67 +330,41 @@ export class ChatServiceProvider {
     var mime = message.attributes.mime;
 
     return new Promise((resolve, reject) => {
-
       this.http2.get(url, {}, {'Content-Type': mime})
         .then(data => {
-
           const blob = new Blob([data.data],{type:mime});
           const result = window.URL.createObjectURL(blob);
-
           resolve(this.sanitizer.bypassSecurityTrustResourceUrl(url));
-
         })
         .catch(error => {
-
           console.log(JSON.stringify(error));
           reject(error.url);
-
-
         });
-
     });
-
   }
 
   getTwilioImageUrl(message){
-
     return new Promise((resolve, reject) => {
-
       message.media.getContentUrl().then((url) => {
-
         this.http2.get(url,{},{'Content-Type': message.media.contentType}).then(data => {
-
           const blob = new Blob([data.data],{type: message.media.contentType});
-
           const result = window.URL.createObjectURL(blob);
-
-
           resolve(this.sanitizer.bypassSecurityTrustResourceUrl(url));
-
-
         }).catch((err) => {
-
           console.log(JSON.stringify(err));
           reject();
-
         });
-
       }).catch((error)=>{
-
         console.log(error);
         reject(error);
-
       });
     });
   }
 
   getFileName(url){
-
       let fileName = url.substr(url.lastIndexOf('/')+1);
       return fileName
-
   }
-
 }
 
 export class ChatMessage {
@@ -507,7 +376,6 @@ export class ChatMessage {
   attributes: any;
   contentType: any;
   filename: any;
-
 }
 
 export class UserInfo {
