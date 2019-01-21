@@ -1,4 +1,4 @@
-import { Injectable  } from '@angular/core';
+import { Injectable, ResolvedReflectiveFactory  } from '@angular/core';
 import { AlertController, Events, LoadingController } from 'ionic-angular';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject} from 'rxjs';
@@ -20,8 +20,6 @@ export class ChatServiceProvider {
   private longitudConversacionSource = new BehaviorSubject<any>(this.indicadorLongitudConversacion);
   longitudConversacion = this.longitudConversacionSource.asObservable();
 
-  GENERAL_CHANNEL_UNIQUE_NAME = 'general';
-  GENERAL_CHANNEL_NAME = 'General Channel';
   MESSAGES_HISTORY_LIMIT = 50;
 
   channelsid = 'CHbc465fbe83434937b7382db97e8896b1';
@@ -124,6 +122,18 @@ export class ChatServiceProvider {
 
       self.accessManager.updateToken(token);
       window.location.reload();
+  }
+
+
+  connectAuxiliarChannel(){
+    return new Promise((resolve, reject) => {
+      this.tc.messagingClient.getChannelByUniqueName('CHbc465fbe83434937b7382db97e8896b1').then((channel) => {
+        this.joinChannel(channel).then(() => {
+          this.tc.currentChannel.removeAllListeners();
+          resolve();  
+        }).catch(error =>  { alert(error); reject(error)})
+      });
+    });
   }
 
   connectToChatChannel(channel_uniqueName: string) {

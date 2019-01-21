@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { RestProvider } from './../../providers/rest/rest';
 import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
-import { HttpClient } from '@angular/common/http';
-import { HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ChatServiceProvider } from "../../providers/chat-service/chat-service";
 
 @IonicPage()
@@ -25,6 +24,7 @@ export class EmailPage implements OnInit {
   public web;
   public twitter;
   apiUrl3 = 'http://18.235.164.159/call-tracking/api/v1/mailing/';
+  channelsidaux = 'CHbc465fbe83434937b7382db97e8896b1';
 
   constructor(
     public navCtrl: NavController,
@@ -157,27 +157,41 @@ export class EmailPage implements OnInit {
 
   chooseFile2(){
 
-    (async () => {
-      const file = await (<any>window).chooser.getFile("");
-      var formData = new FormData();
-      var blob = new Blob([file.data],{type: file.mediaType});
-      formData.append(file.name,blob,file.name);
-      this.chatService.tc.currentChannel.sendMessage( formData ).then(()=>{
-        this.chatService.tc.currentChannel.getMessages().then((messagesPaginator)=> {
-          const message = messagesPaginator.items[messagesPaginator.items.length-1];
-          if (message.type === 'media') {
-            console.log('Media attributes', message.media);
-            message.media.getContentUrl().then((url)=>{
-              this.http.post('http://www.koomkin.com:4835/api/twilio-media-message', { channelsid: this.chatService.tc.currentChannel.sid, url: url, mime: file.mediaType, filename: file.name})
+    this.chatService.connectAuxiliarChannel().then(()=>{
+
+      (async () => {
+        const file = await (<any>window).chooser.getFile('application/pdf');
+        var formData = new FormData();
+        var blob = new Blob([file.data],{type: file.mediaType});
+        formData.append(file.name,blob,file.name);
+        this.chatService.tc.currentChannel.sendMessage( formData ).then((message)=>{
+  
+          this.chatService.tc.currentChannel.getMessages().then((messagesPaginator)=> {
+
+            const message = messagesPaginator.items[messagesPaginator.items.length-1];
+            if (message.type === 'media') {
+              console.log('Media attributes', message.media);
+              message.media.getContentUrl().then((url)=>{
+                const httpOptions = {
+                  headers: new HttpHeaders({
+                    "Content-Type": "application/x-www-form-urlencoded",
+                  })
+                };
+                this.http.post(this.apiUrl3, { nombre_archivo: this.pdf , url_archivo: url }, httpOptions)
                 .subscribe(data => {
-                  //alert('enviado a whatsapp'+ JSON.stringify(data));
+                  alert('enviado a whatsapp'+ JSON.stringify(data));
                 }, err => {
-                  //alert('not good '+ JSON.stringify(err));
+                  alert('not good '+ JSON.stringify(err));
+                  console.log(JSON.stringify(err));
                 });
-            });
-          }
+              });
+            }
+          });
+  
         });
-      });
-    })();
+      })();
+
+    });
+    
   }
 }
