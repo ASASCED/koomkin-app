@@ -23,7 +23,7 @@ export class EmailPage implements OnInit {
   public linkedIn;
   public web;
   public twitter;
-  apiUrl3 = 'http://18.235.164.159/call-tracking/api/v1/mailing/';
+  apiUrl = 'http://18.235.164.159/call-tracking/api/v1/mailing/';
   channelsidaux = 'CHbc465fbe83434937b7382db97e8896b1';
 
   constructor(
@@ -47,15 +47,6 @@ export class EmailPage implements OnInit {
 
   changePage(pagina) {
     this.vista = pagina;
-  }
-
-  copiarAlPortapapeles(id_elemento) {
-    const aux = document.createElement('input');
-    aux.setAttribute('value', document.getElementById(id_elemento).innerHTML);
-    document.body.appendChild(aux);
-    aux.select();
-    document.execCommand('copy');
-    document.body.removeChild(aux);
   }
 
   getMailCliente(idUsuario) {
@@ -134,28 +125,7 @@ export class EmailPage implements OnInit {
       );
   }
 
-  chooseFile() {
-    (async () => {
-      const file = await (<any>window).chooser.getFile('application/pdf');
-      var formData = new FormData();
-      var blob = new Blob([file.data],{type: file.mediaType});
-      formData.append(file.name,blob,file.name);
-
-     const headers = {
-       headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
-     };
-
-     this.http.post(this.apiUrl3, formData, headers).subscribe(data => {
-         console.log(data);
-       },
-       err => {
-         console.log('Error', err);
-       }
-     );
-    })();
-  }
-
-  chooseFile2(){
+  chooseFile(){
 
     this.chatService.connectAuxiliarChannel().then(()=>{
 
@@ -177,7 +147,9 @@ export class EmailPage implements OnInit {
                     "Content-Type": "application/x-www-form-urlencoded",
                   })
                 };
-                this.http.post(this.apiUrl3, { nombre_archivo: this.pdf , url_archivo: url }, httpOptions)
+                url = encodeURIComponent(url);
+                alert(url);
+                this.http.post(this.apiUrl, { nombre_archivo: this.pdf , url_archivo: url }, httpOptions)
                 .subscribe(data => {
                   alert('enviado a whatsapp'+ JSON.stringify(data));
                 }, err => {
@@ -193,5 +165,47 @@ export class EmailPage implements OnInit {
 
     });
     
+  }
+
+  changeMail() {
+    console.log(this.email);
+
+    const body = new URLSearchParams();
+    body.set('correo', this.email);
+    body.set('tipo', '3');
+    const options = {
+      headers: new HttpHeaders().set(
+        'Content-Type',
+        'application/x-www-form-urlencoded'
+      )
+    };
+
+    const url = 'http://18.235.164.159/call-tracking/api/v1/mailing/';
+    console.log(url, body.toString(), options);
+      this.http.post(url, body.toString(), options).subscribe(
+        data => {
+          console.log(JSON.stringify(data));
+          
+        },
+        err => {
+          console.log(err);
+        }
+      );
+  }
+
+  enviarVistaPrevia() {
+
+    const body = new URLSearchParams();
+    body.set('id_lead', '36A6A82A-0089-4AAF-BD02-45C615F83C79');
+    body.set('tipo_correo', '1');
+    body.set('asunto', 'Prueba Weapons');
+
+    this.http.put(this.apiUrl, body.toString())
+                .subscribe(data => {
+                  alert('enviado a whatsapp'+ JSON.stringify(data));
+                }, err => {
+                  alert('not good '+ JSON.stringify(err));
+                  console.log(JSON.stringify(err));
+                });
   }
 }
