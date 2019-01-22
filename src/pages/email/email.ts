@@ -114,7 +114,6 @@ export class EmailPage implements OnInit {
     };
 
     const url = 'http://18.235.164.159/call-tracking/api/v1/mailing/';
-    console.log(url, body.toString(), options);
       this.http.post(url, body.toString(), options).subscribe(
         data => {
           console.log(JSON.stringify(data));
@@ -167,7 +166,6 @@ export class EmailPage implements OnInit {
 
               const message = messagesPaginator.items[messagesPaginator.items.length-1];
               if (message.type === 'media') {
-                console.log('Media attributes', message.media);
                 message.media.getContentUrl().then((url)=>{
                   const httpOptions = {
                     headers: new HttpHeaders({
@@ -185,7 +183,6 @@ export class EmailPage implements OnInit {
                       loading.dismiss();
                       this.mostrarAlertaEstatusPdf('Carta Presentación','El documento se guardó exitosamente');
                       //alert('not good '+ JSON.stringify(err));
-                      console.log(JSON.stringify(err));
                     });
                 }).catch(()=>{
                   loading.dismiss();
@@ -203,7 +200,6 @@ export class EmailPage implements OnInit {
   }
 
   changeMail() {
-    console.log(this.email);
 
     const body = new URLSearchParams();
     body.set('correo', this.email);
@@ -216,11 +212,9 @@ export class EmailPage implements OnInit {
     };
 
     const url = 'http://18.235.164.159/call-tracking/api/v1/mailing/';
-    console.log(url, body.toString(), options);
       this.http.post(url, body.toString(), options).subscribe(
         data => {
           console.log(JSON.stringify(data));
-
         },
         err => {
           console.log(err);
@@ -236,11 +230,10 @@ export class EmailPage implements OnInit {
     body.set('asunto', 'Prueba Weapons');
 
     this.http.put(this.apiUrl, body.toString())
-                .subscribe(data => {
-                  alert('enviado a whatsapp'+ JSON.stringify(data));
-                }, err => {
-                  alert('not good '+ JSON.stringify(err));
-                  console.log(JSON.stringify(err));
-                });
+        .subscribe(data => {
+            console.log('enviado a whatsapp'+ JSON.stringify(data));
+        }, err => {
+            console.log(JSON.stringify(err));
+      });
   }
 }
