@@ -3,7 +3,7 @@ import { AlertController, Events, LoadingController } from 'ionic-angular';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject} from 'rxjs';
 import { DomSanitizer } from '@angular/platform-browser';
-import {HTTP} from '@ionic-native/http'
+import {HTTP} from '@ionic-native/http';
 
 @Injectable()
 
@@ -130,7 +130,7 @@ export class ChatServiceProvider {
       this.tc.messagingClient.getChannelByUniqueName('CHbc465fbe83434937b7382db97e8896b1').then((channel) => {
         this.joinChannel(channel).then(() => {
           this.tc.currentChannel.removeAllListeners();
-          resolve();  
+          resolve();
         }).catch(error =>  { alert(error); reject(error)})
       });
     });
@@ -204,7 +204,7 @@ export class ChatServiceProvider {
   joinChannel(_channel) {
 
     const self = this;
-    
+
     return _channel.join().then((joinedChannel) => {
       self.tc.currentChannel = _channel;
       return joinedChannel;

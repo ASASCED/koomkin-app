@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {AlertController, IonicPage, LoadingController, NavController, NavParams} from 'ionic-angular';
 import { RestProvider } from './../../providers/rest/rest';
 import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -33,7 +33,8 @@ export class EmailPage implements OnInit {
     public authService: AuthServiceProvider,
     public http: HttpClient,
     public chatService: ChatServiceProvider,
-
+    public loadingCtrl: LoadingController,
+    public alertCtrl: AlertController
   ) {
     this.id = this.authService.id;
     this.email = this.authService.email;
@@ -65,29 +66,29 @@ export class EmailPage implements OnInit {
 
           if (this.facebook == null || this.facebook == '') {
             this.facebook = 'No cuento con esta red';
-          } 
-          
+          }
+
           if (this.instagram == null || this.instagram == '') {
             this.instagram = 'No cuento con esta red';
-          } 
-          
+          }
+
           if (this.linkedIn == null || this.linkedIn == '') {
             this.linkedIn = 'No cuento con esta red';
-          } 
-          
+          }
+
           if (this.web == null || this.web == '') {
             this.web = 'No cuento con esta red';
-          } 
-          
+          }
+
           if (this.twitter == null || this.twitter == '') {
             this.twitter = 'No cuento con esta red';
           }
-          
+
         }
       },
       err => {
         //   console.log('error');
-       
+
       }
     );
   }
@@ -117,7 +118,7 @@ export class EmailPage implements OnInit {
       this.http.post(url, body.toString(), options).subscribe(
         data => {
           console.log(JSON.stringify(data));
-          
+
         },
         err => {
           console.log(err);
@@ -125,7 +126,33 @@ export class EmailPage implements OnInit {
       );
   }
 
+
+  mostrarAlertaEstatusPdf(title,subTitle) {
+
+    let alert = this.alertCtrl.create({
+      enableBackdropDismiss: false,
+      title: title,
+      subTitle: subTitle,
+      buttons: [
+        {
+          text: 'Ok',
+          handler: data => {
+            //this.page = 'Lead';
+            //this.content.resize();
+          }
+        }
+      ]
+
+    });
+    alert.present();
+  }
+
   chooseFile(){
+
+    let loading = this.loadingCtrl.create({
+      content: 'Cargando carta presentación...'
+    });
+
 
     this.chatService.connectAuxiliarChannel().then(()=>{
 
@@ -134,37 +161,45 @@ export class EmailPage implements OnInit {
         var formData = new FormData();
         var blob = new Blob([file.data],{type: file.mediaType});
         formData.append(file.name,blob,file.name);
-        this.chatService.tc.currentChannel.sendMessage( formData ).then((message)=>{
-  
-          this.chatService.tc.currentChannel.getMessages().then((messagesPaginator)=> {
+        this.chatService.tc.currentChannel.sendMessage( formData ).then(()=>{
+          loading.present().then(()=>{
+            this.chatService.tc.currentChannel.getMessages().then((messagesPaginator)=> {
 
-            const message = messagesPaginator.items[messagesPaginator.items.length-1];
-            if (message.type === 'media') {
-              console.log('Media attributes', message.media);
-              message.media.getContentUrl().then((url)=>{
-                const httpOptions = {
-                  headers: new HttpHeaders({
-                    "Content-Type": "application/x-www-form-urlencoded",
-                  })
-                };
-                url = encodeURIComponent(url);
-                alert(url);
-                this.http.post(this.apiUrl, { nombre_archivo: this.pdf , url_archivo: url }, httpOptions)
-                .subscribe(data => {
-                  alert('enviado a whatsapp'+ JSON.stringify(data));
-                }, err => {
-                  alert('not good '+ JSON.stringify(err));
-                  console.log(JSON.stringify(err));
+              const message = messagesPaginator.items[messagesPaginator.items.length-1];
+              if (message.type === 'media') {
+                console.log('Media attributes', message.media);
+                message.media.getContentUrl().then((url)=>{
+                  const httpOptions = {
+                    headers: new HttpHeaders({
+                      "Content-Type": "application/*"
+                    })
+                  };
+                  url = encodeURIComponent(url);
+                  //alert(url);
+                  this.http.post(this.apiUrl, { nombre_archivo: this.pdf , url_archivo: url }, httpOptions)
+                    .subscribe(data => {
+                      loading.dismiss();
+                      this.mostrarAlertaEstatusPdf('Carta Presentación','El documento se guardó exitosamente');
+                      //alert('enviado a whatsapp'+ JSON.stringify(data));
+                    }, err => {
+                      loading.dismiss();
+                      this.mostrarAlertaEstatusPdf('Carta Presentación','El documento se guardó exitosamente');
+                      //alert('not good '+ JSON.stringify(err));
+                      console.log(JSON.stringify(err));
+                    });
+                }).catch(()=>{
+                  loading.dismiss();
                 });
-              });
-            }
-          });
-  
+              }
+            }).catch(()=>{loading.dismiss();});
+
         });
+
+      });
       })();
 
     });
-    
+
   }
 
   changeMail() {
@@ -185,7 +220,7 @@ export class EmailPage implements OnInit {
       this.http.post(url, body.toString(), options).subscribe(
         data => {
           console.log(JSON.stringify(data));
-          
+
         },
         err => {
           console.log(err);

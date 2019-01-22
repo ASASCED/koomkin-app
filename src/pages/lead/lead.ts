@@ -1192,9 +1192,11 @@ export class LeadPage implements OnInit {
   }
 
   openFile(url,contentType){
+
     let loading = this.loadingCtrl.create({
-      content: 'Cargando archivo multimedia...'
+      content: 'Cargando carta de presentación...'
     });
+
     loading.present().then(()=>{
      url.then((resultUrl)=>{
        var filename= 'koomkinfile';
