@@ -169,7 +169,7 @@ export class EmailPage implements OnInit {
                 message.media.getContentUrl().then((url)=>{
                   const httpOptions = {
                     headers: new HttpHeaders({
-                      "Content-Type": "application/*"
+                      "Content-Type": "application/x-www-form-urlencoded",
                     })
                   };
                   url = encodeURIComponent(url);
@@ -181,8 +181,12 @@ export class EmailPage implements OnInit {
                       //alert('enviado a whatsapp'+ JSON.stringify(data));
                     }, err => {
                       loading.dismiss();
-                      this.mostrarAlertaEstatusPdf('Carta Presentación','El documento se guardó exitosamente');
-                      //alert('not good '+ JSON.stringify(err));
+                      if(err.status === 200){
+                        this.mostrarAlertaEstatusPdf('Carta Presentación','El documento se guardó exitosamente.');
+                      }else{
+                        this.mostrarAlertaEstatusPdf('Carta Presentación','Ocurrió un problema durante la carga del documento.');
+                      }
+                      console.log(JSON.stringify(err));
                     });
                 }).catch(()=>{
                   loading.dismiss();
@@ -190,9 +194,9 @@ export class EmailPage implements OnInit {
               }
             }).catch(()=>{loading.dismiss();});
 
-        });
+          });
 
-      });
+        });
       })();
 
     });
