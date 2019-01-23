@@ -61,7 +61,7 @@
         </tr>
     </table>
     <div class="cuadro" style="margin-bottom: 6%;">
-        <button *ngIf="vista == 'informacion'" class="enviar-mail" (click)="changePage('editar')">Enviar Vista Previa</button>
+        <button *ngIf="vista == 'informacion'" class="enviar-mail" (click)="enviarVistaPrevia();">Enviar Vista Previa</button>
     </div>
     <div class="cuadro">
         <button *ngIf="vista == 'informacion'" class="edit" (click)="changePage('editar')">Modificar Datos</button>

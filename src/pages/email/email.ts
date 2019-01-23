@@ -30,7 +30,8 @@ export class EmailPage implements OnInit {
   public web;
   public twitter;
   public uuid;
-  apiUrl = "http://18.235.164.159/call-tracking/api/v1/mailing/";
+  apiUrl = 'http://18.235.164.159/call-tracking/api/v1/mailing/';
+
   channelsidaux = "CHbc465fbe83434937b7382db97e8896b1";
 
   constructor(
@@ -100,8 +101,6 @@ export class EmailPage implements OnInit {
   }
 
   changeInfo() {
-    console.log("entro");
-
     const body = new URLSearchParams();
     body.set("id_usuario", this.id);
     body.set("saludo", this.saludo);
@@ -119,13 +118,21 @@ export class EmailPage implements OnInit {
       )
     };
 
-    const url = "http://18.235.164.159/call-tracking/api/v1/mailing/";
-    this.http.post(url, body.toString(), options).subscribe(
+    this.http.post(this.apiUrl, body.toString(), options).subscribe(
       data => {
         console.log(JSON.stringify(data));
       },
       err => {
-        console.log(err);
+        console.log('respuesta porst mensaje');
+        if (err.status === 200) {
+          this.mostrarGuardado(
+            "Se ha guardado tu información con éxito "
+          );
+        } else {
+          this.mostrarGuardado(
+            "No se ha podido guardar tu información"
+          );
+        }
       }
     );
   }
@@ -224,51 +231,68 @@ export class EmailPage implements OnInit {
   }
 
   changeMail() {
+    console.log(this.email);
     const body = new URLSearchParams();
-    body.set("correo", this.email);
-    body.set("tipo", "3");
+    body.set('id_usuario', this.id);
+    body.set('correo', this.email);
+    body.set('tipo', '3');
     const options = {
       headers: new HttpHeaders().set(
-        "Content-Type",
-        "application/x-www-form-urlencoded"
+        'Content-Type',
+        'application/x-www-form-urlencoded'
       )
     };
 
-    const url = "http://18.235.164.159/call-tracking/api/v1/mailing/";
-    this.http.post(url, body.toString(), options).subscribe(
-      data => {
-        console.log(JSON.stringify(data));
-      },
-      err => {
-        console.log(err);
-      }
-    );
+      this.http.post(this.apiUrl, body.toString(), options).subscribe(
+        data => {         
+            console.log(JSON.stringify(data), 'enviado');
+        },
+        err => {
+            console.log(err);
+        }
+      );
   }
 
   enviarVistaPrevia() {
-    const body = new URLSearchParams();
-    body.set("id_lead", this.uuid );
-    body.set("tipo_correo", "2");
-    body.set("asunto", "Vista Previa");
 
-    this.http.put(this.apiUrl, body.toString()).subscribe(
-      data => {
-        this.mostrarGuardado(
-          "Se ha guardado tu información con éxito "
-        );
-      },
-      err => {
-        if (err.status === 200) {
+    let loading = this.loadingCtrl.create({
+      content: "Enviando Vista Previa..."
+    });
+
+    const body = new URLSearchParams();
+    body.set('id_usuario', this.uuid);
+    body.set('tipo_correo', '2');
+    body.set('asunto', 'Vista Previa');
+
+    const options = {
+      headers: new HttpHeaders().set(
+        'Content-Type',
+        'application/x-www-form-urlencoded'
+      )
+    };
+
+    loading.present().then(() => {
+
+    this.http.put(this.apiUrl, body.toString(), options)
+        .subscribe(data => {
+            loading.dismiss();
           this.mostrarGuardado(
-            "Se ha guardado tu información con éxito "
+            "Se ha enviado la Vista Previa"
           );
-        } else {
-          this.mostrarGuardado(
-            "No se ha podido guardar tu información"
-          );
-        }
-      }
-    );
+        }, err => {
+          if (err.status === 200) {
+            loading.dismiss();
+            this.mostrarGuardado(
+              "Se ha enviado la Vista Previa"
+            );
+          } else {
+            loading.dismiss();
+            this.mostrarGuardado(
+              "No se ha podido enviar la Vista Previa"
+            );
+          }
+        });
+      });
   }
 
   public cambioInformacion() {
