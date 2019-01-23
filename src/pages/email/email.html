@@ -66,7 +66,7 @@
     <div class="cuadro">
         <button *ngIf="vista == 'informacion'" class="edit" (click)="changePage('editar')">Modificar Datos</button>
         <button *ngIf="vista === 'editar'" class="edit" (click)="changePage('informacion');">Cancelar</button>
-        <button *ngIf="vista === 'editar'" class="edit" (click)="changePage('informacion');changeInfo();changeMail();">Guardar</button>
+        <button *ngIf="vista === 'editar'" class="edit" (click)="changePage('informacion');changeInfo();changeMail();cambioInformacion()">Guardar</button>
     </div>
 
 </ion-content>

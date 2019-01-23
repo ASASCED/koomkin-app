@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController, AlertController} from 'ionic-angular';
 import { Clipboard } from '@ionic-native/clipboard';
 import { RestProvider } from './../../providers/rest/rest';
 import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
@@ -24,10 +24,10 @@ export class SocialPage implements OnInit{
 
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
-    private clipboard: Clipboard,
     public provedor: RestProvider,
     public authService: AuthServiceProvider,
     public toastCtrl: ToastController,
+    public alertCtrl: AlertController,
     public http: HttpClient) {
       this.id = this.authService.id;
   }
@@ -39,6 +39,20 @@ export class SocialPage implements OnInit{
 
   changePage(pagina) {
     this.vista = pagina;
+  }
+
+  changeTengo(red) {
+    if (red == 'facebook') {
+      this.facebook = 'No cuento con esta red';
+    } else if (red == 'instagram') {
+      this.instagram = 'No cuento con esta red';
+    } else if (red == 'linkedIn') {
+      this.linkedIn = 'No cuento con esta red';
+    } else if (red == 'web') {
+      this.web = 'No cuento con esta red';
+    } else if (red == 'twitter') {
+      this.twitter = 'No cuento con esta red';
+    }
   }
 
   getMailCliente(idUsuario) {
@@ -106,13 +120,56 @@ export class SocialPage implements OnInit{
     console.log(url, body.toString(), options);
       this.http.post(url, body.toString(), options).subscribe(
         data => {
-          console.log(JSON.stringify(data));
-          
+          this.mostrarGuardado(
+            "Se ha guardado tu información con éxito "
+          );  
+        },
+        err => {
+          if (err.status === 200) {
+            this.mostrarGuardado(
+              "Se ha guardado tu información con éxito "
+            );
+          } else {
+            this.mostrarGuardado(
+              "No se ha podido guardar tu información"
+            );
+          }
+        }
+      );
+  }
+
+  public cambioInformacion() {
+    const canal = 'app';
+    const tipo = 'redes-sociales';
+    return new Promise((resolve, reject) => {
+      const url = 'http://www.koomkin.com:4859/clickCambioInformacion/' + this.id + '/' + canal + '/' + tipo;
+      this.http.get(url).subscribe(
+        data => {
+          resolve();
         },
         err => {
           console.log(err);
+          reject(err);
         }
       );
+    });
+  }
+
+  mostrarGuardado(title) {
+    let alert = this.alertCtrl.create({
+      enableBackdropDismiss: false,
+      title: title,
+      buttons: [
+        {
+          text: "Ok",
+          handler: data => {
+            //this.page = 'Lead';
+            //this.content.resize();
+          }
+        }
+      ]
+    });
+    alert.present();
   }
 
 }

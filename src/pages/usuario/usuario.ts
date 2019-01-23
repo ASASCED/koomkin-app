@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController, AlertController } from 'ionic-angular';
 import { CancelarPage } from './../cancelar/cancelar';
 import { Payment } from '../../models/Payment';
 import { UserProvider } from '../../providers/user/user';
@@ -56,6 +56,7 @@ export class UsuarioPage implements OnInit {
     public modalCtrl: ModalController,
     public userService: UserProvider,
     public authService: AuthServiceProvider,
+    public alertCtrl: AlertController,
     public http: HttpClient) {
       this.id = this.authService.id;
   }
@@ -183,10 +184,14 @@ export class UsuarioPage implements OnInit {
       // console.log(str);
     this.userService.updateUserData(str)
       .then(res => {
-        console.log(res);
+        this.mostrarGuardado(
+          "Se ha guardado tu información con éxito "
+        );
       })
       .catch(err => {
-        console.log(err);
+        this.mostrarGuardado(
+          "No se ha podido guardar tu información"
+        );
       });
   }
 
@@ -204,9 +209,10 @@ export class UsuarioPage implements OnInit {
     return new Promise((resolve, reject) => {
       this.http.post(url, body.toString(), options)
         .subscribe(data => {
+          
           return resolve();
         }, err => {
-         // console.log('error');
+          
           return resolve(err);
         });
     });
@@ -228,5 +234,44 @@ export class UsuarioPage implements OnInit {
     });
   }
 
+  public cambioInformacion(tipo) {
+    const canal = 'app';
+
+    return new Promise((resolve, reject) => {
+      const url = 'http://www.koomkin.com:4859/clickCambioInformacion/' + this.id + '/' + canal + '/' + tipo;
+      this.http.get(url).subscribe(
+        data => {
+          resolve();
+        },
+        err => {
+          console.log(err);
+          reject(err);
+        }
+      );
+    });
+  }
+
+  public cambioAnidado() {
+    this.cambioInformacion('general');
+    this.cambioInformacion('call-tracking');
+    this.cambioInformacion('chat-bot');
+  }
+
+  mostrarGuardado(title) {
+    let alert = this.alertCtrl.create({
+      enableBackdropDismiss: false,
+      title: title,
+      buttons: [
+        {
+          text: "Ok",
+          handler: data => {
+            //this.page = 'Lead';
+            //this.content.resize();
+          }
+        }
+      ]
+    });
+    alert.present();
+  }
 
 }

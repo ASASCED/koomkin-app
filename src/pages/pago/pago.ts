@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController, AlertController } from 'ionic-angular';
 import { Payment } from '../../models/Payment';
 import { UserProvider } from '../../providers/user/user';
 import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
 import { CancelarPage } from './../cancelar/cancelar';
+import { HttpHeaders, HttpClient } from '@angular/common/http';
 
 @IonicPage()
 @Component({
@@ -50,7 +51,9 @@ export class PagoPage implements OnInit{
     public navParams: NavParams,
     public modalCtrl: ModalController,
     public userService: UserProvider,
-    public authService: AuthServiceProvider) {
+    public authService: AuthServiceProvider,
+    public alertCtrl: AlertController,
+    public http: HttpClient) {
       this.id = this.authService.id;
   }
 
@@ -180,11 +183,49 @@ export class PagoPage implements OnInit{
     // console.log(str);
     this.userService.updateUserData(str)
       .then(res => {
-        console.log(res);
+        this.mostrarGuardado(
+          "Se ha guardado tu información con éxito "
+        );
       })
       .catch(err => {
-        console.log(err);
+        this.mostrarGuardado(
+          "No se ha podido guardar tu información"
+        );
       });
+  }
+
+  public cambioInformacion() {
+    const canal = 'app';
+    const tipo = 'fiscales';
+    return new Promise((resolve, reject) => {
+      const url = 'http://www.koomkin.com:4859/clickCambioInformacion/' + this.id + '/' + canal + '/' + tipo;
+      this.http.get(url).subscribe(
+        data => {
+          resolve();
+        },
+        err => {
+          console.log(err);
+          reject(err);
+        }
+      );
+    });
+  }
+
+  mostrarGuardado(title) {
+    let alert = this.alertCtrl.create({
+      enableBackdropDismiss: false,
+      title: title,
+      buttons: [
+        {
+          text: "Ok",
+          handler: data => {
+            //this.page = 'Lead';
+            //this.content.resize();
+          }
+        }
+      ]
+    });
+    alert.present();
   }
 
 }

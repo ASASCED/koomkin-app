@@ -21,6 +21,7 @@ export class AuthServiceProvider {
   public notificationActive: boolean = false;
   public userOnAuthentiationProcess
   public userFiscal;
+  public uuid;
 
   constructor(public http: HttpClient, public plt: Platform) {
     this.userLogged = false;
@@ -49,6 +50,7 @@ export class AuthServiceProvider {
           this.email = this.info[0].EMAIL;
           this.empresa = this.info[0].NOMEMPRESACOMPRADOR;
           this.mensajebot = this.info[0].mensajebot;
+          this.uuid = this.info[0].uuid;
          // console.log(this.mensajebot);
           if (this.plt.is('ios') || this.plt.is('android')) {
             window["plugins"].OneSignal.sendTag("chat", this.info[0]['chat']);
