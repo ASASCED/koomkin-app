@@ -1194,7 +1194,7 @@ export class LeadPage implements OnInit {
   openFile(url,contentType){
 
     let loading = this.loadingCtrl.create({
-      content: 'Cargando carta de presentación...'
+      content: 'Cargando archivo multimedia...'
     });
 
     loading.present().then(()=>{
