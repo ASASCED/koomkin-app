@@ -535,6 +535,10 @@ $toUserBackgroundColor: red;
 
 .message-wrap {
     padding: 0 10px;
+    -webkit-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+     user-select: text;
     .message {
         position: relative;
         padding: 7px 0;

@@ -8,7 +8,7 @@ import { StreamingMedia, StreamingAudioOptions } from '@ionic-native/streaming-m
 import { Storage } from '@ionic/storage';
 import { ElementRef, ViewChild, ViewChildren } from '@angular/core';
 import { Content } from 'ionic-angular';
-import { ChatServiceProvider, ChatMessage, UserInfo } from "../../providers/chat-service/chat-service";
+import { ChatServiceProvider, ChatMessage} from "../../providers/chat-service/chat-service";
 import { HttpHeaders } from '@angular/common/http';
 import {FileOpener } from '@ionic-native/file-opener';
 import { File } from '@ionic-native/file';
@@ -190,11 +190,8 @@ export class LeadPage implements OnInit {
   }
 
   public msgListLead: ChatMessage[] = [];
-  user: UserInfo;
-  toUser: UserInfo;
   editorMsg = '';
   showEmojiPicker = false;
-  chatPageVisited = false;
 
   openModalFuncionalidadPrueba() {
 
@@ -425,16 +422,6 @@ export class LeadPage implements OnInit {
     if (!this.leadActual.clave) {
       this.leadActual.clave = this.leadActual.ID_LEAD;  // Por si llega el Lead por notificación.
     }
-
-    this.chatService.getUserInfo()
-      .then((res) => {
-        this.user = res
-      });
-
-    this.toUser = {
-      id: navParams.get('toUserId'),
-      name: navParams.get('toUserName')
-    };
 
     if (this.leadActual.desdeNotificacion === true) {
       this.authService.setNotificationActive(true);
@@ -1192,44 +1179,38 @@ export class LeadPage implements OnInit {
   }
 
   openFile(url,contentType){
-
     let loading = this.loadingCtrl.create({
       content: 'Cargando archivo multimedia...'
     });
 
     loading.present().then(()=>{
-     url.then((resultUrl)=>{
-       var filename= 'koomkinfile';
-       this.fileTransfers.download( resultUrl["changingThisBreaksApplicationSecurity"], this.file.dataDirectory + filename,true ).then((entry) => {
-         this.fileOpener.open( this.file.dataDirectory + filename, contentType
-         ).then(() => {
-           loading.dismiss();
-           console.log('then');
-         }).catch(e =>{
-           loading.dismiss();
-           console.log('catch');
-           console.log('Open error' + e);
-         });
-       }).catch(e => {
-         console.log('Save error' + JSON.stringify(e));
-         loading.dismiss();
-       });
-     }, (error) => {
-       console.log('hello '+JSON.stringify(error));
-       loading.dismiss();
-     });
-   }).catch((err)=>{
+
+      var filename= 'koomkinfile';
+      // this.fileTransfers.download( resultUrl["changingThisBreaksApplicationSecurity"], this.file.dataDirectory + filename,true ).then((entry) => {
+      this.fileOpener.open( url['__zone_symbol__value'], contentType
+      ).then(() => {
+        loading.dismiss();
+        console.log('then');
+      }).catch(e =>{
+        loading.dismiss();
+        console.log('catch');
+        console.log('Open error' + e);
+      });
+
+    }).catch((err)=>{
       //loading.dismiss();
-     alert(err);
-   });
+      //alert(err);
+
+    });
+
   }
 
   launch(url) {
-    url.then((url2)=>{
-      this.platform.ready().then(() => {
-        cordova.InAppBrowser.open(url2["changingThisBreaksApplicationSecurity"], "_system", "location=no");
-      });
+    //url.then((url2)=>{
+    this.platform.ready().then(() => {
+      cordova.InAppBrowser.open(url, "_system", "location=no");
     });
+    //});
   }
 }
 
