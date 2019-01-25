@@ -168,7 +168,8 @@ export class ChatServiceProvider {
                     attributes: message.attributes,
                     contentType: message.attributes.mime,
                     filename: message.attributes.filename,
-                    index: message.index
+                    index: message.index,
+                    channel: message.channel.sid
 
                   }
 
@@ -183,7 +184,8 @@ export class ChatServiceProvider {
                     attributes: message.attributes,
                     contentType: message.media.state.contentType,
                     filename: message.media.filename,
-                    index: message.index
+                    index: message.index,
+                    channel: message.channel.sid
                   };
 
                 }
@@ -200,7 +202,8 @@ export class ChatServiceProvider {
                   attributes: message.attributes,
                   contentType: null,
                   filename: null,
-                  index: message.index
+                  index: message.index,
+                  channel: message.channel.sid
                 };
               }
 
@@ -359,7 +362,8 @@ export class ChatServiceProvider {
                 attributes: message.attributes,
                 contentType: message.attributes.mime,
                 filename: this.getFileName(message.attributes.file_url),
-                index: message.index
+                index: message.index,
+                channel: message.channel.sid
               }
 
             } else {
@@ -373,8 +377,8 @@ export class ChatServiceProvider {
                 attributes: message.attributes,
                 contentType: message.media.state.contentType,
                 filename: message.media.state.filename,
-                index: message.index
-
+                index: message.index,
+                channel: message.channel.sid
               };
 
             }
@@ -391,7 +395,8 @@ export class ChatServiceProvider {
               attributes: message.attributes,
               contentType: null,
               filename: null,
-              index: message.index
+              index: message.index,
+              channel: message.channel.sid
             };
           }
 
@@ -456,7 +461,8 @@ export class ChatServiceProvider {
               attributes: message.attributes,
               contentType: message.attributes.mime,
               filename: this.getFileName(message.attributes.file_url),
-              index: message.index
+              index: message.index,
+              channel: message.channel.sid
             }
 
           } else {
@@ -470,7 +476,8 @@ export class ChatServiceProvider {
               attributes: message.attributes,
               contentType: message.media.state.contentType,
               filename: message.media.state.filename,
-              index: message.index
+              index: message.index,
+              channel: message.channel.sid
 
             };
 
@@ -486,7 +493,8 @@ export class ChatServiceProvider {
             attributes: message.attributes,
             contentType: null,
             filename: null,
-            index: message.index
+            index: message.index,
+            channel: message.channel.sid
           };
         }
 
@@ -508,16 +516,21 @@ export class ChatServiceProvider {
 
   storeConversation(messagesArr){
 
-    this.storage.set(this.tc.currentChannel['sid'], JSON.stringify(messagesArr)).then((data) => {
-      //alert('messages saved');
-      this.msgListSource.next(JSON.parse(data));
-      this.loadingMessagesSource.next(false);
-    }).catch(reason => {
-      //alert('message not saved');
-      this.loadingMessagesSource.next(messagesArr);
-      console.log(reason);
-      this.loadingMessagesSource.next(false);
-    });
+    var currentChannel = this.tc.currentChannel['sid'];
+    var messagesChannel = messagesArr[0].channel;
+    if(currentChannel === messagesChannel){
+
+      this.storage.set(currentChannel, JSON.stringify(messagesArr)).then((data) => {
+        this.msgListSource.next(JSON.parse(data));
+        this.loadingMessagesSource.next(false);
+      }).catch(reason => {
+        //alert('message not saved');
+        this.loadingMessagesSource.next(messagesArr);
+        console.log(reason);
+        this.loadingMessagesSource.next(false);
+      });
+
+    }
 
   }
 
@@ -660,7 +673,7 @@ export class ChatMessage {
   contentType: any;
   filename: any;
   index: any;
-
+  channel: any;
 }
 
 
