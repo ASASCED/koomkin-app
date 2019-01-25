@@ -317,40 +317,23 @@ export class EmailPage implements OnInit {
       content: "Enviando Vista Previa..."
     });
 
-    const body = new URLSearchParams();
-    body.set('id_usuario', this.uuid);
-    body.set('tipo_correo', '2');
-    body.set('asunto', 'Vista Previa');
-
-    const options = {
-      headers: new HttpHeaders().set(
-        'Content-Type',
-        'application/x-www-form-urlencoded'
-      )
-    };
-
     loading.present().then(() => {
 
-    this.http.put(this.apiUrl, body.toString(), options)
-        .subscribe(data => {
-            loading.dismiss();
-          this.mostrarGuardado(
-            "Se ha enviado la Vista Previa"
-          );
-        }, err => {
-          if (err.status === 200) {
-            loading.dismiss();
-            this.mostrarGuardado(
-              "Se ha enviado la Vista Previa"
-            );
-          } else {
-            loading.dismiss();
-            this.mostrarGuardado(
-              "No se ha podido enviar la Vista Previa"
-            );
-          }
-        });
+      this.http2.put(this.apiUrl, {id_usuario:this.uuid,tipo_correo:'2','asunto':'Vista Previa'}, {'Content-Type':'application/x-www-form-urlencoded'}).then((result)=> {
+        loading.dismiss();
+        this.mostrarGuardado(
+          "Se ha enviado la Vista Previa"
+        );
+
+      }).catch((reason)=> {
+        loading.dismiss();
+        this.mostrarGuardado(
+          "No se ha podido enviar la Vista Previa"
+        );
       });
+    });
+
+
   }
 
   public cambioInformacion() {
