@@ -10,6 +10,7 @@ import { RestProvider } from "./../../providers/rest/rest";
 import { AuthServiceProvider } from "../../providers/auth-service/auth-service";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { ChatServiceProvider } from "../../providers/chat-service/chat-service";
+import {HTTP} from '@ionic-native/http'
 
 @IonicPage()
 @Component({
@@ -35,6 +36,7 @@ export class EmailPage implements OnInit {
   channelsidaux = "CHbc465fbe83434937b7382db97e8896b1";
 
   constructor(
+    private http2: HTTP,
     public navCtrl: NavController,
     public navParams: NavParams,
     public provedor: RestProvider,
