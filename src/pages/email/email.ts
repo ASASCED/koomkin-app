@@ -311,10 +311,6 @@ export class EmailPage implements OnInit {
 
   enviarVistaPrevia() {
 
-    let loading = this.loadingCtrl.create({
-      content: "Enviando Vista Previa..."
-    });
-
     const body = new URLSearchParams();
     body.set('id_usuario', this.uuid);
     body.set('tipo_correo', '2');
@@ -327,23 +323,19 @@ export class EmailPage implements OnInit {
       )
     };
 
-    loading.present().then(() => {
-
     this.http.put(this.apiUrl, body.toString(), options)
         .subscribe(data => {
-            loading.dismiss();
-            this.showSuccessP();
+          this.showSuccessP();
+         
         }, err => {
           if (err.status === 200) {
-            loading.dismiss();
             this.showSuccessP();
-          } else {
-            loading.dismiss();
+          } else { 
             this.showErrorP();
           }
         });
-      });
   }
+
 
   public cambioInformacion() {
     const canal = "app";
@@ -366,23 +358,6 @@ export class EmailPage implements OnInit {
         }
       );
     });
-  }
-
-  mostrarGuardado(title) {
-    let alert = this.alertCtrl.create({
-      enableBackdropDismiss: false,
-      title: title,
-      buttons: [
-        {
-          text: "Ok",
-          handler: data => {
-            //this.page = 'Lead';
-            //this.content.resize();
-          }
-        }
-      ]
-    });
-    alert.present();
   }
 
   public showSuccessP() {
