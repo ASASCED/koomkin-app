@@ -5,6 +5,7 @@ import { UserProvider } from '../../providers/user/user';
 import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
 import { CancelarPage } from './../cancelar/cancelar';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
+import swal from 'sweetalert2';
 
 @IonicPage()
 @Component({
@@ -183,14 +184,10 @@ export class PagoPage implements OnInit{
     // console.log(str);
     this.userService.updateUserData(str)
       .then(res => {
-        this.mostrarGuardado(
-          "Se ha guardado tu información con éxito "
-        );
+        this.showSuccess();
       })
       .catch(err => {
-        this.mostrarGuardado(
-          "No se ha podido guardar tu información"
-        );
+        this.showError();
       });
   }
 
@@ -211,21 +208,27 @@ export class PagoPage implements OnInit{
     });
   }
 
-  mostrarGuardado(title) {
-    let alert = this.alertCtrl.create({
-      enableBackdropDismiss: false,
-      title: title,
-      buttons: [
-        {
-          text: "Ok",
-          handler: data => {
-            //this.page = 'Lead';
-            //this.content.resize();
-          }
-        }
-      ]
+  public showSuccess() {
+    swal({
+      title: 'Se ha guardado tu información con éxito',
+      type: 'success',
+      showCancelButton: false,
+      confirmButtonColor: '#3085d6',
+      confirmButtonText: 'OK',
+      reverseButtons: true,
     });
-    alert.present();
+  }
+
+  public showError() {
+    swal({
+      title: 'No se ha podido guardar tu información',
+      text: 'Por favor complete los campos requeridos *',
+      type: 'error',
+      showCancelButton: false,
+      confirmButtonColor: '#3085d6',
+      confirmButtonText: 'OK',
+      reverseButtons: true
+    });
   }
 
 }

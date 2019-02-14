@@ -10,6 +10,7 @@ import { RestProvider } from "./../../providers/rest/rest";
 import { AuthServiceProvider } from "../../providers/auth-service/auth-service";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { ChatServiceProvider } from "../../providers/chat-service/chat-service";
+import swal from 'sweetalert2';
 
 @IonicPage()
 @Component({
@@ -120,18 +121,15 @@ export class EmailPage implements OnInit {
 
     this.http.post(this.apiUrl, body.toString(), options).subscribe(
       data => {
-        console.log(JSON.stringify(data));
+       // console.log(JSON.stringify(data));
+       this.showSuccess();
       },
       err => {
         console.log('respuesta porst mensaje');
         if (err.status === 200) {
-          this.mostrarGuardado(
-            "Se ha guardado tu información con éxito "
-          );
+          this.showSuccess();
         } else {
-          this.mostrarGuardado(
-            "No se ha podido guardar tu información"
-          );
+          this.showError();
         }
       }
     );
@@ -334,20 +332,14 @@ export class EmailPage implements OnInit {
     this.http.put(this.apiUrl, body.toString(), options)
         .subscribe(data => {
             loading.dismiss();
-          this.mostrarGuardado(
-            "Se ha enviado la Vista Previa"
-          );
+            this.showSuccessP();
         }, err => {
           if (err.status === 200) {
             loading.dismiss();
-            this.mostrarGuardado(
-              "Se ha enviado la Vista Previa"
-            );
+            this.showSuccessP();
           } else {
             loading.dismiss();
-            this.mostrarGuardado(
-              "No se ha podido enviar la Vista Previa"
-            );
+            this.showErrorP();
           }
         });
       });
@@ -391,5 +383,49 @@ export class EmailPage implements OnInit {
       ]
     });
     alert.present();
+  }
+
+  public showSuccessP() {
+    swal({
+      title: 'Se ha enviado la vista previa con éxito',
+      type: 'success',
+      showCancelButton: false,
+      confirmButtonColor: '#3085d6',
+      confirmButtonText: 'OK',
+      reverseButtons: true,
+    });
+  }
+
+  public showErrorP() {
+    swal({
+      type: 'error',
+      showCancelButton: false,
+      confirmButtonColor: '#3085d6',
+      confirmButtonText: 'OK',
+      reverseButtons: true
+    });
+  }
+
+  public showSuccess() {
+    swal({
+      title: 'Se ha guardado tu información con éxito',
+      type: 'success',
+      showCancelButton: false,
+      confirmButtonColor: '#3085d6',
+      confirmButtonText: 'OK',
+      reverseButtons: true,
+    });
+  }
+
+  public showError() {
+    swal({
+      title: 'No se ha podido guardar tu información',
+      text: 'Por favor complete los campos requeridos *',
+      type: 'error',
+      showCancelButton: false,
+      confirmButtonColor: '#3085d6',
+      confirmButtonText: 'OK',
+      reverseButtons: true
+    });
   }
 }

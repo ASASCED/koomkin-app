@@ -51,6 +51,7 @@ import {HTTP} from '@ionic-native/http';
 import { EmailPage } from '../pages/email/email';
 import { SocialPage } from '../pages/social/social';
 import { Clipboard } from '@ionic-native/clipboard';
+import { SweetAlert2Module } from '@toverux/ngx-sweetalert2';
 
 
 @NgModule({
@@ -91,6 +92,7 @@ import { Clipboard } from '@ionic-native/clipboard';
     HttpModule,
     ReportePageModule,
     Ng2GoogleChartsModule,
+    SweetAlert2Module.forRoot(),
     IonicStorageModule.forRoot(),
     IonicModule.forRoot(MyApp,{
       backButtonText: 'Regresar',

@@ -96,6 +96,9 @@
     </table>
 
     <div class="cuadro">
+        <button *ngIf="vista == 'informacion'" class="cancelar-suscripcion" (click)="modalCancelMembership()">Cancelar Suscripción</button>
+        <br>
+        <br>
         <button *ngIf="vista == 'informacion'" class="edit" (click)="changePage('editar')">Modificar Datos</button>
         <button *ngIf="vista === 'editar'" class="edit" (click)="changePage('informacion');">Cancelar</button>
         <button *ngIf="vista === 'editar'" class="edit" (click)="changePage('informacion');updateUser();updateMessage(mensaje);cambiarMensaje(mensaje);cambioAnidado()">Guardar</button>
