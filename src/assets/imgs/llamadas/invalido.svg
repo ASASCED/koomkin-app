@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 24 24">
+  <defs>
+    <style>
+      .cls-1, .cls-5 {
+        fill: #c7375a;
+      }
+
+      .cls-2, .cls-3 {
+        fill: none;
+      }
+
+      .cls-3 {
+        stroke: #c7375a;
+      }
+
+      .cls-4 {
+        clip-path: url(#clip-path);
+      }
+
+      .cls-5 {
+        font-size: 8px;
+        font-family: Helvetica-Bold, Helvetica;
+        font-weight: 700;
+      }
+    </style>
+    <clipPath id="clip-path">
+      <path id="Path_590" data-name="Path 590" class="cls-1" d="M0-21.178H15.887V-15.2H0Z" transform="translate(0 21.178)"/>
+    </clipPath>
+  </defs>
+  <g id="Group_4346" data-name="Group 4346" transform="translate(-1437 -1295)">
+    <rect id="Rectangle_4610" data-name="Rectangle 4610" class="cls-2" width="24" height="24" transform="translate(1437 1295)"/>
+    <g id="Group_4343" data-name="Group 4343" transform="translate(1441 1305)">
+      <g id="Group_1141" data-name="Group 1141" transform="translate(5.121)">
+        <path id="Path_587" data-name="Path 587" class="cls-3" d="M896.735,281l-5.051,4.6-2.9-3.327" transform="translate(-888.307 -281)"/>
+        <path id="Path_588" data-name="Path 588" class="cls-3" d="M0,0V2.661H2.419" transform="translate(2.824 1.265) rotate(94)"/>
+      </g>
+      <g id="Group_1144" data-name="Group 1144" transform="translate(0 6.774)">
+        <g id="Group_1143" data-name="Group 1143" class="cls-4" transform="translate(0 0)">
+          <g id="Group_1142" data-name="Group 1142" transform="translate(0 0)">
+            <path id="Path_589" data-name="Path 589" class="cls-1" d="M-2.523-14.635l2.792.045a1.029,1.029,0,0,0,1.023-1.029l.023-1.407.217-.058a9.914,9.914,0,0,1,2.923-.422,9.941,9.941,0,0,1,2.913.516l.21.063-.016.943-.007.464a1.028,1.028,0,0,0,.99,1.061l2.793.045a1.027,1.027,0,0,0,1.023-1.029l.01-.789h-.021a3.224,3.224,0,0,0-.234-.9,3.318,3.318,0,0,0-.424-.731c-1.316-1.735-3.4-2.466-7.19-2.527-5.239-.083-7.19,2.2-7.273,2.295a3.364,3.364,0,0,0-.447.72,3.183,3.183,0,0,0-.261.888h-.016l-.021.79a1.031,1.031,0,0,0,.992,1.061" transform="translate(3.515 20.392)"/>
+          </g>
+        </g>
+      </g>
+    </g>
+    <text id="_" data-name="?" class="cls-5" transform="translate(1449 1303)"><tspan x="-2.443" y="0">?</tspan></text>
+  </g>
+</svg>

@@ -1,0 +1,71 @@
+banner {
+    .flex-col {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    span {
+        display: inline-block;
+        vertical-align: middle;
+        color: white;
+        font-size: 5vw;
+        font-weight: 700;
+        margin-top: 2%;
+        text-align: left;
+    }
+    .row {
+        margin-bottom: 1%;
+        height: 100%;
+        display: flex;
+        vertical-align: middle;
+        justify-content: center;
+        text-align: left;
+    }
+    img {
+        vertical-align: middle;
+        max-height: 45px;
+        max-width: 160px;
+    }
+    .anuncio {
+        height: 70px;
+        background: #288AC1;
+        vertical-align: middle;
+        margin-bottom: 15%;
+        align-items: center;
+    }
+    .anuncio-mensaje {
+        position: absolute;
+        height: 90px;
+        background: #F5F5F5;
+        vertical-align: middle;
+        margin-bottom: 0%;
+        align-items: center;
+        width: 85%;
+        margin-left: 10%;
+        top: 4.5%;
+        border-radius: 10px;
+        box-shadow: 10px 10px 5px -6px rgba(0, 0, 0, 0.33);
+    }
+    .anuncio-img {
+        width: 20%;
+        position: absolute;
+        top: 15%;
+        left: -10%;
+        max-height: 60px;
+    }
+    .anuncio-grid {
+        height: 100%;
+        padding: 0px !important;
+        margin-left: 10%;
+        width: 90%;
+        border-radius: 10px;
+    }
+    .anuncio-titulo {
+        color: #FE703F;
+        font-size: 4.3vw;
+    }
+    .anuncio-contenido {
+        color: #707070;
+        font-size: 3.75vw;
+    }
+}

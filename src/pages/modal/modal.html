@@ -1,0 +1,43 @@
+<ion-header>
+
+    <ion-toolbar>
+        <ion-title>Módulo de chat</ion-title>
+    </ion-toolbar>
+
+</ion-header>
+<ion-content padding>
+    <br>
+    <ion-grid>
+        <ion-row>
+            <ion-col col-4>
+            </ion-col>
+            <ion-col col-4>
+                <img src="assets/imgs/iconos/icn_underconstruction.svg" width="100%" />
+            </ion-col>
+            <ion-col col-4>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col col-12 *ngIf="respuesta===false">
+                <div>
+                    <p class="message-modal">
+                        Estamos trabajando para ofrecerte la funcionalidad de <strong>chat de venta</strong>
+                    </p>
+                    <p class="message-modal">
+                        Esta función está en construcción
+                    </p>
+                </div>
+            </ion-col>
+        </ion-row>
+        <br>
+        <ion-row *ngIf="respuesta===false">
+            <ion-col col-2>
+            </ion-col>
+            <ion-col col-8>
+                <button ion-button class="btn-modal" style="width: 100%;text-transform: none;" (click)="closeModal()">Aceptar</button>
+            </ion-col>
+            <ion-col col-2>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>

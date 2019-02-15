@@ -1,0 +1,618 @@
+<ion-header>
+    <ion-navbar color="azul">
+        <button ion-button menuToggle>
+          <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title>Empresa: {{empresa}}
+            <br>ID Cliente: {{id}}</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content class="detail-card" color="fondo">
+    <ion-card style="height: 80%;" *ngIf="hola == 1">
+        <ion-card-header class="encabezado">
+            <ion-grid>
+                <ion-row>
+                    <ion-col col-2>
+                        <img src="assets/imgs/eficiencia/trofeo.svg" style="width:60%;margin-left: 20%;margin-top: 6%;" />
+                    </ion-col>
+                    <ion-col col-10>
+                        <h1 style="font-size: 5vw;">
+                            <strong>Concurso del mes</strong>
+                        </h1>
+                        <h3 style="font-size: 3.8vw;color:#707070">Noviembre 2018</h3>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+            <hr style="background-color:rgba(112,112,112,0.3); width:94%;height: 2px;margin-top: 0;margin-bottom: 0;">
+        </ion-card-header>
+
+        <ion-card-content style="height: 130%;">
+            <main class="cuadros">
+                <div class="section1">
+                    <div class="wrapper-posicion">
+                        <div class="section1-posicion">
+                            <span class="titulo">Posición</span>
+                        </div>
+                        <div class="section2-posicion">
+                            <span class="numero">#48</span>
+                            <span class="mas-koomkin">de más de 1,000 en Koomkin</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="section2">
+                    <div class="wrapper-restante">
+                        <div class="section1-restante">
+                            <span class="titulo">Tiempo restante</span>
+                        </div>
+                        <div class="section2-restante">
+                            <span class="tiempo-numero">10 10:30</span>
+                            <span class="tiempo">días horas minutos</span>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="section3" style="height: 60%;">
+                    <div class="wrapper-momento">
+                        <div class="section1-momento">
+                            <span class="titulo">Lugar</span>
+                        </div>
+                        <div class="section2-momento">
+                            <span class="titulo">Premio</span>
+                        </div>
+                        <div class="section3-momento">
+                            <ion-grid style="padding:0;height: 100%;">
+                                <ion-row *ngFor="let ganador of ganadores; let i = index;" style="height: 10%;">
+                                    <ion-col col-4>
+                                        <img *ngIf="ganador.lugar <= 3" src="assets/imgs/eficiencia/{{ganador.lugar}}.svg" style="width: 28%;margin-left: 37%;" />
+                                        <span *ngIf="ganador.lugar > 3 && ganador.lugar <= 10">{{ganador.lugar}}</span>
+                                    </ion-col>
+                                    <ion-col col-8 style="display: grid;">
+                                        <span class="momento-empresa">{{ganador.Nombre | capitalize}}</span>
+                                    </ion-col>
+                                    <hr style="background-color:rgba(112,112,112,0.3); width:94%;height: 1px;margin-top: 0;margin-bottom: 0; ">
+                                </ion-row>
+                            </ion-grid>
+                        </div>
+                        <div class="section4-momento ">
+                            <ion-list *ngFor="let premio of premios; let i = index;">
+                                <p class="inversion"><span class="azul">${{premio}}</span> inversión adicional</p>
+                                <hr style="background-color:rgba(112,112,112,0.3); width:94%;height: 1px;margin-top: 0;margin-bottom: 0; ">
+                            </ion-list>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </ion-card-content>
+    </ion-card>
+    <ion-card style="height:120% !important; ">
+        <ion-card-header class="encabezado ">
+            <ion-grid>
+                <ion-row>
+                    <ion-col col-2>
+                        <img src="assets/imgs/eficiencia/ranking.svg " style="width:60%;margin-left: 20%;margin-top: 5%; " />
+                    </ion-col>
+                    <ion-col col-8>
+                        <h1 style="font-size: 5vw; ">
+                            <strong>Ranking de ventas</strong>
+                        </h1>
+                        <h3 style="font-size: 3.8vw;color:#707070 ">{{months}} {{years}}</h3>
+                    </ion-col>
+                    <ion-col col-2>
+                        <img src="assets/imgs/eficiencia/info.svg " style="width:60%;margin-left: 20%;margin-top: 5%; " (click)="openModalFuncionalidadPrueba( 'grafica', 'Ranking de Ventas',1);getInsertClickTooltip('Ranking') " />
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+            <hr style="background-color:rgba(112,112,112,0.3); width:94%;height: 2px;margin-top: 0;margin-bottom: 0; ">
+        </ion-card-header>
+
+        <ion-card-content>
+            <main class="cuadros-ranking ">
+                <div class="section1-ranking ">
+                    <div class="wrapper-posicion ">
+                        <div class="section1-posicion ">
+                            <span class="titulo ">Posición</span>
+                        </div>
+                        <div class="section2-posicion ">
+                            <span class="numero ">{{posicion}}</span>
+
+                            <span class="mas-koomkin ">de más de 1,000 en Koomkin</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="section2-ranking ">
+                    <div class="wrapper-restante ">
+                        <div class="section1-restante ">
+                            <ion-grid style="padding: 0px;padding-bottom: 0 !important;">
+                                <ion-row style="margin-bottom: 0 !important;">
+                                    <ion-col col-10>
+                                        <span class="titulo ">Perteneces al TOP</span>
+                                    </ion-col>
+                                    <ion-col col-2>
+                                        <img src="assets/imgs/eficiencia/info.svg " style="margin-left: 15%;width:60%" (click)="openModalFuncionalidadPrueba( 'top', 'Perteneces al TOP',2);getInsertClickTooltip('Top') " />
+                                    </ion-col>
+                                </ion-row>
+                            </ion-grid>
+                        </div>
+                        <div class="section2-restante ">
+                            <ion-grid style="padding:0 ">
+                                <ion-row>
+                                    <ion-col col-8>
+                                        <span class="tiempo-numero ">{{top}}</span>
+                                    </ion-col>
+                                    <ion-col col-4 style="display: grid; ">
+                                        <img src="assets/imgs/eficiencia/trophy.svg " style="width: 70%;margin-left: 15%; " />
+                                    </ion-col>
+                                </ion-row>
+                            </ion-grid>
+                            <span class="mas-koomkin ">de más de 1,000 en Koomkin</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="section3-ranking sombra" style=" height: 100%">
+                    <div class="wrapper-koomkin ">
+                        <div class="section1-koomkin " style="height: 100%">
+                            <span class="titulo ">TOP 10 al nivel Koomkin</span>
+                        </div>
+                        <div class="section2-koomkin" style="height: 100%">
+                            <ion-scroll scrollY="true" style="overflow: scroll; height:100vh" style="padding:0;height: 100%; width: 100%;">
+                                <ion-row *ngFor="let ganador of ganadores; let i = index;" style="height: 100%;">
+                                    <ion-col col-2>
+                                        <img *ngIf="ganador.lugar <= 3" src="assets/imgs/eficiencia/{{ganador.lugar}}.svg" style="width: 30%;margin-left: 37%;height: 90%;" />
+                                        <span *ngIf="ganador.lugar > 3 && ganador.lugar <= 10">{{ganador.lugar}}</span>
+                                    </ion-col>
+                                    <ion-col col-8 style=" display: grid">
+                                        <span class="koomkin-empresa">{{ganador.Nombre | capitalize}}</span>
+                                    </ion-col>
+                                    <ion-col col-2 style="display: grid">
+                                        <img *ngIf="ganador.lugar == 1" src="assets/imgs/eficiencia/star.svg" style="width: 28%;margin-left: 37%;" />
+                                    </ion-col>
+                                    <hr style="background-color:rgba(112,112,112,0.3); width:94%;height: 1px;margin-top: 0;margin-bottom: 0; ">
+                                </ion-row>
+                            </ion-scroll>
+                        </div>
+                    </div>
+                </div>
+                <div class="section4-ranking ">
+                    <div class="wrapper-grafica ">
+                        <div class="section1-grafica ">
+                            <span class="titulo ">Leads mensuales en proceso de cierre de venta según tu ranking</span>
+                        </div>
+                        <div class="section2-grafica ">
+                            <div class="cuadro-posicion">
+                                Ranking: {{place}}
+                                <br> Leads: {{leads | number: '1.0-0'}}
+                            </div>
+                            <div class="cuadro-tuposicion">
+                                Tu ranking: {{posicion}}
+                                <br> Leads: {{yourleads | number: '1.0-0'}}
+                            </div>
+                            <br>
+                            <br>
+                            <google-chart [data]="bar_ChartData"></google-chart>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </ion-card-content>
+    </ion-card>
+    <ion-card style="height:144% !important; ">
+        <ion-card-header class="encabezado ">
+            <ion-grid>
+                <ion-row>
+                    <ion-col col-2>
+                        <img src="assets/imgs/eficiencia/Shape.svg " style="width:60%;margin-left: 20%;margin-top: 4%; " />
+                    </ion-col>
+                    <ion-col col-10>
+                        <h1 style="font-size: 5vw; ">
+                            <strong>Comparativo por sector</strong>
+                        </h1>
+                        <h3 style="font-size: 3.5vw;color:#707070 ">Desempeño contra los mejores de tu industria</h3>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+            <hr style="background-color:rgba(112,112,112,0.3); width:94%;height: 2px;margin-top: 0;margin-bottom: 0; ">
+        </ion-card-header>
+
+        <ion-card-content>
+            <main class="cuadros-sector ">
+                <div class="wrapper-sector ">
+                    <div class="section1-sector ">
+                        <span class="titulo ">Tu Empresa</span>
+                    </div>
+                    <div class="section2-sector ">
+                        <span class="titulo ">TOP 10</span>
+                    </div>
+                    <div class="section3-sector ">
+                        <ion-grid>
+                            <p class="tema ">Tiempo de atención promedio por lead</p>
+                            <ion-row>
+                                <ion-col col-3 style="display: grid; " (click)="openModalFuncionalidadPrueba( 'tiempo', 'Tiempo de atención promedio por Lead',3);getInsertClickTooltip('Tiempo') ">
+                                    <img src="assets/imgs/eficiencia/tiempo.svg " style="width:60%;margin-left: 20%;display: inline-block " />
+                                    <img src="assets/imgs/eficiencia/info.svg " style="width: 20%;display: inline-block;position: absolute;right: 0;top: 0; " />
+                                </ion-col>
+                                <ion-col col-3 style="display: grid; ">
+                                    <span class="tiempo ">{{empresa_tiempo | number: '2.'}} min</span>
+                                </ion-col>
+                                <ion-col col-3 style="display: grid; ">
+                                    <span class="tiempo ">{{empresas_tiempo}} min</span>
+                                </ion-col>
+                                <ion-col col-3 style="display: grid; ">
+                                    <img *ngIf="comparative_empresa_tiempo == comparative_empresas_tiempo || comparative_empresa_tiempo == 'N/A'" src="assets/imgs/eficiencia/neutral.svg " style="width: 80%;margin-left: 10%; " />
+                                    <img *ngIf="comparative_empresa_tiempo < comparative_empresas_tiempo" src="assets/imgs/eficiencia/feliz.svg " style="width: 80%;margin-left: 10%; " />
+                                    <img *ngIf="comparative_empresa_tiempo > comparative_empresas_tiempo" src="assets/imgs/eficiencia/triste.svg " style="width: 80%;margin-left: 10%; " />
+                                </ion-col>
+                            </ion-row>
+                        </ion-grid>
+                        <hr style="background-color:rgba(112,112,112,0.3); width:94%;height: 2px;margin-top: 0;margin-bottom: 0; ">
+                    </div>
+                    <div class="section4-sector ">
+                        <ion-grid>
+                            <p class="tema ">% de Leads atendidos</p>
+                            <ion-row>
+                                <ion-col col-3 style="display: grid; " (click)="openModalFuncionalidadPrueba( 'atendidos', '% de Leads atendidos',4);getInsertClickTooltip('Atendidos') ">
+                                    <img src="assets/imgs/eficiencia/atendidos.svg " style="width:60%;margin-left: 20%;display: inline-block " />
+                                    <img src="assets/imgs/eficiencia/info.svg " style="width: 20%;display: inline-block;position: absolute;right: 0;top: 0; " />
+                                </ion-col>
+                                <ion-col col-3 style="display: grid; ">
+                                    <span class="tiempo ">{{empresa_atendidos | percent}}</span>
+                                </ion-col>
+                                <ion-col col-3 style="display: grid; ">
+                                    <span class="tiempo ">{{empresas_atendidos | percent}}</span>
+                                </ion-col>
+                                <ion-col col-3 style="display: grid; ">
+                                    <img *ngIf="empresa_atendidos == empresas_atendidos || empresa_atendidos == 'N/A'" src="assets/imgs/eficiencia/neutral.svg " style="width: 80%;margin-left: 10%; " />
+                                    <img *ngIf="empresa_atendidos > empresas_atendidos" src="assets/imgs/eficiencia/feliz.svg " style="width: 80%;margin-left: 10%; " />
+                                    <img *ngIf="empresa_atendidos < empresas_atendidos" src="assets/imgs/eficiencia/triste.svg " style="width: 80%;margin-left: 10%; " /> </ion-col>
+                            </ion-row>
+                        </ion-grid>
+                        <hr style="background-color:rgba(112,112,112,0.3); width:94%;height: 2px;margin-top: 0;margin-bottom: 0; ">
+                    </div>
+                    <div class="section5-sector ">
+                        <ion-grid>
+                            <p class="tema ">% de Respuesta a acciones de Koomkin</p>
+                            <ion-row>
+                                <ion-col col-3 style="display: grid; " (click)="openModalFuncionalidadPrueba( 'koomkin', '% de Respuesta a acciones de Koomkin',5);getInsertClickTooltip('Acciones') ">
+                                    <img src="assets/imgs/eficiencia/koomkin.svg " style="width:60%;margin-left: 20%;display: inline-block " />
+                                    <img src="assets/imgs/eficiencia/info.svg " style="width: 20%;display: inline-block;position: absolute;right: 0;top: 0; " />
+                                </ion-col>
+                                <ion-col col-3 style="display: grid; ">
+                                    <span class="tiempo ">{{empresa_acciones | percent}}</span>
+                                </ion-col>
+                                <ion-col col-3 style="display: grid; ">
+                                    <span class="tiempo ">{{empresas_acciones | percent}}</span>
+                                </ion-col>
+                                <ion-col col-3 style="display: grid; ">
+                                    <img *ngIf="empresa_acciones == empresas_acciones || empresa_acciones == 'N/A'" src="assets/imgs/eficiencia/neutral.svg " style="width: 80%;margin-left: 10%; " />
+                                    <img *ngIf="empresa_acciones > empresas_acciones" src="assets/imgs/eficiencia/feliz.svg " style="width: 80%;margin-left: 10%; " />
+                                    <img *ngIf="empresa_acciones < empresas_acciones" src="assets/imgs/eficiencia/triste.svg " style="width: 80%;margin-left: 10%; " />
+                                </ion-col>
+                            </ion-row>
+                        </ion-grid>
+                        <hr style="background-color:rgba(112,112,112,0.3); width:94%;height: 2px;margin-top: 0;margin-bottom: 0; ">
+                    </div>
+                    <div class="section6-sector ">
+                        <ion-grid>
+                            <p class="tema ">Tiempo de negociación</p>
+                            <ion-row>
+                                <ion-col col-3 style="display: grid; " (click)="openModalFuncionalidadPrueba( 'negocios', 'Tiempo de negociación',6);getInsertClickTooltip('Negociacion')">
+                                    <img src="assets/imgs/eficiencia/negocios.svg " style="width:60%;margin-left: 20%;display: inline-block " />
+                                    <img src="assets/imgs/eficiencia/info.svg " style="width: 20%;display: inline-block;position: absolute;right: 0;top: 0; " />
+                                </ion-col>
+                                <ion-col col-3 style="display: grid; ">
+                                    <span class="tiempo ">{{empresa_negociacion}}</span>
+                                </ion-col>
+                                <ion-col col-3 style="display: grid; ">
+                                    <span class="tiempo ">{{empresas_negociacion}}</span>
+                                </ion-col>
+                                <ion-col col-3 style="display: grid; ">
+                                    <img *ngIf="empresa_negociacion == 'Bajo'" src="assets/imgs/eficiencia/triste.svg " style="width: 80%;margin-left: 10%; " />
+                                    <img *ngIf="empresa_negociacion == 'Alto'" src="assets/imgs/eficiencia/feliz.svg " style="width: 80%;margin-left: 10%; " />
+                                    <img *ngIf="empresa_negociacion == 'N/A' || empresa_negociacion == 'Medio'" src="assets/imgs/eficiencia/neutral.svg " style="width: 80%;margin-left: 10%; " /> </ion-col>
+                            </ion-row>
+                        </ion-grid>
+                        <hr style="background-color:rgba(112,112,112,0.3); width:94%;height: 2px;margin-top: 0;margin-bottom: 0; ">
+                    </div>
+                    <div class="section7-sector ">
+                        <ion-grid>
+                            <p class="tema ">Intento de contacto con Leads no exitosos</p>
+                            <ion-row>
+                                <ion-col col-3 style="display: grid; " (click)="openModalFuncionalidadPrueba( 'noexitosos', 'Intento de contacto con Leads no exitosos',7);getInsertClickTooltip('Intento') ">
+                                    <img src="assets/imgs/eficiencia/noexitosos.svg " style="width:60%;margin-left: 20%;display: inline-block " />
+                                    <img src="assets/imgs/eficiencia/info.svg " style="width: 20%;display: inline-block;position: absolute;right: 0;top: 0; " />
+                                </ion-col>
+                                <ion-col col-3 style="display: grid; ">
+                                    <span class="tiempo ">{{empresa_contacto}} veces</span>
+                                </ion-col>
+                                <ion-col col-3 style="display: grid; ">
+                                    <span class="tiempo ">{{empresas_contacto}} veces</span>
+                                </ion-col>
+                                <ion-col col-3 style="display: grid; ">
+                                    <img *ngIf="empresa_contacto == empresas_contacto || empresa_contacto == 'N/A'" src="assets/imgs/eficiencia/neutral.svg " style="width: 80%;margin-left: 10%; " />
+                                    <img *ngIf="empresa_contacto > empresas_contacto" src="assets/imgs/eficiencia/feliz.svg " style="width: 80%;margin-left: 10%; " />
+                                    <img *ngIf="empresa_contacto < empresas_contacto" src="assets/imgs/eficiencia/triste.svg " style="width: 80%;margin-left: 10%; " /> </ion-col>
+                            </ion-row>
+                        </ion-grid>
+                        <hr style="background-color:rgba(112,112,112,0.3); width:94%;height: 2px;margin-top: 0;margin-bottom: 0; ">
+                    </div>
+                    <div class="section8-sector ">
+                        <ion-grid>
+                            <p class="tema ">Palabras clave en negociaciones</p>
+                            <ion-row>
+                                <ion-col col-3 style="display: grid; " (click)="openModalFuncionalidadPrueba( 'key', 'Palabras clave en negociaciones',8);getInsertClickTooltip('Palabras') ">
+                                    <img src="assets/imgs/eficiencia/key.svg " style="width:60%;margin-left: 20%;display: inline-block " />
+                                    <img src="assets/imgs/eficiencia/info.svg " style="width: 20%;display: inline-block;position: absolute;right: 0;top: 0; " />
+                                </ion-col>
+                                <ion-col col-1 style="display: grid; ">
+
+                                </ion-col>
+                                <ion-col col-3 style="display: grid; ">
+                                    <ion-list class="tiempo " *ngFor="let empresa_palabras of palabrasempresa; let i = index; ">
+                                        <span class="tiempo ">{{empresa_palabras.palabra}}</span>
+                                    </ion-list>
+                                </ion-col>
+                                <ion-col col-1 style="display: grid; ">
+
+                                </ion-col>
+                                <ion-col col-3 style="display: grid; ">
+                                    <ion-list class="tiempo " *ngFor="let empresas_palabras of palabrasempresas; let i = index; ">
+                                        <span class="tiempo ">{{empresas_palabras.palabra}}</span>
+                                    </ion-list>
+                                </ion-col>
+                            </ion-row>
+                        </ion-grid>
+                    </div>
+                </div>
+            </main>
+        </ion-card-content>
+    </ion-card>
+    <ion-card style="height: 106%;">
+        <ion-card-header class="encabezado ">
+            <ion-grid>
+                <ion-row>
+                    <ion-col col-2>
+                        <img src="assets/imgs/eficiencia/eficiency.svg " style="width:65%;margin-left: 20%;margin-top: 2%; " />
+                    </ion-col>
+                    <ion-col col-8>
+                        <h1 style="font-size: 5vw; ">
+                            <strong>Tendencia</strong>
+                        </h1>
+                        <h3 style="font-size: 3.8vw;color:#707070 ">Atención al cliente</h3>
+                    </ion-col>
+                    <ion-col col-2>
+                        <img src="assets/imgs/eficiencia/info.svg " style="width:60%;margin-left: 20%;margin-top: 5%; " (click)="openModalFuncionalidadPrueba( 'tendencia', 'Tendencia',9);getInsertClickTooltip('Tendencia') " />
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+            <hr style="background-color:rgba(112,112,112,0.3); width:94%;height: 2px;margin-top: 0;margin-bottom: 0; ">
+        </ion-card-header>
+
+        <ion-card-content style="height: 100%;margin-top: 2% !important;">
+            <main class="cuadros-tendencia">
+                <div class="section1-tendencia">
+                    <div class="wrapper-tiempo">
+                        <div class="section1-tiempo">
+                            <span class="titulo">Tiempo de atención</span>
+                        </div>
+                        <div class="section2-tiempo">
+                            <div class="wrapper-leads">
+                                <div class="section1-leads">
+                                    <span class="naranja">Últimos 5 leads
+                                                <hr style="background-color: rgba(112,112,112,0.3);
+                                                height: 1px;
+                                                margin-top: 4px;
+                                                margin-bottom: 0;">
+                                        </span>
+                                </div>
+                                <div class="section2-leads">
+                                    <img *ngIf="clientesrep < clientes2rep" src="assets/imgs/eficiencia/feliz.svg " style="width: 80%;margin-left: 10%; " />
+                                    <img *ngIf="clientesrep > clientes2rep" src="assets/imgs/eficiencia/triste.svg " style="width: 80%;margin-left: 10%; " />
+                                    <img *ngIf="clientesrep == clientes2rep" src="assets/imgs/eficiencia/neutral.svg " style="width: 80%;margin-left: 10%; " />
+                                </div>
+                                <div class="section3-leads">
+                                    <ion-list>
+                                        <ion-item *ngIf="clientes < 120">
+                                            <ion-range id="yourminRange" class="azul" debounce="10" step="1" min="0" max="120" [(ngModel)]="clientes" color="barra" pin="true" disabled>
+                                                <ion-label range-left>
+                                                    < 1min </ion-label>
+                                                        <ion-label range-right> > 120min </ion-label>
+                                            </ion-range>
+                                        </ion-item>
+                                        <ion-item *ngIf="clientes >= 120">
+                                            <ion-range id="minRange" class="rojo" step="1" min="0" max="120" [(ngModel)]="clientes" color="danger" pin="true" disabled>
+                                                <ion-label range-left>
+                                                    < 1min </ion-label>
+                                                        <ion-label range-right> > 120min </ion-label>
+                                            </ion-range>
+                                        </ion-item>
+                                        <span class="titulo">Zona Garantia</span>
+                                    </ion-list>
+                                </div>
+                                <div class="section4-leads">
+                                    <span class="naranja">Total de leads en los últimos 30 días                                         
+                                                <hr style="background-color: rgba(112,112,112,0.3);
+                                                height: 1px;
+                                                margin-top: 4px;
+                                                margin-bottom: 0;">
+                                            </span>
+                                </div>
+                                <div class="section5-leads">
+                                    <ion-list>
+                                        <ion-item *ngIf="clientes2 < 120">
+                                            <ion-range id="yourminRange" class="azul" step="1" min="0" max="120" [(ngModel)]="clientes2" color="barra" pin="true" disabled>
+                                                <ion-label range-left>
+                                                    < 1min </ion-label>
+                                                        <ion-label range-right> > 120min </ion-label>
+                                            </ion-range>
+                                        </ion-item>
+                                        <ion-item *ngIf="clientes2 >= 120">
+                                            <ion-range id="minRange" class="rojo" step="1" min="0" max="120" [(ngModel)]="clientes2" color="danger" pin="true" disabled>
+                                                <ion-label range-left>
+                                                    < 1min </ion-label>
+                                                        <ion-label range-right> > 120min </ion-label>
+                                            </ion-range>
+                                        </ion-item>
+                                        <span class="titulo">Zona Garantia</span>
+                                    </ion-list>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="section2-tendencia">
+                    <div class="wrapper-atendidos">
+                        <div class="section1-atendidos">
+                            <span class="titulo">% Leads atendidos < de 2 hrs</span>
+                        </div>
+                        <div class="section2-atendidos">
+                            <div class="wrapper-leads">
+                                <div class="section1-leads">
+                                    <span class="naranja">Últimos 5 leads recibidos
+                                                <hr style="background-color: rgba(112,112,112,0.3);
+                                                height: 1px;
+                                                margin-top: 4px;
+                                                margin-bottom: 0;">
+                                        </span>
+                                </div>
+                                <div class="section2-leads">
+                                    <img *ngIf="fiveprogress > thirtyprogress" src="assets/imgs/eficiencia/feliz.svg " style="width: 80%;margin-left: 10%; " />
+                                    <img *ngIf="fiveprogress == thirtyprogress" src="assets/imgs/eficiencia/neutral.svg " style="width: 80%;margin-left: 10%; " />
+                                    <img *ngIf="fiveprogress < thirtyprogress" src="assets/imgs/eficiencia/triste.svg " style="width: 80%;margin-left: 10%; " />
+                                </div>
+                                <div class="section3-leads">
+                                    <ion-grid>
+                                        <ion-row>
+                                            <ion-col col-2 style="display: grid;">
+                                                0%
+                                            </ion-col>
+                                            <ion-col col-8>
+                                                <div class="progress-outer">
+                                                    <div class="progress-inner" [style.width]="fiveprogressbar + '%'">
+                                                        {{fiveprogress | percent}}
+                                                    </div>
+                                                </div>
+                                            </ion-col>
+                                            <ion-col col-2 style="display: grid;">
+                                                100%
+                                            </ion-col>
+                                        </ion-row>
+                                    </ion-grid>
+                                </div>
+                                <div class="section4-leads">
+                                    <span class="naranja">Últimos 30 días
+                                                <hr style="background-color: rgba(112,112,112,0.3);
+                                                height: 1px;
+                                                margin-top: 4px;
+                                                margin-bottom: 0;">
+                                        </span>
+                                </div>
+                                <div class="section5-leads">
+                                    <ion-grid>
+                                        <ion-row>
+                                            <ion-col col-2 style="display: grid;">
+                                                0%
+                                            </ion-col>
+                                            <ion-col col-8>
+                                                <div class="progress-outer">
+                                                    <div class="progress-inner" [style.width]="thirtyprogressbar + '%'">
+                                                        {{thirtyprogress | percent}}
+                                                    </div>
+                                                </div>
+                                            </ion-col>
+                                            <ion-col col-2 style="display: grid;">
+                                                100%
+                                            </ion-col>
+                                        </ion-row>
+                                    </ion-grid>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </ion-card-content>
+    </ion-card>
+    <ion-card style="height: 85%">
+        <ion-card-header class="encabezado ">
+            <ion-grid>
+                <ion-row>
+                    <ion-col col-2>
+                        <img src="assets/imgs/eficiencia/tips.svg " style="width:65%;margin-left: 20%;margin-top: 2%; " />
+                    </ion-col>
+                    <ion-col col-10>
+                        <h1 style="font-size: 5vw; ">
+                            <strong>Tips de venta</strong>
+                        </h1>
+                        <h3 style="font-size: 3.8vw;color:#707070 ">Consejos de los mejores vendedores</h3>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+            <hr style="background-color:rgba(112,112,112,0.3); width:94%;height: 2px;margin-top: 0;margin-bottom: 0; ">
+        </ion-card-header>
+
+        <ion-card-content>
+            <main class="cuadros-tips">
+                <div class="section1-tips">
+                    <button type="button" class="collapsible" [ngClass]="{'expand':tip1 == false}" (click)="openTipVenta('tip1',tip1);getInsertClickTips(tip1_id)"> 
+                            <ion-grid style="padding: 0px;padding-bottom: 0 !important;">
+                                    <ion-row style="margin-bottom: 0 !important;">
+                                        <ion-col col-1>
+                                            <ion-icon *ngIf="tip1 == false" class="flecha" name="md-arrow-dropright"></ion-icon>
+                                            <ion-icon *ngIf="tip1 == true" class="flecha" name="md-arrow-dropdown"></ion-icon>                                       
+                                        </ion-col>
+                                        <ion-col col-11>
+                                                {{tip1_titulo}}                
+                                            </ion-col>
+                                    </ion-row>
+                                </ion-grid></button>
+                    <div *ngIf="tip1 == true" class="card card-block card-header" [ngClass]="{'expand':tip1 == true}">
+                        <div class="tip">
+                            <div class="text-tip">
+                                {{tip1_descripcion}}
+                            </div>
+                        </div>
+                    </div>
+                    <button type="button" class="collapsible" [ngClass]="{'expand':tip2 == false}" (click)="openTipVenta('tip2',tip2);getInsertClickTips(tip2_id)">
+                                <ion-grid style="padding: 0px;padding-bottom: 0 !important;">
+                                        <ion-row style="margin-bottom: 0 !important;">
+                                            <ion-col col-1>
+                                                <ion-icon *ngIf="tip2 == false" class="flecha" name="md-arrow-dropright"></ion-icon>
+                                                <ion-icon *ngIf="tip2 == true" class="flecha" name="md-arrow-dropdown"></ion-icon>                                       
+                                            </ion-col>
+                                            <ion-col col-11>
+                                                    {{tip2_titulo}}
+                                                </ion-col>
+                                        </ion-row>
+                                    </ion-grid>
+                                </button>
+                    <div *ngIf="tip2 == true" class="card card-block card-header" [ngClass]="{'expand':tip2 == true}">
+                        <div class="tip">
+                            <div class="text-tip">
+                                {{tip2_descripcion}}
+                            </div>
+                        </div>
+                    </div>
+                    <button type="button" class="collapsible" [ngClass]="{'expand':tip3 == false}" (click)="openTipVenta('tip3',tip3);getInsertClickTips(tip3_id)">
+                            <ion-grid style="padding: 0px;padding-bottom: 0 !important;">
+                                <ion-row style="margin-bottom: 0 !important;">
+                                    <ion-col col-1>
+                                        <ion-icon *ngIf="tip3 == false" class="flecha" name="md-arrow-dropright"></ion-icon>
+                                        <ion-icon *ngIf="tip3 == true" class="flecha" name="md-arrow-dropdown"></ion-icon>                                       
+                                    </ion-col>
+                                    <ion-col col-11>
+                                            {{tip3_titulo}}                     
+                                        </ion-col>
+                                </ion-row>
+                            </ion-grid>
+                        </button>
+                    <div *ngIf="tip3 == true" class="card card-block card-header" [ngClass]="{'expand':tip3 == true}">
+                        <div class="tip">
+                            <div class="text-tip">
+                                {{tip3_descripcion}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </ion-card-content>
+    </ion-card>

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!-- Generated template for the ServicioComponent component -->
 <!-- Esto es lo que cambia -->
 <ion-row>
@@ -31,4 +32,31 @@
     <a class="descarga">Dercargar archivo adjunto</a>
   </ion-col>
 </ion-row>
+=======
+<!-- Generated template for the ServicioComponent component -->
+<!-- Esto es lo que cambia -->
+<ion-row>
+    <ion-col>
+      <p class="mensaje">“{{mensajeservicio}}”</p>
+    </ion-col>
+  </ion-row>
+<ion-row class="complemento">
+  <ion-col col-2 *ngIf="usoservicio.length > 0">
+      <img class="icono" src="assets/imgs/complementos/cotizacion.svg">
+  </ion-col>
+  <ion-col col-10 *ngIf="usoservicio.length > 0">
+    <p class="cotiza">Cotización para: </p>
+    <p class="cotizagris"> {{usoservicio}}</p>
+  </ion-col>
+</ion-row>
+<ion-row class="complemento">
+  <ion-col col-2 *ngIf="frecuenciaservicio.length > 0">
+      <img class="icono" src="assets/imgs/complementos/frecuencia.svg">
+  </ion-col>
+  <ion-col col-10 *ngIf="frecuenciaservicio.length > 0">
+    <p class="cotiza">Frecuencia de servicio: </p>
+    <p class="cotizagris"> {{frecuenciaservicio}}</p>
+  </ion-col>
+</ion-row>
+>>>>>>> 58186580ff358fddae42517d10c965f393edfa8a
 <!-- Termina lo que cambia -->

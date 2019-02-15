@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!-- Generated template for the PuntoventaComponent component -->
 <!-- Esto es lo que cambia -->
 <ion-row>
@@ -26,4 +27,28 @@
     <a class="descarga">El cliente revisó tu dirección</a>
   </ion-col>
 </ion-row>
+=======
+<!-- Generated template for the PuntoventaComponent component -->
+<!-- Esto es lo que cambia -->
+<ion-row>
+  <ion-col>
+    <p class="mensaje">“{{mensajeventa}}"</p>
+  </ion-col>
+</ion-row>
+<ion-row class="complemento">
+  <ion-col col-2 *ngIf="usoventa.length > 0">
+    <img class="icono" src="assets/imgs/complementos/cotizacion.svg">
+  </ion-col>
+  <ion-col col-10 *ngIf="usoventa.length > 0">
+    <p class="cotiza">Cotización para: </p>
+    <p class="cotizagris"> {{usoventa}}</p>
+  </ion-col>
+</ion-row>
+<ion-row>
+  <ion-col style="margin-top: 1em;">
+    <ion-icon class="download" name="md-pin"></ion-icon>
+    <a class="descarga">El cliente revisó tu dirección</a>
+  </ion-col>
+</ion-row>
+>>>>>>> 58186580ff358fddae42517d10c965f393edfa8a
 <!-- Termina lo que cambia -->

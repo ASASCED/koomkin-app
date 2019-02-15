@@ -1,0 +1,190 @@
+page-modal-notification {
+    @import "../../assets/styles.scss";
+    body {
+        height: 100%;
+    }
+    .navbar {
+        height: 50px;
+        background: linear-gradient(to right, $koomkin-green, $koomkin-aqua);
+        color: white;
+        .logo {
+            height: 100%;
+            display: flex;
+            align-items: center;
+            img {
+                margin-left: 25px;
+                width: auto;
+                height: 25px;
+            }
+        }
+    }
+    .activity-container {
+        display: grid;
+        height: 100%;
+        width: 100%;
+        grid-template-areas: "activity-header" "activity-content-container" "activity-footer";
+        grid-template-rows: 23.2vh auto 18vh;
+        .activity-header {
+            grid-area: activity-header;
+            grid-row: 1 / 2;
+            background-repeat: no-repeat;
+            background-size: cover;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            width: 100vw;
+            .activity-title {
+                position: absolute;
+                height: 45px;
+                width: 93%;
+                top: 86%;
+                background-color: white;
+                display: flex;
+                color: $koomkin-blue;
+                bottom: 2px;
+                align-items: center;
+                justify-content: center;
+                font-weight: 900;
+                border-radius: 10px;
+                font-size: 5.3vw;
+                box-shadow: 2px 2px 5px -1px $koomkin-grey-light;
+            }
+        }
+        .map-content-container {
+            grid-row: 1 / 3 !important;
+            display: grid !important;
+            grid-template-rows: auto 50px !important;
+            .map-component {
+                grid-row: 1 / 2;
+                height: 100%;
+            }
+            .progress-bar {
+                grid-row: 2 / 3 !important;
+            }
+        }
+        .activity-content-container {
+            grid-area: activity-content-container;
+            grid-row: 2 / 3;
+            display: grid;
+            grid-template-rows: 33% 33% 33%;
+            justify-content: center;
+            align-items: center;
+            width: 100vw;
+            margin-top: 5%;
+            grid-template-areas: "activity-content-title" "activity-content-parrafo" "activity-content-parrafos";
+            .activity-content-title {
+                grid-area: activity-content-title;
+                height: 100%;
+                overflow-wrap: normal;
+                color: rgb(119, 119, 119);
+                font-weight: 500;
+                font-size: 4.8vw;
+                display: grid;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+                padding: 0px 10px;
+                width: 100vw;
+                p {
+                    width: 94vw !important;
+                    overflow-wrap: break-word;
+                    justify-content: center;
+                    align-items: center;
+                    font-size: 4.7vw;
+                }
+            }
+            .activity-content-parrafo {
+                grid-area: activity-content-parrafo;
+                height: 100%;
+                overflow-wrap: normal;
+                color: rgb(119, 119, 119);
+                font-weight: 500;
+                font-size: 4.8vw;
+                display: grid;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+                padding: 0px 10px;
+                width: 100vw;
+                p {
+                    width: 94vw !important;
+                    overflow-wrap: break-word;
+                    justify-content: center;
+                    align-items: center;
+                    font-size: 4.7vw;
+                }
+            }
+            .activity-content-parrafos {
+                grid-area: activity-content-parrafos;
+                height: 100%;
+                overflow-wrap: normal;
+                color: rgb(119, 119, 119);
+                font-weight: 500;
+                font-size: 4.8vw;
+                display: grid;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+                padding: 0px 10px;
+                width: 100vw;
+                p {
+                    width: 94vw !important;
+                    overflow-wrap: break-word;
+                    justify-content: center;
+                    align-items: center;
+                    font-size: 4.7vw;
+                }
+            }
+        }
+        .activity-footer {
+            grid-row-start: 3;
+            grid-area: activity-footer;
+            width: 100vw;
+        }
+        .button-footer-container {
+            height: 100%;
+            width: 100%;
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            .renovacion-positivo {
+                background-color: #f06922;
+                color: white;
+                border: 1.1px solid #f06922;
+                width: 45%;
+                height: 9vh;
+                font-size: 4vw;
+                border-radius: 10px;
+                font-weight: 500;
+            }
+            .renovacion-negativo {
+                background-color: white;
+                color: #f06922;
+                border: 1.1px solid #f06922;
+                width: 45%;
+                height: 9vh;
+                font-size: 4vw;
+                border-radius: 10px;
+                font-weight: 500;
+            }
+        }
+    }
+    .activity-container>div {
+        height: 100%;
+    }
+    .footer {
+        display: -webkit-box;
+        width: 100%;
+        height: 10px;
+        .left {
+            background-color: $koomkin-aqua;
+        }
+        .right {
+            background-color: $koomkin-green;
+        }
+    }
+    .footer div {
+        height: 10px;
+        width: 50%;
+    }
+}

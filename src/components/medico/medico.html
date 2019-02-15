@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!-- Generated template for the MedicoComponent component -->
 <!-- Esto es lo que cambia -->
 <ion-row>
@@ -34,3 +35,75 @@
   </ion-col>
 </ion-row>
 <!-- Termina lo que cambia -->
+=======
+<!-- Generated template for the MedicoComponent component -->
+<!-- Esto es lo que cambia -->
+<ion-row *ngIf="generoM.length > 0 && edadM > 0">
+  <ion-col>
+    <p class="paciente">Información paciente:
+      <a class="edadpaciente"> {{generoM}} {{edadM}} años</a>
+    </p>
+  </ion-col>
+</ion-row>
+
+<ion-row *ngIf="generoM.length > 0 && edad === 0">
+  <ion-col>
+    <p class="paciente">Información paciente:
+      <a class="edadpaciente"> {{generoM}}</a>
+    </p>
+  </ion-col>
+</ion-row>
+
+<ion-row *ngIf="generoM.length === 0 && edad > 1">
+  <ion-col>
+    <p class="paciente">Información paciente:
+      <a class="edadpaciente"> {{edadM}} años</a>
+    </p>
+  </ion-col>
+</ion-row>
+
+<ion-row>
+  <ion-col>
+    <p class="mensaje">“{{mensajemedico}}”</p>
+  </ion-col>
+</ion-row>
+
+<ion-row *ngIf="fechaCitaM.length > 0 && horaCitaM.length > 0">
+  <ion-col>
+    <a class="paciente">Fecha y hora de la cita</a>
+  </ion-col>
+</ion-row>
+<ion-row *ngIf="fechaCitaM.length > 0 && horaCitaM.length > 0">
+  <ion-col>
+    <ion-icon class="cita" name="md-calendar"></ion-icon>
+    <a class="paciented">{{fechaCitaM | date: 'dd/MM/yyyy' }}</a>
+    <ion-icon class="cita" name="md-alarm"></ion-icon>
+    <a class="paciented">{{horaCitaM}} hrs.</a>
+  </ion-col>
+</ion-row>
+
+<ion-row *ngIf="fechaCitaM.length > 0 && horaCitaM.length == 0">
+  <ion-col>
+    <a class="paciente">Fecha de la cita</a>
+  </ion-col>
+</ion-row>
+<ion-row *ngIf="fechaCitaM.length > 0  && horaCitaM.length == 0">
+  <ion-col>
+    <ion-icon class="cita" name="md-calendar"></ion-icon>
+    <a class="paciented">{{fechaCitaM | date: 'dd/MM/yyyy' }}</a>
+  </ion-col>
+</ion-row>
+
+<ion-row *ngIf="fechaCitaM.length == 0  && horaCitaM.length > 0">
+  <ion-col>
+    <a class="paciente">Hora de la cita</a>
+  </ion-col>
+</ion-row>
+<ion-row *ngIf="fechaCitaM.length == 0  && horaCitaM.length > 0">
+  <ion-col>
+    <ion-icon class="cita" name="md-alarm"></ion-icon>
+    <a class="paciented">{{horaCitaM}} hrs.</a>
+  </ion-col>
+</ion-row>
+<!-- Termina lo que cambia -->
+>>>>>>> 58186580ff358fddae42517d10c965f393edfa8a

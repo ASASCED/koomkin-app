@@ -1,0 +1,45 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>Módulo de chat</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+    <br>
+    <ion-grid>
+        <ion-row>
+            <ion-col col-4>
+
+            </ion-col>
+            <ion-col col-4>
+                <img src="assets/imgs/iconos/icn_globos.svg" width="100%" />
+            </ion-col>
+            <ion-col col-4>
+            </ion-col>
+        </ion-row>
+        <br>
+        <ion-row>
+            <ion-col col-12>
+                <div>
+                    <p class="message-modal">
+                        Inicia una conversación con:
+                    </p>
+                    <p class="message-modal">
+                        <strong>{{this.nombre}}</strong>
+                    </p>
+                </div>
+            </ion-col>
+        </ion-row>
+        <br>
+        <ion-row>
+            <ion-col col-5>
+                <button ion-button class="btn-modal" style="width: 100%;text-transform: none;" (click)="closeModal()">Ahora no</button>
+            </ion-col>
+            <ion-col col-2>
+            </ion-col>
+            <ion-col col-5>
+                <button ion-button class="btn-modal" style="width: 100%;text-transform: none;" (click)="iniciarConversacion()" [disabled]="enviado">Iniciar <br> Conversación</button>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>

@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 68 68">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #fe703f;
+        stroke: #707070;
+        stroke-width: 3px;
+      }
+
+      .cls-2 {
+        fill: #fff;
+      }
+
+      .cls-3 {
+        stroke: none;
+      }
+
+      .cls-4 {
+        fill: none;
+      }
+
+      .cls-5 {
+        filter: url(#Ellipse_291);
+      }
+    </style>
+    <filter id="Ellipse_291" x="0" y="0" width="68" height="68" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="Group_9158" data-name="Group 9158" transform="translate(-3222 -1487)">
+    <g class="cls-5" transform="matrix(1, 0, 0, 1, 3222, 1487)">
+      <g id="Ellipse_291-2" data-name="Ellipse 291" class="cls-1" transform="translate(9 6)">
+        <circle class="cls-3" cx="25" cy="25" r="25"/>
+        <circle class="cls-4" cx="25" cy="25" r="23.5"/>
+      </g>
+    </g>
+    <path id="actualizacion" class="cls-2" d="M22.687,40.2a4.053,4.053,0,0,0-6.034-4.83,6.756,6.756,0,0,0-12.612,3.37c0,.114,0,.228.008.342A6.082,6.082,0,0,0,6.067,50.9H21.606a5.4,5.4,0,0,0,1.081-10.7Zm-5.612,3.745-4.45,4.45a.678.678,0,0,1-.954,0l-4.45-4.45A.675.675,0,0,1,7.7,42.8h2.761V38.066a.678.678,0,0,1,.676-.676h2.027a.678.678,0,0,1,.676.676V42.8H16.6A.675.675,0,0,1,17.075,43.948Z" transform="translate(3242.014 1477.015)"/>
+  </g>
+</svg>

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <ion-content class="login-content" padding>
   <ion-row class="logo-row">
     <ion-col col-2></ion-col>
@@ -47,3 +48,49 @@
     </form>
   </div>
 </ion-content>
+=======
+<ion-content class="login-content" padding>
+  <ion-row class="logo-row">
+    <ion-col col-2></ion-col>
+    <ion-col>
+      <img src="assets/imgs/koomkin_bco.png" />
+    </ion-col>
+    <ion-col col-2></ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col col-2></ion-col>
+    <ion-col>
+      <p class="bienvenido">Bienvenido a Mykoomkin</p>
+    </ion-col>
+    <ion-col col-2></ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      <p class="inicio">Inicio de sesión</p>
+    </ion-col>
+  </ion-row>
+  <div class="login-box">
+    <form [formGroup]="loginForm" (ngSubmit)="doLogin()">
+      <ion-row>
+        <ion-col>
+          <ion-list inset>
+            <ion-item class="lower">
+              <ion-input value="{{email}}" style="text-align:center;text-transform: lowercase;" id="inputEmail" type="email" name="email" placeholder="Correo Electrónico"
+                formControlName="email" autofocus></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-input value="{{password}}" id="inputPassword" type="password" name="password" formControlName="password" placeholder="Contraseña"></ion-input>
+            </ion-item>
+            <a><p class="olvidaste" (click)="showPrompt()">¿Olvidaste tu contraseña?</p></a>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col class="signup-col">
+          <button ion-button class="submit-btn" full type="submit" [disabled]="!loginForm.valid">Iniciar Sesión</button>
+        </ion-col>
+      </ion-row>
+    </form>
+  </div>
+</ion-content>
+>>>>>>> 58186580ff358fddae42517d10c965f393edfa8a

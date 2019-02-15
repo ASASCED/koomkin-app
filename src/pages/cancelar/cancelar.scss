@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 .toolbar-background-md{
+=======
+.toolbar-background-md {
+>>>>>>> 58186580ff358fddae42517d10c965f393edfa8a
     background: linear-gradient(to right, #3CCDBB, #33a4bc) !important;
 }
 
@@ -7,6 +11,7 @@
     direction: rtl;
     font-size: 70px;
     text-align: center;
+<<<<<<< HEAD
   }
   .rating > span {
     display: inline-block;
@@ -29,3 +34,29 @@
     font-size: 25px;
   }
 
+=======
+}
+
+.rating>span {
+    display: inline-block;
+    position: relative;
+    color: #10cebc;
+}
+
+.rating>span:hover:before,
+.rating>span:hover~span:before {
+    content: "\2605";
+    position: absolute;
+}
+
+.card-md h2 {
+    color: #10cebc;
+    margin: 0px;
+    font-size: 2rem;
+}
+
+.back {
+    color: white;
+    font-size: 25px;
+}
+>>>>>>> 58186580ff358fddae42517d10c965f393edfa8a

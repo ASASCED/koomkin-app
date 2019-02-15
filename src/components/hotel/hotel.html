@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!-- Generated template for the HotelComponent component -->
 <!-- Esto es lo que cambia -->
 <ion-row>
@@ -33,4 +34,42 @@
     <a class="descarga">El cliente revisó tu dirección</a>
   </ion-col>
 </ion-row>
+=======
+<!-- Generated template for the HotelComponent component -->
+<!-- Esto es lo que cambia -->
+<ion-row *ngIf="mensajehotel">
+  <ion-col>
+    <ion-icon class="reserva" name="md-briefcase"></ion-icon>
+    <a class="tipo" style="position: relative !important;">{{mensajehotel}}</a>
+    <br>
+  </ion-col>
+</ion-row>
+<ion-row *ngIf="personashotel > 0">
+  <ion-col>
+    <ion-icon class="reserva" name="ios-people"></ion-icon>
+    <a class="tipo">{{personashotel}} huéspedes</a>
+  </ion-col>
+</ion-row>
+<ion-row *ngIf="hotelEntrada.length > 0 || hotelSalida.length > 0">
+  <ion-col>
+    <a class="paciente">Fecha de la reservacion</a>
+  </ion-col>
+</ion-row>
+<ion-row *ngIf="hotelEntrada.length > 0 || hotelSalida.length > 0">
+  <ion-col>
+    <ion-icon class="cita" name="md-calendar"></ion-icon>
+    <ion-icon class="viaje" name="md-arrow-round-down"></ion-icon>
+    <a class="paciented">{{hotelEntrada | date: 'dd/MM/yyyy'}}</a>
+    <ion-icon class="cita" name="md-calendar"></ion-icon>
+    <ion-icon class="viaje" name="md-arrow-round-up"></ion-icon>
+    <a class="paciented">{{hotelSalida | date: 'dd/MM/yyyy'}}</a>
+  </ion-col>
+</ion-row>
+<ion-row>
+  <ion-col style="margin-top: 1em;">
+    <ion-icon class="download" name="md-pin"></ion-icon>
+    <a class="descarga">El cliente revisó tu dirección</a>
+  </ion-col>
+</ion-row>
+>>>>>>> 58186580ff358fddae42517d10c965f393edfa8a
 <!-- Termina lo que cambia -->

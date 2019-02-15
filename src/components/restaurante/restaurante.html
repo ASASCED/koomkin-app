@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!-- Generated template for the RestauranteComponent component -->
 <!-- Esto es lo que cambia -->
 <ion-row>
@@ -37,3 +38,65 @@
     <a class="descarga">El cliente revisó tu dirección</a>
   </ion-col>
 </ion-row>
+=======
+<!-- Generated template for the RestauranteComponent component -->
+<!-- Esto es lo que cambia -->
+<ion-row *ngIf="mensajerestaurante.length > 0">
+  <ion-col>
+    <ion-icon class="reserva" name="md-restaurant"></ion-icon>
+    <a class="tipo">{{mensajerestaurante}}</a>
+  </ion-col>
+</ion-row>
+<ion-row *ngIf="personasrestaurante > 0">
+  <ion-col>
+    <ion-icon class="reserva" name="ios-people"></ion-icon>
+    <a class="tipo">Reservación para: {{personasrestaurante}} personas</a>
+  </ion-col>
+</ion-row>
+
+<ion-row *ngIf="fechaCitarestaurante.length > 0 &&
+
+ horaCitarestaurante.length > 0">
+  <ion-col>
+    <a class="paciente">Fecha y hora de la cita</a>
+  </ion-col>
+</ion-row>
+<ion-row *ngIf="fechaCitarestaurante.length > 0 && horaCitarestaurante.length > 0">
+  <ion-col>
+    <ion-icon class="cita" name="md-calendar"></ion-icon>
+    <a class="paciented">{{fechaCitarestaurante | date: 'dd/MM/yyyy' }}</a>
+    <ion-icon class="cita" name="md-alarm"></ion-icon>
+    <a class="paciented">{{horaCitarestaurante}} hrs.</a>
+  </ion-col>
+</ion-row>
+
+<ion-row *ngIf="fechaCitarestaurante.length > 0 && horaCitarestaurante.length == 0">
+  <ion-col>
+    <a class="paciente">Fecha de la cita</a>
+  </ion-col>
+</ion-row>
+<ion-row *ngIf="fechaCitarestaurante.length > 0  && horaCitarestaurante.length == 0">
+  <ion-col>
+    <ion-icon class="cita" name="md-calendar"></ion-icon>
+    <a class="paciented">{{fechaCitarestaurante | date: 'dd/MM/yyyy' }}</a>
+  </ion-col>
+</ion-row>
+
+<ion-row *ngIf="fechaCitarestaurante.length == 0  && horaCitarestaurante.length > 0">
+  <ion-col>
+    <a class="paciente">Hora de la cita</a>
+  </ion-col>
+</ion-row>
+<ion-row *ngIf="fechaCitarestaurante.length == 0  && horaCitarestaurante.length > 0">
+  <ion-col>
+    <ion-icon class="cita" name="md-alarm"></ion-icon>
+    <a class="paciented">{{horaCitarestaurante | date: 'HH:mm' }} hrs.</a>
+  </ion-col>
+</ion-row>
+<ion-row>
+  <ion-col style="margin-top: 1em;">
+    <ion-icon class="download" name="md-pin"></ion-icon>
+    <a class="descarga">El cliente revisó tu dirección</a>
+  </ion-col>
+</ion-row>
+>>>>>>> 58186580ff358fddae42517d10c965f393edfa8a

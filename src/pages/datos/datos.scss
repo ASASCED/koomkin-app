@@ -1,10 +1,15 @@
 page-datos {
+<<<<<<< HEAD
     ion-tabs{
+=======
+    ion-tabs {
+>>>>>>> 58186580ff358fddae42517d10c965f393edfa8a
         color: blueviolet;
     }
 }
 
 .tabs-ios-azul .tabbar {
+<<<<<<< HEAD
     border-color: transparent !important; 
     background-color: #10cebc !important;
 }
@@ -15,6 +20,18 @@ page-datos {
 
 .ios ion-nav{
     background-color: #10cebc !important;
+=======
+    border-color: transparent !important;
+    background-color: #243e56 !important;
+}
+
+.tabs-md-azul .tabbar {
+    background-color: #243e56 !important;
+}
+
+.ios ion-nav {
+    background-color: #243e56 !important;
+>>>>>>> 58186580ff358fddae42517d10c965f393edfa8a
 }
 
 .toolbar-ios {
@@ -22,5 +39,9 @@ page-datos {
     padding-left: 4px;
     padding-right: 4px;
     min-height: 44px;
+<<<<<<< HEAD
     background-color: #10cebc !important;
+=======
+    background-color: #243e56 !important;
+>>>>>>> 58186580ff358fddae42517d10c965f393edfa8a
 }

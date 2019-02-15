@@ -1,0 +1,35 @@
+<ion-header>
+    <ion-navbar color="azul">
+    </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+
+    <body>
+        <div class="activity-container">
+            <div class="activity-header" [ngStyle]="{'background-image':'url('+imagen_notificacion+')'}">
+                <div class="activity-title">
+                    {{titulo_notificacion}}
+                </div>
+            </div>
+            <div class="activity-content-container">
+                <div class="activity-content-title p1_estilo_notificacion">
+                    <p [style.color]="p1_estilo_notificacion">{{parrafo}}</p>
+                </div>
+                <div class="activity-content-parrafo">
+                    <p [style.color]="p2_estilo_notificacion">{{parrafo1}}</p>
+                </div>
+                <div class="activity-content-parrafos">
+                    <p [style.color]="p3_estilo_notificacion">{{parrafo2}}</p>
+                </div>
+            </div>
+            <div class="activity-footer">
+                <div class="button-footer-container">
+                    <button class="renovacion-negativo" (click)="registrarInteres(0);showAlertNo()">{{cancelar_notificacion}}</button>
+                    <button class="renovacion-positivo" (click)="registrarInteres(1);showAlert()">{{aceptar_notificacion}}</button>
+                </div>
+            </div>
+        </div>
+    </body>
+</ion-content>

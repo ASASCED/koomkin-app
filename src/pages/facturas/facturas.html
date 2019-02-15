@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <ion-header>
   <ion-navbar color="azul">
     <button ion-button menuToggle>
@@ -107,3 +108,36 @@
     </ion-list>
   </ion-card-content>
 </ion-content>
+=======
+<ion-header>
+  <ion-navbar color="azul">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Nombre de la empresa: {{empresa}}
+      <br>ID Cliente: {{id}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="detail-card" color="fondo">
+  <ion-card-content>
+    <ion-list>
+      <div style="width:100%;">
+          <p class="titulo">Historial de Facturas</p>
+      </div>
+      
+      <button ion-item *ngFor="let invoice of invoiceData" (click)="onDownloadInvoice(invoice)">
+        <table>
+          <tr class="izq">
+            <td>{{invoice.Fecha | date: 'dd/MM/yyyy'}}</td>
+          </tr>
+          <tr class="der">
+            <td class="ver">Descargar</td>
+          </tr>
+        </table>
+      </button>
+
+    </ion-list>
+  </ion-card-content>
+</ion-content>
+>>>>>>> 58186580ff358fddae42517d10c965f393edfa8a

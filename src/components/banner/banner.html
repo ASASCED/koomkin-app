@@ -1,0 +1,35 @@
+<div class="anuncio">
+    <div *ngIf="description !== 'actualizacion' && description !== 'encuesta'" class="anuncio-mensaje" (click)="mostrar_modal(notification);">
+        <img src="assets/imgs/banner/{{img}}.svg" width="100%" class="anuncio-img" />
+        <ion-grid class="anuncio-grid">
+            <ion-row style="width: 97%;margin-bottom: 0%;">
+                <ion-col col-12>
+                    <span class="anuncio-titulo">{{title}}</span>
+                    <span class="anuncio-contenido">{{subtitle}}</span>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </div>
+    <div *ngIf="description == 'actualizacion'" class="anuncio-mensaje" (click)="goStore()">
+        <img src="assets/imgs/banner/{{img}}.svg" width="100%" class="anuncio-img" />
+        <ion-grid class="anuncio-grid">
+            <ion-row style="width: 97%;margin-bottom: 0%;">
+                <ion-col col-12>
+                    <span class="anuncio-titulo">{{title}}</span>
+                    <span class="anuncio-contenido">{{subtitle}}</span>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </div>
+    <div *ngIf="description == 'encuesta'" class="anuncio-mensaje" (click)="mostrar_encuesta(notification)">
+        <img src="assets/imgs/banner/{{img}}.svg" width="100%" class="anuncio-img" />
+        <ion-grid class="anuncio-grid">
+            <ion-row style="width: 97%;margin-bottom: 0%;">
+                <ion-col col-12>
+                    <span class="anuncio-titulo">{{title}}</span>
+                    <span class="anuncio-contenido">{{subtitle}}</span>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </div>
+</div>
