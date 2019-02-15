@@ -15,7 +15,7 @@ export class AuthServiceProvider {
   constructor(public http: HttpClient) {
   }
 
-  apiUrl = 'http://localhost:3000';
+  apiUrl = 'http://www.koomkin.com:4859';
 
   getUserByEmail(email) {
     return new Promise(resolve => {

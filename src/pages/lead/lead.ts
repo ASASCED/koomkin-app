@@ -2,7 +2,6 @@ import { Component,OnInit } from '@angular/core';
 import { IonicPage, NavController, ViewController, NavParams } from 'ionic-angular';
 import { RestProvider } from './../../providers/rest/rest';
 import { HttpClient } from '@angular/common/http';
-import { StreamingMedia, StreamingAudioOptions } from '@ionic-native/streaming-media';
 
 
 @IonicPage()
@@ -13,7 +12,7 @@ import { StreamingMedia, StreamingAudioOptions } from '@ionic-native/streaming-m
 export class LeadPage implements OnInit {
 
   leadActual;
-  apiUrl = 'http://localhost:3000';
+  apiUrl = 'http://localhost:4859';
 
   CALLING= 'http://www.koomkin.com:4829/twilio_api/api/v1/forward-app-lead/?idLead=';
   AUDIO = 'http://www.koomkin.com:4829/twilio_api/api/v1/data-app/0/?idLead='
@@ -32,8 +31,7 @@ export class LeadPage implements OnInit {
     public navCtrl: NavController,
     public navParams: NavParams,
     public provedor: RestProvider,
-    public http: HttpClient,
-    private streamingMedia: StreamingMedia) {
+    public http: HttpClient) {
     this.leadActual = navParams.data;
   }
 
@@ -48,20 +46,6 @@ export class LeadPage implements OnInit {
     this.viewCtrl.dismiss();
   }
 
-  startAudio() {
-    let options: StreamingAudioOptions = {
-      successCallback: () => { console.log('Finished Audio') },
-      errorCallback: (e) => { console.log('Error: ', e) },
-      initFullscreen: false // iOS only!
-    };
- 
-    //http://soundbible.com/2196-Baby-Music-Box.html
-    this.streamingMedia.playAudio('http://www.koomkin.com:4829/twilio_api/api/v1/data-app/6/?idLead=9BCB71FC-F291-4D27-B0C8-32FD5F03DAC9', options);
-  }
- 
-  stopAudio() {
-    this.streamingMedia.stopAudio();
-  }
 
   FbotonOn() {
     this.getLlamada();

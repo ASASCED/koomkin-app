@@ -23,7 +23,7 @@ export class LeadsPage implements OnInit {
   public noleidos;
   public id;
   public empresa;
-  apiUrl = 'http://localhost:3000';
+  apiUrl = 'http://www.koomkin.com:4859';
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
