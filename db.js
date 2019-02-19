@@ -8,12 +8,12 @@ tp.setConnectionConfig(config);
 
 let db = {};
 
-db.executeGetById = function(id, command, callback) {
+db.executeGetById = function (id, command, callback) {
 
     var connection = new Connection(config);
     var result = [];
 
-    connection.on('connect', function(err) {
+    connection.on('connect', function (err) {
 
         var Request = require('tedious').Request;
         var requestStr = `Execute ${command} ${id}`;
@@ -21,7 +21,7 @@ db.executeGetById = function(id, command, callback) {
         console.log(requestStr);
 
 
-        request = new Request(requestStr, function(err, rowCount) {
+        request = new Request(requestStr, function (err, rowCount) {
             if (err) {
                 callback(err);
             } else {
@@ -30,9 +30,9 @@ db.executeGetById = function(id, command, callback) {
             connection.close();
         });
 
-        request.on('row', function(columns) {
+        request.on('row', function (columns) {
             var item = {};
-            columns.forEach(function(column) {
+            columns.forEach(function (column) {
                 item[column.metadata.colName] = column.value;
             });
             result.push(item);
@@ -42,18 +42,18 @@ db.executeGetById = function(id, command, callback) {
     });
 }
 
-db.executeGetSpByDate = function(id, finicio, ffin, filtro, command, callback) {
+db.executeGetSpByDate = function (id, finicio, ffin, filtro, command, callback) {
     var connection = new Connection(config);
     var result = [];
 
-    connection.on('connect', function(err) {
+    connection.on('connect', function (err) {
 
         var Request = require('tedious').Request;
         var requestStr = `exec ${command} ${finicio}, ${ffin}, ${id}, '${filtro}'`;
         //var requestStr = 'exec SP_RPT_LeadPages \"12-04-2017\", \"12-25-2017\", 2, \"Todos los recibidos\"';
         //requestStr.log(requestStr);
 
-        request = new Request(requestStr, function(err, rowCount) {
+        request = new Request(requestStr, function (err, rowCount) {
             if (err) {
                 console.log(requestStr);
                 callback(err);
@@ -63,9 +63,9 @@ db.executeGetSpByDate = function(id, finicio, ffin, filtro, command, callback) {
             connection.close();
         });
 
-        request.on('row', function(columns) {
+        request.on('row', function (columns) {
             var item = {};
-            columns.forEach(function(column) {
+            columns.forEach(function (column) {
                 item[column.metadata.colName] = column.value;
             });
             result.push(item);
@@ -75,7 +75,7 @@ db.executeGetSpByDate = function(id, finicio, ffin, filtro, command, callback) {
     });
 }
 
-db.executeGetLeadsPagination = function(id, finicio, ffin, filtro, command, min, max) {
+db.executeGetLeadsPagination = function (id, finicio, ffin, filtro, command, min, max) {
 
     const requestStr = `exec ${command} ${ffin}, ${finicio}, ${id}, '${filtro}', ${min}, ${max}`;
 
@@ -94,17 +94,17 @@ db.executeGetLeadsPagination = function(id, finicio, ffin, filtro, command, min,
     });
 };
 
-db.executeModifyLead = function(clave, classification, command, callback) {
+db.executeModifyLead = function (clave, classification, command, callback) {
     var connection = new Connection(config);
     var result = [];
 
-    connection.on('connect', function(err) {
+    connection.on('connect', function (err) {
 
         var Request = require('tedious').Request;
 
         var requestStr = `exec ${command} '${classification}', ${clave} `;
         console.log(requestStr);
-        request = new Request(requestStr, function(err, rowCount) {
+        request = new Request(requestStr, function (err, rowCount) {
             if (err) {
                 callback(err);
             } else {
@@ -113,10 +113,10 @@ db.executeModifyLead = function(clave, classification, command, callback) {
             connection.close();
         });
 
-        request.on('row', function(columns) {
+        request.on('row', function (columns) {
 
             var item = {};
-            columns.forEach(function(column) {
+            columns.forEach(function (column) {
                 item[column.metadata.colName] = column.value;
             });
             result.push(item);
@@ -126,49 +126,49 @@ db.executeModifyLead = function(clave, classification, command, callback) {
     });
 }
 
-db.executeModifyLead2 = function(command, clave, classification, canal, callback) {
-    var connection = new Connection(config);
-    var result = [];
+db.executeModifyLead2 = function (command, clave, classification, canal, callback) {
+  var connection = new Connection(config);
+  var result = [];
 
-    connection.on('connect', function(err) {
+  connection.on('connect', function (err) {
 
-        var Request = require('tedious').Request;
+    var Request = require('tedious').Request;
 
-        var requestStr = `exec ${command} '${classification}', ${clave}, '${canal}' `;
-        console.log(requestStr);
-        request = new Request(requestStr, function(err, rowCount) {
-            if (err) {
-                callback(err);
-            } else {
-                callback(null, result);
-            }
-            connection.close();
-        });
-
-        request.on('row', function(columns) {
-
-            var item = {};
-            columns.forEach(function(column) {
-                item[column.metadata.colName] = column.value;
-            });
-            result.push(item);
-        });
-
-        connection.execSql(request);
+    var requestStr = `exec ${command} '${classification}', ${clave}, '${canal}' `;
+    console.log(requestStr);
+    request = new Request(requestStr, function (err, rowCount) {
+      if (err) {
+        callback(err);
+      } else {
+        callback(null, result);
+      }
+      connection.close();
     });
+
+    request.on('row', function (columns) {
+
+      var item = {};
+      columns.forEach(function (column) {
+        item[column.metadata.colName] = column.value;
+      });
+      result.push(item);
+    });
+
+    connection.execSql(request);
+  });
 }
 
-db.executeLeerLead = function(leadId, userId, callback) {
+db.executeLeerLead = function (leadId, userId, callback) {
     var connection = new Connection(config);
     var result = [];
 
-    connection.on('connect', function(err) {
+    connection.on('connect', function (err) {
 
         var Request = require('tedious').Request;
 
         var requestStr = `exec SP_MarcarLeadLeido '${leadId}', ${userId} `;
 
-        request = new Request(requestStr, function(err, rowCount) {
+        request = new Request(requestStr, function (err, rowCount) {
             if (err) {
                 callback(err);
             } else {
@@ -177,10 +177,10 @@ db.executeLeerLead = function(leadId, userId, callback) {
             connection.close();
         });
 
-        request.on('row', function(columns) {
+        request.on('row', function (columns) {
 
             var item = {};
-            columns.forEach(function(column) {
+            columns.forEach(function (column) {
                 item[column.metadata.colName] = column.value;
             });
             result.push(item);
@@ -190,133 +190,132 @@ db.executeLeerLead = function(leadId, userId, callback) {
     });
 }
 
-db.facebook = function(usuario, tipo, callback) {
-    var connection = new Connection(config);
-    var result = [];
-    //var newdata = [];
+db.facebook = function(usuario,tipo,callback){
+	var connection = new Connection(config);
+	var result = [];
+	//var newdata = [];
+	
+	connection.on('connect', function(err) {
+		
+		var Request = require('tedious').Request;
+		//var TYPES = require('tedious').TYPES;
 
-    connection.on('connect', function(err) {
-
-        var Request = require('tedious').Request;
-        //var TYPES = require('tedious').TYPES;
-
-        var requestStr = "Execute SP_GetFacebookInfo " + usuario;
-
-        request = new Request(requestStr, function(err, rowCount) {
-            if (err) {
+		var requestStr = "Execute SP_GetFacebookInfo " + usuario ;
+		
+		request = new Request(requestStr, function(err,rowCount) {
+			if (err) {
                 callback(err);
             } else {
                 //callback(null, result);
-                if (result[0] != null) {
+				if(result[0] != null){
+					
+					console.log(result[0]);
+				
+					var AjaxRequest = require('ajax-request');
+					
+					var sinceMonth,sinceDay,untilDay,untilMonth
+					
+					if(result[0].since.getMonth() < 9){
+						sinceMonth = "0" + (Number(result[0].since.getMonth())+1)
+					}else{
+						sinceMonth = (Number(result[0].since.getMonth())+1)
+					}
+					
+					if(result[0].since.getDay() < 9){
+						sinceDay = "0" + (Number(result[0].since.getDay())+1)
+					}else{
+						sinceDay = (Number(result[0].since.getDay())+1)
+					}
+					
+					if(result[0].until.getMonth() < 9){
+						untilMonth = "0" + (Number(result[0].until.getMonth())+1)
+					}else{
+						untilMonth = (Number(result[0].until.getMonth())+1)
+					}
+					
+					if(result[0].until.getDay() < 9){
+						//if(result[0].until.getDay() == 0){
+						//	untilDay = "30"
+						//}else{
+							untilDay = "0" + (Number(result[0].until.getDay())+1)
+						//}
+						
+					}else{
+						untilDay = (Number(result[0].until.getDay())+1)
+					}
+					
+					console.log('http://localhost:5000/facebook/CampaignInsights?criteria='+tipo+'&campaign_id='+result[0].id_campaign+'&tipo_empresa='+result[0].tipo_empresa+'&since='+result[0].since.getFullYear()+"-"+sinceMonth+"-"+sinceDay+'&until='+result[0].until.getFullYear()+"-"+untilMonth+"-"+untilDay);
 
-                    console.log(result[0]);
-
-                    var AjaxRequest = require('ajax-request');
-
-                    var sinceMonth, sinceDay, untilDay, untilMonth
-
-                    if (result[0].since.getMonth() < 9) {
-                        sinceMonth = "0" + (Number(result[0].since.getMonth()) + 1)
-                    } else {
-                        sinceMonth = (Number(result[0].since.getMonth()) + 1)
-                    }
-
-                    if (result[0].since.getDay() < 9) {
-                        sinceDay = "0" + (Number(result[0].since.getDay()) + 1)
-                    } else {
-                        sinceDay = (Number(result[0].since.getDay()) + 1)
-                    }
-
-                    if (result[0].until.getMonth() < 9) {
-                        untilMonth = "0" + (Number(result[0].until.getMonth()) + 1)
-                    } else {
-                        untilMonth = (Number(result[0].until.getMonth()) + 1)
-                    }
-
-                    if (result[0].until.getDay() < 9) {
-                        //if(result[0].until.getDay() == 0){
-                        //	untilDay = "30"
-                        //}else{
-                        untilDay = "0" + (Number(result[0].until.getDay()) + 1)
-                            //}
-
-                    } else {
-                        untilDay = (Number(result[0].until.getDay()) + 1)
-                    }
-
-                    console.log('http://localhost:5000/facebook/CampaignInsights?criteria=' + tipo + '&campaign_id=' + result[0].id_campaign + '&tipo_empresa=' + result[0].tipo_empresa + '&since=' + result[0].since.getFullYear() + "-" + sinceMonth + "-" + sinceDay + '&until=' + result[0].until.getFullYear() + "-" + untilMonth + "-" + untilDay);
-
-                    AjaxRequest({
-                            url: 'http://localhost:5000/facebook/CampaignInsights?criteria=' + tipo + '&campaign_id=' + result[0].id_campaign + '&tipo_empresa=' + result[0].tipo_empresa + '&since=' + result[0].since.getFullYear() + "-" + sinceMonth + "-" + sinceDay + '&until=' + result[0].until.getFullYear() + "-" + untilMonth + "-" + untilDay,
-                            method: 'GET'
-                        },
-                        function(err2, res, body2) {
-                            if (err2) {
-                                callback(null, err2);
-                            } else {
-                                callback(null, body2)
-                            }
-                        });
-                    //connection.close();
-                } else {
-                    callback({ "d": "false" });
-                }
+					AjaxRequest({
+						url: 'http://localhost:5000/facebook/CampaignInsights?criteria='+tipo+'&campaign_id='+result[0].id_campaign+'&tipo_empresa='+result[0].tipo_empresa+'&since='+result[0].since.getFullYear()+"-"+sinceMonth+"-"+sinceDay+'&until='+result[0].until.getFullYear()+"-"+untilMonth+"-"+untilDay,
+					method:'GET'},
+					  function(err2,res,body2){
+						if (err2) {
+							callback(null,err2);
+						} else {
+							callback(null,body2)
+						}
+					  });
+					//connection.close();
+				}else{
+					callback({"d":"false"});
+				}
             }
-            connection.close();
-        });
+			connection.close();
+		});
+		
+		request.on('row', function(columns) {
 
-        request.on('row', function(columns) {
+			var item = {}; 
+	        columns.forEach(function (column) { 
+	            item[column.metadata.colName] = column.value; 
+	        }); 
+	        result.push(item);
+		});
 
-            var item = {};
-            columns.forEach(function(column) {
-                item[column.metadata.colName] = column.value;
-            });
-            result.push(item);
-        });
-
-        connection.execSql(request);
-        //connection.close();
-    });
+		connection.execSql(request);
+		//connection.close();
+	});
 }
 
-db.verificarPopup = function(usuario, callback) {
-    var connection = new Connection(config);
-    var result = [];
+db.verificarPopup = function(usuario,callback){
+	var connection = new Connection(config);
+	var result = [];
+	
+	connection.on('connect', function(err) {
+		
+		var Request = require('tedious').Request;
+		//var TYPES = require('tedious').TYPES;
 
-    connection.on('connect', function(err) {
-
-        var Request = require('tedious').Request;
-        //var TYPES = require('tedious').TYPES;
-
-        var requestStr = "EXECUTE SP_muestratutorial " + usuario;
-
-        request = new Request(requestStr, function(err, rowCount) {
-            if (err) {
+		var requestStr = "EXECUTE SP_muestratutorial " + usuario;
+		
+		request = new Request(requestStr, function(err,rowCount) {
+			if (err) {
                 callback(err);
             } else {
                 callback(null, result);
             }
-            connection.close();
-        });
+			connection.close();
+		});
+		
+		request.on('row', function(columns) {
 
-        request.on('row', function(columns) {
+			var item = {}; 
+	        columns.forEach(function (column) { 
+	            item[column.metadata.colName] = column.value; 
+	        }); 
+	        result.push(item);
+		});	
 
-            var item = {};
-            columns.forEach(function(column) {
-                item[column.metadata.colName] = column.value;
-            });
-            result.push(item);
-        });
-
-        connection.execSql(request);
-    });
+		connection.execSql(request);
+	});
 }
 
 // Gerry
 
-db.GeneraContrato = function(req) {
+db.GeneraContrato = function (req) {
     console.log(req.firstname);
-
+    
     const d = req
     const firstname = d.firstname
     const lastname = d.lastname
@@ -350,29 +349,29 @@ db.GeneraContrato = function(req) {
 }
 
 //getDataProveedores
-db.executeInsertarRegisteros = function(command, uuid, acceso, dispositivo) {
+db.executeInsertarRegisteros = function (command, uuid, acceso, dispositivo) {
 
-    const requestStr = `exec ${command} '${uuid}', '${acceso}', '${dispositivo}' `;
+  const requestStr = `exec ${command} '${uuid}', '${acceso}', '${dispositivo}' `;
 
-    console.log(requestStr);
+  console.log(requestStr);
 
-    return tp.sql(requestStr)
-        .execute()
+  return tp.sql(requestStr)
+            .execute()
 };
 
 //getDataComplement
-db.executeGetByClave = function(command, clave) {
-    console.log(clave)
-    const requestStr = `exec ${command} ${clave}`;
+db.executeGetByClave = function (command, clave) {
+  console.log(clave)
+  const requestStr = `exec ${command} ${clave}`;
 
-    console.log(requestStr);
+  console.log(requestStr);
 
-    return tp.sql(requestStr)
-        .execute()
+  return tp.sql(requestStr)
+            .execute()
 };
 
 //getIntentoSesion
-db.executeModifyRegister = function(command, email, password) {
+db.executeModifyRegister = function (command, email, password) {
 
     const requestStr = `exec ${command} '${email}', '${password}' `;
 
@@ -392,7 +391,7 @@ db.executeModifyRegister = function(command, email, password) {
 };
 
 //getAccesoReporte
-db.executeAccesoReporte = function(command, id, acceso, dispositivo, sistema, idioma) {
+db.executeAccesoReporte = function (command, id, acceso, dispositivo, sistema, idioma) {
 
     const requestStr = `exec ${command} ${id}, '${acceso}', '${dispositivo}', '${sistema}', '${idioma}' `;
 
@@ -412,7 +411,7 @@ db.executeAccesoReporte = function(command, id, acceso, dispositivo, sistema, id
 };
 
 //getLoginReporte
-db.executeLoginReporte = function(command, id, acceso, dispositivo, sistema) {
+db.executeLoginReporte = function (command, id, acceso, dispositivo, sistema) {
 
     const requestStr = `exec ${command} ${id}, '${acceso}', '${dispositivo}', '${sistema}' `;
 
@@ -432,7 +431,7 @@ db.executeLoginReporte = function(command, id, acceso, dispositivo, sistema) {
 };
 
 //getInsertClickPagina
-db.executeInsertaRegistro = function(command, usuario, pagina, acceso) {
+db.executeInsertaRegistro = function (command, usuario, pagina, acceso) {
 
     const requestStr = `exec ${command} ${usuario}, '${pagina}', '${acceso}' `;
 
@@ -452,7 +451,7 @@ db.executeInsertaRegistro = function(command, usuario, pagina, acceso) {
 };
 
 //getInsertClickLead
-db.executeInsertarRegistro = function(command, usuario, id, acceso) {
+db.executeInsertarRegistro = function (command, usuario, id, acceso) {
 
     const requestStr = `exec ${command} ${usuario}, ${id}, '${acceso}' `;
 
@@ -472,7 +471,7 @@ db.executeInsertarRegistro = function(command, usuario, id, acceso) {
 };
 
 //getInsertClickLlamar
-db.executeInsertRegister = function(command, usuario, id, acceso, dispositivo) {
+db.executeInsertRegister = function (command, usuario, id, acceso, dispositivo) {
 
     const requestStr = `exec ${command} ${usuario}, ${id}, '${acceso}', '${dispositivo}' `;
 
@@ -492,7 +491,7 @@ db.executeInsertRegister = function(command, usuario, id, acceso, dispositivo) {
 };
 
 //getInsertClickChat
-db.executeInsertRegisterChat = function(command, usuario, id, acceso, dispositivo, metodo) {
+db.executeInsertRegisterChat = function (command, usuario, id, acceso, dispositivo, metodo) {
 
     const requestStr = `exec ${command} ${usuario}, ${id}, '${acceso}', '${dispositivo}', '${metodo}' `;
 
@@ -511,38 +510,38 @@ db.executeInsertRegisterChat = function(command, usuario, id, acceso, dispositiv
     });
 };
 
-db.PostRegisterDeviceId = function(IdUsuario, IdDevice, callback) {
+db.PostRegisterDeviceId = function (IdUsuario, IdDevice,  callback) {
 
     var connection = new Connection(config);
     var result = [];
 
-    connection.on('connect', function(err) {
+    connection.on('connect', function (err) {
 
         var Request = require('tedious').Request;
 
         var DevicePlatform = "Android"
 
-        console.log("INSERT INTO dbo.userMobileDevices (IdUsuario, IdDevice, DevicePlatform, LoginDate) VALUES ('" + IdUsuario + "','" + IdDevice + "','" + DevicePlatform + "','" + getDateTime() + "')");
+        console.log("INSERT INTO dbo.userMobileDevices (IdUsuario, IdDevice, DevicePlatform, LoginDate) VALUES ('"+IdUsuario+"','"+IdDevice+"','"+DevicePlatform+"','"+getDateTime()+"')");
 
-        request = new Request("INSERT INTO dbo.userMobileDevices (IdUsuario, IdDevice, DevicePlatform, LoginDate) VALUES ('" + IdUsuario + "','" + IdDevice + "','" + DevicePlatform + "','" + getDateTime() + "')",
-            function(err, rowCount) {
+        request = new Request("INSERT INTO dbo.userMobileDevices (IdUsuario, IdDevice, DevicePlatform, LoginDate) VALUES ('"+IdUsuario+"','"+IdDevice+"','"+DevicePlatform+"','"+getDateTime()+"')",
+            function (err, rowCount) {
 
-                if (err) {
+            if (err) {
 
-                    callback(err);
+                callback(err);
 
-                } else {
+            } else {
 
-                    callback(null, result);
-                }
+                callback(null, result);
+            }
 
-                connection.close();
+            connection.close();
 
-            });
+        });
 
-        request.on('row', function(columns) {
+        request.on('row', function (columns) {
             var item = {};
-            columns.forEach(function(column) {
+            columns.forEach(function (column) {
                 item[column.metadata.colName] = column.value;
             });
             result.push(item);
@@ -552,47 +551,47 @@ db.PostRegisterDeviceId = function(IdUsuario, IdDevice, callback) {
     });
 }
 
-db.PostRegisterDeviceId2 = function(IdUsuario, IdDevice, Platform, callback) {
+db.PostRegisterDeviceId2 = function (IdUsuario, IdDevice, Platform ,callback) {
 
     var connection = new Connection(config);
     var result = [];
 
-    connection.on('connect', function(err) {
+    connection.on('connect', function (err) {
 
         var Request = require('tedious').Request;
 
         var DevicePlatform = Platform;
 
-        console.log("INSERT INTO dbo.userMobileDevices (IdUsuario, IdDevice, DevicePlatform, LoginDate) VALUES ('" + IdUsuario + "','" + IdDevice + "','" + DevicePlatform + "','" + getDateTime() + "')");
+        console.log("INSERT INTO dbo.userMobileDevices (IdUsuario, IdDevice, DevicePlatform, LoginDate) VALUES ('"+IdUsuario+"','"+IdDevice+"','"+DevicePlatform+"','"+getDateTime()+"')");
+        
+        request = new Request("INSERT INTO dbo.userMobileDevices (IdUsuario, IdDevice, DevicePlatform, LoginDate) VALUES ('"+IdUsuario+"','"+IdDevice+"','"+DevicePlatform+"','"+getDateTime()+"')",
+            function (err, rowCount) {
 
-        request = new Request("INSERT INTO dbo.userMobileDevices (IdUsuario, IdDevice, DevicePlatform, LoginDate) VALUES ('" + IdUsuario + "','" + IdDevice + "','" + DevicePlatform + "','" + getDateTime() + "')",
-            function(err, rowCount) {
+            if (err) {
 
-                if (err) {
+                console.log("ERROR: Dev");
 
-                    console.log("ERROR: Dev");
+                callback(err);
 
-                    callback(err);
+            } else {
 
-                } else {
+                callback(null, result);
+            }
 
-                    callback(null, result);
-                }
+            connection.close();
 
-                connection.close();
+        });
 
-            });
-
-
+        
         connection.execSql(request);
     });
 
 }
 
 
-db.UpdateDeviceId2 = function(IdUsuario, IdDevice) {
+db.UpdateDeviceId2 = function (IdUsuario, IdDevice) {
 
-    updatequerystring = "UPDATE dbo.UserMobileDevices SET IdUsuario = " + IdUsuario + " WHERE IdDevice = '" + IdDevice + "';";
+    updatequerystring = "UPDATE dbo.UserMobileDevices SET IdUsuario = "+IdUsuario+" WHERE IdDevice = '"+IdDevice+"';";
 
     console.log(updatequerystring);
 
@@ -609,31 +608,31 @@ db.UpdateDeviceId2 = function(IdUsuario, IdDevice) {
     });
 };
 
-db.UpdateDeviceId = function(IdUsuario, IdDevice, callback) {
+db.UpdateDeviceId = function (IdUsuario, IdDevice, callback) {
 
     var connection = new Connection(config);
     var result = [];
 
-    connection.on('connect', function(err) {
+    connection.on('connect', function (err) {
         var Request = require('tedious').Request;
-        updatequerystring = "UPDATE dbo.UserMobileDevices SET IdUsuario = " + IdUsuario + " WHERE IdDevice = '" + IdDevice + "';";
+        updatequerystring = "UPDATE dbo.UserMobileDevices SET IdUsuario = "+IdUsuario+" WHERE IdDevice = '"+IdDevice+"';";
         request = new Request(updatequerystring,
-            function(err, rowCount) {
-                if (err) {
-                    console.log("ERRORRRRR UPDATE");
-                    console.log(err)
-                    callback(err);
-                } else {
-                    console.log("client id updated succesfully");
-                    callback(null, result);
-                }
-                connection.close();
-            });
+            function (err, rowCount) {
+            if (err) {
+                console.log("ERRORRRRR UPDATE");
+                console.log(err)
+                callback(err);
+            } else {
+                console.log("client id updated succesfully");
+                callback(null, result);
+            }
+            connection.close();
+        });
         connection.execSql(request);
     });
 }
 
-db.executeGetBanner = function(command, idUsuario) {
+db.executeGetBanner = function (command,idUsuario) {
 
     const requestStr = `Exec ${command} ${idUsuario}`;
 
@@ -653,33 +652,15 @@ db.executeGetBanner = function(command, idUsuario) {
 };
 
 
-db.executeFechaEntradaBanner = function(idReporteBanner, canal) {
+db.executeFechaEntradaBanner = function (idReporteBanner,canal) {
 
     const requestStr = `UPDATE dbo.Tbl_ReporteBanner SET fechaEntradaBanner = GETDATE() where idReporteBanner = ${idReporteBanner};
                         INSERT INTO EntradaBanner(idReporteBanner,TipoAcceso) VALUES (${idReporteBanner},'${canal}');`;
 
+   
+     //const requestStr = `UPDATE dbo.Tbl_ReporteBanner SET fechaEntradaBanner = GETDATE() where idReporteBanner = ${idReporteBanner};`;
 
-    //const requestStr = `UPDATE dbo.Tbl_ReporteBanner SET fechaEntradaBanner = GETDATE() where idReporteBanner = ${idReporteBanner};`;
-
-    console.log(requestStr);
-
-    return new Promise((resolve, reject) => {
-        tp.sql(requestStr)
-            .execute()
-            .then(results => {
-                resolve(results);
-            })
-            .catch(err => {
-                console.log(err);
-                reject(err);
-            });
-    });
-};
-
-
-db.executeGetEficiency = function(idUsuario) {
-
-    const requestStr = `select * from Eficiencia where fecha = (select max(fecha) from Eficiencia) and idusuario = ${idUsuario}`;
+     console.log(requestStr);
 
     return new Promise((resolve, reject) => {
         tp.sql(requestStr)
@@ -694,26 +675,10 @@ db.executeGetEficiency = function(idUsuario) {
     });
 };
 
-db.executeGetEficiencyType = function(cuartaPantalla) {
 
-    const requestStr = `select * from Eficienciatipoempresa where fecha = (select max(fecha) from Eficiencia) and tipocuartapantalla = ${cuartaPantalla}`;
+db.executeGetEficiency = function (idUsuario) {
 
-    return new Promise((resolve, reject) => {
-        tp.sql(requestStr)
-            .execute()
-            .then(results => {
-                resolve(results);
-            })
-            .catch(err => {
-                console.log(err);
-                reject(err);
-            });
-    });
-};
-
-db.executeGetEficiencyRanking = function(cuartaPantalla) {
-
-    const requestStr = `select * from EficienciaRanking`;
+const requestStr = `select * from Eficiencia where fecha = (select max(fecha) from Eficiencia) and idusuario = ${idUsuario}`;
 
     return new Promise((resolve, reject) => {
         tp.sql(requestStr)
@@ -728,13 +693,47 @@ db.executeGetEficiencyRanking = function(cuartaPantalla) {
     });
 };
 
-db.executeInteresBanner = function(interes, idReporteBanner, uuidPase) {
+db.executeGetEficiencyType = function (cuartaPantalla) {
+
+const requestStr = `select * from Eficienciatipoempresa where fecha = (select max(fecha) from Eficiencia) and tipocuartapantalla = ${cuartaPantalla}`;
+
+    return new Promise((resolve, reject) => {
+        tp.sql(requestStr)
+            .execute()
+            .then(results => {
+                resolve(results);
+            })
+            .catch(err => {
+                console.log(err);
+                reject(err);
+            });
+    });
+};
+
+db.executeGetEficiencyRanking = function (cuartaPantalla) {
+
+const requestStr = `select * from EficienciaRanking`;
+
+    return new Promise((resolve, reject) => {
+        tp.sql(requestStr)
+            .execute()
+            .then(results => {
+                resolve(results);
+            })
+            .catch(err => {
+                console.log(err);
+                reject(err);
+            });
+    });
+};
+
+db.executeInteresBanner = function (interes,idReporteBanner,uuidPase) {
 
     var requestStr = '';
 
-    if (interes === '1') {
+    if(interes==='1'){
         requestStr = `UPDATE dbo.Tbl_ReporteBanner SET interesado = 1, fechaClickInteresBanner = GETDATE() WHERE idReporteBanner = '${idReporteBanner}' and (interesado IS NULL OR interesado = 0);`;
-    } else if (interes === '0') {
+    }else if(interes==='0'){
         requestStr = `UPDATE dbo.Tbl_ReporteBanner SET interesado = 0, fechaClickInteresBanner = GETDATE() WHERE idReporteBanner = '${idReporteBanner}' and interesado IS NULL;`;
     }
 
@@ -754,13 +753,13 @@ db.executeInteresBanner = function(interes, idReporteBanner, uuidPase) {
 };
 
 
-db.executeInteresBannerReporte = function(interes, idReporteBanner, uuidPase) {
+db.executeInteresBannerReporte = function (interes,idReporteBanner,uuidPase) {
 
     var requestStr = '';
 
-    if (interes === '1') {
+    if(interes==='1'){
         requestStr = `UPDATE dbo.Tbl_ReporteBanner SET interesado = 1, fechaClickInteresBanner = GETDATE() WHERE idReporteBanner = '${idReporteBanner}' and (interesado IS NULL OR interesado = 0);`;
-    } else if (interes === '0') {
+    }else if(interes==='0'){
         requestStr = `UPDATE dbo.Tbl_ReporteBanner SET interesado = 0, fechaClickInteresBanner = GETDATE() WHERE idReporteBanner = '${idReporteBanner}' and interesado IS NULL;`;
     }
 
@@ -781,7 +780,7 @@ db.executeInteresBannerReporte = function(interes, idReporteBanner, uuidPase) {
 
 
 //getInsertCambiarMensaje
-db.executeCambiarMensaje = function(command, usuario, acceso, mensaje) {
+db.executeCambiarMensaje = function (command, usuario, acceso, mensaje) {
 
     const requestStr = `exec ${command} ${usuario}, '${acceso}', '${mensaje}' `;
 
@@ -801,7 +800,7 @@ db.executeCambiarMensaje = function(command, usuario, acceso, mensaje) {
 };
 
 //getInsertClickBanner
-db.executeClickBanner = function(command, usuario, acceso, tipobanner) {
+db.executeClickBanner = function (command, usuario, acceso, tipobanner) {
 
     const requestStr = `exec ${command} ${usuario}, '${acceso}', ${tipobanner} `;
 
@@ -822,7 +821,7 @@ db.executeClickBanner = function(command, usuario, acceso, tipobanner) {
 
 //getInsertClickTip
 
-db.executeClickTip = function(command, usuario, tipid, acceso) {
+db.executeClickTip = function (command, usuario, tipid, acceso) {
 
     const requestStr = `exec ${command} ${usuario}, ${tipid}, '${acceso}' `;
 
@@ -843,7 +842,7 @@ db.executeClickTip = function(command, usuario, tipid, acceso) {
 
 //getInsertClickTooltip
 
-db.executeClickTooltip = function(command, usuario, tooltipname, acceso) {
+db.executeClickTooltip = function (command, usuario, tooltipname, acceso) {
 
     const requestStr = `exec ${command} ${usuario}, '${tooltipname}', '${acceso}' `;
 
@@ -863,7 +862,7 @@ db.executeClickTooltip = function(command, usuario, tooltipname, acceso) {
 };
 
 //getCreateTicket
-db.executeGenerateTicket = function(command, idUsuario, agente, fecha, canal, satisfaccion, descripcion, correoExterno) {
+db.executeGenerateTicket = function (command, idUsuario, agente, fecha, canal ,satisfaccion ,descripcion , correoExterno) {
 
     const requestStr = `exec ${command} ${idUsuario}, ${agente}, '${fecha}', ${canal}, ${satisfaccion}, '${descripcion}', ${correoExterno}`;
     console.log(requestStr);
@@ -884,7 +883,7 @@ db.executeGenerateTicket = function(command, idUsuario, agente, fecha, canal, sa
 
 //getCreateTicket
 
-db.executeGetTicket = function(command, ticket, requerimiento, area, estatus, agente, comentario, satisfaccion, bandera) {
+db.executeGetTicket = function (command, ticket,  requerimiento ,area  ,estatus , agente, comentario, satisfaccion,bandera) {
 
     const requestStr = `exec ${command} ${ticket}, ${requerimiento}, ${area}, ${estatus}, ${agente}, '${comentario}', ${satisfaccion}, ${bandera}`;
 
@@ -903,9 +902,9 @@ db.executeGetTicket = function(command, ticket, requerimiento, area, estatus, ag
 
 //UpdateHabilitado del banner
 
-db.executeUpdateHabilitado = function(idReporteBanner) {
+db.executeUpdateHabilitado = function (idReporteBanner) {
 
-    const requestStr = `update tbl_reporteBanner set habilitado = 0 where idReporteBanner = ${idReporteBanner}`;
+const requestStr = `update tbl_reporteBanner set habilitado = 0 where idReporteBanner = ${idReporteBanner}`;
 
     return new Promise((resolve, reject) => {
         tp.sql(requestStr)
@@ -922,9 +921,9 @@ db.executeUpdateHabilitado = function(idReporteBanner) {
 
 //Obtiene la informacion de mail por cliente  
 
-db.executeGetMailCliente = function(idUsuario) {
+db.executeGetMailCliente = function (idUsuario) {
 
-    const requestStr = `select * from InformacionMailPorCliente where idUsuario = ${idUsuario}`;
+const requestStr = `select * from InformacionMailPorCliente where idUsuario = ${idUsuario}`;
 
     return new Promise((resolve, reject) => {
         tp.sql(requestStr)
@@ -941,26 +940,9 @@ db.executeGetMailCliente = function(idUsuario) {
 
 //getTips 
 
-db.executeGetTips = function(tip1, tip2, tip3) {
+db.executeGetTips = function (tip1,tip2,tip3) {
 
-    const requestStr = `select * from CatalogoTips where TipId in (${tip1},${tip2},${tip3})`;
-
-    return new Promise((resolve, reject) => {
-        tp.sql(requestStr)
-            .execute()
-            .then(results => {
-                resolve(results);
-            })
-            .catch(err => {
-                console.log(err);
-                reject(err);
-            });
-    });
-};
-
-db.executeGetInfoPago = function(uuid) {
-
-    const requestStr = `select p.FirstName, p.LastName, p.PhoneNumber, pl.Amount, pl.PeriodDays from RecurringPayment p join RecurringPaymentPlan pl on p.RecurringPaymentPlanID=pl.ID where p.UUID=${uuid}`;
+const requestStr = `select * from CatalogoTips where TipId in (${tip1},${tip2},${tip3})`;
 
     return new Promise((resolve, reject) => {
         tp.sql(requestStr)
@@ -975,7 +957,24 @@ db.executeGetInfoPago = function(uuid) {
     });
 };
 
-db.executePostRecurringPayment = function(idUsuario) {
+db.executeGetInfoPago = function (uuid) {
+
+const requestStr = `select p.FirstName, p.LastName, p.PhoneNumber, pl.Amount, pl.PeriodDays from RecurringPayment p join RecurringPaymentPlan pl on p.RecurringPaymentPlanID=pl.ID where p.UUID=${uuid}`;
+
+    return new Promise((resolve, reject) => {
+        tp.sql(requestStr)
+            .execute()
+            .then(results => {
+                resolve(results);
+            })
+            .catch(err => {
+                console.log(err);
+                reject(err);
+            });
+    });
+};
+
+db.executePostRecurringPayment = function (idUsuario) {
 
     const requestStr = `update CATUSUARIO set RecurringPayments = 0 where IDUSUARIO = ${idUsuario}`;
 
@@ -995,27 +994,9 @@ db.executePostRecurringPayment = function(idUsuario) {
 
 //Inserta las respuestas encuestas
 
-db.executePutAnswer = function(idUsuario, idPregunta, respuesta, comentario, canal) {
+db.executePutAnswer = function (idUsuario,idPregunta,respuesta,comentario,canal) {
 
-    const requestStr = `insert into Tbl_RespuestasEncuestas (idUsuario,idAgenda,idPregunta,respuesta,comentario,fechaRespuesta,idAgente,canal) values (${idUsuario},NULL,${idPregunta},${respuesta},'${comentario}',GETDATE(),NULL,'${canal}');`;
-
-    return new Promise((resolve, reject) => {
-        tp.sql(requestStr)
-            .execute()
-            .then(results => {
-                resolve(results);
-            })
-            .catch(err => {
-                console.log(err);
-                reject(err);
-            });
-    });
-};
-
-
-db.executeGetWords = function(idUsuario) {
-
-    const requestStr = `select top 5 * from palabrasporcliente where idusuario = ${idUsuario}`;
+const requestStr = `insert into Tbl_RespuestasEncuestas (idUsuario,idAgenda,idPregunta,respuesta,comentario,fechaRespuesta,idAgente,canal) values (${idUsuario},NULL,${idPregunta},${respuesta},'${comentario}',GETDATE(),NULL,'${canal}');`;
 
     return new Promise((resolve, reject) => {
         tp.sql(requestStr)
@@ -1030,9 +1011,10 @@ db.executeGetWords = function(idUsuario) {
     });
 };
 
-db.executeGetWordsType = function(cuartaPantalla) {
 
-    const requestStr = `select top 5 * from palabrasporpantalla where tipocuartapantalla = ${cuartaPantalla}`;
+db.executeGetWords = function (idUsuario) {
+
+const requestStr = `select top 5 * from palabrasporcliente where idusuario = ${idUsuario}`;
 
     return new Promise((resolve, reject) => {
         tp.sql(requestStr)
@@ -1047,9 +1029,26 @@ db.executeGetWordsType = function(cuartaPantalla) {
     });
 };
 
-db.executeGetTopTen = function() {
+db.executeGetWordsType = function (cuartaPantalla) {
 
-    const requestStr = `select lugar , Nombre from Eficiencia where lugar <= 10 order by lugar`;
+const requestStr = `select top 5 * from palabrasporpantalla where tipocuartapantalla = ${cuartaPantalla}`;
+
+    return new Promise((resolve, reject) => {
+        tp.sql(requestStr)
+            .execute()
+            .then(results => {
+                resolve(results);
+            })
+            .catch(err => {
+                console.log(err);
+                reject(err);
+            });
+    });
+};
+
+db.executeGetTopTen = function () {
+
+const requestStr = `select lugar , Nombre from Eficiencia where lugar <= 10 order by lugar`;
 
     return new Promise((resolve, reject) => {
         tp.sql(requestStr)
@@ -1072,10 +1071,10 @@ function getDateTime() {
     var hour = date.getHours();
     hour = (hour < 10 ? "0" : "") + hour;
 
-    var min = date.getMinutes();
+    var min  = date.getMinutes();
     min = (min < 10 ? "0" : "") + min;
 
-    var sec = date.getSeconds();
+    var sec  = date.getSeconds();
     sec = (sec < 10 ? "0" : "") + sec;
 
     var year = date.getFullYear();
@@ -1083,12 +1082,11 @@ function getDateTime() {
     var month = date.getMonth() + 1;
     month = (month < 10 ? "0" : "") + month;
 
-    var day = date.getDate();
+    var day  = date.getDate();
     day = (day < 10 ? "0" : "") + day;
 
     return year + "-" + month + "-" + day + " " + hour + ":" + min + ":" + sec;
 
 }
-
 
 module.exports = db;
