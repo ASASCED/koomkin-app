@@ -25,14 +25,14 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(express.static(path.join(__dirname, '')));
 
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS');
     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
     next();
 });
 
-app.get('/', function(req, res, next) {
+app.get('/', function (req, res, next) {
     res.sendFile('index.html', { root: __dirname });
 });
 
@@ -40,12 +40,12 @@ app.get('/upcoming', (req, res) => {
     res.json({ 'itworks': 'yes' });
 });
 
-app.get('/getDiasRestantes/:id', function(req, res) {
+app.get('/getDiasRestantes/:id', function (req, res) {
 
     var id = parseInt(req.params.id, 10);
     const command = 'SP_DIAS_RESTANTES_CAMP';
 
-    db.executeGetById(id, command, function(err, rows) {
+    db.executeGetById(id, command, function (err, rows) {
         if (err) {
             res.status(500).json({ error: err }).send();
         } else {
@@ -55,12 +55,12 @@ app.get('/getDiasRestantes/:id', function(req, res) {
 });
 
 
-app.get('/getUrlAudio/:id', function(req, res) {
+app.get('/getUrlAudio/:id', function (req, res) {
 
     var id = parseInt(req.params.id, 10);
     const command = 'SP_GetUrlAudio';
 
-    db.executeGetById(id, command, function(err, rows) {
+    db.executeGetById(id, command, function (err, rows) {
         if (err) {
             res.status(500).json({ error: err }).send();
         } else {
@@ -69,39 +69,39 @@ app.get('/getUrlAudio/:id', function(req, res) {
     });
 });
 
-app.get('/getRecurrementPayment/:id', function(req, res) {
-
+app.get('/getRecurrementPayment/:id', function (req, res) {
+    
     const id = req.params.id;
 
     db.executePostRecurringPayment(id)
-        .then(rows => {
+         .then(rows => {
             res.json(rows).status(200).send();
         })
         .catch(err => {
             res.status(500).json({ error: err }).send();
         });
-});
+    });
 
-app.get('/getInfoPago/:uuid', function(req, res) {
-
+app.get('/getInfoPago/:uuid', function (req, res) {
+    
     const uuid = req.params.uuid;
 
     db.executeGetInfoPago(uuid)
-        .then(rows => {
+         .then(rows => {
             res.json(rows).status(200).send();
         })
         .catch(err => {
             res.status(500).json({ error: err }).send();
         });
-});
+    });
 
 
-app.get('/getLeadCalls/:id', function(req, res) {
+app.get('/getLeadCalls/:id', function (req, res) {
 
     var id = parseInt(req.params.id, 10);
     const command = 'SP_GetLeadCalls';
 
-    db.executeGetById(id, command, function(err, rows) {
+    db.executeGetById(id, command, function (err, rows) {
         if (err) {
             res.status(500).json({ error: err }).send();
         } else {
@@ -110,12 +110,12 @@ app.get('/getLeadCalls/:id', function(req, res) {
     });
 });
 
-app.get('/getCountLeadCalls/:id', function(req, res) {
+app.get('/getCountLeadCalls/:id', function (req, res) {
 
     var id = parseInt(req.params.id, 10);
     const command = 'SP_CountLeadCalls';
 
-    db.executeGetById(id, command, function(err, rows) {
+    db.executeGetById(id, command, function (err, rows) {
         if (err) {
             res.status(500).json({ error: err }).send();
         } else {
@@ -126,12 +126,12 @@ app.get('/getCountLeadCalls/:id', function(req, res) {
 
 //Obtiene las encuestas
 
-app.get('/getSurvey/:id', function(req, res) {
+app.get('/getSurvey/:id', function (req, res) {
 
     var id = parseInt(req.params.id, 10);
     const command = 'SP_getSurvey';
 
-    db.executeGetById(id, command, function(err, rows) {
+    db.executeGetById(id, command, function (err, rows) {
         if (err) {
             res.status(500).json({ error: err }).send();
         } else {
@@ -143,7 +143,7 @@ app.get('/getSurvey/:id', function(req, res) {
 
 //Obtiene la informacion de mail por cliente 
 
-app.get('/getMailCliente/:id', function(req, res) {
+app.get('/getMailCliente/:id', function (req, res) {
 
     var id = parseInt(req.params.id, 10);
 
@@ -158,7 +158,7 @@ app.get('/getMailCliente/:id', function(req, res) {
 
 //Genera el ticket 
 
-app.get('/getTicket/:id/:fecha/:descripcion', function(req, res) {
+app.get('/getTicket/:id/:fecha/:descripcion', function (req, res) {
 
     const id = parseInt(req.params.id, 10);
     const agente = 0;
@@ -168,9 +168,9 @@ app.get('/getTicket/:id/:fecha/:descripcion', function(req, res) {
     const descripcion = req.params.descripcion;
     const correoExterno = 0;
     const command = 'spI_hp_CrearTicket_Bis';
+    
 
-
-    db.executeGenerateTicket(command, id, agente, fecha, canal, satisfaccion, descripcion, correoExterno)
+    db.executeGenerateTicket(command,id,agente,fecha,canal,satisfaccion,descripcion,correoExterno)
         .then(rows => {
             res.json(rows).status(200).send();
         })
@@ -181,7 +181,7 @@ app.get('/getTicket/:id/:fecha/:descripcion', function(req, res) {
 
 //Genera el requerimiento del  ticket 
 
-app.post('/getRequirementTicket/', function(req, res) {
+app.post('/getRequirementTicket/', function (req, res) {
 
 
     const ticket = parseInt(req.body.ticket, 10);
@@ -189,13 +189,13 @@ app.post('/getRequirementTicket/', function(req, res) {
     const area = 6;
     const estatus = 2;
     const agente = 0;
-    console.log('comentario', req.body.comentario);
+    console.log('comentario',req.body.comentario);
     const comentario = req.body.comentario;
     const satisfaccion = 6;
     const bandera = 1;
     const command = 'spI_hp_CrearRequerimiento_Bis';
 
-    db.executeGetTicket(command, ticket, requerimiento, area, estatus, agente, comentario, satisfaccion, bandera)
+    db.executeGetTicket(command,ticket,requerimiento,area,estatus,agente,comentario,satisfaccion,bandera)
         .then(rows => {
             res.json(rows).status(200).send();
         })
@@ -206,7 +206,7 @@ app.post('/getRequirementTicket/', function(req, res) {
 
 
 //getDataProveedores
-app.get('/getDataProveedores/:uuid/:acceso/:dispositivo', function(req, res) {
+app.get('/getDataProveedores/:uuid/:acceso/:dispositivo', function (req, res) {
     const uuid = req.params.uuid;
     const acceso = req.params.acceso;
     const dispositivo = req.params.dispositivo;
@@ -222,12 +222,12 @@ app.get('/getDataProveedores/:uuid/:acceso/:dispositivo', function(req, res) {
 
 });
 
-app.get('/datosFiscales', function(req, res) {
+app.get('/datosFiscales', function (req, res) {
 
     var id = parseInt(req.params.id, 10);
     const command = 'SP_GetDatosFiscalesByUserId';
 
-    db.executeGetById(id, command, function(err, rows) {
+    db.executeGetById(id, command, function (err, rows) {
         if (err) {
             res.status(500).json({ error: err }).send();
         } else {
@@ -236,11 +236,11 @@ app.get('/datosFiscales', function(req, res) {
     });
 });
 
-app.get('/getLead30Dias/:id', function(req, res) {
+app.get('/getLead30Dias/:id', function (req, res) {
     var id = parseInt(req.params.id, 10);
     var command = 'SP_GetLead30Dias';
     //console.log("command", command);
-    db.executeGetById(id, command, function(err, rows) {
+    db.executeGetById(id, command, function (err, rows) {
         if (err) {
             res.status(500).json({ error: err }).send();
         } else {
@@ -249,11 +249,11 @@ app.get('/getLead30Dias/:id', function(req, res) {
     });
 });
 
-app.get('/getLike90Dias/:id', function(req, res) {
+app.get('/getLike90Dias/:id', function (req, res) {
     var id = parseInt(req.params.id, 10);
     var command = 'SP_GetLike90Dias';
     //console.log("command", command);
-    db.executeGetById(id, command, function(err, rows) {
+    db.executeGetById(id, command, function (err, rows) {
         if (err) {
             res.status(500).json({ error: err }).send();
         } else {
@@ -262,10 +262,10 @@ app.get('/getLike90Dias/:id', function(req, res) {
     });
 });
 
-app.get('/getLead12Meses/:id', function(req, res) {
+app.get('/getLead12Meses/:id', function (req, res) {
     var id = parseInt(req.params.id, 10);
     var command = 'SP_GetLead12Meses';
-    db.executeGetById(id, command, function(err, rows) {
+    db.executeGetById(id, command, function (err, rows) {
         if (err) {
             res.status(500).json({ error: err }).send();
         } else {
@@ -274,11 +274,11 @@ app.get('/getLead12Meses/:id', function(req, res) {
     });
 });
 
-app.get('/getLike30Dias/:id', function(req, res) {
+app.get('/getLike30Dias/:id', function (req, res) {
     var id = parseInt(req.params.id, 10);
     console.log("id", id);
     var command = 'SP_GetLike30Dias';
-    db.executeGetById(id, command, function(err, rows) {
+    db.executeGetById(id, command, function (err, rows) {
         if (err) {
             res.status(500).json({ error: err }).send();
         } else {
@@ -287,10 +287,10 @@ app.get('/getLike30Dias/:id', function(req, res) {
     });
 });
 
-app.get('/getLeadsMapa/:id', function(req, res) {
+app.get('/getLeadsMapa/:id', function (req, res) {
     var id = parseInt(req.params.id, 10);
     var command = 'SP_GetLeadsMapa';
-    db.executeGetById(id, command, function(err, rows) {
+    db.executeGetById(id, command, function (err, rows) {
         if (err) {
             res.status(500).json({ error: err }).send();
         } else {
@@ -299,10 +299,10 @@ app.get('/getLeadsMapa/:id', function(req, res) {
     });
 });
 
-app.get('/getLeadCountMonth/:id', function(req, res) {
+app.get('/getLeadCountMonth/:id', function (req, res) {
     var id = parseInt(req.params.id, 10);
     var command = 'SP_GetLeadCountMonth';
-    db.executeGetById(id, command, function(err, rows) {
+    db.executeGetById(id, command, function (err, rows) {
         if (err) {
             res.status(500).json({ error: err }).send();
         } else {
@@ -311,12 +311,12 @@ app.get('/getLeadCountMonth/:id', function(req, res) {
     });
 });
 
-app.get('/getCostoCampania/:id', function(req, res) {
+app.get('/getCostoCampania/:id', function (req, res) {
 
     var id = parseInt(req.params.id, 10);
     var command = 'SP_GetCostoCampania'
 
-    db.executeGetById(id, command, function(err, rows) {
+    db.executeGetById(id, command, function (err, rows) {
         if (err) {
             res.status(500).json({ error: err }).send();
         } else {
@@ -325,10 +325,10 @@ app.get('/getCostoCampania/:id', function(req, res) {
     });
 });
 
-app.get('/getLeadById/:id', function(req, res) {
+app.get('/getLeadById/:id', function (req, res) {
     var id = parseInt(req.params.id, 10);
     var command = 'SP_GetLeadById';
-    db.executeGetById(id, command, function(err, rows) {
+    db.executeGetById(id, command, function (err, rows) {
         if (err) {
             res.status(500).json({ error: err }).send();
         } else {
@@ -338,10 +338,10 @@ app.get('/getLeadById/:id', function(req, res) {
 });
 
 
-app.get('/getObtieneContactoSexCte/:id', function(req, res) {
+app.get('/getObtieneContactoSexCte/:id', function (req, res) {
     var id = parseInt(req.params.id, 10);
     var command = 'SP_ObtieneContactoSexCte';
-    db.executeGetById(id, command, function(err, rows) {
+    db.executeGetById(id, command, function (err, rows) {
         if (err) {
             res.status(500).json({ error: err }).send();
         } else {
@@ -350,11 +350,11 @@ app.get('/getObtieneContactoSexCte/:id', function(req, res) {
     });
 });
 
-app.get('/getReporteWeb', function(req, res) {
+app.get('/getReporteWeb', function (req, res) {
     var id = parseInt(req.query.param1, 10);
     console.log(id);
     var command = 'SP_GetReporteWeb';
-    db.executeGetById(id, command, function(err, rows) {
+    db.executeGetById(id, command, function (err, rows) {
         if (err) {
             res.status(500).json({ error: err }).send();
         } else {
@@ -363,10 +363,10 @@ app.get('/getReporteWeb', function(req, res) {
     });
 });
 
-app.get('/getUserById/:id', function(req, res) {
+app.get('/getUserById/:id', function (req, res) {
     var id = parseInt(req.params.id, 10);
     var command = 'SP_GetUsuarioById';
-    db.executeGetById(id, command, function(err, rows) {
+    db.executeGetById(id, command, function (err, rows) {
         if (err) {
             res.status(500).json({ error: err }).send();
         } else {
@@ -375,10 +375,10 @@ app.get('/getUserById/:id', function(req, res) {
     });
 });
 
-app.get('/getUserByEmail/:email', function(req, res) {
+app.get('/getUserByEmail/:email', function (req, res) {
     var email = "'" + req.params.email + "'";
     var command = 'SP_GetUsuarioByEmail';
-    db.executeGetById(email, command, function(err, rows) {
+    db.executeGetById(email, command, function (err, rows) {
         if (err) {
             res.status(500).json({ error: err }).send();
         } else {
@@ -387,7 +387,7 @@ app.get('/getUserByEmail/:email', function(req, res) {
     });
 });
 
-app.get('/getLeadsReport/:id/:finicio/:ffin/:filtro', function(req, res) {
+app.get('/getLeadsReport/:id/:finicio/:ffin/:filtro', function (req, res) {
 
     var urlArray = req.url.split('/');
     var id = urlArray[2];
@@ -397,7 +397,7 @@ app.get('/getLeadsReport/:id/:finicio/:ffin/:filtro', function(req, res) {
     var filtro = filtroTemp.split('_').join(' ');
     var command = 'SP_RPT_Leads2';
 
-    db.executeGetSpByDate(id, finicio, ffin, filtro, command, function(err, rows) {
+    db.executeGetSpByDate(id, finicio, ffin, filtro, command, function (err, rows) {
         if (err) {
             res.status(500).json({ error: err }).send();
         } else {
@@ -406,7 +406,7 @@ app.get('/getLeadsReport/:id/:finicio/:ffin/:filtro', function(req, res) {
     });
 });
 
-app.get('/getLeadsReportPagination/:id/:finicio/:ffin/:filtro/:min/:max', function(req, res) {
+app.get('/getLeadsReportPagination/:id/:finicio/:ffin/:filtro/:min/:max', function (req, res) {
 
     const id = req.params.id;
     const finicio = '' + req.params.finicio;
@@ -428,8 +428,8 @@ app.get('/getLeadsReportPagination/:id/:finicio/:ffin/:filtro/:min/:max', functi
         });
 });
 
-app.get('/facebook', function(req, res) {
-    db.facebook(req.query.param1, req.query.param2, function(err, rows) {
+app.get('/facebook', function (req, res) {
+    db.facebook(req.query.param1, req.query.param2, function (err, rows) {
         if (err) {
             res.send('Error');
         } else {
@@ -438,7 +438,7 @@ app.get('/facebook', function(req, res) {
     });
 });
 
-app.get('/facebook/checkLeadComplement', function(req, res) {
+app.get('/facebook/checkLeadComplement', function (req, res) {
     var user_id = req.query.user_id;
     //var cot_id = req.query.cot_id;
     var email = req.query.email;
@@ -458,14 +458,14 @@ app.get('/facebook/checkLeadComplement', function(req, res) {
 var checkLeadComplement = (user_id, email) => {
 
     let url = 'http://187.162.208.218:5000/facebook/checkLeadComplement?'
-        // let url = 'http://187.162.208.218:5001/facebook/checkLeadComplement?'
-        // let url = 'http://localhost:5001/facebook/checkLeadComplement?'
-        // console.log(url);
+    // let url = 'http://187.162.208.218:5001/facebook/checkLeadComplement?'
+    // let url = 'http://localhost:5001/facebook/checkLeadComplement?'
+    // console.log(url);
     console.log('pene');
     return new Promise((resolve, reject) => {
         //request(url + "user_id=" + user_id + "&cot_id=" + cot_id,
         request(url + "user_id=" + user_id + "&email=" + email,
-            function(error, response, body) {
+            function (error, response, body) {
                 if (!error) {
                     resolve(body);
                 } else {
@@ -476,8 +476,8 @@ var checkLeadComplement = (user_id, email) => {
 };
 
 
-app.get('/verificarPopup', function(req, res) {
-    db.verificarPopup(req.query.param1, function(err, rows) {
+app.get('/verificarPopup', function (req, res) {
+    db.verificarPopup(req.query.param1, function (err, rows) {
         if (err) {
             res.send('Error');
         } else {
@@ -487,7 +487,7 @@ app.get('/verificarPopup', function(req, res) {
 });
 
 
-app.get('/calificaLead/:clave/:classification', function(req, res) {
+app.get('/calificaLead/:clave/:classification', function (req, res) {
     /* console.log('pinche putita', req);
     const body = _.pick(req.body, 'clave', 'classification'); */
 
@@ -495,7 +495,7 @@ app.get('/calificaLead/:clave/:classification', function(req, res) {
     const classification = req.params.classification;
     const clave = req.params.clave
 
-    db.executeModifyLead(clave, classification, command, function(err, rows) {
+    db.executeModifyLead(clave, classification, command, function (err, rows) {
         if (err) {
             res.status(500).json({ error: err }).send();
         } else {
@@ -504,7 +504,7 @@ app.get('/calificaLead/:clave/:classification', function(req, res) {
     });
 });
 
-app.get('/clasificaLead/:clave/:classification', function(req, res) {
+app.get('/clasificaLead/:clave/:classification', function (req, res) {
     /* console.log('pinche putita', req);
     const body = _.pick(req.body, 'clave', 'classification'); */
 
@@ -512,7 +512,7 @@ app.get('/clasificaLead/:clave/:classification', function(req, res) {
     const classification = req.params.classification;
     const clave = req.params.clave
 
-    db.executeModifyLead(clave, classification, command, function(err, rows) {
+    db.executeModifyLead(clave, classification, command, function (err, rows) {
         if (err) {
             res.status(500).json({ error: err }).send();
         } else {
@@ -521,7 +521,7 @@ app.get('/clasificaLead/:clave/:classification', function(req, res) {
     });
 });
 
-app.get('/calificaLead2/:clave/:classification/:canal', function(req, res) {
+app.get('/calificaLead2/:clave/:classification/:canal', function (req, res) {
     /* console.log('pinche putita', req);
     const body = _.pick(req.body, 'clave', 'classification'); */
 
@@ -530,7 +530,7 @@ app.get('/calificaLead2/:clave/:classification/:canal', function(req, res) {
     const clave = req.params.clave
     const canal = req.params.canal;
 
-    db.executeModifyLead2(command, clave, classification, canal, function(err, rows) {
+    db.executeModifyLead2(command, clave, classification, canal, function (err, rows) {
         if (err) {
             res.status(500).json({ error: err }).send();
         } else {
@@ -539,7 +539,7 @@ app.get('/calificaLead2/:clave/:classification/:canal', function(req, res) {
     });
 });
 
-app.get('/clasificaLead2/:clave/:classification/:canal', function(req, res) {
+app.get('/clasificaLead2/:clave/:classification/:canal', function (req, res) {
     /* console.log('pinche putita', req);
     const body = _.pick(req.body, 'clave', 'classification'); */
 
@@ -548,7 +548,7 @@ app.get('/clasificaLead2/:clave/:classification/:canal', function(req, res) {
     const clave = req.params.clave
     const canal = req.params.canal;
 
-    db.executeModifyLead2(command, clave, classification, canal, function(err, rows) {
+    db.executeModifyLead2(command, clave, classification, canal, function (err, rows) {
         if (err) {
             res.status(500).json({ error: err }).send();
         } else {
@@ -558,9 +558,9 @@ app.get('/clasificaLead2/:clave/:classification/:canal', function(req, res) {
 });
 //POST methods
 
-app.get('/leerLead/:leadId/:userId', function(req, res) {
+app.get('/leerLead/:leadId/:userId', function (req, res) {
 
-    db.executeLeerLead(req.params.leadId, req.params.userId, function(err, rows) {
+    db.executeLeerLead(req.params.leadId, req.params.userId, function (err, rows) {
         if (err) {
             res.status(500).json({ error: err }).send();
         } else {
@@ -569,7 +569,7 @@ app.get('/leerLead/:leadId/:userId', function(req, res) {
     });
 });
 
-app.get('/getIntentoSesion/:email/:password', function(req, res) {
+app.get('/getIntentoSesion/:email/:password', function (req, res) {
     const email = req.params.email;
     const password = req.params.password;
     const command = 'SP_IntentoSesion';
@@ -582,7 +582,7 @@ app.get('/getIntentoSesion/:email/:password', function(req, res) {
         });
 });
 
-app.get('/getAccesoReporte/:id/:acceso/:dispositivo/:sistema/:idioma', function(req, res) {
+app.get('/getAccesoReporte/:id/:acceso/:dispositivo/:sistema/:idioma', function (req, res) {
     const id = req.params.id;
     const acceso = req.params.acceso;
     const dispositivo = req.params.dispositivo;
@@ -599,7 +599,7 @@ app.get('/getAccesoReporte/:id/:acceso/:dispositivo/:sistema/:idioma', function(
         });
 });
 
-app.get('/getLoginReporte/:id/:acceso/:dispositivo/:sistema', function(req, res) {
+app.get('/getLoginReporte/:id/:acceso/:dispositivo/:sistema', function (req, res) {
     const id = req.params.id;
     const acceso = req.params.acceso;
     const dispositivo = req.params.dispositivo;
@@ -615,7 +615,7 @@ app.get('/getLoginReporte/:id/:acceso/:dispositivo/:sistema', function(req, res)
         });
 });
 
-app.get('/getInsertClickPagina/:usuario/:pagina/:acceso', function(req, res) {
+app.get('/getInsertClickPagina/:usuario/:pagina/:acceso', function (req, res) {
     const usuario = req.params.usuario;
     const pagina = req.params.pagina;
     const acceso = req.params.acceso;
@@ -631,7 +631,7 @@ app.get('/getInsertClickPagina/:usuario/:pagina/:acceso', function(req, res) {
         });
 });
 
-app.get('/getInsertClickFiltro/:usuario/:pagina/:acceso', function(req, res) {
+app.get('/getInsertClickFiltro/:usuario/:pagina/:acceso', function (req, res) {
     const usuario = req.params.usuario;
     const pagina = req.params.pagina;
     const acceso = req.params.acceso;
@@ -647,7 +647,7 @@ app.get('/getInsertClickFiltro/:usuario/:pagina/:acceso', function(req, res) {
         });
 });
 
-app.get('/getLeadComplement/:clave', function(req, res) {
+app.get('/getLeadComplement/:clave', function (req, res) {
 
     const clave = req.params.clave;
     const command = 'SP_RPT_GetComplement';
@@ -661,7 +661,7 @@ app.get('/getLeadComplement/:clave', function(req, res) {
         });
 });
 
-app.get('/getInsertClickLead/:usuario/:id/:acceso', function(req, res) {
+app.get('/getInsertClickLead/:usuario/:id/:acceso', function (req, res) {
     const usuario = req.params.usuario;
     const id = req.params.id;
     const acceso = req.params.acceso;
@@ -676,7 +676,7 @@ app.get('/getInsertClickLead/:usuario/:id/:acceso', function(req, res) {
         });
 });
 
-app.get('/getInsertClickLlamar/:usuario/:id/:acceso/:dispositivo', function(req, res) {
+app.get('/getInsertClickLlamar/:usuario/:id/:acceso/:dispositivo', function (req, res) {
     const usuario = req.params.usuario;
     const id = req.params.id;
     const acceso = req.params.acceso;
@@ -692,7 +692,7 @@ app.get('/getInsertClickLlamar/:usuario/:id/:acceso/:dispositivo', function(req,
         });
 });
 
-app.get('/getInsertClickChat/:usuario/:id/:acceso/:dispositivo/:metodo', function(req, res) {
+app.get('/getInsertClickChat/:usuario/:id/:acceso/:dispositivo/:metodo', function (req, res) {
     const usuario = req.params.usuario;
     const id = req.params.id;
     const acceso = req.params.acceso;
@@ -710,13 +710,13 @@ app.get('/getInsertClickChat/:usuario/:id/:acceso/:dispositivo/:metodo', functio
 });
 
 
-app.post('/registerDeviceId/:idUsuario/:idDevice', function(req, res) {
+app.post('/registerDeviceId/:idUsuario/:idDevice', function (req, res) {
 
     console.log("Registrando DeviceID");
     var idDevice = req.params.idDevice;
     var idUser = req.params.idUsuario;
 
-    db.PostRegisterDeviceId(idUser, idDevice, function(err, rows) {
+    db.PostRegisterDeviceId(idUser, idDevice, function (err, rows) {
         if (err) {
             res.status(500).json({ error: err }).send();
         } else {
@@ -727,7 +727,7 @@ app.post('/registerDeviceId/:idUsuario/:idDevice', function(req, res) {
 });
 
 
-app.post('/registerDeviceId/:idUsuario/:idDevice/:platform', function(req, res) {
+app.post('/registerDeviceId/:idUsuario/:idDevice/:platform', function (req, res) {
 
     console.log("Registrando DeviceID2");
 
@@ -737,7 +737,7 @@ app.post('/registerDeviceId/:idUsuario/:idDevice/:platform', function(req, res) 
 
     var platform = req.params.platform;
 
-    db.PostRegisterDeviceId2(idUser, idDevice, platform, function(err, rows) {
+    db.PostRegisterDeviceId2(idUser, idDevice, platform, function (err, rows) {
         if (err) {
 
             console.log("Device already registered. updating userID");
@@ -745,7 +745,7 @@ app.post('/registerDeviceId/:idUsuario/:idDevice/:platform', function(req, res) 
 
             db.UpdateDeviceId2(idUser, idDevice)
 
-            .then(rows => {
+                .then(rows => {
                     res.json(rows).status(200).send();
                 })
                 .catch(err => {
@@ -763,120 +763,120 @@ app.post('/registerDeviceId/:idUsuario/:idDevice/:platform', function(req, res) 
 
 });
 
-app.get('/getBanner/:idUsuario', function(req, res) {
+app.get('/getBanner/:idUsuario', function (req, res) {
 
     const id = parseInt(req.params.idUsuario, 10);
     const command = 'SP_GetBanner';
 
-    db.executeGetBanner(command, id)
-        .then(rows => {
+    db.executeGetBanner(command,id)
+         .then(rows => {
             res.json(rows).status(200).send();
         })
         .catch(err => {
             res.status(500).json({ error: err }).send();
         });
-});
+    });
 
 
-app.get('/registrarEntradaBanner/:idReporteBanner/:canal?', function(req, res) {
+app.get('/registrarEntradaBanner/:idReporteBanner/:canal?', function (req, res) {
 
     const id = parseInt(req.params.idReporteBanner, 10);
     var canal = req.params.canal;
 
-    if (!canal) {
+    if(!canal){
 
         canal = 'App'
 
     }
 
-    db.executeFechaEntradaBanner(id, canal)
-        .then(rows => {
+    db.executeFechaEntradaBanner(id,canal)
+         .then(rows => {
             res.json(rows).status(200).send();
         })
         .catch(err => {
             res.status(500).json({ error: err }).send();
         });
-});
+    });
 
-app.get('/getEficiency/:idUsuario', function(req, res) {
+app.get('/getEficiency/:idUsuario', function (req, res) {
 
     const id = parseInt(req.params.idUsuario, 10);
 
 
     db.executeGetEficiency(id)
-        .then(rows => {
+         .then(rows => {
             res.json(rows).status(200).send();
         })
         .catch(err => {
             res.status(500).json({ error: err }).send();
         });
-});
+    });
 
-app.get('/getEficiencyType/:cuartaPantalla', function(req, res) {
+app.get('/getEficiencyType/:cuartaPantalla', function (req, res) {
 
     const idTipo = parseInt(req.params.cuartaPantalla, 10);
 
 
     db.executeGetEficiencyType(idTipo)
-        .then(rows => {
+         .then(rows => {
             res.json(rows).status(200).send();
         })
         .catch(err => {
             res.status(500).json({ error: err }).send();
         });
-});
+    });
 
-app.get('/getEficiencyRanking', function(req, res) {
+app.get('/getEficiencyRanking', function (req, res) {
 
 
     db.executeGetEficiencyRanking()
-        .then(rows => {
+         .then(rows => {
             res.json(rows).status(200).send();
         })
         .catch(err => {
             res.status(500).json({ error: err }).send();
         });
-});
+    });
 
-app.get('/getWordsType/:cuartaPantalla', function(req, res) {
+app.get('/getWordsType/:cuartaPantalla', function (req, res) {
 
     const idTipo = parseInt(req.params.cuartaPantalla, 10);
 
 
     db.executeGetWordsType(idTipo)
-        .then(rows => {
+         .then(rows => {
             res.json(rows).status(200).send();
         })
         .catch(err => {
             res.status(500).json({ error: err }).send();
         });
-});
+    });
 
-app.get('/getWords/:idUsuario', function(req, res) {
+app.get('/getWords/:idUsuario', function (req, res) {
 
     const id = parseInt(req.params.idUsuario, 10);
 
     db.executeGetWords(id)
-        .then(rows => {
+         .then(rows => {
             res.json(rows).status(200).send();
         })
         .catch(err => {
             res.status(500).json({ error: err }).send();
         });
-});
+    });
 
-app.get('/getTopTen', function(req, res) {
+app.get('/getTopTen', function (req, res) {
 
     db.executeGetTopTen()
-        .then(rows => {
+         .then(rows => {
             res.json(rows).status(200).send();
         })
         .catch(err => {
             res.status(500).json({ error: err }).send();
         });
-});
+    });
 
-app.get('/getAnswer/:idUsuario/:idPregunta/:respuesta/:comentario/:canal', function(req, res) {
+app.get('/getAnswer/:idUsuario/:idPregunta/:respuesta/:comentario/:canal', function (req, res) {
 
     const idUsuario = parseInt(req.params.idUsuario, 10);
     const idPregunta = parseInt(req.params.idPregunta, 10);
@@ -884,34 +884,34 @@ app.get('/getAnswer/:idUsuario/:idPregunta/:respuesta/:comentario/:canal', funct
     const comentario = req.params.comentario;
     const canal = req.params.canal;
 
-    db.executePutAnswer(idUsuario, idPregunta, respuesta, comentario, canal)
-        .then(rows => {
+    db.executePutAnswer(idUsuario,idPregunta,respuesta,comentario,canal)
+         .then(rows => {
             res.json(rows).status(200).send();
         })
         .catch(err => {
             res.status(500).json({ error: err }).send();
         });
-});
+    });
 
-app.get('/getTips/:idtip1/:idtip2/:idtip3', function(req, res) {
+app.get('/getTips/:idtip1/:idtip2/:idtip3' , function (req, res) {
 
     const tip1 = parseInt(req.params.idtip1, 10);
     const tip2 = parseInt(req.params.idtip2, 10);
     const tip3 = parseInt(req.params.idtip3, 10);
 
 
-    db.executeGetTips(tip1, tip2, tip3)
-        .then(rows => {
+    db.executeGetTips(tip1,tip2,tip3)
+         .then(rows => {
             res.json(rows).status(200).send();
         })
         .catch(err => {
             res.status(500).json({ error: err }).send();
         });
-});
+    });
 
 //update banner habilitado
 
-app.get('/getUpdateBanner/:id', function(req, res) {
+app.get('/getUpdateBanner/:id', function (req, res) {
 
     const id = parseInt(req.params.id, 10);
 
@@ -921,90 +921,90 @@ app.get('/getUpdateBanner/:id', function(req, res) {
         .catch(err => {
             res.status(500).json({ error: err }).send();
         });
-});
+    });
 
 
 
-app.get('/registrarInteresBanner/:interes/:idReporteBanner/:uuidPase/:canal?', function(req, res) {
-
+app.get('/registrarInteresBanner/:interes/:idReporteBanner/:uuidPase/:canal?', function (req, res) {
+    
     const interes = req.params.interes;
     const idReporteBanner = req.params.idReporteBanner;
     const uuidPase = req.params.uuidPase;
 
-    db.executeInteresBanner(interes, idReporteBanner, uuidPase)
-        .then(rows => {
+    db.executeInteresBanner(interes,idReporteBanner,uuidPase)
+         .then(rows => {
             res.json(rows).status(200).send();
         })
         .catch(err => {
             res.status(500).json({ error: err }).send();
         });
-});
+    });
 
 
-app.get('/cambiarMensaje/:usuario/:acceso/:mensaje', function(req, res) {
-
+app.get('/cambiarMensaje/:usuario/:acceso/:mensaje', function (req, res) {
+    
     const command = 'SP_InsertCambiarMensaje';
     const usuario = parseInt(req.params.usuario, 10);
     const acceso = req.params.acceso;
     const mensaje = req.params.mensaje;
 
-    db.executeCambiarMensaje(command, usuario, acceso, mensaje)
-        .then(rows => {
+    db.executeCambiarMensaje(command,usuario,acceso,mensaje)
+         .then(rows => {
             res.json(rows).status(200).send();
         })
         .catch(err => {
             res.status(500).json({ error: err }).send();
         });
-});
+    });
 
 
-app.get('/clickBanner/:usuario/:acceso/:tipobanner', function(req, res) {
-
+app.get('/clickBanner/:usuario/:acceso/:tipobanner', function (req, res) {
+    
     const command = 'SP_InsertClickBanner';
     const usuario = parseInt(req.params.usuario, 10);
     const acceso = req.params.acceso;
     const tipobanner = parseInt(req.params.tipobanner, 10);
 
-    db.executeClickBanner(command, usuario, acceso, tipobanner)
-        .then(rows => {
+    db.executeClickBanner(command,usuario,acceso,tipobanner)
+         .then(rows => {
             res.json(rows).status(200).send();
         })
         .catch(err => {
             res.status(500).json({ error: err }).send();
         });
-});
+    });
 
-app.get('/clickTip/:usuario/:tipid/:acceso', function(req, res) {
-
+app.get('/clickTip/:usuario/:tipid/:acceso', function (req, res) {
+    
     const command = 'SP_InsertClickTip';
     const usuario = parseInt(req.params.usuario, 10);
     const tipid = parseInt(req.params.tipid, 10);
     const acceso = req.params.acceso;
 
-    db.executeClickTip(command, usuario, tipid, acceso)
-        .then(rows => {
+    db.executeClickTip(command,usuario,tipid,acceso)
+         .then(rows => {
             res.json(rows).status(200).send();
         })
         .catch(err => {
             res.status(500).json({ error: err }).send();
         });
-});
+    });
 
-app.get('/clickTooltip/:usuario/:tooltipname/:acceso', function(req, res) {
-
+app.get('/clickTooltip/:usuario/:tooltipname/:acceso', function (req, res) {
+    
     const command = 'SP_InsertClickTooltip';
     const usuario = parseInt(req.params.usuario, 10);
     const tooltipname = req.params.tooltipname;
     const acceso = req.params.acceso;
 
-    db.executeClickTooltip(command, usuario, tooltipname, acceso)
-        .then(rows => {
+    db.executeClickTooltip(command,usuario,tooltipname,acceso)
+         .then(rows => {
             res.json(rows).status(200).send();
         })
         .catch(err => {
             res.status(500).json({ error: err }).send();
         });
-});
+    });
 
 //SP_InsertClickCambioInformacion
 
@@ -1017,7 +1017,7 @@ app.get('/clickCambioInformacion/:usuario/:tipo/:acceso', function(req, res) {
     const tipo = req.params.tipo;
     const acceso = req.params.acceso;
 
-    db.executeInsertaRegistro(command, usuario, tipo, acceso)
+    db.executeInsertaRegistro(command, usuario, tipo, acceso) 
         .then(rows => {
             res.json(rows).status(200).send();
         })
@@ -1034,7 +1034,7 @@ app.get('/clickCambioInformacion/:usuario/:tipo/:acceso', function(req, res) {
 });*/
 
 // catch 404 and forward to error handler
-app.use(function(req, res) {
+app.use(function (req, res) {
     res.sendStatus(404);
     /*
     var err = new Error('Not Found');
@@ -1044,3 +1044,6 @@ app.use(function(req, res) {
 });
 
 module.exports = app;
+
+
+
