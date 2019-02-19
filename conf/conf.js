@@ -28,7 +28,7 @@ module.exports.config = {
    HOST: 5545,
    //HOST: 6843,
    password: 'U$3rk00mk1n',
-   server: '192.168.5.70',
+   server: '189.205.233.70',
    options:{
      port:1433,
      database: 'AGO_KOOMKIN'
