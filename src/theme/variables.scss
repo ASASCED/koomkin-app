@@ -1,43 +1,19 @@
 // Ionic Variables and Theming. For more info, please see:
 // http://ionicframework.com/docs/theming/
-<<<<<<< HEAD
-
 // Font path is used to include ionicons,
 // roboto, and noto sans fonts
 $font-path: "../assets/fonts";
-
-
-=======
-// Font path is used to include ionicons,
-// roboto, and noto sans fonts
-$font-path: "../assets/fonts";
->>>>>>> 58186580ff358fddae42517d10c965f393edfa8a
 // The app direction is used to include
 // rtl styles in your app. For more info, please see:
 // http://ionicframework.com/docs/theming/rtl-support/
 $app-direction: ltr;
-<<<<<<< HEAD
-
-
 @import "ionic.globals";
-
-
-=======
-@import "ionic.globals";
->>>>>>> 58186580ff358fddae42517d10c965f393edfa8a
 // Shared Variables
 // --------------------------------------------------
 // To customize the look and feel of this app, you can override
 // the Sass variables found in Ionic's source scss files.
 // To view all the possible Ionic variables, see:
 // http://ionicframework.com/docs/theming/overriding-ionic-variables/
-<<<<<<< HEAD
-
-
-
-
-=======
->>>>>>> 58186580ff358fddae42517d10c965f393edfa8a
 // Named Color Variables
 // --------------------------------------------------
 // Named colors makes it easy to reuse colors on various components.
@@ -45,41 +21,6 @@ $app-direction: ltr;
 // to match your app's branding. Ionic uses a Sass map of
 // colors so you can add, rename and remove colors as needed.
 // The "primary" color is the only required color in the map.
-<<<<<<< HEAD
-
-$colors: (
-  primary:    #488aff,
-  secondary:  #32db64,
-  danger:     #f53d3d,
-  light:      #f4f4f4,
-  dark:       #222,
-  azul:       #3CCDBB,
-  fondo:      #e9f2fd
-);
-
-
-// App iOS Variables
-// --------------------------------------------------
-// iOS only Sass variables can go here
-
-
-
-
-// App Material Design Variables
-// --------------------------------------------------
-// Material Design only Sass variables can go here
-
-
-
-
-// App Windows Variables
-// --------------------------------------------------
-// Windows only Sass variables can go here
-
-
-
-
-=======
 $colors: ( primary: #488aff, secondary: #32db64, danger: #f53d3d, light: #f4f4f4, dark: #222, azul: #3CCDBB, fondo: #e9f2fd, blue-green: #33A2BD, barra: #288AC1);
 // App iOS Variables
 $range-ios-knob-background-color: #288AC1;
@@ -95,39 +36,19 @@ $range-ios-tick-border-radius: 62px;
 // App Windows Variables
 // --------------------------------------------------
 // Windows only Sass variables can go here
->>>>>>> 58186580ff358fddae42517d10c965f393edfa8a
 // App Theme
 // --------------------------------------------------
 // Ionic apps can have different themes applied, which can
 // then be future customized. This import comes last
 // so that the above variables are used and Ionic's
 // default are overridden.
-<<<<<<< HEAD
-
 @import "ionic.theme.default";
-
-
-=======
-@import "ionic.theme.default";
->>>>>>> 58186580ff358fddae42517d10c965f393edfa8a
 // Ionicons
 // --------------------------------------------------
 // The premium icon font for Ionic. For more info, please see:
 // http://ionicframework.com/docs/ionicons/
-<<<<<<< HEAD
-
-@import "ionic.ionicons";
-
-
-// Fonts
-// --------------------------------------------------
-
-@import "roboto";
-@import "noto-sans";
-=======
 @import "ionic.ionicons";
 // Fonts
 // --------------------------------------------------
 @import "roboto";
 @import "noto-sans";
->>>>>>> 58186580ff358fddae42517d10c965f393edfa8a

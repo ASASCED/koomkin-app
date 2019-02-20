@@ -1,14 +1,3 @@
-<<<<<<< HEAD
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
-/**
- * Generated class for the PagoPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-=======
 import { Component, OnInit } from '@angular/core';
 import { IonicPage, NavController, NavParams, ModalController, AlertController } from 'ionic-angular';
 import { Payment } from '../../models/Payment';
@@ -17,22 +6,12 @@ import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
 import { CancelarPage } from './../cancelar/cancelar';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import swal from 'sweetalert2';
->>>>>>> 58186580ff358fddae42517d10c965f393edfa8a
 
 @IonicPage()
 @Component({
   selector: 'page-pago',
   templateUrl: 'pago.html',
 })
-<<<<<<< HEAD
-export class PagoPage {
-
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-  }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad PagoPage');
-=======
 export class PagoPage implements OnInit{
 
   public paymentData: Payment[];
@@ -250,7 +229,6 @@ export class PagoPage implements OnInit{
       confirmButtonText: 'OK',
       reverseButtons: true
     });
->>>>>>> 58186580ff358fddae42517d10c965f393edfa8a
   }
 
 }

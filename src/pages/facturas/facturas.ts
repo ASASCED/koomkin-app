@@ -1,9 +1,3 @@
-<<<<<<< HEAD
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
-import { FacturaPage } from '../factura/factura';
-import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
-=======
 import { Component, OnInit } from '@angular/core';
 import { IonicPage, NavController, NavParams, ModalController,Platform } from 'ionic-angular';
 import { FacturaPage } from '../factura/factura';
@@ -12,7 +6,6 @@ import { Payment } from '../../models/Payment';
 import { UserProvider } from '../../providers/user/user';
 import { File } from '@ionic-native/file';
 import { FileOpener } from '@ionic-native/file-opener';
->>>>>>> 58186580ff358fddae42517d10c965f393edfa8a
 
 @IonicPage()
 @Component({
@@ -20,18 +13,6 @@ import { FileOpener } from '@ionic-native/file-opener';
   templateUrl: 'facturas.html',
 })
 
-<<<<<<< HEAD
-
-export class FacturasPage {
-  
-  public empresa;
-  public id;
-
-  constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController,public authService: AuthServiceProvider) {
-    this.empresa = this.authService.empresa;
-    this.id = this.authService.id;
-}
-=======
 export class FacturasPage implements OnInit {
 
   public empresa;
@@ -89,17 +70,12 @@ export class FacturasPage implements OnInit {
     return filtrado;
   }
 
->>>>>>> 58186580ff358fddae42517d10c965f393edfa8a
   navegarPagina() {
     this.navCtrl.push(FacturaPage);
   }
 
   ionViewDidLoad() {
-<<<<<<< HEAD
-    console.log('ionViewDidLoad FacturasPage');
-=======
     // console.log('ionViewDidLoad FacturasPage');
->>>>>>> 58186580ff358fddae42517d10c965f393edfa8a
   }
 
   mostrar_modal() {
@@ -107,8 +83,6 @@ export class FacturasPage implements OnInit {
     modal.present();
   }
 
-<<<<<<< HEAD
-=======
   public onDownloadInvoice(invoice: Payment) {
     // console.log(invoice);
     const year = parseInt(invoice.Fecha[3], 10) < 8 ? 2 : 3;
@@ -216,5 +190,4 @@ export class FacturasPage implements OnInit {
    }
   }*/
 
->>>>>>> 58186580ff358fddae42517d10c965f393edfa8a
 }

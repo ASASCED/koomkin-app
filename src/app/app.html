@@ -1,39 +1,3 @@
-<<<<<<< HEAD
-<ion-menu id="myMenu" [content]="content">
-  <ion-header>
-    <ion-toolbar color="azul" >
-      <img src="../assets/imgs/iconos/infinito.png" style="margin-left: 45%;" />
-    </ion-toolbar>
-  </ion-header>
-
-  <ion-content color="azul">
-    <ion-list>
-      <button ion-item (click)="pagina(leads)">
-        <ion-icon name="appname-bandeja" class="iconos-m"> 
-        </ion-icon>
-        <p class="text">Leads</p>
-      </button>
-      <button ion-item (click)="pagina(reporte)">
-        <ion-icon name="appname-reporte" class="iconos-m">
-        </ion-icon>
-        <p class="text">Reporte</p>
-      </button>
-      <button ion-item (click)="pagina(datos)">
-        <ion-icon name="appname-datos" class="iconos-m">
-        </ion-icon>
-        <p class="text">Datos</p>
-      </button>
-      <button ion-item (click)="pagina(login)" class="salir">
-        <ion-icon name="appname-logout" class="iconos-m">
-        </ion-icon>
-        <p class="text">Cerrar Sesión</p>
-      </button>
-    </ion-list>
-  </ion-content>
-</ion-menu>
-
-<!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->
-=======
 <ion-menu id="myMenu" [content]="content">
     <ion-header>
         <ion-toolbar color="azul">
@@ -75,5 +39,4 @@
 </ion-menu>
 
 <!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->
->>>>>>> 58186580ff358fddae42517d10c965f393edfa8a
 <ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>

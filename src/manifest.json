@@ -1,10 +1,7 @@
 {
   "name": "Ionic",
   "short_name": "Ionic",
-<<<<<<< HEAD
-=======
   "permissions": [ "http://localhost:8100/"],
->>>>>>> 58186580ff358fddae42517d10c965f393edfa8a
   "start_url": "index.html",
   "display": "standalone",
   "icons": [{

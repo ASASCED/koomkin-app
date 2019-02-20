@@ -1,9 +1,3 @@
-<<<<<<< HEAD
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
-
-import { CancelarPage } from './../cancelar/cancelar';
-=======
 import { Component, OnInit } from "@angular/core";
 import {
   IonicPage,
@@ -20,23 +14,10 @@ import { HttpClient } from "@angular/common/http";
 import { HttpHeaders } from "@angular/common/http";
 import swal from 'sweetalert2';
 
->>>>>>> 58186580ff358fddae42517d10c965f393edfa8a
 
 
 @IonicPage()
 @Component({
-<<<<<<< HEAD
-  selector: 'page-usuario',
-  templateUrl: 'usuario.html',
-})
-export class UsuarioPage {
-
-  constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController) {
-  }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad UsuarioPage');
-=======
   selector: "page-usuario",
   templateUrl: "usuario.html"
 })
@@ -201,7 +182,6 @@ export class UsuarioPage implements OnInit {
       if (unique) filtrado.push(itm);
     });
     return filtrado;
->>>>>>> 58186580ff358fddae42517d10c965f393edfa8a
   }
 
   mostrar_modal() {
@@ -209,8 +189,6 @@ export class UsuarioPage implements OnInit {
     modal.present();
   }
 
-<<<<<<< HEAD
-=======
   updateUser() {
     const str =
       `actualizarUsuario?nombre=${this.nombre}&apaterno=${
@@ -406,5 +384,4 @@ export class UsuarioPage implements OnInit {
       );
     });
   }
->>>>>>> 58186580ff358fddae42517d10c965f393edfa8a
 }

@@ -1,78 +1,13 @@
 <ion-header>
 
-<<<<<<< HEAD
-  <ion-navbar>
-    <ion-title>usuario</ion-title>
-  </ion-navbar>
-=======
     <ion-navbar>
         <ion-title>usuario</ion-title>
     </ion-navbar>
->>>>>>> 58186580ff358fddae42517d10c965f393edfa8a
 
 </ion-header>
 
 
 <ion-content padding>
-<<<<<<< HEAD
-  <table>
-    <tr>
-      <th class="contacto" colspan="2">Datos de contacto</th>
-    </tr>
-    <tr>
-      <td>Nombre</td>
-      <td>Mauricio García</td>
-    </tr>
-    <tr>
-      <td>Empresa</td>
-      <td>Grupo Koomkin</td>
-    </tr>
-    <tr>
-      <td>Mail de contacto</td>
-      <td>mgarcia@koomkin.com</td>
-    </tr>
-    <tr>
-      <td>Contraseña</td>
-      <td>Grupokoomkin@1</td>
-    </tr>
-    <tr>
-      <td>Teléfono</td>
-      <td>5535 0499</td>
-    </tr>
-    <tr>
-      <td>Móvil</td>
-      <td>55 4056 4567</td>
-    </tr>
-  </table>
-  <hr>
-  <table>
-    <tr>
-      <th class="contacto" colspan="2">Datos fiscales</th>
-    </tr>
-    <tr>
-      <td>Razón social</td>
-      <td>Grupo Koomkin SA de CV</td>
-    </tr>
-    <tr>
-      <td>RFC</td>
-      <td>GKO120503S79</td>
-    </tr>
-    <tr>
-      <td>Domicilio Fiscal</td>
-      <td>Horacio 1844, 7C Polanco, Miguel Hidalgo, México DF, 11510</td>
-    </tr>
-    <tr>
-      <td>Nombre del titular</td>
-      <td>Pablo García</td>
-    </tr>
-  </table>
-  <div class="cuadro">
-    <button class="edit">Modificar Datos</button>
-  </div>
-  <div class="cuadro1">
-    <button class="cancelar" (click)="mostrar_modal()">Cancelar Suscripción</button>
-  </div>
-=======
     <table *ngIf="vista == 'informacion'">
         <tr>
             <th class="contacto" colspan="2">Configuración General</th>
@@ -169,5 +104,4 @@
         <button *ngIf="vista === 'editar'" class="edit" (click)="changePage('informacion');updateUser();updateMessage(mensaje);cambiarMensaje(mensaje);cambioAnidado()">Guardar</button>
     </div>
 
->>>>>>> 58186580ff358fddae42517d10c965f393edfa8a
 </ion-content>

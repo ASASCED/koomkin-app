@@ -1,18 +1,3 @@
-<<<<<<< HEAD
-import { NgModule } from '@angular/core';
-import { IonicPageModule } from 'ionic-angular';
-import { LeadPage } from './lead';
-
-@NgModule({
-  declarations: [
-    LeadPage,
-  ],
-  imports: [
-    IonicPageModule.forChild(LeadPage),
-  ],
-})
-export class LeadPageModule {}
-=======
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import { LeadPage } from './lead';
@@ -42,4 +27,3 @@ import { ServicioComponent } from '../../components/servicio/servicio';
   ],
 })
 export class LeadPageModule {}
->>>>>>> 58186580ff358fddae42517d10c965f393edfa8a
