@@ -195,7 +195,7 @@ export class PagoPage implements OnInit{
     const canal = 'app';
     const tipo = 'fiscales';
     return new Promise((resolve, reject) => {
-      const url = 'http://www.koomkin.com:4859/clickCambioInformacion/' + this.id + '/' + canal + '/' + tipo;
+      const url = 'https://www.koomkin.com.mx/api/app/clickCambioInformacion/' + this.id + '/' + canal + '/' + tipo;
       this.http.get(url).subscribe(
         data => {
           resolve();

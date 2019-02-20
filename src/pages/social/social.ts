@@ -117,7 +117,7 @@ export class SocialPage implements OnInit{
       )
     };
 
-    const url = 'http://18.235.164.159/call-tracking/api/v1/mailing/';
+    const url = 'https://koomkin.com.mx/call-tracking/api/v1/mailing/';
     console.log(url, body.toString(), options);
       this.http.post(url, body.toString(), options).subscribe(
         data => {
@@ -138,7 +138,7 @@ export class SocialPage implements OnInit{
     const canal = 'app';
     const tipo = 'redes-sociales';
     return new Promise((resolve, reject) => {
-      const url = 'http://www.koomkin.com:4859/clickCambioInformacion/' + this.id + '/' + canal + '/' + tipo;
+      const url = 'https://www.koomkin.com.mx/api/app/clickCambioInformacion/' + this.id + '/' + canal + '/' + tipo;
       this.http.get(url).subscribe(
         data => {
           resolve();

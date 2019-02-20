@@ -22,12 +22,13 @@ export class AuthServiceProvider {
   public userOnAuthentiationProcess
   public userFiscal;
   public uuid;
+  public recurrente;
 
   constructor(public http: HttpClient, public plt: Platform) {
     this.userLogged = false;
   }
 
-  apiUrl = 'http://www.koomkin.com:4859';
+  apiUrl = 'https://www.koomkin.com.mx/api/app';
   apiUrlNode = 'http://www.koomkin.com:5545';
 
   //apiUrl = 'https://fierce-spire-89861.herokuapp.com';
@@ -51,7 +52,9 @@ export class AuthServiceProvider {
           this.empresa = this.info[0].NOMEMPRESACOMPRADOR;
           this.mensajebot = this.info[0].mensajebot;
           this.uuid = this.info[0].uuid;
-         // console.log(this.mensajebot);
+          this.recurrente = this.info[0].RecurringPayments;
+
+          // console.log(this.recurrente);
           if (this.plt.is('ios') || this.plt.is('android')) {
             window["plugins"].OneSignal.sendTag("chat", this.info[0]['chat']);
           } 

@@ -35,7 +35,7 @@ export class LoginPage implements OnInit {
   datosenvio;
   key: string = 'usuario';
   user: any = [];
-  apiUrl = 'http://www.koomkin.com:1050';
+  apiUrl = 'https://koomkin.com.mx/api/misc/sendPasswordEmail?email=';
   resultado;
   error;
   envio;
@@ -347,7 +347,7 @@ export class LoginPage implements OnInit {
 
   enviarCorreo(data) {
     let email = data.email
-    this.http.get(this.apiUrl + "/API/SendPasswordEmail?email=" + email)
+    this.http.get(this.apiUrl + email)
       .subscribe(data => {
         this.resultado = data;
         this.resultado = JSON.parse(this.resultado);

@@ -12,10 +12,8 @@ export class RestProvider {
   }
 
   private user;
-  apiUrl = 'http://www.koomkin.com:4859';
-  apiUrl1 = 'http://189.205.233.70:4829/twilio_api/api/v1/forward-app/?idLead=';
-  apiUrl2 = 'http://187.162.208.218:5000/facebook/checkLeadComplement?user_id=';
-  apiUrl3 = 'http://18.235.164.159/call-tracking/api/v1/mailing/'
+  apiUrl = 'https://www.koomkin.com.mx/api/app';
+  apiUrl1 = 'https://koomkin.com.mx/call-tracking/api/v1/forward-app/?idLead=';
   date;
   datefin;
   email;
@@ -215,7 +213,7 @@ export class RestProvider {
   getCheckLeadComplement(){
     return new Promise(resolve => {
       console.log(this.email);
-      this.http.get(this.apiUrl2 + '/facebook/checkLeadComplement?user_id=' + this.user + '&email=' + this.email).subscribe(data => {
+      this.http.get(this.apiUrl + '/facebook/checkLeadComplement?user_id=' + this.user + '&email=' + this.email).subscribe(data => {
         resolve(data);
         console.log(data);
       }, err => {

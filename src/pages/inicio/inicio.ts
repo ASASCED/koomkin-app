@@ -94,7 +94,7 @@ export class InicioPage implements OnInit {
 
   public getBanner() {
     return new Promise((resolve, reject) => {
-      const urlBanner = "http://www.koomkin.com:4859/getBanner/" + this.id;
+      const urlBanner = "https://www.koomkin.com.mx/api/app/getBanner/" + this.id;
       let datos;
       this.http.get(urlBanner).subscribe(
         data => {
@@ -138,7 +138,7 @@ export class InicioPage implements OnInit {
 
   public clickBanner() {
     return new Promise((resolve, reject) => {
-      const urlBanner = "http://www.koomkin.com:4859/clickBanner/" + this.id + '/App/' + this.tipoBanner;
+      const urlBanner = "https://www.koomkin.com.mx/api/app/clickBanner/" + this.id + '/App/' + this.tipoBanner;
       this.http.get(urlBanner).subscribe(
         data => {
          // console.log('registro',data);

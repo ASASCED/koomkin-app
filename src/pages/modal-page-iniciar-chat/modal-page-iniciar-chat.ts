@@ -56,7 +56,7 @@ export class ModalPageIniciarChatPage {
       )
     };
 
-    const url = "http://www.koomkin.com:4829/twilio_api/api/v1/scheduler/";
+    const url = "https://koomkin.com.mx/call-tracking/api/v1/scheduler/";
     return new Promise((resolve, reject) => {
       this.http.post(url, body.toString(), options).subscribe(
         data => {

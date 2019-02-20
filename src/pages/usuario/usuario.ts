@@ -14,8 +14,6 @@ import { HttpClient } from "@angular/common/http";
 import { HttpHeaders } from "@angular/common/http";
 import swal from 'sweetalert2';
 
-
-
 @IonicPage()
 @Component({
   selector: "page-usuario",
@@ -57,6 +55,7 @@ export class UsuarioPage implements OnInit {
   public uidf;
   public uuid;
   public mensaje = "";
+  public recurrente;
 
   constructor(
     public navCtrl: NavController,
@@ -68,6 +67,7 @@ export class UsuarioPage implements OnInit {
     public http: HttpClient
   ) {
     this.id = this.authService.id;
+    this.recurrente = this.authService.recurrente;
   }
 
   ngOnInit() {
@@ -223,7 +223,7 @@ export class UsuarioPage implements OnInit {
       )
     };
 
-    const url = "http://www.koomkin.com:4829/twilio_api/api/v1/extra-info/";
+    const url = "hhttps://koomkin.com.mx/call-tracking/api/v1/extra-info/";
     return new Promise((resolve, reject) => {
       this.http.post(url, body.toString(), options).subscribe(
         data => {
@@ -239,7 +239,7 @@ export class UsuarioPage implements OnInit {
   public cambiarMensaje(mensaje) {
     return new Promise((resolve, reject) => {
       const url =
-        "http://www.koomkin.com:4859/cambiarMensaje/" +
+        "https://www.koomkin.com.mx/api/app/cambiarMensaje/" +
         this.id +
         "/App/" +
         mensaje;
@@ -259,7 +259,7 @@ export class UsuarioPage implements OnInit {
     const canal = "app";
 
     return new Promise((resolve, reject) => {
-      const url = "http://www.koomkin.com:4859/clickCambioInformacion/" + this.id + "/" + canal + "/" + tipo;
+      const url = "https://www.koomkin.com.mx/api/app/clickCambioInformacion/" + this.id + "/" + canal + "/" + tipo;
       this.http.get(url).subscribe(
         data => {
           resolve();
@@ -366,7 +366,7 @@ export class UsuarioPage implements OnInit {
 
   public cancelMembership () {
     return new Promise((resolve, reject) => {
-      const url = 'http://www.koomkin.com:4859/getRecurrementPayment/' + this.id;
+      const url = 'https://www.koomkin.com.mx/api/app/getRecurrementPayment/' + this.id;
       this.http.get(url).subscribe(
         data => {
           swal({

@@ -48,7 +48,7 @@ export class ModalSurveyPage implements OnInit {
   public registrarEntradaBanner() {
     return new Promise((resolve, reject) => {
       const urlEntradaBanner =
-        'http://www.koomkin.com:4859/registrarEntradaBanner/' +
+        'https://www.koomkin.com.mx/api/app/registrarEntradaBanner/' +
         this.idReporteBanner +
         '/app';
       this.http.get(urlEntradaBanner).subscribe(
@@ -197,7 +197,7 @@ export class ModalSurveyPage implements OnInit {
         headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
       };
 
-      let url = 'http://www.koomkin.com:4859/getRequirementTicket/';
+      let url = 'https://www.koomkin.com.mx/api/app/getRequirementTicket/';
       return new Promise((resolve, reject) => {
         this.http.post(url ,body.toString() , options)
           .subscribe(data => {

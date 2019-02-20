@@ -30,11 +30,16 @@ export class LeadPage implements OnInit {
 
   leadActual;
   //url de producción
-  apiUrl = 'http://www.koomkin.com:4859';
-  apiUrl2 = 'http://koomkin.com:5545/facebook/checkLeadComplement?user_id=';
-  apiUrl3 = 'http://www.koomkin.com:4829/twilio_api/api/v1/forward-app/?idLead=';
-  CALLING = 'http://www.koomkin.com:4829/twilio_api/api/v1/forward-app-lead/?idLead=';
-  AUDIO = 'http://www.koomkin.com:4829/twilio_api/api/v1/data-app/0/?idLead=';
+  apiUrl = 'https://www.koomkin.com.mx/api/app';
+  apiUrl3 = 'https://koomkin.com.mx/call-tracking/api/v1/forward-app/?idLead=';
+  CALLING = 'https://koomkin.com.mx/call-tracking/api/v1/forward-app-lead/?idLead=';
+  AUDIO = 'https://koomkin.com.mx/call-tracking/api/v1/data-app/0/?idLead=';
+
+    /* url de amazon
+    apiUrl = 'http://www.koomkin.com:4859';
+    apiUrl3 = 'http://www.koomkin.com:4829/twilio_api/api/v1/forward-app/?idLead=';
+    CALLING = 'http://www.koomkin.com:4829/twilio_api/api/v1/forward-app-lead/?idLead=';
+    AUDIO = 'http://www.koomkin.com:4829/twilio_api/api/v1/data-app/0/?idLead='; */
 
   public califica;
   public calificacion;
@@ -364,6 +369,7 @@ export class LeadPage implements OnInit {
 
     this.getLeadCalls();
     this.getCheckLeadComplement();
+
     this.getCountLeadCalls()
     this.getUrlAudio();
     this.showCall();
@@ -454,7 +460,8 @@ export class LeadPage implements OnInit {
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
     };
-    const url = 'http://www.koomkin.com:4829/twilio_api/api/v1/data-app/?id=' + this.leadActual.uuid + '&md=app';
+    const url = 'https://koomkin.com.mx/call-tracking/api/v1/data-app/?id=' + this.leadActual.uuid + '&md=app';
+    console.log(url);
     return new Promise(resolve => {
       this.http.post(url, options).subscribe(data => {
         resolve(data);

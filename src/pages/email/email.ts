@@ -31,7 +31,9 @@ export class EmailPage implements OnInit {
   public web;
   public twitter;
   public uuid;
-  apiUrl = 'http://18.235.164.159/call-tracking/api/v1/mailing/';
+  // apiUrl = 'http://18.235.164.159/call-tracking/api/v1/mailing/';
+
+  apiUrl = '  https://koomkin.com.mx/call-tracking/api/v1/mailing/';
 
   channelsidaux = "CHbc465fbe83434937b7382db97e8896b1";
 
@@ -121,8 +123,8 @@ export class EmailPage implements OnInit {
 
     this.http.post(this.apiUrl, body.toString(), options).subscribe(
       data => {
-       // console.log(JSON.stringify(data));
-       this.showSuccess();
+        // console.log(JSON.stringify(data));
+        this.showSuccess();
       },
       err => {
         console.log('respuesta porst mensaje');
@@ -233,58 +235,58 @@ export class EmailPage implements OnInit {
     let loading = this.loadingCtrl.create({
       content: "Cargando carta presentación..."
     });
-  this.chatService.connectAuxiliarChannel().then(()=>{
+    this.chatService.connectAuxiliarChannel().then(() => {
 
-(async () => {
-  const file = await (<any>window).chooser.getFile('application/pdf');
-  var formData = new FormData();
-  var blob = new Blob([file.data],{type: file.mediaType});
-  formData.append(file.name,blob,file.name);
-  this.chatService.tc.currentChannel.sendMessage( formData ).then(()=>{
-  loading.present().then(()=>{
-  this.chatService.tc.currentChannel.getMessages().then((messagesPaginator)=> {
+      (async () => {
+        const file = await (<any>window).chooser.getFile('application/pdf');
+        var formData = new FormData();
+        var blob = new Blob([file.data], { type: file.mediaType });
+        formData.append(file.name, blob, file.name);
+        this.chatService.tc.currentChannel.sendMessage(formData).then(() => {
+          loading.present().then(() => {
+            this.chatService.tc.currentChannel.getMessages().then((messagesPaginator) => {
 
-  const message = messagesPaginator.items[messagesPaginator.items.length-1];
-  if (message.type === 'media') {
-  console.log('Media attributes', message.media);
-  message.media.getContentUrl().then((url)=>{
-  const httpOptions = {
-    headers: new HttpHeaders({
-      "Content-Type": "application/x-www-form-urlencoded",
-    })
-  };
-  url = encodeURIComponent(url);
-  //alert(url);
-  this.http.post(this.apiUrl, { nombre_archivo: this.pdf , url_archivo: url }, httpOptions)
-.subscribe(data => {
-  loading.dismiss();
-  this.mostrarAlertaEstatusPdf('Carta Presentación','El documento se guardó exitosamente');
-  //alert('enviado a whatsapp'+ JSON.stringify(data));
-}, err => {
-  loading.dismiss()
-  if(err.status === 200){
-    this.mostrarAlertaEstatusPdf('Carta Presentación','El documento se guardó exitosamente.');
-  }else{
-    this.mostrarAlertaEstatusPdf('Carta Presentación','Ocurrió un problema durante la carga del documento.');
+              const message = messagesPaginator.items[messagesPaginator.items.length - 1];
+              if (message.type === 'media') {
+                console.log('Media attributes', message.media);
+                message.media.getContentUrl().then((url) => {
+                  const httpOptions = {
+                    headers: new HttpHeaders({
+                      "Content-Type": "application/x-www-form-urlencoded",
+                    })
+                  };
+                  url = encodeURIComponent(url);
+                  //alert(url);
+                  this.http.post(this.apiUrl, { nombre_archivo: this.pdf, url_archivo: url }, httpOptions)
+                    .subscribe(data => {
+                      loading.dismiss();
+                      this.mostrarAlertaEstatusPdf('Carta Presentación', 'El documento se guardó exitosamente');
+                      //alert('enviado a whatsapp'+ JSON.stringify(data));
+                    }, err => {
+                      loading.dismiss()
+                      if (err.status === 200) {
+                        this.mostrarAlertaEstatusPdf('Carta Presentación', 'El documento se guardó exitosamente.');
+                      } else {
+                        this.mostrarAlertaEstatusPdf('Carta Presentación', 'Ocurrió un problema durante la carga del documento.');
+                      }
+
+                      ;
+                      console.log(JSON.stringify(err));
+                    });
+                }).catch(() => {
+                  loading.dismiss();
+                });
+              }
+            }).catch(() => { loading.dismiss(); });
+
+          });
+
+        });
+      })();
+
+    });
+
   }
-
-  ;
-  console.log(JSON.stringify(err));
-});
-}).catch(()=>{
-  loading.dismiss();
-});
-}
-}).catch(()=>{loading.dismiss();});
-
-});
-
-});
-})();
-
-});
-
-}
 
   changeMail() {
     console.log(this.email);
@@ -299,14 +301,14 @@ export class EmailPage implements OnInit {
       )
     };
 
-      this.http.post(this.apiUrl, body.toString(), options).subscribe(
-        data => {         
-            console.log(JSON.stringify(data), 'enviado');
-        },
-        err => {
-            console.log(err);
-        }
-      );
+    this.http.post(this.apiUrl, body.toString(), options).subscribe(
+      data => {
+        console.log(JSON.stringify(data), 'enviado');
+      },
+      err => {
+        console.log(err);
+      }
+    );
   }
 
   enviarVistaPrevia() {
@@ -324,16 +326,16 @@ export class EmailPage implements OnInit {
     };
 
     this.http.put(this.apiUrl, body.toString(), options)
-        .subscribe(data => {
+      .subscribe(data => {
+        this.showSuccessP();
+
+      }, err => {
+        if (err.status === 200) {
           this.showSuccessP();
-         
-        }, err => {
-          if (err.status === 200) {
-            this.showSuccessP();
-          } else { 
-            this.showErrorP();
-          }
-        });
+        } else {
+          this.showErrorP();
+        }
+      });
   }
 
 
@@ -342,7 +344,7 @@ export class EmailPage implements OnInit {
     const tipo = "email-plantilla";
     return new Promise((resolve, reject) => {
       const url =
-        "http://www.koomkin.com:4859/clickCambioInformacion/" +
+        "https://www.koomkin.com.mx/api/app/clickCambioInformacion/" +
         this.id +
         "/" +
         canal +
