@@ -224,41 +224,9 @@ app.get('/getDataProveedores/:uuid/:acceso/:dispositivo', function (req, res) {
 
 app.get('/datosFiscales', function (req, res) {
 
-    const id = req.query.id
-    const command = 'SP_GetDatosFiscalesByUserId'
-
-    db.executeSPById(command, id)
-        .then(rows => {
-            res.json(rows);
-            res.status(200);
-        }, (err) => {
-            res.status(500).json({error: err}).send();
-        })
-        .catch(err => {
-            res.status(500).json({error: err}).send();
-        });
-});
-
-app.get('/datosPagos', function (req, res) {
-
-    const id = req.query.id
-    const command = 'SP_GetPagosByUserId'
-
-    db.executeSPById(command, id)
-        .then(rows => {
-            res.json(rows);
-            res.status(200);
-        }, (err) => {
-            res.status(500).json({error: err}).send();
-        })
-        .catch(err => {
-            res.status(500).json({error: err}).send();
-        });
-});
-
-app.get('/getObtieneContactoCte/:id', function (req, res) {
     var id = parseInt(req.params.id, 10);
-    var command = 'SP_ObtieneContactoSexCte';
+    const command = 'SP_GetDatosFiscalesByUserId';
+
     db.executeGetById(id, command, function (err, rows) {
         if (err) {
             res.status(500).json({ error: err }).send();
