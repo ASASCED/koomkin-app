@@ -113,13 +113,13 @@ export class InicioPage implements OnInit {
             this.description = datos[0].descripcionBanner;
             this.habilitado = datos[0].habilitado;
             this.notification = JSON.parse(datos[0].dataPage);
-            // console.log(this.description);
-            console.log(this.tipoBanner,this.habilitado);
+            // // console.log(this.description);
+            // console.log(this.tipoBanner,this.habilitado);
             resolve();
           }
         },
         err => {
-          console.log(err);
+          // console.log(err);
           reject(err);
         }
       );
@@ -132,7 +132,7 @@ export class InicioPage implements OnInit {
         this.mostrar = 1;
       })
       .catch(err => {
-        console.log(err);
+        // console.log(err);
       });
   }
 
@@ -141,11 +141,11 @@ export class InicioPage implements OnInit {
       const urlBanner = "https://www.koomkin.com.mx/api/app/clickBanner/" + this.id + '/App/' + this.tipoBanner;
       this.http.get(urlBanner).subscribe(
         data => {
-         // console.log('registro',data);
+         // // console.log('registro',data);
           resolve();
         },
         err => {
-         // console.log(err);
+         // // console.log(err);
           reject(err);
         }
       );

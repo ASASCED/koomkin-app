@@ -7,16 +7,8 @@ import {HTTP} from '@ionic-native/http'
 import { Storage } from '@ionic/storage';
 import {File} from "@ionic-native/file";
 import { Transfer, FileUploadOptions, TransferObject } from '@ionic-native/transfer';
-//import { normalizeURL } from 'ionic-angular';
-//import {LeadPage} from "../../pages/lead/lead";
-//import {take} from "rxjs/operator/take";
-//import { LeadPage} from "../../pages/lead/lead";
-//import { FileTransfer, FileTransferObject } from '@ionic-native/file-transfer';
-//import { Observable } from "rxjs/Observable";
-
 
 @Injectable()
-
 
 export class ChatServiceProvider {
 
@@ -51,22 +43,17 @@ export class ChatServiceProvider {
   }
 
   updateMsgList(data: any){
-    //alert('cleaning');
     this.msgListSource.next(data);
   }
 
   startChatService(uuid:string){
-
     this.connectClientWithUsername(uuid).then(()=>{
-
       this.chatClientStarted = true;
-
     }).catch(function(error) {
       //alert(error);
       window.location.reload();
-      console.log(("connectclient" +JSON.stringify(error, Object.getOwnPropertyNames(error))));
+      // console.log(("connectclient" +JSON.stringify(error, Object.getOwnPropertyNames(error))));
     });
-
   }
 
   connectClientWithUsername(username) {
@@ -80,13 +67,13 @@ export class ChatServiceProvider {
 
   fetchAccessToken(username, handler) {
     return new Promise((resolve, reject)=> {
-      this.http.post('http://www.koomkin.com:4835/token' , {device: "mobile", identity: username})
+      this.http.post('https://www.koomkin.com.mx/chat/token' , {device: "mobile", identity: username})
         .subscribe(data => {
           var token = data['token'];
           handler(token);
           return resolve();
         }, err => {
-          console.log(JSON.stringify(err));
+          // console.log(JSON.stringify(err));
           return reject(err);
         });
     });
@@ -100,18 +87,15 @@ export class ChatServiceProvider {
     return self.tc.messagingClient.initialize()
       .then(() => {
         this.chatClientStarted = true;
-
         self.tc.messagingClient.on('tokenExpired', ()=>{self.refreshToken()});
-
       }).catch(function(error) {
-        console.log(("" +JSON.stringify(error, Object.getOwnPropertyNames(error))));
+        // console.log(("" +JSON.stringify(error, Object.getOwnPropertyNames(error))));
       });
   }
 
 
   refreshToken() {
     var self = this;
-
     self.fetchAccessToken(self.tc.username, self.setNewToken.bind(self));
   }
 
@@ -137,28 +121,17 @@ export class ChatServiceProvider {
     let self = this;
     this.updateMsgList([]);
     self.tc.messagingClient.getChannelByUniqueName(channel_uniqueName).then((channel) => {
-
       self.loadingMessagesSource.next(true);
-
       this.leaveCurrentChannel().then(() => {
-
         this.joinChannel(channel).then(() => {
-
           this.tc.currentChannel.removeAllListeners();
-
           self.tc.currentChannel.on('messageAdded', (message) => {
-
             if(self.tc.currentChannel.sid  === message.channel.sid){
-              console.log('message accepted');
-
+              // console.log('message accepted');
               var mediaPromisesArray = []; // Arreglo de archivos media. Cuando cargan se guarda la conversacion.
-
               let messageGUI: ChatMessage;
-
               if(message.type === 'media'){
-
                 if(message.attributes.file_url){
-
                   messageGUI = {
                     userId: message.author,
                     time: message.timestamp,
@@ -170,11 +143,8 @@ export class ChatServiceProvider {
                     filename: message.attributes.filename,
                     index: message.index,
                     channel: message.channel.sid
-
                   }
-
                 }else{
-
                   messageGUI = {
                     userId: message.author,
                     time: message.timestamp,
@@ -187,11 +157,8 @@ export class ChatServiceProvider {
                     index: message.index,
                     channel: message.channel.sid
                   };
-
                 }
-
                 mediaPromisesArray.push(messageGUI.url);
-
               }else{
                 messageGUI = {
                   userId: message.author,
@@ -208,51 +175,36 @@ export class ChatServiceProvider {
               }
 
               this.storage.get(this.tc.currentChannel['sid']).then((data)=> {
-
                 if(data){
-
                   var storedConversation = JSON.parse(data);
                   storedConversation.push(messageGUI);
                   Promise.all(mediaPromisesArray).then((values) => {
                     this.loadingMessagesSource.next(false);
                     this.storeConversation(storedConversation);
                   }).catch((reason) => {
-                    console.log(reason);
+                    // console.log(reason);
                     this.loadingMessagesSource.next(false);
                     this.storeConversation(storedConversation);
                   });
-
                 }else{
                   this.msgListSource.next([messageGUI]);
                 }
-
-              }).catch(reason => {console.log(reason);this.msgListSource.next([messageGUI]);});
-
+              }).catch(reason => { console.log(reason);this.msgListSource.next([messageGUI]);});
             }else{
-              console.log('message rejected')
-
+              // console.log('message rejected')
             }
-
-
-
           });
 
           this.loadMessages('setupchannel');
         }).catch((error) => {
           self.loadingMessagesSource.next(false);
-          //alert('spinner INactive:'+ error);
-          // console.log(('joinChannel' + JSON.stringify(error, Object.getOwnPropertyNames(error))));
-        });
+            });
       }).catch((error) => {
         self.loadingMessagesSource.next(false);
-        //alert('spinner INactive:'+ error);
-        //  console.log(('leaveCurrentChannel' + JSON.stringify(error, Object.getOwnPropertyNames(error))));
-      });
+         });
     }).catch((error) => {
       self.loadingMessagesSource.next(false);
-      //alert('spinner INactive:'+ error);
-      // console.log(('getChannelByUniqueName' + JSON.stringify(error, Object.getOwnPropertyNames(error))));
-    });
+      });
 
   }
 
@@ -278,7 +230,7 @@ export class ChatServiceProvider {
 
         return Promise.resolve();
       }).catch(function (error) {
-        console.log(('leave error' + JSON.stringify(error, Object.getOwnPropertyNames(error))));
+        // console.log(('leave error' + JSON.stringify(error, Object.getOwnPropertyNames(error))));
       });
     } else {
       return Promise.resolve();
@@ -289,14 +241,6 @@ export class ChatServiceProvider {
 
   loadMessages(fromstring: string): any {
 
-    // Imprime lo que esta guardado en IonicStorage
-    //this.storage.forEach((value, key, index) => {
-      //console.log("This is the value", value)
-      //console.log("from the key", key)
-      //console.log("Index is", index);
-    //});
-
-
     var mediaPromisesArray = []; // Arreglo de archivos media. Cuando cargan se guarda la conversacion.
     var arr : Array<ChatMessage> = []; // Arreglo de mensajes para mostrar en pantalla.
     var self = this;
@@ -304,55 +248,36 @@ export class ChatServiceProvider {
     this.loadingMessagesSource.next(true); // Desactiva el spinner de cargar mensajes.
 
     this.storage.get(this.tc.currentChannel['sid']).then((data)=>{
-      //console.log(this.tc.currentChannel);
+      //// console.log(this.tc.currentChannel);
       if(data){
         var storedConversation = JSON.parse(data); // Conversacion guardada con sid del canal de twilio (local)
         arr = storedConversation;
-        //this.msgListSource.next(arr); // Desplegar la conversacion guardada (local)
         this.loadingMessagesSource.next(false);
-        //console.log('arr lenght '+arr.length);
-        //console.log(arr[arr.length-1]);
-        //console.log(arr[arr.length]);
         var last = arr[arr.length-1];
         var storedConversationSize = storedConversation.length;  // longitud de la conversación (local)
         var lastStoredMessageIndex = last['index'];
-        //alert('laststoredmessageindex '+lastStoredMessageIndex);
       }else{
-        //alert('conversation NOT found');
       }
 
       self.tc.currentChannel.getMessages(self.MESSAGES_HISTORY_LIMIT).then((messages)=> { // Extraer mensajes del canal
-
         const totalMessages = messages.items.length; // Longitud de conversacion (remota)
-
-        ///alert('total messages '+totalMessages);
-
         for (let i = 0; i < totalMessages; i++) {
-
           const message = messages.items[i];
-
           if(message.index in arr){
             continue;
           }
 
           if(data){
-            //alert(message.text);
-            //alert(message.index in arr);
             if (message.index in arr) { // si ya esta el mensaje guardado
-
               continue; // Salta esta iteracion.
             }else{
               //alert('adding message');
             }
-
           }
 
           let messageGUI: ChatMessage;
-
           if (message.type === 'media') {
-
             if (message.attributes.file_url) {
-
               messageGUI = {
                 userId: message.author,
                 time: message.timestamp,
@@ -365,9 +290,7 @@ export class ChatServiceProvider {
                 index: message.index,
                 channel: message.channel.sid
               }
-
             } else {
-
               messageGUI = {
                 userId: message.author,
                 time: message.timestamp,
@@ -380,7 +303,6 @@ export class ChatServiceProvider {
                 index: message.index,
                 channel: message.channel.sid
               };
-
             }
 
             mediaPromisesArray.push(messageGUI.url);
@@ -409,21 +331,21 @@ export class ChatServiceProvider {
           this.storeConversation(arr);
           this.loadingMessagesSource.next(false);
         }).catch((reason) => {
-          console.log('No se pudieron cargar uno o más mensajes multimedia')
-          console.log(reason);
+          // console.log('No se pudieron cargar uno o más mensajes multimedia')
+          // console.log(reason);
           this.loadingMessagesSource.next(false);
           this.storeConversation(arr);
         });
 
       }).catch((reason)=>{
-        console.log('no se pudieron cargar los mensaejes')
-        console.log(reason);
+        // console.log('no se pudieron cargar los mensaejes')
+        // console.log(reason);
         this.loadingMessagesSource.next(false);
       });
 
     }).catch((reason => {
-      console.log('falla en ionic storage');
-      console.log(reason);
+      // console.log('falla en ionic storage');
+      // console.log(reason);
       this.loadingMessagesSource.next(false);
     }));
 
@@ -508,7 +430,7 @@ export class ChatServiceProvider {
       if(fromstring === 'setupchannel'){
         this.loadingMessagesSource.next(false);
       }
-      console.log(('PROBLEM' +JSON.stringify(error, Object.getOwnPropertyNames(error))));
+      // console.log(('PROBLEM' +JSON.stringify(error, Object.getOwnPropertyNames(error))));
       return Promise.resolve(arr);
     });
 
@@ -526,21 +448,11 @@ export class ChatServiceProvider {
       }).catch(reason => {
         //alert('message not saved');
         this.loadingMessagesSource.next(messagesArr);
-        console.log(reason);
+        // console.log(reason);
         this.loadingMessagesSource.next(false);
       });
-
     }
-
   }
-
-  //showLoader() {
-  //  this.loading = this.loadingCtrl.create({
-  //    content: 'Cargando Mensajes...'
-  //  });
-  //  this.loading.present();
-
-  //}
 
   getCircularReplacer = () => {
     const seen = new WeakSet();
@@ -564,12 +476,6 @@ export class ChatServiceProvider {
         {
           text: 'Enviar Solicitud',
           handler: data => {
-            //this.mandarSolicitudChat();
-            //this.setStorage(this.leadActual.clave,Date.now()+ 1*1800000).then(()=>{
-
-            //});
-
-            // this.page='Lead';
           }
         }
       ]
@@ -585,80 +491,45 @@ export class ChatServiceProvider {
     var mime = message.attributes.mime;
 
     return new Promise((resolve, reject) => {
-
       if(mime.startsWith('image')||mime.startsWith('audio') ||mime.startsWith('video')|| mime.startsWith('application/pdf')){
-
-
         this.http2.downloadFile(url, {}, {},this.file.cacheDirectory + this.getFileName(url)).then((fileEntry)=> {
-
           message.url = Promise.resolve(fileEntry.toURL());
-
           resolve(fileEntry.toURL());
-
         });
-
       }else{
-
         resolve(url);
-
       }
-
     });
-
   }
 
 
   getTwilioImageUrl(message){
 
-
     var contentType = message.media.state.contentType;
-
     return new Promise((resolve, reject) => {
-
       message.media.getContentUrl().then((url) => {
-
         if(contentType.startsWith('image')||contentType.startsWith('audio') ||contentType.startsWith('video')|| contentType.startsWith('application/pdf')){
-
           var rutaArchivo = this.file.dataDirectory +Date.now()+'.'+this.getFileName(message.media.state.contentType);
-
           this.http2.downloadFile(url, {}, {},rutaArchivo).then((fileEntry)=> {
-
             //message.url = Promise.resolve(rutaArchivo);
-
             resolve(rutaArchivo);
-
           }).catch((reason)=>{
-
             //alert('wow');
             //alert(JSON.stringify(reason, Object.getOwnPropertyNames(reason)))
-
           });
-
-
         }else{
-
           resolve(url);
-
         }
-
-
       }).catch((error)=>{
-
-        console.log(error);
+        // console.log(error);
         reject(error);
-
       });
-
-
     });
-
   }
 
   getFileName(url){
-
     let fileName = url.substr(url.lastIndexOf('/')+1);
     return fileName
-
   }
 
 }

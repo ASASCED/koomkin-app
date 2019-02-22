@@ -32,7 +32,7 @@ export class ModalPageIniciarChatPage {
   }
 
   ionViewDidLoad() {
-    // console.log('ionViewDidLoad ModalPageIniciarChatPage');
+    // // console.log('ionViewDidLoad ModalPageIniciarChatPage');
   }
 
   ionViewWillLoad() {

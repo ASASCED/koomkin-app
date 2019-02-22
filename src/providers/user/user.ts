@@ -5,7 +5,7 @@ import { Payment } from '../../models/Payment';
 
 @Injectable()
 export class UserProvider {
-  public apiUrl = 'http://www.koomkin.com:5545/';
+  public apiUrl = 'https://www.koomkin.com.mx/api/app';
   constructor(private httpClient: HttpClient) {
 
   }
@@ -16,13 +16,13 @@ export class UserProvider {
   }
 
   public fileRequest(url: string): Promise<any> {
-    // console.log(this.apiUrl + url);
+    // // console.log(this.apiUrl + url);
     return this.httpClient.get(this.apiUrl + url, this.options())
       .toPromise();
   }
 
   public updateUserData(url: string) {
-    // console.log(this.apiUrl + url);
+    // // console.log(this.apiUrl + url);
     return this.httpClient.put(this.apiUrl + url, {})
       .toPromise();
   }

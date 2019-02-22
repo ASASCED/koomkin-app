@@ -106,7 +106,7 @@ export class ModalNotificationPage implements OnInit {
           resolve();
         },
         err => {
-          console.log(err);
+          // console.log(err);
           reject(err);
         }
       );

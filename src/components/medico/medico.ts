@@ -22,7 +22,7 @@ export class MedicoComponent implements OnInit {
   text: string;
 
   constructor() {
-    // console.log('Medico');
+    // // console.log('Medico');
   }
 
   ngOnInit(): void {}

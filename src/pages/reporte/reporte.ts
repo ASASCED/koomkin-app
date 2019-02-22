@@ -142,7 +142,7 @@ export class ReportePage implements OnInit {
     this.empresa = this.authService.empresa;
     this.id = this.authService.id;
     this.app = this.provedor.app;
-    // console.log(this.app);
+    // // console.log(this.app);
     if (this.app === 1) {
       this.app = 'Si';
     } else {
@@ -396,7 +396,7 @@ export class ReportePage implements OnInit {
 
         },
         (error) => {
-          console.log(error);
+          // console.log(error);
         });
   }
   //Llena la minitabla de estados (3er grafico)
@@ -467,7 +467,7 @@ export class ReportePage implements OnInit {
           };
         },
         (error) => {
-          console.log(error);
+          // console.log(error);
         });
   }
 
@@ -531,7 +531,7 @@ export class ReportePage implements OnInit {
           };
         },
         (error) => {
-          console.log(error);
+          // console.log(error);
         });
   }
 
@@ -547,7 +547,7 @@ export class ReportePage implements OnInit {
             this.age2 = Math.round((this.age[2].clicks / total) * 100);
             this.age3 = Math.round((this.age[3].clicks / total) * 100);
             this.age4 = Math.round((this.age[4].clicks / total) * 100);
-            // console.log(this.age0);
+            // // console.log(this.age0);
             if (this.age0 < 10) {
               this.age0p = "0"
             } else if (this.age0 < 30) {
@@ -620,7 +620,7 @@ export class ReportePage implements OnInit {
           }
         },
         (error) => {
-          console.log(error);
+          // console.log(error);
         });
   }
 
@@ -652,7 +652,7 @@ export class ReportePage implements OnInit {
           }
         },
         (error) => {
-          console.log(error);
+          // console.log(error);
         });
   }
 
@@ -661,7 +661,7 @@ export class ReportePage implements OnInit {
       .then(
         (data) => {
           this.gender = data;
-          // console.log(data);
+          // // console.log(data);
           if (data) {
             let total = Number(this.gender[0].clicks) + Number(this.gender[1].clicks) + Number(this.gender[2].clicks);
             this.mujer = Math.round((this.gender[0].clicks / total) * 100);
@@ -696,7 +696,7 @@ export class ReportePage implements OnInit {
           }
         },
         (error) => {
-          console.log(error);
+          // console.log(error);
         });
   }
 
@@ -705,10 +705,10 @@ export class ReportePage implements OnInit {
       .then(
         (data) => {
           this.leadsr = data;
-          //console.log(this.leadsr);
+          //// console.log(this.leadsr);
         },
         (error) => {
-          console.log(error);
+          // console.log(error);
         });
   }
 
@@ -716,9 +716,9 @@ export class ReportePage implements OnInit {
     this.provedor.getObtieneContactoSexCte()
     .then(
       (data) => {
-        // console.log(this.exitoso);
+        // // console.log(this.exitoso);
         this.exitoso = data;
-        // console.log(this.exitoso);
+        // // console.log(this.exitoso);
         const exito = data[0].LEADS90EX;
         const exitotal = data[0].LEADS90;
         if (exito === 0) {
@@ -736,7 +736,7 @@ export class ReportePage implements OnInit {
         }
       },
       (error) => {
-        console.log(error);
+        // console.log(error);
       });
   }
 
@@ -767,8 +767,8 @@ export class ReportePage implements OnInit {
 
             var first = Math.trunc(this.costo / 1000);
             var second = Math.trunc(this.costo - (first * 1000));
-            // console.log(first);
-            // console.log(second);
+            // // console.log(first);
+            // // console.log(second);
             if (first > 0) {
               if (second == 0) {
                 this.costoFinal = "$" + first + ",000"
@@ -789,7 +789,7 @@ export class ReportePage implements OnInit {
           }
         },
         (error) => {
-          console.log(error);
+          // console.log(error);
         });
   }
 
@@ -797,11 +797,11 @@ export class ReportePage implements OnInit {
     this.provedor.getDiasRestantes()
       .then(
         (data) => {
-          //console.log(data);
+          //// console.log(data);
 
           if (data[0]) {
             let result = data[0].DIAS_RESTANTES;
-            //console.log(result);
+            //// console.log(result);
             if (result > 0) {
               this.share = result + ' días';
             } else {
@@ -812,7 +812,7 @@ export class ReportePage implements OnInit {
           }
         },
         (error) => {
-          console.log(error);
+          // console.log(error);
         });
   }
 
@@ -864,7 +864,7 @@ export class ReportePage implements OnInit {
           }
         },
         (error) => {
-          console.log(error);
+          // console.log(error);
           //Leads calificados
           this.result = '0%';
           //Leads con like
@@ -877,16 +877,16 @@ export class ReportePage implements OnInit {
     const usuario = this.id;
     const pagina = 'reporte';
     const acceso = 'App';
-    // console.log(usuario,pagina,acceso);
+    // // console.log(usuario,pagina,acceso);
     this.provedor.getInsertClickPagina(usuario,pagina,acceso).then((data) => {
       this.datosenvio = data;
     }, (err) => {
-      console.log('error');
+      // console.log('error');
     });
   }
 
   ionViewDidLoad() {
-    //console.log(this.datagraph);
+    //// console.log(this.datagraph);
   }
 
   goBack(): void {

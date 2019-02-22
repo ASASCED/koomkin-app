@@ -20,11 +20,11 @@ export class ProfesionistaComponent implements OnInit{
   text: string;
 
   constructor() {
-   // console.log('profesionista');
+   // // console.log('profesionista');
   }
 
   ngOnInit(){
-  //  console.log(this.fechaCitaP);
+  //  // console.log(this.fechaCitaP);
 
   }
 }

@@ -19,7 +19,7 @@ export class ModalPage {
   }
 
   ionViewDidLoad() {
-    // console.log('ionViewDidLoad ModalPage');
+    // // console.log('ionViewDidLoad ModalPage');
   }
 
   closeModal(){
@@ -57,7 +57,7 @@ export class ModalPage {
           return resolve();
         }, err => {
           this.respuesta = true;
-          console.log(err);
+          // console.log(err);
           //alert(err);
           return resolve(err);
         });

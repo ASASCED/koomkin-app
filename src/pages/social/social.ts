@@ -60,7 +60,7 @@ export class SocialPage implements OnInit{
     this.provedor.getMailCliente(idUsuario).then(
       data => {
         this.datos = data;
-        console.log(this.datos);
+        // console.log(this.datos);
         if (this.datos) {
           this.facebook = this.datos[0].facebook;
           this.instagram = this.datos[0].instagram;
@@ -92,14 +92,14 @@ export class SocialPage implements OnInit{
         }
       },
       err => {
-        //   console.log('error');
+        //   // console.log('error');
        
       }
     );
   }
 
   changeInfo() {
-    console.log('entro');
+    // console.log('entro');
 
     const body = new URLSearchParams();
     body.set('id_usuario', this.id);
@@ -118,7 +118,7 @@ export class SocialPage implements OnInit{
     };
 
     const url = 'https://koomkin.com.mx/call-tracking/api/v1/mailing/';
-    console.log(url, body.toString(), options);
+    // console.log(url, body.toString(), options);
       this.http.post(url, body.toString(), options).subscribe(
         data => {
           this.showSuccess();
@@ -144,7 +144,7 @@ export class SocialPage implements OnInit{
           resolve();
         },
         err => {
-          console.log(err);
+          // console.log(err);
           reject(err);
         }
       );

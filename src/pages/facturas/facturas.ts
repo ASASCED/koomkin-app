@@ -43,7 +43,7 @@ export class FacturasPage implements OnInit {
       .then(data => {
         this.authService.setUserFiscal(data[0]);
         this.userFiscal = data[0];
-        // console.log(this.userFiscal);
+        // // console.log(this.userFiscal);
       });
   }
 
@@ -75,7 +75,7 @@ export class FacturasPage implements OnInit {
   }
 
   ionViewDidLoad() {
-    // console.log('ionViewDidLoad FacturasPage');
+    // // console.log('ionViewDidLoad FacturasPage');
   }
 
   mostrar_modal() {
@@ -84,18 +84,18 @@ export class FacturasPage implements OnInit {
   }
 
   public onDownloadInvoice(invoice: Payment) {
-    // console.log(invoice);
+    // // console.log(invoice);
     const year = parseInt(invoice.Fecha[3], 10) < 8 ? 2 : 3;
     this.userService.fileRequest(`descargarFactura?uid=${invoice.uid}&v=${year}`)
       .then(file => {
        // this.userService.downloadInvoice(file, invoice);
         this.pdfObj = this.userService.downloadInvoice(file, invoice);
-        // console.log('93',this.pdfObj);
+        // // console.log('93',this.pdfObj);
         const date = new Date();
         const formatedDate = date.toISOString().split('T')[0];
 
         if (this.platform.is('cordova')) {
-          // console.log(this.pdfObj);
+          // // console.log(this.pdfObj);
 
           this.pdfObj.getBuffer((buffer) => {
             const utf8 = new Uint8Array(buffer);
@@ -111,12 +111,12 @@ export class FacturasPage implements OnInit {
               });
           })
         } else {
-          // console.log('else',this.pdfObj);
+          // // console.log('else',this.pdfObj);
           this.userService.downloadInvoice(file, invoice);
         }
       })
       .catch((err) => {
-        // console.log('Error al descargar factura', err);
+        // // console.log('Error al descargar factura', err);
         this.userService.downloadInvoice(err.error.text, invoice);
       });
   }

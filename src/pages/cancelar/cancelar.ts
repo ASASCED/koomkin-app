@@ -19,7 +19,7 @@ export class CancelarPage {
     this.nombre = this.navParams.get("nombre");
     this.edad = this.navParams.get("edad");
 
-    console.log(this.nombre, this.edad);
+    // console.log(this.nombre, this.edad);
 
   }
 

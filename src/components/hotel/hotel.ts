@@ -13,7 +13,7 @@ export class HotelComponent implements OnInit{
   text: string;
 
   constructor() {
-    // console.log('Hotel');
+    // // console.log('Hotel');
   }
 
   ngOnInit(): void {

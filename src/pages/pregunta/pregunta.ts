@@ -18,7 +18,7 @@ export class PreguntaPage {
     this.nombre = this.navParams.get("nombre");
     this.edad = this.navParams.get("edad");
 
-   // console.log( this.nombre, this.edad );
+   // // console.log( this.nombre, this.edad );
 
   }
 
@@ -52,13 +52,13 @@ export class PreguntaPage {
         {
           text: 'Cerrar',
           handler: data => {
-            console.log('Cancel clicked');
+            // console.log('Cancel clicked');
           }
         },
         {
           text: 'Cancelar',
           handler: data => {
-            console.log('Saved clicked');
+            // console.log('Saved clicked');
           }
         }
       ]

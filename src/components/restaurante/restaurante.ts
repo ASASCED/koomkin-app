@@ -20,11 +20,11 @@ export class RestauranteComponent implements OnInit {
   text: string;
 
   constructor() {
-    // console.log('Restaurante');
+    // // console.log('Restaurante');
   }
 
   ngOnInit(){
-   // console.log(this.horaCitarestaurante,this.fechaCitarestaurante);
+   // // console.log(this.horaCitarestaurante,this.fechaCitarestaurante);
   }
 
 }

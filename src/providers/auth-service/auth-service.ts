@@ -29,9 +29,6 @@ export class AuthServiceProvider {
   }
 
   apiUrl = 'https://www.koomkin.com.mx/api/app';
-  apiUrlNode = 'http://www.koomkin.com:5545';
-
-  //apiUrl = 'https://fierce-spire-89861.herokuapp.com';
   apiUrl0 = 'https://fierce-spire-89861.herokuapp.com';
   apiUrl2 = 'http://localhost:3000';
 
@@ -40,9 +37,9 @@ export class AuthServiceProvider {
       this.http.get(this.apiUrl + '/getUserByEmail/' + email).timeout(8000).subscribe(data => {
         resolve(data);
         this.info = data;
-        //console.log("infoooo"+JSON.stringify(this.info));
+        //// console.log("infoooo"+JSON.stringify(this.info));
         if (this.info.length > 0) {
-         // console.log(this.info);
+         // // console.log(this.info);
 
           this.setEnableChat(this.info[0]['chat']);
           this.setClientUUID(this.info[0]['uuid']);
@@ -54,7 +51,7 @@ export class AuthServiceProvider {
           this.uuid = this.info[0].uuid;
           this.recurrente = this.info[0].RecurringPayments;
 
-          // console.log(this.recurrente);
+          // // console.log(this.recurrente);
           if (this.plt.is('ios') || this.plt.is('android')) {
             window["plugins"].OneSignal.sendTag("chat", this.info[0]['chat']);
           } 
@@ -62,7 +59,7 @@ export class AuthServiceProvider {
         }
       }, err => {
         reject(err);
-       // console.log(JSON.stringify(err));
+       // // console.log(JSON.stringify(err));
       });
     });
   }
@@ -88,7 +85,7 @@ export class AuthServiceProvider {
 
   setClientUUID(value:any) {
     this.clientUUID = value;
-    //console.log(this.clientUUID)
+    //// console.log(this.clientUUID)
     //alert("hey "+this.clientUUID)
   }
 
@@ -100,7 +97,7 @@ export class AuthServiceProvider {
 
   setNotificationActive(value:any) {
     this.notificationActive = value;
-    //console.log(this.clientUUID)
+    //// console.log(this.clientUUID)
     //alert("hey "+this.clientUUID)
   }
 
@@ -121,7 +118,7 @@ export class AuthServiceProvider {
         resolve(result);
       });
     } else {
-      return this.http.get(this.apiUrlNode + '/datosFiscales?id=' + id)
+      return this.http.get(this.apiUrl + '/datosFiscales?id=' + id)
         .toPromise();
     }
   }

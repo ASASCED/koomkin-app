@@ -53,11 +53,11 @@ export class ModalSurveyPage implements OnInit {
         '/app';
       this.http.get(urlEntradaBanner).subscribe(
         data => {
-          //  console.log(urlEntradaBanner);
+          //  // console.log(urlEntradaBanner);
           resolve();
         },
         err => {
-          console.log(err);
+          // console.log(err);
           reject(err);
         }
       );
@@ -68,10 +68,10 @@ export class ModalSurveyPage implements OnInit {
     this.provedor.getSurvey(tipo).then(
       data => {
         this.preguntas = data;
-        // console.log(this.preguntas.length);
+        // // console.log(this.preguntas.length);
       },
       error => {
-        console.log(error);
+        // console.log(error);
       }
     );
   }
@@ -148,7 +148,7 @@ export class ModalSurveyPage implements OnInit {
             this.respuestas = data;
           },
           error => {
-            console.log(error);
+            // console.log(error);
           }
         );
     }
@@ -182,7 +182,7 @@ export class ModalSurveyPage implements OnInit {
         this.getRequirementTicket(this.ticket);
       },
       error => {
-        console.log(error);
+        // console.log(error);
       }
     );
   }
@@ -213,10 +213,10 @@ export class ModalSurveyPage implements OnInit {
   public getUpdateBanner() {
     this.provedor.getUpdateBanner(this.idReporteBanner).then(
       data => {
-        console.log(data);
+        // console.log(data);
       },
       error => {
-        console.log(error);
+        // console.log(error);
       }
     );
   }

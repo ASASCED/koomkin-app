@@ -74,7 +74,7 @@ export class LoginPage implements OnInit {
   ) {
     let disconnectSubscription = this.network.onDisconnect().subscribe(() => {
       this.showError("Error de conexión.", "Verifica tu conexión a internet.");
-     // console.log(disconnectSubscription);
+     // // console.log(disconnectSubscription);
     });
   }
 
@@ -182,7 +182,7 @@ export class LoginPage implements OnInit {
     }, (err) => {
       this.loading.dismiss();
       this.showError("Error de conexión.", "No fue posible establecer una conexión con el servidor.\n Verifique su conexión a internet.");
-      console.log(err);
+      // console.log(err);
     });
 
   }
@@ -202,7 +202,7 @@ export class LoginPage implements OnInit {
                 this.id = this.leads[0].IDUSUARIO;
                 if (Md5.hashStr(this.password) === this.leads[0].PASSWORD2) {
                 this.app = this.leads[0].app;
-                //  console.log("entro");
+                //  // console.log("entro");
                   this.authService.setUserIsLogged(true);
                   this.restService.setUser(this.id);
                 // this.restService.setApp(this.app);
@@ -244,12 +244,12 @@ export class LoginPage implements OnInit {
 
   //Agrega registros
   getIntentoSesion(email, password) {
-   // console.log(email, password);
+   // // console.log(email, password);
     this.restService.getIntentoSesion(email, password).then((data) => {
       this.datosenvio = data;
     }, (err) => {
       this.showError("Error de conexión.", "Verifica tu conexión a internet.")
-      //console.log(email,password);
+      //// console.log(email,password);
     });
   }
 
@@ -323,7 +323,7 @@ export class LoginPage implements OnInit {
         {
           text: 'Cancelar',
           handler: data => {
-            console.log('Cancel clicked');
+            // console.log('Cancel clicked');
           }
         },
         {
@@ -359,7 +359,7 @@ export class LoginPage implements OnInit {
         }
       },
         err => {
-          console.log("Error");
+          // console.log("Error");
         });
   }
 

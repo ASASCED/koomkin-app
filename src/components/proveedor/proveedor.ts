@@ -23,11 +23,11 @@ export class ProveedorComponent implements OnInit{
   text: string;
 
   constructor() {
-    // console.log('Proveedor');
+    // // console.log('Proveedor');
   }
 
   ngOnInit(){
-    // console.log(this.usoproveedor,typeof(this.usoproveedor));
+    // // console.log(this.usoproveedor,typeof(this.usoproveedor));
   }
 
 }

@@ -162,7 +162,7 @@ export class UsuarioPage implements OnInit {
       .userRequest("datosPagos?id=" + this.id)
       .then((payments: [Payment]) => {
         this.paymentData = payments;
-        // console.log(this.userFiscal);
+        // // console.log(this.userFiscal);
         this.invoiceData = this.removeDuplicates(
           payments.filter(x => x.TieneFactura === "1")
         );
@@ -198,7 +198,7 @@ export class UsuarioPage implements OnInit {
         this.celular
       }` +
       `&uid=${this.id}`;
-    // console.log(str);
+    // // console.log(str);
     this.userService
       .updateUserData(str)
       .then(res => {
@@ -248,7 +248,7 @@ export class UsuarioPage implements OnInit {
           resolve();
         },
         err => {
-          console.log(err);
+          // console.log(err);
           reject(err);
         }
       );
@@ -265,7 +265,7 @@ export class UsuarioPage implements OnInit {
           resolve();
         },
         err => {
-          console.log(err);
+          // console.log(err);
           reject(err);
         }
       );
@@ -357,7 +357,7 @@ export class UsuarioPage implements OnInit {
           resolve();
         },
         err => {
-          console.log(err);
+          // console.log(err);
           reject(err);
         }
       );
@@ -378,7 +378,7 @@ export class UsuarioPage implements OnInit {
           resolve();
         },
         err => {
-          console.log(err);
+          // console.log(err);
           reject(err);
         }
       );

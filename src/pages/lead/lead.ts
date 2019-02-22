@@ -36,10 +36,10 @@ export class LeadPage implements OnInit {
   AUDIO = 'https://koomkin.com.mx/call-tracking/api/v1/data-app/0/?idLead=';
 
     /* url de amazon
-    apiUrl = 'http://www.koomkin.com:4859';
-    apiUrl3 = 'http://www.koomkin.com:4829/twilio_api/api/v1/forward-app/?idLead=';
-    CALLING = 'http://www.koomkin.com:4829/twilio_api/api/v1/forward-app-lead/?idLead=';
-    AUDIO = 'http://www.koomkin.com:4829/twilio_api/api/v1/data-app/0/?idLead='; */
+    apiUrl = 'https://www.koomkin.com.mx/api/app';
+    apiUrl3 = 'https://koomkin.com.mx/call-tracking/api/v1/forward-app/?idLead=';
+    CALLING = 'https://koomkin.com.mx/call-tracking/api/v1/forward-app-lead/?idLead=';
+    AUDIO = 'https://koomkin.com.mx/call-tracking/api/v1/data-app/0/?idLead='; */
 
   public califica;
   public calificacion;
@@ -424,7 +424,7 @@ export class LeadPage implements OnInit {
       this.leadActual.fechaContacto = this.leadActual.fechaContacto.substring(0, 16)
       .replace(/^(\d{4})-(\d{2})-(\d{2})T(\d{5})$/g, '$3/$2/$1$4');
     }
-    console.log(this.leadActual.fechaContacto);
+    // console.log(this.leadActual.fechaContacto);
     if (!this.leadActual.clave) {
       this.leadActual.clave = this.leadActual.ID_LEAD;  // Por si llega el Lead por notificación.
     }
@@ -442,16 +442,16 @@ export class LeadPage implements OnInit {
   FbotonOn() {
     let uno = document.getElementById('tel');
     uno.innerHTML = 'Llamando a ' + this.leadActual.NOMBRE;
-    //  console.log(this.leadActual);
+    //  // console.log(this.leadActual);
   }
 
   public getLlamada() {
     return new Promise(resolve => {
       this.http.get(this.apiUrl3 + this.leadActual.uuid).subscribe(data => {
-        console.log(data);
+        // console.log(data);
         this.tel = JSON.stringify(data);
       }, err => {
-        //     console.log(err);
+        //     // console.log(err);
       });
     });
   }
@@ -461,7 +461,7 @@ export class LeadPage implements OnInit {
       headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
     };
     const url = 'https://koomkin.com.mx/call-tracking/api/v1/data-app/?id=' + this.leadActual.uuid + '&md=app';
-    console.log(url);
+    // console.log(url);
     return new Promise(resolve => {
       this.http.post(url, options).subscribe(data => {
         resolve(data);
@@ -512,10 +512,10 @@ export class LeadPage implements OnInit {
     this.http.get(this.apiUrl + "/clasificaLead2/" + body.clave + '/' + body.classification + '/app')
       .subscribe(data => {
         this.clasificacion = data[0].clasificaLead;
-        //console.log(this.clasificacion);
+        //// console.log(this.clasificacion);
       },
         err => {
-          console.log("Error occured");
+          // console.log("Error occured");
         });
 
   }
@@ -527,7 +527,7 @@ export class LeadPage implements OnInit {
       role: 'cancelar',
       cssClass: 'cancel-button',
       handler: () => {
-        console.log('Disagree clicked');
+        // console.log('Disagree clicked');
       }
     }
 
@@ -537,7 +537,7 @@ export class LeadPage implements OnInit {
       handler: () => {
         this.getLlamada();
         this.FbotonOn();
-        console.log('Agree clicked');
+        // console.log('Agree clicked');
       }
     }
 
@@ -554,9 +554,9 @@ export class LeadPage implements OnInit {
 
   public getLeadCalls() {
     this.http.get(this.apiUrl + '/getLeadCalls/' + this.leadActual.clave).subscribe(data => {
-      //console.log(data);
+      //// console.log(data);
       this.llamadas = data;
-      //console.log(this.llamadas);
+      //// console.log(this.llamadas);
       if (this.llamadas) {
         for (let k in this.llamadas) {
           this.llamadas[k].CallStatus = this.llamadas[k].CallStatus;
@@ -590,7 +590,7 @@ export class LeadPage implements OnInit {
   public getCountLeadCalls() {
     //this.http.get(this.apiUrl + '/getCountLeadCalls/265850').subscribe(data => {
     this.http.get(this.apiUrl + '/getCountLeadCalls/' + this.leadActual.clave).subscribe(data => {
-      //console.log(data);
+      //// console.log(data);
       this.llamada = data;
       if (this.llamada.length > 0) {
         this.exitosa_c = this.llamada[0].COMPLETED_COMPRADOR;
@@ -617,7 +617,7 @@ export class LeadPage implements OnInit {
         if (this.buzon == null) {
           this.buzon = '0';
         }
-        //console.log(this.exitosa_c, this.exitosa_v, this.exitosa, this.perdida, this.buzon);
+        //// console.log(this.exitosa_c, this.exitosa_v, this.exitosa, this.perdida, this.buzon);
       }
     });
   }
@@ -626,7 +626,7 @@ export class LeadPage implements OnInit {
     return new Promise(resolve => {
       const apiUrl2 = this.apiUrl + '/getLeadComplement/' + this.leadActual.clave;
       this.http.get(apiUrl2).subscribe(data => {
-        // console.log(data);
+        // // console.log(data);
         if (data == null || Object.keys(data).length == 0) {
           this.mensaje = this.leadActual.MENSAJE;
           this.urgencia = "No";
@@ -636,12 +636,12 @@ export class LeadPage implements OnInit {
           this.usoproveedor = "";
           this.unidadesproveedor = "";
           this.categoria = 1;
-          //  console.log(this.mensaje);
+          //  // console.log(this.mensaje);
         }
         else
           if (Object.keys(data).length > 0) {
             this.categoria = data[0].CompanyType;
-            console.log(this.categoria);
+            // console.log(this.categoria);
             switch (this.categoria) {
               case 1:
                 if ((data[0] === null)) {
@@ -718,7 +718,7 @@ export class LeadPage implements OnInit {
                     } else if (this.usoservicio == "1") {
                       this.usoservicio = "Mi empresa";
                     }
-                    console.log(this.usoservicio);
+                    // console.log(this.usoservicio);
                     this.frecuenciaservicio = data[0].Frequency;
                     if (this.frecuenciaservicio == null || this.frecuenciaservicio == "null" || this.frecuenciaservicio == undefined || this.frecuenciaservicio == "None") {
                       this.frecuenciaservicio = "";
@@ -1039,10 +1039,10 @@ export class LeadPage implements OnInit {
     this.http.get(this.apiUrl + "/calificaLead2/" + body.clave + '/' + body.classification + '/app')
       .subscribe(data => {
         this.calificacion = data[0].calificaLead;
-        // console.log(this.calificacion);
+        // // console.log(this.calificacion);
       },
         err => {
-          console.log("Error occured");
+          // console.log("Error occured");
         });
   }
 
@@ -1074,10 +1074,10 @@ export class LeadPage implements OnInit {
     this.http.get(this.apiUrl + "/calificaLead2/" + body.clave + '/' + body.classification + '/appchat')
       .subscribe(data => {
         this.calificacion = data[0].calificaLead;
-        // console.log(this.calificacion);
+        // // console.log(this.calificacion);
       },
         err => {
-          console.log("Error occured");
+          // console.log("Error occured");
         });
 
   }
@@ -1120,16 +1120,16 @@ export class LeadPage implements OnInit {
     } else if (this.platform.is('android')) {
       this.dispositivo = 'android';
     }
-    //   console.log(usuario, this.dispositivo, acceso, id);
+    //   // console.log(usuario, this.dispositivo, acceso, id);
     this.provedor.getInsertClickLlamar(usuario, id, acceso, this.dispositivo).then((data) => {
       this.datosenvio = data;
     }, (err) => {
-      console.log('error');
+      // console.log('error');
     });
   }
 
   verUrl() {
-    //  console.log(this.urlaudio);
+    //  // console.log(this.urlaudio);
   }
 
   startAudio() {
@@ -1138,7 +1138,7 @@ export class LeadPage implements OnInit {
       errorCallback: () => { console.log() },
       initFullscreen: false,
     }
-    // console.log(this.urlaudio);
+    // // console.log(this.urlaudio);
     this.streamingMedia.playAudio(this.urlaudio, options);
   }
 
@@ -1170,9 +1170,9 @@ export class LeadPage implements OnInit {
         this.chatService.tc.currentChannel.getMessages().then((messagesPaginator)=> {
           const message = messagesPaginator.items[messagesPaginator.items.length-1];
           if (message.type === 'media') {
-            console.log('Media attributes', message.media);
+            // console.log('Media attributes', message.media);
             message.media.getContentUrl().then((url)=>{
-              this.http.post('http://www.koomkin.com:4835/api/twilio-media-message', { channelsid: this.chatService.tc.currentChannel.sid, url: url, mime: file.mediaType, filename: file.name})
+              this.http.post('https://koomkin.com.mx/call-tracking/api/twilio-media-message', { channelsid: this.chatService.tc.currentChannel.sid, url: url, mime: file.mediaType, filename: file.name})
                 .subscribe(data => {
                   //alert('enviado a whatsapp'+ JSON.stringify(data));
                 }, err => {
@@ -1197,11 +1197,11 @@ export class LeadPage implements OnInit {
       this.fileOpener.open( url['__zone_symbol__value'], contentType
       ).then(() => {
         loading.dismiss();
-        console.log('then');
+        // console.log('then');
       }).catch(e =>{
         loading.dismiss();
-        console.log('catch');
-        console.log('Open error' + e);
+        // console.log('catch');
+        // console.log('Open error' + e);
       });
 
     }).catch((err)=>{

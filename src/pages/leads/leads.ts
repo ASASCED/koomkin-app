@@ -156,7 +156,7 @@ export class LeadsPage implements OnInit {
           leadsArray[k].url = url;
         })
         .catch();
-      // console.log(leadsArray[k]);
+      // // console.log(leadsArray[k]);
 
       if (leadsArray[k].calificaLead == "True") {
         leadsArray[k].calificaLead = "like";
@@ -185,7 +185,7 @@ export class LeadsPage implements OnInit {
         leadsArray[k].clasificaLead = "P";
       }
     }
-    // console.log(leadsArray);
+    // // console.log(leadsArray);
     this.checkNoleidos();
     return leadsArray;
   }
@@ -212,7 +212,7 @@ export class LeadsPage implements OnInit {
     const body = {
       classification: this.califica
     };
-    //console.log(lead.clave);
+    //// console.log(lead.clave);
     this.http
       .get(
         this.apiUrl + "/calificaLead/" + lead.clave + "/" + body.classification
@@ -220,10 +220,10 @@ export class LeadsPage implements OnInit {
       .subscribe(
         data => {
           this.calificacion = data[0].calificaLead;
-          //console.log(this.calificacion);
+          //// console.log(this.calificacion);
         },
         err => {
-          console.log("Error occured");
+          // console.log("Error occured");
         }
       );
   }
@@ -232,13 +232,13 @@ export class LeadsPage implements OnInit {
 
   verLead(lead) {
     let acceso = "App";
-    // console.log(lead.clave,lead.ID,acceso);
+    // // console.log(lead.clave,lead.ID,acceso);
     this.navCtrl.push(LeadPage, lead);
     this.getInsertClickLead(lead.clave, lead.ID, acceso);
   }
 
   public changeLeido(lead) {
-    //console.log(lead);
+    //// console.log(lead);
     const url = this.apiUrl + "/leerLead/" + lead.clave + "/" + lead.ID;
     this.http.get(url).subscribe(
       data => {
@@ -249,7 +249,7 @@ export class LeadsPage implements OnInit {
         lead.leido = "leido";
       },
       err => {
-        console.log("Error occured");
+        // console.log("Error occured");
       }
     );
   }
@@ -269,7 +269,7 @@ export class LeadsPage implements OnInit {
         }
       },
       err => {
-        //console.log("Error occured");
+        //// console.log("Error occured");
       }
     );
   }
@@ -288,7 +288,7 @@ export class LeadsPage implements OnInit {
           }
         },
         err => {
-          console.log(err);
+          // console.log(err);
         }
       );
     });
@@ -306,7 +306,7 @@ export class LeadsPage implements OnInit {
           } else if (Object.keys(data).length > 0) {
             if (data[0].Urgency) {
               urgencia = data[0].Urgency;
-              // console.log(urgencia);
+              // // console.log(urgencia);
               if (
                 urgencia == "0" ||
                 urgencia == "null" ||
@@ -326,7 +326,7 @@ export class LeadsPage implements OnInit {
           }
         },
         err => {
-          // console.log(err);
+          // // console.log(err);
         }
       );
     });
@@ -337,7 +337,7 @@ export class LeadsPage implements OnInit {
       const apiUrl2 = this.apiUrl + "/getLeadComplement/" + clave;
       this.http.get(apiUrl2).subscribe(
         data => {
-          //console.log(data);
+          //// console.log(data);
           if (Object.keys(data).length > 0) {
             this.categoria = data[0].CompanyType;
             let mensaje;
@@ -490,7 +490,7 @@ export class LeadsPage implements OnInit {
           }
         },
         err => {
-          // console.log(err);
+          // // console.log(err);
         }
       );
     });
@@ -509,12 +509,12 @@ export class LeadsPage implements OnInit {
           if (data.length === 0) {
             this.leads_download_available = false;
           }
-          // console.log(JSON.stringify(this.leads));
+          // // console.log(JSON.stringify(this.leads));
           this.leads = this.leads.concat(this.stylizeLeads(data));
           this.clasificacionSeleccionadaFiltrar();
         },
         error => {
-          console.log(error);
+          // console.log(error);
         }
       );
   }
@@ -541,7 +541,7 @@ export class LeadsPage implements OnInit {
         this.clasificacionSeleccionadaFiltrar();
       },
       error => {
-        console.log(error);
+        // console.log(error);
       }
     );
   }
@@ -550,13 +550,13 @@ export class LeadsPage implements OnInit {
     const usuario = this.id;
     const pagina = "leads";
     const acceso = "App";
-    //  console.log(usuario, pagina, acceso);
+    //  // console.log(usuario, pagina, acceso);
     this.provedor.getInsertClickPagina(usuario, pagina, acceso).then(
       data => {
         this.datosenvio = data;
       },
       err => {
-        console.log("error");
+        // console.log("error");
       }
     );
   }
@@ -573,11 +573,11 @@ export class LeadsPage implements OnInit {
         this.clasificacionSeleccionadaFiltrar();
       },
       error => {
-        console.log(error);
+        // console.log(error);
       }
     );
     setTimeout(() => {
-      console.log("Async operation has ended");
+      // console.log("Async operation has ended");
       refresher.complete();
     }, 50);
   }
@@ -622,20 +622,20 @@ export class LeadsPage implements OnInit {
   }
 
   public getInsertClickLead(usuario, id, acceso) {
-    //  console.log(usuario, id, acceso);
+    //  // console.log(usuario, id, acceso);
     this.restService.getInsertClickLead(id, usuario, acceso).then(
       data => {
         this.datosenvio = data;
       },
       err => {
-        console.log("error");
+        // console.log("error");
       }
     );
   }
 
   public filterLeadsClasificacion(criterioFiltro: string) {
     this.leadsfiltrados = this.leadsfiltrados.filter(function(data) {
-      //console.log(data);
+      //// console.log(data);
       return data.clasificaLead == criterioFiltro;
     });
   }
@@ -652,7 +652,7 @@ export class LeadsPage implements OnInit {
       role: "cancelar",
       cssClass: "cancel-button",
       handler: () => {
-        console.log("Disagree clicked");
+        // console.log("Disagree clicked");
       }
     };
 
@@ -661,7 +661,7 @@ export class LeadsPage implements OnInit {
       cssClass: "exit-button",
       handler: () => {
         this.getLlamada(lead);
-        console.log("Agree clicked");
+        // console.log("Agree clicked");
       }
     };
 
@@ -680,7 +680,7 @@ export class LeadsPage implements OnInit {
           resolve(data);
         },
         err => {
-          console.log(err);
+          // console.log(err);
         }
       );
     });
@@ -697,13 +697,13 @@ export class LeadsPage implements OnInit {
         this.infinitespinnerisactive = false;
       },
       error => {
-        console.log(error);
+        // console.log(error);
       }
     );
   }
 
   public getUrlAudio(clave) {
-    // console.log(clave);
+    // // console.log(clave);
     return new Promise(resolve => {
       const apiurl = this.apiUrl + "/getUrlAudio/" + clave;
       this.http.get(apiurl).subscribe(
@@ -724,7 +724,7 @@ export class LeadsPage implements OnInit {
           }
         },
         err => {
-          // console.log(err);
+          // // console.log(err);
         }
       );
     });
@@ -755,12 +755,12 @@ export class LeadsPage implements OnInit {
             this.description = datos[0].descripcionBanner;
             this.habilitado = datos[0].habilitado;
             this.notification = JSON.parse(datos[0].dataPage);
-            // console.log(this.description);
+            // // console.log(this.description);
             resolve();
           }
         },
         err => {
-          console.log(err);
+          // console.log(err);
           reject(err);
         }
       );
@@ -773,7 +773,7 @@ export class LeadsPage implements OnInit {
         this.mostrar = 1;
       })
       .catch(err => {
-        console.log(err);
+        // console.log(err);
       });
   }
 
@@ -782,11 +782,11 @@ export class LeadsPage implements OnInit {
       const urlBanner = "https://www.koomkin.com.mx/api/app/clickBanner/" + this.id + '/App/' + this.tipoBanner;
       this.http.get(urlBanner).subscribe(
         data => {
-         // console.log('registro',data);
+         // // console.log('registro',data);
           resolve();
         },
         err => {
-         // console.log(err);
+         // // console.log(err);
           reject(err);
         }
       );

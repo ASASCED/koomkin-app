@@ -66,7 +66,7 @@ export class EmailPage implements OnInit {
     this.provedor.getMailCliente(idUsuario).then(
       data => {
         this.datos = data;
-        console.log(this.datos);
+        // console.log(this.datos);
         if (this.datos) {
           this.facebook = this.datos[0].facebook;
           this.instagram = this.datos[0].instagram;
@@ -98,7 +98,7 @@ export class EmailPage implements OnInit {
         }
       },
       err => {
-        //   console.log('error');
+        //   // console.log('error');
       }
     );
   }
@@ -123,11 +123,11 @@ export class EmailPage implements OnInit {
 
     this.http.post(this.apiUrl, body.toString(), options).subscribe(
       data => {
-        // console.log(JSON.stringify(data));
+        // // console.log(JSON.stringify(data));
         this.showSuccess();
       },
       err => {
-        console.log('respuesta porst mensaje');
+        // console.log('respuesta porst mensaje');
         if (err.status === 200) {
           this.showSuccess();
         } else {
@@ -212,7 +212,7 @@ export class EmailPage implements OnInit {
                                 "Ocurrió un problema durante la carga del documento."
                               );
                             }
-                            console.log(JSON.stringify(err));
+                            // console.log(JSON.stringify(err));
                           }
                         );
                     })
@@ -248,7 +248,7 @@ export class EmailPage implements OnInit {
 
               const message = messagesPaginator.items[messagesPaginator.items.length - 1];
               if (message.type === 'media') {
-                console.log('Media attributes', message.media);
+                // console.log('Media attributes', message.media);
                 message.media.getContentUrl().then((url) => {
                   const httpOptions = {
                     headers: new HttpHeaders({
@@ -271,7 +271,7 @@ export class EmailPage implements OnInit {
                       }
 
                       ;
-                      console.log(JSON.stringify(err));
+                      // console.log(JSON.stringify(err));
                     });
                 }).catch(() => {
                   loading.dismiss();
@@ -289,7 +289,7 @@ export class EmailPage implements OnInit {
   }
 
   changeMail() {
-    console.log(this.email);
+    // console.log(this.email);
     const body = new URLSearchParams();
     body.set('id_usuario', this.id);
     body.set('correo', this.email);
@@ -303,10 +303,10 @@ export class EmailPage implements OnInit {
 
     this.http.post(this.apiUrl, body.toString(), options).subscribe(
       data => {
-        console.log(JSON.stringify(data), 'enviado');
+        // console.log(JSON.stringify(data), 'enviado');
       },
       err => {
-        console.log(err);
+        // console.log(err);
       }
     );
   }
@@ -355,7 +355,7 @@ export class EmailPage implements OnInit {
           resolve();
         },
         err => {
-          console.log(err);
+          // console.log(err);
           reject(err);
         }
       );

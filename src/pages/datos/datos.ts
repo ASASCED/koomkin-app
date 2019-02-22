@@ -33,7 +33,7 @@ export class DatosPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad DatosPage');
+    // console.log('ionViewDidLoad DatosPage');
   }
 
 }

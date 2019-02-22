@@ -15,7 +15,7 @@ export class InmobiliariaComponent implements OnInit{
   text: string;
 
   constructor() {
-    // console.log('inmobiliaria');
+    // // console.log('inmobiliaria');
   }
 
   ngOnInit(): void {

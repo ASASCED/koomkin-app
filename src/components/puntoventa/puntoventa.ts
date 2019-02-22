@@ -19,7 +19,7 @@ export class PuntoventaComponent implements OnInit{
   text: string;
 
   constructor() {
-    // console.log('Punto de venta');
+    // // console.log('Punto de venta');
   }
 
   ngOnInit(){

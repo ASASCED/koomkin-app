@@ -147,7 +147,7 @@ export class PagoPage implements OnInit{
     this.userService.userRequest('datosPagos?id=' + this.id)
       .then((payments: [Payment]) => {
         this.paymentData = payments;
-        // console.log(this.userFiscal);
+        // // console.log(this.userFiscal);
         this.invoiceData = this.removeDuplicates(payments.filter(x => x.TieneFactura === '1'));
       })
       .catch(err => {
@@ -181,7 +181,7 @@ export class PagoPage implements OnInit{
     const str =
       `actualizarFiscal?razon_social=${this.razon}&n_exterior=${this.numeroexterior}&n_interior=${this.numerointerior}` + `&cp=${this.cp}&calle=${this.calle}&colonia=${this.colonia}&ciudad=${this.ciudad}&delegacion=${this.delegacion}` + `&f_nombre=${this.f_nombre}&f_apaterno=${this.f_paterno}&f_amaterno=${this.f_materno}&f_email=${this.f_email}` +
       `&f_telefono=${this.f_tel}&uid=${this.authService.id}&rfc=${this.rfc}&estado=${stateId}&uidf=${this.uidf}`;
-    // console.log(str);
+    // // console.log(str);
     this.userService.updateUserData(str)
       .then(res => {
         this.showSuccess();
@@ -201,7 +201,7 @@ export class PagoPage implements OnInit{
           resolve();
         },
         err => {
-          console.log(err);
+          // console.log(err);
           reject(err);
         }
       );

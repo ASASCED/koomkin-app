@@ -61,7 +61,7 @@ export class RestProvider {
       this.http.get(this.apiUrl + '/getObtieneContactoSexCte/' + this.user).subscribe(data => {
         resolve(data);
       }, err => {
-        console.log(err);
+        // console.log(err);
       });
     });
   }
@@ -70,9 +70,9 @@ export class RestProvider {
     return new Promise(resolve => {
       this.http.get(this.apiUrl + '/getCostoCampania/' + this.user).subscribe(data => {
         resolve(data);
-        //console.log(data);
+        //// console.log(data);
       }, err => {
-        console.log(err);
+        // console.log(err);
       });
     });
   }
@@ -81,9 +81,9 @@ export class RestProvider {
     return new Promise(resolve => {
       this.http.get(this.apiUrl + '/getDiasRestantes/' + this.user).subscribe(data => {
         resolve(data);
-        //console.log(data);
+        //// console.log(data);
       }, err => {
-        console.log(err);
+        // console.log(err);
       });
     });
   }
@@ -92,9 +92,9 @@ export class RestProvider {
     return new Promise(resolve => {
       this.http.get(this.apiUrl + '/getIntentoSesion/' + email + '/' + password).subscribe(data => {
         resolve(data);
-        //console.log(data);
+        //// console.log(data);
       }, err => {
-        console.log(err);
+        // console.log(err);
       });
     });
   }
@@ -103,9 +103,9 @@ export class RestProvider {
     return new Promise(resolve => {
       this.http.get(this.apiUrl + '/getInsertClickPagina/' + usuario + '/' + pagina + '/' + acceso).subscribe(data => {
         resolve(data);
-        //console.log(data);
+        //// console.log(data);
       }, err => {
-        console.log(err);
+        // console.log(err);
       });
     });
   }
@@ -114,9 +114,9 @@ export class RestProvider {
     return new Promise(resolve => {
       this.http.get(this.apiUrl + '/getInsertClickLead/' + usuario + '/' + id + '/' + acceso).subscribe(data => {
         resolve(data);
-        //console.log(data);
+        //// console.log(data);
       }, err => {
-        console.log(err);
+        // console.log(err);
       });
     });
   }
@@ -125,9 +125,9 @@ export class RestProvider {
     return new Promise(resolve => {
       this.http.get(this.apiUrl + '/getInsertClickLlamar/' + usuario + '/' + id + '/' + acceso + '/' + dispositivo).subscribe(data => {
         resolve(data);
-        //console.log(data);
+        //// console.log(data);
       }, err => {
-        console.log(err);
+        // console.log(err);
       });
     });
   }
@@ -137,9 +137,9 @@ export class RestProvider {
     return new Promise(resolve => {
       this.http.get(this.apiUrl + '/getLead30Dias/' + this.user).subscribe(data => {
         resolve(data);
-        //console.log(data);
+        //// console.log(data);
       }, err => {
-        console.log(err);
+        // console.log(err);
       });
     });
   }
@@ -148,9 +148,9 @@ export class RestProvider {
     return new Promise(resolve => {
       this.http.get(this.apiUrl + '/getLead12Meses/' + this.user).subscribe(data => {
         resolve(data);
-        //console.log(data);
+        //// console.log(data);
       }, err => {
-        console.log(err);
+        // console.log(err);
       });
     });
   }
@@ -159,9 +159,9 @@ export class RestProvider {
     return new Promise(resolve => {
       this.http.get(this.apiUrl + '/getLike30Dias/' + this.user).subscribe(data => {
         resolve(data);
-        //console.log(data);
+        //// console.log(data);
       }, err => {
-        console.log(err);
+        // console.log(err);
       });
     });
   }
@@ -170,9 +170,9 @@ export class RestProvider {
     return new Promise(resolve => {
       this.http.get(this.apiUrl + '/getLeadsMapa/' + this.user).subscribe(data => {
         resolve(data);
-        //console.log(data);
+        //// console.log(data);
       }, err => {
-        console.log(err);
+        // console.log(err);
       });
     });
   }
@@ -181,9 +181,9 @@ export class RestProvider {
     return new Promise(resolve => {
       this.http.get(this.apiUrl + '/facebook?param1=' + this.user + '&param2=impression_device').subscribe(data => {
         resolve(data);
-        //console.log(data);
+        //// console.log(data);
       }, err => {
-        console.log(err);
+        // console.log(err);
       });
     });
   }
@@ -192,9 +192,9 @@ export class RestProvider {
     return new Promise(resolve => {
       this.http.get(this.apiUrl + '/facebook?param1=' + this.user + '&param2=age').subscribe(data => {
         resolve(data);
-        //console.log(data);
+        //// console.log(data);
       }, err => {
-        console.log(err);
+        // console.log(err);
       });
     });
   }
@@ -203,21 +203,21 @@ export class RestProvider {
     return new Promise(resolve => {
       this.http.get(this.apiUrl + '/facebook?param1=' + this.user + '&param2=gender').subscribe(data => {
         resolve(data);
-        //console.log(data);
+        //// console.log(data);
       }, err => {
-        console.log(err);
+        // console.log(err);
       });
     });
   }
 
   getCheckLeadComplement(){
     return new Promise(resolve => {
-      console.log(this.email);
+      // console.log(this.email);
       this.http.get(this.apiUrl + '/facebook/checkLeadComplement?user_id=' + this.user + '&email=' + this.email).subscribe(data => {
         resolve(data);
-        console.log(data);
+        // console.log(data);
       }, err => {
-        console.log(err);
+        // console.log(err);
       });
     });
   }
@@ -226,9 +226,9 @@ export class RestProvider {
     return new Promise(resolve => {
       this.http.get(this.apiUrl1 ).subscribe(data => {
         resolve(data);
-        // console.log(data);
+        // // console.log(data);
       }, err => {
-        console.log(err);
+        // console.log(err);
       });
     });
   }
@@ -237,9 +237,9 @@ export class RestProvider {
     return new Promise(resolve => {
       this.http.get(this.apiUrl + '/getLeadCalls/' + this.user).subscribe(data => {
         resolve(data);
-      //   console.log(data);
+      //   // console.log(data);
       }, err => {
-        console.log(err);
+        // console.log(err);
       });
     });
   }
@@ -248,9 +248,9 @@ export class RestProvider {
     return new Promise(resolve => {
       this.http.get(this.apiUrl + '/getLeadCountMonth/' + this.user).subscribe(data => {
         resolve(data);
-        // console.log(data);
+        // // console.log(data);
       }, err => {
-        console.log(err);
+        // console.log(err);
       });
     });
   }
@@ -259,15 +259,15 @@ export class RestProvider {
     return new Promise(resolve => {
       this.http.get(this.apiUrl + '/getCountLeadCalls/' + this.user).subscribe(data => {
         resolve(data);
-       //  console.log(data);
+       //  // console.log(data);
       }, err => {
-        console.log(err);
+        // console.log(err);
       });
     });
   }
 
   getLeadsReport() {
-    //console.log(this.date);
+    //// console.log(this.date);
     return new Promise(resolve => {
       let currentDate = new Date();
       let twoDigitMonth=((currentDate.getMonth()+1)>=10)? (currentDate.getMonth()+1) : '0' + (currentDate.getMonth()+1);
@@ -278,15 +278,15 @@ export class RestProvider {
       this.date = DigitYear + "-" + twoDigitMonth + "-" + twoDigitDate;
       this.http.get(this.apiUrl + '/getLeadsReport/' + this.user + '/' + this.date + '/' + this.datefin + '/Todos_los_recibidos').subscribe(data => {
         resolve(data);
-        //console.log(data);
+        //// console.log(data);
       }, err => {
-        console.log(err);
+        // console.log(err);
       });
     });
   }
 
   getLeadsReportPagination(min: number, max: number) {
-    //console.log(this.date);
+    //// console.log(this.date);
     return new Promise(resolve => {
       let currentDate = new Date();
       let twoDigitMonth=((currentDate.getMonth()+1)>=10)? (currentDate.getMonth()+1) : '0' + (currentDate.getMonth()+1);
@@ -300,9 +300,9 @@ export class RestProvider {
       this.date = "'"+DigitYear + "" + twoDigitMonth + "" + twoDigitDate+"'";
       this.http.get(this.apiUrl + '/getLeadsReportPagination/' + this.user + '/' + this.datefin + '/' + this.date + '/Todos los recibidos' + '/' + this.leads_pagination_min + '/' + this.leads_pagination_max).subscribe(data => {
         resolve(data);
-        //console.log(data);
+        //// console.log(data);
       }, err => {
-        console.log(err);
+        // console.log(err);
       });
     });
   }
@@ -321,7 +321,7 @@ export class RestProvider {
     return new Promise(resolve => {
       this.http.post(this.apiUrl + '/registerDeviceId/' + this.user + '/' + deviceId + '/' + platform , {}).subscribe(data => {
         resolve(data);
-        // console.log(JSON.stringify(data));
+        // // console.log(JSON.stringify(data));
       }, err => {
       });
     });
@@ -332,7 +332,7 @@ export class RestProvider {
       this.http.get(this.apiUrl + '/getUrlAudio/' + this.user).subscribe(data => {
         resolve(data);
       }, err => {
-       //  console.log(err);
+       //  // console.log(err);
       });
     });
   }
@@ -341,9 +341,9 @@ export class RestProvider {
     return new Promise(resolve => {
       this.http.get(this.apiUrl + '/getBanner/' + this.user).subscribe(data => {
         resolve(data);
-        console.log(data);
+        // console.log(data);
       }, err => {
-        console.log(err);
+        // console.log(err);
       });
     });
   }
@@ -352,9 +352,9 @@ export class RestProvider {
     return new Promise(resolve => {
       this.http.get(this.apiUrl + '/getEficiency/' + this.user).subscribe(data => {
         resolve(data);
-       // console.log(data);
+       // // console.log(data);
       }, err => {
-        console.log(err);
+        // console.log(err);
       });
     });
   }
@@ -363,9 +363,9 @@ export class RestProvider {
     return new Promise(resolve => {
       this.http.get(this.apiUrl + '/getEficiencyType/' + tipocuarta).subscribe(data => {
         resolve(data);
-       // console.log(data);
+       // // console.log(data);
       }, err => {
-        console.log(err);
+        // console.log(err);
       });
     });
   }
@@ -374,9 +374,9 @@ export class RestProvider {
     return new Promise(resolve => {
       this.http.get(this.apiUrl + '/getEficiencyRanking').subscribe(data => {
         resolve(data);
-        // console.log(data);
+        // // console.log(data);
       }, err => {
-        console.log(err);
+        // console.log(err);
       });
     });
   }
@@ -385,9 +385,9 @@ export class RestProvider {
     return new Promise(resolve => {
       this.http.get(this.apiUrl + '/getWords/' + this.user).subscribe(data => {
         resolve(data);
-       // console.log(data);
+       // // console.log(data);
       }, err => {
-        console.log(err);
+        // console.log(err);
       });
     });
   }
@@ -397,7 +397,7 @@ export class RestProvider {
       this.http.get(this.apiUrl + '/getWordsType/' + tipocuarta).subscribe(data => {
         resolve(data);
       }, err => {
-        console.log(err);
+        // console.log(err);
       });
     });
   }
@@ -406,9 +406,9 @@ export class RestProvider {
     return new Promise(resolve => {
       this.http.get(this.apiUrl + '/getTopTen').subscribe(data => {
         resolve(data);
-        // console.log(data);
+        // // console.log(data);
       }, err => {
-        console.log(err);
+        // console.log(err);
       });
     });
   }
@@ -417,9 +417,9 @@ export class RestProvider {
     return new Promise(resolve => {
       this.http.get(this.apiUrl + '/getTips/' + idtip1 + '/' + idtip2 + '/' + idtip3).subscribe(data => {
         resolve(data);
-       // console.log(data);
+       // // console.log(data);
       }, err => {
-        console.log(err);
+        // console.log(err);
       });
     });
   }
@@ -430,7 +430,7 @@ export class RestProvider {
         .subscribe(data => {
           resolve(data);
         }, err => {
-          // console.log(err);
+          // // console.log(err);
         });
     });
   }
@@ -441,7 +441,7 @@ export class RestProvider {
         .subscribe(data => {
           resolve(data);
         }, err => {
-          // console.log(err);
+          // // console.log(err);
         });
     });
   }
@@ -451,7 +451,7 @@ export class RestProvider {
       this.http.get(this.apiUrl + '/getSurvey/' + tipo).subscribe(data => {
         resolve(data);
       }, err => {
-        console.log(err);
+        // console.log(err);
       });
     });
   }
@@ -461,7 +461,7 @@ export class RestProvider {
       this.http.get(this.apiUrl + '/getAnswer/' + idUsuario + '/' + idPregunta + '/' + respuesta + '/' + comentario + '/' + canal).subscribe(data => {
         resolve(data);
       }, err => {
-        console.log(err);
+        // console.log(err);
       });
     });
   }
@@ -471,7 +471,7 @@ export class RestProvider {
       this.http.get(this.apiUrl + '/getTicket/' + idUsuario + '/' + fecha + '/' + descripcion).subscribe(data => {
         resolve(data);
       }, err => {
-        console.log(err);
+        // console.log(err);
       });
     });
   }
@@ -481,7 +481,7 @@ export class RestProvider {
       this.http.get(this.apiUrl + '/getTicket/' + idTicket + '/' + descripcion ).subscribe(data => {
         resolve(data);
       }, err => {
-        console.log(err);
+        // console.log(err);
       });
     });
   }
@@ -491,7 +491,7 @@ export class RestProvider {
       this.http.get(this.apiUrl + '/getUpdateBanner/' + idReporteBanner ).subscribe(data => {
         resolve(data);
       }, err => {
-        console.log(err);
+        // console.log(err);
       });
     });
   }
@@ -501,7 +501,7 @@ export class RestProvider {
       this.http.get(this.apiUrl + '/getMailCliente/' + idUsuario ).subscribe(data => {
         resolve(data);
       }, err => {
-        console.log(err);
+        // console.log(err);
       });
     });
   }

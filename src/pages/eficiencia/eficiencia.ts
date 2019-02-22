@@ -258,13 +258,13 @@ export class EficienciaPage implements OnInit {
     const usuario = this.id;
     const pagina = "eficiencia";
     const acceso = "App";
-    //  console.log(usuario, pagina, acceso);
+    //  // console.log(usuario, pagina, acceso);
     this.provedor.getInsertClickPagina(usuario, pagina, acceso).then(
       data => {
         this.datosenvio = data;
       },
       err => {
-        console.log("error");
+        // console.log("error");
       }
     );
   }
@@ -360,10 +360,10 @@ export class EficienciaPage implements OnInit {
             this.empresas_contacto = "N/A";
           }
         }
-        //  console.log(this.datos);
+        //  // console.log(this.datos);
       },
       err => {
-        //   console.log("error");
+        //   // console.log("error");
         this.empresas_tiempo = "N/A";
         this.empresas_atendidos = "N/A";
         this.empresas_acciones = "N/A";
@@ -378,7 +378,7 @@ export class EficienciaPage implements OnInit {
       data => {
         this.datos = data;
         if (this.datos.length > 0) {
-          //    console.log(this.datos);
+          //    // console.log(this.datos);
           this.empresas_tiempo = this.datos[0].avg_HorasAtencion * 60 ;
           this.empresas_tiempo = this.empresas_tiempo.toFixed();
           this.comparative_empresas_tiempo = this.datos[0].avg_HorasAtencion * 60;
@@ -397,7 +397,7 @@ export class EficienciaPage implements OnInit {
         }
       },
       err => {
-        console.log("error");
+        // console.log("error");
       }
     );
   }
@@ -411,7 +411,7 @@ export class EficienciaPage implements OnInit {
         }
       },
       err => {
-        console.log("error");
+        // console.log("error");
       }
     );
   }
@@ -425,7 +425,7 @@ export class EficienciaPage implements OnInit {
         }
       },
       err => {
-        console.log("error");
+        // console.log("error");
       }
     );
   }
@@ -532,7 +532,7 @@ export class EficienciaPage implements OnInit {
         }
       },
       err => {
-        console.log('error');
+        // console.log('error');
       }
     );
   }
@@ -542,10 +542,10 @@ export class EficienciaPage implements OnInit {
       data => {
         this.datos = data;
         this.ganadores = this.datos;
-        // console.log(this.datos);
+        // // console.log(this.datos);
       },
       err => {
-        console.log("error");
+        // console.log("error");
       }
     );
   }
@@ -554,7 +554,7 @@ export class EficienciaPage implements OnInit {
     this.provedor.getTips(idtip1, idtip2, idtip3).then(
       data => {
         this.datos = data;
-        console.log(this.datos);
+        // console.log(this.datos);
         this.tip1_id = this.datos[0].TipId;
         this.tip2_id = this.datos[1].TipId;
         this.tip3_id = this.datos[2].TipId;
@@ -566,39 +566,39 @@ export class EficienciaPage implements OnInit {
         this.tip3_descripcion = this.datos[2].Description;
       },
       err => {
-        console.log('error');
+        // console.log('error');
       }
     );
   }
 
   public getInsertClickTips(idtip) {
-    console.log(idtip);
+    // console.log(idtip);
     const usuario = this.id;
     const tipid = idtip;
     const acceso = 'App';
-    //  console.log(usuario, pagina, acceso);
+    //  // console.log(usuario, pagina, acceso);
     this.provedor.getInsertClickTip(usuario, tipid, acceso).then(
       data => {
         this.datosenvio = data;
       },
       err => {
-        console.log('error');
+        // console.log('error');
       }
     );
   }
 
   public getInsertClickTooltip(tooltip) {
-    console.log(tooltip);
+    // console.log(tooltip);
     const usuario = this.id;
     const tooltipname = tooltip;
     const acceso = 'App';
-    //  console.log(usuario, pagina, acceso);
+    //  // console.log(usuario, pagina, acceso);
     this.provedor.getInsertClickTooltip(usuario, acceso, tooltipname).then(
       data => {
         this.datosenvio = data;
       },
       err => {
-        console.log('error');
+        // console.log('error');
       }
     );
   }

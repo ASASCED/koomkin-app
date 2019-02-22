@@ -12,7 +12,7 @@ export class FacturaPage {
   }
 
   ionViewDidLoad() {
-    //console.log('ionViewDidLoad FacturaPage');
+    //// console.log('ionViewDidLoad FacturaPage');
   }
 
   dismiss() {

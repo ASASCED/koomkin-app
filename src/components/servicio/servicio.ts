@@ -20,7 +20,7 @@ export class ServicioComponent {
   text: string;
 
   constructor() {
-    // console.log('Servicio');
+    // // console.log('Servicio');
   }
 
 }

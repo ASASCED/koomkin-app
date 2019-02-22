@@ -50,7 +50,7 @@ export class MyApp {
 
   apiUrl1 = 'https://fierce-spire-89861.herokuapp.com';
   apiUrl0 = 'http://localhost:3000';
-  apiUrl = 'http://www.koomkin.com:4859';
+  apiUrl = 'https://www.koomkin.com.mx/api/app';
 
   pages: Array<{ title: string, component: any }>;
 
@@ -99,7 +99,7 @@ export class MyApp {
 
       //window["plugins"].UXCam.startWithKey("d9f707635967f38");
       //window["UXCam"].startWithKey('d9f707635967f38', function () { alert('start ssss') }, function () { alert('start error') });
-      //UXCam.startWithKey('d9f707635967f38', function () { alert('start ssss') }, function () { console.log('start error') })
+      //UXCam.startWithKey('d9f707635967f38', function () { alert('start ssss') }, function () { // console.log('start error') })
 
       var notificationOpenedCallback = ((jsonData) => {
 
@@ -112,17 +112,17 @@ export class MyApp {
           if (actionButtonPressed) {
             if (actionButtonPressed === 'like-button') {
               this.calificaLeadNotificacion(notif_additional_data.leadId, "like");
-              //console.log("like-button pressed");
+              //// console.log("like-button pressed");
               notif_additional_data.leadInfo.calificaLead = 'like';
             } else if (actionButtonPressed === 'unlike-button') {
               this.calificaLeadNotificacion(notif_additional_data.leadId, "unlike");
-             // console.log("unlike-button pressed");
+             // // console.log("unlike-button pressed");
               notif_additional_data.leadInfo.calificaLead = 'dislike';
             } else {
-             // console.log("notification opened while app is active. User pressed ok button");
+             // // console.log("notification opened while app is active. User pressed ok button");
             }
           } else {
-           // console.log("notification opened on the notification list of the phone");
+           // // console.log("notification opened on the notification list of the phone");
           }
 
           if (this.authService.getUserIsLogged() === true) {
@@ -130,7 +130,7 @@ export class MyApp {
             if(notif_additional_data.leadInfo){
               notif_additional_data.leadInfo["desdeNotificacion"] = true;
             }
-           // console.log(JSON.stringify(notif_additional_data.leadInfo));
+           // // console.log(JSON.stringify(notif_additional_data.leadInfo));
             this.zone.run(() => {
               if(notif_additional_data.chatMessage){
                 notif_additional_data.leadInfo["gotopage"] = 'Chat';
@@ -165,7 +165,7 @@ export class MyApp {
               notif_additional_data.leadInfo["desdeNotificacion"] = true;
               notif_additional_data.leadInfo["loggedout"] = true;
             }
-          //  console.log(JSON.stringify(notif_additional_data.leadInfo));
+          //  // console.log(JSON.stringify(notif_additional_data.leadInfo));
             this.zone.run(() => {
 
               if(notif_additional_data.chatMessage){
@@ -227,10 +227,10 @@ export class MyApp {
   calificaLeadNotificacion(leadID: number, calificacion: string) {
     this.http.get(this.apiUrl + "/calificaLead2/" + leadID + '/' + calificacion + '/notificacion')
       .subscribe(data => {
-        console.log("calificado exitosamente desde notificación");
+        // console.log("calificado exitosamente desde notificación");
       },
         err => {
-          console.log("Error calificando desde notificacion");
+          // console.log("Error calificando desde notificacion");
         });
   }
 
@@ -245,7 +245,7 @@ export class MyApp {
 
   cerrarSesion() {
     this.authService.setUserIsLogged(false);
-    console.log("LOG OUT");
+    // console.log("LOG OUT");
     this.storage.remove('email');
     this.storage.remove('password');
   }
