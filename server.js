@@ -224,9 +224,41 @@ app.get('/getDataProveedores/:uuid/:acceso/:dispositivo', function (req, res) {
 
 app.get('/datosFiscales', function (req, res) {
 
-    var id = parseInt(req.params.id, 10);
-    const command = 'SP_GetDatosFiscalesByUserId';
+    const id = req.query.id
+    const command = 'SP_GetDatosFiscalesByUserId'
 
+    db.executeSPById(command, id)
+        .then(rows => {
+            res.json(rows);
+            res.status(200);
+        }, (err) => {
+            res.status(500).json({error: err}).send();
+        })
+        .catch(err => {
+            res.status(500).json({error: err}).send();
+        });
+});
+
+app.get('/datosPagos', function (req, res) {
+
+    const id = req.query.id
+    const command = 'SP_GetPagosByUserId'
+
+    db.executeSPById(command, id)
+        .then(rows => {
+            res.json(rows);
+            res.status(200);
+        }, (err) => {
+            res.status(500).json({error: err}).send();
+        })
+        .catch(err => {
+            res.status(500).json({error: err}).send();
+        });
+});
+
+app.get('/getObtieneContactoCte/:id', function (req, res) {
+    var id = parseInt(req.params.id, 10);
+    var command = 'SP_ObtieneContactoSexCte';
     db.executeGetById(id, command, function (err, rows) {
         if (err) {
             res.status(500).json({ error: err }).send();
@@ -1026,21 +1058,9 @@ app.get('/clickCambioInformacion/:usuario/:tipo/:acceso', function(req, res) {
         });
 });
 
-/*app.post('/pruebita', function(req, res){
-    console.log(req.body);
-    var body = _.pick(req.body, 'a', 'b');
-    console.log(body);
-    res.status(200).send();
-});*/
-
 // catch 404 and forward to error handler
 app.use(function (req, res) {
     res.sendStatus(404);
-    /*
-    var err = new Error('Not Found');
-    err.status = 404;
-    next(err);
-    */
 });
 
 module.exports = app;
