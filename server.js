@@ -1058,11 +1058,6 @@ app.get('/clickCambioInformacion/:usuario/:tipo/:acceso', function(req, res) {
         });
 });
 
-// catch 404 and forward to error handler
-app.use(function (req, res) {
-    res.sendStatus(404);
-});
-
 app.put('/actualizarUsuario', function (req, res) {
 
     db.updateDatosUsuario(req.query)
@@ -1147,6 +1142,10 @@ app.put('/registraDatosFiscales', function (req, res) {
         });
 });
 
+// catch 404 and forward to error handler
+app.use(function (req, res) {
+    res.sendStatus(404);
+});
 
 module.exports = app;
 
