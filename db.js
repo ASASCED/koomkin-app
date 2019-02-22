@@ -1009,6 +1009,84 @@ db.executePostRecurringPayment = function (idUsuario) {
 
 };
 
+
+db.updateDatosFiscales = function (body) {
+
+    const str = body.uid + ", '" + body.f_nombre + "', '" + body.f_apaterno + "', '" + body.f_amaterno + "', '" + body.f_email + "', '" +
+      body.f_telefono + "', '" + body.rfc + "', '" + body.razon_social + "', '" + body.calle + "', '" + body.n_exterior + "', '" +
+      body.n_interior + "', '" + body.cp + "', '" + body.colonia + "', 156, " + body.estado + ", '" + body.ciudad + "', '" + body.delegacion + "'";
+  
+    const requestStr = "Execute SP_UpdateDatosFiscales " + str;
+  
+    return new Promise((resolve, reject) => {
+      tp.sql(requestStr)
+        .execute()
+        .then(results => {
+          resolve(results)
+        })
+        .fail(err => {
+          console.log(err)
+          reject(err)
+        });
+    });
+  
+  }
+  
+  db.updateDatosUsuario = function (body) {
+  
+    const str = body.uid + ", '" + body.nombre + "', '" + body.apaterno + "', '" + body.amaterno + "', '" + body.empresa + "', '" + body.email + "', '" +
+      body.telefono + "', '" + body.celular + "'";
+  
+    const requestStr = "Execute SP_UpdateUsuario " + str;
+  
+    return new Promise((resolve, reject) => {
+      tp.sql(requestStr)
+        .execute()
+        .then(results => {
+          resolve(results)
+        })
+        .fail(err => {
+          console.log(err)
+          reject(err)
+        });
+    });
+  }
+  
+  db.insertDatosFiscales = function (body, id, uid) {
+  
+    const d = body
+    const nombre = d.nombre
+    const apaterno = d.apaterno
+    const amaterno = d.amaterno
+    const email = d.email
+    const telefono = d.telefono
+    const rfc = d.rfc
+    const rz = d.razons
+    const calle = d.calle
+    const nexterior = d.numero_exterior
+    const ninterno = d.numero_interior
+    const cp = d.codpos
+    const colonia = d.colonia
+    const estado = d.estado_n
+    const ciudad = d.ciudad
+    const delegacion = d.delegacion
+  
+    var requestStr = `Execute kad_spI_InsertaDatosFiscales ${id}, '${nombre}', '${apaterno}', '${amaterno}', '${email}', '', '',`;
+    requestStr += `'${telefono}', '${rfc}', '${rz}', '${calle}', '${nexterior}', '${ninterno}', '${cp}', '${colonia}', ${estado}, 156, '${ciudad}', '${delegacion}', '${uid}'`;
+  
+    return new Promise((resolve, reject) => {
+      tp.sql(requestStr)
+        .execute()
+        .then(results => {
+          resolve(results)
+        })
+        .fail(err => {
+          console.log(err)
+          reject(err)
+        });
+    });
+  }
+
 //Inserta las respuestas encuestas
 
 db.executePutAnswer = function (idUsuario,idPregunta,respuesta,comentario,canal) {

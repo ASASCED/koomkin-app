@@ -1063,6 +1063,91 @@ app.use(function (req, res) {
     res.sendStatus(404);
 });
 
+app.put('/actualizarUsuario', function (req, res) {
+
+    db.updateDatosUsuario(req.query)
+        .then(rows => {
+            res.status(200);
+            res.send(rows);
+        }, (err) => {
+            res.status(500);
+            res.send('Error', err);
+        })
+        .catch(err => {
+            res.status(500);
+            res.send('Error', err);
+        });
+});
+
+app.put('/actualizarFiscal', function (req, res) {
+
+    db.updateDatosFiscales(req.query)
+        .then(rows => {
+            facturaAPIUpdateUsuario(req.query.uidf, rows[0])
+                .then(result => {
+                    res.status(200);
+                    res.send(rows);
+                }, (err) => {
+                    console.log(err);
+                    res.status(500);
+                    res.send(err);
+                })
+                .catch(err => {
+                    console.log(err);
+                    res.status(500);
+                    res.send(err);
+                })
+        }, (err) => {
+            console.log(err);
+            res.status(500);
+            res.send(err);
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500);
+            res.send(err);
+        });
+});
+
+app.put('/registraDatosFiscales', function (req, res) {
+
+    const json = decodeURIComponent(req.query.json);
+    const id_usuario = req.query.id;
+
+    let UID = '';
+
+    facturaAPICrearUsuario(json)
+        .then(body => {
+            if (body.status === "success") {
+                UID = body.Data.UID
+                db.insertDatosFiscales(JSON.parse(json), id_usuario, UID)
+                    .then(result => {
+                        res.status(200);
+                        res.send(result);
+                    }, (err) => {
+                        res.status(500);
+                        res.send(err);
+                    })
+                    .catch(err => {
+                        res.status(500);
+                        res.send(err);
+                    });
+            }
+            else if (body.status === "already") {
+                res.status(409);
+                res.send('Usuario ya existe');
+            }
+        }, (err) => {
+            res.status(500);
+            res.send(err);
+        })
+        .catch(err => {
+            res.status(500);
+            res.send(err);
+        });
+});
+
+
 module.exports = app;
 
 
