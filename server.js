@@ -1038,6 +1038,10 @@ app.get('/clickTooltip/:usuario/:tooltipname/:acceso', function (req, res) {
         });
     });
 
+//SP_InsertClickCambioInformacion
+
+
+
 app.get('/clickCambioInformacion/:usuario/:tipo/:acceso', function(req, res) {
 
     const command = 'SP_InsertClickCambioInformacion';
