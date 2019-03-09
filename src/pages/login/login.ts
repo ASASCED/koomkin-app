@@ -35,7 +35,7 @@ export class LoginPage implements OnInit {
   datosenvio;
   key: string = 'usuario';
   user: any = [];
-  apiUrl = 'https://koomkin.com.mx/api/misc/sendPasswordEmail?email=';
+  apiUrl = 'https://www.koomkin.com.mx/api/misc/sendPasswordEmail?email=';
   resultado;
   error;
   envio;

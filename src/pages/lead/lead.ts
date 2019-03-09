@@ -31,15 +31,15 @@ export class LeadPage implements OnInit {
   leadActual;
   //url de producción
   apiUrl = 'https://www.koomkin.com.mx/api/app';
-  apiUrl3 = 'https://koomkin.com.mx/call-tracking/api/v1/forward-app/?idLead=';
-  CALLING = 'https://koomkin.com.mx/call-tracking/api/v1/forward-app-lead/?idLead=';
-  AUDIO = 'https://koomkin.com.mx/call-tracking/api/v1/data-app/0/?idLead=';
+  apiUrl3 = 'https://www.koomkin.com.mx/call-tracking/api/v1/forward-app/?idLead=';
+  CALLING = 'https://www.koomkin.com.mx/call-tracking/api/v1/forward-app-lead/?idLead=';
+  AUDIO = 'https://www.koomkin.com.mx/call-tracking/api/v1/data-app/0/?idLead=';
 
     /* url de amazon
     apiUrl = 'https://www.koomkin.com.mx/api/app';
-    apiUrl3 = 'https://koomkin.com.mx/call-tracking/api/v1/forward-app/?idLead=';
-    CALLING = 'https://koomkin.com.mx/call-tracking/api/v1/forward-app-lead/?idLead=';
-    AUDIO = 'https://koomkin.com.mx/call-tracking/api/v1/data-app/0/?idLead='; */
+    apiUrl3 = 'https://www.koomkin.com.mx/call-tracking/api/v1/forward-app/?idLead=';
+    CALLING = 'https://www.koomkin.com.mx/call-tracking/api/v1/forward-app-lead/?idLead=';
+    AUDIO = 'https://www.koomkin.com.mx/call-tracking/api/v1/data-app/0/?idLead='; */
 
   public califica;
   public calificacion;

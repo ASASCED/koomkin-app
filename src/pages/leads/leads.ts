@@ -60,8 +60,8 @@ export class LeadsPage implements OnInit {
   public habilitado;
 
   apiUrl = "https://www.koomkin.com.mx/api/app";
-  apiUrl3 = "https://koomkin.com.mx/call-tracking/api/v1/forward-app/";
-  apiUrl4 = "https://koomkin.com.mx/call-tracking/api/v1/extra-info/?id=";
+  apiUrl3 = "https://www.koomkin.com.mx/call-tracking/api/v1/forward-app/";
+  apiUrl4 = "https://www.koomkin.com.mx/call-tracking/api/v1/extra-info/?id=";
 
   public url = "sinaudio";
   public audio;

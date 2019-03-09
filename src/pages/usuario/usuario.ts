@@ -4,7 +4,8 @@ import {
   NavController,
   NavParams,
   ModalController,
-  AlertController
+  AlertController,
+  App
 } from "ionic-angular";
 import { CancelarPage } from "./../cancelar/cancelar";
 import { Payment } from "../../models/Payment";
@@ -13,6 +14,9 @@ import { AuthServiceProvider } from "../../providers/auth-service/auth-service";
 import { HttpClient } from "@angular/common/http";
 import { HttpHeaders } from "@angular/common/http";
 import swal from 'sweetalert2';
+import { ModalSurveyPage } from '../../pages/modal-survey/modal-survey';
+import { InicioPage } from "../inicio/inicio";
+import { dateDataSortValue } from "ionic-angular/umd/util/datetime-util";
 
 @IonicPage()
 @Component({
@@ -56,6 +60,13 @@ export class UsuarioPage implements OnInit {
   public uuid;
   public mensaje = "";
   public recurrente;
+  public cancelar;
+  public dias;
+  public notificacion;
+  public idReporteBanner;
+  public uuidPase;
+  public tipo;
+
 
   constructor(
     public navCtrl: NavController,
@@ -64,10 +75,12 @@ export class UsuarioPage implements OnInit {
     public userService: UserProvider,
     public authService: AuthServiceProvider,
     public alertCtrl: AlertController,
-    public http: HttpClient
+    public http: HttpClient,
+    public app: App
   ) {
     this.id = this.authService.id;
     this.recurrente = this.authService.recurrente;
+    this.tipo = "13";
   }
 
   ngOnInit() {
@@ -333,8 +346,8 @@ export class UsuarioPage implements OnInit {
       reverseButtons: true
     }).then((result) => {
       if (result.value) {
-       // this.cancelMembershipOP();
-       this.cancelMembership();
+      this.cancelMembershipOP();
+      // this.cancelMembership();
       } 
     });
   }
@@ -357,8 +370,11 @@ export class UsuarioPage implements OnInit {
           resolve();
         },
         err => {
-          // console.log(err);
-          reject(err);
+          if (err.status === 200 && err.text == 'OK') {
+            this.showSuccess();
+          } else {
+            this.showError();
+          }
         }
       );
     });
@@ -383,5 +399,43 @@ export class UsuarioPage implements OnInit {
         }
       );
     });
+  }
+
+  public showSuccessCancel() {
+    swal({
+      title: 'Se ha cancelado su suscripción con éxito',
+      type: 'success',
+      showCancelButton: false,
+      confirmButtonColor: '#3085d6',
+      confirmButtonText: 'OK',
+      reverseButtons: true,
+    });
+  }
+
+  public showErroCancel() {
+    swal({
+      title: 'No se ha podido cancelar su suscripción',
+      text: 'Por favor complete los campos requeridos *',
+      type: 'error',
+      showCancelButton: false,
+      confirmButtonColor: '#3085d6',
+      confirmButtonText: 'OK',
+      reverseButtons: true
+    });
+  }
+
+  public puedeCancelar(){
+    this.dias = 90;
+    this.cancelar = this.dias - 29;
+  //  this.fechaInicio = this.fechaInicio.getDate();
+    console.log(this.cancelar);
+    
+    //this.fecha.setDate(this.fecha.getDate() + this.cancelar);
+    
+  }
+
+  mostrar_encuesta() {
+  // this.navCtrl.setRoot(ModalSurveyPage, { tipo: this.tipo });
+    this.app.getRootNav().setRoot(ModalSurveyPage, { tipo: this.tipo }); 
   }
 }

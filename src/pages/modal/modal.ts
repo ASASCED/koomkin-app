@@ -48,7 +48,7 @@ export class ModalPage {
       headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
     };
 
-    const url = 'https://koomkin.com.mx/call-tracking/api/v1/extra-info/';
+    const url = 'https://www.koomkin.com.mx/call-tracking/api/v1/extra-info/';
     return new Promise((resolve, reject) => {
       this.http.post(url ,body.toString() , options)
         .subscribe(data => {

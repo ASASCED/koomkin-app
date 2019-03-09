@@ -117,7 +117,7 @@ export class SocialPage implements OnInit{
       )
     };
 
-    const url = 'https://koomkin.com.mx/call-tracking/api/v1/mailing/';
+    const url = 'https://www.koomkin.com.mx/call-tracking/api/v1/mailing/';
     // console.log(url, body.toString(), options);
       this.http.post(url, body.toString(), options).subscribe(
         data => {

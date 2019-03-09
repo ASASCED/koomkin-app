@@ -13,7 +13,7 @@ export class RestProvider {
 
   private user;
   apiUrl = 'https://www.koomkin.com.mx/api/app';
-  apiUrl1 = 'https://koomkin.com.mx/call-tracking/api/v1/forward-app/?idLead=';
+  apiUrl1 = 'https://www.koomkin.com.mx/call-tracking/api/v1/forward-app/?idLead=';
   date;
   datefin;
   email;
