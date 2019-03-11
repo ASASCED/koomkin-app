@@ -7,7 +7,6 @@ import {HttpHeaders} from "@angular/common/http";
 import { HttpClient } from '@angular/common/http';
 import swal from 'sweetalert2';
 
-
 @IonicPage()
 @Component({
   selector: "page-modal-survey",

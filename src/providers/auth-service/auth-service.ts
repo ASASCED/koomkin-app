@@ -23,6 +23,7 @@ export class AuthServiceProvider {
   public userFiscal;
   public uuid;
   public recurrente;
+  public cancelar;
 
   constructor(public http: HttpClient, public plt: Platform) {
     this.userLogged = false;
@@ -39,8 +40,7 @@ export class AuthServiceProvider {
         this.info = data;
         //// console.log("infoooo"+JSON.stringify(this.info));
         if (this.info.length > 0) {
-         // // console.log(this.info);
-
+          console.log(this.info);
           this.setEnableChat(this.info[0]['chat']);
           this.setClientUUID(this.info[0]['uuid']);
           this.contrasena = this.info[0].PASSWORD2;
@@ -50,8 +50,8 @@ export class AuthServiceProvider {
           this.mensajebot = this.info[0].mensajebot;
           this.uuid = this.info[0].uuid;
           this.recurrente = this.info[0].RecurringPayments;
-
-          // // console.log(this.recurrente);
+          this.cancelar = this.info[0].cancellation;
+          console.log(this.cancelar);
           if (this.plt.is('ios') || this.plt.is('android')) {
             window["plugins"].OneSignal.sendTag("chat", this.info[0]['chat']);
           } 

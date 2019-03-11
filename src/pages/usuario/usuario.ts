@@ -15,8 +15,6 @@ import { HttpClient } from "@angular/common/http";
 import { HttpHeaders } from "@angular/common/http";
 import swal from 'sweetalert2';
 import { ModalSurveyPage } from '../../pages/modal-survey/modal-survey';
-import { InicioPage } from "../inicio/inicio";
-import { dateDataSortValue } from "ionic-angular/umd/util/datetime-util";
 
 @IonicPage()
 @Component({
@@ -81,6 +79,7 @@ export class UsuarioPage implements OnInit {
     this.id = this.authService.id;
     this.recurrente = this.authService.recurrente;
     this.tipo = "13";
+    this.cancelar = this.authService.cancelar;
   }
 
   ngOnInit() {
@@ -422,16 +421,6 @@ export class UsuarioPage implements OnInit {
       confirmButtonText: 'OK',
       reverseButtons: true
     });
-  }
-
-  public puedeCancelar(){
-    this.dias = 90;
-    this.cancelar = this.dias - 29;
-  //  this.fechaInicio = this.fechaInicio.getDate();
-    console.log(this.cancelar);
-    
-    //this.fecha.setDate(this.fecha.getDate() + this.cancelar);
-    
   }
 
   mostrar_encuesta() {
