@@ -24,12 +24,9 @@ import { RestProvider } from "../providers/rest/rest";
 import { HttpClient } from '@angular/common/http';
 import { Storage } from '@ionic/storage';
 
-// declare var UXCam: any;
-
 @Component({
   templateUrl: 'app.html'
 })
-
 
 export class MyApp {
   @ViewChild(Nav) nav: NavController;
