@@ -239,7 +239,7 @@ export class ModalSurveyPage implements OnInit {
   }
 
   public cancelMembershipOP() {
-    const cuerpo = `{'uuid': '${this.uuid}'}`;
+    const cuerpo = `{'id': '${this.id}'}`;
 
     const options = {
       headers: new HttpHeaders().set(
@@ -254,20 +254,20 @@ export class ModalSurveyPage implements OnInit {
         data => {
          // console.log(data);
           swal({
-            imageUrl: 'assets/images/ajustes/icn_check.svg',
+            imageUrl: 'assets/imgs/ajustes/icn_check.svg',
             imageHeight: 80,
             title: '¡Suscripción Cancelada!'
           });
           resolve();
         },
         err => {
-          if (err.status === 200 && err.text === 'OK') {
+          if (err.status === 200 && err.statusText === 'OK') {
             swal({
-              imageUrl: 'assets/images/ajustes/icn_check.svg',
+              imageUrl: 'assets/imgs/ajustes/icn_check.svg',
               imageHeight: 80,
               title: '¡Suscripción Cancelada!'
             });
-          } else if (err.status === 200 && err.text === 'No puede cancelarse porque rompe con las politicas de los 3 días.') {
+          } else if (err.status === 200 && err.text === 'No puede cancelarse porque rompe con las politicas de los 3 días.' || err.status === 200 && err.statusText === 'No puede cancelarse porque rompe con las politicas de los 3 días.') {
             this.showErrorCancelTres();
           } else {
             this.showErrorCancel();
