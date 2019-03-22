@@ -5,14 +5,14 @@
     </clipPath>
   </defs>
   <g id="ic_empresa_selected" clip-path="url(#clip-ic_empresa_selected)">
-    <rect width="48" height="48" fill="#fff"/>
+    <rect width="48" height="48" fill="transparent"/>
     <g id="Grupo_10328" data-name="Grupo 10328" transform="translate(-4752 -531.001)">
       <rect id="Rectángulo_4433" data-name="Rectángulo 4433" width="27.032" height="27.032" transform="translate(4762 541)" fill="none"/>
       <g id="Grupo_3480" data-name="Grupo 3480" transform="translate(4764.535 541.845)">
-        <rect id="Rectángulo_4416" data-name="Rectángulo 4416" width="21.567" height="2.097" transform="translate(0 24.262)" fill="#3dcdbb"/>
-        <rect id="Rectángulo_4417" data-name="Rectángulo 4417" width="12.581" height="26.359" transform="translate(4.493)" fill="#3dcdbb"/>
-        <rect id="Rectángulo_4418" data-name="Rectángulo 4418" width="7.189" height="26.359" transform="translate(7.189)" fill="#3dcdbb"/>
-        <rect id="Rectángulo_4419" data-name="Rectángulo 4419" width="7.189" height="4.194" transform="translate(7.189 22.166)" fill="#3dcdbb"/>
+        <rect id="Rectángulo_4416" data-name="Rectángulo 4416" width="21.567" height="2.097" transform="translate(0 24.262)" fill="#A09D9D"/>
+        <rect id="Rectángulo_4417" data-name="Rectángulo 4417" width="12.581" height="26.359" transform="translate(4.493)" fill="#A09D9D"/>
+        <rect id="Rectángulo_4418" data-name="Rectángulo 4418" width="7.189" height="26.359" transform="translate(7.189)" fill="#A09D9D"/>
+        <rect id="Rectángulo_4419" data-name="Rectángulo 4419" width="7.189" height="4.194" transform="translate(7.189 22.166)" fill="#A09D9D"/>
         <rect id="Rectángulo_4420" data-name="Rectángulo 4420" width="1.797" height="2.396" transform="translate(6.29 3.594)" fill="#fff"/>
         <rect id="Rectángulo_4421" data-name="Rectángulo 4421" width="1.797" height="2.396" transform="translate(9.885 3.594)" fill="#fff"/>
         <rect id="Rectángulo_4422" data-name="Rectángulo 4422" width="1.797" height="2.396" transform="translate(13.479 3.594)" fill="#fff"/>

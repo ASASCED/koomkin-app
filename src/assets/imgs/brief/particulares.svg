@@ -5,16 +5,16 @@
     </clipPath>
   </defs>
   <g id="ic_individuo_selected" clip-path="url(#clip-ic_individuo_selected)">
-    <rect width="48" height="48" fill="#fff"/>
+    <rect width="48" height="48" fill="transparent"/>
     <g id="teamwork" transform="translate(18 7.999)">
       <g id="Grupo_10244" data-name="Grupo 10244" transform="translate(1.687 0)">
         <g id="Grupo_10243" data-name="Grupo 10243" transform="translate(0 0)">
-          <circle id="Elipse_719" data-name="Elipse 719" cx="3.375" cy="3.375" r="3.375" fill="#3dcdbb"/>
+          <circle id="Elipse_719" data-name="Elipse 719" cx="3.375" cy="3.375" r="3.375" fill="#A09D9D"/>
         </g>
       </g>
       <g id="Grupo_10246" data-name="Grupo 10246" transform="translate(0 8.438)">
         <g id="Grupo_10245" data-name="Grupo 10245">
-          <path id="Trazado_21158" data-name="Trazado 21158" d="M170.119,167.491l-.766-5.967A1.681,1.681,0,0,0,167.675,160h-.925a.85.85,0,0,0-.6.246l-1.09,1.09-1.09-1.09a.85.85,0,0,0-.6-.246h-.923a1.677,1.677,0,0,0-1.677,1.5l-.768,5.991a.845.845,0,0,0,.837.95h.911l.705,8.607a1.682,1.682,0,0,0,1.679,1.519h1.848a1.687,1.687,0,0,0,1.681-1.534l.7-8.591h.91a.842.842,0,0,0,.633-.287A.831.831,0,0,0,170.119,167.491Z" transform="translate(-160 -160.005)" fill="#3dcdbb"/>
+          <path id="Trazado_21158" data-name="Trazado 21158" d="M170.119,167.491l-.766-5.967A1.681,1.681,0,0,0,167.675,160h-.925a.85.85,0,0,0-.6.246l-1.09,1.09-1.09-1.09a.85.85,0,0,0-.6-.246h-.923a1.677,1.677,0,0,0-1.677,1.5l-.768,5.991a.845.845,0,0,0,.837.95h.911l.705,8.607a1.682,1.682,0,0,0,1.679,1.519h1.848a1.687,1.687,0,0,0,1.681-1.534l.7-8.591h.91a.842.842,0,0,0,.633-.287A.831.831,0,0,0,170.119,167.491Z" transform="translate(-160 -160.005)" fill="#A09D9D"/>
         </g>
       </g>
     </g>

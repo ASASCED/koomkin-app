@@ -4,7 +4,7 @@ page-brief {
         height: 100%;
         width: 100%;
         grid-template-areas: "activity-header" "activity-content-container";
-        grid-template-rows: 23% auto;
+        grid-template-rows: 20% auto;
         .activity-header {
             grid-area: activity-header;
             height: 100%;
@@ -34,29 +34,46 @@ page-brief {
             text-align: center;
             padding: 4%;
             display: grid;
+            .bloque {
+                margin-top: 2%;
+                display: inline-block;
+                .mitad-izq {
+                    display: inline-block;
+                    width: 49%;
+                }
+                .mitad-der {
+                    display: inline-block;
+                    width: 49%;
+                }
+            }
             .titulo-brief{
                 color: #288AC1;
                 font-weight: bold;
                 font-size: 4vw;
                 text-align: left;
+                margin: 3% 0;
             }
             .input-brief {
                 height: 20px;
                 width: 100%;
                 color: #707070;
-                border: 1px #CECECE solid;
+                border: none;
+                border-bottom: 1px #CECECE solid;
                 font-weight: bold;
-                border-radius: 5px;
+                border-radius: 0px;
+                box-shadow: none;
             }
             .seleccion-brief { 
                 height: 20px;                
-                width: 100%;
+                width: 95%;
+                margin-right: 5%;
                 background: transparent;
                 border: 1px #CECECE solid;
                 color: #707070;
                 font-weight: bold;
                 border-radius: 5px;
             }
+            
             .botones-cobertura-brief {
                 display: inline-block;
                 .boton-cobertura-brief-blanco{ 
@@ -78,7 +95,7 @@ page-brief {
                     border-radius: 7px;
                     background: white;
                     .texto-boton-brief {
-                        color: #10cebc;
+                        color: #A09D9D;
                         margin: 0;
                         font-weight: bold;
                     }
@@ -87,17 +104,24 @@ page-brief {
             .botones-brief{
                 display: inline-block;
                 .boton-brief {
-                    width: 40%;
-                    margin: 4%;
+                    width: 48%;
+                    height: 56px;
+                    margin: 2% 1%;
                     display: inline-block;
                     border: 1px #CECECE solid;
                     border-radius: 7px;
                     background: white;
-                    .texto-boton-brief {
-                        color: #10cebc;
-                        margin: 0;
-                        font-weight: bold;
-                    }
+                    display:table-cell;
+                }
+                .boton-brief-activo {
+                    width: 48%;
+                    height: 56px;
+                    margin: 2% 1%;
+                    display: inline-block;
+                    border: 1px #10cebc solid;
+                    background: #10cebc;
+                    border-radius: 7px;
+                    display:table-cell;
                 }
             } 
             .guardar-brief {
@@ -129,3 +153,30 @@ page-brief {
     }
 }
 
+.botones-completo {
+    display: inline-block;
+    width: 100%;
+    .botones-mitad {
+        display: inline-block;
+        width: 38%;
+    }
+    .botones-mitad-izq {
+        display: inline-block;
+        width: 55%;
+    }
+    
+}
+
+.main2 {
+    display: table;
+    height: 55px;
+}
+
+.inner2 {
+    display: table-cell;
+    vertical-align: middle;
+    color: #A09D9D;
+    margin: 0;
+    font-weight: bold;
+    font-size: 3.8vw;
+}

@@ -31,6 +31,7 @@ export class BriefPage implements OnInit{
   public cobertura_estado;  
   public cobertura_region;
   public cobertura_nacional; 
+  public editar = 0;
 
     constructor(
       public navCtrl: NavController,
@@ -57,6 +58,7 @@ export class BriefPage implements OnInit{
           this.cp = this.datos[0].CP;
           this.ciudad = this.datos[0].Ciudad;
           this.target = this.datos[0].ClientesTarget;
+          this.target = 'Particulares';
           this.mejor = this.datos[0].Mejor;
           this.producto = this.datos[0].Producto;
           this.direccion = this.datos[0].Direccion;
@@ -67,9 +69,7 @@ export class BriefPage implements OnInit{
           this.campania = this.datos[0].IDCampania;
           this.cobertura_nacional = this.datos[0].Nacional;   
           console.log(this.datos);
-          return new Promise((resolve, reject) => {
-            this.getCobertura(idUsuario,this.datos[0].IDCampania);
-          });
+          this.getCobertura(idUsuario,this.datos[0].IDCampania);
         },
         err => {
           //   // console.log('error');
@@ -78,7 +78,7 @@ export class BriefPage implements OnInit{
     }
 
     getCobertura(idUsuario,campania) {
-      this.provedor.getCobertura(idUsuario).then(
+      this.provedor.getCobertura(idUsuario,campania).then(
         data => {
           this.cobertura = data;
           if( (this.cuarta == 2 || this.cuarta == 3 || this.cuarta == 5) && this.cobertura_nacional !== 1  ) {
@@ -121,6 +121,14 @@ export class BriefPage implements OnInit{
           //   // console.log('error');
         }
       );
+    }
+
+    changeEdit(numero) {
+      if(numero == 0) {
+        this.editar = 1;
+      } else if(numero == 1) {
+        this.editar = 0;
+      }
     }
 
     
