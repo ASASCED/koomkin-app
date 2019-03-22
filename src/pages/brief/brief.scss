@@ -1,0 +1,131 @@
+page-brief {
+    .encuesta-container {
+        display: grid;
+        height: 100%;
+        width: 100%;
+        grid-template-areas: "activity-header" "activity-content-container";
+        grid-template-rows: 23% auto;
+        .activity-header {
+            grid-area: activity-header;
+            height: 100%;
+            width: 100%;
+            .encabezado-encuesta {
+                height: 50px;
+                position: absolute;
+                top: 80px;
+                width: 80%;
+                margin-left: 10%;
+                border-radius: 40px;
+                background: white;
+                text-align: center;
+                color:  #288AC1;
+                display: grid;
+                justify-content: center;
+                align-items: center;
+                font-size: 4.2vw;
+                font-weight: bold;
+                box-shadow: 10px 10px 13px -8px rgba(0, 0, 0, 0.45);
+            }
+        }
+        .activity-content-container {
+            grid-area: activity-content-container;
+            height: 100%;
+            width: 100%;
+            text-align: center;
+            padding: 4%;
+            display: grid;
+            .titulo-brief{
+                color: #288AC1;
+                font-weight: bold;
+                font-size: 4vw;
+                text-align: left;
+            }
+            .input-brief {
+                height: 20px;
+                width: 100%;
+                color: #707070;
+                border: 1px #CECECE solid;
+                font-weight: bold;
+                border-radius: 5px;
+            }
+            .seleccion-brief { 
+                height: 20px;                
+                width: 100%;
+                background: transparent;
+                border: 1px #CECECE solid;
+                color: #707070;
+                font-weight: bold;
+                border-radius: 5px;
+            }
+            .botones-cobertura-brief {
+                display: inline-block;
+                .boton-cobertura-brief-blanco{ 
+                    width: 23%;
+                    display: inline-block;
+                    border: 1px #10cebc solid;
+                    border-radius: 7px;
+                    background: #10cebc;
+                    .texto-boton-brief {
+                        color: white;
+                        margin: 0;
+                        font-weight: bold;
+                    }
+                }
+                .boton-cobertura-brief {
+                    width: 23%;
+                    display: inline-block;
+                    border: 1px #CECECE solid;
+                    border-radius: 7px;
+                    background: white;
+                    .texto-boton-brief {
+                        color: #10cebc;
+                        margin: 0;
+                        font-weight: bold;
+                    }
+                }
+            }
+            .botones-brief{
+                display: inline-block;
+                .boton-brief {
+                    width: 40%;
+                    margin: 4%;
+                    display: inline-block;
+                    border: 1px #CECECE solid;
+                    border-radius: 7px;
+                    background: white;
+                    .texto-boton-brief {
+                        color: #10cebc;
+                        margin: 0;
+                        font-weight: bold;
+                    }
+                }
+            } 
+            .guardar-brief {
+                background-color: #f06922;
+                color: white;
+                border: 1.1px solid #f06922;
+                width: 60%;
+                margin-left: 20%;
+                height: 32px;
+                font-size: 4.5vw;
+                border-radius: 30px;
+                font-weight: bold;
+            }
+            
+        }
+    }
+}
+.footer {
+    display: -webkit-box;
+    width: 100%;
+    height: 10px;
+    .left {
+        background-color: #00a3bf;
+        width: 50%;
+    }
+    .right {
+        background-color: #10cebc;
+        width: 50%;
+    }
+}
+

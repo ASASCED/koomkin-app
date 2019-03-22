@@ -10,3 +10,4 @@ export { PagoPage } from './pago/pago';
 export { LoginPage } from './login/login';
 export { InicioPage } from './inicio/inicio';
 export { EficienciaPage } from './eficiencia/eficiencia';
+export { BriefPage } from './brief/brief';

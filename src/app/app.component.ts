@@ -23,6 +23,7 @@ import { RestProvider } from "../providers/rest/rest";
 
 import { HttpClient } from '@angular/common/http';
 import { Storage } from '@ionic/storage';
+import { BriefPage } from '../pages/brief/brief';
 
 @Component({
   templateUrl: 'app.html'
@@ -44,6 +45,7 @@ export class MyApp {
   lead = LeadPage;
   inicio = InicioPage;
   eficiencia = EficienciaPage;
+  brief = BriefPage;
 
   apiUrl1 = 'https://fierce-spire-89861.herokuapp.com';
   apiUrl0 = 'http://localhost:3000';
@@ -77,7 +79,8 @@ export class MyApp {
       { title: 'Lead', component: LeadPage },
       { title: 'Login', component: LoginPage },
       { title: 'Inicio', component: InicioPage },
-      { title: 'Eficiencia', component: EficienciaPage }
+      { title: 'Eficiencia', component: EficienciaPage },
+      { title: 'Brief', component: BriefPage }
     ];
 
   }

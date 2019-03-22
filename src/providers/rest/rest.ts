@@ -505,5 +505,55 @@ export class RestProvider {
       });
     });
   }
+
+  getBriefInformation(idUsuario) {
+    return new Promise(resolve => {
+      this.http.get(this.apiUrl + '/getBriefInformation/' + idUsuario ).subscribe(data => {
+        resolve(data);
+      }, err => {
+         console.log(err);
+      });
+    });
+  }
+
+  getCobertura(idUsuario,idCampania) {
+    return new Promise(resolve => {
+      this.http.get(this.apiUrl + '/getCobertura/' + idUsuario + '/' + idCampania).subscribe(data => {
+        resolve(data);
+      }, err => {
+         console.log(err);
+      });
+    });
+  }
+
+  getCodigoPostal(codigo) {
+    return new Promise(resolve => {
+      this.http.get(this.apiUrl + '/getCodigoPostal/' + codigo ).subscribe(data => {
+        resolve(data);
+      }, err => {
+         console.log(err);
+      });
+    });
+  }
+
+  getEstados() {
+    return new Promise(resolve => {
+      this.http.get(this.apiUrl + '/getEstados').subscribe(data => {
+        resolve(data);
+      }, err => {
+         console.log(err);
+      });
+    });
+  }
+
+  getEmpresas() {
+    return new Promise(resolve => {
+      this.http.get(this.apiUrl + '/getEmpresas').subscribe(data => {
+        resolve(data);
+      }, err => {
+         console.log(err);
+      });
+    });
+  }
   
 }

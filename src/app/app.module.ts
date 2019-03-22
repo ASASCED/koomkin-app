@@ -52,6 +52,7 @@ import { EmailPage } from '../pages/email/email';
 import { SocialPage } from '../pages/social/social';
 import { Clipboard } from '@ionic-native/clipboard';
 import { SweetAlert2Module } from '@toverux/ngx-sweetalert2';
+import { BriefPage } from '../pages/brief/brief';
 
 
 @NgModule({
@@ -69,6 +70,7 @@ import { SweetAlert2Module } from '@toverux/ngx-sweetalert2';
     LoginPage,
     InicioPage,
     EficienciaPage,
+    BriefPage,
     HotelComponent,
     SocialPage,
     EmailPage,
@@ -115,6 +117,7 @@ import { SweetAlert2Module } from '@toverux/ngx-sweetalert2';
     LoginPage,
     InicioPage,
     EficienciaPage,
+    BriefPage,
     SocialPage,
     EmailPage,
     HotelComponent,

@@ -53,7 +53,6 @@ export class EficienciaPage implements OnInit {
   public id;
   public clientUUID = this.authService.getClientUUID();
 
-
   public empresa_tiempo;
   public empresas_tiempo;
   public comparative_empresa_tiempo;

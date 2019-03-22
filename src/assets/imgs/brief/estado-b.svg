@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="48" height="48" viewBox="0 0 48 48">
+  <defs>
+    <clipPath id="clip-ic_estado">
+      <rect width="48" height="48"/>
+    </clipPath>
+  </defs>
+  <g id="ic_estado" clip-path="url(#clip-ic_estado)">
+    <rect width="48" height="48" fill="transparent"/>
+    <path id="Trazado_21461" data-name="Trazado 21461" d="M439.605,340.931c4.127,5.6,7.193,9.839,7.193,9.839s16.863-12.221,17.368-12.846,2.5-4.463,2.477-5.337c-.015-.514-.418-3.236-.749-5.4a12.633,12.633,0,0,0-2.176-.373c-2.131-.119-3.256-.769-6.038.237s-6.689,1.835-10.182,3.315c-2.863,1.213-9.267,1.156-11.839,4.653C435.537,338.084,436.013,342.124,439.605,340.931Z" transform="translate(-426.643 -314.497)" fill="#fff"/>
+  </g>
+</svg>

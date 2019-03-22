@@ -19,6 +19,7 @@ import { PreguntaPage } from '../../pages/pregunta/pregunta';
 import { HttpClient } from '@angular/common/http';
 import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
 import { EficienciaPage } from '../eficiencia/eficiencia';
+import { BriefPage } from '../brief/brief';
 
 @IonicPage()
 @Component({
@@ -40,6 +41,7 @@ export class InicioPage implements OnInit {
   lead = LeadPage;
   inicio = InicioPage;
   eficiencia = EficienciaPage;
+  brief = BriefPage;
 
   pages: Array<{ title: string, component: any }>;
 
@@ -55,6 +57,7 @@ export class InicioPage implements OnInit {
   public fondo;
   public description;
   public habilitado;
+  public activo;
 
   constructor(
     public navCtrl: NavController,
@@ -65,7 +68,7 @@ export class InicioPage implements OnInit {
 
   ) {
     this.id = this.authService.id;
-
+    this.activo = this.authService.activo;
     this.pages = [
       { title: "Reporte", component: ReportePage },
       { title: "Leads", component: LeadsPage },
@@ -79,6 +82,8 @@ export class InicioPage implements OnInit {
       { title: "Login", component: LoginPage },
       { title: "Inicio", component: InicioPage },
       { title: "Eficiencia", component: EficienciaPage },
+      { title: "Brief", component: BriefPage },
+
     ];
   }
 

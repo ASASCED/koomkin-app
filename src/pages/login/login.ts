@@ -161,9 +161,9 @@ export class LoginPage implements OnInit {
           this.storage.set('email', this.email);
           this.storage.set('password', this.password);
 
-          if(data[0]['uuid']){
+         /* if(data[0]['uuid']){
             this.iniciarClienteChatTwilio(data[0]['uuid']);
-          }
+          }*/
           this.navCtrl.setRoot(InicioPage);
           // this.navCtrl.setRoot(LeadsPage);
         } else {
@@ -216,16 +216,16 @@ export class LoginPage implements OnInit {
                   this.storage.set('email', this.email);
                   this.storage.set('password', this.password);
                   if(this.authService.getNotificationActive()){
-                    if(data[0]['uuid']){
+                   /* if(data[0]['uuid']){
                       this.iniciarClienteChatTwilio(data[0]['uuid']);
-                    }
+                    }*/
                     this.authService.setNotificationActive(false);
 
                   }else{
                     this.navCtrl.setRoot(InicioPage).then(()=>{
-                      if(data[0]['uuid']){
+                     /* if(data[0]['uuid']){
                         this.iniciarClienteChatTwilio(data[0]['uuid']);
-                      }
+                      }*/
                     });
                   }
 

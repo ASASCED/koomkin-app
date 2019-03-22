@@ -1,0 +1,78 @@
+<ion-header>
+  <ion-navbar color="azul">
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+      <ion-title>Empresa: {{empresa}}
+          <br>ID Cliente: {{id}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+  <div class="encuesta-container">
+    <div class="activity-header">
+        <img src="https://firebasestorage.googleapis.com/v0/b/chatcintanegra.appspot.com/o/img_config.svg?alt=media&token=17192549-7ef5-439b-9aab-b9a6ab3beee0" width="100%">
+        <div class="encabezado-encuesta">Configuración Campaña Digital</div>
+    </div>
+    <div class="activity-content-container">
+        <span class="titulo-brief">Producto/Servicio Principal</span>
+        <input type="text" class="input-brief" [(ngModel)]="producto">
+        <span class="titulo-brief">Tipo en Empresa</span>
+        <select type="text" class="seleccion-brief" [(ngModel)]="empresas">
+          <option *ngFor="let tipo_empresa of tipo_empresas">
+            {{tipo_empresa.TIPOEMPRESA}}
+          </option>
+        </select>
+        <span class="titulo-brief">Código Postal</span>
+        <input type="text" class="input-brief" [(ngModel)]="cp">
+        <span class="titulo-brief">Cobertura Campaña</span>
+        <div class="botones-cobertura-brief">
+            <button [ngClass]="{'boton-cobertura-brief-blanco':cobertura_local === 1,'boton-cobertura-brief':cobertura_local !== 1}" style="margin-right: 1%;">
+                <img *ngIf="cobertura_local !== 1" src="assets/imgs/brief/local.svg" width="65%">
+                <img *ngIf="cobertura_local === 1" src="assets/imgs/brief/local-b.svg" width="65%">
+
+                <p class="texto-boton-brief">Local</p>
+            </button>
+            <button [ngClass]="{'boton-cobertura-brief-blanco':cobertura_estado === 1,'boton-cobertura-brief':cobertura_estado !== 1}" style="margin-right: 1%;">
+                <img *ngIf="cobertura_estado !== 1" src="assets/imgs/brief/estado.svg" width="65%">
+                <img *ngIf="cobertura_estado === 1" src="assets/imgs/brief/estado-b.svg" width="65%">
+
+                <p class="texto-boton-brief">Estado</p>
+            </button>
+            <button [ngClass]="{'boton-cobertura-brief-blanco':cobertura_region === 1,'boton-cobertura-brief':cobertura_region !== 1}" style="margin-right: 1%;">
+                <img *ngIf="cobertura_region !== 1" src="assets/imgs/brief/region.svg" width="65%">
+                <img *ngIf="cobertura_region === 1" src="assets/imgs/brief/region-b.svg" width="65%">
+
+                <p class="texto-boton-brief">Región</p>
+            </button>
+            <button [ngClass]="{'boton-cobertura-brief-blanco':cobertura_nacional === 1,'boton-cobertura-brief':cobertura_nacional !== 1}">
+                <img *ngIf="cobertura_nacional !== 1" src="assets/imgs/brief/nacional.svg" width="65%">
+                <img *ngIf="cobertura_nacional === 1" src="assets/imgs/brief/nacional-b.svg" width="65%">
+                <p class="texto-boton-brief">Nacional</p>
+            </button>
+          </div>
+        <span class="titulo-brief">¿En qué eres mejor que tu competencia?</span>
+        <input type="text" class="input-brief" [(ngModel)]="mejor">
+        <span class="titulo-brief">Cliente Objetivo</span>
+        <div class="botones-brief">
+          <button class="boton-brief" style="    margin-right: 0%;">
+              <img src="assets/imgs/brief/particulares.svg" width="45%">
+              <p class="texto-boton-brief">Particulares</p>
+          </button>
+          <button class="boton-brief">
+              <img src="assets/imgs/brief/empresas.svg" width="45%">
+              <p class="texto-boton-brief">Empresas</p>
+          </button>
+        </div>
+        <button class="guardar-brief">Guardar Configuración</button>
+    </div>
+</div>
+</ion-content>
+
+<ion-footer>
+  <div class="footer">
+      <div class="left"></div>
+      <div class="right"></div>
+  </div>
+</ion-footer>

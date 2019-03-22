@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="48" height="48" viewBox="0 0 48 48">
+  <defs>
+    <clipPath id="clip-ic_local">
+      <rect width="48" height="48"/>
+    </clipPath>
+  </defs>
+  <g id="ic_local" clip-path="url(#clip-ic_local)">
+    <rect width="48" height="48" fill="transparent"/>
+    <g id="street" transform="translate(6.207 10)">
+      <path id="Trazado_21153" data-name="Trazado 21153" d="M22.387,19H10.593l-2.8,2.8,2.8,2.8H17.32v8.867H14.986v1.867h-1.4v2.8h8.4v-2.8h-1.4V33.467H18.253V24.6h4.134a1.468,1.468,0,0,0,1.466-1.466V20.466A1.467,1.467,0,0,0,22.387,19ZM19.653,35.333H15.92V34.4h3.733Z" transform="translate(0 -10.133)" fill="#fff"/>
+      <path id="Trazado_21154" data-name="Trazado 21154" d="M32.807,5.133H24.874V4.62a2.333,2.333,0,1,0-.933,0v.514H21.206a1,1,0,0,0-1,1v1.8h9.734a1,1,0,0,1,1,1V9.8h1.867L35.14,7.467Zm-9.8-2.8a1.4,1.4,0,1,1,1.4,1.4A1.4,1.4,0,0,1,23.007,2.333Z" transform="translate(-6.621)" fill="#fff"/>
+    </g>
+  </g>
+</svg>

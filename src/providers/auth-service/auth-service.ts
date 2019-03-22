@@ -24,6 +24,7 @@ export class AuthServiceProvider {
   public uuid;
   public recurrente;
   public cancelar;
+  public activo;
 
   constructor(public http: HttpClient, public plt: Platform) {
     this.userLogged = false;
@@ -51,7 +52,11 @@ export class AuthServiceProvider {
           this.uuid = this.info[0].uuid;
           this.recurrente = this.info[0].RecurringPayments;
           this.cancelar = this.info[0].cancellation;
-          console.log(this.cancelar);
+          this.activo = this.info[0].activo;
+          if(this.activo == this.id) {
+            this.activo = 1;
+          }
+          console.log(this.activo);
           if (this.plt.is('ios') || this.plt.is('android')) {
             window["plugins"].OneSignal.sendTag("chat", this.info[0]['chat']);
           } 
