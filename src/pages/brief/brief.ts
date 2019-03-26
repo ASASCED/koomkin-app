@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { Component, OnInit,ViewChild } from '@angular/core';
+import { IonicPage, NavController, NavParams, AlertController, Slides, SegmentButton, Toggle } from 'ionic-angular';
 import { RestProvider } from '../../providers/rest/rest';
 import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
 
@@ -9,6 +9,8 @@ import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
   templateUrl: 'brief.html',
 })
 export class BriefPage implements OnInit{
+
+  @ViewChild('loopSlider') sliderComponent: Slides;
 
   public empresa;
   public id;
@@ -32,6 +34,62 @@ export class BriefPage implements OnInit{
   public cobertura_region;
   public cobertura_nacional; 
   public editar = 0;
+
+  mas_informacion: boolean = false;
+  familiar: boolean = false;
+
+  public event = {
+    month: '1900-02-19',
+  }
+
+  public puestos = [
+    { nombre: 2 },
+    { nombre: 3 },
+  ];
+
+  public positions = [
+    {id: 1, nombre: 'Socio'},
+    {id: 2, nombre: 'Socio-Director'},
+    {id: 3, nombre: 'Dir. General'},
+    {id: 4, nombre: 'Dir. Comercial'},
+    {id: 5, nombre: 'Dir. Marketing'},
+    {id: 6, nombre: 'Gerente'},
+    {id: 7, nombre: 'Supervisor'},
+    {id: 8, nombre: 'Ventas'},
+    {id: 9, nombre: 'Marketing'},
+    {id: 10, nombre: 'Otro'}
+   ];
+  
+  public carreras = [
+    {id: 1, nombre: 'Preparatoria'},
+    {id: 2, nombre: 'Licenciatura'},
+    {id: 3, nombre: 'Maestria'},
+    {id: 4, nombre: 'Doctorado'},
+   ];
+
+  public ingresos = [
+    {id: 1, nombre: 'bajo'},
+    {id: 2, nombre: 'medio'},
+    {id: 3, nombre: 'medio-alto'},
+    {id: 4, nombre: 'alto'},
+   ];
+
+  selectedSegment = 'first';
+
+  slides = [
+    {
+      id: 'first',
+      title: 'First Slide'
+    },
+    {
+      id: 'second',
+      title: 'Second Slide'
+    },
+    {
+      id: 'third',
+      title: 'Third Slide'
+    }
+  ];
 
     constructor(
       public navCtrl: NavController,
@@ -58,7 +116,7 @@ export class BriefPage implements OnInit{
           this.cp = this.datos[0].CP;
           this.ciudad = this.datos[0].Ciudad;
           this.target = this.datos[0].ClientesTarget;
-          this.target = 'Particulares';
+          this.target = 'Empresas';
           this.mejor = this.datos[0].Mejor;
           this.producto = this.datos[0].Producto;
           this.direccion = this.datos[0].Direccion;
@@ -115,7 +173,7 @@ export class BriefPage implements OnInit{
         data => {
           let empresas = data;
           this.tipo_empresas = empresas;
-          // console.log(this.tipo_empresas);
+          console.log(this.tipo_empresas);
         },
         err => {
           //   // console.log('error');
@@ -131,5 +189,20 @@ export class BriefPage implements OnInit{
       }
     }
 
+    onSegmentChanged(segmentButton: SegmentButton) {
+      console.log('Segment changed to', segmentButton.value);
+  
+      const selectedIndex = this.slides.findIndex((slide) => {
+        return slide.id === segmentButton.value;
+      });
+      this.sliderComponent.slideTo(selectedIndex);
+    }
+  
+    onSlideChanged(s: Slides) {
+      console.log('Slide changed', s);
+  
+      const currentSlide = this.slides[s.getActiveIndex()];
+      this.selectedSegment = currentSlide.id;
+    }
     
 }

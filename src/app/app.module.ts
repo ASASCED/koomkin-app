@@ -99,7 +99,9 @@ import { BriefPage } from '../pages/brief/brief';
     IonicModule.forRoot(MyApp,{
       backButtonText: 'Regresar',
       backButtonIcon: 'ios-arrow-back',
-      iconMode: 'md'
+      iconMode: 'md',
+      monthNames:['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+      monthShortNames: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sept', 'Oct', 'Nov', 'Dic']
     })
   ],
   bootstrap: [IonicApp],

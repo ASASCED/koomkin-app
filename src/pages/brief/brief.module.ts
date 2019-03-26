@@ -11,3 +11,4 @@ import { BriefPage } from './brief';
   ],
 })
 export class BriefPageModule {}
+

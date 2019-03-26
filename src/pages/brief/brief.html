@@ -64,27 +64,29 @@
 
         <p class="titulo-brief">Cliente Objetivo</p>
         <div class="botones-brief">
-            <button class="boton-brief" style="margin-right: 0%;">
+            <button class="boton-brief" style="margin-right: 0%;" [ngClass]="{'boton-brief-activo':target === 'Particulares'}">
                 <div class="botones-completo">
                     <div class="botones-mitad">
-                      <img src="assets/imgs/brief/particulares.svg" width="55px">
+                      <img *ngIf="target !== 'Particulares'" src="assets/imgs/brief/particulares.svg" width="55px">
+                      <img *ngIf="target === 'Particulares'" src="assets/imgs/brief/particulares-b.svg" width="55px">
                     </div> 
                     <div class="botones-mitad-izq">
                         <div class="main2">
-                            <div class="inner2"> Particulares </div>
+                            <div class="inner2" [ngStyle]="{'color':target === 'Particulares' ? 'white' : '#A09D9D'}"> Particulares</div>
                         </div>
                     </div> 
                   </div>   
             </button>
-            <button class="boton-brief">
+            <button class="boton-brief" [ngClass]="{'boton-brief-activo':target === 'Empresas'}">
               <div class="botones-completo">
                 <div class="botones-mitad">
-                  <img src="assets/imgs/brief/empresas.svg" width="55px">
+                  <img *ngIf="target !== 'Empresas'" src="assets/imgs/brief/empresas.svg" width="55px">
+                  <img *ngIf="target === 'Empresas'" src="assets/imgs/brief/empresas-b.svg" width="55px">
                 </div> 
                 <div class="botones-mitad-izq">
                     <div class="main2">
-                        <div class="inner2"> Empresas </div>
-                    </div>
+                        <div class="inner2" [ngStyle]="{'color':target === 'Empresas' ? 'white' : '#A09D9D'}">Empresas</div>
+                      </div>
                 </div> 
               </div>  
             </button>
@@ -101,10 +103,10 @@
           <div class="mitad-izq">
             <p class="titulo-brief">Tipo en Empresa</p>
             <select type="text" class="seleccion-brief" [(ngModel)]="empresas">
-                <option *ngFor="let tipo_empresa of tipo_empresas">
-                  {{tipo_empresa.TIPOEMPRESA}}
-                </option>
-              </select>
+              <option *ngFor="let tipo_empresa of tipo_empresas">
+                {{tipo_empresa.TIPOEMPRESA}}
+              </option>
+            </select>
           </div>
           <div class="mitad-der">
             <p class="titulo-brief">Código Postal</p>
@@ -173,7 +175,168 @@
         <button class="guardar-brief" (click)="changeEdit(1)">Guardar Configuración</button>
 
     </div>
+    <hr style="background-color: #fff;
+    border-top: 2px dashed #8c8b8b;">
+    <div class="mas-brief">
+      <p class="deseas-brief">¿Deseas agregar mayor información o detalle de tu empresa para mejorar la configuración de tu campaña?</p>
+      <ion-item>
+          <ion-label class="informacion-brief">Más información</ion-label>
+          <ion-toggle color="secondary" class="informacion-brief" [(ngModel)]="mas_informacion"></ion-toggle>
+      </ion-item>
+    </div>
 </div>
+<br>
+<br>
+<br>
+<br>
+<br>
+  <ion-segment *ngIf="mas_informacion" [(ngModel)]="selectedSegment" (ionChange)="onSegmentChanged($event)">
+    <ion-segment-button value="first" class="segment-datos">
+      Tus datos
+    </ion-segment-button>
+    <ion-segment-button value="second" class="segment-empresa">
+      Tu empresa    
+    </ion-segment-button>
+    <ion-segment-button value="third" class="segment-objetivo">
+      Cliente Objetivo
+    </ion-segment-button>
+  </ion-segment>
+  <ion-slides *ngIf="mas_informacion" (ionSlideDidChange)="onSlideChanged($event)" #loopSlider>
+
+    <ion-slide style="height: 50% !important;">
+        <div class="brief-contenedor">
+            <p class="titulo-brief">Nombre Completo</p>
+            <input type="text" class="input-brief">
+        
+            <ion-grid class="anuncio-grid">
+                <p class="titulo-brief">Fecha de Nacimiento</p>
+                <ion-item>
+                    <ion-datetime displayFormat="DD MMMM YYYY" [(ngModel)]="event.month" cancelText =Cancelar doneText=Aceptar></ion-datetime>
+                  </ion-item>
+            </ion-grid>
+
+            <ion-grid class="anuncio-grid">
+                <ion-row style="width: 100%;margin-bottom: 0%;">
+                    <ion-col col-8>
+                        <p class="titulo-brief">Puesto</p>
+                        <select type="text" class="seleccion-brief" [(ngModel)]="positions">
+                            <option *ngFor="let puesto of positions">
+                              {{puesto.nombre}}
+                            </option>
+                          </select>
+                    </ion-col>
+                    <ion-col col-4>
+                        <p class="titulo-brief">C.P. domicilio</p>
+                        <input type="number" class="seleccion-brief">
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+
+            <ion-grid class="anuncio-grid">
+                <ion-row style="width: 100%;margin-bottom: 0%;">
+                    <ion-col col-6>
+                        <p class="titulo-brief">Años en tu empresa</p>
+                        <input type="number" class="seleccion-brief">
+                    </ion-col>
+                    <ion-col col-6>
+                        <p class="titulo-brief">Educación</p>
+                        <select type="text" class="seleccion-brief" [(ngModel)]="carreras">
+                          <option *ngFor="let carrera of carreras">
+                            {{carrera.nombre}}
+                          </option>
+                        </select>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+           <button class="guardar">Guardar</button>
+    
+        </div>
+    </ion-slide>
+    <ion-slide>
+      <div class="brief-contenedor">
+          <p class="titulo-brief">Nombre Comercial de tu empresa</p>
+          <input type="text" class="input-brief">
+      
+          <p class="titulo-brief">RFC de tu empresa</p>
+          <input type="text" class="input-brief">
+  
+          <div class="bloque">
+            <div class="mitad-izq">
+              <p class="titulo-brief">Número de Empleados</p>
+              <input type="text" class="input-brief">
+            </div>
+            <div class="mitad-der">
+              <p class="titulo-brief">Número de Socios</p>
+              <input type="text" class="input-brief">
+            </div>
+          </div>
+          <ion-grid class="anuncio-grid">
+              <ion-row style="width: 100%;margin-bottom: 0%;">
+                  <ion-col col-6>
+                    <p class="titulo-brief">Empresa Familiar</p>
+                    <ion-item style="width: 99% !important;">
+                      <ion-label *ngIf="familiar == true" class="informacion-brief barra-no">Si</ion-label>
+                      <ion-label *ngIf="familiar == false" class="informacion-brief barra-no">No</ion-label>
+                      <ion-toggle color="secondary" class="empresa-si" style="padding: 12px 60px 12px 16px;" [(ngModel)]="familiar"></ion-toggle>
+                    </ion-item>      
+                  </ion-col>
+                  <ion-col col-6>
+                    <p class="titulo-brief">Tipo</p>
+                    <ul class="chico">
+                      <li class="zero-chico" [ngClass]="{'selection':eleccion === 1}">
+                        <span>PFAE</span>
+                      </li>
+                      <li class="zero-chico" [ngClass]="{'selection':eleccion === 2}">
+                        <span>PM</span>
+                      </li>
+                    </ul>
+                  </ion-col>
+              </ion-row>
+          </ion-grid>
+          <p class="titulo-brief">Rango de Ventas Anuales (Último año)</p>
+          <ul class="grande">
+              <li class="zero" [ngClass]="{'selection':eleccion === 1}">
+                  <span>Micro 1<br>(1 millón)</span>
+              </li>
+              <li class="zero" [ngClass]="{'selection':eleccion === 2}">
+                  <span>Micro 2<br>(5 millones)</span>
+              </li>
+              <li class="zero" [ngClass]="{'selection':eleccion === 3}">
+                  <span>Pequeña 1<br>(10 millones)</span>
+              </li>
+              <li class="zero" [ngClass]="{'selection':eleccion === 4}">
+                  <span>Pequeña 2<br>(20 millones)</span>
+              </li>
+              <li class="zero" [ngClass]="{'selection':eleccion === 5}">
+                  <span>Mediana<br>(+20 millones)</span>
+              </li>
+          </ul>
+          <p class="titulo-brief">Principal Ventaja Competitiva</p>
+          <ul class="mediano">
+              <li class="zero" [ngClass]="{'selection':eleccion === 1}">
+                  <span>Precio</span>
+              </li>
+              <li class="zero" [ngClass]="{'selection':eleccion === 2}">
+                  <span>Calidad</span>
+              </li>
+              <li class="zero" [ngClass]="{'selection':eleccion === 3}">
+                  <span>Tiempo Entrega</span>
+              </li>
+              <li class="zero" [ngClass]="{'selection':eleccion === 4}">
+                  <span>Otro</span>
+              </li>
+          </ul>
+          <p class="titulo-brief">Detalla dicha ventaja competitiva</p>
+          <textarea class="otro" rows="3" cols="34" maxlength="250" placeholder="Detalla tu ventaja competitiva..." required></textarea>
+          
+          <button class="guardar">Guardar</button>
+  
+      </div>
+    </ion-slide>
+    <ion-slide>
+      <h1>Slide 3</h1>
+    </ion-slide>
+  </ion-slides>
 </ion-content>
 
 <ion-footer>
