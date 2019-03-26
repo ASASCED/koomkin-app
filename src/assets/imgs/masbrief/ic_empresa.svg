@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="28" height="28" viewBox="0 0 28 28">
+  <defs>
+    <clipPath id="clip-ic_empresa">
+      <rect width="28" height="28"/>
+    </clipPath>
+  </defs>
+  <g id="ic_empresa" clip-path="url(#clip-ic_empresa)">
+    <rect width="28" height="28" fill="transparent"/>
+    <g id="Grupo_10427" data-name="Grupo 10427" transform="translate(3 1)">
+      <rect id="Rectángulo_4416" data-name="Rectángulo 4416" width="21.567" height="2.097" transform="translate(0 24.262)" fill="#00a3bf"/>
+      <rect id="Rectángulo_4417" data-name="Rectángulo 4417" width="12.581" height="26.359" transform="translate(4.493)" fill="#00a3bf"/>
+      <rect id="Rectángulo_4418" data-name="Rectángulo 4418" width="7.189" height="26.359" transform="translate(7.189)" fill="#00a3bf"/>
+      <rect id="Rectángulo_4419" data-name="Rectángulo 4419" width="7.189" height="4.194" transform="translate(7.189 22.166)" fill="#00a3bf"/>
+      <rect id="Rectángulo_4420" data-name="Rectángulo 4420" width="1.797" height="2.396" transform="translate(6.29 3.594)" fill="#3dcdbb"/>
+      <rect id="Rectángulo_4421" data-name="Rectángulo 4421" width="1.797" height="2.396" transform="translate(9.885 3.594)" fill="#3dcdbb"/>
+      <rect id="Rectángulo_4422" data-name="Rectángulo 4422" width="1.797" height="2.396" transform="translate(13.479 3.594)" fill="#3dcdbb"/>
+      <rect id="Rectángulo_4423" data-name="Rectángulo 4423" width="1.797" height="2.396" transform="translate(6.29 7.788)" fill="#3dcdbb"/>
+      <rect id="Rectángulo_4424" data-name="Rectángulo 4424" width="1.797" height="2.396" transform="translate(9.885 7.788)" fill="#3dcdbb"/>
+      <rect id="Rectángulo_4425" data-name="Rectángulo 4425" width="1.797" height="2.396" transform="translate(13.479 7.788)" fill="#3dcdbb"/>
+      <rect id="Rectángulo_4426" data-name="Rectángulo 4426" width="1.797" height="2.396" transform="translate(6.29 11.981)" fill="#3dcdbb"/>
+      <rect id="Rectángulo_4427" data-name="Rectángulo 4427" width="1.797" height="2.396" transform="translate(9.885 11.981)" fill="#3dcdbb"/>
+      <rect id="Rectángulo_4428" data-name="Rectángulo 4428" width="1.797" height="2.396" transform="translate(13.479 11.981)" fill="#3dcdbb"/>
+      <rect id="Rectángulo_4429" data-name="Rectángulo 4429" width="1.797" height="2.396" transform="translate(6.29 16.175)" fill="#3dcdbb"/>
+      <rect id="Rectángulo_4430" data-name="Rectángulo 4430" width="1.797" height="2.396" transform="translate(9.885 16.175)" fill="#3dcdbb"/>
+      <rect id="Rectángulo_4431" data-name="Rectángulo 4431" width="1.797" height="2.396" transform="translate(13.479 16.175)" fill="#3dcdbb"/>
+      <rect id="Rectángulo_4432" data-name="Rectángulo 4432" width="1.797" height="4.194" transform="translate(9.885 22.166)" fill="#3dcdbb"/>
+    </g>
+  </g>
+</svg>

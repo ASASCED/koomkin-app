@@ -20,6 +20,7 @@ import { HttpClient } from '@angular/common/http';
 import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
 import { EficienciaPage } from '../eficiencia/eficiencia';
 import { BriefPage } from '../brief/brief';
+import { MasBriefPage } from '../mas-brief/mas-brief';
 
 @IonicPage()
 @Component({
@@ -42,6 +43,7 @@ export class InicioPage implements OnInit {
   inicio = InicioPage;
   eficiencia = EficienciaPage;
   brief = BriefPage;
+  masbrief = MasBriefPage;
 
   pages: Array<{ title: string, component: any }>;
 

@@ -1,3 +1,106 @@
+page-lead {
+
+    .segment-ios .segment-button.segment-activated {
+        color: white;
+        background-color: #00b9bf;
+        opacity: 1;
+        -webkit-transition: 100ms all linear;
+        transition: 100ms all linear;
+        border-color: #00b9bf;
+        font-size: 5vw;
+        text-transform: none;
+    }
+    
+    .segment-ios .segment-button {
+        color: #00b9bf;
+        background-color: transparent;
+        opacity: 1;
+        -webkit-transition: 100ms all linear;
+        transition: 100ms all linear;
+        border-color: #00b9bf;
+        background: white;
+        font-size: 5vw;
+        text-transform: none;
+    }
+ 
+    
+    .segment-md .segment-button {
+        color: white !important;
+        background-color: transparent !important;
+        opacity: .5 !important;
+        -webkit-transition: 100ms all linear !important;
+        transition: 100ms all linear !important;
+        border-color: #00b9bf !important;
+        background: transparent !important;
+        font-size: 5vw !important;
+        text-transform: none !important;
+    }
+
+    .segment-md .segment-button.segment-activated {
+        color: white !important;
+        opacity: 1 !important;
+        -webkit-transition: 100ms all linear !important;
+        transition: 100ms all linear !important;
+        border-color: #00b9bf !important;
+        font-size: 5vw !important;
+        text-transform: none !important;
+        background: transparent !important;
+    }
+
+.dentro {
+    margin: 0px !important;
+    border-radius: 2px;
+    width: 100% !important;
+    background: #EFEFEF !important;
+    border-top: 0px solid #d0d0d0 !important;
+    border-bottom: 0px solid #d0d0d0 !important;
+    border-right: 0px solid #d0d0d0 !important;
+    margin-bottom: 1px rgba(0, 0, 0, 0.14);
+    -webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+}
+
+.back-button-icon-ios {
+    margin: -1px 0 0;
+    display: inherit;
+    min-width: 18px;
+    font-size: 3.4rem;
+    color: black;
+}
+
+.toolbar-ios .segment-button {
+    max-width: 40%;
+    height: 3.6rem;
+    font-size: 2.5vh;
+    line-height: 3.5rem;
+}
+
+.segment-md .segment-button {
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    width: 0;
+    height: 4.2rem;
+    border-bottom-width: 2px;
+    border-bottom-style: solid;
+    border-bottom-color: rgba(0, 0, 0, 0.1);
+    font-size: 3vh;
+    font-weight: 400;
+    line-height: 4rem;
+    text-transform: uppercase;
+    color: white;
+    background-color: transparent;
+    opacity: .5;
+    -webkit-transition: 100ms all linear;
+    transition: 100ms all linear;
+    padding: 0 6px;
+}
+
+
+
+}
+
 ion-icon {
     color: #fff;
 }
@@ -61,118 +164,18 @@ ion-app.md [padding] .scroll-content {
     background-color: transparent;
 }
 
-.segment-ios .segment-button.segment-activated {
-    color: white;
-    background-color: #00b9bf;
-    ;
-    opacity: 1;
-    -webkit-transition: 100ms all linear;
-    transition: 100ms all linear;
-    border-color: #00b9bf;
-    ;
-    font-size: 5vw;
-    text-transform: none;
-}
-
-.segment-ios .segment-button {
-    color: #00b9bf;
-    ;
-    background-color: transparent;
-    opacity: 1;
-    -webkit-transition: 100ms all linear;
-    transition: 100ms all linear;
-    border-color: #00b9bf;
-    background: white;
-    font-size: 5vw;
-    text-transform: none;
-}
-
-.vertical-align-content {
-    display: flex!important;
-    align-content: center!important;
-    align-items: center!important;
-}
-
-.segment-md .segment-button {
-    color: #00b9bf;
-    ;
-    background-color: transparent;
-    opacity: 1;
-    -webkit-transition: 100ms all linear;
-    transition: 100ms all linear;
-    border-color: #00b9bf;
-    background: white;
-    font-size: 5vw;
-    text-transform: none !important;
-}
-
-.segment-md .segment-button.segment-activated {
-    color: white;
-    opacity: 1;
-    -webkit-transition: 100ms all linear;
-    transition: 100ms all linear;
-    border-color: #00b9bf;
-    ;
-    font-size: 6vw;
-    text-transform: none;
-}
-
-.dentro {
-    margin: 0px !important;
-    border-radius: 2px;
-    width: 100% !important;
-    background: #EFEFEF !important;
-    border-top: 0px solid #d0d0d0 !important;
-    border-bottom: 0px solid #d0d0d0 !important;
-    border-right: 0px solid #d0d0d0 !important;
-    margin-bottom: 1px rgba(0, 0, 0, 0.14);
-    -webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
-    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
-}
-
-.back-button-icon-ios {
-    margin: -1px 0 0;
-    display: inherit;
-    min-width: 18px;
-    font-size: 3.4rem;
-    color: black;
-}
-
-.toolbar-ios .segment-button {
-    max-width: 40%;
-    height: 3.6rem;
-    font-size: 2.5vh;
-    line-height: 3.5rem;
-}
-
-.segment-md .segment-button {
-    -webkit-box-flex: 1;
-    -webkit-flex: 1;
-    -ms-flex: 1;
-    flex: 1;
-    width: 0;
-    height: 4.2rem;
-    border-bottom-width: 2px;
-    border-bottom-style: solid;
-    border-bottom-color: rgba(0, 0, 0, 0.1);
-    font-size: 3vh;
-    font-weight: 400;
-    line-height: 4rem;
-    text-transform: uppercase;
-    color: white;
-    background-color: transparent;
-    opacity: .5;
-    -webkit-transition: 100ms all linear;
-    transition: 100ms all linear;
-    padding: 0 6px;
-}
-
 .complemento {
     display: flex !important;
     align-content: center !important;
     align-items: center !important;
     text-align: center;
     vertical-align: middle !important;
+}
+
+.vertical-align-content {
+    display: flex !important;
+    align-content: center !important;
+    align-items: center !important;
 }
 
 .vista {
@@ -799,3 +802,4 @@ audio::-internal-media-controls-cast-button, video::-internal-media-controls-cas
 audio::-webkit-media-controls-toggle-closed-captions-button {
   display: none;
 }
+

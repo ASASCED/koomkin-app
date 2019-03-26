@@ -2,6 +2,7 @@ import { Component, OnInit,ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController, Slides, SegmentButton, Toggle } from 'ionic-angular';
 import { RestProvider } from '../../providers/rest/rest';
 import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
+import { MasBriefPage } from '../mas-brief/mas-brief';
 
 @IonicPage()
 @Component({
@@ -102,8 +103,8 @@ export class BriefPage implements OnInit{
       this.id = this.authService.id;
     }
 
-
     ngOnInit() {
+      this.mas_informacion = false;
       this.getBriefInformation(this.id);
       this.getEstados();
       this.getEmpresas();
@@ -203,6 +204,10 @@ export class BriefPage implements OnInit{
   
       const currentSlide = this.slides[s.getActiveIndex()];
       this.selectedSegment = currentSlide.id;
+    }
+
+    pagina() {
+      this.navCtrl.push(MasBriefPage);
     }
     
 }

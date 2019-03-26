@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="28" height="28" viewBox="0 0 28 28">
+  <defs>
+    <clipPath id="clip-ic_gobierno">
+      <rect width="28" height="28"/>
+    </clipPath>
+  </defs>
+  <g id="ic_gobierno" clip-path="url(#clip-ic_gobierno)">
+    <rect width="28" height="28" fill="transparent"/>
+    <g id="Grupo_10424" data-name="Grupo 10424" transform="translate(-5174 -595)">
+      <rect id="Rectángulo_4435" data-name="Rectángulo 4435" width="27" height="27" transform="translate(5175 595)" fill="none"/>
+      <g id="Grupo_3484" data-name="Grupo 3484" transform="translate(5177.531 595)">
+        <path id="Trazado_1079" data-name="Trazado 1079" d="M20.95,25.465H14.9l2.536-16.08a.673.673,0,0,0-.659-.778H15.658V6.8a2.273,2.273,0,0,0-2.384-2.131H12.8a3.05,3.05,0,0,0,.558-1.792A2.731,2.731,0,0,0,10.8,0,2.731,2.731,0,0,0,8.252,2.875,3.174,3.174,0,0,0,8.81,4.667H8.336A2.273,2.273,0,0,0,5.952,6.8V8.59H4.735a.693.693,0,0,0-.524.237.645.645,0,0,0-.152.541l2.655,16.08H.676a.676.676,0,1,0,0,1.353H20.95a.668.668,0,1,0,0-1.336ZM8.945,11.43h3.72a.676.676,0,0,1,0,1.353H8.945a.676.676,0,1,1,0-1.353Zm4.582,3.737H8.1a.676.676,0,1,1,0-1.353h5.428a.676.676,0,1,1,0,1.353Zm0,0" fill="#00a3bf"/>
+      </g>
+    </g>
+  </g>
+</svg>

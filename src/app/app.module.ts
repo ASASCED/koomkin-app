@@ -53,6 +53,7 @@ import { SocialPage } from '../pages/social/social';
 import { Clipboard } from '@ionic-native/clipboard';
 import { SweetAlert2Module } from '@toverux/ngx-sweetalert2';
 import { BriefPage } from '../pages/brief/brief';
+import { MasBriefPage } from '../pages/mas-brief/mas-brief';
 
 
 @NgModule({
@@ -71,6 +72,7 @@ import { BriefPage } from '../pages/brief/brief';
     InicioPage,
     EficienciaPage,
     BriefPage,
+    MasBriefPage,
     HotelComponent,
     SocialPage,
     EmailPage,
@@ -120,6 +122,7 @@ import { BriefPage } from '../pages/brief/brief';
     InicioPage,
     EficienciaPage,
     BriefPage,
+    MasBriefPage,
     SocialPage,
     EmailPage,
     HotelComponent,
