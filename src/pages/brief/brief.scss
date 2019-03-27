@@ -7,8 +7,7 @@ page-brief {
     }
 
     input[type="text"]:disabled{background-color:white;}
-
-
+    
     .encuesta-container {
         display: grid;
         height: 100%;
@@ -195,6 +194,7 @@ page-brief {
     box-shadow: none;
     font-size: 3vw;
     padding: 3px 5px;
+    font-style: italic;
 }
 
 .seleccion-brief { 
@@ -216,4 +216,19 @@ option {
     display: block;
     white-space: 3vw;
     padding: 0px 2px 1px;
+}
+
+    
+.bloque {
+    margin-top: 2%;
+    display: inline-block;
+    width: 100%;
+    .mitad-izq {
+        display: inline-block;
+        width: 49%;
+    }
+    .mitad-der {
+        display: inline-block;
+        width: 49%;
+    }
 }

@@ -13,8 +13,6 @@ module.exports.config = {
   /*** API Mandrill mailing ***/
   MANDRILL_KEY: 'ALev50nS5NboejBdJhmuiQ',
 
-
-  userName: 'USERKOOMKIN',
   /*** Variables de desarrollo ***/
   // HOST: 6842,
   // password: 'Ag0K00M',
@@ -24,14 +22,25 @@ module.exports.config = {
   //   database: 'aaa'
   // }
 
-  /*** Variables de producción ***/
+  /*** Variables de producción **
+   userName: 'USERKOOMKIN',
    HOST: 5545,
    //HOST: 6843,
    password: 'U$3rk00mk1n',
    server: '189.205.233.70',
    options:{
      port:1433,
-     database: 'AGO_KOOMKIN'
-   }
+     database: 'AGO_KOOMKIN'     
+   }*/
 
+     /*** Variables de producción ***/
+     userName: 'Koomkin',
+     HOST: 5545,
+     //HOST: 6843,
+     password: 'Ag0K00M18',
+     server: 'koomkindevsql08.cqgvwp6knhug.us-east-1.rds.amazonaws.com',
+     options: {
+       port:1433,
+       database: 'AGO_KOOMKIN'     
+     }
 }

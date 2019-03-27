@@ -67,12 +67,17 @@ export class MasBriefPage implements OnInit{
       {id: 4, nombre: 'Doctorado'},
      ];
   
-    public ingresos = [
-      {id: 1, nombre: 'bajo'},
-      {id: 2, nombre: 'medio'},
-      {id: 3, nombre: 'medio-alto'},
-      {id: 4, nombre: 'alto'},
+     public sectores = [
+      {id: 1, nombre: 'sector 1'},
+      {id: 2, nombre: 'sector 2'},
+      {id: 3, nombre: 'sector 3'},
+      {id: 4, nombre: 'sector 4'},
+      {id: 5, nombre: 'sector 5'},
+      {id: 6, nombre: 'sector 6'},
+      {id: 7, nombre: 'sector 7'},
+      {id: 8, nombre: 'sector 8'},
      ];
+  
   
     selectedSegment = 'first';
   

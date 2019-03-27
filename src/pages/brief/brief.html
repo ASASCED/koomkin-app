@@ -22,15 +22,15 @@
         <div class="bloque">
           <div class="mitad-izq">
             <p class="titulo-brief">Tipo en Empresa</p>
-            <select disabled type="text" class="seleccion-brief" [(ngModel)]="empresas">
-              <option *ngFor="let tipo_empresa of tipo_empresas">
-                {{tipo_empresa.TIPOEMPRESA}}
-              </option>
-            </select>
+            <select type="text" class="seleccion-brief" style="width: 99%;" [(ngModel)]="tipoempresa">
+                <option [selected]="default == tipoempresa" *ngFor="let tipo_empresa of tipo_empresas">
+                  {{tipo_empresa.TIPOEMPRESA}}
+                </option>
+              </select>
           </div>
           <div class="mitad-der">
             <p class="titulo-brief">Código Postal</p>
-            <input disabled type="number" class="seleccion-brief" [(ngModel)]="cp">
+            <input disabled type="number" class="seleccion-brief" [(ngModel)]="cp" style="width: 99%;">
           </div>
         </div>
 
@@ -44,7 +44,6 @@
             <button [ngClass]="{'boton-cobertura-brief-blanco':cobertura_estado === 1,'boton-cobertura-brief':cobertura_estado !== 1}" style="margin-right: 1%;">
                 <img *ngIf="cobertura_estado !== 1" src="assets/imgs/brief/estado.svg" width="65%">
                 <img *ngIf="cobertura_estado === 1" src="assets/imgs/brief/estado-b.svg" width="65%">
-
                 <p class="texto-boton-brief">Estado</p>
             </button>
             <button [ngClass]="{'boton-cobertura-brief-blanco':cobertura_region === 1,'boton-cobertura-brief':cobertura_region !== 1}" style="margin-right: 1%;">
@@ -102,38 +101,38 @@
         <div class="bloque">
           <div class="mitad-izq">
             <p class="titulo-brief">Tipo en Empresa</p>
-            <select type="text" class="seleccion-brief" [(ngModel)]="empresas">
-              <option *ngFor="let tipo_empresa of tipo_empresas">
+            <select type="text" class="seleccion-brief" style="width: 99%;" [(ngModel)]="tipoempresa">
+              <option [selected]="default == tipoempresa" *ngFor="let tipo_empresa of tipo_empresas">
                 {{tipo_empresa.TIPOEMPRESA}}
               </option>
             </select>
           </div>
           <div class="mitad-der">
             <p class="titulo-brief">Código Postal</p>
-            <input type="number" class="seleccion-brief" [(ngModel)]="cp">
+            <input type="number" class="seleccion-brief" [(ngModel)]="cp" style="width: 99%;">
           </div>
         </div>
 
         <p class="titulo-brief">Cobertura Campaña</p>
         <div class="botones-cobertura-brief">
-            <button [ngClass]="{'boton-cobertura-brief-blanco':cobertura_local === 1,'boton-cobertura-brief':cobertura_local !== 1}" style="margin-right: 1%;">
+            <button [ngClass]="{'boton-cobertura-brief-blanco':cobertura_local === 1,'boton-cobertura-brief':cobertura_local !== 1}" style="margin-right: 1%;" (click)="changeCobertura('Local')">
                 <img *ngIf="cobertura_local !== 1" src="assets/imgs/brief/local.svg" width="65%">
                 <img *ngIf="cobertura_local === 1" src="assets/imgs/brief/local-b.svg" width="65%">
                 <p class="texto-boton-brief">Local</p>
             </button>
-            <button [ngClass]="{'boton-cobertura-brief-blanco':cobertura_estado === 1,'boton-cobertura-brief':cobertura_estado !== 1}" style="margin-right: 1%;">
+            <button [ngClass]="{'boton-cobertura-brief-blanco':cobertura_estado === 1,'boton-cobertura-brief':cobertura_estado !== 1}" style="margin-right: 1%;" (click)="changeCobertura('Estado')">
                 <img *ngIf="cobertura_estado !== 1" src="assets/imgs/brief/estado.svg" width="65%">
                 <img *ngIf="cobertura_estado === 1" src="assets/imgs/brief/estado-b.svg" width="65%">
 
                 <p class="texto-boton-brief">Estado</p>
             </button>
-            <button [ngClass]="{'boton-cobertura-brief-blanco':cobertura_region === 1,'boton-cobertura-brief':cobertura_region !== 1}" style="margin-right: 1%;">
+            <button [ngClass]="{'boton-cobertura-brief-blanco':cobertura_region === 1,'boton-cobertura-brief':cobertura_region !== 1}" style="margin-right: 1%;" (click)="changeCobertura('Region')">
                 <img *ngIf="cobertura_region !== 1" src="assets/imgs/brief/region.svg" width="65%">
                 <img *ngIf="cobertura_region === 1" src="assets/imgs/brief/region-b.svg" width="65%">
 
                 <p class="texto-boton-brief">Región</p>
             </button>
-            <button [ngClass]="{'boton-cobertura-brief-blanco':cobertura_nacional === 1,'boton-cobertura-brief':cobertura_nacional !== 1}">
+            <button [ngClass]="{'boton-cobertura-brief-blanco':cobertura_nacional === 1,'boton-cobertura-brief':cobertura_nacional !== 1}" (click)="changeCobertura('Nacional')">
                 <img *ngIf="cobertura_nacional !== 1" src="assets/imgs/brief/nacional.svg" width="65%">
                 <img *ngIf="cobertura_nacional === 1" src="assets/imgs/brief/nacional-b.svg" width="65%">
                 <p class="texto-boton-brief">Nacional</p>
@@ -144,7 +143,7 @@
 
         <p class="titulo-brief">Cliente Objetivo</p>
         <div class="botones-brief">
-          <button class="boton-brief" style="margin-right: 0%;" [ngClass]="{'boton-brief-activo':target === 'Particulares'}">
+          <button class="boton-brief" style="margin-right: 0%;" [ngClass]="{'boton-brief-activo':target === 'Particulares'}" (click)="changeTarget('Particulares')">
               <div class="botones-completo">
                   <div class="botones-mitad">
                     <img *ngIf="target !== 'Particulares'" src="assets/imgs/brief/particulares.svg" width="55px">
@@ -157,7 +156,7 @@
                   </div> 
                 </div>   
           </button>
-          <button class="boton-brief" [ngClass]="{'boton-brief-activo':target === 'Empresas'}">
+          <button class="boton-brief" [ngClass]="{'boton-brief-activo':target === 'Empresas'}" (click)="changeTarget('Empresas')">
             <div class="botones-completo">
               <div class="botones-mitad">
                 <img *ngIf="target !== 'Empresas'" src="assets/imgs/brief/empresas.svg" width="55px">
@@ -172,7 +171,7 @@
           </button>
         </div>
 
-        <button class="guardar-brief" (click)="changeEdit(1)">Guardar Configuración</button>
+        <button class="guardar-brief" (click)="changeEdit(1);enviarInfo()">Guardar Configuración</button>
 
     </div>
     <hr style="background-color: #fff;

@@ -33,8 +33,8 @@
                       <ion-grid class="anuncio-grid">
                           <p class="titulo-brief">Fecha de Nacimiento</p>
                           <ion-item>
-                              <ion-datetime displayFormat="DD MMMM YYYY" [(ngModel)]="event.month" cancelText =Cancelar doneText=Aceptar></ion-datetime>
-                            </ion-item>
+                              <ion-datetime class="seleccion-brief-grande" displayFormat="DD MMMM YYYY" [(ngModel)]="event.month" cancelText =Cancelar doneText=Aceptar></ion-datetime>
+                          </ion-item>
                       </ion-grid>
           
                       <ion-grid class="anuncio-grid">
@@ -79,16 +79,16 @@
                     <input type="text" class="input-brief">
                 
                     <p class="titulo-brief">RFC de tu empresa</p>
-                    <input type="text" class="input-brief">
+                    <input type="number" class="seleccion-brief-grande">
             
                     <div class="bloque">
                       <div class="mitad-izq">
                         <p class="titulo-brief">Número de Empleados</p>
-                        <input type="text" class="input-brief">
+                        <input type="number" class="seleccion-brief-grande">
                       </div>
                       <div class="mitad-der">
                         <p class="titulo-brief">Número de Socios</p>
-                        <input type="text" class="input-brief">
+                        <input type="number" class="seleccion-brief-grande">
                       </div>
                     </div>
                     <ion-grid class="anuncio-grid">
@@ -105,7 +105,7 @@
                               <p class="titulo-brief">Tipo</p>
                               <ul class="chico">
                                 <li class="zero-chico" [ngClass]="{'selection':eleccion === 1}">
-                                    <ion-grid class="anuncio-grid" style="height: 100%;">
+                                    <ion-grid class="anuncio-grid" style="height: 100%;justify-content: center;padding: 0;">
                                         <ion-row style="width: 100%;margin-bottom: 0%;">
                                             <ion-col col-4 style="height: 100%;">
                                               <img class="img-completo" src="assets/imgs/masbrief/ic_particular.svg">
@@ -118,7 +118,7 @@
                                   
                                 </li>
                                 <li class="zero-chico" [ngClass]="{'selection':eleccion === 2}">
-                                    <ion-grid class="anuncio-grid" style="height: 100%;">
+                                    <ion-grid class="anuncio-grid" style="height: 100%;justify-content: center;padding: 0;">
                                         <ion-row style="width: 100%;margin-bottom: 0%;">
                                             <ion-col col-4 style="height: 100%;">
                                               <img class="img-completo" src="assets/imgs/masbrief/ic_PM.svg">
@@ -136,7 +136,7 @@
                     <p class="titulo-brief">Rango de Ventas Anuales (Último año)</p>
                     <ul class="grande">
                         <li class="zero-grande" [ngClass]="{'selection':eleccion === 1}">
-                            <ion-grid class="anuncio-grid" style="height: 100%;padding-top: 10%">
+                            <ion-grid class="anuncio-grid" style="height: 100%;justify-content: center;padding: 0;">
                                 <ion-row style="width: 100%;margin-bottom: 0%;">
                                     <ion-col col-12 style="height: 100%;">
                                         <span>Micro 1<br>(<1 millón)</span>
@@ -145,7 +145,7 @@
                             </ion-grid>  
                         </li>
                         <li class="zero-grande" [ngClass]="{'selection':eleccion === 2}">
-                            <ion-grid class="anuncio-grid" style="height: 100%;padding-top: 10%">
+                            <ion-grid class="anuncio-grid" style="height: 100%;justify-content: center;padding: 0;">
                                 <ion-row style="width: 100%;margin-bottom: 0%;">
                                     <ion-col col-12 style="height: 100%;">
                                         <span>Micro 2<br>(5 millones)</span>
@@ -154,7 +154,7 @@
                             </ion-grid>  
                         </li>
                         <li class="zero-grande" [ngClass]="{'selection':eleccion === 3}">
-                            <ion-grid class="anuncio-grid" style="height: 100%;padding-top: 10%">
+                            <ion-grid class="anuncio-grid" style="height: 100%;justify-content: center;padding: 0;">
                                 <ion-row style="width: 100%;margin-bottom: 0%;">
                                     <ion-col col-12 style="height: 100%;">
                                         <span>Pequeña 1<br>(10 millones)</span>
@@ -163,7 +163,7 @@
                             </ion-grid>  
                         </li>
                         <li class="zero-grande" [ngClass]="{'selection':eleccion === 4}">
-                            <ion-grid class="anuncio-grid" style="height: 100%;padding-top: 10%">
+                            <ion-grid class="anuncio-grid" style="height: 100%;justify-content: center;padding: 0;">
                                 <ion-row style="width: 100%;margin-bottom: 0%;">
                                     <ion-col col-12 style="height: 100%;">
                                         <span>Pequeña 2<br>(20 millones)</span>
@@ -172,7 +172,7 @@
                             </ion-grid> 
                         </li>
                         <li class="zero-grande" [ngClass]="{'selection':eleccion === 5}">
-                            <ion-grid class="anuncio-grid" style="height: 100%;">
+                            <ion-grid class="anuncio-grid" style="height: 100%;justify-content: center;padding: 0;">
                                 <ion-row style="width: 100%;margin-bottom: 0%;">
                                     <ion-col col-12 style="height: 100%;">
                                         <span>Mediana<br>(+20 millones)</span>
@@ -184,20 +184,44 @@
                     <p class="titulo-brief">Principal Ventaja Competitiva</p>
                     <ul class="mediano">
                         <li class="zero-mediano" [ngClass]="{'selection':eleccion === 1}">
-                            <span>Precio</span>
+                            <ion-grid class="anuncio-grid" style="height: 100%;justify-content: center;padding: 0;">
+                                <ion-row style="width: 100%;margin-bottom: 0%;">
+                                    <ion-col col-12 style="height: 100%;">
+                                        <span>Precio</span>
+                                      </ion-col>
+                                </ion-row>
+                            </ion-grid>  
                         </li>
                         <li class="zero-mediano" [ngClass]="{'selection':eleccion === 2}">
-                            <span>Calidad</span>
+                            <ion-grid class="anuncio-grid" style="height: 100%;justify-content: center;padding: 0;">
+                                <ion-row style="width: 100%;margin-bottom: 0%;">
+                                    <ion-col col-12 style="height: 100%;">
+                                        <span>Calidad</span>
+                                      </ion-col>
+                                </ion-row>
+                            </ion-grid>  
                         </li>
                         <li class="zero-mediano" [ngClass]="{'selection':eleccion === 3}">
-                            <span>Tiempo Entrega</span>
+                            <ion-grid class="anuncio-grid" style="height: 100%;justify-content: center;padding: 0;">
+                                <ion-row style="width: 100%;margin-bottom: 0%;">
+                                    <ion-col col-12 style="height: 100%;">
+                                        <span>Tiempo de Entrega</span>
+                                      </ion-col>
+                                </ion-row>
+                            </ion-grid>  
                         </li>
                         <li class="zero-mediano" [ngClass]="{'selection':eleccion === 4}">
-                            <span>Otro</span>
+                            <ion-grid class="anuncio-grid" style="height: 100%;justify-content: center;padding: 0;">
+                                <ion-row style="width: 100%;margin-bottom: 0%;">
+                                    <ion-col col-12 style="height: 100%;">
+                                        <span>Otro</span>
+                                      </ion-col>
+                                </ion-row>
+                            </ion-grid>  
                         </li>
                     </ul>
                     <p class="titulo-brief">Detalla dicha ventaja competitiva</p>
-                    <textarea class="otro" rows="3" cols="32" maxlength="250" placeholder="Detalla tu ventaja competitiva..." required></textarea>
+                    <textarea class="otro" rows="2" cols="32" maxlength="150" placeholder="Detalla tu ventaja competitiva..." required></textarea>
                     
                     <button class="guardar">Guardar</button>
             
@@ -210,42 +234,96 @@
                       <p class="titulo-brief">Segmento de ingresos anuales</p>
                       <ul class="mediano">
                           <li class="zero-mediano" [ngClass]="{'selection':eleccion === 1}">
-                              <span>Bajo</span>
+                              <ion-grid class="anuncio-grid" style="height: 100%;justify-content: center;padding: 0;">
+                                  <ion-row style="width: 100%;margin-bottom: 0%;">
+                                      <ion-col col-12 style="height: 100%;">
+                                          <span class="letra-grande">Bajo</span>
+                                        </ion-col>
+                                  </ion-row>
+                              </ion-grid> 
                           </li>
                           <li class="zero-mediano" [ngClass]="{'selection':eleccion === 2}">
-                              <span>Medio</span>
+                              <ion-grid class="anuncio-grid" style="height: 100%;justify-content: center;padding: 0;">
+                                  <ion-row style="width: 100%;margin-bottom: 0%;">
+                                      <ion-col col-12 style="height: 100%;">
+                                          <span class="letra-grande">Medio</span>
+                                        </ion-col>
+                                  </ion-row>
+                              </ion-grid> 
                           </li>
                           <li class="zero-mediano" [ngClass]="{'selection':eleccion === 3}">
-                              <span>Medio Alto</span>
+                              <ion-grid class="anuncio-grid" style="height: 100%;justify-content: center;padding: 0;">
+                                  <ion-row style="width: 100%;margin-bottom: 0%;">
+                                      <ion-col col-12 style="height: 100%;">
+                                          <span class="letra-grande">Medio Alto</span>
+                                        </ion-col>
+                                  </ion-row>
+                              </ion-grid> 
                           </li>
                           <li class="zero-mediano" [ngClass]="{'selection':eleccion === 4}">
-                              <span>Alto</span>
+                              <ion-grid class="anuncio-grid" style="height: 100%;justify-content: center;padding: 0;">
+                                  <ion-row style="width: 100%;margin-bottom: 0%;">
+                                      <ion-col col-12 style="height: 100%;">
+                                          <span class="letra-grande">Alto</span>
+                                        </ion-col>
+                                  </ion-row>
+                              </ion-grid> 
                           </li>
                       </ul>
 
                       <p class="titulo-brief">Edad (Selecciona una o más opciones)</p>
                       <ul class="grande">
                           <li class="zero-grande" [ngClass]="{'selection':eleccion === 1}">
-                              <span>18-25<br>años</span>
+                              <ion-grid class="anuncio-grid" style="height: 100%;justify-content: center;padding: 0;">
+                                  <ion-row style="width: 100%;margin-bottom: 0%;">
+                                      <ion-col col-12 style="height: 100%;">
+                                          <span class="letra-grande">18-25<br>años</span>
+                                        </ion-col>
+                                  </ion-row>
+                              </ion-grid>  
                           </li>
                           <li class="zero-grande" [ngClass]="{'selection':eleccion === 2}">
-                              <span>26-32<br>años</span>
+                              <ion-grid class="anuncio-grid" style="height: 100%;justify-content: center;padding: 0;">
+                                  <ion-row style="width: 100%;margin-bottom: 0%;">
+                                      <ion-col col-12 style="height: 100%;">
+                                          <span class="letra-grande">26-32<br>años</span>
+                                        </ion-col>
+                                  </ion-row>
+                              </ion-grid> 
                           </li>
                           <li class="zero-grande" [ngClass]="{'selection':eleccion === 3}">
-                              <span>33-40<br>años</span>
+                              <ion-grid class="anuncio-grid" style="height: 100%;justify-content: center;padding: 0;">
+                                  <ion-row style="width: 100%;margin-bottom: 0%;">
+                                      <ion-col col-12 style="height: 100%;">
+                                          <span class="letra-grande">33-40<br>años</span>
+                                        </ion-col>
+                                  </ion-row>
+                              </ion-grid> 
                           </li>
                           <li class="zero-grande" [ngClass]="{'selection':eleccion === 4}">
-                              <span>41-55<br>años</span>
+                              <ion-grid class="anuncio-grid" style="height: 100%;justify-content: center;padding: 0;">
+                                  <ion-row style="width: 100%;margin-bottom: 0%;">
+                                      <ion-col col-12 style="height: 100%;">
+                                          <span class="letra-grande">41-55<br>años</span>
+                                        </ion-col>
+                                  </ion-row>
+                              </ion-grid> 
                           </li>
                           <li class="zero-grande" [ngClass]="{'selection':eleccion === 5}">
-                              <span>55-65<br>años</span>
+                              <ion-grid class="anuncio-grid" style="height: 100%;justify-content: center;padding: 0;">
+                                  <ion-row style="width: 100%;margin-bottom: 0%;">
+                                      <ion-col col-12 style="height: 100%;">
+                                          <span class="letra-grande">55-65<br>años</span>
+                                        </ion-col>
+                                  </ion-row>
+                              </ion-grid> 
                           </li>
                       </ul>
 
                       <p class="titulo-brief">Sector</p>
                       <ul class="chico" style="margin-top: 0%;">
                           <li class="zero-chico" [ngClass]="{'selection':eleccion === 1}">
-                              <ion-grid class="anuncio-grid" style="height: 100%;">
+                              <ion-grid class="anuncio-grid" style="height: 100%;justify-content: center;padding: 0;">
                                   <ion-row style="width: 100%;margin-bottom: 0%;">
                                       <ion-col col-4 style="height: 100%;">
                                         <img class="img-mitad" src="assets/imgs/masbrief/ic_femenino.svg">
@@ -257,7 +335,7 @@
                               </ion-grid>
                           </li>
                           <li class="zero-chico" [ngClass]="{'selection':eleccion === 2}">
-                              <ion-grid class="anuncio-grid" style="height: 100%;">
+                              <ion-grid class="anuncio-grid" style="height: 100%;justify-content: center;padding: 0;">
                                   <ion-row style="width: 100%;margin-bottom: 0%;">
                                       <ion-col col-4 style="height: 100%;">
                                         <img class="img-mitad" src="assets/imgs/masbrief/ic_masculino.svg">
@@ -329,12 +407,17 @@
                               </div>  
                             </button>
                       </div>
+
+                      <p class="titulo-brief">Sector</p>
+                      <select type="text" class="seleccion-brief-grande" [(ngModel)]="sectores">
+                          <option *ngFor="let sector of sectores">
+                            {{sector.nombre}}
+                          </option>
+                        </select>                     
                        
                       <p class="titulo-brief">Intereses o comentarios adicionales</p>
-                      <textarea class="otro" rows="3" cols="32" maxlength="250" placeholder="Escribe sus intereses o comentarios adicionales..." required></textarea>
+                      <textarea class="otro" rows="2" cols="32" maxlength="150" placeholder="Escribe sus intereses o comentarios adicionales..." required></textarea>
                       
-
-
                       <button class="guardar">Guardar</button>
               
                   </div>
