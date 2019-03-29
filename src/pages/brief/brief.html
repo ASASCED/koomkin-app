@@ -23,7 +23,7 @@
           <div class="mitad-izq">
             <p class="titulo-brief">Tipo en Empresa</p>
             <select type="text" class="seleccion-brief" style="width: 99%;" [(ngModel)]="tipoempresa">
-                <option [selected]="default == tipoempresa" *ngFor="let tipo_empresa of tipo_empresas">
+                <option *ngFor="let tipo_empresa of tipo_empresas">
                   {{tipo_empresa.TIPOEMPRESA}}
                 </option>
               </select>
@@ -102,7 +102,7 @@
           <div class="mitad-izq">
             <p class="titulo-brief">Tipo en Empresa</p>
             <select type="text" class="seleccion-brief" style="width: 99%;" [(ngModel)]="tipoempresa">
-              <option [selected]="default == tipoempresa" *ngFor="let tipo_empresa of tipo_empresas">
+              <option *ngFor="let tipo_empresa of tipo_empresas">
                 {{tipo_empresa.TIPOEMPRESA}}
               </option>
             </select>

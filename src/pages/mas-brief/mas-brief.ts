@@ -14,38 +14,33 @@ export class MasBriefPage implements OnInit{
   
     public empresa;
     public id;
-    public tipoempresa = 'Selecionar tipo';
-    public tipo_empresas: any;
-    public datos;
-    public cp;
-    public ciudad;
     public target;
-    public mejor;
-    public producto;
-    public direccion;
-    public estado;
-    public latitud;
-    public longitud;
-    public cuarta;
-    public campania;
-    public cobertura;
-    public cobertura_local;
-    public cobertura_estado;  
-    public cobertura_region;
-    public cobertura_nacional; 
+    public fechaNacimiento;
+    public idpuesto: any;
+    public puesto;
+    public cpDomicilio;
+    public aniosEmpresa;
+    public educacion;
+    public nombreComercial;
+    public rfcEmpresa;
+    public numeroEmpleados;
+    public numeroSocios;
+    public empresaFamiliar;
+    public regimenFiscal;
+    public rangoVentasAnuales;
+    public ventajaCompetitiva;
+    public ingresosAnuales;
+    public edad;
+    public genero;
+    public intereses;
+    public sector;
+    public categoria;
+    public sectores;
+
     public editar = 0;
-  
+
     mas_informacion: boolean = false;
     familiar: boolean = false;
-  
-    public event = {
-      month: '1900-02-19',
-    }
-  
-    public puestos = [
-      { nombre: 2 },
-      { nombre: 3 },
-    ];
   
     public positions = [
       {id: 1, nombre: 'Socio'},
@@ -63,11 +58,10 @@ export class MasBriefPage implements OnInit{
     public carreras = [
       {id: 1, nombre: 'Preparatoria'},
       {id: 2, nombre: 'Licenciatura'},
-      {id: 3, nombre: 'Maestria'},
-      {id: 4, nombre: 'Doctorado'},
+      {id: 3, nombre: 'Maestria'}
      ];
   
-     public sectores = [
+     public cat_sectores = [
       {id: 1, nombre: 'sector 1'},
       {id: 2, nombre: 'sector 2'},
       {id: 3, nombre: 'sector 3'},
@@ -77,7 +71,6 @@ export class MasBriefPage implements OnInit{
       {id: 7, nombre: 'sector 7'},
       {id: 8, nombre: 'sector 8'},
      ];
-  
   
     selectedSegment = 'first';
   
@@ -96,6 +89,7 @@ export class MasBriefPage implements OnInit{
       }
     ];
   
+    
       constructor(
         public navCtrl: NavController,
         public navParams: NavParams,
@@ -103,87 +97,39 @@ export class MasBriefPage implements OnInit{
         public authService: AuthServiceProvider,
         public alertCtrl: AlertController,
       ) {
+        this.target = navParams.get('target');
+        this.fechaNacimiento = navParams.get('fechaNacimiento');
+        this.idpuesto = navParams.get('puesto');
+
+        this.positions.forEach(element=> {
+          if(element['id'] == this.idpuesto) {
+            this.idpuesto = element['nombre'];
+          }
+        });
+        
+        this.cpDomicilio = navParams.get('cpDomicilio');
+        this.aniosEmpresa = navParams.get('aniosEmpresa');
+        this.educacion = navParams.get('educacion');
+        this.nombreComercial = navParams.get('nombreComercial');
+        this.rfcEmpresa = navParams.get('rfcEmpresa');
+        this.numeroEmpleados = navParams.get('numeroEmpleados');
+        this.numeroSocios = navParams.get('numeroSocios');
+        this.empresaFamiliar = navParams.get('empresaFamiliar');
+        this.regimenFiscal = navParams.get('regimenFiscal');
+        this.ventajaCompetitiva = navParams.get('ventajaCompetitiva');
+        this.rangoVentasAnuales = navParams.get('rangoVentasAnuales');
+        this.ingresosAnuales = navParams.get('ingresosAnuales');
+        this.edad = navParams.get('edad');
+        this.genero = navParams.get('genero');
+        this.intereses = navParams.get('intereses');
+        this.sector = navParams.get('sector');
+        this.categoria = navParams.get('categoria');
+        this.sectores = navParams.get('sectores');
         this.empresa = this.authService.empresa;
         this.id = this.authService.id;
       }
-  
-  
+   
       ngOnInit() {
-        this.getBriefInformation(this.id);
-        this.getEstados();
-        this.getEmpresas();
-      }
-  
-      getBriefInformation(idUsuario) {
-        this.provedor.getBriefInformation(idUsuario).then(
-          data => {
-            this.datos = data;
-            this.cp = this.datos[0].CP;
-            this.ciudad = this.datos[0].Ciudad;
-            this.target = this.datos[0].ClientesTarget;
-            this.target = 'Empresas';
-            this.mejor = this.datos[0].Mejor;
-            this.producto = this.datos[0].Producto;
-            this.direccion = this.datos[0].Direccion;
-            this.estado = this.datos[0].Estado;
-            this.latitud = this.datos[0].Latitud;
-            this.longitud = this.datos[0].Longitud;
-            this.cuarta = this.datos[0].TipoCuartaPantalla;
-            this.campania = this.datos[0].IDCampania;
-            this.cobertura_nacional = this.datos[0].Nacional;   
-            console.log(this.datos);
-            this.getCobertura(idUsuario,this.datos[0].IDCampania);
-          },
-          err => {
-            //   // console.log('error');
-          }
-        );
-      }
-  
-      getCobertura(idUsuario,campania) {
-        this.provedor.getCobertura(idUsuario,campania).then(
-          data => {
-            this.cobertura = data;
-            if( (this.cuarta == 2 || this.cuarta == 3 || this.cuarta == 5) && this.cobertura_nacional !== 1  ) {
-              console.log('LOCAL');
-              this.cobertura_local = 1;
-            } else if(this.cobertura.length >= 2 && this.cobertura_nacional !== 1 ) {
-              console.log('REGION');
-              this.cobertura_region = 1;
-            } else if(this.cobertura == 1 && this.cobertura_nacional !== 1 ) {
-              console.log('ESTADO');
-              this.cobertura_estado = 1;
-            }
-            console.log(this.cobertura);
-          },
-          err => {
-            //   // console.log('error');
-          }
-        );
-      }
-  
-      getEstados() {
-        this.provedor.getEstados().then(
-          data => {
-            // console.log(data);
-          },
-          err => {
-            //   // console.log('error');
-          }
-        );
-      }
-  
-      getEmpresas() {
-        this.provedor.getEmpresas().then(
-          data => {
-            let empresas = data;
-            this.tipo_empresas = empresas;
-            console.log(this.tipo_empresas);
-          },
-          err => {
-            //   // console.log('error');
-          }
-        );
       }
   
       changeEdit(numero) {
@@ -204,11 +150,54 @@ export class MasBriefPage implements OnInit{
       }
     
       onSlideChanged(s: Slides) {
-        console.log('Slide changed', s);
-    
         const currentSlide = this.slides[s.getActiveIndex()];
         this.selectedSegment = currentSlide.id;
       }
-      
-  }
+
+      onSelectName({id, name}): void {
+        this.puesto = name;  
+        console.log(id,this.puesto);                  
+      }
+
+      numberOnly(event): boolean {
+        const charCode = event.which ? event.which : event.keyCode;
+        if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+          return false;
+        }
+        return true;
+      }
   
+      changeRegimen(regimen) {
+        this.regimenFiscal = regimen;
+      }
+
+      changeRango(rango) {
+        this.rangoVentasAnuales = rango;
+      }
+
+      changeVentaja(ventaja) {
+        this.ventajaCompetitiva = ventaja;
+      }
+
+      changeIngresos(ingresos) {
+        this.ingresosAnuales = ingresos;
+      }
+
+      changeEdad(edad) {
+        this.edad = edad;
+      }
+
+      changeGenero(genero) {
+        this.genero = genero;
+      }
+
+      changeSector(sector) {
+        this.sector = sector
+      }
+
+      changeCategoria(categoria) {
+        this.categoria = categoria;
+      }
+
+      
+}

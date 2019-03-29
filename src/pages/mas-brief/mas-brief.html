@@ -10,30 +10,29 @@
 
 
   <ion-content>
-      <div class="adicional-container" >
-          <ion-segment class="adiconal-header" [(ngModel)]="selectedSegment" (ionChange)="onSegmentChanged($event)">
-              <ion-segment-button value="first" class="segment-datos">
+    <div class="adicional-container" >
+        <ion-segment class="adiconal-header" [(ngModel)]="selectedSegment" (ionChange)="onSegmentChanged($event)">
+            <ion-segment-button value="first" class="segment-datos">
                 Tus datos
-              </ion-segment-button>
-              <ion-segment-button value="second" class="segment-empresa">
+            </ion-segment-button>
+            <ion-segment-button value="second" class="segment-empresa">
                 Tu empresa    
-              </ion-segment-button>
-              <ion-segment-button value="third" class="segment-objetivo">
+            </ion-segment-button>
+            <ion-segment-button value="third" class="segment-objetivo">
                 Cliente Objetivo
-              </ion-segment-button>
-          </ion-segment>
+            </ion-segment-button>
+        </ion-segment>
           
-          <ion-slides class="adicional-content-container" (ionSlideDidChange)="onSlideChanged($event)" #loopSlider>
-          
-              <ion-slide style="width: 100% !important;">
-                  <div class="brief-contenedor">
-                      <p class="titulo-brief">Nombre Completo</p>
-                      <input type="text" class="input-brief">
+        <ion-slides class="adicional-content-container" (ionSlideDidChange)="onSlideChanged($event)" #loopSlider>     
+            <ion-slide style="width: 100% !important;">
+                <div class="brief-contenedor">
+                    <p class="titulo-brief">Nombre Completo</p>
+                    <input type="text" class="input-brief">
                   
                       <ion-grid class="anuncio-grid">
                           <p class="titulo-brief">Fecha de Nacimiento</p>
                           <ion-item>
-                              <ion-datetime class="seleccion-brief-grande" displayFormat="DD MMMM YYYY" [(ngModel)]="event.month" cancelText =Cancelar doneText=Aceptar></ion-datetime>
+                              <ion-datetime class="seleccion-brief-grande" displayFormat="DD MMMM YYYY" [(ngModel)]="fechaNacimiento" cancelText=Cancelar doneText=Aceptar></ion-datetime>
                           </ion-item>
                       </ion-grid>
           
@@ -41,7 +40,7 @@
                           <ion-row style="width: 100%;margin-bottom: 0%;">
                               <ion-col col-6>
                                   <p class="titulo-brief">Puesto</p>
-                                  <select type="text" class="seleccion-brief" [(ngModel)]="positions">
+                                  <select type="text" class="seleccion-brief" [(ngModel)]="idpuesto">
                                       <option *ngFor="let puesto of positions">
                                         {{puesto.nombre}}
                                       </option>
@@ -49,7 +48,7 @@
                               </ion-col>
                               <ion-col col-6>
                                   <p class="titulo-brief">C.P. domicilio</p>
-                                  <input type="number" class="seleccion-brief">
+                                  <input type="text" minlength="5" maxlength="5" [(ngModel)]="cpDomicilio" (keypress)="numberOnly($event)" class="seleccion-brief">
                               </ion-col>
                           </ion-row>
                       </ion-grid>
@@ -58,11 +57,11 @@
                           <ion-row style="width: 100%;margin-bottom: 0%;">
                               <ion-col col-6>
                                   <p class="titulo-brief">Años en tu empresa</p>
-                                  <input type="number" class="seleccion-brief">
+                                  <input type="text" minlength="1" maxlength="8" [(ngModel)]="aniosEmpresa" (keypress)="numberOnly($event)" class="seleccion-brief">
                               </ion-col>
                               <ion-col col-6>
                                   <p class="titulo-brief">Educación</p>
-                                  <select type="text" class="seleccion-brief" [(ngModel)]="carreras">
+                                  <select type="text" class="seleccion-brief" [(ngModel)]="educacion">
                                     <option *ngFor="let carrera of carreras">
                                       {{carrera.nombre}}
                                     </option>
@@ -76,19 +75,19 @@
               <ion-slide>
                 <div class="brief-contenedor">
                     <p class="titulo-brief">Nombre Comercial de tu empresa</p>
-                    <input type="text" class="input-brief">
+                    <input type="text" class="input-brief" [(ngModel)]="nombreComercial" >
                 
                     <p class="titulo-brief">RFC de tu empresa</p>
-                    <input type="number" class="seleccion-brief-grande">
+                    <input type="text" minlength="12" maxlength="13" class="seleccion-brief-grande" [(ngModel)]="rfcEmpresa">
             
                     <div class="bloque">
                       <div class="mitad-izq">
                         <p class="titulo-brief">Número de Empleados</p>
-                        <input type="number" class="seleccion-brief-grande">
+                        <input type="text" minlength="1" maxlength="8" (keypress)="numberOnly($event)" [(ngModel)]="numeroEmpleados" class="seleccion-brief-grande">
                       </div>
                       <div class="mitad-der">
                         <p class="titulo-brief">Número de Socios</p>
-                        <input type="number" class="seleccion-brief-grande">
+                        <input type="text" minlength="1" maxlength="8" (keypress)="numberOnly($event)" [(ngModel)]="numeroSocios" class="seleccion-brief-grande">
                       </div>
                     </div>
                     <ion-grid class="anuncio-grid">
@@ -102,26 +101,27 @@
                               </ion-item>      
                             </ion-col>
                             <ion-col col-6>
-                              <p class="titulo-brief">Tipo</p>
+                              <p class="titulo-brief">Régimen Fiscal</p>
                               <ul class="chico">
-                                <li class="zero-chico" [ngClass]="{'selection':eleccion === 1}">
+                                <li class="zero-chico" [ngClass]="{'elegida-brief':regimenFiscal == 'PFAE'}" (click)="changeRegimen('PFAE')">
                                     <ion-grid class="anuncio-grid" style="height: 100%;justify-content: center;padding: 0;">
                                         <ion-row style="width: 100%;margin-bottom: 0%;">
                                             <ion-col col-4 style="height: 100%;">
-                                              <img class="img-completo" src="assets/imgs/masbrief/ic_particular.svg">
+                                              <img *ngIf="regimenFiscal !== 'PFAE'" class="img-completo" src="assets/imgs/masbrief/ic_particular.svg">
+                                              <img *ngIf="regimenFiscal == 'PFAE'" class="img-completo" src="assets/imgs/masbrief/ic_particular_selected.svg">
                                             </ion-col>
                                             <ion-col col-8 style="height: 100%;">
                                               <span>PFAE</span>
                                             </ion-col>
                                         </ion-row>
                                     </ion-grid>
-                                  
                                 </li>
-                                <li class="zero-chico" [ngClass]="{'selection':eleccion === 2}">
+                                <li class="zero-chico" [ngClass]="{'elegida-brief':regimenFiscal == 'PM'}" (click)="changeRegimen('PM')">
                                     <ion-grid class="anuncio-grid" style="height: 100%;justify-content: center;padding: 0;">
                                         <ion-row style="width: 100%;margin-bottom: 0%;">
                                             <ion-col col-4 style="height: 100%;">
-                                              <img class="img-completo" src="assets/imgs/masbrief/ic_PM.svg">
+                                              <img *ngIf="regimenFiscal !== 'PM'" class="img-completo" src="assets/imgs/masbrief/ic_PM.svg">
+                                              <img *ngIf="regimenFiscal == 'PM'" class="img-completo" src="assets/imgs/masbrief/ic_PM_selected.svg">
                                             </ion-col>
                                             <ion-col col-8 style="height: 100%;">
                                               <span>PM</span>
@@ -135,7 +135,7 @@
                     </ion-grid>
                     <p class="titulo-brief">Rango de Ventas Anuales (Último año)</p>
                     <ul class="grande">
-                        <li class="zero-grande" [ngClass]="{'selection':eleccion === 1}">
+                        <li class="zero-grande" [ngClass]="{'elegida-brief':rangoVentasAnuales == 'Micro 1 (<1 millón)'}" (click)="changeRango('Micro 1 (<1 millón)')">
                             <ion-grid class="anuncio-grid" style="height: 100%;justify-content: center;padding: 0;">
                                 <ion-row style="width: 100%;margin-bottom: 0%;">
                                     <ion-col col-12 style="height: 100%;">
@@ -144,38 +144,38 @@
                                 </ion-row>
                             </ion-grid>  
                         </li>
-                        <li class="zero-grande" [ngClass]="{'selection':eleccion === 2}">
+                        <li class="zero-grande" [ngClass]="{'elegida-brief':rangoVentasAnuales == 'Micro 2 (<5 millones)'}" (click)="changeRango('Micro 2 (<5 millones)')">
                             <ion-grid class="anuncio-grid" style="height: 100%;justify-content: center;padding: 0;">
                                 <ion-row style="width: 100%;margin-bottom: 0%;">
                                     <ion-col col-12 style="height: 100%;">
-                                        <span>Micro 2<br>(5 millones)</span>
+                                        <span>Micro 2<br>(<5 millones)</span>
                                       </ion-col>
                                 </ion-row>
                             </ion-grid>  
                         </li>
-                        <li class="zero-grande" [ngClass]="{'selection':eleccion === 3}">
+                        <li class="zero-grande" [ngClass]="{'elegida-brief':rangoVentasAnuales == 'Pequeña 1 (<10 millones)'}" (click)="changeRango('Pequeña 1 (<10 millones)')">
                             <ion-grid class="anuncio-grid" style="height: 100%;justify-content: center;padding: 0;">
                                 <ion-row style="width: 100%;margin-bottom: 0%;">
                                     <ion-col col-12 style="height: 100%;">
-                                        <span>Pequeña 1<br>(10 millones)</span>
+                                        <span>Pequeña 1<br>(<10 millones)</span>
                                       </ion-col>
                                 </ion-row>
                             </ion-grid>  
                         </li>
-                        <li class="zero-grande" [ngClass]="{'selection':eleccion === 4}">
+                        <li class="zero-grande" [ngClass]="{'elegida-brief':rangoVentasAnuales == 'Pequeña 2 (<20 millones)'}" (click)="changeRango('Pequeña 2 (<20 millones)')">
                             <ion-grid class="anuncio-grid" style="height: 100%;justify-content: center;padding: 0;">
                                 <ion-row style="width: 100%;margin-bottom: 0%;">
                                     <ion-col col-12 style="height: 100%;">
-                                        <span>Pequeña 2<br>(20 millones)</span>
+                                        <span>Pequeña 2<br>(<20 millones)</span>
                                       </ion-col>
                                 </ion-row>
                             </ion-grid> 
                         </li>
-                        <li class="zero-grande" [ngClass]="{'selection':eleccion === 5}">
+                        <li class="zero-grande" [ngClass]="{'elegida-brief':rangoVentasAnuales == 'Mediana (>20 millones)'}" (click)="changeRango('Mediana (>20 millones)')">
                             <ion-grid class="anuncio-grid" style="height: 100%;justify-content: center;padding: 0;">
                                 <ion-row style="width: 100%;margin-bottom: 0%;">
                                     <ion-col col-12 style="height: 100%;">
-                                        <span>Mediana<br>(+20 millones)</span>
+                                        <span>Mediana<br>(>20 millones)</span>
                                       </ion-col>
                                 </ion-row>
                             </ion-grid>  
@@ -183,7 +183,7 @@
                     </ul>
                     <p class="titulo-brief">Principal Ventaja Competitiva</p>
                     <ul class="mediano">
-                        <li class="zero-mediano" [ngClass]="{'selection':eleccion === 1}">
+                        <li class="zero-mediano" [ngClass]="{'elegida-brief':ventajaCompetitiva == 'Precio'}" (click)="changeVentaja('Precio')">
                             <ion-grid class="anuncio-grid" style="height: 100%;justify-content: center;padding: 0;">
                                 <ion-row style="width: 100%;margin-bottom: 0%;">
                                     <ion-col col-12 style="height: 100%;">
@@ -192,7 +192,7 @@
                                 </ion-row>
                             </ion-grid>  
                         </li>
-                        <li class="zero-mediano" [ngClass]="{'selection':eleccion === 2}">
+                        <li class="zero-mediano" [ngClass]="{'elegida-brief':ventajaCompetitiva == 'Calidad'}" (click)="changeVentaja('Calidad')">
                             <ion-grid class="anuncio-grid" style="height: 100%;justify-content: center;padding: 0;">
                                 <ion-row style="width: 100%;margin-bottom: 0%;">
                                     <ion-col col-12 style="height: 100%;">
@@ -201,7 +201,7 @@
                                 </ion-row>
                             </ion-grid>  
                         </li>
-                        <li class="zero-mediano" [ngClass]="{'selection':eleccion === 3}">
+                        <li class="zero-mediano" [ngClass]="{'elegida-brief':ventajaCompetitiva == 'Tiempo de Entrega'}" (click)="changeVentaja('Tiempo de Entrega')">
                             <ion-grid class="anuncio-grid" style="height: 100%;justify-content: center;padding: 0;">
                                 <ion-row style="width: 100%;margin-bottom: 0%;">
                                     <ion-col col-12 style="height: 100%;">
@@ -210,7 +210,7 @@
                                 </ion-row>
                             </ion-grid>  
                         </li>
-                        <li class="zero-mediano" [ngClass]="{'selection':eleccion === 4}">
+                        <li class="zero-mediano" [ngClass]="{'elegida-brief':ventajaCompetitiva == 'Otro'}" (click)="changeVentaja('Otro')">
                             <ion-grid class="anuncio-grid" style="height: 100%;justify-content: center;padding: 0;">
                                 <ion-row style="width: 100%;margin-bottom: 0%;">
                                     <ion-col col-12 style="height: 100%;">
@@ -220,20 +220,20 @@
                             </ion-grid>  
                         </li>
                     </ul>
-                    <p class="titulo-brief">Detalla dicha ventaja competitiva</p>
-                    <textarea class="otro" rows="2" cols="32" maxlength="150" placeholder="Detalla tu ventaja competitiva..." required></textarea>
+                    <p *ngIf="ventajaCompetitiva == 'Otro'" class="titulo-brief">Detalla dicha ventaja competitiva</p>
+                    <textarea *ngIf="ventajaCompetitiva == 'Otro'" [(ngModel)]="ventajaCompetitiva"  class="otro" rows="2" cols="32" maxlength="150" placeholder="Detalla tu ventaja competitiva..." required></textarea>
                     
                     <button class="guardar">Guardar</button>
             
                 </div>
               </ion-slide>
               <ion-slide>
-                  <div class="brief-contenedor">
+                  <div class="brief-contenedor" *ngIf="target == 'Particulares'" >
                       <p class="titulo-brief" style="text-align: center">Particulares</p>
 
                       <p class="titulo-brief">Segmento de ingresos anuales</p>
                       <ul class="mediano">
-                          <li class="zero-mediano" [ngClass]="{'selection':eleccion === 1}">
+                          <li class="zero-mediano" [ngClass]="{'elegida-brief':ingresosAnuales == 'Bajo'}" (click)="changeIngresos('Bajo')">
                               <ion-grid class="anuncio-grid" style="height: 100%;justify-content: center;padding: 0;">
                                   <ion-row style="width: 100%;margin-bottom: 0%;">
                                       <ion-col col-12 style="height: 100%;">
@@ -242,7 +242,7 @@
                                   </ion-row>
                               </ion-grid> 
                           </li>
-                          <li class="zero-mediano" [ngClass]="{'selection':eleccion === 2}">
+                          <li class="zero-mediano" [ngClass]="{'elegida-brief':ingresosAnuales == 'Medio'}" (click)="changeIngresos('Medio')">
                               <ion-grid class="anuncio-grid" style="height: 100%;justify-content: center;padding: 0;">
                                   <ion-row style="width: 100%;margin-bottom: 0%;">
                                       <ion-col col-12 style="height: 100%;">
@@ -251,7 +251,7 @@
                                   </ion-row>
                               </ion-grid> 
                           </li>
-                          <li class="zero-mediano" [ngClass]="{'selection':eleccion === 3}">
+                          <li class="zero-mediano" [ngClass]="{'elegida-brief':ingresosAnuales == 'Medio Alto'}" (click)="changeIngresos('Medio Alto')">
                               <ion-grid class="anuncio-grid" style="height: 100%;justify-content: center;padding: 0;">
                                   <ion-row style="width: 100%;margin-bottom: 0%;">
                                       <ion-col col-12 style="height: 100%;">
@@ -260,7 +260,7 @@
                                   </ion-row>
                               </ion-grid> 
                           </li>
-                          <li class="zero-mediano" [ngClass]="{'selection':eleccion === 4}">
+                          <li class="zero-mediano" [ngClass]="{'elegida-brief':ingresosAnuales == 'Alto'}" (click)="changeIngresos('Alto')">
                               <ion-grid class="anuncio-grid" style="height: 100%;justify-content: center;padding: 0;">
                                   <ion-row style="width: 100%;margin-bottom: 0%;">
                                       <ion-col col-12 style="height: 100%;">
@@ -273,7 +273,7 @@
 
                       <p class="titulo-brief">Edad (Selecciona una o más opciones)</p>
                       <ul class="grande">
-                          <li class="zero-grande" [ngClass]="{'selection':eleccion === 1}">
+                          <li class="zero-grande" [ngClass]="{'elegida-brief':edad == '18-25 años'}" (click)="changeEdad('18-25 años')">
                               <ion-grid class="anuncio-grid" style="height: 100%;justify-content: center;padding: 0;">
                                   <ion-row style="width: 100%;margin-bottom: 0%;">
                                       <ion-col col-12 style="height: 100%;">
@@ -282,7 +282,7 @@
                                   </ion-row>
                               </ion-grid>  
                           </li>
-                          <li class="zero-grande" [ngClass]="{'selection':eleccion === 2}">
+                          <li class="zero-grande" [ngClass]="{'elegida-brief':edad == '26-32 años'}" (click)="changeEdad('26-32 años')">
                               <ion-grid class="anuncio-grid" style="height: 100%;justify-content: center;padding: 0;">
                                   <ion-row style="width: 100%;margin-bottom: 0%;">
                                       <ion-col col-12 style="height: 100%;">
@@ -291,7 +291,7 @@
                                   </ion-row>
                               </ion-grid> 
                           </li>
-                          <li class="zero-grande" [ngClass]="{'selection':eleccion === 3}">
+                          <li class="zero-grande" [ngClass]="{'elegida-brief':edad == '33-40 años'}" (click)="changeEdad('33-40 años')">
                               <ion-grid class="anuncio-grid" style="height: 100%;justify-content: center;padding: 0;">
                                   <ion-row style="width: 100%;margin-bottom: 0%;">
                                       <ion-col col-12 style="height: 100%;">
@@ -300,7 +300,7 @@
                                   </ion-row>
                               </ion-grid> 
                           </li>
-                          <li class="zero-grande" [ngClass]="{'selection':eleccion === 4}">
+                          <li class="zero-grande" [ngClass]="{'elegida-brief':edad == '41-55 años'}" (click)="changeEdad('41-55 años')">
                               <ion-grid class="anuncio-grid" style="height: 100%;justify-content: center;padding: 0;">
                                   <ion-row style="width: 100%;margin-bottom: 0%;">
                                       <ion-col col-12 style="height: 100%;">
@@ -309,7 +309,7 @@
                                   </ion-row>
                               </ion-grid> 
                           </li>
-                          <li class="zero-grande" [ngClass]="{'selection':eleccion === 5}">
+                          <li class="zero-grande" [ngClass]="{'elegida-brief':edad == '55-65 años'}" (click)="changeEdad('55-65 años')">
                               <ion-grid class="anuncio-grid" style="height: 100%;justify-content: center;padding: 0;">
                                   <ion-row style="width: 100%;margin-bottom: 0%;">
                                       <ion-col col-12 style="height: 100%;">
@@ -320,13 +320,15 @@
                           </li>
                       </ul>
 
-                      <p class="titulo-brief">Sector</p>
+                      <p class="titulo-brief">Género</p>
                       <ul class="chico" style="margin-top: 0%;">
-                          <li class="zero-chico" [ngClass]="{'selection':eleccion === 1}">
+                          <li class="zero-chico" [ngClass]="{'elegida-brief':genero == 'Femenino'}" (click)="changeGenero('Femenino')">
                               <ion-grid class="anuncio-grid" style="height: 100%;justify-content: center;padding: 0;">
                                   <ion-row style="width: 100%;margin-bottom: 0%;">
                                       <ion-col col-4 style="height: 100%;">
-                                        <img class="img-mitad" src="assets/imgs/masbrief/ic_femenino.svg">
+                                        <img *ngIf="genero !== 'Femenino'" class="img-mitad" src="assets/imgs/masbrief/ic_femenino.svg">
+                                        <img *ngIf="genero == 'Femenino'" class="img-mitad" src="assets/imgs/masbrief/ic_femenino_selected.svg">
+
                                       </ion-col>
                                       <ion-col col-8 style="height: 100%;">
                                         <span>Femenino</span>
@@ -334,11 +336,12 @@
                                   </ion-row>
                               </ion-grid>
                           </li>
-                          <li class="zero-chico" [ngClass]="{'selection':eleccion === 2}">
+                          <li class="zero-chico" [ngClass]="{'elegida-brief':genero == 'Masculino'}" (click)="changeGenero('Masculino')">
                               <ion-grid class="anuncio-grid" style="height: 100%;justify-content: center;padding: 0;">
                                   <ion-row style="width: 100%;margin-bottom: 0%;">
                                       <ion-col col-4 style="height: 100%;">
-                                        <img class="img-mitad" src="assets/imgs/masbrief/ic_masculino.svg">
+                                        <img *ngIf="genero !== 'Masculino'" class="img-mitad" src="assets/imgs/masbrief/ic_masculino.svg">
+                                        <img *ngIf="genero == 'Masculino'" class="img-mitad" src="assets/imgs/masbrief/ic_masculino_selected.svg">
                                       </ion-col>
                                       <ion-col col-8 style="height: 100%;">
                                         <span>Masculino</span>
@@ -346,81 +349,91 @@
                                   </ion-row>
                               </ion-grid>
                           </li>
-                      </ul>
-
-                      <p class="titulo-brief">Categoria</p>
-                      <div class="botones-brief">
-                          <button class="boton-brief" style="margin-right: 0%;" [ngClass]="{'boton-brief-activo':target === 'Empresas'}">
-                              <div class="botones-completo">
-                                  <div class="botones-mitad">
-                                    <img class="img-mitad" *ngIf="target !== 'Empresas'" src="assets/imgs/masbrief/ic_empresa.svg">
-                                    <img class="img-mitad" *ngIf="target === 'Empresas'" src="assets/imgs/masbrief/ic_empresa_selected.svg">
-                                  </div> 
-                                  <div class="botones-mitad-izq">
-                                      <div class="main2">
-                                          <div class="inner2" [ngStyle]="{'color':target === 'Empresas' ? 'white' : '#A09D9D'}">Privado</div>
-                                      </div>
-                                  </div> 
-                                </div>   
-                          </button>
-                          <button class="boton-brief" [ngClass]="{'boton-brief-activo':target === 'Empresas'}">
-                            <div class="botones-completo">
-                              <div class="botones-mitad">
-                                <img class="img-mitad" *ngIf="target !== 'Empresas'" src="assets/imgs/masbrief/ic_gobierno.svg">
-                                <img class="img-mitad" *ngIf="target === 'Empresas'" src="assets/imgs/masbrief/ic_gobierno_selected.svg">
-                              </div> 
-                              <div class="botones-mitad-izq">
-                                  <div class="main2">
-                                      <div class="inner2" [ngStyle]="{'color':target === 'Empresas' ? 'white' : '#A09D9D'}">Gobierno</div>
-                                    </div>
-                              </div> 
-                            </div>  
-                          </button>
-                      </div>
-                     
-                      <p class="titulo-brief">Género</p>
-                      <div class="botones-brief">
-                            <button class="boton-brief" style="margin-right: 0%;" [ngClass]="{'boton-brief-activo':target === 'Empresas'}">
-                                <div class="botones-completo">
-                                    <div class="botones-mitad">
-                                      <img class="img-mitad"  *ngIf="target !== 'Empresas'" src="assets/imgs/masbrief/ic_PYME.svg">
-                                      <img class="img-mitad"  *ngIf="target === 'Empresas'" src="assets/imgs/masbrief/ic_PYME_selected.svg">
-                                    </div> 
-                                    <div class="botones-mitad-izq">
-                                        <div class="main2">
-                                            <div class="inner2" [ngStyle]="{'color':target === 'Empresas' ? 'white' : '#A09D9D'}">PYME</div>
-                                        </div>
-                                    </div> 
-                                  </div>   
-                            </button>
-                            <button class="boton-brief" [ngClass]="{'boton-brief-activo':target === 'Empresas'}">
-                              <div class="botones-completo">
-                                <div class="botones-mitad">
-                                  <img class="img-mitad" *ngIf="target !== 'Empresas'" src="assets/imgs/masbrief/ic_empresa.svg">
-                                  <img class="img-mitad" *ngIf="target === 'Empresas'" src="assets/imgs/masbrief/ic_empresa_selected.svg">
-                                </div> 
-                                <div class="botones-mitad-izq">
-                                    <div class="main2">
-                                        <div class="inner2" [ngStyle]="{'color':target === 'Empresas' ? 'white' : '#A09D9D'}">Corporativo</div>
-                                      </div>
-                                </div> 
-                              </div>  
-                            </button>
-                      </div>
-
-                      <p class="titulo-brief">Sector</p>
-                      <select type="text" class="seleccion-brief-grande" [(ngModel)]="sectores">
-                          <option *ngFor="let sector of sectores">
-                            {{sector.nombre}}
-                          </option>
-                        </select>                     
+                      </ul>                
                        
                       <p class="titulo-brief">Intereses o comentarios adicionales</p>
-                      <textarea class="otro" rows="2" cols="32" maxlength="150" placeholder="Escribe sus intereses o comentarios adicionales..." required></textarea>
+                      <textarea class="otro" rows="2" cols="32" maxlength="150" [(ngModel)]="intereses" placeholder="Escribe sus intereses o comentarios adicionales..." required></textarea>
                       
                       <button class="guardar">Guardar</button>
               
                   </div>
+
+                  <div class="brief-contenedor" *ngIf="target == 'Empresas'">
+                    <p  class="titulo-brief" style="text-align: center">Empresas</p>
+
+                    <p class="titulo-brief">Sector</p>
+                    <div class="botones-brief">
+                        <button class="boton-brief" style="margin-right: 0%;" [ngClass]="{'boton-brief-activo':sector === 'Privado'}" (click)="changeSector('Privado')">
+                            <div class="botones-completo">
+                                <div class="botones-mitad">
+                                  <img class="img-mitad" *ngIf="sector !== 'Privado'" src="assets/imgs/masbrief/ic_empresa.svg">
+                                  <img class="img-mitad" *ngIf="sector === 'Privado'" src="assets/imgs/masbrief/ic_empresa_selected.svg">
+                                </div> 
+                                <div class="botones-mitad-izq">
+                                    <div class="main2">
+                                        <div class="inner2" [ngStyle]="{'color':sector === 'Privado' ? 'white' : '#A09D9D'}">Privado</div>
+                                    </div>
+                                </div> 
+                              </div>   
+                        </button>
+                        <button class="boton-brief" [ngClass]="{'boton-brief-activo':sector === 'Gobierno'}" (click)="changeSector('Gobierno')">
+                          <div class="botones-completo">
+                            <div class="botones-mitad">
+                              <img class="img-mitad" *ngIf="sector !== 'Gobierno'" src="assets/imgs/masbrief/ic_gobierno.svg">
+                              <img class="img-mitad" *ngIf="sector === 'Gobierno'" src="assets/imgs/masbrief/ic_gobierno_selected.svg">
+                            </div> 
+                            <div class="botones-mitad-izq">
+                                <div class="main2">
+                                    <div class="inner2" [ngStyle]="{'color':sector === 'Gobierno' ? 'white' : '#A09D9D'}">Gobierno</div>
+                                  </div>
+                            </div> 
+                          </div>  
+                        </button>
+                    </div>
+                   
+                    <p class="titulo-brief">Categoria</p>
+                    <div class="botones-brief">
+                          <button class="boton-brief" style="margin-right: 0%;" [ngClass]="{'boton-brief-activo':categoria === 'PYME'}" (click)="changeCategoria('PYME')">
+                              <div class="botones-completo">
+                                  <div class="botones-mitad">
+                                    <img class="img-mitad"  *ngIf="categoria !== 'PYME'" src="assets/imgs/masbrief/ic_PYME.svg">
+                                    <img class="img-mitad"  *ngIf="categoria === 'PYME'" src="assets/imgs/masbrief/ic_PYME_selected.svg">
+                                  </div> 
+                                  <div class="botones-mitad-izq">
+                                      <div class="main2">
+                                          <div class="inner2" [ngStyle]="{'color':categoria === 'PYME' ? 'white' : '#A09D9D'}">PYME</div>
+                                      </div>
+                                  </div> 
+                                </div>   
+                          </button>
+                          <button class="boton-brief" [ngClass]="{'boton-brief-activo':categoria === 'Corporativo'}" (click)="changeCategoria('Corporativo')">
+                            <div class="botones-completo">
+                              <div class="botones-mitad">
+                                <img class="img-mitad" *ngIf="categoria !== 'Corporativo'" src="assets/imgs/masbrief/ic_empresa.svg">
+                                <img class="img-mitad" *ngIf="categoria === 'Corporativo'" src="assets/imgs/masbrief/ic_empresa_selected.svg">
+                              </div> 
+                              <div class="botones-mitad-izq">
+                                  <div class="main2">
+                                      <div class="inner2" [ngStyle]="{'color':categoria === 'Corporativo' ? 'white' : '#A09D9D'}">Corporativo</div>
+                                    </div>
+                              </div> 
+                            </div>  
+                          </button>
+                    </div>
+
+                    <p class="titulo-brief">Sectores</p>
+                    <select type="text" class="seleccion-brief-grande" [(ngModel)]="sectores">
+                        <option *ngFor="let sector of cat_sectores">
+                          {{sector.nombre}}
+                        </option>
+                      </select>                     
+                     
+                    <p class="titulo-brief">Intereses o comentarios adicionales</p>
+                    <textarea class="otro" rows="2" cols="32" maxlength="150" [(ngModel)]="intereses" placeholder="Escribe sus intereses o comentarios adicionales..." required></textarea>
+                    
+                    <button class="guardar">Guardar</button>
+            
+                </div>
               </ion-slide>
           </ion-slides>
       </div>

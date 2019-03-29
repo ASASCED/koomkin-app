@@ -137,6 +137,7 @@ page-mas-brief {
         -webkit-transition: .4s;
         transition: .4s;
         font-weight: bold;
+
     }
     
     ul.grande li:first-child {
@@ -172,7 +173,6 @@ page-mas-brief {
         transition: .4s;
         font-weight: bold;
         font-size: 3.4vw;
-        
     }
     
     ul.mediano li:first-child {
@@ -183,7 +183,7 @@ page-mas-brief {
     ul.mediano li:last-child {
         border-radius: 0px 5px 5px 0px !important;
     }
-    
+
     ul.chico {
         display: -webkit-box;
         display: -webkit-flex;
@@ -208,6 +208,7 @@ page-mas-brief {
         -webkit-transition: .4s;
         transition: .4s;
         font-weight: bold;
+
     }
     
     ul.chico li:first-child {
@@ -259,6 +260,7 @@ page-mas-brief {
         vertical-align: middle;
     }
     
+
     .otro {
         width: 100%;
         padding: 2%;
@@ -335,5 +337,12 @@ page-mas-brief {
         box-shadow: none !important;
         padding: 3px 5px;
         font-size: 4vw;
+    }
+
+    .elegida-brief {
+        border: 1px #288AC1 solid !important;
+        color: white !important;
+        background: #288AC1 !important;
+        font-weight: bold !important;
     }
 }
