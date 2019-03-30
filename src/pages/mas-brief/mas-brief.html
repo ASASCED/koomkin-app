@@ -391,8 +391,8 @@
                         </button>
                     </div>
                    
-                    <p class="titulo-brief">Categoria</p>
-                    <div class="botones-brief">
+                    <p *ngIf="sector === 'Privado'" class="titulo-brief">Categoria</p>
+                    <div *ngIf="sector === 'Privado'" class="botones-brief">
                           <button class="boton-brief" style="margin-right: 0%;" [ngClass]="{'boton-brief-activo':categoria === 'PYME'}" (click)="changeCategoria('PYME')">
                               <div class="botones-completo">
                                   <div class="botones-mitad">
@@ -421,8 +421,8 @@
                           </button>
                     </div>
 
-                    <p class="titulo-brief">Sectores</p>
-                    <select type="text" class="seleccion-brief-grande" [(ngModel)]="sectores">
+                    <p *ngIf="sector === 'Privado'" class="titulo-brief">Sectores</p>
+                    <select *ngIf="sector === 'Privado'" type="text" class="seleccion-brief-grande" [(ngModel)]="sectores">
                         <option *ngFor="let sector of cat_sectores">
                           {{sector.nombre}}
                         </option>

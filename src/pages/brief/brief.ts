@@ -99,7 +99,11 @@ export class BriefPage implements OnInit{
           this.longitud = this.datos[0].Longitud;
           this.cuarta = this.datos[0].TipoCuartaPantalla;
           this.campania = this.datos[0].IDCampania;
-          this.cobertura_nacional = this.datos[0].Nacional;   
+          this.cobertura_nacional = this.datos[0].Nacional;
+          if (this.cobertura_nacional == 1) {
+             this.cobertura_empresa = 'Nacional';
+             console.log(this.cobertura_empresa);
+          }
           this.tipoempresa = this.datos[0].TipoEmpresa;
 
           if(this.tipoempresa == 1) {
@@ -149,16 +153,18 @@ export class BriefPage implements OnInit{
         data => {
           this.cobertura = data;
           if( (this.cuarta == 2 || this.cuarta == 3 || this.cuarta == 5) && this.cobertura_nacional !== 1  ) {
-            console.log('LOCAL');
             this.cobertura_local = 1;
-          } else if(this.cobertura.length >= 2 && this.cobertura_nacional !== 1 ) {
-            console.log('REGION');
-            this.cobertura_region = 1;
+            this.cobertura_empresa = 'Local';
+            console.log(this.cobertura_empresa);
           } else if(this.cobertura == 1 && this.cobertura_nacional !== 1 ) {
-            console.log('ESTADO');
             this.cobertura_estado = 1;
-          }
-          console.log('la cobertura es', this.cobertura);
+            this.cobertura_empresa = 'Estado';
+            console.log(this.cobertura_empresa);
+          } else if(this.cobertura.length >= 2 && this.cobertura_nacional !== 1 ) {
+            this.cobertura_region = 1;
+            this.cobertura_empresa = 'Region';
+            console.log(this.cobertura_empresa);
+          } 
         },
         err => {
           //   // console.log('error');
@@ -247,6 +253,18 @@ export class BriefPage implements OnInit{
     }
     
     enviarInfo() {
+      if(this.tipoempresa == 'Fabricante') {
+        this.tipoempresa = 1;
+      } else if(this.tipoempresa == 'Distribuidor y Mayorista') {
+        this.tipoempresa = 2;
+      } else if(this.tipoempresa == 'Minorista o Venta Directa') {
+        this.tipoempresa = 3;
+      } else if(this.tipoempresa == 'Servicios') {
+        this.tipoempresa = 4;
+      } else if(this.tipoempresa == 'Profesionista') {
+        this.tipoempresa = 6;
+      }
+
       console.log(
         this.producto,
         this.tipoempresa,

@@ -22,7 +22,7 @@
         <div class="bloque">
           <div class="mitad-izq">
             <p class="titulo-brief">Tipo en Empresa</p>
-            <select type="text" class="seleccion-brief" style="width: 99%;" [(ngModel)]="tipoempresa">
+            <select disabled type="text" class="seleccion-brief" style="width: 99%;" [(ngModel)]="tipoempresa">
                 <option *ngFor="let tipo_empresa of tipo_empresas">
                   {{tipo_empresa.TIPOEMPRESA}}
                 </option>

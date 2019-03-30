@@ -20,6 +20,7 @@ db.executeGetById = function (id, command, callback) {
 
         console.log(requestStr);
 
+
         request = new Request(requestStr, function (err, rowCount) {
             if (err) {
                 callback(err);
@@ -1157,6 +1158,7 @@ const requestStr = `select lugar , Nombre from Eficiencia where lugar <= 10 orde
     });
 };
 
+
 db.executeGetBriefInformation = function (idUsuario) {
 
     const requestStr = `Exec SP_GetBriefById ${idUsuario}`;
@@ -1172,7 +1174,7 @@ db.executeGetBriefInformation = function (idUsuario) {
                     reject(err);
                 });
         });
-};
+    };
 
 db.executeGetCobertura = function (idUsuario, idCampania) {
 
@@ -1191,7 +1193,6 @@ db.executeGetCobertura = function (idUsuario, idCampania) {
         });
     };
 
-
 db.executeGetEstados = function () {
 
     const requestStr = `select IDESTADO,NOMBRE From CATESTADO where IDPAIS = 156`;
@@ -1207,7 +1208,7 @@ db.executeGetEstados = function () {
                     reject(err);
                 });
         });
-};
+    };
 
 db.executeGetEmpresas = function () {
 
@@ -1229,57 +1230,6 @@ db.executeGetEmpresas = function () {
 db.executeGetCodigoPostal = function (cp) {
 
     const requestStr = `select * From Tbl_SEPOMEX where CP = ${cp}`;
-        
-    return new Promise((resolve, reject) => {
-        tp.sql(requestStr)
-            .execute()
-            .then(results => {
-                resolve(results);
-            })
-            .catch(err => {
-                console.log(err);
-                reject(err);
-            });
-        });
-};
-
-db.executeUpdateCodigoPostal = function (estado, cp, ciudad, idUsuario) {
-
-        const requestStr = `update tbl_direccionGoogle set ESTADO = ${estado}, cp = ${cp}, Ciudad = ${ciudad} where IDUSUARIO = ${idUsuario}`;
-            
-        return new Promise((resolve, reject) => {
-            tp.sql(requestStr)
-                .execute()
-                .then(results => {
-                    resolve(results);
-                })
-                .catch(err => {
-                    console.log(err);
-                    reject(err);
-                });
-            });
-};
-    
-db.executeUpdateMejor = function (mejor, idUsuario) {
-
-    const requestStr = `update tbl_tuCampania set PorqueEresMejor = ${mejor} where IDUSUARIO = ${idUsuario}`;
-        
-    return new Promise((resolve, reject) => {
-        tp.sql(requestStr)
-            .execute()
-            .then(results => {
-                resolve(results);
-            })
-            .catch(err => {
-                console.log(err);
-                reject(err);
-            });
-        });
-};
-
-db.executeUpdateTarget = function (target, idUsuario) {
-
-    const requestStr = `update tbl_tuCampania set ClientesTarget = ${target} where IDUSUARIO = ${idUsuario}`;
         
     return new Promise((resolve, reject) => {
         tp.sql(requestStr)

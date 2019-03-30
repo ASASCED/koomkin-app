@@ -17,23 +17,27 @@ page-mas-brief {
         background: #ECECEC !important;
         opacity: 1 !important;
         transition: 100ms all linear !important;
-        font-size: 4vw !important;
+        font-size: 3.8vw !important;
         font-weight: bold !important;
         text-transform: none !important;
-        border-bottom: none !important;
         padding: 0% !important;
+        background: white !important;
+        border: 1px solid gray;
+        border-radius: 5px;
+        margin: 1%;
+        box-shadow: 6px 6px 12px -6px rgba(0,0,0,0.75);
     }
     
     .segment-datos {
-        border-right: 5px solid gray !important;
+       // border-right: 5px solid gray !important;
     }
     
     .segment-objetivo {
-        border-right: none !important;
+       // border-right: none !important;
     }
 
     .segment-empresa {
-        border-right: 5px solid gray !important;
+       // border-right: 5px solid gray !important;
     }
     
     .segment-md .segment-button.segment-activated {
@@ -42,10 +46,14 @@ page-mas-brief {
         -webkit-transition: 100ms all linear !important;
         transition: 100ms all linear !important;
         border-color: none !important;
-        font-size: 4vw !important;
+        font-size: 3.8vw !important;
         text-transform: none !important;
         background: #288AC1 !important;
-        padding: 0% !important;
+        padding: 0% !important;    
+        border-radius: 5px;
+        border: 1px solid #288AC1;
+        margin: 1%;
+        box-shadow: 6px 6px 12px -6px rgba(0,0,0,0.75);
     }
     
 

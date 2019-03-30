@@ -1057,78 +1057,6 @@ app.get('/clickCambioInformacion/:usuario/:tipo/:acceso', function(req, res) {
         });
 });
 
-//SP_GetBriefById
-
-app.get('/getBriefInformation/:usuario', function(req, res) {
-
-    const usuario = parseInt(req.params.usuario, 10);
-
-    db.executeGetBriefInformation(usuario) 
-        .then(rows => {
-            res.json(rows).status(200).send();
-        })
-        .catch(err => {
-            res.status(500).json({ error: err }).send();
-        });
-});
-
-//getCobertura
-
-app.get('/getCobertura/:usuario/:campania', function(req, res) {
-
-    const usuario = parseInt(req.params.usuario, 10);
-    const campania = parseInt(req.params.campania, 10);
-
-    db.executeGetCobertura(usuario,campania) 
-        .then(rows => {
-            res.json(rows).status(200).send();
-        })
-        .catch(err => {
-            res.status(500).json({ error: err }).send();
-        });
-});
-
-//getCodigoPostal
-
-app.get('/getCodigoPostal/:codigo', function(req, res) {
-
-    const codigo = parseInt(req.params.codigo, 10);
-
-    db.executeGetCodigoPostal(codigo) 
-        .then(rows => {
-            res.json(rows).status(200).send();
-        })
-        .catch(err => {
-            res.status(500).json({ error: err }).send();
-        });
-});
-
-//getEstados 
-
-app.get('/getEstados', function(req, res) {
-
-    db.executeGetEstados() 
-        .then(rows => {
-            res.json(rows).status(200).send();
-        })
-        .catch(err => {
-            res.status(500).json({ error: err }).send();
-        });
-});
-
-//get tipo Empresas 
-
-app.get('/getEmpresas', function(req, res) {
-
-    db.executeGetEmpresas() 
-        .then(rows => {
-            res.json(rows).status(200).send();
-        })
-        .catch(err => {
-            res.status(500).json({ error: err }).send();
-        });
-});
-
 app.put('/actualizarUsuario', function (req, res) {
 
     db.updateDatosUsuario(req.query)
@@ -1213,6 +1141,80 @@ app.put('/registraDatosFiscales', function (req, res) {
         });
 });
 
+//SP_GetBriefById
+
+app.get('/getBriefInformation/:usuario', function(req, res) {
+
+    const usuario = parseInt(req.params.usuario, 10);
+
+    db.executeGetBriefInformation(usuario) 
+        .then(rows => {
+            res.json(rows).status(200).send();
+        })
+        .catch(err => {
+            res.status(500).json({ error: err }).send();
+        });
+});
+
+
+//getCodigoPostal
+
+app.get('/getCodigoPostal/:codigo', function(req, res) {
+
+    const codigo = parseInt(req.params.codigo, 10);
+
+    db.executeGetCodigoPostal(codigo) 
+        .then(rows => {
+            res.json(rows).status(200).send();
+        })
+        .catch(err => {
+            res.status(500).json({ error: err }).send();
+        });
+});
+
+//getCobertura
+
+app.get('/getCobertura/:usuario/:campania', function(req, res) {
+
+    const usuario = parseInt(req.params.usuario, 10);
+    const campania = parseInt(req.params.campania, 10);
+
+    db.executeGetCobertura(usuario,campania) 
+        .then(rows => {
+            res.json(rows).status(200).send();
+        })
+        .catch(err => {
+            res.status(500).json({ error: err }).send();
+        });
+}); 
+
+//getEstados 
+
+app.get('/getEstados', function(req, res) {
+
+    db.executeGetEstados() 
+        .then(rows => {
+            res.json(rows).status(200).send();
+        })
+        .catch(err => {
+            res.status(500).json({ error: err }).send();
+        });
+});
+
+//get tipo Empresas 
+
+app.get('/getEmpresas', function(req, res) {
+
+    db.executeGetEmpresas() 
+        .then(rows => {
+            res.json(rows).status(200).send();
+        })
+        .catch(err => {
+            res.status(500).json({ error: err }).send();
+        });
+});
+
+
 app.post('/passLogin', (req, res) => {
     const body = req.body;
     const id = parseInt(body.id);
@@ -1230,7 +1232,7 @@ app.post('/passLogin', (req, res) => {
         res.status(401).send();
     }
    });
-   
+
 // catch 404 and forward to error handler
 app.use(function (req, res) {
     res.sendStatus(404);
