@@ -254,20 +254,20 @@ export class BriefPage implements OnInit{
     
     enviarInfo() {
       if(this.tipoempresa == 'Fabricante') {
-        this.tipoempresa = 1;
+        this.tipo_empresa = 1;
       } else if(this.tipoempresa == 'Distribuidor y Mayorista') {
-        this.tipoempresa = 2;
+        this.tipo_empresa = 2;
       } else if(this.tipoempresa == 'Minorista o Venta Directa') {
-        this.tipoempresa = 3;
+        this.tipo_empresa = 3;
       } else if(this.tipoempresa == 'Servicios') {
-        this.tipoempresa = 4;
+        this.tipo_empresa = 4;
       } else if(this.tipoempresa == 'Profesionista') {
-        this.tipoempresa = 6;
+        this.tipo_empresa = 6;
       }
 
       console.log(
         this.producto,
-        this.tipoempresa,
+        this.tipo_empresa,
         this.cp,
         this.cobertura_empresa,
         this.mejor,

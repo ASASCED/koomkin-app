@@ -1174,6 +1174,42 @@ db.executeGetBriefInformation = function (idUsuario) {
                     reject(err);
                 });
         });
+};
+
+db.executeUpdateBriefInformation = function (idUsuario,new_Producto,new_TipoEmpresa,new_CodigoPostal,new_IDMembresia,new_PorqueEresMejor,new_ClientesTarget,new_Correo1,new_Correo2,new_Correo3,new_IdSubSector ) {
+
+    const requestStr = `Update TBL_CATALOGOPRODUCTOS set NOMBRE = '${new_Producto}' where IDUSUARIO = ${idUsuario}; 
+                        Update TBL_BRIEF set ID_TIPOEMPRESA = ${new_TipoEmpresa} , CODIGOPOSTAL = ${new_CodigoPostal} where IDUSUARIO = ${idUsuario};
+                        Update tbl_direccionGoogle set cp = ${new_CodigoPostal} where IDUSUARIO = ${idUsuario};
+                        Insert into tbl_tuCampania (IDMembresia,
+                                                    IDUSUARIO,
+                                                    PorqueEresMejor,
+                                                    ClientesTarget,
+                                                    Correo1,
+                                                    Correo2,
+                                                    Correo3,
+                                                    IdSubSector)
+                                                values (
+                                                    ${new_IDMembresia},
+                                                    ${idUsuario},
+                                                    '${new_PorqueEresMejor}',
+                                                    '${new_ClientesTarget}',
+                                                    '${new_Correo1}',
+                                                    '${new_Correo2}',
+                                                    '${new_Correo3}',
+                                                    ${new_IdSubSector});`;
+    
+        return new Promise((resolve, reject) => {
+            tp.sql(requestStr)
+                .execute()
+                .then(results => {
+                    resolve(results);
+                })
+                .catch(err => {
+                    console.log(err);
+                    reject(err);
+                });
+        });
     };
 
 db.executeGetCobertura = function (idUsuario, idCampania) {

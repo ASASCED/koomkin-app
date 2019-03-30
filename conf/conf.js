@@ -22,7 +22,7 @@ module.exports.config = {
   //   database: 'aaa'
   // }
 
-  /* Variables de producción */
+  /* Variables de producción 
    userName: 'USERKOOMKIN',
    HOST: 5545,
    //HOST: 6843,
@@ -31,9 +31,9 @@ module.exports.config = {
    options:{
      port:1433,
      database: 'AGO_KOOMKIN'     
-   }
+   }*/
 
-     /* Variables de producción amazon 
+     /* Variables de desarollo amazon 
      userName: 'Koomkin',
      HOST: 5545,
      //HOST: 6843,
@@ -43,4 +43,15 @@ module.exports.config = {
        port:1433,
        database: 'AGO_KOOMKIN'     
      }*/
+
+       /* Variables de desarollo amazon */
+     userName: 'Reporte',
+     HOST: 5545,
+     //HOST: 6843,
+     password: 'n6WHF9ydE6vkAWa2',
+     server: 'koomkindb.cqgvwp6knhug.us-east-1.rds.amazonaws.com',
+     options: {
+       port:1433,
+       database: 'AGO_KOOMKIN'     
+     }
 }

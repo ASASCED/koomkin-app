@@ -4,12 +4,12 @@ const favicon = require('serve-favicon');
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
-var cors = require('cors')
+const cors = require('cors');
 const db = require('./db.js');
 const _ = require('underscore');
 const KOOMKIN_KEY = 'K00mk1n@!xWz93OTkwMSwiZX';
 
-var app = express()
+var app = express();
 
 if ('development' == app.get('env')) {
     console.log("Rejecting node tls");
@@ -1141,6 +1141,31 @@ app.put('/registraDatosFiscales', function (req, res) {
         });
 });
 
+//updateBriefInformation
+
+app.get('/updateBriefInformation/:usuario/:new_Producto/:new_TipoEmpresa/:new_CodigoPostal/:new_IDMembresia/:new_PorqueEresMejor/:new_ClientesTarget/:new_Correo1/:new_Correo2/:new_Correo3/:new_IdSubSector', function(req, res) {
+
+    const usuario = parseInt(req.params.usuario, 10);
+    const new_Producto = req.params.new_Producto;
+    const new_TipoEmpresa = parseInt(req.params.new_TipoEmpresa,10);
+    const new_CodigoPostal = parseInt(req.params.new_CodigoPostal,10);
+    const new_IDMembresia = parseInt(req.params.new_IDMembresia,10);
+    const new_PorqueEresMejor = req.params.new_PorqueEresMejor;
+    const new_ClientesTarget = req.params.new_ClientesTarget;
+    const new_Correo1 = req.params.new_Correo1;
+    const new_Correo2 = req.params.new_Correo2;
+    const new_Correo3 = req.params.new_Correo3;
+    const new_IdSubSector = parseInt(req.params.new_IdSubSector,10);
+
+    db.executeUpdateBriefInformation(usuario,new_Producto,new_TipoEmpresa,new_CodigoPostal,new_IDMembresia,new_PorqueEresMejor,new_ClientesTarget,new_Correo1,new_Correo2,new_Correo3,new_IdSubSector) 
+        .then(rows => {
+            res.json(rows).status(200).send();
+        })
+        .catch(err => {
+            res.status(500).json({ error: err }).send();
+        });
+});
+
 //SP_GetBriefById
 
 app.get('/getBriefInformation/:usuario', function(req, res) {
@@ -1155,7 +1180,6 @@ app.get('/getBriefInformation/:usuario', function(req, res) {
             res.status(500).json({ error: err }).send();
         });
 });
-
 
 //getCodigoPostal
 
