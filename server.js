@@ -1143,9 +1143,10 @@ app.put('/registraDatosFiscales', function (req, res) {
 
 //updateBriefInformation
 
-app.get('/updateBriefInformation/:usuario/:new_Producto/:new_TipoEmpresa/:new_CodigoPostal/:new_IDMembresia/:new_PorqueEresMejor/:new_ClientesTarget/:new_Correo1/:new_Correo2/:new_Correo3/:new_IdSubSector', function(req, res) {
+app.get('/updateBriefInformation/:usuario/:idProducto/:new_Producto/:new_TipoEmpresa/:new_CodigoPostal/:new_IDMembresia/:new_PorqueEresMejor/:new_ClientesTarget/:new_Correo1/:new_Correo2/:new_Correo3/:new_IdSubSector', function(req, res) {
 
     const usuario = parseInt(req.params.usuario, 10);
+    const idProducto = parseInt(req.params.idProducto, 10);
     const new_Producto = req.params.new_Producto;
     const new_TipoEmpresa = parseInt(req.params.new_TipoEmpresa,10);
     const new_CodigoPostal = parseInt(req.params.new_CodigoPostal,10);
@@ -1157,6 +1158,7 @@ app.get('/updateBriefInformation/:usuario/:new_Producto/:new_TipoEmpresa/:new_Co
     const new_Correo3 = req.params.new_Correo3;
     const new_IdSubSector = parseInt(req.params.new_IdSubSector,10);
 
+    console.log(usuario,idProducto,new_Producto,new_TipoEmpresa,new_CodigoPostal,new_IDMembresia,new_PorqueEresMejor,new_ClientesTarget,new_Correo1,new_Correo2,new_Correo3,new_IdSubSector);
     db.executeUpdateBriefInformation(usuario,new_Producto,new_TipoEmpresa,new_CodigoPostal,new_IDMembresia,new_PorqueEresMejor,new_ClientesTarget,new_Correo1,new_Correo2,new_Correo3,new_IdSubSector) 
         .then(rows => {
             res.json(rows).status(200).send();
