@@ -18,6 +18,7 @@ export class BriefPage implements OnInit{
   public id;
   public tipoempresa:any;
   public tipo_empresas: any;
+  public tipo_empresa: any;
   public educacion;
   public datos;
   public cp;
@@ -26,6 +27,7 @@ export class BriefPage implements OnInit{
   public mejor;
   public producto;
   public direccion;
+  public cat_estados;
   public estado;
   public latitud;
   public longitud;
@@ -38,6 +40,11 @@ export class BriefPage implements OnInit{
   public cobertura_region;
   public cobertura_nacional; 
   public editar = 0;
+
+  public correo1;
+  public correo2;
+  public correo3;
+  public IdSubSector;
 
   //variables mas info
 
@@ -102,7 +109,6 @@ export class BriefPage implements OnInit{
           this.cobertura_nacional = this.datos[0].Nacional;
           if (this.cobertura_nacional == 1) {
              this.cobertura_empresa = 'Nacional';
-             console.log(this.cobertura_empresa);
           }
           this.tipoempresa = this.datos[0].TipoEmpresa;
 
@@ -117,6 +123,12 @@ export class BriefPage implements OnInit{
           } else if(this.tipoempresa == 6) {
             this.tipoempresa = 'Profesionista';
           }
+
+          this.correo1 = this.datos[0].correo1;
+          this.correo2 = this.datos[0].correo2;
+          this.correo3 = this.datos[0].correo3;
+          this.IdSubSector = this.datos[0].IdSubSector;
+          this.IDMembresia = this.datos[0].IDMembresia;
 
           this.fechaNacimiento = this.datos[0].FECHANACIMIENTO;
           this.puesto = this.datos[0].ID_PUESTO;
@@ -175,7 +187,8 @@ export class BriefPage implements OnInit{
     getEstados() {
       this.provedor.getEstados().then(
         data => {
-          // console.log(data);
+          this.cat_estados = data;
+          console.log(data);
         },
         err => {
           //   // console.log('error');
@@ -266,13 +279,20 @@ export class BriefPage implements OnInit{
       }
 
       console.log(
+        this.id,
         this.producto,
         this.tipo_empresa,
         this.cp,
-        this.cobertura_empresa,
+        this.IDMembresia,
         this.mejor,
-        this.target
+        this.target,
+        this.correo1,
+        this.correo2,
+        this.correo3,
+        this.IdSubSector
       );
+
+
     }
 
     pagina() {

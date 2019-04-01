@@ -58,7 +58,15 @@
                 <p class="texto-boton-brief">Nacional</p>
             </button>
           </div>
-        <p class="titulo-brief">¿En qué eres mejor que tu competencia?</p>
+
+          <ion-item *ngIf="cobertura_region === 1">
+            <ion-label>Estados</ion-label>
+            <ion-select [(ngModel)]="estado" multiple>
+              <ion-option *ngFor="let estados of cat_estados" [value]="estados.value">{{estados.NOMBRE}}</ion-option>
+            </ion-select>
+          </ion-item>
+        
+          <p class="titulo-brief">¿En qué eres mejor que tu competencia?</p>
         <input disabled type="text" class="input-brief" [(ngModel)]="mejor">
 
         <p class="titulo-brief">Cliente Objetivo</p>
@@ -138,6 +146,14 @@
                 <p class="texto-boton-brief">Nacional</p>
             </button>
           </div>
+
+          <ion-item *ngIf="cobertura_region === 1">
+            <ion-label>Estados</ion-label>
+            <ion-select [(ngModel)]="estado" multiple>
+              <ion-option *ngFor="let estados of cat_estados" [value]="estados.value">{{estados.NOMBRE}}</ion-option>
+            </ion-select>
+          </ion-item>  
+
         <p class="titulo-brief">¿En qué eres mejor que tu competencia?</p>
         <input type="text" class="input-brief" [(ngModel)]="mejor">
 

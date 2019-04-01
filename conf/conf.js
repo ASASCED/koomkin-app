@@ -47,7 +47,7 @@ module.exports.config = {
        /* Variables de desarollo amazon */
      userName: 'Reporte',
      HOST: 5545,
-     //HOST: 6843,
+     // HOST: 6843,
      password: 'n6WHF9ydE6vkAWa2',
      server: 'koomkindb.cqgvwp6knhug.us-east-1.rds.amazonaws.com',
      options: {
