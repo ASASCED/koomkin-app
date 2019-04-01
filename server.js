@@ -1158,8 +1158,7 @@ app.get('/updateBriefInformation/:usuario/:idProducto/:new_Producto/:new_TipoEmp
     const new_Correo3 = req.params.new_Correo3;
     const new_IdSubSector = parseInt(req.params.new_IdSubSector,10);
 
-    console.log(usuario,idProducto,new_Producto,new_TipoEmpresa,new_CodigoPostal,new_IDMembresia,new_PorqueEresMejor,new_ClientesTarget,new_Correo1,new_Correo2,new_Correo3,new_IdSubSector);
-    db.executeUpdateBriefInformation(usuario,new_Producto,new_TipoEmpresa,new_CodigoPostal,new_IDMembresia,new_PorqueEresMejor,new_ClientesTarget,new_Correo1,new_Correo2,new_Correo3,new_IdSubSector) 
+    db.executeUpdateBriefInformation(usuario,idProducto,new_Producto,new_TipoEmpresa,new_CodigoPostal,new_IDMembresia,new_PorqueEresMejor,new_ClientesTarget,new_Correo1,new_Correo2,new_Correo3,new_IdSubSector) 
         .then(rows => {
             res.json(rows).status(200).send();
         })
