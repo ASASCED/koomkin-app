@@ -1199,6 +1199,7 @@ db.executeUpdateBriefInformation = function (idUsuario,idProducto,new_Producto,n
                                                     '${new_Correo3}',
                                                     ${new_IdSubSector});`;
     
+        console.log(requestStr);
         return new Promise((resolve, reject) => {
             tp.sql(requestStr)
                 .execute()
