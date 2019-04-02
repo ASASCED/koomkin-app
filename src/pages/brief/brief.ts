@@ -356,7 +356,7 @@ export class BriefPage implements OnInit{
     }
 
     updateCobertura(idCampania,idPais,idEstado,idUsuario) {
-      console.log(idCampania,idPais,idEstado,idUsuario);
+      console.log('la cobertura es',idCampania,idPais,idEstado,idUsuario);
       this.provedor.updateCobertura(idCampania,idPais,idEstado,idUsuario).then(
         data => {
           console.log(data);
