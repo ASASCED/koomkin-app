@@ -29,6 +29,7 @@ export class BriefPage implements OnInit{
   public direccion;
   public cat_estados;
   public estado;
+  public estado_cob;
   public latitud;
   public longitud;
   public cuarta;
@@ -104,6 +105,7 @@ export class BriefPage implements OnInit{
         data => {
           this.datos = data;
           this.cp = this.datos[0].CP;
+          this.getCodigoPostal(this.cp);
           this.ciudad = this.datos[0].Ciudad;
           this.target = this.datos[0].ClientesTarget;
           this.mejor = this.datos[0].Mejor;
@@ -165,6 +167,23 @@ export class BriefPage implements OnInit{
           
           console.log(this.datos);
           this.getCobertura(idUsuario,this.datos[0].IDCampania);
+        },
+        err => {
+          //   // console.log('error');
+        }
+      );
+    }
+
+    getCodigoPostal(cp){
+      this.provedor.getCodigoPostal(cp).then(
+        data => {
+          this.datos_ciudad = data;
+          this.estado_cob = this.datos_ciudad[0].Estado;
+          this.cat_estados.forEach(element=> {
+            if(element['NOMBRE'] ==  this.estado_cob) {
+              this.estado_cob = element['IDESTADO'];
+            }
+          });
         },
         err => {
           //   // console.log('error');
@@ -322,7 +341,7 @@ export class BriefPage implements OnInit{
           if(this.cobertura_empresa == 'Local') {
             this.cobertura_local = 1;
           } else if(this.cobertura_empresa == 'Estado') {
-            this.updateCobertura(this.idCampania,this.idPais,estado,this.id);
+            this.updateCobertura(this.idCampania,this.idPais,this.estado_cob,this.id);
           } else if(this.cobertura_empresa == 'Region') {
             console.log('update tbl tu campania cobertura un registro por estado');
           } else if(this.cobertura_empresa == 'Nacional') {
@@ -340,7 +359,19 @@ export class BriefPage implements OnInit{
       console.log(idCampania,idPais,idEstado,idUsuario);
       this.provedor.updateCobertura(idCampania,idPais,idEstado,idUsuario).then(
         data => {
+          console.log(data);
+        },
+        err => {
+          //   // console.log('error');
+        }
+      );
+    }
 
+    updateCoberturaRegion(idCampania,idPais,idEstado,idUsuario) {
+      console.log(idCampania,idPais,idEstado,idUsuario);
+      this.provedor.updateCoberturaRegion(idCampania,idPais,idEstado,idUsuario).then(
+        data => {
+          console.log(data);
         },
         err => {
           //   // console.log('error');
@@ -352,7 +383,7 @@ export class BriefPage implements OnInit{
       console.log(idCampania,idUsuario);
       this.provedor.updateCoberturaNacional(idCampania,idUsuario).then(
         data => {
-
+          console.log(data);
         },
         err => {
           //   // console.log('error');

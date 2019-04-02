@@ -1252,7 +1252,7 @@ app.get('/updateBriefClienteEmpresas/:clientesTargetSector/:clientesTargetCatego
         });
 });
 
-//updateBriefInformation Cliente Objetivo Particulares
+//por estado
 
 app.get('/updateCobertura/:idCampania/:idEstado/:idUsuario', function(req, res) {
 
@@ -1269,6 +1269,23 @@ app.get('/updateCobertura/:idCampania/:idEstado/:idUsuario', function(req, res) 
         });
 });
 
+
+//por region
+
+app.get('/updateCoberturaRegion/:idCampania/:idEstado/:idUsuario', function(req, res) {
+
+    const idCampania = parseInt(req.params.idCampania, 10);
+    const idEstado = parseInt(req.params.idEstado, 10);
+    const idUsuario = parseInt(req.params.idUsuario, 10);
+
+    db.updateCoberturaRegion(idCampania,idEstado,idUsuario) 
+        .then(rows => {
+            res.json(rows).status(200).send();
+        })
+        .catch(err => {
+            res.status(500).json({ error: err }).send();
+        });
+});
 
 //updateBriefInformation Cliente Objetivo Particulares
 

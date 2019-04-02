@@ -1304,6 +1304,24 @@ db.updateBriefClienteEmpresas= function ( clientesTargetSector, clientesTargetCa
 
 db.updateCobertura = function (idCampania,idEstado,idUsuario) {
 
+    const requestStr = `insert into tbl_TuCampaniaCobertura (IDCampania,IdPAIS,IDESTADO,IDUSUARIO) VALUES (${idCampania},156,${idEstado},${idUsuario});
+                        update TBL_BRIEF set IDESTADO = ${idEstado} where IDUSUARIO = ${idUsuario}`;
+    
+        return new Promise((resolve, reject) => {
+            tp.sql(requestStr)
+                .execute()
+                .then(results => {
+                    resolve(results);
+                })
+                .catch(err => {
+                    console.log(err);
+                    reject(err);
+                });
+        });
+};
+
+db.updateCoberturaRegion = function (idCampania,idEstado,idUsuario) {
+
     const requestStr = `insert into tbl_TuCampaniaCobertura (IDCampania,IdPAIS,IDESTADO,IDUSUARIO) VALUES (${idCampania},156,${idEstado},${idUsuario});`;
     
         return new Promise((resolve, reject) => {
@@ -1317,11 +1335,12 @@ db.updateCobertura = function (idCampania,idEstado,idUsuario) {
                     reject(err);
                 });
         });
-    };
+};
 
 db.updateCoberturaNacional = function (idCampania,idUsuario) {
 
-    const requestStr = `insert into tbl_TuCampaniaCobertura (IDCampania,IdPAIS,IDESTADO,IDUSUARIO) VALUES (${idCampania},156,NULL,${idUsuario});`;
+    const requestStr = `insert into tbl_TuCampaniaCobertura (IDCampania,IdPAIS,IDESTADO,IDUSUARIO) VALUES (${idCampania},156,NULL,${idUsuario});
+                        update TBL_BRIEF set IDESTADO = NULL where IDUSUARIO = ${idUsuario}`;
     
         return new Promise((resolve, reject) => {
             tp.sql(requestStr)
@@ -1390,7 +1409,7 @@ db.executeGetEmpresas = function () {
 
 db.executeGetCodigoPostal = function (cp) {
 
-    const requestStr = `select * From Tbl_SEPOMEX where CP = ${cp}`;
+    const requestStr = `select CP, Estado From Tbl_SEPOMEX where CP = ${cp}`;
         
     return new Promise((resolve, reject) => {
         tp.sql(requestStr)
