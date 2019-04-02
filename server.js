@@ -817,9 +817,7 @@ app.get('/registrarEntradaBanner/:idReporteBanner/:canal?', function (req, res) 
     var canal = req.params.canal;
 
     if(!canal){
-
         canal = 'App'
-
     }
 
     db.executeFechaEntradaBanner(id,canal)
@@ -1159,6 +1157,94 @@ app.get('/updateBriefInformation/:usuario/:idProducto/:new_Producto/:new_TipoEmp
     const new_IdSubSector = parseInt(req.params.new_IdSubSector,10);
 
     db.executeUpdateBriefInformation(usuario,idProducto,new_Producto,new_TipoEmpresa,new_CodigoPostal,new_IDMembresia,new_PorqueEresMejor,new_ClientesTarget,new_Correo1,new_Correo2,new_Correo3,new_IdSubSector) 
+        .then(rows => {
+            res.json(rows).status(200).send();
+        })
+        .catch(err => {
+            res.status(500).json({ error: err }).send();
+        });
+});
+
+//updateBriefInformation datos
+
+app.get('/updateBriefDatos/:usuario/:nombre/:aPaterno/:aMaterno/:fechaNac/:idPuesto/:cpDomicilio/:aniosEmpresa/:educacion', function(req, res) {
+
+    const usuario = parseInt(req.params.usuario, 10);
+    const nombre = req.params.nombre;
+    const aPaterno = req.params.aPaterno;
+    const aMaterno = req.params.aMaterno;
+    const fechaNac = req.params.fechaNac;
+    const idPuesto = parseInt(req.params.idPuesto, 10);
+    const cpDomicilio = parseInt(req.params.cpDomicilio, 10);
+    const aniosEmpresa = parseInt(req.params.aniosEmpresa, 10);
+    const educacion = req.params.educacion;
+
+    db.updateBriefDatos(usuario,nombre,aPaterno,aMaterno,fechaNac,idPuesto,cpDomicilio,aniosEmpresa,educacion) 
+        .then(rows => {
+            res.json(rows).status(200).send();
+        })
+        .catch(err => {
+            res.status(500).json({ error: err }).send();
+        });
+});
+
+//updateBriefInformation Empresa
+
+app.get('/updateBriefEmpresa/:usuario/:nombreEmpresa/:rfcEmpresa/:numeroEmpleados/:numeroSocios/:empresaFamiliar/:regimenFiscal/:rangoVentasAnuales/:ventajaCompetitiva/:idCampania', function(req, res) {
+
+    const usuario = parseInt(req.params.usuario, 10);
+    const nombreEmpresa = req.params.nombreEmpresa;
+    const rfcEmpresa = req.params.rfcEmpresa;
+    const numeroEmpleados = parseInt(req.params.numeroEmpleados, 10);
+    const numeroSocios = parseInt(req.params.numeroSocios, 10);
+    const empresaFamiliar = parseInt(req.params.empresaFamiliar, 10);
+    const regimenFiscal = req.params.regimenFiscal;
+    const rangoVentasAnuales = req.params.rangoVentasAnuales;
+    const ventajaCompetitiva = req.params.ventajaCompetitiva;
+    const idCampania = parseInt(req.params.idCampania, 10);
+
+
+    db.updateBriefEmpresa(usuario,nombreEmpresa,rfcEmpresa,numeroEmpleados,numeroSocios,empresaFamiliar,regimenFiscal,rangoVentasAnuales,ventajaCompetitiva,idCampania) 
+        .then(rows => {
+            res.json(rows).status(200).send();
+        })
+        .catch(err => {
+            res.status(500).json({ error: err }).send();
+        });
+});
+
+//updateBriefInformation Cliente Objetivo Particulares
+
+app.get('/updateBriefClienteParticular/:clientesTargetIngresosAnuales/:clientesTargetEdad/:clientesTargetGenero/:clientesTargetIntereses/:idCampania', function(req, res) {
+
+    const clientesTargetIngresosAnuales = req.params.clientesTargetIngresosAnuales;
+    const clientesTargetEdad = req.params.clientesTargetEdad;
+    const clientesTargetGenero = req.params.clientesTargetGenero;
+    const clientesTargetIntereses = req.params.clientesTargetIntereses;
+    const idCampania = parseInt(req.params.idCampania, 10);
+
+
+    db.updateBriefClienteParticular(clientesTargetIngresosAnuales,clientesTargetEdad,clientesTargetGenero,clientesTargetIntereses,idCampania) 
+        .then(rows => {
+            res.json(rows).status(200).send();
+        })
+        .catch(err => {
+            res.status(500).json({ error: err }).send();
+        });
+});
+
+//updateBriefInformation Cliente Objetivo Empresas
+
+app.get('/updateBriefClienteEmpresas/:clientesTargetSector/:clientesTargetCategoria/:clientesTargetSectores/:clientesTargetIntereses/:idCampania', function(req, res) {
+
+    const clientesTargetSector = req.params.clientesTargetSector;
+    const clientesTargetCategoria = req.params.clientesTargetCategoria;
+    const clientesTargetSectores = req.params.clientesTargetSectores;
+    const clientesTargetIntereses = req.params.clientesTargetIntereses;
+    const idCampania = parseInt(req.params.idCampania, 10);
+
+
+    db.updateBriefClienteEmpresas(clientesTargetSector,clientesTargetCategoria,clientesTargetSectores,clientesTargetIntereses,idCampania) 
         .then(rows => {
             res.json(rows).status(200).send();
         })

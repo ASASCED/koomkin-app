@@ -516,9 +516,9 @@ export class RestProvider {
     });
   }
 
-  updateBriefInformation(idUsuario,new_Producto,new_TipoEmpresa,new_CodigoPostal,new_IDMembresia,new_PorqueEresMejor,new_ClientesTarget,new_Correo1,new_Correo2,new_Correo3,new_IdSubSector) {
+  updateBriefInformation(idUsuario,idProducto,new_Producto,new_TipoEmpresa,new_CodigoPostal,new_IDMembresia,new_PorqueEresMejor,new_ClientesTarget,new_Correo1,new_Correo2,new_Correo3,new_IdSubSector) {
     return new Promise(resolve => {
-      this.http.get(this.apiUrl + '/updateBriefInformation/' + idUsuario + '/' + new_Producto + '/' + new_TipoEmpresa  + '/' + new_CodigoPostal  + '/' + new_IDMembresia  + '/' + new_PorqueEresMejor  + '/' + new_ClientesTarget  + '/' + new_Correo1  + '/' + new_Correo2  + '/' + new_Correo3  + '/' + new_IdSubSector ).subscribe(data => {
+      this.http.get(this.apiUrl + '/updateBriefInformation/' + idUsuario + '/' + idProducto + '/' + new_Producto + '/' + new_TipoEmpresa  + '/' + new_CodigoPostal  + '/' + new_IDMembresia  + '/' + new_PorqueEresMejor  + '/' + new_ClientesTarget  + '/' + new_Correo1  + '/' + new_Correo2  + '/' + new_Correo3  + '/' + new_IdSubSector ).subscribe(data => {
         resolve(data);
       }, err => {
          console.log(err);

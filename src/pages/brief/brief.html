@@ -196,7 +196,7 @@
       <p class="deseas-brief">¿Deseas agregar mayor información o detalle de tu empresa para mejorar la configuración de tu campaña?</p>
       <ion-item>
           <ion-label class="informacion-brief">Más información</ion-label>
-          <ion-toggle color="secondary" class="informacion-brief" (ionChange)="pagina()"></ion-toggle>
+          <ion-toggle color="secondary" [(ngModel)]="mas_informacion" class="informacion-brief" (ionChange)="pagina()"></ion-toggle>
       </ion-item>
     </div>
   </div>

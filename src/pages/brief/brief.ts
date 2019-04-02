@@ -3,7 +3,6 @@ import { IonicPage, NavController, NavParams, AlertController, Slides } from 'io
 import { RestProvider } from '../../providers/rest/rest';
 import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
 import { MasBriefPage } from '../mas-brief/mas-brief';
-import { NULL_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @IonicPage()
 @Component({
@@ -41,13 +40,17 @@ export class BriefPage implements OnInit{
   public cobertura_nacional; 
   public editar = 0;
 
+  public IDMembresia;
+  public IdProducto;
   public correo1;
   public correo2;
   public correo3;
   public IdSubSector;
 
   //variables mas info
-
+  public nombre;
+  public apaterno;
+  public amaterno;
   public fechaNacimiento;
   public puesto;
   public cpDomicilio;
@@ -82,6 +85,8 @@ export class BriefPage implements OnInit{
     ) {
       this.empresa = this.authService.empresa;
       this.id = this.authService.id;
+      this.mas_informacion = false;
+
     }
 
     ngOnInit() {
@@ -107,6 +112,7 @@ export class BriefPage implements OnInit{
           this.cuarta = this.datos[0].TipoCuartaPantalla;
           this.campania = this.datos[0].IDCampania;
           this.cobertura_nacional = this.datos[0].Nacional;
+          this.IdProducto = this.datos[0].IdProducto;
           if (this.cobertura_nacional == 1) {
              this.cobertura_empresa = 'Nacional';
           }
@@ -124,12 +130,15 @@ export class BriefPage implements OnInit{
             this.tipoempresa = 'Profesionista';
           }
 
-          this.correo1 = this.datos[0].correo1;
-          this.correo2 = this.datos[0].correo2;
-          this.correo3 = this.datos[0].correo3;
+          this.correo1 = this.datos[0].Correo1;
+          this.correo2 = this.datos[0].Correo2;
+          this.correo3 = this.datos[0].Correo3;
           this.IdSubSector = this.datos[0].IdSubSector;
           this.IDMembresia = this.datos[0].IDMembresia;
 
+          this.nombre = this.datos[0].NOMBRE;
+          this.apaterno = this.datos[0].APEPATERNO;
+          this.amaterno = this.datos[0].APEMATERNO;
           this.fechaNacimiento = this.datos[0].FECHANACIMIENTO;
           this.puesto = this.datos[0].ID_PUESTO;
           this.cpDomicilio = this.datos[0].CodigoPostalDomicilio;
@@ -167,15 +176,15 @@ export class BriefPage implements OnInit{
           if( (this.cuarta == 2 || this.cuarta == 3 || this.cuarta == 5) && this.cobertura_nacional !== 1  ) {
             this.cobertura_local = 1;
             this.cobertura_empresa = 'Local';
-            console.log(this.cobertura_empresa);
+           // console.log(this.cobertura_empresa);
           } else if(this.cobertura == 1 && this.cobertura_nacional !== 1 ) {
             this.cobertura_estado = 1;
             this.cobertura_empresa = 'Estado';
-            console.log(this.cobertura_empresa);
+           // console.log(this.cobertura_empresa);
           } else if(this.cobertura.length >= 2 && this.cobertura_nacional !== 1 ) {
             this.cobertura_region = 1;
             this.cobertura_empresa = 'Region';
-            console.log(this.cobertura_empresa);
+           // console.log(this.cobertura_empresa);
           } 
         },
         err => {
@@ -188,7 +197,7 @@ export class BriefPage implements OnInit{
       this.provedor.getEstados().then(
         data => {
           this.cat_estados = data;
-          console.log(data);
+          //console.log(data);
         },
         err => {
           //   // console.log('error');
@@ -201,7 +210,7 @@ export class BriefPage implements OnInit{
         data => {
           let empresas = data;
           this.tipo_empresas = empresas;
-          console.log(this.tipo_empresas);
+          //console.log(this.tipo_empresas);
         },
         err => {
           //   // console.log('error');
@@ -280,6 +289,7 @@ export class BriefPage implements OnInit{
 
       console.log(
         this.id,
+        this.IdProducto,
         this.producto,
         this.tipo_empresa,
         this.cp,
@@ -291,11 +301,32 @@ export class BriefPage implements OnInit{
         this.correo3,
         this.IdSubSector
       );
-
+        
+      this.provedor.updateBriefInformation(
+        this.id,
+        this.IdProducto,
+        this.producto,
+        this.tipo_empresa,
+        this.cp,
+        this.IDMembresia,
+        this.mejor,
+        this.target,
+        this.correo1,
+        this.correo2,
+        this.correo3,
+        this.IdSubSector).then(
+        data => {
+          console.log('INFO ENVIADA');
+        },
+        err => {
+          //   // console.log('error');
+        }
+      );
 
     }
 
     pagina() {
+      this.mas_informacion = false;
       this.navCtrl.push(MasBriefPage, 
         { 
           target: this.target,
@@ -318,7 +349,11 @@ export class BriefPage implements OnInit{
           intereses: this.intereses,
           sector: this.sector,
           categoria: this.categoria,
-          sectores: this.sectores
+          sectores: this.sectores,
+          regimenFiscal: this.regimenFiscal,
+          nombre: this.nombre, 
+          apaterno: this.apaterno, 
+          amaterno: this.amaterno 
       });
     }
 }

@@ -748,9 +748,9 @@ db.executeInteresBanner = function (interes,idReporteBanner,uuidPase) {
 
     var requestStr = '';
 
-    if(interes==='1'){
+    if(interes==='1') {
         requestStr = `UPDATE dbo.Tbl_ReporteBanner SET interesado = 1, fechaClickInteresBanner = GETDATE() WHERE idReporteBanner = '${idReporteBanner}' and (interesado IS NULL OR interesado = 0);`;
-    }else if(interes==='0'){
+    } else if(interes==='0') {
         requestStr = `UPDATE dbo.Tbl_ReporteBanner SET interesado = 0, fechaClickInteresBanner = GETDATE() WHERE idReporteBanner = '${idReporteBanner}' and interesado IS NULL;`;
     }
 
@@ -774,9 +774,9 @@ db.executeInteresBannerReporte = function (interes,idReporteBanner,uuidPase) {
 
     var requestStr = '';
 
-    if(interes==='1'){
+    if(interes==='1') {
         requestStr = `UPDATE dbo.Tbl_ReporteBanner SET interesado = 1, fechaClickInteresBanner = GETDATE() WHERE idReporteBanner = '${idReporteBanner}' and (interesado IS NULL OR interesado = 0);`;
-    }else if(interes==='0'){
+    } else if(interes==='0') {
         requestStr = `UPDATE dbo.Tbl_ReporteBanner SET interesado = 0, fechaClickInteresBanner = GETDATE() WHERE idReporteBanner = '${idReporteBanner}' and interesado IS NULL;`;
     }
 
@@ -1211,7 +1211,78 @@ db.executeUpdateBriefInformation = function (idUsuario,idProducto,new_Producto,n
                     reject(err);
                 });
         });
+};
+
+db.updateBriefDatos = function (idUsuario, nombre, aPaterno, aMaterno, fechaNac, idPuesto, cpDomicilio, aniosEmpresa, educacion) {
+
+    const requestStr = `Update CATUSUARIO set NOMBRE = '${nombre}', APEPATERNO = '${aPaterno}', APEMATERNO = '${aMaterno}' where IDUSUARIO = ${idUsuario};
+    update TBL_BRIEF set FECHANACIMIENTO = '${fechaNac}', ID_PUESTO = ${idPuesto}, CodigoPostalDomicilio = ${cpDomicilio}, AniosEmpresa = ${aniosEmpresa}, Educacion = '${educacion}' where IDUSUARIO = ${idUsuario};`;
+    
+        return new Promise((resolve, reject) => {
+            tp.sql(requestStr)
+                .execute()
+                .then(results => {
+                    resolve(results);
+                })
+                .catch(err => {
+                    console.log(err);
+                    reject(err);
+                });
+        });
+};
+
+db.updateBriefEmpresa = function (idUsuario, nombreEmpresa, rfcEmpresa, numeroEmpleados, numeroSocios, empresaFamiliar, regimenFiscal, rangoVentasAnuales, ventajaCompetitiva, idCampania) {
+
+    const requestStr = `Update CATUSUARIO set NOMEMPRESACOMPRADOR = '${nombreEmpresa}'  where IDUSUARIO = ${idUsuario};
+    update TBL_BRIEF set RFCEMPRESA = '${rfcEmpresa}', NumeroEmpleados = ${numeroEmpleados}, NumeroSocios = ${numeroSocios}, EmpresaFamiliar = ${empresaFamiliar}, RegimenFiscal = '${regimenFiscal}', RangoVentasAnuales = '${rangoVentasAnuales}' where IDUSUARIO = ${idUsuario};
+    update tbl_TuCampania set VentajaCompetitiva = '${ventajaCompetitiva}' where IDCampania = ${idCampania};`;
+    
+        return new Promise((resolve, reject) => {
+            tp.sql(requestStr)
+                .execute()
+                .then(results => {
+                    resolve(results);
+                })
+                .catch(err => {
+                    console.log(err);
+                    reject(err);
+                });
+        });
     };
+
+db.updateBriefClienteParticular = function ( clientesTargetIngresosAnuales, clientesTargetEdad, clientesTargetGenero, clientesTargetIntereses, idCampania) {
+
+        const requestStr = `update tbl_TuCampania set ClientesTargetIngresosAnuales = '${clientesTargetIngresosAnuales}', ClientesTargetEdad = '${clientesTargetEdad}', ClientesTargetGenero = '${clientesTargetGenero}', ClientesTargetIntereses = '${clientesTargetIntereses}' where IDCampania = ${idCampania}`;    
+
+        return new Promise((resolve, reject) => {
+            tp.sql(requestStr)
+                .execute()
+                .then(results => {
+                    resolve(results);
+                })
+                .catch(err => {
+                    console.log(err);
+                    reject(err);
+                });
+        });
+};
+
+db.updateBriefClienteEmpresas= function ( clientesTargetSector, clientesTargetCategoria, clientesTargetSectores, clientesTargetIntereses, idCampania) {
+
+    const requestStr = `update tbl_TuCampania set ClientesTargetSector = '${clientesTargetSector}', ClientesTargetCategoria = '${clientesTargetCategoria}', ClientesTargetSectores = '${clientesTargetSectores}', ClientesTargetIntereses = '${clientesTargetIntereses}' where IDCampania = ${idCampania}`;    
+
+    return new Promise((resolve, reject) => {
+        tp.sql(requestStr)
+            .execute()
+            .then(results => {
+                resolve(results);
+            })
+            .catch(err => {
+                console.log(err);
+                reject(err);
+            });
+    });
+};
 
 db.executeGetCobertura = function (idUsuario, idCampania) {
 

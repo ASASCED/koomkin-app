@@ -36,11 +36,12 @@ export class MasBriefPage implements OnInit{
     public sector;
     public categoria;
     public sectores;
-
+    public nombre;
+    public apaterno;
+    public amaterno;
     public editar = 0;
 
     mas_informacion: boolean = false;
-    familiar: boolean = false;
   
     public positions = [
       {id: 1, nombre: 'Socio'},
@@ -106,7 +107,10 @@ export class MasBriefPage implements OnInit{
             this.idpuesto = element['nombre'];
           }
         });
-        
+        this.nombre = navParams.get('nombre');
+        this.apaterno = navParams.get('apaterno');
+        this.amaterno = navParams.get('amaterno');
+
         this.cpDomicilio = navParams.get('cpDomicilio');
         this.aniosEmpresa = navParams.get('aniosEmpresa');
         this.educacion = navParams.get('educacion');
@@ -115,6 +119,8 @@ export class MasBriefPage implements OnInit{
         this.numeroEmpleados = navParams.get('numeroEmpleados');
         this.numeroSocios = navParams.get('numeroSocios');
         this.empresaFamiliar = navParams.get('empresaFamiliar');
+        console.log(this.empresaFamiliar);
+
         this.regimenFiscal = navParams.get('regimenFiscal');
         this.ventajaCompetitiva = navParams.get('ventajaCompetitiva');
         this.rangoVentasAnuales = navParams.get('rangoVentasAnuales');
@@ -149,14 +155,17 @@ export class MasBriefPage implements OnInit{
         this.sliderComponent.slideTo(selectedIndex);
       }
     
+      onChangeSegment(position) {
+        console.log(position);
+        const selectedIndex = this.slides.findIndex((slide) => {
+          return slide.id === position;
+        });
+        this.sliderComponent.slideTo(selectedIndex);
+      }
+
       onSlideChanged(s: Slides) {
         const currentSlide = this.slides[s.getActiveIndex()];
         this.selectedSegment = currentSlide.id;
-      }
-
-      onSelectName({id, name}): void {
-        this.puesto = name;  
-        console.log(id,this.puesto);                  
       }
 
       numberOnly(event): boolean {
