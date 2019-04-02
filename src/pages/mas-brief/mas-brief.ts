@@ -40,7 +40,8 @@ export class MasBriefPage implements OnInit{
     public apaterno;
     public amaterno;
     public editar = 0;
-
+    public idCampania;
+    public datos;
     mas_informacion: boolean = false;
   
     public positions = [
@@ -119,8 +120,6 @@ export class MasBriefPage implements OnInit{
         this.numeroEmpleados = navParams.get('numeroEmpleados');
         this.numeroSocios = navParams.get('numeroSocios');
         this.empresaFamiliar = navParams.get('empresaFamiliar');
-        console.log(this.empresaFamiliar);
-
         this.regimenFiscal = navParams.get('regimenFiscal');
         this.ventajaCompetitiva = navParams.get('ventajaCompetitiva');
         this.rangoVentasAnuales = navParams.get('rangoVentasAnuales');
@@ -150,7 +149,31 @@ export class MasBriefPage implements OnInit{
       getLastCampania() {
         this.provedor.getLastCampania(this.id).then(
           data => {
-            console.log(data);
+            this.datos = data;
+            this.idCampania = this.datos[0].IDCampania;
+            console.log(this.idCampania);
+          },
+          err => {
+            //   // console.log('error');
+          }
+        );
+      }
+
+      updateBriefDatos() {
+        this.provedor.updateBriefDatos(this.id,this.nombre,this.apaterno,this.amaterno,this.fechaNacimiento,this.idpuesto,this.cpDomicilio,this.aniosEmpresa,this.educacion).then(
+          data => {
+            console.log('cambio datos');
+          },
+          err => {
+            //   // console.log('error');
+          }
+        );
+      }
+
+      updateBriefEmpresa() {
+        this.provedor.updateBriefEmpresa(this.id,this.nombreComercial,this.rfcEmpresa,this.numeroEmpleados,this.numeroSocios,this.empresaFamiliar,this.regimenFiscal,this.rangoVentasAnuales,this.ventajaCompetitiva,this.idCampania).then(
+          data => {
+            console.log(this.idCampania);
           },
           err => {
             //   // console.log('error');
@@ -158,6 +181,28 @@ export class MasBriefPage implements OnInit{
         );
       }
   
+      updateBriefClienteParticular() {
+        this.provedor.updateBriefClienteParticular(this.sector,this.edad,this.genero,this.intereses,this.idCampania).then(
+          data => {
+            console.log(this.idCampania);
+          },
+          err => {
+            //   // console.log('error');
+          }
+        );
+      }
+
+      updateBriefClienteEmpresas() {
+        this.provedor.updateBriefClienteEmpresas(this.sector,this.categoria,this.sectores,this.intereses,this.idCampania).then(
+          data => {
+            console.log(this.idCampania);
+          },
+          err => {
+            //   // console.log('error');
+          }
+        );
+      }
+
       onSegmentChanged(segmentButton: SegmentButton) {
         console.log('Segment changed to', segmentButton.value);
     
