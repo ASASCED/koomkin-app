@@ -1217,11 +1217,11 @@ db.executeUpdateBriefInformation = function (idUsuario,idProducto,new_Producto,n
                                                     ${new_IdSubSector});
                         select top 1 * from tbl_tuCampania where IDUSUARIO = ${idUsuario} order by IDCampania desc`;                       
     
-        console.log(requestStr);
         return new Promise((resolve, reject) => {
             tp.sql(requestStr)
                 .execute()
                 .then(results => {
+                    console.log(results);
                     resolve(results);
                 })
                 .catch(err => {
@@ -1302,6 +1302,23 @@ db.updateBriefClienteEmpresas= function ( clientesTargetSector, clientesTargetCa
     });
 };
 
+db.updateCobertura = function (idCampania,idPais,idEstado,idUsuario) {
+
+    const requestStr = `insert into tbl_TuCampaniaCobertura (IDCampania,IdPAIS,IDESTADO,IDUSUARIO) VALUES (${idCampania},${idPais},${idEstado},${idUsuario});`;
+    
+        return new Promise((resolve, reject) => {
+            tp.sql(requestStr)
+                .execute()
+                .then(results => {
+                    resolve(results);
+                })
+                .catch(err => {
+                    console.log(err);
+                    reject(err);
+                });
+        });
+    };
+
 db.executeGetCobertura = function (idUsuario, idCampania) {
 
     const requestStr = `select * from tbl_tucampaniacobertura where IDUSUARIO = ${idUsuario} and IDCampania = ${idCampania}`;
@@ -1318,6 +1335,7 @@ db.executeGetCobertura = function (idUsuario, idCampania) {
                 });
         });
     };
+
 
 db.executeGetEstados = function () {
 

@@ -131,12 +131,13 @@ export class MasBriefPage implements OnInit{
         this.sector = navParams.get('sector');
         this.categoria = navParams.get('categoria');
         this.sectores = navParams.get('sectores');
+        this.idCampania = navParams.get('idCampania');
+        console.log(this.idCampania);
         this.empresa = this.authService.empresa;
         this.id = this.authService.id;
       }
    
       ngOnInit() {
-        this.getLastCampania();
       }
   
       changeEdit(numero) {
@@ -145,19 +146,6 @@ export class MasBriefPage implements OnInit{
         } else if(numero == 1) {
           this.editar = 0;
         }
-      }
-
-      getLastCampania() {
-        this.provedor.getLastCampania(this.id).then(
-          data => {
-            this.datos = data;
-            this.idCampania = this.datos[0].IDCampania;
-            console.log(this.idCampania);
-          },
-          err => {
-            //   // console.log('error');
-          }
-        );
       }
 
       updateBriefDatos() {

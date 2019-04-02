@@ -20,6 +20,7 @@ export class BriefPage implements OnInit{
   public tipo_empresa: any;
   public educacion;
   public datos;
+  public datosCampania;
   public cp;
   public ciudad;
   public target;
@@ -39,6 +40,7 @@ export class BriefPage implements OnInit{
   public cobertura_region;
   public cobertura_nacional; 
   public editar = 0;
+  public idPais = 156;
 
   public IDMembresia;
   public IdProducto;
@@ -70,6 +72,7 @@ export class BriefPage implements OnInit{
   public sector;
   public categoria;
   public sectores;
+  public idCampania;
 
   mas_informacion: boolean = false;
   familiar: boolean = false;
@@ -197,7 +200,7 @@ export class BriefPage implements OnInit{
       this.provedor.getEstados().then(
         data => {
           this.cat_estados = data;
-          //console.log(data);
+          console.log(data);
         },
         err => {
           //   // console.log('error');
@@ -211,6 +214,18 @@ export class BriefPage implements OnInit{
           let empresas = data;
           this.tipo_empresas = empresas;
           //console.log(this.tipo_empresas);
+        },
+        err => {
+          //   // console.log('error');
+        }
+      );
+    }
+
+    getCP() {
+      this.provedor.getEstados().then(
+        data => {
+          this.cat_estados = data;
+          console.log(data);
         },
         err => {
           //   // console.log('error');
@@ -286,21 +301,6 @@ export class BriefPage implements OnInit{
       } else if(this.tipoempresa == 'Profesionista') {
         this.tipo_empresa = 6;
       }
-
-      console.log(
-        this.id,
-        this.IdProducto,
-        this.producto,
-        this.tipo_empresa,
-        this.cp,
-        this.IDMembresia,
-        this.mejor,
-        this.target,
-        this.correo1,
-        this.correo2,
-        this.correo3,
-        this.IdSubSector
-      );
         
       this.provedor.updateBriefInformation(
         this.id,
@@ -316,13 +316,37 @@ export class BriefPage implements OnInit{
         this.correo3,
         this.IdSubSector).then(
         data => {
-          console.log('INFO ENVIADA');
+
+          this.datosCampania = data;
+          this.idCampania = this.datosCampania[0].IDCampania;
+          if(this.cobertura_empresa == 'Local') {
+            this.cobertura_local = 1;
+          } else if(this.cobertura_empresa == 'Estado') {
+            this.updateCobertura(this.idCampania,this.idPais,estado,this.id);
+          } else if(this.cobertura_empresa == 'Region') {
+            console.log('update tbl tu campania cobertura un registro por estado');
+          } else if(this.cobertura_empresa == 'Nacional') {
+            let null_estado = null;
+            this.updateCobertura(this.idCampania,this.idPais,null_estado,this.id);
+          }
         },
         err => {
           //   // console.log('error');
         }
       );
 
+    }
+
+    updateCobertura(idCampania,idPais,idEstado,idUsuario) {
+      console.log(idCampania,idPais,idEstado,idUsuario);
+      this.provedor.updateCobertura(idCampania,idPais,idEstado,idUsuario).then(
+        data => {
+
+        },
+        err => {
+          //   // console.log('error');
+        }
+      );
     }
 
     pagina() {
@@ -353,7 +377,8 @@ export class BriefPage implements OnInit{
           regimenFiscal: this.regimenFiscal,
           nombre: this.nombre, 
           apaterno: this.apaterno, 
-          amaterno: this.amaterno 
+          amaterno: this.amaterno, 
+          idCampania: this.idCampania
       });
     }
 }

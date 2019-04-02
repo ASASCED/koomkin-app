@@ -576,6 +576,16 @@ export class RestProvider {
     });
   }
 
+  updateCobertura(idCampania,idPais,idEstado,idUsuario)  {
+    return new Promise(resolve => {
+      this.http.get(this.apiUrl + '/updateCobertura/' + idCampania + '/' + idPais + '/' + idEstado + '/' + idUsuario).subscribe(data => {
+        resolve(data);
+      }, err => {
+         console.log(err);
+      });
+    });
+  }
+
   getCobertura(idUsuario,idCampania) {
     return new Promise(resolve => {
       this.http.get(this.apiUrl + '/getCobertura/' + idUsuario + '/' + idCampania).subscribe(data => {
