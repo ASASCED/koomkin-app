@@ -576,9 +576,19 @@ export class RestProvider {
     });
   }
 
-  updateCobertura(idCampania,idPais,idEstado,idUsuario)  {
+  updateCobertura(idCampania,idEstado,idUsuario)  {
     return new Promise(resolve => {
-      this.http.get(this.apiUrl + '/updateCobertura/' + idCampania + '/' + idPais + '/' + idEstado + '/' + idUsuario).subscribe(data => {
+      this.http.get(this.apiUrl + '/updateCobertura/' + idCampania + '/' + idEstado + '/' + idUsuario).subscribe(data => {
+        resolve(data);
+      }, err => {
+         console.log(err);
+      });
+    });
+  }
+
+  updateCoberturaNacional(idCampania,idUsuario)  {
+    return new Promise(resolve => {
+      this.http.get(this.apiUrl + '/updateCoberturaNacional/' + idCampania + '/' + idUsuario).subscribe(data => {
         resolve(data);
       }, err => {
          console.log(err);

@@ -1254,14 +1254,30 @@ app.get('/updateBriefClienteEmpresas/:clientesTargetSector/:clientesTargetCatego
 
 //updateBriefInformation Cliente Objetivo Particulares
 
-app.get('/updateCobertura/:idCampania/:idPais/:idEstado/:idUsuario', function(req, res) {
+app.get('/updateCobertura/:idCampania/:idEstado/:idUsuario', function(req, res) {
 
     const idCampania = parseInt(req.params.idCampania, 10);
-    const idPais = parseInt(req.params.idPais, 10);
     const idEstado = parseInt(req.params.idEstado, 10);
     const idUsuario = parseInt(req.params.idUsuario, 10);
 
-    db.updateCobertura(idCampania,idPais,idEstado,idUsuario) 
+    db.updateCobertura(idCampania,idEstado,idUsuario) 
+        .then(rows => {
+            res.json(rows).status(200).send();
+        })
+        .catch(err => {
+            res.status(500).json({ error: err }).send();
+        });
+});
+
+
+//updateBriefInformation Cliente Objetivo Particulares
+
+app.get('/updateCoberturaNacional/:idCampania/:idUsuario', function(req, res) {
+
+    const idCampania = parseInt(req.params.idCampania, 10);
+    const idUsuario = parseInt(req.params.idUsuario, 10);
+
+    db.updateCoberturaNacional(idCampania,idUsuario) 
         .then(rows => {
             res.json(rows).status(200).send();
         })

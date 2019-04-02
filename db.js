@@ -1302,9 +1302,26 @@ db.updateBriefClienteEmpresas= function ( clientesTargetSector, clientesTargetCa
     });
 };
 
-db.updateCobertura = function (idCampania,idPais,idEstado,idUsuario) {
+db.updateCobertura = function (idCampania,idEstado,idUsuario) {
 
-    const requestStr = `insert into tbl_TuCampaniaCobertura (IDCampania,IdPAIS,IDESTADO,IDUSUARIO) VALUES (${idCampania},${idPais},${idEstado},${idUsuario});`;
+    const requestStr = `insert into tbl_TuCampaniaCobertura (IDCampania,IdPAIS,IDESTADO,IDUSUARIO) VALUES (${idCampania},156,${idEstado},${idUsuario});`;
+    
+        return new Promise((resolve, reject) => {
+            tp.sql(requestStr)
+                .execute()
+                .then(results => {
+                    resolve(results);
+                })
+                .catch(err => {
+                    console.log(err);
+                    reject(err);
+                });
+        });
+    };
+
+db.updateCoberturaNacional = function (idCampania,idUsuario) {
+
+    const requestStr = `insert into tbl_TuCampaniaCobertura (IDCampania,IdPAIS,IDESTADO,IDUSUARIO) VALUES (${idCampania},156,NULL,${idUsuario});`;
     
         return new Promise((resolve, reject) => {
             tp.sql(requestStr)

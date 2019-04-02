@@ -326,8 +326,7 @@ export class BriefPage implements OnInit{
           } else if(this.cobertura_empresa == 'Region') {
             console.log('update tbl tu campania cobertura un registro por estado');
           } else if(this.cobertura_empresa == 'Nacional') {
-            let null_estado = null;
-            this.updateCobertura(this.idCampania,this.idPais,null_estado,this.id);
+            this.updateCoberturaNacional(this.idCampania,this.id);
           }
         },
         err => {
@@ -340,6 +339,18 @@ export class BriefPage implements OnInit{
     updateCobertura(idCampania,idPais,idEstado,idUsuario) {
       console.log(idCampania,idPais,idEstado,idUsuario);
       this.provedor.updateCobertura(idCampania,idPais,idEstado,idUsuario).then(
+        data => {
+
+        },
+        err => {
+          //   // console.log('error');
+        }
+      );
+    }
+
+    updateCoberturaNacional(idCampania,idUsuario) {
+      console.log(idCampania,idUsuario);
+      this.provedor.updateCoberturaNacional(idCampania,idUsuario).then(
         data => {
 
         },
