@@ -1340,8 +1340,7 @@ db.updateCoberturaRegion = function (idCampania,idEstado,idUsuario) {
 
 db.updateCoberturaNacional = function (idCampania,idUsuario) {
 
-    const requestStr = `insert into tbl_TuCampaniaCobertura (IDCampania,IdPAIS,IDESTADO,IDUSUARIO) VALUES (${idCampania},156,NULL,${idUsuario});
-                        update TBL_BRIEF set IDESTADO = NULL where IDUSUARIO = ${idUsuario}`;
+    const requestStr = `insert into tbl_TuCampaniaCobertura (IDCampania,IdPAIS,IDESTADO,IDUSUARIO) VALUES (${idCampania},156,NULL,${idUsuario});`;
     
         return new Promise((resolve, reject) => {
             tp.sql(requestStr)
