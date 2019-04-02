@@ -18,6 +18,7 @@ export class MasBriefPage implements OnInit{
     public fechaNacimiento;
     public idpuesto: any;
     public puesto;
+    public id_puesto;
     public cpDomicilio;
     public aniosEmpresa;
     public educacion;
@@ -160,9 +161,18 @@ export class MasBriefPage implements OnInit{
       }
 
       updateBriefDatos() {
-        this.provedor.updateBriefDatos(this.id,this.nombre,this.apaterno,this.amaterno,this.fechaNacimiento,this.idpuesto,this.cpDomicilio,this.aniosEmpresa,this.educacion).then(
+
+        this.positions.forEach(element=> {
+          console.log(this.idpuesto);
+          if(element['nombre'] == this.idpuesto) {
+            this.id_puesto = element['id'];
+            console.log(this.id_puesto);
+          }
+        });
+
+        this.provedor.updateBriefDatos(this.id,this.nombre,this.apaterno,this.amaterno,this.fechaNacimiento,this.id_puesto,this.cpDomicilio,this.aniosEmpresa,this.educacion).then(
           data => {
-            console.log('cambio datos');
+            console.log('updateBriefDatos');
           },
           err => {
             //   // console.log('error');
@@ -171,9 +181,14 @@ export class MasBriefPage implements OnInit{
       }
 
       updateBriefEmpresa() {
+        if(this.empresaFamiliar == true) {
+          this.empresaFamiliar = 1;
+        } else if(this.empresaFamiliar == false) {
+          this.empresaFamiliar = 0;
+        }
         this.provedor.updateBriefEmpresa(this.id,this.nombreComercial,this.rfcEmpresa,this.numeroEmpleados,this.numeroSocios,this.empresaFamiliar,this.regimenFiscal,this.rangoVentasAnuales,this.ventajaCompetitiva,this.idCampania).then(
           data => {
-            console.log(this.idCampania);
+            console.log('updateBriefEmpresa');
           },
           err => {
             //   // console.log('error');
@@ -182,9 +197,9 @@ export class MasBriefPage implements OnInit{
       }
   
       updateBriefClienteParticular() {
-        this.provedor.updateBriefClienteParticular(this.sector,this.edad,this.genero,this.intereses,this.idCampania).then(
+        this.provedor.updateBriefClienteParticular(this.ingresosAnuales,this.edad,this.genero,this.intereses,this.idCampania).then(
           data => {
-            console.log(this.idCampania);
+            console.log('updateBriefClienteParticular');
           },
           err => {
             //   // console.log('error');
@@ -195,7 +210,7 @@ export class MasBriefPage implements OnInit{
       updateBriefClienteEmpresas() {
         this.provedor.updateBriefClienteEmpresas(this.sector,this.categoria,this.sectores,this.intereses,this.idCampania).then(
           data => {
-            console.log(this.idCampania);
+            console.log('updateBriefClienteEmpresas');
           },
           err => {
             //   // console.log('error');
@@ -247,6 +262,7 @@ export class MasBriefPage implements OnInit{
 
       changeIngresos(ingresos) {
         this.ingresosAnuales = ingresos;
+        console.log(this.ingresosAnuales)
       }
 
       changeEdad(edad) {
@@ -258,7 +274,8 @@ export class MasBriefPage implements OnInit{
       }
 
       changeSector(sector) {
-        this.sector = sector
+        this.sector = sector;
+        
       }
 
       changeCategoria(categoria) {

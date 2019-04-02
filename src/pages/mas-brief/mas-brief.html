@@ -82,7 +82,7 @@
                               </ion-col>
                           </ion-row>
                       </ion-grid>
-                     <button class="guardar" (click)="onChangeSegment('second')">Guardar</button>
+                     <button class="guardar" (click)="onChangeSegment('second');updateBriefDatos()">Guardar</button>
                   </div>
               </ion-slide>
               <ion-slide>
@@ -236,7 +236,7 @@
                     <p *ngIf="ventajaCompetitiva == 'Otro'" class="titulo-brief">Detalla dicha ventaja competitiva</p>
                     <textarea *ngIf="ventajaCompetitiva == 'Otro'" [(ngModel)]="ventajaCompetitiva"  class="otro" rows="2" cols="32" maxlength="150" placeholder="Detalla tu ventaja competitiva..." required></textarea>
                     
-                    <button class="guardar" (click)="onChangeSegment('third')">Guardar</button>
+                    <button class="guardar" (click)="onChangeSegment('third');updateBriefEmpresa()">Guardar</button>
             
                 </div>
               </ion-slide>
@@ -335,12 +335,12 @@
 
                       <p class="titulo-brief">Género</p>
                       <ul class="chico" style="margin-top: 0%;">
-                          <li class="zero-chico" [ngClass]="{'elegida-brief':genero == 'Femenino'}" (click)="changeGenero('Femenino')">
+                          <li class="zero-chico" [ngClass]="{'elegida-brief':genero == 'F'}" (click)="changeGenero('F')">
                               <ion-grid class="anuncio-grid" style="height: 100%;justify-content: center;padding: 0;">
                                   <ion-row style="width: 100%;margin-bottom: 0%;">
                                       <ion-col col-4 style="height: 100%;">
-                                        <img *ngIf="genero !== 'Femenino'" class="img-mitad" src="assets/imgs/masbrief/ic_femenino.svg">
-                                        <img *ngIf="genero == 'Femenino'" class="img-mitad" src="assets/imgs/masbrief/ic_femenino_selected.svg">
+                                        <img *ngIf="genero !== 'F'" class="img-mitad" src="assets/imgs/masbrief/ic_femenino.svg">
+                                        <img *ngIf="genero == 'F'" class="img-mitad" src="assets/imgs/masbrief/ic_femenino_selected.svg">
 
                                       </ion-col>
                                       <ion-col col-8 style="height: 100%;">
@@ -349,12 +349,12 @@
                                   </ion-row>
                               </ion-grid>
                           </li>
-                          <li class="zero-chico" [ngClass]="{'elegida-brief':genero == 'Masculino'}" (click)="changeGenero('Masculino')">
+                          <li class="zero-chico" [ngClass]="{'elegida-brief':genero == 'M'}" (click)="changeGenero('M')">
                               <ion-grid class="anuncio-grid" style="height: 100%;justify-content: center;padding: 0;">
                                   <ion-row style="width: 100%;margin-bottom: 0%;">
                                       <ion-col col-4 style="height: 100%;">
-                                        <img *ngIf="genero !== 'Masculino'" class="img-mitad" src="assets/imgs/masbrief/ic_masculino.svg">
-                                        <img *ngIf="genero == 'Masculino'" class="img-mitad" src="assets/imgs/masbrief/ic_masculino_selected.svg">
+                                        <img *ngIf="genero !== 'M'" class="img-mitad" src="assets/imgs/masbrief/ic_masculino.svg">
+                                        <img *ngIf="genero == 'M'" class="img-mitad" src="assets/imgs/masbrief/ic_masculino_selected.svg">
                                       </ion-col>
                                       <ion-col col-8 style="height: 100%;">
                                         <span>Masculino</span>
@@ -367,7 +367,7 @@
                       <p class="titulo-brief">Intereses o comentarios adicionales</p>
                       <textarea class="otro" rows="2" cols="32" maxlength="150" [(ngModel)]="intereses" placeholder="Escribe sus intereses o comentarios adicionales..." required></textarea>
                       
-                      <button class="guardar">Guardar</button>
+                      <button class="guardar" (click)="updateBriefClienteParticular()">Guardar</button>
               
                   </div>
 
@@ -444,7 +444,7 @@
                     <p class="titulo-brief">Intereses o comentarios adicionales</p>
                     <textarea class="otro" rows="2" cols="32" maxlength="150" [(ngModel)]="intereses" placeholder="Escribe sus intereses o comentarios adicionales..." required></textarea>
                     
-                    <button class="guardar" >Guardar</button>
+                    <button class="guardar" (click)="updateBriefClienteEmpresas()">Guardar</button>
             
                 </div>
               </ion-slide>

@@ -548,7 +548,7 @@ export class RestProvider {
 
   updateBriefEmpresa(idUsuario,nombreEmpresa,rfcEmpresa,numeroEmpleados,numeroSocios,empresaFamiliar,regimenFiscal,rangoVentasAnuales,ventajaCompetitiva,idCampania) {
     return new Promise(resolve => {
-      this.http.get(this.apiUrl + '/updateBriefDatos/' + idUsuario + '/' + nombreEmpresa + '/' + rfcEmpresa + '/' + numeroEmpleados  + '/' + numeroSocios  + '/' + empresaFamiliar  + '/' + regimenFiscal  + '/' + rangoVentasAnuales  + '/' + ventajaCompetitiva + '/' + idCampania ).subscribe(data => {
+      this.http.get(this.apiUrl + '/updateBriefEmpresa/' + idUsuario + '/' + nombreEmpresa + '/' + rfcEmpresa + '/' + numeroEmpleados  + '/' + numeroSocios  + '/' + empresaFamiliar  + '/' + regimenFiscal  + '/' + rangoVentasAnuales  + '/' + ventajaCompetitiva + '/' + idCampania ).subscribe(data => {
         resolve(data);
       }, err => {
          console.log(err);
@@ -558,7 +558,7 @@ export class RestProvider {
 
   updateBriefClienteParticular(clientesTargetIngresosAnuales,clientesTargetEdad,clientesTargetGenero,clientesTargetIntereses,idCampania) {
     return new Promise(resolve => {
-      this.http.get(this.apiUrl + '/updateBriefDatos/' + clientesTargetIngresosAnuales + '/' + clientesTargetEdad + '/' + clientesTargetGenero + '/' + clientesTargetIntereses  + '/' + idCampania ).subscribe(data => {
+      this.http.get(this.apiUrl + '/updateBriefClienteParticular/' + clientesTargetIngresosAnuales + '/' + clientesTargetEdad + '/' + clientesTargetGenero + '/' + clientesTargetIntereses  + '/' + idCampania ).subscribe(data => {
         resolve(data);
       }, err => {
          console.log(err);
@@ -568,7 +568,7 @@ export class RestProvider {
 
   updateBriefClienteEmpresas(clientesTargetSector,clientesTargetCategoria,clientesTargetSectores,clientesTargetIntereses,idCampania) {
     return new Promise(resolve => {
-      this.http.get(this.apiUrl + '/updateBriefDatos/' + clientesTargetSector + '/' + clientesTargetCategoria + '/' + clientesTargetSectores + '/' + clientesTargetIntereses  + '/' + idCampania ).subscribe(data => {
+      this.http.get(this.apiUrl + '/updateBriefClienteEmpresas/' + clientesTargetSector + '/' + clientesTargetCategoria + '/' + clientesTargetSectores + '/' + clientesTargetIntereses  + '/' + idCampania ).subscribe(data => {
         resolve(data);
       }, err => {
          console.log(err);

@@ -195,8 +195,10 @@
     <div class="mas-brief">
       <p class="deseas-brief">¿Deseas agregar mayor información o detalle de tu empresa para mejorar la configuración de tu campaña?</p>
       <ion-item>
-          <ion-label class="informacion-brief">Más información</ion-label>
-          <ion-toggle color="secondary" [(ngModel)]="mas_informacion" class="informacion-brief" (ionChange)="pagina()"></ion-toggle>
+          <ion-label class="informacion-brief" style="opacity: 1 !Important;">Más información</ion-label>
+          <ion-toggle *ngIf="target !== 'Empresas' && target !== 'Particulares'" disabled color="secondary" [(ngModel)]="mas_informacion" class="informacion-brief" (ionChange)="pagina()"></ion-toggle>
+          <ion-toggle *ngIf="target === 'Empresas' || target === 'Particulares'" color="secondary" [(ngModel)]="mas_informacion" class="informacion-brief" (ionChange)="pagina()"></ion-toggle>
+
       </ion-item>
     </div>
   </div>

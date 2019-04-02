@@ -1214,7 +1214,8 @@ db.executeUpdateBriefInformation = function (idUsuario,idProducto,new_Producto,n
                                                     '${new_Correo1}',
                                                     '${new_Correo2}',
                                                     '${new_Correo3}',
-                                                    ${new_IdSubSector});`;
+                                                    ${new_IdSubSector});
+                        select top 1 * from tbl_tuCampania where IDUSUARIO = ${idUsuario} order by IDCampania desc`;                       
     
         console.log(requestStr);
         return new Promise((resolve, reject) => {
