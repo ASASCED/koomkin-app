@@ -1223,7 +1223,6 @@ app.get('/updateBriefClienteParticular/:clientesTargetIngresosAnuales/:clientesT
     const clientesTargetIntereses = req.params.clientesTargetIntereses;
     const idCampania = parseInt(req.params.idCampania, 10);
 
-
     db.updateBriefClienteParticular(clientesTargetIngresosAnuales,clientesTargetEdad,clientesTargetGenero,clientesTargetIntereses,idCampania) 
         .then(rows => {
             res.json(rows).status(200).send();
@@ -1260,6 +1259,21 @@ app.get('/getBriefInformation/:usuario', function(req, res) {
     const usuario = parseInt(req.params.usuario, 10);
 
     db.executeGetBriefInformation(usuario) 
+        .then(rows => {
+            res.json(rows).status(200).send();
+        })
+        .catch(err => {
+            res.status(500).json({ error: err }).send();
+        });
+});
+
+//SP_GetLastCampania
+
+app.get('/getLastCampania/:usuario', function(req, res) {
+
+    const usuario = parseInt(req.params.usuario, 10);
+
+    db.executeGetLastCampania(usuario) 
         .then(rows => {
             res.json(rows).status(200).send();
         })

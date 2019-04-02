@@ -516,9 +516,59 @@ export class RestProvider {
     });
   }
 
+  getLastCampania(idUsuario) {
+    return new Promise(resolve => {
+      this.http.get(this.apiUrl + '/getLastCampania/' + idUsuario ).subscribe(data => {
+        resolve(data);
+      }, err => {
+         console.log(err);
+      });
+    });
+  }
+
   updateBriefInformation(idUsuario,idProducto,new_Producto,new_TipoEmpresa,new_CodigoPostal,new_IDMembresia,new_PorqueEresMejor,new_ClientesTarget,new_Correo1,new_Correo2,new_Correo3,new_IdSubSector) {
     return new Promise(resolve => {
       this.http.get(this.apiUrl + '/updateBriefInformation/' + idUsuario + '/' + idProducto + '/' + new_Producto + '/' + new_TipoEmpresa  + '/' + new_CodigoPostal  + '/' + new_IDMembresia  + '/' + new_PorqueEresMejor  + '/' + new_ClientesTarget  + '/' + new_Correo1  + '/' + new_Correo2  + '/' + new_Correo3  + '/' + new_IdSubSector ).subscribe(data => {
+        resolve(data);
+      }, err => {
+         console.log(err);
+      });
+    });
+  }
+
+  updateBriefDatos(idUsuario,nombre,aPaterno,aMaterno,fechaNac,idPuesto,cpDomicilio,aniosEmpresa,educacion) {
+    return new Promise(resolve => {
+      this.http.get(this.apiUrl + '/updateBriefDatos/' + idUsuario + '/' + nombre + '/' + aPaterno + '/' + aMaterno  + '/' + fechaNac  + '/' + idPuesto  + '/' + cpDomicilio  + '/' + aniosEmpresa  + '/' + educacion ).subscribe(data => {
+        resolve(data);
+      }, err => {
+         console.log(err);
+      });
+    });
+  }
+
+  updateBriefEmpresa(idUsuario,nombreEmpresa,rfcEmpresa,numeroEmpleados,numeroSocios,empresaFamiliar,regimenFiscal,rangoVentasAnuales,ventajaCompetitiva,idCampania) {
+    return new Promise(resolve => {
+      this.http.get(this.apiUrl + '/updateBriefDatos/' + idUsuario + '/' + nombreEmpresa + '/' + rfcEmpresa + '/' + numeroEmpleados  + '/' + numeroSocios  + '/' + empresaFamiliar  + '/' + regimenFiscal  + '/' + rangoVentasAnuales  + '/' + ventajaCompetitiva + '/' + idCampania ).subscribe(data => {
+        resolve(data);
+      }, err => {
+         console.log(err);
+      });
+    });
+  }
+
+  updateBriefClienteParticular(clientesTargetIngresosAnuales,clientesTargetEdad,clientesTargetGenero,clientesTargetIntereses,idCampania) {
+    return new Promise(resolve => {
+      this.http.get(this.apiUrl + '/updateBriefDatos/' + clientesTargetIngresosAnuales + '/' + clientesTargetEdad + '/' + clientesTargetGenero + '/' + clientesTargetIntereses  + '/' + idCampania ).subscribe(data => {
+        resolve(data);
+      }, err => {
+         console.log(err);
+      });
+    });
+  }
+
+  updateBriefClienteEmpresas(clientesTargetSector,clientesTargetCategoria,clientesTargetSectores,clientesTargetIntereses,idCampania) {
+    return new Promise(resolve => {
+      this.http.get(this.apiUrl + '/updateBriefDatos/' + clientesTargetSector + '/' + clientesTargetCategoria + '/' + clientesTargetSectores + '/' + clientesTargetIntereses  + '/' + idCampania ).subscribe(data => {
         resolve(data);
       }, err => {
          console.log(err);

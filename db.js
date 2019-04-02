@@ -1176,6 +1176,23 @@ db.executeGetBriefInformation = function (idUsuario) {
         });
 };
 
+db.executeGetLastCampania = function (idUsuario) {
+
+    const requestStr = `select top 1 * from tbl_tuCampania where IDUSUARIO = ${idUsuario} order by IDCampania desc`;
+    
+        return new Promise((resolve, reject) => {
+            tp.sql(requestStr)
+                .execute()
+                .then(results => {
+                    resolve(results);
+                })
+                .catch(err => {
+                    console.log(err);
+                    reject(err);
+                });
+        });
+};
+
 db.executeUpdateBriefInformation = function (idUsuario,idProducto,new_Producto,new_TipoEmpresa,new_CodigoPostal,new_IDMembresia,new_PorqueEresMejor,new_ClientesTarget,new_Correo1,new_Correo2,new_Correo3,new_IdSubSector ) {
 
     const requestStr = `Update TBL_CATALOGOPRODUCTOS set NOMBRE = '${new_Producto}' where IDUSUARIO = ${idUsuario} and ID_PRODUCTO = ${idProducto}; 

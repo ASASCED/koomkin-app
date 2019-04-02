@@ -136,6 +136,7 @@ export class MasBriefPage implements OnInit{
       }
    
       ngOnInit() {
+        this.getLastCampania();
       }
   
       changeEdit(numero) {
@@ -144,6 +145,17 @@ export class MasBriefPage implements OnInit{
         } else if(numero == 1) {
           this.editar = 0;
         }
+      }
+
+      getLastCampania() {
+        this.provedor.getLastCampania(this.id).then(
+          data => {
+            console.log(data);
+          },
+          err => {
+            //   // console.log('error');
+          }
+        );
       }
   
       onSegmentChanged(segmentButton: SegmentButton) {
