@@ -37,9 +37,6 @@ export class BriefPage implements OnInit{
   public campania;
   public cobertura;
   public cobertura_empresa;
-  public cobertura_local;
-  public cobertura_estado;  
-  public cobertura_region;
   public cobertura_nacional; 
   public editar = 0;
   public idPais = 156;
@@ -119,6 +116,7 @@ export class BriefPage implements OnInit{
           if (this.cobertura_nacional == 1) {
              this.cobertura_empresa = 'Nacional';
           } 
+          console.log(this.datos[0].Nacional);
           this.tipoempresa = this.datos[0].TipoEmpresa;
 
           if(this.tipoempresa == 1) {
@@ -183,8 +181,11 @@ export class BriefPage implements OnInit{
               }
             });
           }
-          this.cobertura_local = 1;
-          console.log(this.cobertura_local,this.cobertura_nacional);
+          if(this.cobertura_empresa !== 'Nacional') {
+            this.cobertura_empresa = 'Local';
+            console.log(this.cobertura_empresa);
+          }
+          
         },
         err => {
           // console.log('error');
@@ -196,23 +197,21 @@ export class BriefPage implements OnInit{
       this.provedor.getCobertura(idUsuario,campania).then(
         data => {
           this.cobertura = data;
+
           console.log(this.cobertura );
+
           if( (this.cuarta == 2 || this.cuarta == 3 || this.cuarta == 5) && this.cobertura.length == 1 && this.cobertura_nacional !== 1  ) {
-            this.cobertura_local = 1;
+            console.log('if local');
+
             this.cobertura_empresa = 'Local';
-            // console.log(this.cobertura_empresa);
           } else if(this.cobertura.length == 1 && this.cobertura_nacional !== 1 && this.cuarta !== 2 && this.cuarta !== 3 && this.cuarta !== 5 ) {
-            this.cobertura_estado = 1;
             this.cobertura_empresa = 'Estado';
-            // console.log(this.cobertura_empresa);
           } else if(this.cobertura.length >= 2 && this.cobertura_nacional !== 1 ) {
-            this.cobertura_region = 1;
             this.cobertura_empresa = 'Region';
             for(let i = 0; this.cobertura.length > i; i++ ) {
               this.cat_estados.forEach(element=> {
                 if(element['IDESTADO'] == this.cobertura[i].IDESTADO) {
                   this.estado.push(element['NOMBRE']);
-                  // console.log(element['NOMBRE'],this.estado );
                 }
               });
             }
@@ -231,7 +230,7 @@ export class BriefPage implements OnInit{
       this.provedor.getEstados().then(
         data => {
           this.cat_estados = data;
-          console.log(data);
+          // console.log(data);
         },
         err => {
           // console.log('error');
@@ -276,41 +275,21 @@ export class BriefPage implements OnInit{
       switch (tipo) {
         case 'Local': {
           this.cobertura_empresa = 'Local';
-          this.cobertura_local = 1;
-          this.cobertura_estado = 0;
-          this.cobertura_region = 0;
-          this.cobertura_nacional = 0;
           break;
         }
         case 'Estado': {
           this.cobertura_empresa = 'Estado';
-          this.cobertura_local = 0;
-          this.cobertura_estado = 1;
-          this.cobertura_region = 0;
-          this.cobertura_nacional = 0;
           break;
         }
         case 'Region': {
           this.cobertura_empresa = 'Region';
-          this.cobertura_local = 0;
-          this.cobertura_estado = 0;
-          this.cobertura_region = 1;
-          this.cobertura_nacional = 0;
           break;
         }
         case 'Nacional': {
           this.cobertura_empresa = 'Nacional';
-          this.cobertura_local = 0;
-          this.cobertura_estado = 0;
-          this.cobertura_region = 0;
-          this.cobertura_nacional = 1;
           break;
         }
         default:
-        this.cobertura_local = 0;
-        this.cobertura_estado = 0;
-        this.cobertura_region = 0;
-        this.cobertura_nacional = 0;
       }
       // console.log('cambio cobertura a', tipo);
     }
@@ -347,11 +326,10 @@ export class BriefPage implements OnInit{
         this.correo3,
         this.IdSubSector).then(
         data => {
-          console.log(this.cp);
           this.datosCampania = data;
           this.idCampania = this.datosCampania[0].IDCampania;
-          if(this.cobertura_empresa == 'Local') {
-            this.cobertura_local = 1;
+          if(this.cobertura_empresa == 'Local' && this.cobertura_empresa !== 'Nacional') {
+            this.cobertura_empresa == 'Local';
           } else if(this.cobertura_empresa == 'Estado') {
             this.updateCobertura(this.idCampania,this.estado_cob,this.id);
           } else if(this.cobertura_empresa == 'Region') {
