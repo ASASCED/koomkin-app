@@ -800,6 +800,17 @@ app.get('/updateBriefEmpresa/:usuario/:nombreEmpresa/:rfcEmpresa/:numeroEmpleado
     let ventajaCompetitiva = req.params.ventajaCompetitiva;
     const idCampania = parseInt(req.params.idCampania, 10);
 
+    if(!numeroEmpleados){
+        numeroEmpleados = 'NULL';
+    }
+
+    if(!numeroSocios){
+        numeroSocios = 'NULL';
+    }
+
+    if(!ventajaCompetitiva){
+        ventajaCompetitiva = 'NULL';
+    }
 
     db.updateBriefEmpresa(usuario,nombreEmpresa,rfcEmpresa,numeroEmpleados,numeroSocios,empresaFamiliar,regimenFiscal,rangoVentasAnuales,ventajaCompetitiva,idCampania) 
         .then(rows => {
@@ -812,13 +823,17 @@ app.get('/updateBriefEmpresa/:usuario/:nombreEmpresa/:rfcEmpresa/:numeroEmpleado
 
 //updateBriefInformation Cliente Objetivo Particulares
 
-app.get('/updateBriefClienteParticular/:clientesTargetIngresosAnuales/:clientesTargetEdad/:clientesTargetGenero/:clientesTargetIntereses/:idCampania', function(req, res) {
+app.get('/updateBriefClienteParticular/:clientesTargetIngresosAnuales/:clientesTargetEdad/:clientesTargetGenero/:clientesTargetIntereses?/:idCampania', function(req, res) {
 
     const clientesTargetIngresosAnuales = req.params.clientesTargetIngresosAnuales;
     const clientesTargetEdad = req.params.clientesTargetEdad;
     const clientesTargetGenero = req.params.clientesTargetGenero;
-    const clientesTargetIntereses = req.params.clientesTargetIntereses;
+    let clientesTargetIntereses = req.params.clientesTargetIntereses;
     const idCampania = parseInt(req.params.idCampania, 10);
+
+    if(!clientesTargetIntereses){
+        clientesTargetIntereses = 'NULL';
+    }
 
     db.updateBriefClienteParticular(clientesTargetIngresosAnuales,clientesTargetEdad,clientesTargetGenero,clientesTargetIntereses,idCampania) 
         .then(rows => {
@@ -831,14 +846,17 @@ app.get('/updateBriefClienteParticular/:clientesTargetIngresosAnuales/:clientesT
 
 //updateBriefInformation Cliente Objetivo Empresas
 
-app.get('/updateBriefClienteEmpresas/:clientesTargetSector/:clientesTargetCategoria/:clientesTargetSectores/:clientesTargetIntereses/:idCampania', function(req, res) {
+app.get('/updateBriefClienteEmpresas/:clientesTargetSector/:clientesTargetCategoria/:clientesTargetSectores/:clientesTargetIntereses?/:idCampania', function(req, res) {
 
     const clientesTargetSector = req.params.clientesTargetSector;
     const clientesTargetCategoria = req.params.clientesTargetCategoria;
     const clientesTargetSectores = req.params.clientesTargetSectores;
-    const clientesTargetIntereses = req.params.clientesTargetIntereses;
+    let clientesTargetIntereses = req.params.clientesTargetIntereses;
     const idCampania = parseInt(req.params.idCampania, 10);
-
+    
+    if(!clientesTargetIntereses){
+        clientesTargetIntereses = 'NULL';
+    }
 
     db.updateBriefClienteEmpresas(clientesTargetSector,clientesTargetCategoria,clientesTargetSectores,clientesTargetIntereses,idCampania) 
         .then(rows => {
