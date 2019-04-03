@@ -175,12 +175,16 @@ export class BriefPage implements OnInit{
       this.provedor.getCodigoPostal(cp).then(
         data => {
           this.datos_ciudad = data;
-          this.estado_cob = this.datos_ciudad[0].Estado;
-          this.cat_estados.forEach(element=> {
-            if(element['NOMBRE'] == this.estado_cob) {
-              this.estado_cob = element['IDESTADO'];
-            }
-          });
+          if(this.datos_ciudad.length > 0) {
+            this.estado_cob = this.datos_ciudad[0].Estado;
+            this.cat_estados.forEach(element=> {
+              if(element['NOMBRE'] == this.estado_cob) {
+                this.estado_cob = element['IDESTADO'];
+              }
+            });
+          }
+          this.cobertura_local = 1;
+          console.log(this.cobertura_local,this.cobertura_nacional);
         },
         err => {
           // console.log('error');
@@ -343,6 +347,7 @@ export class BriefPage implements OnInit{
         this.correo3,
         this.IdSubSector).then(
         data => {
+          console.log(this.cp);
           this.datosCampania = data;
           this.idCampania = this.datosCampania[0].IDCampania;
           if(this.cobertura_empresa == 'Local') {
@@ -438,7 +443,7 @@ export class BriefPage implements OnInit{
     }
 
     briefLleno() {
-      console.log(this.producto,this.tipoempresa,this.cp,this.mejor,this.target,this.cobertura_empresa );
+      // console.log(this.producto,this.tipoempresa,this.cp,this.mejor,this.target,this.cobertura_empresa );
       if((this.producto !== '' && this.tipoempresa !== '' && this.cp !== '' && this.mejor !== '' && this.target !== '' && this.cobertura_empresa !== '') && 
          (this.producto !== undefined && this.tipoempresa !== undefined && this.cp !== undefined && this.mejor !== undefined && this.target !== undefined && this.cobertura_empresa !== undefined) && 
          (this.producto !== null && this.tipoempresa !== null && this.cp !== null && this.mejor !== null && this.target !== null && this.cobertura_empresa !== null) && 

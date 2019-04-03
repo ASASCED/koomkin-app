@@ -752,7 +752,7 @@ app.get('/updateBriefInformation/:usuario/:idProducto/:new_Producto/:new_TipoEmp
 
 //updateBriefInformation datos
 
-app.get('/updateBriefDatos/:usuario/:nombre/:aPaterno/:aMaterno/:fechaNac/:idPuesto/:cpDomicilio/:aniosEmpresa/:educacion', function(req, res) {
+app.get('/updateBriefDatos/:usuario/:nombre/:aPaterno/:aMaterno/:fechaNac?/:idPuesto/:cpDomicilio/:aniosEmpresa?/:educacion?', function(req, res) {
 
     const usuario = parseInt(req.params.usuario, 10);
     const nombre = req.params.nombre;
@@ -763,6 +763,18 @@ app.get('/updateBriefDatos/:usuario/:nombre/:aPaterno/:aMaterno/:fechaNac/:idPue
     const cpDomicilio = parseInt(req.params.cpDomicilio, 10);
     const aniosEmpresa = parseInt(req.params.aniosEmpresa, 10);
     const educacion = req.params.educacion;
+
+    if(!fechaNac){
+        fechaNac = 'NULL';
+    }
+
+    if(!aniosEmpresa){
+        aniosEmpresa = 'NULL';
+    }
+
+    if(!educacion){
+        educacion = 'NULL';
+    }
 
     db.updateBriefDatos(usuario,nombre,aPaterno,aMaterno,fechaNac,idPuesto,cpDomicilio,aniosEmpresa,educacion) 
         .then(rows => {
@@ -775,7 +787,7 @@ app.get('/updateBriefDatos/:usuario/:nombre/:aPaterno/:aMaterno/:fechaNac/:idPue
 
 //updateBriefInformation Empresa
 
-app.get('/updateBriefEmpresa/:usuario/:nombreEmpresa/:rfcEmpresa/:numeroEmpleados/:numeroSocios/:empresaFamiliar/:regimenFiscal/:rangoVentasAnuales/:ventajaCompetitiva/:idCampania', function(req, res) {
+app.get('/updateBriefEmpresa/:usuario/:nombreEmpresa/:rfcEmpresa/:numeroEmpleados?/:numeroSocios?/:empresaFamiliar/:regimenFiscal/:rangoVentasAnuales/:ventajaCompetitiva?/:idCampania', function(req, res) {
 
     const usuario = parseInt(req.params.usuario, 10);
     const nombreEmpresa = req.params.nombreEmpresa;

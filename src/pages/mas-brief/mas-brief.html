@@ -242,9 +242,9 @@
               </ion-slide>
               <ion-slide>
                   <div class="brief-contenedor" *ngIf="target == 'Particulares'" >
-                      <p class="titulo-brief" style="text-align: center">Particulares</p>
+                      <p class="titulo-brief" style="text-align: center;text-decoration: underline;font-size: 4.5vw">Particulares</p>
 
-                      <p class="titulo-brief">Segmento de ingresos anuales</p>
+                      <p class="titulo-brief">Segmento de ingresos</p>
                       <ul class="mediano">
                           <li class="zero-mediano" [ngClass]="{'elegida-brief':ingresosAnuales == 'Bajo'}" (click)="changeIngresos('Bajo')">
                               <ion-grid class="anuncio-grid" style="height: 100%;justify-content: center;padding: 0;">
@@ -372,7 +372,7 @@
                   </div>
 
                   <div class="brief-contenedor" *ngIf="target == 'Empresas'">
-                    <p  class="titulo-brief" style="text-align: center">Empresas</p>
+                    <p  class="titulo-brief" style="text-align: center;text-decoration: underline;font-size: 4.5vw">Empresas</p>
 
                     <p class="titulo-brief">Sector</p>
                     <div class="botones-brief">

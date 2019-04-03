@@ -36,10 +36,10 @@
 
         <p class="titulo-brief">Cobertura Campaña</p>
         <div class="botones-cobertura-brief">
-            <button [ngClass]="{'boton-cobertura-brief-blanco':cobertura_local === 1,'boton-cobertura-brief':cobertura_local !== 1}" style="margin-right: 1%;">
-                <img *ngIf="cobertura_local !== 1" src="assets/imgs/brief/local.svg" width="65%">
-                <img *ngIf="cobertura_local === 1" src="assets/imgs/brief/local-b.svg" width="65%">
-                <p class="texto-boton-brief">Local</p>
+            <button [ngClass]="{'boton-cobertura-brief-blanco':cobertura_local === 1 && cobertura_nacional !== 1,'boton-cobertura-brief':cobertura_local === 1 && cobertura_nacional === 1  || cobertura_local !== 1 && cobertura_nacional === 1}" style="margin-right: 1%;" >
+              <img *ngIf="cobertura_local === 1 && cobertura_nacional === 1 || cobertura_local !== 1 && cobertura_nacional === 1 " src="assets/imgs/brief/local.svg" width="65%">
+              <img *ngIf="cobertura_local === 1 && cobertura_nacional !== 1" src="assets/imgs/brief/local-b.svg" width="65%">
+              <p class="texto-boton-brief">Local</p>
             </button>
             <button [ngClass]="{'boton-cobertura-brief-blanco':cobertura_estado === 1,'boton-cobertura-brief':cobertura_estado !== 1}" style="margin-right: 1%;">
                 <img *ngIf="cobertura_estado !== 1" src="assets/imgs/brief/estado.svg" width="65%">
@@ -69,7 +69,7 @@
         <p class="titulo-brief">¿En qué eres mejor que tu competencia?</p>
         <input disabled type="text" class="input-brief" [(ngModel)]="mejor">
 
-        <p class="titulo-brief">Cliente Objetivo</p>
+        <p class="titulo-brief" style="margin-bottom: 1%;">Cliente Objetivo</p>
         <div class="botones-brief">
             <button class="boton-brief" style="margin-right: 0%;" [ngClass]="{'boton-brief-activo':target === 'Particulares'}">
                 <div class="botones-completo">
@@ -122,11 +122,11 @@
         </div>
 
         <p class="titulo-brief">Cobertura Campaña</p>
-        <div class="botones-cobertura-brief">
-            <button [ngClass]="{'boton-cobertura-brief-blanco':cobertura_local === 1,'boton-cobertura-brief':cobertura_local !== 1}" style="margin-right: 1%;" (click)="changeCobertura('Local')">
-                <img *ngIf="cobertura_local !== 1" src="assets/imgs/brief/local.svg" width="65%">
-                <img *ngIf="cobertura_local === 1" src="assets/imgs/brief/local-b.svg" width="65%">
-                <p class="texto-boton-brief">Local</p>
+        <div class="botones-cobertura-brief"> 
+            <button [ngClass]="{'boton-cobertura-brief-blanco':cobertura_local === 1 && cobertura_nacional !== 1,'boton-cobertura-brief':cobertura_local === 1 && cobertura_nacional === 1  || cobertura_local !== 1 && cobertura_nacional === 1}" style="margin-right: 1%;" (click)="changeCobertura('Local')">
+              <img *ngIf="cobertura_local === 1 && cobertura_nacional === 1 || cobertura_local !== 1 && cobertura_nacional === 1 " src="assets/imgs/brief/local.svg" width="65%">
+              <img *ngIf="cobertura_local === 1 && cobertura_nacional !== 1" src="assets/imgs/brief/local-b.svg" width="65%">
+              <p class="texto-boton-brief">Local</p>
             </button>
             <button [ngClass]="{'boton-cobertura-brief-blanco':cobertura_estado === 1,'boton-cobertura-brief':cobertura_estado !== 1}" style="margin-right: 1%;" (click)="changeCobertura('Estado')">
                 <img *ngIf="cobertura_estado !== 1" src="assets/imgs/brief/estado.svg" width="65%">
