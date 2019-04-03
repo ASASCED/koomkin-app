@@ -116,7 +116,7 @@ export class BriefPage implements OnInit{
           if (this.cobertura_nacional == 1) {
              this.cobertura_empresa = 'Nacional';
           } 
-          console.log(this.datos[0].Nacional);
+          console.log(this.cuarta);
           this.tipoempresa = this.datos[0].TipoEmpresa;
 
           if(this.tipoempresa == 1) {
@@ -181,7 +181,7 @@ export class BriefPage implements OnInit{
               }
             });
           }
-          if(this.cobertura_empresa !== 'Nacional') {
+          if(this.cobertura_empresa !== 'Nacional' && this.cobertura_empresa !== 'Estado' && this.cobertura_empresa !== 'Region') {
             this.cobertura_empresa = 'Local';
             console.log(this.cobertura_empresa);
           }
@@ -200,9 +200,7 @@ export class BriefPage implements OnInit{
 
           console.log(this.cobertura );
 
-          if( (this.cuarta == 2 || this.cuarta == 3 || this.cuarta == 5) && this.cobertura.length == 1 && this.cobertura_nacional !== 1  ) {
-            console.log('if local');
-
+          if( (this.cuarta == 2 || this.cuarta == 3 || this.cuarta == 5) && this.cobertura.length == 1 && this.cobertura_empresa !== 'Nacional'  && this.cobertura_empresa !== 'Estado' && this.cobertura_empresa !== 'Region' ) {
             this.cobertura_empresa = 'Local';
           } else if(this.cobertura.length == 1 && this.cobertura_nacional !== 1 && this.cuarta !== 2 && this.cuarta !== 3 && this.cuarta !== 5 ) {
             this.cobertura_empresa = 'Estado';

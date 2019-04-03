@@ -758,11 +758,11 @@ app.get('/updateBriefDatos/:usuario/:nombre/:aPaterno/:aMaterno/:fechaNac?/:idPu
     const nombre = req.params.nombre;
     const aPaterno = req.params.aPaterno;
     const aMaterno = req.params.aMaterno;
-    const fechaNac = req.params.fechaNac;
+    let fechaNac = req.params.fechaNac;
     const idPuesto = parseInt(req.params.idPuesto, 10);
     const cpDomicilio = parseInt(req.params.cpDomicilio, 10);
-    const aniosEmpresa = parseInt(req.params.aniosEmpresa, 10);
-    const educacion = req.params.educacion;
+    let aniosEmpresa = parseInt(req.params.aniosEmpresa, 10);
+    let educacion = req.params.educacion;
 
     if(!fechaNac){
         fechaNac = 'NULL';
@@ -792,12 +792,12 @@ app.get('/updateBriefEmpresa/:usuario/:nombreEmpresa/:rfcEmpresa/:numeroEmpleado
     const usuario = parseInt(req.params.usuario, 10);
     const nombreEmpresa = req.params.nombreEmpresa;
     const rfcEmpresa = req.params.rfcEmpresa;
-    const numeroEmpleados = parseInt(req.params.numeroEmpleados, 10);
-    const numeroSocios = parseInt(req.params.numeroSocios, 10);
+    let numeroEmpleados = parseInt(req.params.numeroEmpleados, 10);
+    let numeroSocios = parseInt(req.params.numeroSocios, 10);
     const empresaFamiliar = parseInt(req.params.empresaFamiliar, 10);
     const regimenFiscal = req.params.regimenFiscal;
     const rangoVentasAnuales = req.params.rangoVentasAnuales;
-    const ventajaCompetitiva = req.params.ventajaCompetitiva;
+    let ventajaCompetitiva = req.params.ventajaCompetitiva;
     const idCampania = parseInt(req.params.idCampania, 10);
 
 
