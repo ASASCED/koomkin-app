@@ -96,7 +96,6 @@ app.get('/getInfoPago/:uuid', function (req, res) {
         });
     });
 
-
 app.get('/getLeadCalls/:id', function (req, res) {
 
     var id = parseInt(req.params.id, 10);
@@ -179,32 +178,6 @@ app.get('/getTicket/:id/:fecha/:descripcion', function (req, res) {
             res.status(500).json({ error: err }).send();
         });
 });
-
-//Genera el requerimiento del  ticket 
-
-app.post('/getRequirementTicket/', function (req, res) {
-
-
-    const ticket = parseInt(req.body.ticket, 10);
-    const requerimiento = 0;
-    const area = 6;
-    const estatus = 2;
-    const agente = 0;
-    console.log('comentario',req.body.comentario);
-    const comentario = req.body.comentario;
-    const satisfaccion = 6;
-    const bandera = 1;
-    const command = 'spI_hp_CrearRequerimiento_Bis';
-
-    db.executeGetTicket(command,ticket,requerimiento,area,estatus,agente,comentario,satisfaccion,bandera)
-        .then(rows => {
-            res.json(rows).status(200).send();
-        })
-        .catch(err => {
-            res.status(500).json({ error: err }).send();
-        });
-});
-
 
 //getDataProveedores
 app.get('/getDataProveedores/:uuid/:acceso/:dispositivo', function (req, res) {
@@ -491,8 +464,6 @@ app.get('/facebook/checkLeadComplement', function (req, res) {
 var checkLeadComplement = (user_id, email) => {
 
     let url = 'http://187.162.208.218:5000/facebook/checkLeadComplement?'
-    // let url = 'http://187.162.208.218:5001/facebook/checkLeadComplement?'
-    // let url = 'http://localhost:5001/facebook/checkLeadComplement?'
     // console.log(url);
     console.log('pene');
     return new Promise((resolve, reject) => {
@@ -521,8 +492,6 @@ app.get('/verificarPopup', function (req, res) {
 
 
 app.get('/calificaLead/:clave/:classification', function (req, res) {
-    /* console.log('pinche putita', req);
-    const body = _.pick(req.body, 'clave', 'classification'); */
 
     const command = 'SP_CalificaLead';
     const classification = req.params.classification;
@@ -538,8 +507,6 @@ app.get('/calificaLead/:clave/:classification', function (req, res) {
 });
 
 app.get('/clasificaLead/:clave/:classification', function (req, res) {
-    /* console.log('pinche putita', req);
-    const body = _.pick(req.body, 'clave', 'classification'); */
 
     const command = 'SP_ClasificaLead';
     const classification = req.params.classification;
@@ -555,8 +522,6 @@ app.get('/clasificaLead/:clave/:classification', function (req, res) {
 });
 
 app.get('/calificaLead2/:clave/:classification/:canal', function (req, res) {
-    /* console.log('pinche putita', req);
-    const body = _.pick(req.body, 'clave', 'classification'); */
 
     const command = 'SP_CalificaLead2';
     const classification = req.params.classification;
@@ -573,8 +538,6 @@ app.get('/calificaLead2/:clave/:classification/:canal', function (req, res) {
 });
 
 app.get('/clasificaLead2/:clave/:classification/:canal', function (req, res) {
-    /* console.log('pinche putita', req);
-    const body = _.pick(req.body, 'clave', 'classification'); */
 
     const command = 'SP_ClasificaLead2';
     const classification = req.params.classification;
@@ -589,7 +552,6 @@ app.get('/clasificaLead2/:clave/:classification/:canal', function (req, res) {
         }
     });
 });
-//POST methods
 
 app.get('/leerLead/:leadId/:userId', function (req, res) {
 
@@ -742,58 +704,274 @@ app.get('/getInsertClickChat/:usuario/:id/:acceso/:dispositivo/:metodo', functio
         });
 });
 
+//updateBriefInformation
 
-app.post('/registerDeviceId/:idUsuario/:idDevice', function (req, res) {
+app.get('/updateBriefInformation/:usuario/:idProducto/:new_Producto/:new_TipoEmpresa/:new_CodigoPostal/:new_IDMembresia/:new_PorqueEresMejor/:new_ClientesTarget/:new_Correo1?/:new_Correo2?/:new_Correo3?/:new_IdSubSector?', function(req, res) {
 
-    console.log("Registrando DeviceID");
-    var idDevice = req.params.idDevice;
-    var idUser = req.params.idUsuario;
+    const usuario = parseInt(req.params.usuario, 10);
+    const idProducto = parseInt(req.params.idProducto, 10);
+    const new_Producto = req.params.new_Producto;
+    const new_TipoEmpresa = parseInt(req.params.new_TipoEmpresa,10);
+    const new_CodigoPostal = parseInt(req.params.new_CodigoPostal,10);
+    let new_IDMembresia = parseInt(req.params.new_IDMembresia,10);
+    const new_PorqueEresMejor = req.params.new_PorqueEresMejor;
+    const new_ClientesTarget = req.params.new_ClientesTarget;
+    let new_Correo1 = req.params.new_Correo1;
+    let new_Correo2 = req.params.new_Correo2;
+    let new_Correo3 = req.params.new_Correo3;
+    let new_IdSubSector = parseInt(req.params.new_IdSubSector,10);
 
-    db.PostRegisterDeviceId(idUser, idDevice, function (err, rows) {
-        if (err) {
+    if(!new_IDMembresia){
+        new_IDMembresia = 'NULL';
+    }
+
+    if(!new_Correo1){
+        new_Correo1 = 'NULL';
+    }
+
+    if(!new_Correo2){
+        new_Correo2 = 'NULL';
+    }
+
+    if(!new_Correo3){
+        new_Correo3 = 'NULL';
+    }
+
+    if(!new_IdSubSector){
+        new_IdSubSector = 'NULL';
+    }
+
+    db.executeUpdateBriefInformation(usuario,idProducto,new_Producto,new_TipoEmpresa,new_CodigoPostal,new_IDMembresia,new_PorqueEresMejor,new_ClientesTarget,new_Correo1,new_Correo2,new_Correo3,new_IdSubSector) 
+        .then(rows => {
+            res.json(rows).status(200).send();
+        })
+        .catch(err => {
             res.status(500).json({ error: err }).send();
-        } else {
-            console.log(JSON.stringify(rows));
-            res.sendStatus(200);
-        }
-    });
+        });
 });
 
+//updateBriefInformation datos
 
-app.post('/registerDeviceId/:idUsuario/:idDevice/:platform', function (req, res) {
+app.get('/updateBriefDatos/:usuario/:nombre/:aPaterno/:aMaterno/:fechaNac/:idPuesto/:cpDomicilio/:aniosEmpresa/:educacion', function(req, res) {
 
-    console.log("Registrando DeviceID2");
+    const usuario = parseInt(req.params.usuario, 10);
+    const nombre = req.params.nombre;
+    const aPaterno = req.params.aPaterno;
+    const aMaterno = req.params.aMaterno;
+    const fechaNac = req.params.fechaNac;
+    const idPuesto = parseInt(req.params.idPuesto, 10);
+    const cpDomicilio = parseInt(req.params.cpDomicilio, 10);
+    const aniosEmpresa = parseInt(req.params.aniosEmpresa, 10);
+    const educacion = req.params.educacion;
 
-    var idDevice = req.params.idDevice;
+    db.updateBriefDatos(usuario,nombre,aPaterno,aMaterno,fechaNac,idPuesto,cpDomicilio,aniosEmpresa,educacion) 
+        .then(rows => {
+            res.json(rows).status(200).send();
+        })
+        .catch(err => {
+            res.status(500).json({ error: err }).send();
+        });
+});
 
-    var idUser = req.params.idUsuario;
+//updateBriefInformation Empresa
 
-    var platform = req.params.platform;
+app.get('/updateBriefEmpresa/:usuario/:nombreEmpresa/:rfcEmpresa/:numeroEmpleados/:numeroSocios/:empresaFamiliar/:regimenFiscal/:rangoVentasAnuales/:ventajaCompetitiva/:idCampania', function(req, res) {
 
-    db.PostRegisterDeviceId2(idUser, idDevice, platform, function (err, rows) {
-        if (err) {
+    const usuario = parseInt(req.params.usuario, 10);
+    const nombreEmpresa = req.params.nombreEmpresa;
+    const rfcEmpresa = req.params.rfcEmpresa;
+    const numeroEmpleados = parseInt(req.params.numeroEmpleados, 10);
+    const numeroSocios = parseInt(req.params.numeroSocios, 10);
+    const empresaFamiliar = parseInt(req.params.empresaFamiliar, 10);
+    const regimenFiscal = req.params.regimenFiscal;
+    const rangoVentasAnuales = req.params.rangoVentasAnuales;
+    const ventajaCompetitiva = req.params.ventajaCompetitiva;
+    const idCampania = parseInt(req.params.idCampania, 10);
 
-            console.log("Device already registered. updating userID");
-            // console.log(err);
 
-            db.UpdateDeviceId2(idUser, idDevice)
+    db.updateBriefEmpresa(usuario,nombreEmpresa,rfcEmpresa,numeroEmpleados,numeroSocios,empresaFamiliar,regimenFiscal,rangoVentasAnuales,ventajaCompetitiva,idCampania) 
+        .then(rows => {
+            res.json(rows).status(200).send();
+        })
+        .catch(err => {
+            res.status(500).json({ error: err }).send();
+        });
+});
 
-                .then(rows => {
-                    res.json(rows).status(200).send();
-                })
-                .catch(err => {
-                    res.status(500).json({ error: err }).send();
-                });
+//updateBriefInformation Cliente Objetivo Particulares
 
-        } else {
+app.get('/updateBriefClienteParticular/:clientesTargetIngresosAnuales/:clientesTargetEdad/:clientesTargetGenero/:clientesTargetIntereses/:idCampania', function(req, res) {
 
-            console.log(JSON.stringify(rows));
-            res.sendStatus(200);
+    const clientesTargetIngresosAnuales = req.params.clientesTargetIngresosAnuales;
+    const clientesTargetEdad = req.params.clientesTargetEdad;
+    const clientesTargetGenero = req.params.clientesTargetGenero;
+    const clientesTargetIntereses = req.params.clientesTargetIntereses;
+    const idCampania = parseInt(req.params.idCampania, 10);
 
-        }
+    db.updateBriefClienteParticular(clientesTargetIngresosAnuales,clientesTargetEdad,clientesTargetGenero,clientesTargetIntereses,idCampania) 
+        .then(rows => {
+            res.json(rows).status(200).send();
+        })
+        .catch(err => {
+            res.status(500).json({ error: err }).send();
+        });
+});
 
-    });
+//updateBriefInformation Cliente Objetivo Empresas
 
+app.get('/updateBriefClienteEmpresas/:clientesTargetSector/:clientesTargetCategoria/:clientesTargetSectores/:clientesTargetIntereses/:idCampania', function(req, res) {
+
+    const clientesTargetSector = req.params.clientesTargetSector;
+    const clientesTargetCategoria = req.params.clientesTargetCategoria;
+    const clientesTargetSectores = req.params.clientesTargetSectores;
+    const clientesTargetIntereses = req.params.clientesTargetIntereses;
+    const idCampania = parseInt(req.params.idCampania, 10);
+
+
+    db.updateBriefClienteEmpresas(clientesTargetSector,clientesTargetCategoria,clientesTargetSectores,clientesTargetIntereses,idCampania) 
+        .then(rows => {
+            res.json(rows).status(200).send();
+        })
+        .catch(err => {
+            res.status(500).json({ error: err }).send();
+        });
+});
+
+//por estado
+
+app.get('/updateCobertura/:idCampania/:idEstado/:idUsuario', function(req, res) {
+
+    const idCampania = parseInt(req.params.idCampania, 10);
+    const idEstado = parseInt(req.params.idEstado, 10);
+    const idUsuario = parseInt(req.params.idUsuario, 10);
+
+    db.updateCobertura(idCampania,idEstado,idUsuario) 
+        .then(rows => {
+            res.json(rows).status(200).send();
+        })
+        .catch(err => {
+            res.status(500).json({ error: err }).send();
+        });
+});
+
+//por region
+
+app.get('/updateCoberturaRegion/:idCampania/:idEstado/:idUsuario', function(req, res) {
+
+    const idCampania = parseInt(req.params.idCampania, 10);
+    const idEstado = parseInt(req.params.idEstado, 10);
+    const idUsuario = parseInt(req.params.idUsuario, 10);
+
+    db.updateCoberturaRegion(idCampania,idEstado,idUsuario) 
+        .then(rows => {
+            res.json(rows).status(200).send();
+        })
+        .catch(err => {
+            res.status(500).json({ error: err }).send();
+        });
+});
+
+//updateBriefInformation Cliente Objetivo Particulares
+
+app.get('/updateCoberturaNacional/:idCampania/:idUsuario', function(req, res) {
+
+    const idCampania = parseInt(req.params.idCampania, 10);
+    const idUsuario = parseInt(req.params.idUsuario, 10);
+
+    db.updateCoberturaNacional(idCampania,idUsuario) 
+        .then(rows => {
+            res.json(rows).status(200).send();
+        })
+        .catch(err => {
+            res.status(500).json({ error: err }).send();
+        });
+});
+
+//SP_GetBriefById
+
+app.get('/getBriefInformation/:usuario', function(req, res) {
+
+    const usuario = parseInt(req.params.usuario, 10);
+
+    db.executeGetBriefInformation(usuario) 
+        .then(rows => {
+            res.json(rows).status(200).send();
+        })
+        .catch(err => {
+            res.status(500).json({ error: err }).send();
+        });
+});
+
+//SP_GetLastCampania
+
+app.get('/getLastCampania/:usuario', function(req, res) {
+
+    const usuario = parseInt(req.params.usuario, 10);
+
+    db.executeGetLastCampania(usuario) 
+        .then(rows => {
+            res.json(rows).status(200).send();
+        })
+        .catch(err => {
+            res.status(500).json({ error: err }).send();
+        });
+});
+
+//getCodigoPostal
+
+app.get('/getCodigoPostal/:codigo', function(req, res) {
+
+    const codigo = parseInt(req.params.codigo, 10);
+
+    db.executeGetCodigoPostal(codigo) 
+        .then(rows => {
+            res.json(rows).status(200).send();
+        })
+        .catch(err => {
+            res.status(500).json({ error: err }).send();
+        });
+});
+
+//getCobertura
+
+app.get('/getCobertura/:usuario/:campania', function(req, res) {
+
+    const usuario = parseInt(req.params.usuario, 10);
+    const campania = parseInt(req.params.campania, 10);
+
+    db.executeGetCobertura(usuario,campania) 
+        .then(rows => {
+            res.json(rows).status(200).send();
+        })
+        .catch(err => {
+            res.status(500).json({ error: err }).send();
+        });
+}); 
+
+//getEstados 
+
+app.get('/getEstados', function(req, res) {
+
+    db.executeGetEstados() 
+        .then(rows => {
+            res.json(rows).status(200).send();
+        })
+        .catch(err => {
+            res.status(500).json({ error: err }).send();
+        });
+});
+
+//get tipo Empresas 
+
+app.get('/getEmpresas', function(req, res) {
+
+    db.executeGetEmpresas() 
+        .then(rows => {
+            res.json(rows).status(200).send();
+        })
+        .catch(err => {
+            res.status(500).json({ error: err }).send();
+        });
 });
 
 app.get('/getBanner/:idUsuario', function (req, res) {
@@ -954,8 +1132,6 @@ app.get('/getUpdateBanner/:id', function (req, res) {
         });
     });
 
-
-
 app.get('/registrarInteresBanner/:interes/:idReporteBanner/:uuidPase/:canal?', function (req, res) {
     
     const interes = req.params.interes;
@@ -1055,6 +1231,8 @@ app.get('/clickCambioInformacion/:usuario/:tipo/:acceso', function(req, res) {
         });
 });
 
+//PUT Methods
+
 app.put('/actualizarUsuario', function (req, res) {
 
     db.updateDatosUsuario(req.query)
@@ -1139,128 +1317,23 @@ app.put('/registraDatosFiscales', function (req, res) {
         });
 });
 
-//updateBriefInformation
+//POST methods
 
-app.get('/updateBriefInformation/:usuario/:idProducto/:new_Producto/:new_TipoEmpresa/:new_CodigoPostal/:new_IDMembresia/:new_PorqueEresMejor/:new_ClientesTarget/:new_Correo1/:new_Correo2/:new_Correo3/:new_IdSubSector', function(req, res) {
+//Genera el requerimiento del  ticket 
 
-    const usuario = parseInt(req.params.usuario, 10);
-    const idProducto = parseInt(req.params.idProducto, 10);
-    const new_Producto = req.params.new_Producto;
-    const new_TipoEmpresa = parseInt(req.params.new_TipoEmpresa,10);
-    const new_CodigoPostal = parseInt(req.params.new_CodigoPostal,10);
-    const new_IDMembresia = parseInt(req.params.new_IDMembresia,10);
-    const new_PorqueEresMejor = req.params.new_PorqueEresMejor;
-    const new_ClientesTarget = req.params.new_ClientesTarget;
-    const new_Correo1 = req.params.new_Correo1;
-    const new_Correo2 = req.params.new_Correo2;
-    const new_Correo3 = req.params.new_Correo3;
-    const new_IdSubSector = parseInt(req.params.new_IdSubSector,10);
+app.post('/getRequirementTicket/', function (req, res) {
 
-    db.executeUpdateBriefInformation(usuario,idProducto,new_Producto,new_TipoEmpresa,new_CodigoPostal,new_IDMembresia,new_PorqueEresMejor,new_ClientesTarget,new_Correo1,new_Correo2,new_Correo3,new_IdSubSector) 
-        .then(rows => {
-            res.json(rows).status(200).send();
-        })
-        .catch(err => {
-            res.status(500).json({ error: err }).send();
-        });
-});
+    const ticket = parseInt(req.body.ticket, 10);
+    const requerimiento = 0;
+    const area = 6;
+    const estatus = 2;
+    const agente = 0;
+    const comentario = req.body.comentario;
+    const satisfaccion = 6;
+    const bandera = 1;
+    const command = 'spI_hp_CrearRequerimiento_Bis';
 
-//updateBriefInformation datos
-
-app.get('/updateBriefDatos/:usuario/:nombre/:aPaterno/:aMaterno/:fechaNac/:idPuesto/:cpDomicilio/:aniosEmpresa/:educacion', function(req, res) {
-
-    const usuario = parseInt(req.params.usuario, 10);
-    const nombre = req.params.nombre;
-    const aPaterno = req.params.aPaterno;
-    const aMaterno = req.params.aMaterno;
-    const fechaNac = req.params.fechaNac;
-    const idPuesto = parseInt(req.params.idPuesto, 10);
-    const cpDomicilio = parseInt(req.params.cpDomicilio, 10);
-    const aniosEmpresa = parseInt(req.params.aniosEmpresa, 10);
-    const educacion = req.params.educacion;
-
-    db.updateBriefDatos(usuario,nombre,aPaterno,aMaterno,fechaNac,idPuesto,cpDomicilio,aniosEmpresa,educacion) 
-        .then(rows => {
-            res.json(rows).status(200).send();
-        })
-        .catch(err => {
-            res.status(500).json({ error: err }).send();
-        });
-});
-
-//updateBriefInformation Empresa
-
-app.get('/updateBriefEmpresa/:usuario/:nombreEmpresa/:rfcEmpresa/:numeroEmpleados/:numeroSocios/:empresaFamiliar/:regimenFiscal/:rangoVentasAnuales/:ventajaCompetitiva/:idCampania', function(req, res) {
-
-    const usuario = parseInt(req.params.usuario, 10);
-    const nombreEmpresa = req.params.nombreEmpresa;
-    const rfcEmpresa = req.params.rfcEmpresa;
-    const numeroEmpleados = parseInt(req.params.numeroEmpleados, 10);
-    const numeroSocios = parseInt(req.params.numeroSocios, 10);
-    const empresaFamiliar = parseInt(req.params.empresaFamiliar, 10);
-    const regimenFiscal = req.params.regimenFiscal;
-    const rangoVentasAnuales = req.params.rangoVentasAnuales;
-    const ventajaCompetitiva = req.params.ventajaCompetitiva;
-    const idCampania = parseInt(req.params.idCampania, 10);
-
-
-    db.updateBriefEmpresa(usuario,nombreEmpresa,rfcEmpresa,numeroEmpleados,numeroSocios,empresaFamiliar,regimenFiscal,rangoVentasAnuales,ventajaCompetitiva,idCampania) 
-        .then(rows => {
-            res.json(rows).status(200).send();
-        })
-        .catch(err => {
-            res.status(500).json({ error: err }).send();
-        });
-});
-
-//updateBriefInformation Cliente Objetivo Particulares
-
-app.get('/updateBriefClienteParticular/:clientesTargetIngresosAnuales/:clientesTargetEdad/:clientesTargetGenero/:clientesTargetIntereses/:idCampania', function(req, res) {
-
-    const clientesTargetIngresosAnuales = req.params.clientesTargetIngresosAnuales;
-    const clientesTargetEdad = req.params.clientesTargetEdad;
-    const clientesTargetGenero = req.params.clientesTargetGenero;
-    const clientesTargetIntereses = req.params.clientesTargetIntereses;
-    const idCampania = parseInt(req.params.idCampania, 10);
-
-    db.updateBriefClienteParticular(clientesTargetIngresosAnuales,clientesTargetEdad,clientesTargetGenero,clientesTargetIntereses,idCampania) 
-        .then(rows => {
-            res.json(rows).status(200).send();
-        })
-        .catch(err => {
-            res.status(500).json({ error: err }).send();
-        });
-});
-
-//updateBriefInformation Cliente Objetivo Empresas
-
-app.get('/updateBriefClienteEmpresas/:clientesTargetSector/:clientesTargetCategoria/:clientesTargetSectores/:clientesTargetIntereses/:idCampania', function(req, res) {
-
-    const clientesTargetSector = req.params.clientesTargetSector;
-    const clientesTargetCategoria = req.params.clientesTargetCategoria;
-    const clientesTargetSectores = req.params.clientesTargetSectores;
-    const clientesTargetIntereses = req.params.clientesTargetIntereses;
-    const idCampania = parseInt(req.params.idCampania, 10);
-
-
-    db.updateBriefClienteEmpresas(clientesTargetSector,clientesTargetCategoria,clientesTargetSectores,clientesTargetIntereses,idCampania) 
-        .then(rows => {
-            res.json(rows).status(200).send();
-        })
-        .catch(err => {
-            res.status(500).json({ error: err }).send();
-        });
-});
-
-//por estado
-
-app.get('/updateCobertura/:idCampania/:idEstado/:idUsuario', function(req, res) {
-
-    const idCampania = parseInt(req.params.idCampania, 10);
-    const idEstado = parseInt(req.params.idEstado, 10);
-    const idUsuario = parseInt(req.params.idUsuario, 10);
-
-    db.updateCobertura(idCampania,idEstado,idUsuario) 
+    db.executeGetTicket(command,ticket,requerimiento,area,estatus,agente,comentario,satisfaccion,bandera)
         .then(rows => {
             res.json(rows).status(200).send();
         })
@@ -1270,126 +1343,47 @@ app.get('/updateCobertura/:idCampania/:idEstado/:idUsuario', function(req, res) 
 });
 
 
-//por region
+app.post('/registerDeviceId/:idUsuario/:idDevice', function (req, res) {
 
-app.get('/updateCoberturaRegion/:idCampania/:idEstado/:idUsuario', function(req, res) {
+    console.log("Registrando DeviceID");
+    var idDevice = req.params.idDevice;
+    var idUser = req.params.idUsuario;
 
-    const idCampania = parseInt(req.params.idCampania, 10);
-    const idEstado = parseInt(req.params.idEstado, 10);
-    const idUsuario = parseInt(req.params.idUsuario, 10);
-
-    db.updateCoberturaRegion(idCampania,idEstado,idUsuario) 
-        .then(rows => {
-            res.json(rows).status(200).send();
-        })
-        .catch(err => {
+    db.PostRegisterDeviceId(idUser, idDevice, function (err, rows) {
+        if (err) {
             res.status(500).json({ error: err }).send();
-        });
+        } else {
+            console.log(JSON.stringify(rows));
+            res.sendStatus(200);
+        }
+    });
 });
 
-//updateBriefInformation Cliente Objetivo Particulares
+app.post('/registerDeviceId/:idUsuario/:idDevice/:platform', function (req, res) {
 
-app.get('/updateCoberturaNacional/:idCampania/:idUsuario', function(req, res) {
+    console.log("Registrando DeviceID2");
 
-    const idCampania = parseInt(req.params.idCampania, 10);
-    const idUsuario = parseInt(req.params.idUsuario, 10);
+    var idDevice = req.params.idDevice;
+    var idUser = req.params.idUsuario;
+    var platform = req.params.platform;
 
-    db.updateCoberturaNacional(idCampania,idUsuario) 
-        .then(rows => {
-            res.json(rows).status(200).send();
-        })
-        .catch(err => {
-            res.status(500).json({ error: err }).send();
-        });
+    db.PostRegisterDeviceId2(idUser, idDevice, platform, function (err, rows) {
+        if (err) {
+            console.log("Device already registered. updating userID");
+            // console.log(err);
+            db.UpdateDeviceId2(idUser, idDevice)
+                .then(rows => {
+                    res.json(rows).status(200).send();
+                })
+                .catch(err => {
+                    res.status(500).json({ error: err }).send();
+                });
+        } else {
+            console.log(JSON.stringify(rows));
+            res.sendStatus(200);
+        }
+    });
 });
-
-//SP_GetBriefById
-
-app.get('/getBriefInformation/:usuario', function(req, res) {
-
-    const usuario = parseInt(req.params.usuario, 10);
-
-    db.executeGetBriefInformation(usuario) 
-        .then(rows => {
-            res.json(rows).status(200).send();
-        })
-        .catch(err => {
-            res.status(500).json({ error: err }).send();
-        });
-});
-
-//SP_GetLastCampania
-
-app.get('/getLastCampania/:usuario', function(req, res) {
-
-    const usuario = parseInt(req.params.usuario, 10);
-
-    db.executeGetLastCampania(usuario) 
-        .then(rows => {
-            res.json(rows).status(200).send();
-        })
-        .catch(err => {
-            res.status(500).json({ error: err }).send();
-        });
-});
-
-//getCodigoPostal
-
-app.get('/getCodigoPostal/:codigo', function(req, res) {
-
-    const codigo = parseInt(req.params.codigo, 10);
-
-    db.executeGetCodigoPostal(codigo) 
-        .then(rows => {
-            res.json(rows).status(200).send();
-        })
-        .catch(err => {
-            res.status(500).json({ error: err }).send();
-        });
-});
-
-//getCobertura
-
-app.get('/getCobertura/:usuario/:campania', function(req, res) {
-
-    const usuario = parseInt(req.params.usuario, 10);
-    const campania = parseInt(req.params.campania, 10);
-
-    db.executeGetCobertura(usuario,campania) 
-        .then(rows => {
-            res.json(rows).status(200).send();
-        })
-        .catch(err => {
-            res.status(500).json({ error: err }).send();
-        });
-}); 
-
-//getEstados 
-
-app.get('/getEstados', function(req, res) {
-
-    db.executeGetEstados() 
-        .then(rows => {
-            res.json(rows).status(200).send();
-        })
-        .catch(err => {
-            res.status(500).json({ error: err }).send();
-        });
-});
-
-//get tipo Empresas 
-
-app.get('/getEmpresas', function(req, res) {
-
-    db.executeGetEmpresas() 
-        .then(rows => {
-            res.json(rows).status(200).send();
-        })
-        .catch(err => {
-            res.status(500).json({ error: err }).send();
-        });
-});
-
 
 app.post('/passLogin', (req, res) => {
     const body = req.body;

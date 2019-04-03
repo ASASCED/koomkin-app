@@ -527,51 +527,56 @@ export class RestProvider {
   }
 
   updateBriefInformation(idUsuario,idProducto,new_Producto,new_TipoEmpresa,new_CodigoPostal,new_IDMembresia,new_PorqueEresMejor,new_ClientesTarget,new_Correo1,new_Correo2,new_Correo3,new_IdSubSector) {
-    return new Promise(resolve => {
+    return new Promise((resolve,reject) => {
       this.http.get(this.apiUrl + '/updateBriefInformation/' + idUsuario + '/' + idProducto + '/' + new_Producto + '/' + new_TipoEmpresa  + '/' + new_CodigoPostal  + '/' + new_IDMembresia  + '/' + new_PorqueEresMejor  + '/' + new_ClientesTarget  + '/' + new_Correo1  + '/' + new_Correo2  + '/' + new_Correo3  + '/' + new_IdSubSector ).subscribe(data => {
         resolve(data);
       }, err => {
+         reject(err);
          console.log(err);
       });
     });
   }
 
   updateBriefDatos(idUsuario,nombre,aPaterno,aMaterno,fechaNac,idPuesto,cpDomicilio,aniosEmpresa,educacion) {
-    return new Promise(resolve => {
+    return new Promise((resolve,reject) => {
       this.http.get(this.apiUrl + '/updateBriefDatos/' + idUsuario + '/' + nombre + '/' + aPaterno + '/' + aMaterno  + '/' + fechaNac  + '/' + idPuesto  + '/' + cpDomicilio  + '/' + aniosEmpresa  + '/' + educacion ).subscribe(data => {
         resolve(data);
       }, err => {
+         reject(err);
          console.log(err);
       });
     });
   }
 
   updateBriefEmpresa(idUsuario,nombreEmpresa,rfcEmpresa,numeroEmpleados,numeroSocios,empresaFamiliar,regimenFiscal,rangoVentasAnuales,ventajaCompetitiva,idCampania) {
-    return new Promise(resolve => {
+    return new Promise((resolve,reject) => {
       this.http.get(this.apiUrl + '/updateBriefEmpresa/' + idUsuario + '/' + nombreEmpresa + '/' + rfcEmpresa + '/' + numeroEmpleados  + '/' + numeroSocios  + '/' + empresaFamiliar  + '/' + regimenFiscal  + '/' + rangoVentasAnuales  + '/' + ventajaCompetitiva + '/' + idCampania ).subscribe(data => {
         resolve(data);
       }, err => {
-         console.log(err);
+        reject(err);
+        console.log(err);
       });
     });
   }
 
   updateBriefClienteParticular(clientesTargetIngresosAnuales,clientesTargetEdad,clientesTargetGenero,clientesTargetIntereses,idCampania) {
-    return new Promise(resolve => {
+    return new Promise((resolve,reject) => {
       this.http.get(this.apiUrl + '/updateBriefClienteParticular/' + clientesTargetIngresosAnuales + '/' + clientesTargetEdad + '/' + clientesTargetGenero + '/' + clientesTargetIntereses  + '/' + idCampania ).subscribe(data => {
         resolve(data);
       }, err => {
-         console.log(err);
+        reject(err);
+        console.log(err);
       });
     });
   }
 
   updateBriefClienteEmpresas(clientesTargetSector,clientesTargetCategoria,clientesTargetSectores,clientesTargetIntereses,idCampania) {
-    return new Promise(resolve => {
+    return new Promise((resolve,reject) => {
       this.http.get(this.apiUrl + '/updateBriefClienteEmpresas/' + clientesTargetSector + '/' + clientesTargetCategoria + '/' + clientesTargetSectores + '/' + clientesTargetIntereses  + '/' + idCampania ).subscribe(data => {
         resolve(data);
       }, err => {
-         console.log(err);
+        reject(err);
+        console.log(err);
       });
     });
   }

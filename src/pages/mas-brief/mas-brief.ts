@@ -1,7 +1,9 @@
 import { Component, OnInit,ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController, Slides, SegmentButton } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, Slides, SegmentButton, App } from 'ionic-angular';
 import { RestProvider } from '../../providers/rest/rest';
 import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
+import swal from 'sweetalert2';
+import { InicioPage } from '../inicio/inicio';
 
 @IonicPage()
 @Component({
@@ -99,7 +101,10 @@ export class MasBriefPage implements OnInit{
         public provedor: RestProvider,
         public authService: AuthServiceProvider,
         public alertCtrl: AlertController,
+        public app: App
       ) {
+        this.empresa = this.authService.empresa;
+        this.id = this.authService.id;
         this.target = navParams.get('target');
         this.fechaNacimiento = navParams.get('fechaNacimiento');
         this.idpuesto = navParams.get('puesto');
@@ -132,9 +137,11 @@ export class MasBriefPage implements OnInit{
         this.categoria = navParams.get('categoria');
         this.sectores = navParams.get('sectores');
         this.idCampania = navParams.get('idCampania');
+        if(this.idCampania == undefined) {
+          this.getLastCampania();
+        }
         console.log(this.idCampania);
-        this.empresa = this.authService.empresa;
-        this.id = this.authService.id;
+        
       }
    
       ngOnInit() {
@@ -163,7 +170,7 @@ export class MasBriefPage implements OnInit{
             console.log('updateBriefDatos');
           },
           err => {
-            //   // console.log('error');
+            // console.log('error');
           }
         );
       }
@@ -179,7 +186,7 @@ export class MasBriefPage implements OnInit{
             console.log('updateBriefEmpresa');
           },
           err => {
-            //   // console.log('error');
+            // console.log('error');
           }
         );
       }
@@ -187,10 +194,13 @@ export class MasBriefPage implements OnInit{
       updateBriefClienteParticular() {
         this.provedor.updateBriefClienteParticular(this.ingresosAnuales,this.edad,this.genero,this.intereses,this.idCampania).then(
           data => {
+            this.showSuccess();
+            this.irInicio();
             console.log('updateBriefClienteParticular');
           },
           err => {
-            //   // console.log('error');
+            this.showError();
+            // console.log('error');
           }
         );
       }
@@ -198,10 +208,13 @@ export class MasBriefPage implements OnInit{
       updateBriefClienteEmpresas() {
         this.provedor.updateBriefClienteEmpresas(this.sector,this.categoria,this.sectores,this.intereses,this.idCampania).then(
           data => {
+            this.showSuccess();
+            this.irInicio();
             console.log('updateBriefClienteEmpresas');
           },
           err => {
-            //   // console.log('error');
+            this.showError();
+            // console.log('error');
           }
         );
       }
@@ -270,5 +283,43 @@ export class MasBriefPage implements OnInit{
         this.categoria = categoria;
       }
 
-      
+      getLastCampania() {
+        this.provedor.getLastCampania(this.id).then(
+          data => {
+            this.datos = data;
+            this.idCampania = this.datos[0].IDCampania;
+            console.log(this.idCampania);
+          },
+          err => {
+            //   // console.log('error');
+          }
+        );
+      }
+    
+      public showSuccess() {
+        swal({
+          title: 'Se ha guardado tu información con éxito',
+          type: 'success',
+          showCancelButton: false,
+          confirmButtonColor: '#3085d6',
+          confirmButtonText: 'OK',
+          reverseButtons: true,
+        });
+      }
+    
+      public showError() {
+        swal({
+          title: 'No se ha podido guardar tu información',
+          text: 'Por favor complete los campos requeridos *',
+          type: 'error',
+          showCancelButton: false,
+          confirmButtonColor: '#3085d6',
+          confirmButtonText: 'OK',
+          reverseButtons: true
+        });
+      }
+
+      public irInicio() {
+        this.app.getRootNav().setRoot(InicioPage); 
+      }
 }

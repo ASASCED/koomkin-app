@@ -55,9 +55,10 @@ page-pago {
         font-size: 16px;
         cursor: pointer;
         width: 99%;
+        background: white;
     }
     .campos {
-        font-size: 5vw;
+        font-size: 4.5vw;
         color: #606060;
         font-weight: 700;
     }
@@ -66,5 +67,14 @@ page-pago {
         color: #606060;
         font-weight: 350;
         background: transparent;
+    }
+    input {
+        border: 1px solid #c4c4c4;
+        border-radius: 5px;
+        padding: 3px 5px;
+        width: 99%;
+        cursor: pointer;
+        box-shadow: none;
+            color: #606060;
     }
 }

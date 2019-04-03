@@ -59,14 +59,14 @@
             </button>
           </div>
 
-          <ion-item *ngIf="cobertura_region === 1">
-            <ion-label>Estados</ion-label>
-            <ion-select [(ngModel)]="estado" multiple>
-              <ion-option *ngFor="let estados of cat_estados" [value]="estados.value">{{estados.NOMBRE}}</ion-option>
-            </ion-select>
-          </ion-item>
+              <ion-item *ngIf="cobertura_region === 1" style="max-width: 350px;">
+                <ion-label style="opacity: 1 !Important;">Estados</ion-label>
+                <ion-select disabled [(ngModel)]="estado" multiple style="opacity: 1 !Important;">
+                  <ion-option *ngFor="let estados of cat_estados" [value]="estados.value">{{estados.NOMBRE}}</ion-option>
+                </ion-select>
+              </ion-item>
         
-          <p class="titulo-brief">¿En qué eres mejor que tu competencia?</p>
+        <p class="titulo-brief">¿En qué eres mejor que tu competencia?</p>
         <input disabled type="text" class="input-brief" [(ngModel)]="mejor">
 
         <p class="titulo-brief">Cliente Objetivo</p>
@@ -147,10 +147,10 @@
             </button>
           </div>
 
-          <ion-item *ngIf="cobertura_region === 1">
+          <ion-item *ngIf="cobertura_region === 1" style="max-width: 350px;">
             <ion-label>Estados</ion-label>
             <ion-select [(ngModel)]="estado" multiple>
-              <ion-option *ngFor="let estados of cat_estados" [value]="estados.value">{{estados.NOMBRE}}</ion-option>
+              <ion-option  *ngFor="let estados of cat_estados" [value]="estados.value">{{estados.NOMBRE}}</ion-option>
             </ion-select>
           </ion-item>  
 
@@ -196,8 +196,8 @@
       <p class="deseas-brief">¿Deseas agregar mayor información o detalle de tu empresa para mejorar la configuración de tu campaña?</p>
       <ion-item>
           <ion-label class="informacion-brief" style="opacity: 1 !Important;">Más información</ion-label>
-          <ion-toggle *ngIf="target !== 'Empresas' && target !== 'Particulares'" disabled color="secondary" [(ngModel)]="mas_informacion" class="informacion-brief" (ionChange)="pagina()"></ion-toggle>
-          <ion-toggle *ngIf="target === 'Empresas' || target === 'Particulares'" color="secondary" [(ngModel)]="mas_informacion" class="informacion-brief" (ionChange)="pagina()"></ion-toggle>
+          <ion-toggle *ngIf="lleno === false" disabled color="secondary" [(ngModel)]="mas_informacion" class="informacion-brief" (ionChange)="pagina()"></ion-toggle>
+          <ion-toggle *ngIf="lleno === true" color="secondary" [(ngModel)]="mas_informacion" class="informacion-brief" (ionChange)="pagina()"></ion-toggle>
 
       </ion-item>
     </div>

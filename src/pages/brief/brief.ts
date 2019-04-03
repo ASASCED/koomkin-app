@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, AlertController, Slides } from 'io
 import { RestProvider } from '../../providers/rest/rest';
 import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
 import { MasBriefPage } from '../mas-brief/mas-brief';
+import swal from 'sweetalert2';
 
 @IonicPage()
 @Component({
@@ -28,7 +29,7 @@ export class BriefPage implements OnInit{
   public producto;
   public direccion;
   public cat_estados;
-  public estado;
+  public estado: any = [];
   public estado_cob;
   public latitud;
   public longitud;
@@ -42,7 +43,7 @@ export class BriefPage implements OnInit{
   public cobertura_nacional; 
   public editar = 0;
   public idPais = 156;
-
+  public datos_ciudad;
   public IDMembresia;
   public IdProducto;
   public correo1;
@@ -74,6 +75,7 @@ export class BriefPage implements OnInit{
   public categoria;
   public sectores;
   public idCampania;
+  public lleno: boolean = false;
 
   mas_informacion: boolean = false;
   familiar: boolean = false;
@@ -89,12 +91,9 @@ export class BriefPage implements OnInit{
     ) {
       this.empresa = this.authService.empresa;
       this.id = this.authService.id;
-      this.mas_informacion = false;
-
     }
 
     ngOnInit() {
-      this.mas_informacion = false;
       this.getBriefInformation(this.id);
       this.getEstados();
       this.getEmpresas();
@@ -111,7 +110,6 @@ export class BriefPage implements OnInit{
           this.mejor = this.datos[0].Mejor;
           this.producto = this.datos[0].Producto;
           this.direccion = this.datos[0].Direccion;
-          this.estado = this.datos[0].Estado;
           this.latitud = this.datos[0].Latitud;
           this.longitud = this.datos[0].Longitud;
           this.cuarta = this.datos[0].TipoCuartaPantalla;
@@ -164,12 +162,11 @@ export class BriefPage implements OnInit{
           this.sector = this.datos[0].ClientesTargetSector;
           this.categoria = this.datos[0].ClientesTargetCategoria;
           this.sectores = this.datos[0].ClientesTargetSectores;
-          
           // console.log(this.datos);
           this.getCobertura(idUsuario,this.datos[0].IDCampania);
         },
         err => {
-          //   // console.log('error');
+          // console.log('error');
         }
       );
     }
@@ -180,13 +177,13 @@ export class BriefPage implements OnInit{
           this.datos_ciudad = data;
           this.estado_cob = this.datos_ciudad[0].Estado;
           this.cat_estados.forEach(element=> {
-            if(element['NOMBRE'] ==  this.estado_cob) {
+            if(element['NOMBRE'] == this.estado_cob) {
               this.estado_cob = element['IDESTADO'];
             }
           });
         },
         err => {
-          //   // console.log('error');
+          // console.log('error');
         }
       );
     }
@@ -195,23 +192,33 @@ export class BriefPage implements OnInit{
       this.provedor.getCobertura(idUsuario,campania).then(
         data => {
           this.cobertura = data;
-          // console.log(this.cobertura );
+          console.log(this.cobertura );
           if( (this.cuarta == 2 || this.cuarta == 3 || this.cuarta == 5) && this.cobertura.length == 1 && this.cobertura_nacional !== 1  ) {
             this.cobertura_local = 1;
             this.cobertura_empresa = 'Local';
-           // console.log(this.cobertura_empresa);
+            // console.log(this.cobertura_empresa);
           } else if(this.cobertura.length == 1 && this.cobertura_nacional !== 1 && this.cuarta !== 2 && this.cuarta !== 3 && this.cuarta !== 5 ) {
             this.cobertura_estado = 1;
             this.cobertura_empresa = 'Estado';
-           // console.log(this.cobertura_empresa);
+            // console.log(this.cobertura_empresa);
           } else if(this.cobertura.length >= 2 && this.cobertura_nacional !== 1 ) {
             this.cobertura_region = 1;
             this.cobertura_empresa = 'Region';
-           // console.log(this.cobertura_empresa);
+            for(let i = 0; this.cobertura.length > i; i++ ) {
+              this.cat_estados.forEach(element=> {
+                if(element['IDESTADO'] == this.cobertura[i].IDESTADO) {
+                  this.estado.push(element['NOMBRE']);
+                  // console.log(element['NOMBRE'],this.estado );
+                }
+              });
+            }
           } 
+
+          this.briefLleno();
+
         },
         err => {
-          //   // console.log('error');
+          // console.log('error');
         }
       );
     }
@@ -220,10 +227,10 @@ export class BriefPage implements OnInit{
       this.provedor.getEstados().then(
         data => {
           this.cat_estados = data;
-          // console.log(data);
+          console.log(data);
         },
         err => {
-          //   // console.log('error');
+          // console.log('error');
         }
       );
     }
@@ -233,10 +240,10 @@ export class BriefPage implements OnInit{
         data => {
           let empresas = data;
           this.tipo_empresas = empresas;
-          //console.log(this.tipo_empresas);
+          // console.log(this.tipo_empresas);
         },
         err => {
-          //   // console.log('error');
+          // console.log('error');
         }
       );
     }
@@ -248,7 +255,7 @@ export class BriefPage implements OnInit{
           // console.log(data);
         },
         err => {
-          //   // console.log('error');
+          // console.log('error');
         }
       );
     }
@@ -336,7 +343,6 @@ export class BriefPage implements OnInit{
         this.correo3,
         this.IdSubSector).then(
         data => {
-
           this.datosCampania = data;
           this.idCampania = this.datosCampania[0].IDCampania;
           if(this.cobertura_empresa == 'Local') {
@@ -355,9 +361,11 @@ export class BriefPage implements OnInit{
           } else if(this.cobertura_empresa == 'Nacional') {
             this.updateCoberturaNacional(this.idCampania,this.id);
           }
+          this.lleno = true;
+          this.showSuccess();
         },
         err => {
-          //   // console.log('error');
+          this.showError();
         }
       );
 
@@ -380,7 +388,7 @@ export class BriefPage implements OnInit{
          // console.log(data);
         },
         err => {
-          //   // console.log('error');
+          // console.log('error');
         }
       );
     }
@@ -426,6 +434,40 @@ export class BriefPage implements OnInit{
           apaterno: this.apaterno, 
           amaterno: this.amaterno, 
           idCampania: this.idCampania
+      });
+    }
+
+    briefLleno() {
+      console.log(this.producto,this.tipoempresa,this.cp,this.mejor,this.target,this.cobertura_empresa );
+      if((this.producto !== '' && this.tipoempresa !== '' && this.cp !== '' && this.mejor !== '' && this.target !== '' && this.cobertura_empresa !== '') && 
+         (this.producto !== undefined && this.tipoempresa !== undefined && this.cp !== undefined && this.mejor !== undefined && this.target !== undefined && this.cobertura_empresa !== undefined) && 
+         (this.producto !== null && this.tipoempresa !== null && this.cp !== null && this.mejor !== null && this.target !== null && this.cobertura_empresa !== null) && 
+         (this.producto !== 'null' && this.tipoempresa !== 'null' && this.cp !== 'null' && this.mejor !== 'null' && this.target !== 'null' && this.cobertura_empresa !== 'null')) {
+           // console.log('entro');
+           this.lleno = true;
+      }
+    }
+
+    public showSuccess() {
+      swal({
+        title: 'Se ha guardado tu información con éxito',
+        type: 'success',
+        showCancelButton: false,
+        confirmButtonColor: '#3085d6',
+        confirmButtonText: 'OK',
+        reverseButtons: true,
+      });
+    }
+  
+    public showError() {
+      swal({
+        title: 'No se ha podido guardar tu información',
+        text: 'Por favor complete todos los campos',
+        type: 'error',
+        showCancelButton: false,
+        confirmButtonColor: '#3085d6',
+        confirmButtonText: 'OK',
+        reverseButtons: true
       });
     }
 }
