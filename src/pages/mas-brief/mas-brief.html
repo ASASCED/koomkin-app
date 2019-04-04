@@ -435,11 +435,11 @@
                     </div>
 
                     <p *ngIf="sector === 'Privado'" class="titulo-brief">Sectores*</p>
-                    <select *ngIf="sector === 'Privado'" type="text" class="seleccion-brief-grande" [(ngModel)]="sectores">
-                        <option *ngFor="let sector of cat_sectores">
-                          {{sector.nombre}}
-                        </option>
-                      </select>                     
+                    <ion-item *ngIf="sector === 'Privado'">
+                        <ion-select class="seleccion-brief-grande" style="max-width: 100%;" [(ngModel)]="sectores" multiple>
+                            <ion-option  *ngFor="let sector of cat_sectores">{{sector.nombre}}</ion-option>
+                        </ion-select>
+                    </ion-item>
                      
                     <p class="titulo-brief">Intereses o comentarios adicionales</p>
                     <textarea class="otro" rows="2" cols="32" maxlength="150" [(ngModel)]="intereses" placeholder="Escribe sus intereses o comentarios adicionales..." required></textarea>

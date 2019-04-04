@@ -39,9 +39,9 @@ export class AuthServiceProvider {
       this.http.get(this.apiUrl + '/getUserByEmail/' + email).timeout(8000).subscribe(data => {
         resolve(data);
         this.info = data;
-        //// console.log("infoooo"+JSON.stringify(this.info));
+        // console.log("infoooo"+JSON.stringify(this.info));
         if (this.info.length > 0) {
-          console.log(this.info);
+          // console.log(this.info);
           this.setEnableChat(this.info[0]['chat']);
           this.setClientUUID(this.info[0]['uuid']);
           this.contrasena = this.info[0].PASSWORD2;
@@ -56,7 +56,7 @@ export class AuthServiceProvider {
           if(this.activo == this.id) {
             this.activo = 1;
           }
-          console.log(this.activo);
+          // console.log(this.activo);
           if (this.plt.is('ios') || this.plt.is('android')) {
             window["plugins"].OneSignal.sendTag("chat", this.info[0]['chat']);
           } 

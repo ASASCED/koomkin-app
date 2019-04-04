@@ -38,7 +38,7 @@ export class MasBriefPage implements OnInit{
     public intereses;
     public sector;
     public categoria;
-    public sectores;
+    public sectores: any;
     public nombre;
     public apaterno;
     public amaterno;
@@ -67,14 +67,16 @@ export class MasBriefPage implements OnInit{
      ];
   
      public cat_sectores = [
-      {id: 1, nombre: 'sector 1'},
-      {id: 2, nombre: 'sector 2'},
-      {id: 3, nombre: 'sector 3'},
-      {id: 4, nombre: 'sector 4'},
-      {id: 5, nombre: 'sector 5'},
-      {id: 6, nombre: 'sector 6'},
-      {id: 7, nombre: 'sector 7'},
-      {id: 8, nombre: 'sector 8'},
+      {id: 1, nombre: 'Manufactura'},
+      {id: 2, nombre: 'Distribuidores'},
+      {id: 3, nombre: 'Comercio'},
+      {id: 4, nombre: 'Hoteles'},
+      {id: 5, nombre: 'Restaurantes'},
+      {id: 6, nombre: 'Construcción'},
+      {id: 7, nombre: 'Transportes'},
+      {id: 8, nombre: 'Educación'},
+      {id: 9, nombre: 'Salud'},
+      {id: 10, nombre: 'Otro'}
      ];
   
     selectedSegment = 'first';
@@ -136,11 +138,18 @@ export class MasBriefPage implements OnInit{
         this.sector = navParams.get('sector');
         this.categoria = navParams.get('categoria');
         this.sectores = navParams.get('sectores');
+        console.log(this.sectores);
+
+        if (this.sectores !== null && this.sectores !== 'null' && this.sectores !== undefined && this.sectores !== '') {
+          console.log('entro if');
+          this.sectores = this.sectores.split(",");
+        }
+        //
+
         this.idCampania = navParams.get('idCampania');
-        if(this.idCampania == undefined) {
+        if (this.idCampania == undefined) {
           this.getLastCampania();
         }
-        console.log(this.idCampania);
         
       }
    

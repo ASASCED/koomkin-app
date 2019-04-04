@@ -1,4 +1,4 @@
-import { Component, OnInit,ViewChild } from '@angular/core';
+import { Component, OnInit,ViewChild, AfterContentChecked } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController, Slides } from 'ionic-angular';
 import { RestProvider } from '../../providers/rest/rest';
 import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
@@ -10,7 +10,7 @@ import swal from 'sweetalert2';
   selector: 'page-brief',
   templateUrl: 'brief.html',
 })
-export class BriefPage implements OnInit{
+export class BriefPage implements OnInit, AfterContentChecked{
 
   @ViewChild('loopSlider') sliderComponent: Slides;
 
@@ -95,6 +95,10 @@ export class BriefPage implements OnInit{
       this.getEstados();
       this.getEmpresas();
     }
+    
+    ngAfterContentChecked() {
+      this.briefLleno();
+    }
 
     getBriefInformation(idUsuario) {
       this.provedor.getBriefInformation(idUsuario).then(
@@ -116,7 +120,6 @@ export class BriefPage implements OnInit{
           if (this.cobertura_nacional == 1) {
              this.cobertura_empresa = 'Nacional';
           } 
-          console.log(this.cuarta);
           this.tipoempresa = this.datos[0].TipoEmpresa;
 
           if(this.tipoempresa == 1) {
@@ -197,7 +200,6 @@ export class BriefPage implements OnInit{
       this.provedor.getCobertura(idUsuario,campania).then(
         data => {
           this.cobertura = data;
-
           if( (this.cuarta == 2 || this.cuarta == 3 || this.cuarta == 5) && this.cobertura.length == 1 && this.cobertura_empresa !== 'Nacional'  && this.cobertura_empresa !== 'Estado' && this.cobertura_empresa !== 'Region' ) {
             this.cobertura_empresa = 'Local';
           } else if(this.cobertura.length == 1 && this.cobertura_nacional !== 1 && this.cuarta !== 2 && this.cuarta !== 3 && this.cuarta !== 5 ) {
@@ -212,9 +214,6 @@ export class BriefPage implements OnInit{
               });
             }
           } 
-
-          this.briefLleno();
-
         },
         err => {
           // console.log('error');
@@ -422,7 +421,7 @@ export class BriefPage implements OnInit{
          (this.producto !== undefined && this.tipoempresa !== undefined && this.cp !== undefined && this.mejor !== undefined && this.target !== undefined && this.cobertura_empresa !== undefined) && 
          (this.producto !== null && this.tipoempresa !== null && this.cp !== null && this.mejor !== null && this.target !== null && this.cobertura_empresa !== null) && 
          (this.producto !== 'null' && this.tipoempresa !== 'null' && this.cp !== 'null' && this.mejor !== 'null' && this.target !== 'null' && this.cobertura_empresa !== 'null')) {
-           // console.log('entro');
+          // console.log('entro');
            this.lleno = true;
       }
     }
