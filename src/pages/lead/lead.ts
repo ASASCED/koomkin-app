@@ -208,8 +208,7 @@ export class LeadPage implements OnInit {
     });
 
   }
-
-
+  
   openModalIniciarConversacion() {
 
     const myModal2 = this.modal.create('ModalPageIniciarChatPage', { uuid: this.leadActual.uuid, nombrelead: this.leadActual.NOMBRE }, { enableBackdropDismiss: false, cssClass: "Modal-iniciar-chat" });

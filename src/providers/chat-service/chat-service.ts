@@ -6,7 +6,6 @@ import {DomSanitizer} from '@angular/platform-browser';
 import {HTTP} from '@ionic-native/http'
 import { Storage } from '@ionic/storage';
 import {File} from "@ionic-native/file";
-import { Transfer, FileUploadOptions, TransferObject } from '@ionic-native/transfer';
 
 @Injectable()
 
@@ -66,11 +65,13 @@ export class ChatServiceProvider {
   }
 
   fetchAccessToken(username, handler) {
+    console.log('fetchAccessToken');
     return new Promise((resolve, reject)=> {
       // http://www.koomkin.com:4835/token
       this.http.post('https://www.koomkin.com.mx/chat/token' , {device: "mobile", identity: username})
         .subscribe(data => {
           var token = data['token'];
+          alert(token);
           handler(token);
           return resolve();
         }, err => {
@@ -118,7 +119,7 @@ export class ChatServiceProvider {
   }
 
   connectToChatChannel(channel_uniqueName: string) {
-
+    alert(channel_uniqueName);
     let self = this;
     this.updateMsgList([]);
     self.tc.messagingClient.getChannelByUniqueName(channel_uniqueName).then((channel) => {
@@ -238,8 +239,6 @@ export class ChatServiceProvider {
     }
   }
 
-
-
   loadMessages(fromstring: string): any {
 
     var mediaPromisesArray = []; // Arreglo de archivos media. Cuando cargan se guarda la conversacion.
@@ -351,7 +350,6 @@ export class ChatServiceProvider {
     }));
 
   }
-
 
   loadMessagesStorageless(fromstring: string): any {
 

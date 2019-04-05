@@ -246,13 +246,11 @@
                 <p class="line-breaker ">{{msg.message}}</p>
               </div>
 
-
               <div *ngIf="msg.type === 'media' && msg.contentType.startsWith('image')" class="msg-content">
                 <span class="triangle"></span>
                 <!-- attributes {{msg.attributes.mime}} -->
                 <img #spy class="twilioImage" style="max-width: 180px; max-height: 180px; cursor: pointer" (click)="openFile(msg.url ,msg.contentType)" [src]="msg.url['__zone_symbol__value']">
               </div>
-
 
               <div *ngIf="msg.type === 'media' && msg.contentType.startsWith('image') == false" class="msg-content">
                 <span class="triangle" *ngIf="!msg.contentType.startsWith('audio')"></span>
@@ -273,11 +271,8 @@
                     Tu navegador no soporta achivos de audio.
                   </audio>
                 </div>
-
                 <p class="line-breaker "></p>
               </div>
-
-
             </div>
           </div>
         </div>
@@ -308,8 +303,7 @@
 
 <ion-footer class="chat-footer" *ngIf="page=='Chat'" no-border [style.height]="'55px'">
 
-
-    <div class="input-wrap">
+    <div class="input-wrap" style="width: 100%;">
       <button class="chat-send-message" ion-button clear icon-only item-right (click)="chooseFile()">
         <ion-icon style=" position: relative;  display: inline-block; vertical-align: middle; text-align: center; font-size: 2em; color:#37B9BB;" name="add" ios="ios-add" md="md-add"></ion-icon>
       </button>
