@@ -50,7 +50,7 @@ export class ChatServiceProvider {
       this.chatClientStarted = true;
     }).catch(function(error) {
       //alert(error);
-      window.location.reload();
+      //window.location.reload();
       // console.log(("connectclient" +JSON.stringify(error, Object.getOwnPropertyNames(error))));
     });
   }
@@ -71,7 +71,7 @@ export class ChatServiceProvider {
       this.http.post('https://www.koomkin.com.mx/chat/token' , {device: "mobile", identity: username})
         .subscribe(data => {
           var token = data['token'];
-          alert(token);
+          //alert(token);
           handler(token);
           return resolve();
         }, err => {
@@ -119,7 +119,7 @@ export class ChatServiceProvider {
   }
 
   connectToChatChannel(channel_uniqueName: string) {
-    alert(channel_uniqueName);
+    //alert(channel_uniqueName);
     let self = this;
     this.updateMsgList([]);
     self.tc.messagingClient.getChannelByUniqueName(channel_uniqueName).then((channel) => {

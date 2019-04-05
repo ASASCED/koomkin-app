@@ -223,12 +223,12 @@ export class LoginPage implements OnInit {
 
                   }else{
                     this.navCtrl.setRoot(InicioPage).then(()=>{
-                      if(data[0]['uuid']){
-                        this.iniciarClienteChatTwilio(data[0]['uuid']);
-                      }
+                      //if(data[0]['uuid']){
+                        //this.iniciarClienteChatTwilio(data[0]['uuid']);
+                      //}
                     });
                   }
-
+                  this.iniciarClienteChatTwilio(data[0]['uuid']);
                 }
               }
             }, (err) => {
