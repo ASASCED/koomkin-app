@@ -9,7 +9,24 @@ const db = require('./db.js');
 const _ = require('underscore');
 const KOOMKIN_KEY = 'K00mk1n@!xWz93OTkwMSwiZX';
 
+const fb = require('./firebase/conf/services/brief-service.js');
+
+fb.updateBrief('00Tfc2hPbk3uoUJ6my0T').then(data => {
+  console.log(data);
+}).catch(reason =>{
+  console.log(reason);
+});
+
+fb.getBrief('00Tfc2hPbk3uoUJ6my0T').then(querySnapshot => {
+  querySnapshot.forEach(doc => {
+    console.log(doc.data())
+  });
+});
+
+
+
 var app = express();
+
 
 if ('development' == app.get('env')) {
     console.log("Rejecting node tls");
@@ -575,6 +592,7 @@ app.get('/getIntentoSesion/:email/:password', function (req, res) {
         .catch(err => {
             res.status(500).json({ error: err }).send();
         });
+
 });
 
 app.get('/getAccesoReporte/:id/:acceso/:dispositivo/:sistema/:idioma', function (req, res) {
