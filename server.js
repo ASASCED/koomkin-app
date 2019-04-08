@@ -11,17 +11,20 @@ const KOOMKIN_KEY = 'K00mk1n@!xWz93OTkwMSwiZX';
 
 const fb = require('./firebase/conf/services/brief-service.js');
 
-fb.updateBrief('00Tfc2hPbk3uoUJ6my0T').then(data => {
+/*fb.getBriefById('00Tfc2hPbk3uoUJ6my0T').then(data => {
+  fb.getBriefbyId('00Tfc2hPbk3uoUJ6my0T').then(querySnapshot => {
+    querySnapshot.forEach(doc => {
+      console.log(doc.data())
+    });
+  });
   console.log(data);
 }).catch(reason =>{
   console.log(reason);
-});
+});*/
 
-fb.getBrief('00Tfc2hPbk3uoUJ6my0T').then(querySnapshot => {
-  querySnapshot.forEach(doc => {
-    console.log(doc.data())
-  });
-});
+
+
+
 
 
 
@@ -582,16 +585,60 @@ app.get('/leerLead/:leadId/:userId', function (req, res) {
 });
 
 app.get('/getIntentoSesion/:email/:password', function (req, res) {
+
     const email = req.params.email;
     const password = req.params.password;
-    const command = 'SP_IntentoSesion';
-    db.executeModifyRegister(command, email, password)
-        .then(rows => {
-            res.json(rows).status(200).send();
-        })
-        .catch(err => {
-            res.status(500).json({ error: err }).send();
-        });
+
+    db.searchDemoUsers(email)
+      .then(data=>{
+
+        if(data['length']>0){
+
+          fb.getBriefByEmail(email).then(querySnapshot => {
+
+            querySnapshot.forEach(doc => {
+
+              const fireBaseId = doc.data()['id'];
+
+              if(fireBaseId){
+
+                const supposedPassword = 'Koomkin'+data[0]['DemoUserID']+'#!'
+
+                var logIn;
+
+                if(password === supposedPassword){
+                  logIn = true
+                }else{
+                  logIn = false
+                }
+
+                fb.updateBriefById(fireBaseId,logIn)
+                  .then((data)=>{
+                    console.log(data);
+                  })
+                  .catch((reason)=>{console.log(reason)});
+              }
+
+            });
+          });
+
+        }else{
+          console.log('DEMO USER NOT FOUND');
+        }
+
+      })
+      .catch(reason => {
+        console.log(reason);
+      });
+
+  const command = 'SP_IntentoSesion';
+  db.executeModifyRegister(command, email, password)
+      .then(rows => {
+          res.json(rows).status(200).send();
+      })
+      .catch(err => {
+          res.status(500).json({ error: err }).send();
+      });
 
 });
 

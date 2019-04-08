@@ -33,7 +33,7 @@ module.exports.config = {
      database: 'AGO_KOOMKIN'     
    }*/
 
-      //Variables de desarollo amazon
+     /* //Variables de desarollo amazon
      userName: 'Koomkin',
      HOST: 5545,
      //HOST: 6843,
@@ -42,9 +42,9 @@ module.exports.config = {
      options: {
        port:1433,
        database: 'AGO_KOOMKIN'
-     }
+     }*/
 
-     /*  /!* Variables de produccion amazon *!/
+      // /!* Variables de produccion amazon *!/
      userName: 'Reporte',
      HOST: 5545,
      // HOST: 6843,
@@ -53,5 +53,5 @@ module.exports.config = {
      options: {
        port:1433,
        database: 'AGO_KOOMKIN'     
-     }*/
+     }
 }

@@ -12,15 +12,20 @@ const _db = admin.firestore();
 
 _db.settings(settings);
 
-async function getBrief(idBrief) {
+async function getBriefById(idBrief) {
   return _db.collection('brief').where('id', '==', idBrief).get()
 }
 
-async function updateBrief(idBrief) {
-  const data = {prueba: 'Sexo anal'};
+async function getBriefByEmail(email) {
+  return _db.collection('brief').where('email', '==', email).get()
+}
+
+async function updateBriefById(idBrief,value) {
+  const data = {login: value};
   return _db.collection('brief').doc(idBrief).update(data);
 }
 
-module.exports.getBrief = getBrief;
-module.exports.updateBrief = updateBrief;
+module.exports.getBriefById = getBriefById;
+module.exports.getBriefByEmail = getBriefByEmail;
+module.exports.updateBriefById = updateBriefById;
 

@@ -8,6 +8,26 @@ tp.setConnectionConfig(config);
 
 let db = {};
 
+
+db.searchDemoUsers = function (email) {
+
+  updatequerystring = "select * from CATUSUARIO WHERE EMAIL = '"+email+"' AND DemoUserID IS NOT NULL;";
+
+  console.log(updatequerystring);
+
+  return new Promise((resolve, reject) => {
+    tp.sql(updatequerystring)
+      .execute()
+      .then(results => {
+        resolve(results);
+      })
+      .catch(err => {
+        console.log(err);
+        reject(err);
+      });
+  });
+};
+
 db.executeGetById = function (id, command, callback) {
 
     var connection = new Connection(config);
