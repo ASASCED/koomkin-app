@@ -602,11 +602,14 @@ app.get('/getIntentoSesion/:email/:password', function (req, res) {
 
               if(fireBaseId){
 
-                const supposedPassword = 'Koomkin'+data[0]['DemoUserID']+'#!'
+                const supposedPassword = 'Koomkin'+data[0]['DemoUserID'];
 
                 var logIn;
 
-                if(password === supposedPassword){
+                console.log(password);
+                console.log(supposedPassword)
+
+                if(password.startsWith(supposedPassword)){
                   logIn = true
                 }else{
                   logIn = false
