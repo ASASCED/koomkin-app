@@ -820,20 +820,40 @@ app.get('/updateBriefInformation/:usuario/:idProducto/:new_Producto/:new_TipoEmp
 
 //updateBriefInformation datos
 
-app.get('/updateBriefDatos/:usuario/:nombre/:aPaterno/:aMaterno/:fechaNac?/:idPuesto/:cpDomicilio/:aniosEmpresa?/:educacion?', function(req, res) {
+app.get('/updateBriefDatos/:usuario/:nombre?/:aPaterno?/:aMaterno?/:fechaNac?/:idPuesto?/:cpDomicilio?/:aniosEmpresa?/:educacion?', function(req, res) {
 
     const usuario = parseInt(req.params.usuario, 10);
-    const nombre = req.params.nombre;
-    const aPaterno = req.params.aPaterno;
-    const aMaterno = req.params.aMaterno;
+    let nombre = req.params.nombre;
+    let aPaterno = req.params.aPaterno;
+    let aMaterno = req.params.aMaterno;
     let fechaNac = req.params.fechaNac;
-    const idPuesto = parseInt(req.params.idPuesto, 10);
-    const cpDomicilio = parseInt(req.params.cpDomicilio, 10);
+    let idPuesto = parseInt(req.params.idPuesto, 10);
+    let cpDomicilio = parseInt(req.params.cpDomicilio, 10);
     let aniosEmpresa = parseInt(req.params.aniosEmpresa, 10);
     let educacion = req.params.educacion;
 
+    if(!nombre){
+        nombre = 'NULL';
+    }
+
+    if(!aPaterno){
+        aPaterno = 'NULL';
+    }
+
+    if(!aMaterno){
+        aMaterno = 'NULL';
+    }
+
     if(!fechaNac){
         fechaNac = 'NULL';
+    }
+
+    if(!idPuesto){
+        idPuesto = 'NULL';
+    }
+
+    if(!cpDomicilio){
+        cpDomicilio = 'NULL';
     }
 
     if(!aniosEmpresa){
@@ -855,18 +875,26 @@ app.get('/updateBriefDatos/:usuario/:nombre/:aPaterno/:aMaterno/:fechaNac?/:idPu
 
 //updateBriefInformation Empresa
 
-app.get('/updateBriefEmpresa/:usuario/:nombreEmpresa/:rfcEmpresa/:numeroEmpleados?/:numeroSocios?/:empresaFamiliar/:regimenFiscal/:rangoVentasAnuales/:ventajaCompetitiva?/:idCampania', function(req, res) {
+app.get('/updateBriefEmpresa/:usuario/:nombreEmpresa?/:rfcEmpresa?/:numeroEmpleados?/:numeroSocios?/:empresaFamiliar?/:regimenFiscal?/:rangoVentasAnuales?/:ventajaCompetitiva?/:idCampania', function(req, res) {
 
     const usuario = parseInt(req.params.usuario, 10);
-    const nombreEmpresa = req.params.nombreEmpresa;
-    const rfcEmpresa = req.params.rfcEmpresa;
+    let nombreEmpresa = req.params.nombreEmpresa;
+    let rfcEmpresa = req.params.rfcEmpresa;
     let numeroEmpleados = parseInt(req.params.numeroEmpleados, 10);
     let numeroSocios = parseInt(req.params.numeroSocios, 10);
-    const empresaFamiliar = parseInt(req.params.empresaFamiliar, 10);
-    const regimenFiscal = req.params.regimenFiscal;
-    const rangoVentasAnuales = req.params.rangoVentasAnuales;
+    let empresaFamiliar = parseInt(req.params.empresaFamiliar, 10);
+    let regimenFiscal = req.params.regimenFiscal;
+    let rangoVentasAnuales = req.params.rangoVentasAnuales;
     let ventajaCompetitiva = req.params.ventajaCompetitiva;
     const idCampania = parseInt(req.params.idCampania, 10);
+
+    if(!nombreEmpresa){
+        nombreEmpresa = 'NULL';
+    }
+
+    if(!rfcEmpresa){
+        rfcEmpresa = 'NULL';
+    }
 
     if(!numeroEmpleados){
         numeroEmpleados = 'NULL';
@@ -874,6 +902,18 @@ app.get('/updateBriefEmpresa/:usuario/:nombreEmpresa/:rfcEmpresa/:numeroEmpleado
 
     if(!numeroSocios){
         numeroSocios = 'NULL';
+    }
+
+    if(!empresaFamiliar){
+        empresaFamiliar = 'NULL';
+    }
+
+    if(!regimenFiscal){
+        regimenFiscal = 'NULL';
+    }
+
+    if(!ventajaCompetitiva){
+        ventajaCompetitiva = 'NULL';
     }
 
     if(!ventajaCompetitiva){
