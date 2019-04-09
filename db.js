@@ -1275,6 +1275,7 @@ db.updateBriefEmpresa = function (idUsuario, nombreEmpresa, rfcEmpresa, numeroEm
     update TBL_BRIEF set RFCEMPRESA = '${rfcEmpresa}', NumeroEmpleados = ${numeroEmpleados}, NumeroSocios = ${numeroSocios}, EmpresaFamiliar = ${empresaFamiliar}, RegimenFiscal = '${regimenFiscal}', RangoVentasAnuales = '${rangoVentasAnuales}' where IDUSUARIO = ${idUsuario};
     update tbl_TuCampania set VentajaCompetitiva = '${ventajaCompetitiva}' where IDCampania = ${idCampania};`;
     
+    console.log(requestStr);
         return new Promise((resolve, reject) => {
             tp.sql(requestStr)
                 .execute()
@@ -1291,7 +1292,7 @@ db.updateBriefEmpresa = function (idUsuario, nombreEmpresa, rfcEmpresa, numeroEm
 db.updateBriefClienteParticular = function ( clientesTargetIngresosAnuales, clientesTargetEdad, clientesTargetGenero, clientesTargetIntereses, idCampania) {
 
         const requestStr = `update tbl_TuCampania set ClientesTargetIngresosAnuales = '${clientesTargetIngresosAnuales}', ClientesTargetEdad = '${clientesTargetEdad}', ClientesTargetGenero = '${clientesTargetGenero}', ClientesTargetIntereses = '${clientesTargetIntereses}' where IDCampania = ${idCampania}`;    
-
+        console.log(requestStr);
         return new Promise((resolve, reject) => {
             tp.sql(requestStr)
                 .execute()
@@ -1308,7 +1309,7 @@ db.updateBriefClienteParticular = function ( clientesTargetIngresosAnuales, clie
 db.updateBriefClienteEmpresas= function ( clientesTargetSector, clientesTargetCategoria, clientesTargetSectores, clientesTargetIntereses, idCampania) {
 
     const requestStr = `update tbl_TuCampania set ClientesTargetSector = '${clientesTargetSector}', ClientesTargetCategoria = '${clientesTargetCategoria}', ClientesTargetSectores = '${clientesTargetSectores}', ClientesTargetIntereses = '${clientesTargetIntereses}' where IDCampania = ${idCampania}`;    
-
+    console.log(requestStr);
     return new Promise((resolve, reject) => {
         tp.sql(requestStr)
             .execute()
@@ -1345,6 +1346,7 @@ db.updateCoberturaRegion = function (idCampania,idEstado,idUsuario) {
 
     const requestStr = `insert into tbl_TuCampaniaCobertura (IDCampania,IdPAIS,IDESTADO,IDUSUARIO) VALUES (${idCampania},156,${idEstado},${idUsuario});`;
     
+    console.log(requestStr);
         return new Promise((resolve, reject) => {
             tp.sql(requestStr)
                 .execute()
@@ -1361,7 +1363,7 @@ db.updateCoberturaRegion = function (idCampania,idEstado,idUsuario) {
 db.updateCoberturaNacional = function (idCampania,idUsuario) {
 
     const requestStr = `insert into tbl_TuCampaniaCobertura (IDCampania,IdPAIS,IDESTADO,IDUSUARIO) VALUES (${idCampania},156,NULL,${idUsuario});`;
-    
+    console.log(requestStr);
         return new Promise((resolve, reject) => {
             tp.sql(requestStr)
                 .execute()
@@ -1378,7 +1380,6 @@ db.updateCoberturaNacional = function (idCampania,idUsuario) {
 db.executeGetCobertura = function (idUsuario, idCampania) {
 
     const requestStr = `select * from tbl_tucampaniacobertura where IDUSUARIO = ${idUsuario} and IDCampania = ${idCampania}`;
-    
         return new Promise((resolve, reject) => {
             tp.sql(requestStr)
                 .execute()
