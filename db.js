@@ -1375,6 +1375,22 @@ db.updateCoberturaNacional = function (idCampania,idUsuario) {
                     reject(err);
                 });
         });
+};
+
+db.executeGetInicioCampana = function (idUsuario) {
+
+    const requestStr = `select top 1 (DATEDIFF (DAY,DATEADD(DAY,1,FInicio),GETDATE()) + 1 ) as inicioCampana from kad_Tbl_Membresias where IDUSUARIO = ${idUsuario} order by IDMembresia ASC`;
+        return new Promise((resolve, reject) => {
+            tp.sql(requestStr)
+                .execute()
+                .then(results => {
+                    resolve(results);
+                })
+                .catch(err => {
+                    console.log(err);
+                    reject(err);
+                });
+        });
     };
 
 db.executeGetCobertura = function (idUsuario, idCampania) {

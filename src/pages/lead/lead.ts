@@ -312,7 +312,7 @@ export class LeadPage implements OnInit {
 
   public leerChat() {
 
-    const url = 'http://www.koomkin.com:4835/api/read-messages/';
+    const url = 'https://www.koomkin.com.mx/chat/api/read-messages/';
     return new Promise((resolve, reject) => {
       this.http.post(url + this.leadActual.uuid, { device: "app" })
         .subscribe(data => {
@@ -396,7 +396,6 @@ export class LeadPage implements OnInit {
   ionViewDidLoad() { }
 
   constructor(
-
     private modal: ModalController,
     public viewCtrl: ViewController,
     public navCtrl: NavController,
@@ -1104,9 +1103,7 @@ export class LeadPage implements OnInit {
         } else {
           this.audio = 'sinaudio';
         }
-
       }
-
     });
   }
 

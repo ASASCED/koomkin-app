@@ -1037,6 +1037,21 @@ app.get('/getBriefInformation/:usuario', function(req, res) {
         });
 });
 
+//SP_GetInicioCampaña
+
+app.get('/getInicioCampana/:usuario', function(req, res) {
+
+    const usuario = parseInt(req.params.usuario, 10);
+
+    db.executeGetInicioCampana(usuario) 
+        .then(rows => {
+            res.json(rows).status(200).send();
+        })
+        .catch(err => {
+            res.status(500).json({ error: err }).send();
+        });
+});
+
 //SP_GetLastCampania
 
 app.get('/getLastCampania/:usuario', function(req, res) {
