@@ -2,6 +2,11 @@ const express = require('express');
 const path = require('path');
 const request = require('request');
 const config = conf.config;
+const base64 = require('file-base64');
+
+const favicon = require('serve-favicon');
+const logger = require('morgan');
+const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const db = require('./db.js');
