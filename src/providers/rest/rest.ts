@@ -244,6 +244,17 @@ export class RestProvider {
     });
   }
 
+  getInicioCampana() {
+    return new Promise(resolve => {
+      this.http.get(this.apiUrl + '/getInicioCampana/' + this.user).subscribe(data => {
+        resolve(data);
+        // // console.log(data);
+      }, err => {
+        // console.log(err);
+      });
+    });
+  }
+
   getLeadCountMonth() {
     return new Promise(resolve => {
       this.http.get(this.apiUrl + '/getLeadCountMonth/' + this.user).subscribe(data => {

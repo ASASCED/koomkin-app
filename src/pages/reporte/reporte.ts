@@ -64,6 +64,7 @@ export class ReportePage implements OnInit {
   public exitoso;
   public resultexito;
   public app;
+  public fechaInicio;
   //función de la primera gráfica
   public columnChartData = {
     chartType: 'ColumnChart',
@@ -153,7 +154,7 @@ export class ReportePage implements OnInit {
   ngOnInit() {
     this.titulo = this.navParams.get('numero');
     this.titulo = this.navParams.get('numero');
-
+    this.getInicioCampana();
     this.columnChartData.dataTable = [["Mes", "Leads", { "role": "style" }],
       ["ABR", 0, "#00A6D4"],
       ["MAY", 0, "#00A6D4"],
@@ -308,6 +309,7 @@ export class ReportePage implements OnInit {
           if (this.meses[0].fechaReporte == this.meses[0].hoy) {
             let dt2 = new Date(this.meses[0].fechaReporte);
             let diastranscurridos = dt2.getDate()
+            console.log(this.fechaInicio);
             let estimado = Math.ceil((outter[outter.length - 1][1] / diastranscurridos) * 31)
             let inner = [];
             inner.push("ESTIM");
@@ -880,6 +882,14 @@ export class ReportePage implements OnInit {
     // // console.log(usuario,pagina,acceso);
     this.provedor.getInsertClickPagina(usuario,pagina,acceso).then((data) => {
       this.datosenvio = data;
+    }, (err) => {
+      // console.log('error');
+    });
+  }
+
+  public getInicioCampana() {
+    this.provedor.getInicioCampana().then((data) => {
+      this.fechaInicio = data;
     }, (err) => {
       // console.log('error');
     });

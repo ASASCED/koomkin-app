@@ -1554,7 +1554,69 @@ app.post('/passLogin', (req, res) => {
     } else {
         res.status(401).send();
     }
-   });
+});
+
+var facturaAPICrearUsuario = (json) => {
+
+    //const url = 'http://devfactura.in/api/v1/clients/create'
+    const url = config.URL_FACTURA + '/v1/clients/create'
+
+    var options = {
+        url: url,
+        method: 'POST',
+        headers: {
+            'F-API-KEY': config.API_KEY,
+            'F-SECRET-KEY': config.SCT_KEY,
+            'Content-Type': 'application/json'
+        },
+        body: json
+    };
+
+    return new Promise((resolve, reject) => {
+
+        function callback(error, res, body) {
+            if (!error && body.status !== "error") {
+                resolve(JSON.parse(body))
+            } else {
+                reject(error);
+            }
+        }
+
+        request(options, callback);
+    });
+}
+
+var facturaAPIUpdateUsuario = (uid, rows) => {
+
+    const url = config.URL_FACTURA + '/v1/clients/' + uid + '/update'
+    var options = {
+        url: url,
+        method: 'POST',
+        headers: {
+            'F-API-KEY': config.API_KEY,
+            'F-SECRET-KEY': config.SCT_KEY,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(rows)
+    };
+
+    //console.log(options)
+
+    return new Promise((resolve, reject) => {
+        function callback(error, res, body) {
+            if (!error && body.status !== "error") {
+                //console.log(body);
+                resolve(body)
+            } else {
+                console.log(error);
+                reject(error);
+            }
+        }
+
+        request(options, callback);
+    });
+};
+
 
 // catch 404 and forward to error handler
 app.use(function (req, res) {
