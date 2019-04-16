@@ -182,23 +182,6 @@ app.get('/getTicket/:id/:fecha/:descripcion', function (req, res) {
         });
 });
 
-//getDataProveedores
-app.get('/getDataProveedores/:uuid/:acceso/:dispositivo', function (req, res) {
-    const uuid = req.params.uuid;
-    const acceso = req.params.acceso;
-    const dispositivo = req.params.dispositivo;
-
-    const command = 'SP_DataProveedores';
-    db.executeInsertarRegisteros(command, uuid, acceso, dispositivo)
-        .then(rows => {
-            res.status(200).json(rows).send();
-        })
-        .catch(err => {
-            res.status(500).json({ error: err }).send();
-        });
-
-});
-
 app.get('/datosFiscales', function (req, res) {
 
     const id = req.query.id
@@ -481,18 +464,6 @@ var checkLeadComplement = (user_id, email) => {
             });
     });
 };
-
-
-app.get('/verificarPopup', function (req, res) {
-    db.verificarPopup(req.query.param1, function (err, rows) {
-        if (err) {
-            res.send('Error');
-        } else {
-            res.send(rows);
-        }
-    });
-});
-
 
 app.get('/calificaLead/:clave/:classification', function (req, res) {
 
@@ -914,13 +885,25 @@ app.get('/updateBriefEmpresa/:usuario/:nombreEmpresa?/:rfcEmpresa?/:numeroEmplea
 
 //updateBriefInformation Cliente Objetivo Particulares
 
-app.get('/updateBriefClienteParticular/:clientesTargetIngresosAnuales/:clientesTargetEdad/:clientesTargetGenero/:clientesTargetIntereses?/:idCampania', function(req, res) {
+app.get('/updateBriefClienteParticular/:clientesTargetIngresosAnuales?/:clientesTargetEdad?/:clientesTargetGenero?/:clientesTargetIntereses?/:idCampania', function(req, res) {
 
-    const clientesTargetIngresosAnuales = req.params.clientesTargetIngresosAnuales;
-    const clientesTargetEdad = req.params.clientesTargetEdad;
-    const clientesTargetGenero = req.params.clientesTargetGenero;
+    let clientesTargetIngresosAnuales = req.params.clientesTargetIngresosAnuales;
+    let clientesTargetEdad = req.params.clientesTargetEdad;
+    let clientesTargetGenero = req.params.clientesTargetGenero;
     let clientesTargetIntereses = req.params.clientesTargetIntereses;
     const idCampania = parseInt(req.params.idCampania, 10);
+
+    if(!clientesTargetIngresosAnuales){
+        clientesTargetIngresosAnuales = 'NULL';
+    }
+
+    if(!clientesTargetEdad){
+        clientesTargetEdad = 'NULL';
+    }
+
+    if(!clientesTargetGenero){
+        clientesTargetGenero = 'NULL';
+    }
 
     if(!clientesTargetIntereses){
         clientesTargetIntereses = 'NULL';
@@ -937,14 +920,26 @@ app.get('/updateBriefClienteParticular/:clientesTargetIngresosAnuales/:clientesT
 
 //updateBriefInformation Cliente Objetivo Empresas
 
-app.get('/updateBriefClienteEmpresas/:clientesTargetSector/:clientesTargetCategoria/:clientesTargetSectores/:clientesTargetIntereses?/:idCampania', function(req, res) {
+app.get('/updateBriefClienteEmpresas/:clientesTargetSector?/:clientesTargetCategoria?/:clientesTargetSectores?/:clientesTargetIntereses?/:idCampania', function(req, res) {
 
-    const clientesTargetSector = req.params.clientesTargetSector;
-    const clientesTargetCategoria = req.params.clientesTargetCategoria;
-    const clientesTargetSectores = req.params.clientesTargetSectores;
+    let clientesTargetSector = req.params.clientesTargetSector;
+    let clientesTargetCategoria = req.params.clientesTargetCategoria;
+    let clientesTargetSectores = req.params.clientesTargetSectores;
     let clientesTargetIntereses = req.params.clientesTargetIntereses;
     const idCampania = parseInt(req.params.idCampania, 10);
     
+    if(!clientesTargetSector){
+        clientesTargetSector = 'NULL';
+    }
+
+    if(!clientesTargetCategoria){
+        clientesTargetCategoria = 'NULL';
+    }
+
+    if(!clientesTargetSectores){
+        clientesTargetSectores = 'NULL';
+    }
+
     if(!clientesTargetIntereses){
         clientesTargetIntereses = 'NULL';
     }

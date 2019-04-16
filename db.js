@@ -315,98 +315,6 @@ db.facebook = function(usuario,tipo,callback){
 	});
 }
 
-db.verificarPopup = function(usuario,callback){
-	var connection = new Connection(config);
-	var result = [];
-	
-	connection.on('connect', function(err) {
-		
-		var Request = require('tedious').Request;
-		//var TYPES = require('tedious').TYPES;
-
-		var requestStr = "EXECUTE SP_muestratutorial " + usuario;
-		
-		request = new Request(requestStr, function(err,rowCount) {
-			if (err) {
-                callback(err);
-            } else {
-                callback(null, result);
-            }
-			connection.close();
-		});
-		
-		request.on('row', function(columns) {
-
-			var item = {}; 
-	        columns.forEach(function (column) { 
-	            item[column.metadata.colName] = column.value; 
-	        }); 
-	        result.push(item);
-		});	
-
-		connection.execSql(request);
-	});
-}
-
-// Gerry
-
-db.GeneraContrato = function (req) {
-    console.log(req.firstname);
-    
-    const d = req
-    const firstname = d.firstname
-    const lastname = d.lastname
-    const company_name = d.company_name
-    const email = d.email
-    const phone = d.phone
-    const adress = d.adress
-    const zip_code = d.zip_code
-    const payed_days = d.payed_days
-    const gift_days = d.gift_days
-    const payment_ammount = d.payment_ammount
-
-    console.log(firstname);
-
-    var requestStr = `Execute SP_GENERA_CONTRATO '${firstname}', '${lastname}', '${company_name}', 
-    '${email}', '${phone}', '${adress}', '${zip_code}', ${payed_days}, ${gift_days}, ${payment_ammount}`;
-
-    console.log(requestStr)
-
-    return new Promise((resolve, reject) => {
-        tp.sql(requestStr)
-            .execute()
-            .then(results => {
-                resolve(results)
-            })
-            .catch(err => {
-                console.log(err)
-                reject(err)
-            });
-    });
-}
-
-//getDataProveedores
-db.executeInsertarRegisteros = function (command, uuid, acceso, dispositivo) {
-
-  const requestStr = `exec ${command} '${uuid}', '${acceso}', '${dispositivo}' `;
-
-  console.log(requestStr);
-
-  return tp.sql(requestStr)
-            .execute()
-};
-
-//getDataComplement
-db.executeGetByClave = function (command, clave) {
-  console.log(clave)
-  const requestStr = `exec ${command} ${clave}`;
-
-  console.log(requestStr);
-
-  return tp.sql(requestStr)
-            .execute()
-};
-
 //getIntentoSesion
 db.executeModifyRegister = function (command, email, password) {
 
@@ -555,27 +463,19 @@ db.PostRegisterDeviceId = function (IdUsuario, IdDevice,  callback) {
     connection.on('connect', function (err) {
 
         var Request = require('tedious').Request;
-
         var DevicePlatform = "Android"
 
         console.log("INSERT INTO dbo.userMobileDevices (IdUsuario, IdDevice, DevicePlatform, LoginDate) VALUES ('"+IdUsuario+"','"+IdDevice+"','"+DevicePlatform+"','"+getDateTime()+"')");
 
         request = new Request("INSERT INTO dbo.userMobileDevices (IdUsuario, IdDevice, DevicePlatform, LoginDate) VALUES ('"+IdUsuario+"','"+IdDevice+"','"+DevicePlatform+"','"+getDateTime()+"')",
             function (err, rowCount) {
-
             if (err) {
-
                 callback(err);
-
             } else {
-
                 callback(null, result);
             }
-
             connection.close();
-
         });
-
         request.on('row', function (columns) {
             var item = {};
             columns.forEach(function (column) {
@@ -583,7 +483,6 @@ db.PostRegisterDeviceId = function (IdUsuario, IdDevice,  callback) {
             });
             result.push(item);
         });
-
         connection.execSql(request);
     });
 }
@@ -596,33 +495,21 @@ db.PostRegisterDeviceId2 = function (IdUsuario, IdDevice, Platform ,callback) {
     connection.on('connect', function (err) {
 
         var Request = require('tedious').Request;
-
         var DevicePlatform = Platform;
 
         console.log("INSERT INTO dbo.userMobileDevices (IdUsuario, IdDevice, DevicePlatform, LoginDate) VALUES ('"+IdUsuario+"','"+IdDevice+"','"+DevicePlatform+"','"+getDateTime()+"')");
-        
         request = new Request("INSERT INTO dbo.userMobileDevices (IdUsuario, IdDevice, DevicePlatform, LoginDate) VALUES ('"+IdUsuario+"','"+IdDevice+"','"+DevicePlatform+"','"+getDateTime()+"')",
             function (err, rowCount) {
-
             if (err) {
-
                 console.log("ERROR: Dev");
-
                 callback(err);
-
             } else {
-
                 callback(null, result);
             }
-
             connection.close();
-
-        });
-
-        
+        });        
         connection.execSql(request);
     });
-
 }
 
 
@@ -915,8 +802,6 @@ db.executeGenerateTicket = function (command, idUsuario, agente, fecha, canal ,s
             });
     });
 };
-
-
 
 //getCreateTicket
 
