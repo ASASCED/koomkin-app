@@ -1136,6 +1136,17 @@ db.executeUpdateBriefInformation = function (idUsuario,idProducto,new_Producto,n
         });
 };
 
+//getDataComplement
+db.executeGetByClave = function (command, clave) {
+    console.log(clave)
+    const requestStr = `exec ${command} ${clave}`;
+  
+    console.log(requestStr);
+  
+    return tp.sql(requestStr)
+              .execute()
+  };
+
 db.updateBriefDatos = function (idUsuario, nombre, aPaterno, aMaterno, fechaNac, idPuesto, cpDomicilio, aniosEmpresa, educacion) {
 
     const requestStr = `Update CATUSUARIO set NOMBRE = '${nombre}', APEPATERNO = '${aPaterno}', APEMATERNO = '${aMaterno}' where IDUSUARIO = ${idUsuario};
