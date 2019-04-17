@@ -894,19 +894,19 @@ app.get('/updateBriefClienteParticular/:clientesTargetIngresosAnuales?/:clientes
     const idCampania = parseInt(req.params.idCampania, 10);
 
     if(!clientesTargetIngresosAnuales){
-        clientesTargetIngresosAnuales = 'NULL';
+        clientesTargetIngresosAnuales = null;
     }
 
     if(!clientesTargetEdad){
-        clientesTargetEdad = 'NULL';
+        clientesTargetEdad = null;
     }
 
     if(!clientesTargetGenero){
-        clientesTargetGenero = 'NULL';
+        clientesTargetGenero = null;
     }
 
     if(!clientesTargetIntereses){
-        clientesTargetIntereses = 'NULL';
+        clientesTargetIntereses = null;
     }
 
     db.updateBriefClienteParticular(clientesTargetIngresosAnuales,clientesTargetEdad,clientesTargetGenero,clientesTargetIntereses,idCampania) 
