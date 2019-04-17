@@ -893,6 +893,8 @@ app.get('/updateBriefClienteParticular/:clientesTargetIngresosAnuales?/:clientes
     let clientesTargetIntereses = req.params.clientesTargetIntereses;
     const idCampania = parseInt(req.params.idCampania, 10);
 
+    console.log(clientesTargetIngresosAnuales,clientesTargetEdad,clientesTargetGenero,clientesTargetIntereses)
+    
     if(!clientesTargetIngresosAnuales){
         clientesTargetIngresosAnuales = null;
     }
@@ -908,6 +910,7 @@ app.get('/updateBriefClienteParticular/:clientesTargetIngresosAnuales?/:clientes
     if(!clientesTargetIntereses){
         clientesTargetIntereses = null;
     }
+    console.log(clientesTargetIngresosAnuales,clientesTargetEdad,clientesTargetGenero,clientesTargetIntereses)
 
     db.updateBriefClienteParticular(clientesTargetIngresosAnuales,clientesTargetEdad,clientesTargetGenero,clientesTargetIntereses,idCampania) 
         .then(rows => {
