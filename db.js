@@ -1187,24 +1187,18 @@ db.updateBriefEmpresa = function (idUsuario, nombreEmpresa, rfcEmpresa, numeroEm
 
 db.updateBriefClienteParticular = function ( clientesTargetIngresosAnuales, clientesTargetEdad, clientesTargetGenero, clientesTargetIntereses, idCampania) {
 
-    console.log(clientesTargetIngresosAnuales, clientesTargetEdad, clientesTargetGenero, clientesTargetIntereses, idCampania);
-
-    if (clientesTargetGenero == 'null') {
-        clientesTargetGenero = null;
-    } 
-
-        const requestStr = `update tbl_TuCampania set ClientesTargetIngresosAnuales = '${clientesTargetIngresosAnuales}', ClientesTargetEdad = '${clientesTargetEdad}', ClientesTargetGenero = '${clientesTargetGenero}', ClientesTargetIntereses = '${clientesTargetIntereses}' where IDCampania = ${idCampania}`;    
-        console.log(requestStr);
-        return new Promise((resolve, reject) => {
-            tp.sql(requestStr)
-                .execute()
-                .then(results => {
-                    resolve(results);
-                })
-                .catch(err => {
-                    console.log(err);
-                    reject(err);
-                });
+    const requestStr = `update tbl_TuCampania set ClientesTargetIngresosAnuales = '${clientesTargetIngresosAnuales}', ClientesTargetEdad = '${clientesTargetEdad}', ClientesTargetGenero = '${clientesTargetGenero}', ClientesTargetIntereses = '${clientesTargetIntereses}' where IDCampania = ${idCampania}`;    
+    console.log(requestStr);
+    return new Promise((resolve, reject) => {
+        tp.sql(requestStr)
+            .execute()
+            .then(results => {
+                resolve(results);
+            })
+            .catch(err => {
+                console.log(err);
+                reject(err);
+            });
         });
 };
 
