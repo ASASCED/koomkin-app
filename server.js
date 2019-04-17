@@ -894,20 +894,20 @@ app.get('/updateBriefClienteParticular/:clientesTargetIngresosAnuales?/:clientes
     const idCampania = parseInt(req.params.idCampania, 10);
 
     console.log(clientesTargetIngresosAnuales,clientesTargetEdad,clientesTargetGenero,clientesTargetIntereses)
-    
-    if(!clientesTargetIngresosAnuales){
+
+    if(!clientesTargetIngresosAnuales || clientesTargetIngresosAnuales == 'NULL'){
         clientesTargetIngresosAnuales = null;
     }
 
-    if(!clientesTargetEdad){
+    if(!clientesTargetEdad || clientesTargetEdad == 'NULL'){
         clientesTargetEdad = null;
     }
 
-    if(!clientesTargetGenero){
+    if(!clientesTargetGenero || clientesTargetGenero == 'NULL'){
         clientesTargetGenero = null;
     }
 
-    if(!clientesTargetIntereses){
+    if(!clientesTargetIntereses || clientesTargetIntereses == 'NULL'){
         clientesTargetIntereses = null;
     }
     console.log(clientesTargetIngresosAnuales,clientesTargetEdad,clientesTargetGenero,clientesTargetIntereses)
