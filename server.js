@@ -904,7 +904,7 @@ app.get('/updateBriefClienteParticular/:clientesTargetIngresosAnuales?/:clientes
     }
 
     if(!clientesTargetGenero || clientesTargetGenero == 'NULL'){
-        clientesTargetGenero = 0;
+        clientesTargetGenero = 'A';
     }
 
     if(!clientesTargetIntereses || clientesTargetIntereses == 'NULL'){
