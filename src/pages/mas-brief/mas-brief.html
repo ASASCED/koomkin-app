@@ -265,7 +265,7 @@
                                   </ion-row>
                               </ion-grid> 
                           </li>
-                          <li class="zero-mediano" [ngClass]="{'elegida-brief':ingresosMedioAlto == true}" (click)="changeIngresos('Medio Alto')">
+                          <li class="zero-mediano" [ngClass]="{'elegida-brief':ingresosMedioAlto == true}" (click)="changeIngresos('Intermedio')">
                               <ion-grid class="anuncio-grid" style="height: 100%;justify-content: center;padding: 0;">
                                   <ion-row style="width: 100%;margin-bottom: 0%;">
                                       <ion-col col-12 style="height: 100%;">
@@ -286,8 +286,9 @@
                       </ul>
 
                       <p class="titulo-brief">Rango de Edad*</p>
+
                       <ul class="grande">
-                          <li class="zero-grande" [ngClass]="{'elegida-brief':edad == '18-25 años'}" (click)="changeEdad('18-25 años')">
+                          <li class="zero-grande" [ngClass]="{'elegida-brief':edad18 == true}" (click)="changeEdad('18-25 años')">
                               <ion-grid class="anuncio-grid" style="height: 100%;justify-content: center;padding: 0;">
                                   <ion-row style="width: 100%;margin-bottom: 0%;">
                                       <ion-col col-12 style="height: 100%;">
@@ -296,7 +297,7 @@
                                   </ion-row>
                               </ion-grid>  
                           </li>
-                          <li class="zero-grande" [ngClass]="{'elegida-brief':edad == '26-32 años'}" (click)="changeEdad('26-32 años')">
+                          <li class="zero-grande" [ngClass]="{'elegida-brief':edad26 == true}" (click)="changeEdad('26-32 años')">
                               <ion-grid class="anuncio-grid" style="height: 100%;justify-content: center;padding: 0;">
                                   <ion-row style="width: 100%;margin-bottom: 0%;">
                                       <ion-col col-12 style="height: 100%;">
@@ -305,7 +306,7 @@
                                   </ion-row>
                               </ion-grid> 
                           </li>
-                          <li class="zero-grande" [ngClass]="{'elegida-brief':edad == '33-40 años'}" (click)="changeEdad('33-40 años')">
+                          <li class="zero-grande" [ngClass]="{'elegida-brief':edad33 == true}" (click)="changeEdad('33-40 años')">
                               <ion-grid class="anuncio-grid" style="height: 100%;justify-content: center;padding: 0;">
                                   <ion-row style="width: 100%;margin-bottom: 0%;">
                                       <ion-col col-12 style="height: 100%;">
@@ -314,7 +315,7 @@
                                   </ion-row>
                               </ion-grid> 
                           </li>
-                          <li class="zero-grande" [ngClass]="{'elegida-brief':edad == '41-55 años'}" (click)="changeEdad('41-55 años')">
+                          <li class="zero-grande" [ngClass]="{'elegida-brief':edad41 == true}" (click)="changeEdad('41-55 años')">
                               <ion-grid class="anuncio-grid" style="height: 100%;justify-content: center;padding: 0;">
                                   <ion-row style="width: 100%;margin-bottom: 0%;">
                                       <ion-col col-12 style="height: 100%;">
@@ -323,7 +324,7 @@
                                   </ion-row>
                               </ion-grid> 
                           </li>
-                          <li class="zero-grande" [ngClass]="{'elegida-brief':edad == '55-65 años'}" (click)="changeEdad('55-65 años')">
+                          <li class="zero-grande" [ngClass]="{'elegida-brief':edad55 == true}" (click)="changeEdad('55-65 años')">
                               <ion-grid class="anuncio-grid" style="height: 100%;justify-content: center;padding: 0;">
                                   <ion-row style="width: 100%;margin-bottom: 0%;">
                                       <ion-col col-12 style="height: 100%;">
@@ -339,12 +340,12 @@
                           <li class="zero-chico" [ngClass]="{'elegida-brief':genero == 'F'}" (click)="changeGenero('F')">
                               <ion-grid class="anuncio-grid" style="height: 100%;justify-content: center;padding: 0;">
                                   <ion-row style="width: 100%;margin-bottom: 0%;">
-                                      <ion-col col-4 style="height: 100%;">
+                                      <ion-col col-3 style="height: 100%;">
                                         <img *ngIf="genero !== 'F'" class="img-mitad" src="assets/imgs/masbrief/ic_femenino.svg">
                                         <img *ngIf="genero == 'F'" class="img-mitad" src="assets/imgs/masbrief/ic_femenino_selected.svg">
 
                                       </ion-col>
-                                      <ion-col col-8 style="height: 100%;">
+                                      <ion-col col-9 style="height: 100%;">
                                         <span>Femenino</span>
                                       </ion-col>
                                   </ion-row>
@@ -353,16 +354,29 @@
                           <li class="zero-chico" [ngClass]="{'elegida-brief':genero == 'M'}" (click)="changeGenero('M')">
                               <ion-grid class="anuncio-grid" style="height: 100%;justify-content: center;padding: 0;">
                                   <ion-row style="width: 100%;margin-bottom: 0%;">
-                                      <ion-col col-4 style="height: 100%;">
+                                      <ion-col col-3 style="height: 100%;">
                                         <img *ngIf="genero !== 'M'" class="img-mitad" src="assets/imgs/masbrief/ic_masculino.svg">
                                         <img *ngIf="genero == 'M'" class="img-mitad" src="assets/imgs/masbrief/ic_masculino_selected.svg">
                                       </ion-col>
-                                      <ion-col col-8 style="height: 100%;">
+                                      <ion-col col-9 style="height: 100%;">
                                         <span>Masculino</span>
                                       </ion-col>
                                   </ion-row>
                               </ion-grid>
                           </li>
+                          <li class="zero-chico" [ngClass]="{'elegida-brief':genero == 'A'}" (click)="changeGenero('A')">
+                            <ion-grid class="anuncio-grid" style="height: 100%;justify-content: center;padding: 0;">
+                                <ion-row style="width: 100%;margin-bottom: 0%;">
+                                    <ion-col col-3 style="height: 100%;">
+                                      <img *ngIf="genero !== 'A'" class="img-mitad" src="assets/imgs/masbrief/ic_masculino.svg">
+                                      <img *ngIf="genero == 'A'" class="img-mitad" src="assets/imgs/masbrief/ic_masculino_selected.svg">
+                                    </ion-col>
+                                    <ion-col col-9 style="height: 100%;">
+                                      <span>Ambos</span>
+                                    </ion-col>
+                                </ion-row>
+                            </ion-grid>
+                        </li>
                       </ul>                
                        
                       <p class="titulo-brief">Intereses o comentarios adicionales</p>

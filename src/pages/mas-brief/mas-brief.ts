@@ -47,6 +47,23 @@ export class MasBriefPage implements OnInit{
     public datos;
     mas_informacion: boolean = false;
   
+    // Varios ingresos
+    public ingresosArray = [];
+    public ultIngresosArray;
+    public ingresosBajo;
+    public ingresosMedio;
+    public ingresosMedioAlto;
+    public ingresosAlto;
+
+
+    public edadArray = [];
+    public ultEdadArray;
+    public edad18;
+    public edad26;
+    public edad33;
+    public edad41;
+    public edad55;
+
     public positions = [
       {id: 1, nombre: 'Socio'},
       {id: 2, nombre: 'Socio-Director'},
@@ -138,13 +155,72 @@ export class MasBriefPage implements OnInit{
         this.sector = navParams.get('sector');
         this.categoria = navParams.get('categoria');
         this.sectores = navParams.get('sectores');
-        console.log(this.sectores);
-
+        
         if (this.sectores !== null && this.sectores !== 'null' && this.sectores !== undefined && this.sectores !== '') {
-          console.log('entro if');
-          this.sectores = this.sectores.split(",");
+          this.sectores = this.sectores.split(',');
         }
-        //
+
+        if (this.intereses == null || this.intereses == 'null' || this.intereses == undefined || this.intereses == 'NULL') {
+          this.intereses = '';
+        }
+
+
+        if (this.ingresosAnuales != null && this.ingresosAnuales != undefined && this.ingresosAnuales != 'null' && this.ingresosAnuales != 'null' && this.ingresosAnuales != ''  ) {
+
+          if ( this.ingresosAnuales.includes('Bajo') ) {
+            this.ingresosBajo = true;
+            this.ingresosArray.push('Bajo');
+          } 
+
+          if ( this.ingresosAnuales.includes('Medio') ) {
+            this.ingresosMedio = true;
+            this.ingresosArray.push('Medio');
+          } 
+        
+          if ( this.ingresosAnuales.includes('Intermedio') ) {
+          this.ingresosMedioAlto = true;
+          this.ingresosArray.push('Intermedio');
+          } 
+        
+          if ( this.ingresosAnuales.includes('Alto') ) {
+          this.ingresosAlto = true;
+          this.ingresosArray.push('Alto');
+          }
+        } 
+        
+        console.log('entro');
+
+
+        if (this.edad !== null && this.edad !== undefined && this.edad !== 'null' && this.edad !== ''  ) {
+          console.log('entro edad' );
+
+          if ( this.edad.includes('18-25 años') ) {
+            this.edad18 = true;
+            this.edadArray.push('18-25 años');
+          } 
+
+          if ( this.edad.includes('26-32 años') ) {
+            this.edad26 = true;
+            this.edadArray.push('26-32 años');
+          } 
+        
+          if ( this.edad.includes('33-40 años') ) {
+            this.edad33 = true;
+            this.edadArray.push('33-40 años');
+          } 
+        
+          if ( this.edad.includes('41-55 años') ) {
+            this.edad41 = true;
+            this.edadArray.push('41-55 años');
+          }
+
+          if ( this.edad.includes('55-65 años') ) {
+            this.edad55 = true;
+            this.edadArray.push('55-65 años');
+          }
+        } 
+
+        
 
         this.idCampania = navParams.get('idCampania');
         if (this.idCampania == undefined) {
@@ -201,6 +277,10 @@ export class MasBriefPage implements OnInit{
       }
   
       updateBriefClienteParticular() {
+
+        this.ingresosAnuales = this.ingresosArray.join('|');
+        this.edad = this.edadArray.join('|');
+
         this.provedor.updateBriefClienteParticular(this.ingresosAnuales,this.edad,this.genero,this.intereses,this.idCampania).then(
           data => {
             this.showSuccess();
@@ -215,7 +295,20 @@ export class MasBriefPage implements OnInit{
       }
 
       updateBriefClienteEmpresas() {
-        this.provedor.updateBriefClienteEmpresas(this.sector,this.categoria,this.sectores,this.intereses,this.idCampania).then(
+
+        let sectores = [];
+
+        if (this.sectores !== null && this.sectores !== undefined && this.sectores !== 'null' && this.sectores !== ''  ) {
+          for (let i = 0; this.sectores.length > i; i++ ) {
+            this.cat_sectores.forEach(element => {
+              if (element['id'] == this.sectores[i].id) {
+                sectores.push(element['nombre']);
+              }
+            });
+          }
+        }
+
+        this.provedor.updateBriefClienteEmpresas(this.sector,this.categoria,sectores,this.intereses,this.idCampania).then(
           data => {
             this.showSuccess();
             this.irInicio();
@@ -271,12 +364,124 @@ export class MasBriefPage implements OnInit{
       }
 
       changeIngresos(ingresos) {
-        this.ingresosAnuales = ingresos;
-        console.log(this.ingresosAnuales)
-      }
-
+        switch (ingresos) {
+          case 'Bajo':
+            if ( this.ingresosArray.includes('Bajo')  == true ) {
+              let indice = this.ingresosArray.indexOf('Bajo'); 
+              this.ingresosArray.splice(indice, 1);
+              this.ultIngresosArray = this.ingresosArray;
+              this.ingresosBajo = false;
+            } else if ( this.ingresosArray.includes('Bajo')  == false ) {
+              this.ultIngresosArray = this.ingresosArray.push(ingresos);
+              this.ingresosBajo = true;
+            }
+          return;
+  
+          case 'Medio':
+            if ( this.ingresosArray.includes('Medio')  == true ) {
+              let indice = this.ingresosArray.indexOf('Medio'); 
+              this.ingresosArray.splice(indice, 1);
+              this.ultIngresosArray = this.ingresosArray;
+              this.ingresosMedio = false;
+            } else if ( this.ingresosArray.includes('Medio')  == false ) {
+              this.ultIngresosArray = this.ingresosArray.push(ingresos);
+              this.ingresosMedio = true;
+            }
+          return;
+  
+          case 'Intermedio':
+            if ( this.ingresosArray.includes('Intermedio')  == true ) {
+              let indice = this.ingresosArray.indexOf('Intermedio'); 
+              this.ingresosArray.splice(indice, 1);
+              this.ultIngresosArray = this.ingresosArray;
+              this.ingresosMedioAlto = false;
+            } else if ( this.ingresosArray.includes('Intermedio')  == false ) {
+              this.ultIngresosArray = this.ingresosArray.push(ingresos);
+              this.ingresosMedioAlto = true;
+            }
+          return;
+  
+          case 'Alto':
+            if ( this.ingresosArray.includes('Alto')  == true ) {
+              let indice = this.ingresosArray.indexOf('Alto'); 
+              this.ingresosArray.splice(indice, 1);
+              this.ultIngresosArray = this.ingresosArray;
+              this.ingresosAlto = false;
+            } else if ( this.ingresosArray.includes('Alto')  == false ) {
+              this.ultIngresosArray = this.ingresosArray.push(ingresos);
+              this.ingresosAlto = true;
+            }
+          return;
+          default: 
+  
+        } 
+      } 
+  
       changeEdad(edad) {
-        this.edad = edad;
+        switch (edad) {
+          case '18-25 años':
+            if ( this.edadArray.includes('18-25 años') == true ) {
+              let indice = this.edadArray.indexOf('18-25 años'); 
+              this.edadArray.splice(indice, 1);
+              this.ultEdadArray = this.edadArray;
+              this.edad18 = false;
+            } else if ( this.edadArray.includes('18-25 años') == false ) {
+              this.ultEdadArray = this.edadArray.push(edad);
+              this.edad18 = true;
+            }
+          return;
+  
+          case '26-32 años':
+            if ( this.edadArray.includes('26-32 años') == true ) {
+              let indice = this.edadArray.indexOf('26-32 años'); 
+              this.edadArray.splice(indice, 1);
+              this.ultEdadArray = this.edadArray;
+              this.edad26 = false;
+            } else if ( this.edadArray.includes('26-32 años') == false ) {
+              this.ultEdadArray = this.edadArray.push(edad);
+              this.edad26 = true;
+            }
+          return;
+  
+          case '33-40 años':
+            if ( this.edadArray.includes('33-40 años') == true ) {
+              let indice = this.edadArray.indexOf('33-40 años'); 
+              this.edadArray.splice(indice, 1);
+              this.ultEdadArray = this.edadArray;
+              this.edad33 = false;
+            } else if ( this.edadArray.includes('33-40 años') == false ) {
+              this.ultEdadArray = this.edadArray.push(edad);
+              this.edad33 = true;
+            }
+          return;
+  
+          case '41-55 años':
+            if ( this.edadArray.includes('41-55 años')  == true ) {
+              let indice = this.edadArray.indexOf('41-55 años'); 
+              this.edadArray.splice(indice, 1);
+              this.ultEdadArray = this.edadArray;
+              this.edad41 = false;
+            } else if ( this.edadArray.includes('41-55 años')  == false ) {
+              this.ultEdadArray = this.edadArray.push(edad);
+              this.edad41 = true;
+            }
+          return;
+  
+          case '55-65 años':
+            if ( this.edadArray.includes('55-65 años')  == true ) {
+              let indice = this.edadArray.indexOf('55-65 años'); 
+              this.edadArray.splice(indice, 1);
+              this.ultEdadArray = this.edadArray;
+              this.edad55 = false;
+            } else if ( this.edadArray.includes('55-65 años')  == false ) {
+              this.ultEdadArray = this.edadArray.push(edad);
+              this.edad55 = true;
+            }
+          return;
+  
+          default: 
+  
+        } 
       }
 
       changeGenero(genero) {

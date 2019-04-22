@@ -309,8 +309,15 @@ export class ReportePage implements OnInit {
           if (this.meses[0].fechaReporte == this.meses[0].hoy) {
             let dt2 = new Date(this.meses[0].fechaReporte);
             let diastranscurridos = dt2.getDate()
+            let estimado;
             console.log(this.fechaInicio);
-            let estimado = Math.ceil((outter[outter.length - 1][1] / diastranscurridos) * 31)
+            if (this.fechaInicio < 30 ) {
+              estimado = Math.ceil((outter[outter.length - 1][1] / (this.fechaInicio + 1 )) * 30);
+              console.log(estimado, 'if');
+            } else {
+              estimado = Math.ceil((outter[outter.length - 1][1] / (diastranscurridos + 1 )) * 30);
+              console.log(estimado, 'else');
+            }            
             let inner = [];
             inner.push("ESTIM");
             inner.push(estimado);
@@ -889,7 +896,10 @@ export class ReportePage implements OnInit {
 
   public getInicioCampana() {
     this.provedor.getInicioCampana().then((data) => {
-      this.fechaInicio = data;
+      console.log(data);
+      if (data['length'] > 0) {
+        this.fechaInicio = data[0].inicioCampana;
+      }
     }, (err) => {
       // console.log('error');
     });
