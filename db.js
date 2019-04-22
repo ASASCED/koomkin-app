@@ -785,6 +785,25 @@ db.executeClickTooltip = function (command, usuario, tooltipname, acceso) {
     });
 };
 
+db.executeClickCancelar = function (command, usuario, acceso) {
+
+    const requestStr = `exec ${command} ${usuario}, '${acceso}' `;
+
+    console.log(requestStr);
+
+    return new Promise((resolve, reject) => {
+        tp.sql(requestStr)
+            .execute()
+            .then(results => {
+                resolve(results);
+            })
+            .catch(err => {
+                console.log(err);
+                reject(err);
+            });
+    });
+};
+
 //getCreateTicket
 db.executeGenerateTicket = function (command, idUsuario, agente, fecha, canal ,satisfaccion ,descripcion , correoExterno) {
 
@@ -1279,7 +1298,7 @@ db.executeGetInicioCampana = function (idUsuario) {
 
     const requestStr = `
     select top 1 (DATEDIFF (DAY,DATEADD(DAY,1,FInicio),GETDATE()) + 1 ) as inicioCampana from kad_Tbl_Membresias where IDUSUARIO = ${idUsuario} order by IDMembresia ASC;
-    SELECT CAT.idUsuario, PAG.idPago, PAG.idProspecto AS 'UltimoProspecto', PAGP.idProspecto AS 'PenultimoProspecto', ULTIMAMEM.DiasPagados AS 'UltimoDiasPagados', PENMEM.DiasPagaDos AS 'PenultimoDiasPagados',ULTIMAMEM.Finicio AS 'UltimaFInicio',PENMEM.Finicio AS 'PenultimaFInicio', DATEDIFF(DAY,PENMEM.Finicio,ULTIMAMEM.Finicio) DiasDif, DATEDIFF(DAY,DATEDIFF(DAY,PENMEM.Finicio,ULTIMAMEM.Finicio) ,PENMEM.DiasPagaDos) duracion FROM CATUSUARIO CAT
+    SELECT CAT.idUsuario, PAG.idPago, PAG.idProspecto AS 'UltimoProspecto', PAGP.idProspecto AS 'PenultimoProspecto', ULTIMAMEM.DiasPagados AS 'UltimoDiasPagados', (PENMEM.DiasPagaDos + PENMEM.DiasRegalados)  AS 'PenultimoDiasPagados',ULTIMAMEM.Finicio AS 'UltimaFInicio',PENMEM.Finicio AS 'PenultimaFInicio', DATEDIFF(DAY,PENMEM.Finicio,ULTIMAMEM.Finicio) DiasDif, DATEDIFF(DAY,DATEDIFF(DAY,PENMEM.Finicio,ULTIMAMEM.Finicio) ,(PENMEM.DiasPagaDos + PENMEM.DiasRegalados)) duracion FROM CATUSUARIO CAT
     OUTER APPLY (SELECT TOP 1 * FROM kad_Tbl_PagosClientesKoomkinAdmin PAG
 			 WHERE PAG.idUsuario = CAT.idUsuario
 			 AND estatus='A'

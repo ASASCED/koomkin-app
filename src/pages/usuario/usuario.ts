@@ -78,8 +78,11 @@ export class UsuarioPage implements OnInit {
   ) {
     this.id = this.authService.id;
     this.recurrente = this.authService.recurrente;
+    console.log( this.recurrente);
     this.tipo = "13";
     this.cancelar = this.authService.cancelar;
+    console.log( this.cancelar);
+
   }
 
   ngOnInit() {

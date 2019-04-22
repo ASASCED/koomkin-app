@@ -446,6 +446,17 @@ export class RestProvider {
     });
   }
 
+  getInsertClickCancelarMembresia(usuario, acceso) {
+    return new Promise(resolve => {
+      this.http.get(this.apiUrl + '/clickCancelarMembresia/' + usuario + '/' + acceso)
+        .subscribe(data => {
+          resolve(data);
+        }, err => {
+          // // console.log(err);
+        });
+    });
+  }
+
   getInsertClickTooltip(usuario, tooltipname, acceso) {
     return new Promise(resolve => {
       this.http.get(this.apiUrl + '/clickTooltip/' + usuario + '/' + tooltipname + '/' + acceso)

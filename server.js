@@ -1331,6 +1331,21 @@ app.get('/clickTip/:usuario/:tipid/:acceso', function (req, res) {
         });
     });
 
+app.get('/clickCancelarMembresia/:usuario/:acceso', function (req, res) {
+    
+    const command = 'SP_InsertClickCancelarMembresia';
+    const usuario = parseInt(req.params.usuario, 10);
+    const acceso = req.params.acceso;
+
+    db.executeClickCancelar(command,usuario,acceso)
+         .then(rows => {
+            res.json(rows).status(200).send();
+        })
+        .catch(err => {
+            res.status(500).json({ error: err }).send();
+        });
+});
+
 app.get('/clickTooltip/:usuario/:tooltipname/:acceso', function (req, res) {
     
     const command = 'SP_InsertClickTooltip';

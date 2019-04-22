@@ -252,29 +252,37 @@ export class ModalSurveyPage implements OnInit {
       const url = 'https://www.koomkin.com.mx/api/openPay/cancelPayment';
       this.http.post(url, cuerpo, options).subscribe(
         data => {
-         // console.log(data);
-          swal({
-            imageUrl: 'assets/imgs/ajustes/icn_check.svg',
-            imageHeight: 80,
-            title: '¡Suscripción Cancelada!'
-          });
-          resolve();
-        },
-        err => {
-          if (err.status === 200 && err.statusText === 'OK') {
+          if (data['result'] == 'OK') {
             swal({
               imageUrl: 'assets/imgs/ajustes/icn_check.svg',
               imageHeight: 80,
               title: '¡Suscripción Cancelada!'
             });
-          } else if (err.status === 200 && err.text === 'No puede cancelarse porque rompe con las politicas de los 3 días.' || err.status === 200 && err.statusText === 'No puede cancelarse porque rompe con las politicas de los 3 días.') {
+            this.enviarRespuestas();
+            this.getInsertClickCancelarMembresia();
+            resolve();
+          } else if (data['result'] == 'error') {
             this.showErrorCancelTres();
-          } else {
-            this.showErrorCancel();
           }
+        },
+        err => {
+          this.showErrorCancel();
         }
       );
     });
+  }
+
+  public getInsertClickCancelarMembresia() {
+    const usuario = this.id;
+    const acceso = 'App';
+    this.provedor.getInsertClickCancelarMembresia(usuario, acceso).then(
+      data => {
+        this.datosenvio = data;
+      },
+      err => {
+        // console.log('error');
+      }
+    );
   }
 
   public showSuccessCancel() {
