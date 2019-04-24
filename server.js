@@ -542,6 +542,7 @@ app.get('/getIntentoSesion/:email/:password', function (req, res) {
 
     const email = req.params.email;
     const password = req.params.password;
+    console.log(email,password);
 
     db.searchDemoUsers(email)
       .then(data=>{

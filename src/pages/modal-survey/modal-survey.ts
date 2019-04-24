@@ -277,7 +277,7 @@ export class ModalSurveyPage implements OnInit {
     const acceso = 'App';
     this.provedor.getInsertClickCancelarMembresia(usuario, acceso).then(
       data => {
-        this.datosenvio = data;
+       // this.datosenvio = data;
       },
       err => {
         // console.log('error');
