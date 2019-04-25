@@ -1144,11 +1144,11 @@ db.executeUpdateBriefInformation = function (idUsuario,idProducto,new_Producto,n
                                     ${new_IdSubSector});
         select top 1 * from tbl_tuCampania where IDUSUARIO = ${idUsuario} order by IDCampania desc`;                       
 
-    } else {
+    } else if(idEstado != 'NULL') {
         const requestStr = `Update TBL_CATALOGOPRODUCTOS set NOMBRE = '${new_Producto}' where IDUSUARIO = ${idUsuario} and ID_PRODUCTO = ${idProducto}; 
-                        Update TBL_BRIEF set ID_TIPOEMPRESA = ${new_TipoEmpresa} , CODIGOPOSTAL = ${new_CodigoPostal}, IDESTADO = ${idEstado} where IDUSUARIO = ${idUsuario};
-                        Update tbl_direccionGoogle set cp = ${new_CodigoPostal} where IDUSUARIO = ${idUsuario};
-                        Insert into tbl_tuCampania (IDMembresia,
+                            Update TBL_BRIEF set ID_TIPOEMPRESA = ${new_TipoEmpresa} , CODIGOPOSTAL = ${new_CodigoPostal}, IDESTADO = ${idEstado} where IDUSUARIO = ${idUsuario};
+                            Update tbl_direccionGoogle set cp = ${new_CodigoPostal} where IDUSUARIO = ${idUsuario};
+                            Insert into tbl_tuCampania (IDMembresia,
                                                     IDUSUARIO,
                                                     PorqueEresMejor,
                                                     ClientesTarget,
