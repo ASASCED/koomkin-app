@@ -959,11 +959,15 @@ app.get('/updateBriefClienteEmpresas/:clientesTargetSector?/:clientesTargetCateg
 
 //por estado
 
-app.get('/updateCobertura/:idCampania/:idEstado/:idUsuario', function(req, res) {
+app.get('/updateCobertura/:idCampania/:idEstado?/:idUsuario', function(req, res) {
 
     const idCampania = parseInt(req.params.idCampania, 10);
     const idEstado = parseInt(req.params.idEstado, 10);
     const idUsuario = parseInt(req.params.idUsuario, 10);
+
+    if(!idEstado){
+        idEstado = 'NULL';
+    }
 
     db.updateCobertura(idCampania,idEstado,idUsuario) 
         .then(rows => {
