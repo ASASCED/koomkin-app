@@ -729,7 +729,7 @@ app.get('/getInsertClickChat/:usuario/:id/:acceso/:dispositivo/:metodo', functio
 
 //updateBriefInformation
 
-app.get('/updateBriefInformation/:usuario/:idProducto/:new_Producto/:new_TipoEmpresa/:new_CodigoPostal/:new_IDMembresia/:new_PorqueEresMejor/:new_ClientesTarget/:new_Correo1?/:new_Correo2?/:new_Correo3?/:new_IdSubSector?', function(req, res) {
+app.get('/updateBriefInformation/:usuario/:idProducto/:new_Producto/:new_TipoEmpresa/:new_CodigoPostal/:new_IDMembresia/:new_PorqueEresMejor/:new_ClientesTarget/:new_Correo1?/:new_Correo2?/:new_Correo3?/:new_IdSubSector?/:idEstado?', function(req, res) {
 
     const usuario = parseInt(req.params.usuario, 10);
     const idProducto = parseInt(req.params.idProducto, 10);
@@ -743,6 +743,7 @@ app.get('/updateBriefInformation/:usuario/:idProducto/:new_Producto/:new_TipoEmp
     let new_Correo2 = req.params.new_Correo2;
     let new_Correo3 = req.params.new_Correo3;
     let new_IdSubSector = parseInt(req.params.new_IdSubSector,10);
+    let idEstado = parseInt(req.params.idEstado,10);
 
     if(!new_IDMembresia){
         new_IDMembresia = 'NULL';
@@ -764,7 +765,11 @@ app.get('/updateBriefInformation/:usuario/:idProducto/:new_Producto/:new_TipoEmp
         new_IdSubSector = 'NULL';
     }
 
-    db.executeUpdateBriefInformation(usuario,idProducto,new_Producto,new_TipoEmpresa,new_CodigoPostal,new_IDMembresia,new_PorqueEresMejor,new_ClientesTarget,new_Correo1,new_Correo2,new_Correo3,new_IdSubSector) 
+    if(!idEstado){
+        idEstado = 'NULL';
+    }
+
+    db.executeUpdateBriefInformation(usuario,idProducto,new_Producto,new_TipoEmpresa,new_CodigoPostal,new_IDMembresia,new_PorqueEresMejor,new_ClientesTarget,new_Correo1,new_Correo2,new_Correo3,new_IdSubSector,idEstado) 
         .then(rows => {
             res.json(rows).status(200).send();
         })
