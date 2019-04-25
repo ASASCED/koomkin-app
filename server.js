@@ -731,6 +731,7 @@ app.get('/getInsertClickChat/:usuario/:id/:acceso/:dispositivo/:metodo', functio
 
 app.get('/updateBriefInformation/:usuario/:idProducto/:new_Producto/:new_TipoEmpresa/:new_CodigoPostal/:new_IDMembresia/:new_PorqueEresMejor/:new_ClientesTarget/:new_Correo1?/:new_Correo2?/:new_Correo3?/:new_IdSubSector?/:idEstado?', function(req, res) {
 
+    console.log(usuario,idProducto,new_Producto,new_TipoEmpresa,new_CodigoPostal,new_IDMembresia,new_PorqueEresMejor,new_ClientesTarget,new_Correo1,new_Correo2,new_Correo3,new_IdSubSector,idEstado);
     const usuario = parseInt(req.params.usuario, 10);
     const idProducto = parseInt(req.params.idProducto, 10);
     const new_Producto = req.params.new_Producto;
