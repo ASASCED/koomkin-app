@@ -1118,8 +1118,6 @@ db.executeGetLastCampania = function (idUsuario) {
 };
 
 db.executeUpdateBriefInformation = function (idUsuario,idProducto,new_Producto,new_TipoEmpresa,new_CodigoPostal,new_IDMembresia,new_PorqueEresMejor,new_ClientesTarget,new_Correo1,new_Correo2,new_Correo3,new_IdSubSector,idEstado ) {
-    console.log('El id es',idEstado);
-    console.log('El tipo es',typeof(idEstado));
 
     if(idEstado == 'NULL') {
         console.log('entro');
@@ -1146,8 +1144,6 @@ db.executeUpdateBriefInformation = function (idUsuario,idProducto,new_Producto,n
         select top 1 * from tbl_tuCampania where IDUSUARIO = ${idUsuario} order by IDCampania desc`;                       
 
     } else if(idEstado != 'NULL') {
-        console.log('entro else if');
-
         const requestStr = `Update TBL_CATALOGOPRODUCTOS set NOMBRE = '${new_Producto}' where IDUSUARIO = ${idUsuario} and ID_PRODUCTO = ${idProducto}; 
                             Update TBL_BRIEF set ID_TIPOEMPRESA = ${new_TipoEmpresa} , CODIGOPOSTAL = ${new_CodigoPostal}, IDESTADO = ${idEstado} where IDUSUARIO = ${idUsuario};
                             Update tbl_direccionGoogle set cp = ${new_CodigoPostal} where IDUSUARIO = ${idUsuario};
@@ -1171,6 +1167,8 @@ db.executeUpdateBriefInformation = function (idUsuario,idProducto,new_Producto,n
                         select top 1 * from tbl_tuCampania where IDUSUARIO = ${idUsuario} order by IDCampania desc`;                       
     }
     
+    console.log(requestStr);
+
         return new Promise((resolve, reject) => {
             tp.sql(requestStr)
                 .execute()
