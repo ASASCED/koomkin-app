@@ -1119,9 +1119,11 @@ db.executeGetLastCampania = function (idUsuario) {
 
 db.executeUpdateBriefInformation = function (idUsuario,idProducto,new_Producto,new_TipoEmpresa,new_CodigoPostal,new_IDMembresia,new_PorqueEresMejor,new_ClientesTarget,new_Correo1,new_Correo2,new_Correo3,new_IdSubSector,idEstado ) {
 
+    var requestStr = '';
+
     if(idEstado == 'NULL') {
         console.log('entro');
-        let requestStr = `Update TBL_CATALOGOPRODUCTOS set NOMBRE = '${new_Producto}' where IDUSUARIO = ${idUsuario} and ID_PRODUCTO = ${idProducto}; 
+        requestStr = `Update TBL_CATALOGOPRODUCTOS set NOMBRE = '${new_Producto}' where IDUSUARIO = ${idUsuario} and ID_PRODUCTO = ${idProducto}; 
         Update TBL_BRIEF set ID_TIPOEMPRESA = ${new_TipoEmpresa} , CODIGOPOSTAL = ${new_CodigoPostal} where IDUSUARIO = ${idUsuario};
         Update tbl_direccionGoogle set cp = ${new_CodigoPostal} where IDUSUARIO = ${idUsuario};
         Insert into tbl_tuCampania (IDMembresia,
@@ -1146,7 +1148,7 @@ db.executeUpdateBriefInformation = function (idUsuario,idProducto,new_Producto,n
     } else if(idEstado != 'NULL') {
         console.log('entro if');
 
-        let requestStr = `Update TBL_CATALOGOPRODUCTOS set NOMBRE = '${new_Producto}' where IDUSUARIO = ${idUsuario} and ID_PRODUCTO = ${idProducto}; 
+        requestStr = `Update TBL_CATALOGOPRODUCTOS set NOMBRE = '${new_Producto}' where IDUSUARIO = ${idUsuario} and ID_PRODUCTO = ${idProducto}; 
                             Update TBL_BRIEF set ID_TIPOEMPRESA = ${new_TipoEmpresa} , CODIGOPOSTAL = ${new_CodigoPostal}, IDESTADO = ${idEstado} where IDUSUARIO = ${idUsuario};
                             Update tbl_direccionGoogle set cp = ${new_CodigoPostal} where IDUSUARIO = ${idUsuario};
                             Insert into tbl_tuCampania (IDMembresia,
@@ -1168,8 +1170,6 @@ db.executeUpdateBriefInformation = function (idUsuario,idProducto,new_Producto,n
                                                     ${new_IdSubSector});
                         select top 1 * from tbl_tuCampania where IDUSUARIO = ${idUsuario} order by IDCampania desc`;   
                         
-                        console.log(requestStr);
-
     }
     
     console.log(requestStr);
