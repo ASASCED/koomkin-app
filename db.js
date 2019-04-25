@@ -1118,7 +1118,9 @@ db.executeGetLastCampania = function (idUsuario) {
 };
 
 db.executeUpdateBriefInformation = function (idUsuario,idProducto,new_Producto,new_TipoEmpresa,new_CodigoPostal,new_IDMembresia,new_PorqueEresMejor,new_ClientesTarget,new_Correo1,new_Correo2,new_Correo3,new_IdSubSector,idEstado ) {
-    console.log('El id es ',idEstado);
+    console.log('El id es',idEstado);
+    console.log('El tipo es',typeof(idEstado));
+
     if(idEstado == 'NULL') {
         const requestStr = `Update TBL_CATALOGOPRODUCTOS set NOMBRE = '${new_Producto}' where IDUSUARIO = ${idUsuario} and ID_PRODUCTO = ${idProducto}; 
         Update TBL_BRIEF set ID_TIPOEMPRESA = ${new_TipoEmpresa} , CODIGOPOSTAL = ${new_CodigoPostal} where IDUSUARIO = ${idUsuario};
