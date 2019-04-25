@@ -539,7 +539,7 @@ app.get('/leerLead/:leadId/:userId', function (req, res) {
 });
 
 app.get('/getIntentoSesion/:email/:password', function (req, res) {
-
+    console.log(req.params.password);
     const email = req.params.email;
     const password = req.params.password;
     console.log(email,password);
