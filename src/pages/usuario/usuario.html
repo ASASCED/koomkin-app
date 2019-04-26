@@ -97,10 +97,11 @@
 
     <div class="cuadro">
         <button *ngIf="vista == 'informacion' && recurrente == true  && cancelar == 1" class="cancelar-suscripcion" (click)="mostrar_encuesta()">Cancelar Suscripción</button>
+        <button *ngIf="vista == 'informacion' && recurrente == false  && cancelar == 0" class="cancelar-suscripcion" (click)="btnReactivar()">Reactivar Suscripción</button>
         <br>
         <br>
         <button *ngIf="vista == 'informacion'" class="edit" (click)="changePage('editar')">Modificar Datos</button>
-        <button *ngIf="vista === 'editar'" class="edit" (click)="changePage('informacion');">Cancelar{{cancelar}}</button>
+        <button *ngIf="vista === 'editar'" class="edit" (click)="changePage('informacion');">Cancelar</button>
         <button *ngIf="vista === 'editar'" class="edit" (click)="changePage('informacion');updateUser();updateMessage(mensaje);cambiarMensaje(mensaje);cambioAnidado()">Guardar</button>
     </div>
 

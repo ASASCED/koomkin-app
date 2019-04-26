@@ -319,4 +319,5 @@ export class ModalSurveyPage implements OnInit {
       reverseButtons: true
     });
   }
+
 }

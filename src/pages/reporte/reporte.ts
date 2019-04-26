@@ -310,14 +310,11 @@ export class ReportePage implements OnInit {
             let dt2 = new Date(this.meses[0].fechaReporte);
             let diastranscurridos = dt2.getDate()
             let estimado;
-            console.log(this.fechaInicio);
-            if (this.fechaInicio < 30 ) {
+            if (this.fechaInicio <= 30 && this.fechaInicio != null) {
               estimado = Math.ceil((outter[outter.length - 1][1] / (this.fechaInicio + 1 )) * 30);
-              console.log(estimado, 'if');
             } else {
               estimado = Math.ceil((outter[outter.length - 1][1] / (diastranscurridos + 1 )) * 30);
-              console.log(estimado, 'else');
-            }            
+            }        
             let inner = [];
             inner.push("ESTIM");
             inner.push(estimado);
@@ -893,16 +890,20 @@ export class ReportePage implements OnInit {
       // console.log('error');
     });
   }
-
+  
   public getInicioCampana() {
-    this.provedor.getInicioCampana().then((data) => {
-      console.log(data);
-      if (data['length'] > 0) {
+    this.restService.getInicioCampana().then(
+      data => {
+        if (data['length'] > 0) {
         this.fechaInicio = data[0].inicioCampana;
+        this.duracion = data[0].duracion;
+        // console.log(this.fechaInicio, 'if');
+        }
+      },
+      err => {
+        // console.log('error');
       }
-    }, (err) => {
-      // console.log('error');
-    });
+    );
   }
 
   ionViewDidLoad() {

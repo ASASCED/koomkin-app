@@ -65,6 +65,12 @@ export class UsuarioPage implements OnInit {
   public uuidPase;
   public tipo;
 
+  // reactivar
+  public datosMembresia;
+  public monto = [];
+  public tarjeta = [];
+  public periodo = [];
+  public fin = [];
 
   constructor(
     public navCtrl: NavController,
@@ -89,6 +95,7 @@ export class UsuarioPage implements OnInit {
     this.vista = "informacion";
     this.getPaymentData();
     this.initDictionary();
+    this.infoCard();
     this.uuid = this.authService.getClientUUID();
     this.mensaje = this.authService.mensajebot;
 
@@ -337,5 +344,104 @@ export class UsuarioPage implements OnInit {
   mostrar_encuesta() {
   // this.navCtrl.setRoot(ModalSurveyPage, { tipo: this.tipo });
     this.app.getRootNav().setRoot(ModalSurveyPage, { tipo: this.tipo }); 
+  }
+
+  public btnReactivar() {
+    swal({
+      title: '¿Estás seguro que deseas reactivar tu Membresía?',
+      text: 'Vamos a realizarte el cobro de $' + this.monto + 'MXN por un periodo de ' + this.periodo + ' días a la tarjeta con terminación: ' + this.tarjeta,
+      showCancelButton: true,
+      confirmButtonColor: '#288AC1',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Confirmar',
+      cancelButtonText: 'Cancelar',
+      reverseButtons: true
+    }).then(result => {
+      if (result.value) {
+        this.reinstateMembershipOP();
+      }
+    });
+  }  
+
+  public reinstateMembershipOP () {
+    const cuerpo = `{'idusuario': '${this.id}'}`;
+
+    const options = {
+      headers: new HttpHeaders().set(
+        'Content-Type',
+        'application/json'
+      )
+    };
+    return new Promise((resolve, reject) => {
+      const url = 'https://www.koomkin.com.mx/api/openPay/reinstateRecurringPayments';
+      this.http.post(url, cuerpo, options).subscribe(
+        data => {
+          console.log(data);
+          if (data['result'] == 'OK') {
+            this.showSuccessReinstate();
+            resolve();
+          } else if (data['result'] == 'error') {
+              this.showErrorReinstate();
+          }
+          resolve();
+        },
+        err => {
+            console.log(err);
+            this.showErrorReinstate();
+        }
+      );
+    });
+  }
+
+  public showSuccessReinstate() {
+    swal({
+      title: 'Se ha reactivado su suscripción con éxito',
+      type: 'success',
+      showCancelButton: false,
+      confirmButtonColor: '#3085d6',
+      confirmButtonText: 'OK',
+      reverseButtons: true,
+    });
+  }
+
+  public showErrorReinstate() {
+    swal({
+      title: 'No se ha podido reactivar su suscripción',
+      text: 'Por favor comuniquese a Servicio a Cliente para más información',
+      type: 'error',
+      showCancelButton: false,
+      confirmButtonColor: '#3085d6',
+      confirmButtonText: 'OK',
+      reverseButtons: true
+    });
+  }
+
+  public infoCard() {
+    const cuerpo = `{'user_id': '${this.id}'}`;
+
+    const options = {
+      headers: new HttpHeaders().set(
+        'Content-Type',
+        'application/json'
+      )
+    };
+    return new Promise((resolve, reject) => {
+      const url = 'https://www.koomkin.com.mx/api/openPay/creditCardData';
+      this.http.post(url, cuerpo, options).subscribe(
+        data => {
+          console.log(data);
+          if(data['result'] !== 'error') {
+            this.datosMembresia = data;
+            this.monto = data['amount'];
+            this.tarjeta = data['credit_card'];       
+            this.periodo = data['period'];
+            this.fin = data['end_date'];
+          }
+        },
+        err => {
+            console.log(err);
+        }
+      );
+    });
   }
 }

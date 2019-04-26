@@ -74,6 +74,7 @@ export class BriefPage implements OnInit, AfterContentChecked{
   public idCampania;
   public lleno: boolean = false;
 
+  public cambio_estado_cob;
   mas_informacion: boolean = false;
   familiar: boolean = false;
 
@@ -178,6 +179,9 @@ export class BriefPage implements OnInit, AfterContentChecked{
           this.datos_ciudad = data;
           if(this.datos_ciudad.length > 0) {
             this.estado_cob = this.datos_ciudad[0].Estado;
+            if(this.estado_cob == 'Nuevo León') {
+              this.estado_cob = 'Nuevo Leon'
+            } 
             this.cat_estados.forEach(element=> {
               if(element['NOMBRE'] == this.estado_cob) {
                 this.estado_cob = element['IDESTADO'];
@@ -194,6 +198,31 @@ export class BriefPage implements OnInit, AfterContentChecked{
           // console.log('error');
         }
       );
+    }
+
+    getNewCodigoPostal(cp){
+      return new Promise(resolve => {
+      this.provedor.getCodigoPostal(cp).then(
+        data => {
+          this.datos_ciudad = data;
+          if(this.datos_ciudad.length > 0) {
+            this.cambio_estado_cob = this.datos_ciudad[0].Estado;
+            if(this.cambio_estado_cob == 'Nuevo León') {
+              this.cambio_estado_cob = 'Nuevo Leon'
+            } 
+            this.cat_estados.forEach(element=> {
+              if(element['NOMBRE'] == this.cambio_estado_cob) {
+                this.cambio_estado_cob = element['IDESTADO'];
+                let nuevo_estado = this.cambio_estado_cob
+                resolve(nuevo_estado);              }
+            });
+          }
+        },
+          err => {
+            // console.log('error');
+          }
+        );
+      });
     }
 
     getCobertura(idUsuario,campania) {
@@ -225,7 +254,7 @@ export class BriefPage implements OnInit, AfterContentChecked{
       this.provedor.getEstados().then(
         data => {
           this.cat_estados = data;
-          // console.log(data);
+          console.log(data);
         },
         err => {
           // console.log('error');
@@ -306,39 +335,43 @@ export class BriefPage implements OnInit, AfterContentChecked{
       } else if(this.tipoempresa == 'Profesionista') {
         this.tipo_empresa = 6;
       }
-        
-      this.provedor.updateBriefInformation(
-        this.id,
-        this.IdProducto,
-        this.producto,
-        this.tipo_empresa,
-        this.cp,
-        this.IDMembresia,
-        this.mejor,
-        this.target,
-        this.correo1,
-        this.correo2,
-        this.correo3,
-        this.IdSubSector).then(
-        data => {
-          this.datosCampania = data;
-          this.idCampania = this.datosCampania[0].IDCampania;
-          if(this.cobertura_empresa == 'Local' && this.cobertura_empresa !== 'Nacional') {
-            this.cobertura_empresa == 'Local';
-          } else if(this.cobertura_empresa == 'Estado') {
-            this.updateCobertura(this.idCampania,this.estado_cob,this.id);
-          } else if(this.cobertura_empresa == 'Region') {
-            for(let i = 0; this.estado.length > i; i++ ) {
-              this.cat_estados.forEach(element=> {
-                if(element['NOMBRE'] == this.estado[i]) {
-                  this.estado_cob = element['IDESTADO'];
-                }
-              });
-              this.updateCoberturaRegion(this.idCampania,this.estado_cob,this.id) 
+
+      this.getNewCodigoPostal(this.cp)
+      .then(nuevo_estado => {
+        console.log('entro');
+        this.provedor.updateBriefInformation(
+          this.id,
+          this.IdProducto,
+          this.producto,
+          this.tipo_empresa,
+          this.cp,
+          this.IDMembresia,
+          this.mejor,
+          this.target,
+          this.correo1,
+          this.correo2,
+          this.correo3,
+          this.IdSubSector,
+          nuevo_estado).then(
+            data => {
+              this.datosCampania = data;
+              this.idCampania = this.datosCampania[0].IDCampania;
+              if(this.cobertura_empresa == 'Local' && this.cobertura_empresa !== 'Nacional') {
+                this.cobertura_empresa == 'Local';
+              } else if(this.cobertura_empresa == 'Estado') {
+                this.updateCobertura(this.idCampania,this.estado_cob,this.id);
+              } else if(this.cobertura_empresa == 'Region') {
+                  for(let i = 0; this.estado.length > i; i++ ) {
+                    this.cat_estados.forEach(element=> {
+                      if(element['NOMBRE'] == this.estado[i]) {
+                        this.estado_cob = element['IDESTADO'];
+                      }
+                  });
+                this.updateCoberturaRegion(this.idCampania,this.estado_cob,this.id) 
+              }
+            } else if(this.cobertura_empresa == 'Nacional') {
+                this.updateCoberturaNacional(this.idCampania,this.id);
             }
-          } else if(this.cobertura_empresa == 'Nacional') {
-            this.updateCoberturaNacional(this.idCampania,this.id);
-          }
           this.lleno = true;
           this.showSuccess();
         },
@@ -346,7 +379,8 @@ export class BriefPage implements OnInit, AfterContentChecked{
           this.showError();
         }
       );
-
+      })
+      .catch();
     }
 
     updateCobertura(idCampania,idEstado,idUsuario) {

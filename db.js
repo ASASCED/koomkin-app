@@ -841,6 +841,25 @@ db.executeGetTicket = function (command, ticket,  requerimiento ,area  ,estatus 
     });
 };
 
+//updateAgenda
+
+db.executeUpdateAgenda = function (idUsuario,idTicket,estatusOptimizacion) {
+
+    const requestStr = `insert into Tbl_AgendaOptimizaciones (idUsuario, idTicket, estatusOptimizacion) values (${idUsuario},${idTicket}, '${estatusOptimizacion}')`;
+
+    return new Promise((resolve, reject) => {
+        tp.sql(requestStr)
+            .execute()
+            .then(results => {
+                resolve(results);
+            })
+            .catch(err => {
+                console.log(err);
+                reject(err);
+            });
+    });
+};
+
 //UpdateHabilitado del banner
 
 db.executeUpdateHabilitado = function (idReporteBanner) {

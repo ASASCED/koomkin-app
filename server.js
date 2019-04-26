@@ -1503,6 +1503,46 @@ app.post('/getRequirementTicket/', function (req, res) {
         });
 });
 
+//Genera el requerimiento del  ticket 
+
+app.post('/getRequirementTicketOptimizacion/', function (req, res) {
+
+    const ticket = parseInt(req.body.ticket, 10);
+    const requerimiento = 50;
+    const area = 8;
+    const estatus = 1;
+    const agente = 0;
+    const comentario = req.body.comentario;
+    const satisfaccion = 6;
+    const bandera = 0;
+    const command = 'spI_hp_CrearRequerimiento_Bis';
+
+    db.executeGetTicket(command,ticket,requerimiento,area,estatus,agente,comentario,satisfaccion,bandera)
+        .then(rows => {
+            res.json(rows).status(200).send();
+        })
+        .catch(err => {
+            res.status(500).json({ error: err }).send();
+        });
+});
+
+//Genera el requerimiento del  ticket 
+
+app.post('/updateAgendaOptimizaciones/', function (req, res) {
+
+    const idUsuario = parseInt(req.body.idUsuario, 10);
+    const idTicket = parseInt(req.body.ticket, 10);
+    const estatusOptimizacion = req.body.estatusOptimizacion;
+
+    db.UpdateAgenda(idUsuario,idTicket,estatusOptimizacion)
+        .then(rows => {
+            res.json(rows).status(200).send();
+        })
+        .catch(err => {
+            res.status(500).json({ error: err }).send();
+        });
+});
+
 
 app.post('/registerDeviceId/:idUsuario/:idDevice', function (req, res) {
 

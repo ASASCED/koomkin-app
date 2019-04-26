@@ -104,7 +104,6 @@ export class ChatServiceProvider {
   setNewToken(token) {
     var self = this;
     self.accessManager.updateToken(token);
-    window.location.reload();
   }
 
   connectAuxiliarChannel(){
