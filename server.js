@@ -1531,8 +1531,10 @@ app.post('/getRequirementTicketOptimizacion/', function (req, res) {
 app.post('/updateAgendaOptimizaciones/', function (req, res) {
 
     const idUsuario = parseInt(req.body.idUsuario, 10);
-    const idTicket = parseInt(req.body.ticket, 10);
+    const idTicket = parseInt(req.body.idTicket, 10);
     const estatusOptimizacion = req.body.estatusOptimizacion;
+
+    console.log(idUsuario,idTicket,estatusOptimizacion);
 
     db.executeUpdateAgenda(idUsuario,idTicket,estatusOptimizacion)
         .then(rows => {
