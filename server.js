@@ -1534,7 +1534,7 @@ app.post('/updateAgendaOptimizaciones/', function (req, res) {
     const idTicket = parseInt(req.body.ticket, 10);
     const estatusOptimizacion = req.body.estatusOptimizacion;
 
-    db.UpdateAgenda(idUsuario,idTicket,estatusOptimizacion)
+    db.executeUpdateAgenda(idUsuario,idTicket,estatusOptimizacion)
         .then(rows => {
             res.json(rows).status(200).send();
         })
