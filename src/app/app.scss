@@ -122,6 +122,9 @@ ion-icon {
     &[class*="appname-reporte"] {
         mask-image: url(../assets/imgs/inicio/reporte.svg);
     }
+    &[class*="appname-brief"] {
+        mask-image: url(../assets/imgs/inicio/brief.svg);
+    }
     &[class*="appname-eficiencia"] {
         mask-image: url(../assets/imgs/inicio/eficiencia.svg);
     }

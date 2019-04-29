@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, AlertController, Slides } from 'io
 import { RestProvider } from '../../providers/rest/rest';
 import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
 import { MasBriefPage } from '../mas-brief/mas-brief';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import swal from 'sweetalert2';
 
 @IonicPage()
@@ -27,6 +28,7 @@ export class BriefPage implements OnInit, AfterContentChecked{
   public target;
   public mejor;
   public producto;
+  public productoInicial;
   public direccion;
   public cat_estados;
   public estado: any = [];
@@ -73,7 +75,9 @@ export class BriefPage implements OnInit, AfterContentChecked{
   public sectores;
   public idCampania;
   public lleno: boolean = false;
-
+  public ticket;
+  public ticketfinal;
+  public comentarioCierre;
   public cambio_estado_cob;
   mas_informacion: boolean = false;
   familiar: boolean = false;
@@ -86,6 +90,7 @@ export class BriefPage implements OnInit, AfterContentChecked{
       public provedor: RestProvider,
       public authService: AuthServiceProvider,
       public alertCtrl: AlertController,
+      public http: HttpClient
     ) {
       this.empresa = this.authService.empresa;
       this.id = this.authService.id;
@@ -111,6 +116,8 @@ export class BriefPage implements OnInit, AfterContentChecked{
           this.target = this.datos[0].ClientesTarget;
           this.mejor = this.datos[0].Mejor;
           this.producto = this.datos[0].Producto;
+          this.productoInicial = this.datos[0].Producto;
+
           this.direccion = this.datos[0].Direccion;
           this.latitud = this.datos[0].Latitud;
           this.longitud = this.datos[0].Longitud;
@@ -336,6 +343,12 @@ export class BriefPage implements OnInit, AfterContentChecked{
         this.tipo_empresa = 6;
       }
 
+      if (this.productoInicial !== this.producto) {
+        console.log('entro if');
+        this.productoInicial = this.producto;
+        this.createTicket();
+      } 
+
       this.getNewCodigoPostal(this.cp)
       .then(nuevo_estado => {
         console.log('entro');
@@ -480,6 +493,82 @@ export class BriefPage implements OnInit, AfterContentChecked{
         confirmButtonColor: '#3085d6',
         confirmButtonText: 'OK',
         reverseButtons: true
+      });
+    }
+
+    public createTicket() {
+      let fecha;
+      const descripcion = 'Cambio de Producto o Servicio Principal';
+      const rightNow = new Date();
+      const res = rightNow.toISOString().slice(0, 10).replace(/-/g, '');
+  
+      fecha = res;
+  
+      this.provedor.getTicket(this.id, fecha, descripcion).then(
+        data => {
+          this.ticket = data[0].idTicket;
+          console.log(this.ticket);
+          this.getRequirementTicket(this.ticket);
+          this.agendaOptimizaciones(this.ticket);
+        },
+        error => {
+          // console.log(error);
+        }
+      );
+    }
+  
+    public getRequirementTicket(ticket) {
+
+      const body = new URLSearchParams();
+      body.set('ticket', ticket);
+      body.set('comentario', 'Cambio de Producto o Servicio Principal');
+  
+      const options = {
+        headers: new HttpHeaders().set(
+          'Content-Type',
+          'application/x-www-form-urlencoded'
+        )
+      };
+  
+      const url = 'https://www.koomkin.com.mx/api/app/getRequirementTicketOptimizacion/';
+      return new Promise((resolve, reject) => {
+        this.http.post(url, body.toString(), options).subscribe(
+          data => {
+            this.ticketfinal = data;
+            return resolve();
+          },
+          err => {
+            return reject(err);
+          }
+        );
+      });
+    }
+
+    public agendaOptimizaciones(ticket) {
+
+      const body = new URLSearchParams();
+      body.set('idUsuario', this.id);
+      body.set('idTicket', ticket);
+      body.set('estatusOptimizacion', 'Sin Optimizar');
+  
+      const options = {
+        headers: new HttpHeaders().set(
+          'Content-Type',
+          'application/x-www-form-urlencoded'
+        )
+      };
+
+      const url = 'https://www.koomkin.com.mx/api/app/updateAgendaOptimizaciones/';
+      return new Promise((resolve, reject) => {
+        this.http.post(url, body.toString(), options).subscribe(
+          data => {
+            this.ticketfinal = data;
+            return resolve();
+          },
+          err => {
+            return reject(err);
+          }
+        );
       });
     }
 }

@@ -548,9 +548,9 @@ export class RestProvider {
     });
   }
 
-  updateBriefInformation(idUsuario,idProducto,new_Producto,new_TipoEmpresa,new_CodigoPostal,new_IDMembresia,new_PorqueEresMejor,new_ClientesTarget,new_Correo1,new_Correo2,new_Correo3,new_IdSubSector) {
+  updateBriefInformation(idUsuario,idProducto,new_Producto,new_TipoEmpresa,new_CodigoPostal,new_IDMembresia,new_PorqueEresMejor,new_ClientesTarget,new_Correo1,new_Correo2,new_Correo3,new_IdSubSector,idEstado) {
     return new Promise((resolve,reject) => {
-      this.http.get(this.apiUrl + '/updateBriefInformation/' + idUsuario + '/' + idProducto + '/' + new_Producto + '/' + new_TipoEmpresa  + '/' + new_CodigoPostal  + '/' + new_IDMembresia  + '/' + new_PorqueEresMejor  + '/' + new_ClientesTarget  + '/' + new_Correo1  + '/' + new_Correo2  + '/' + new_Correo3  + '/' + new_IdSubSector ).subscribe(data => {
+      this.http.get(this.apiUrl + '/updateBriefInformation/' + idUsuario + '/' + idProducto + '/' + new_Producto + '/' + new_TipoEmpresa  + '/' + new_CodigoPostal  + '/' + new_IDMembresia  + '/' + new_PorqueEresMejor  + '/' + new_ClientesTarget  + '/' + new_Correo1  + '/' + new_Correo2  + '/' + new_Correo3  + '/' + new_IdSubSector + '/' +  idEstado).subscribe(data => {
         resolve(data);
       }, err => {
          reject(err);

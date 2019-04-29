@@ -65,6 +65,7 @@ export class ReportePage implements OnInit {
   public resultexito;
   public app;
   public fechaInicio;
+  public duracion;
   //función de la primera gráfica
   public columnChartData = {
     chartType: 'ColumnChart',
@@ -892,7 +893,7 @@ export class ReportePage implements OnInit {
   }
   
   public getInicioCampana() {
-    this.restService.getInicioCampana().then(
+    this.provedor.getInicioCampana().then(
       data => {
         if (data['length'] > 0) {
         this.fechaInicio = data[0].inicioCampana;
