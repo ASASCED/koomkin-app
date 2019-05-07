@@ -272,13 +272,14 @@ export class EficienciaPage implements OnInit {
     this.provedor.getEficiency().then(
       data => {
         this.datos = data;
-
+        console.log(this.datos);
         if (this.datos.length > 0) {
           this.idcuarta = this.datos[0].tipocuartapantalla;
 
           this.yourleads = this.datos[0].Exitosos;
           this.top = JSON.stringify(this.datos[0].top * 100) + "%";
           this.yourplace = JSON.stringify(this.datos[0].Lugar);
+
           this.posicion = "#" + this.yourplace;
 
           if (this.datos[0].avg_HorasAtencion_5 != null ) {
@@ -432,6 +433,7 @@ export class EficienciaPage implements OnInit {
   public getEficiencyRanking() {
     this.provedor.getEficiencyRanking().then(
       data => {
+        console.log(data);
         if (data) {
           this.datos = data;
           const lugar = [

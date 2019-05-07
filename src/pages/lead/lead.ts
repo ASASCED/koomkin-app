@@ -552,31 +552,29 @@ export class LeadPage implements OnInit {
 
   public getLeadCalls() {
     this.http.get(this.apiUrl + '/getLeadCalls/' + this.leadActual.clave).subscribe(data => {
-      //// console.log(data);
       this.llamadas = data;
-      //// console.log(this.llamadas);
       if (this.llamadas) {
         for (let k in this.llamadas) {
           this.llamadas[k].CallStatus = this.llamadas[k].CallStatus;
-          if (this.llamadas[k].CallStatus == 'failed') {
+          // console.log(this.llamadas[k].CallStatus,this.llamadas[k].LlamadaLead);
+          if (this.llamadas[k].CallStatus == 'failed' || this.llamadas[k].CallStatus == 'completed' && this.llamadas[k].exitosa == 0) {
             this.llamadas[k].CallStatus = 'perdida';
-          }
+          }          
           if (this.llamadas[k].CallStatus == 'inv-lead' || this.llamadas[k].CallStatus == 'inv-cliente') {
             this.llamadas[k].CallStatus = 'invalido';
           }
           if (this.llamadas[k].CallStatus == 'ringing') {
             this.llamadas[k].CallStatus = 'llamando';
           }
-          if (this.llamadas[k].LlamadaLead == 0 && this.llamadas[k].CallStatus == 'completed' || this.llamadas[k].CallStatus == 'in-progress') {
+          if (this.llamadas[k].LlamadaLead == 0 && this.llamadas[k].exitosa == 1) {
             this.llamadas[k].CallStatus = 'cliente';
-          } else if (this.llamadas[k].LlamadaLead == 1 && this.llamadas[k].CallStatus == 'completed' || this.llamadas[k].CallStatus == 'in-progress') {
+          } else if (this.llamadas[k].LlamadaLead == 1 && this.llamadas[k].exitosa == 1) {
             this.llamadas[k].CallStatus = 'comprador';
           }
-
           this.llamadas[k].horallamada = this.llamadas[k].FechaLlamada.substring(11, 16);
           this.llamadas[k].FechaLlamada = this.llamadas[k].FechaLlamada.substring(0, 10).replace(/^(\d{4})-(\d{2})-(\d{2})$/g, '$3/$2/$1');
-          let f = new Date();
-          let fecha = f.getDate() + "/" + (f.getMonth() + 1) + "/" + f.getFullYear();
+          var f = new Date();
+          var fecha = f.getDate() + '/' + (f.getMonth() + 1) + '/' + f.getFullYear();
           if (this.llamadas[k].FechaLlamada == fecha) {
             this.llamadas[k].FechaLlamada = 'Hoy';
           }

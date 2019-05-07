@@ -9,7 +9,7 @@ import { Network } from '@ionic-native/network';
 import { Platform } from 'ionic-angular';
 import { HttpClient } from '@angular/common/http';
 
-import {ChatServiceProvider} from "../../providers/chat-service/chat-service";
+import { ChatServiceProvider } from "../../providers/chat-service/chat-service";
 import { InicioPage } from '../inicio/inicio';
 
 import { HTTP } from '@ionic-native/http';
@@ -70,7 +70,7 @@ export class LoginPage implements OnInit {
     private network: Network,
     private toastCtrl: ToastController,
     public http: HttpClient,
-              public chatService: ChatServiceProvider
+    public chatService: ChatServiceProvider
   ) {
     let disconnectSubscription = this.network.onDisconnect().subscribe(() => {
       this.showError("Error de conexión.", "Verifica tu conexión a internet.");

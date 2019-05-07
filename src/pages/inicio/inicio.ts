@@ -21,6 +21,7 @@ import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
 import { EficienciaPage } from '../eficiencia/eficiencia';
 import { BriefPage } from '../brief/brief';
 import { MasBriefPage } from '../mas-brief/mas-brief';
+import { ToastController } from 'ionic-angular';
 
 @IonicPage()
 @Component({
@@ -67,7 +68,7 @@ export class InicioPage implements OnInit {
     private menuCtrl: MenuController,
     public authService: AuthServiceProvider,
     public http: HttpClient,
-
+    public toastCtrl: ToastController
   ) {
     this.id = this.authService.id;
     this.activo = this.authService.activo;
@@ -105,23 +106,32 @@ export class InicioPage implements OnInit {
       let datos;
       this.http.get(urlBanner).subscribe(
         data => {
+          console.log(data);
+
           if (data == null) {
             this.mostrar = 0;
+            this.tipoBanner = 0;
+              this.habilitado = 0;
           } else if (data) {
             datos = data;
-            
-            this.title = datos[0].titulo;
-            this.subtitle = datos[0].subtitulo;
-            this.fondo = datos[0].fondo;
-            this.tipoBanner = datos[0].tipoBanner;
-            this.img = datos[0].descripcionBanner;
-            this.idReportBanner = datos[0].idReporteBanner;
-            this.uuidPass = datos[0].uuidPase;
-            this.description = datos[0].descripcionBanner;
-            this.habilitado = datos[0].habilitado;
-            this.notification = JSON.parse(datos[0].dataPage);
-            // // console.log(this.description);
-            // console.log(this.tipoBanner,this.habilitado);
+            if(datos.length > 0) {
+              this.title = datos[0].titulo;
+              this.subtitle = datos[0].subtitulo;
+              this.fondo = datos[0].fondo;
+              this.tipoBanner = datos[0].tipoBanner;
+              this.img = datos[0].descripcionBanner;
+              this.idReportBanner = datos[0].idReporteBanner;
+              this.uuidPass = datos[0].uuidPase;
+              this.description = datos[0].descripcionBanner;
+              this.habilitado = datos[0].habilitado;
+              if(this.habilitado == null) {
+                this.habilitado = 0;
+              }
+              this.notification = JSON.parse(datos[0].dataPage);
+            } else if(datos.length == 0) {
+              this.tipoBanner = 0;
+              this.habilitado = 0;
+            }
             resolve();
           }
         },
@@ -157,5 +167,15 @@ export class InicioPage implements OnInit {
         }
       );
     });
+  }
+
+  presentToast() {
+    const toast = this.toastCtrl.create({
+      message: 'Da click en el banner para continuar',
+      duration: 3000,
+      position: 'top',
+      dismissOnPageChange: true
+    });
+    toast.present();
   }
 }

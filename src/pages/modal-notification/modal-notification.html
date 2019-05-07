@@ -1,11 +1,15 @@
 <ion-header>
     <ion-navbar color="azul">
+        <ion-buttons *ngIf="tipoBanner >= 3 && tipoBanner <= 9">
+            <button class="regre" (click)="irInicio()">
+                <ion-icon class="regre" name="ios-arrow-back"  style="font-size: 1.8em;"></ion-icon>
+                Regresar
+            </button>
+        </ion-buttons>
     </ion-navbar>
 </ion-header>
 
-
 <ion-content>
-
     <body>
         <div class="activity-container">
             <div class="activity-header" [ngStyle]="{'background-image':'url('+imagen_notificacion+')'}">
@@ -26,8 +30,8 @@
             </div>
             <div class="activity-footer">
                 <div class="button-footer-container">
-                    <button class="renovacion-negativo" (click)="registrarInteres(0);showAlertNo()">{{cancelar_notificacion}}</button>
-                    <button class="renovacion-positivo" (click)="registrarInteres(1);showAlert()">{{aceptar_notificacion}}</button>
+                    <button class="renovacion-negativo" (click)="registrarInteres(0);showAlertNo();irInicio()">{{cancelar_notificacion}}</button>
+                    <button class="renovacion-positivo" (click)="registrarInteres(1);showAlert();irInicio()">{{aceptar_notificacion}}</button>
                 </div>
             </div>
         </div>

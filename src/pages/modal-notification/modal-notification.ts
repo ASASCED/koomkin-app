@@ -3,11 +3,15 @@ import {
   IonicPage,
   NavController,
   NavParams,
-  ViewController
+  ViewController,
+  App,
+  MenuController
 } from "ionic-angular";
 import { AuthServiceProvider } from "../../providers/auth-service/auth-service";
 import { HttpClient } from "@angular/common/http";
 import { AlertController } from "ionic-angular";
+import { InicioPage } from "../inicio/inicio";
+
 
 @IonicPage()
 @Component({
@@ -29,7 +33,7 @@ export class ModalNotificationPage implements OnInit {
   public parrafo;
   public parrafo1;
   public parrafo2;
-
+  public tipoBanner;
   public aceptar_color_notificacion;
   public cancelar_color_notificacion;
   public modal_titulo_notificacion;
@@ -48,17 +52,27 @@ export class ModalNotificationPage implements OnInit {
     public authService: AuthServiceProvider,
     public viewCtrl: ViewController,
     public http: HttpClient,
+    public app: App,
+    private menuCtrl: MenuController,
     public alertCtrl: AlertController
   ) {
     this.empresa = this.authService.empresa;
     this.id = this.authService.id;
     this.notificacion = navParams.get("notificacion");
     this.idReporteBanner = navParams.get("idReporteBanner");
+    this.tipoBanner = navParams.get("tipo");
+    console.log(this.tipoBanner);
     this.uuidPase = navParams.get("uuidPase");
   }
 
-  ionViewDidLoad() {}
+  ionViewDidEnter() {
+    this.menuCtrl.swipeEnable(false);
+  }
 
+  ionViewWillLeave() {
+    this.menuCtrl.swipeEnable(true);
+  }
+  
   dismiss() {
     let data = { foo: "bar" };
     this.viewCtrl.dismiss(data);
@@ -129,5 +143,9 @@ export class ModalNotificationPage implements OnInit {
       buttons: [this.modal_mensaje_no_notificacion]
     });
     alert.present();
+  }
+
+  public irInicio() {
+    this.app.getRootNav().setRoot(InicioPage); 
   }
 }
