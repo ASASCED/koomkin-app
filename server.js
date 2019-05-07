@@ -566,15 +566,15 @@ app.get('/getIntentoSesion/:email/:password', function (req, res) {
 
                 if(password.startsWith(supposedPassword)){
                   logIn = true
-                }else{
-                  logIn = false
+
+                  fb.updateBriefById(fireBaseId,logIn)
+                    .then((data)=>{
+                      console.log(data);
+                    })
+                    .catch((reason)=>{console.log(reason)});
+
                 }
 
-                fb.updateBriefById(fireBaseId,logIn)
-                  .then((data)=>{
-                    console.log(data);
-                  })
-                  .catch((reason)=>{console.log(reason)});
               }
 
             });
