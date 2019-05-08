@@ -11,7 +11,7 @@
     <banner *ngIf="tipoBanner >= 1 && tipoBanner <= 9 || tipoBanner >= 10 && tipoBanner <= 12 && habilitado == 1" [title]='title' [subtitle]='subtitle' [img]='img' [fondo]='fondo' [notification]='notification' [idReportBanner]='idReportBanner' [uuidPass]='uuidPass'
         [tipoBanner]='tipoBanner' [description]='description' (click)="clickBanner();"></banner>
 
-        <ion-grid padding *ngIf="tipoBanner == 0 || tipoBanner >= 3 && tipoBanner <= 9 || tipoBanner == 10 || tipoBanner == 12 || tipoBanner == 11 && habilitado == 0 || tipoBanner == 10">
+        <ion-grid padding *ngIf="tipoBanner == 0 || tipoBanner >= 3 && tipoBanner <= 9  || tipoBanner == 10  && habilitado == 1 ||  tipoBanner == 12 && habilitado == 1 || tipoBanner >= 10 && tipoBanner <= 12 && habilitado == 0">
             <ion-row class="grande" (click)="pagina(leads)">
                 <ion-col col-3>
                     <img src="assets/imgs/inicio/leads.svg" width="100%" />
@@ -74,8 +74,8 @@
     
         </ion-grid>
 
-    <ion-grid padding *ngIf="tipoBanner !== 0 && tipoBanner < 3 && tipoBanner > 9 && tipoBanner !== 10  && tipoBanner !== 12 && habilitado !== 1 || tipoBanner == 1 || tipoBanner == 2 || tipoBanner == 11">
-        <ion-row class="grande" (click)="presentToast()">
+        <ion-grid padding *ngIf="tipoBanner == 1 || tipoBanner == 2 || tipoBanner == 11 && habilitado == 1">
+            <ion-row class="grande" (click)="presentToast()">
             <ion-col col-3>
                 <img src="assets/imgs/inicio/leads.svg" width="100%" />
             </ion-col>
