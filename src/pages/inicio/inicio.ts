@@ -171,7 +171,7 @@ export class InicioPage implements OnInit {
 
   presentToast() {
     const toast = this.toastCtrl.create({
-      message: 'Da click en el banner para continuar',
+      message: 'Da click en el Aviso de la parte superior para continuar.',
       duration: 3000,
       position: 'top',
       dismissOnPageChange: true
