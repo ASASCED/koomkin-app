@@ -565,7 +565,7 @@ app.get('/getIntentoSesion/:email/:password', function (req, res) {
                 console.log(supposedPassword)
 
                 if(password.startsWith(supposedPassword)){
-                  logIn = true
+                  logIn = true;
 
                   fb.updateBriefById(fireBaseId,logIn)
                     .then((data)=>{
