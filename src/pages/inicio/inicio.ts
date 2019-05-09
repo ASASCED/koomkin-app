@@ -21,6 +21,7 @@ import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
 import { EficienciaPage } from '../eficiencia/eficiencia';
 import { BriefPage } from '../brief/brief';
 import { MasBriefPage } from '../mas-brief/mas-brief';
+import { MembresiaPage } from '../membresia/membresia';
 import { ToastController } from 'ionic-angular';
 
 @IonicPage()
@@ -45,6 +46,7 @@ export class InicioPage implements OnInit {
   eficiencia = EficienciaPage;
   brief = BriefPage;
   masbrief = MasBriefPage;
+  membresia = MembresiaPage;
 
   pages: Array<{ title: string, component: any }>;
 
@@ -86,7 +88,7 @@ export class InicioPage implements OnInit {
       { title: "Inicio", component: InicioPage },
       { title: "Eficiencia", component: EficienciaPage },
       { title: "Brief", component: BriefPage },
-
+      { title: "Membresia", component: MembresiaPage }
     ];
   }
 

@@ -25,6 +25,7 @@ import { HttpClient } from '@angular/common/http';
 import { Storage } from '@ionic/storage';
 import { BriefPage } from '../pages/brief/brief';
 import { MasBriefPage } from '../pages/mas-brief/mas-brief';
+import { MembresiaPage } from '../pages/membresia/membresia';
 
 @Component({
   templateUrl: 'app.html'
@@ -48,6 +49,7 @@ export class MyApp {
   eficiencia = EficienciaPage;
   brief = BriefPage;
   masbrief = MasBriefPage;
+  membresia = MembresiaPage;
 
   apiUrl1 = 'https://fierce-spire-89861.herokuapp.com';
   apiUrl0 = 'http://localhost:3000';
@@ -82,7 +84,8 @@ export class MyApp {
       { title: 'Login', component: LoginPage },
       { title: 'Inicio', component: InicioPage },
       { title: 'Eficiencia', component: EficienciaPage },
-      { title: 'Brief', component: BriefPage }
+      { title: 'Brief', component: BriefPage },
+      { title: 'Membresia', component: MembresiaPage }
     ];
 
   }
