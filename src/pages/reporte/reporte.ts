@@ -898,7 +898,7 @@ export class ReportePage implements OnInit {
         if (data['length'] > 0) {
         this.fechaInicio = data[0].inicioCampana;
         this.duracion = data[0].duracion;
-        // console.log(this.fechaInicio, 'if');
+        console.log(data[0]);
         }
       },
       err => {
