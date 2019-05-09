@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { ErrorHandler, NgModule, CURRENCY_ID } from '@angular/core';
+import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpModule } from '@angular/http';
@@ -55,6 +55,7 @@ import { SweetAlert2Module } from '@toverux/ngx-sweetalert2';
 import { BriefPage } from '../pages/brief/brief';
 import { MasBriefPage } from '../pages/mas-brief/mas-brief';
 import { MembresiaPage } from '../pages/membresia/membresia';
+import { DatosFinancierosPage } from '../pages/datos-financieros/datos-financieros';
 
 
 @NgModule({
@@ -74,6 +75,7 @@ import { MembresiaPage } from '../pages/membresia/membresia';
     EficienciaPage,
     BriefPage,
     MasBriefPage,
+    DatosFinancierosPage,
     HotelComponent,
     SocialPage,
     EmailPage,
@@ -124,6 +126,7 @@ import { MembresiaPage } from '../pages/membresia/membresia';
     InicioPage,
     EficienciaPage,
     BriefPage,
+    DatosFinancierosPage,
     MembresiaPage,
     MasBriefPage,
     SocialPage,

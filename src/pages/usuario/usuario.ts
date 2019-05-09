@@ -181,7 +181,7 @@ export class UsuarioPage implements OnInit {
 
   public getPaymentData() {
     this.userService
-      .userRequest("datosPagos?id=" + this.id)
+      .userRequest("/datosPagos?id=" + this.id)
       .then((payments: [Payment]) => {
         this.paymentData = payments;
         // // console.log(this.userFiscal);

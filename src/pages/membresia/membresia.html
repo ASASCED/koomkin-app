@@ -17,22 +17,39 @@
         </tr>
         <tr>
             <td class="campos">Inicio de campaña</td>
-            <td class="datos">{{fechaInicio}}</td>
+            <td class="datos">{{ fechaInicio | date: 'dd/MM/yyyy' }}</td>
         </tr>
         <tr>
             <td class="campos">Días restantes de campaña</td>
-            <td class="datos">{{diasRestantes}}</td>
+            <td class="datos">{{ diasRestantes}}</td>
         </tr>
         <tr>
             <th class="contacto" colspan="2">Mejora tu campaña</th>
         </tr>
         <tr>
-            <td class="campos" colspan="2" style="text-align: center">¿Cuántos clientes nuevos quieres hoy?</td>
+            <td class="campos" colspan="2" style="text-align: center">Elige tu inversión</td>
         </tr>
         <tr>
-          <td class="campos">Inversión</td>
-          <td class="datos">$ 5,000 pesos</td>
-      </tr>
+            <th class="contacto" colspan="2">
+                <ion-segment class="adiconal-header" [(ngModel)]="selectedSegment">
+                    <ion-segment-button value="first" class="segment-datos">
+                        $ 250 MXN
+                    </ion-segment-button>
+                    <ion-segment-button value="second" class="segment-empresa">
+                        $ 500 MXN   
+                    </ion-segment-button>
+                    <ion-segment-button value="third" class="segment-objetivo">
+                        $ 1,000 MXN
+                    </ion-segment-button>
+                </ion-segment>
+            </th>
+        </tr>
+        <tr>
+          <td class="campos" colspan="2" style="text-align: center">Con esta inversión obtendrás </td>
+        </tr>
+        <tr>
+          <td class="datos"  colspan="2">10 Clientes Potenciales</td>
+        </tr>
     </table>
     
 

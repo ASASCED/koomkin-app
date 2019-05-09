@@ -1,0 +1,12 @@
+<ion-header>
+    <ion-navbar color="azul">
+        <ion-title>Empresa: {{empresa}}
+            <br>ID Cliente:{{id}}
+        </ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-tabs color="azul" style="background-color: #10cebc !important;">
+    <ion-tab tabIcon="md-card" tabTitle="Membresia" [root]="Membresia"></ion-tab>
+    <ion-tab tabIcon="md-contact" tabTitle="Fiscales" [root]="Pago"></ion-tab>
+</ion-tabs>

@@ -23,6 +23,7 @@ import { BriefPage } from '../brief/brief';
 import { MasBriefPage } from '../mas-brief/mas-brief';
 import { MembresiaPage } from '../membresia/membresia';
 import { ToastController } from 'ionic-angular';
+import { DatosFinancierosPage } from '../datos-financieros/datos-financieros';
 
 @IonicPage()
 @Component({
@@ -47,6 +48,7 @@ export class InicioPage implements OnInit {
   brief = BriefPage;
   masbrief = MasBriefPage;
   membresia = MembresiaPage;
+  financieros = DatosFinancierosPage;
 
   pages: Array<{ title: string, component: any }>;
 

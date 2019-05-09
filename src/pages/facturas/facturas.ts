@@ -48,7 +48,7 @@ export class FacturasPage implements OnInit {
   }
 
   public getPaymentData() {
-    this.userService.userRequest('datosPagos?id=' + this.id)
+    this.userService.userRequest('/datosPagos?id=' + this.id)
       .then((payments: [Payment]) => {
         this.paymentData = payments;
         this.invoiceData = this.removeDuplicates(payments.filter(x => x.TieneFactura === '1'));
