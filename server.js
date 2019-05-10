@@ -539,51 +539,35 @@ app.get('/leerLead/:leadId/:userId', function (req, res) {
 });
 
 app.get('/getIntentoSesion/:email/:password', function (req, res) {
-    console.log(req.params.password);
     const email = req.params.email;
     const password = req.params.password;
     console.log(email,password);
 
     db.searchDemoUsers(email)
       .then(data=>{
-
         if(data['length']>0){
-
           fb.getBriefByEmail(email).then(querySnapshot => {
-
             querySnapshot.forEach(doc => {
-
               const fireBaseId = doc.data()['id'];
-
               if(fireBaseId){
-
                 const supposedPassword = 'Koomkin'+data[0]['DemoUserID'];
-
                 var logIn;
-
                 console.log(password);
                 console.log(supposedPassword)
-
                 if(password.startsWith(supposedPassword)){
                   logIn = true;
-
                   fb.updateBriefById(fireBaseId,logIn)
                     .then((data)=>{
                       console.log(data);
                     })
                     .catch((reason)=>{console.log(reason)});
-
                 }
-
               }
-
             });
           });
-
-        }else{
+        } else{
           console.log('DEMO USER NOT FOUND');
         }
-
       })
       .catch(reason => {
         console.log(reason);

@@ -277,7 +277,8 @@ export class EficienciaPage implements OnInit {
           this.idcuarta = this.datos[0].tipocuartapantalla;
 
           this.yourleads = this.datos[0].Exitosos;
-          this.top = JSON.stringify(this.datos[0].top * 100) + "%";
+          let topUno = Math.trunc(this.datos[0].top * 100);
+          this.top = JSON.stringify(topUno) + '%';
           this.yourplace = JSON.stringify(this.datos[0].Lugar);
 
           this.posicion = "#" + this.yourplace;
