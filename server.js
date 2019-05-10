@@ -578,7 +578,7 @@ app.get('/getIntentoSesion/:email/:password', function (req, res) {
               }
 
             });
-          });
+          }).catch(reason => {console.log(reason)});
 
         }else{
           console.log('DEMO USER NOT FOUND');
