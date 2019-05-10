@@ -266,6 +266,18 @@ app.get('/getLead12Meses/:id', function (req, res) {
     });
 });
 
+app.get('/SP_GetLeadLastMonth/:id', function (req, res) {
+    var id = parseInt(req.params.id, 10);
+    var command = 'SP_GetLeadLastMonth';
+    db.executeGetById(id, command, function (err, rows) {
+        if (err) {
+            res.status(500).json({ error: err }).send();
+        } else {
+            res.json(rows);
+        }
+    });
+});
+
 app.get('/getLike30Dias/:id', function (req, res) {
     var id = parseInt(req.params.id, 10);
     console.log("id", id);

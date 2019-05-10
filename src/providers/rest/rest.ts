@@ -155,6 +155,17 @@ export class RestProvider {
     });
   }
 
+  getLeadLastMonth(){
+    return new Promise(resolve => {
+      this.http.get(this.apiUrl + '/getLeadLastMonth/' + this.user).subscribe(data => {
+        resolve(data);
+        //// console.log(data);
+      }, err => {
+        // console.log(err);
+      });
+    });
+  }
+
   getLikeDias() {
     return new Promise(resolve => {
       this.http.get(this.apiUrl + '/getLike30Dias/' + this.user).subscribe(data => {

@@ -70,6 +70,6 @@ export class MembresiaPage {
         (error) => {
           // console.log(error);
         });
-  }
+  } 
 
 }

@@ -144,7 +144,7 @@ export class ReportePage implements OnInit {
     this.empresa = this.authService.empresa;
     this.id = this.authService.id;
     this.app = this.provedor.app;
-    // // console.log(this.app);
+    // console.log(this.app);
     if (this.app === 1) {
       this.app = 'Si';
     } else {
@@ -461,8 +461,6 @@ export class ReportePage implements OnInit {
             }
             i++;
           }
-
-
 
           this.tableChartData = {
             chartType: 'Table',
