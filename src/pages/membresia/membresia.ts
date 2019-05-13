@@ -28,6 +28,7 @@ export class MembresiaPage {
     this.id = this.authService.id;
     this.getInicioCampana();
     this.getDiasRestantes();
+    this.getLeadLastMonth();
   }
 
   ionViewDidLoad() {
@@ -69,7 +70,22 @@ export class MembresiaPage {
         },
         (error) => {
           // console.log(error);
-        });
+        }
+      );
   } 
 
+  public getLeadLastMonth() {
+    this.provedor.getLeadLastMonth()
+      .then(
+        (data) => {
+          if (data[0]) {
+            console.log(data);
+          } else {
+            console.log('vacio');
+          }
+        },
+        (error) => {
+          // console.log(error);
+        });
+  } 
 }
