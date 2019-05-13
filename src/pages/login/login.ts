@@ -138,6 +138,8 @@ export class LoginPage implements OnInit {
     this.authService.getUserByEmail(this.email).then((data) => {
       this.loading.dismiss();
       this.leads = data;
+      console.log(this.leads);
+
       if (this.leads.length > 0) {
         if (this.plt.is('ios') || this.plt.is('android')) {
           window["plugins"].OneSignal.sendTag("email_error", "");
@@ -198,6 +200,7 @@ export class LoginPage implements OnInit {
             this.authService.getUserByEmail(this.email).then((data) => {
               this.loading.dismiss();
               this.leads = data;
+              console.log(this.leads);
               if (this.leads.length > 0) {
                 this.id = this.leads[0].IDUSUARIO;
                 if (Md5.hashStr(this.password) === this.leads[0].PASSWORD2) {

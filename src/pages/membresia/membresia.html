@@ -23,38 +23,39 @@
             <td class="campos">Días restantes de campaña</td>
             <td class="datos">{{ diasRestantes }}</td>
         </tr>
-        <tr>
-            <th class="contacto" colspan="2">Mejora tu campaña</th>
-        </tr>
-        <tr>
-            <td class="campos" colspan="2" style="text-align: center">Elige tu inversión</td>
-        </tr>
-        <tr>
-            <th class="contacto" colspan="2">
-                <ion-segment class="adiconal-header" [(ngModel)]="selectedSegment">
-                    <ion-segment-button value="first" class="segment-datos">
-                        $ 250 MXN
-                    </ion-segment-button>
-                    <ion-segment-button value="second" class="segment-empresa">
-                        $ 500 MXN   
-                    </ion-segment-button>
-                    <ion-segment-button value="third" class="segment-objetivo">
-                        $ 1,000 MXN
-                    </ion-segment-button>
-                </ion-segment>
-            </th>
-        </tr>
-        <tr>
-          <td class="campos" colspan="2" style="text-align: center">Con esta inversión obtendrás </td>
-        </tr>
-        <tr>
-          <td class="datos"  colspan="2">10 Clientes Potenciales</td>
-        </tr>
     </table>
-    
-
-    <div class="cuadro">
-        <button class="cancelar-suscripcion" >Invertir</button>
+    <div *ngIf="recurrente == true">
+        <div class="activity-title">
+            Mejora tu campaña
+        </div>
+        <br>
+        <div class="activity-subtitle">
+            Elige tu inversión
+        </div>
+        <br>
+        <div class="contacto">
+            <ion-segment class="adiconal-header" [(ngModel)]="selectedAmount">
+                <ion-segment-button value="250" class="segment-datos">
+                    $ 250 MXN
+                </ion-segment-button>
+                <ion-segment-button value="500" class="segment-empresa">
+                    $ 500 MXN   
+                </ion-segment-button>
+                <ion-segment-button value="1000" class="segment-objetivo">
+                    $ 1,000 MXN
+                </ion-segment-button>
+            </ion-segment>
+        </div>
+        <div class="activity-subtitle">
+            Con esta inversión obtendrás
+        </div>
+        <br>
+        <div class="activity-oferta">
+            10 Clientes Potenciales
+        </div>
+        <br> 
+        <div class="cuadro">
+            <button class="cancelar-suscripcion" (click)='upgradeMembership()'>Invertir</button>
+        </div>
     </div>
-
 </ion-content>

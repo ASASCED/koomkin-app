@@ -11,8 +11,7 @@ import { CancelarPage } from "./../cancelar/cancelar";
 import { Payment } from "../../models/Payment";
 import { UserProvider } from "../../providers/user/user";
 import { AuthServiceProvider } from "../../providers/auth-service/auth-service";
-import { HttpClient } from "@angular/common/http";
-import { HttpHeaders } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import swal from 'sweetalert2';
 import { ModalSurveyPage } from '../../pages/modal-survey/modal-survey';
 

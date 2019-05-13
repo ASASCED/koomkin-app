@@ -25,6 +25,8 @@ export class AuthServiceProvider {
   public recurrente;
   public cancelar;
   public activo;
+  public idRecurrente;
+  public uuidRecurrente;
 
   constructor(public http: HttpClient, public plt: Platform) {
     this.userLogged = false;
@@ -51,6 +53,8 @@ export class AuthServiceProvider {
           this.mensajebot = this.info[0].mensajebot;
           this.uuid = this.info[0].uuid;
           this.recurrente = this.info[0].RecurringPayments;
+          this.idRecurrente = this.info[0].RecurringPaymentUUID;
+          this.uuidRecurrente = this.info[0].RecurringPaymentID;
           this.cancelar = this.info[0].cancellation;
           this.activo = this.info[0].activo;
           if(this.activo == this.id) {

@@ -1,4 +1,6 @@
 page-membresia {
+    @import "../../assets/styles.scss";
+
     .title-white{
         color: white !important;
     }
@@ -19,7 +21,7 @@ page-membresia {
     }
     .contacto {
         text-align: center !important;
-        color: #10cebc;
+        color: $koomkin-blue;
         font-size: 5.5vw;
         margin-bottom: 4%;
         font-weight: bold !important;
@@ -122,11 +124,50 @@ page-membresia {
         border-color: none !important;
         font-size: 3.8vw !important;
         text-transform: none !important;
-        background: #288AC1 !important;
+        background: $koomkin-green !important;
         padding: 0% !important;    
         border-radius: 5px;
-        border: 1px solid #288AC1;
+        border: 1px solid $koomkin-green;
         margin: 1%;
         box-shadow: 6px 6px 12px -6px rgba(0,0,0,0.75);
+    }
+    .activity-title {
+        height: 45px;
+        width: 90%;
+        margin-left: 5%;
+        background-color: white;
+        display: flex;
+        color: $koomkin-blue;
+        bottom: 2px;
+        align-items: center;
+        justify-content: center;
+        font-weight: 900;
+        border-radius: 10px;
+        font-size: 5.3vw;
+        box-shadow: 2px 2px 5px -1px $koomkin-grey-light;
+    }
+
+    .activity-subtitle {
+        color:  #707070;
+        text-align: center;
+        height: 45px;
+        width: 90%;
+        margin-left: 5%;
+        font-size: 5vw;
+        display: grid;
+        justify-content: center;
+        align-items: center;
+        font-weight: bold;
+    }
+    .activity-oferta {
+        width: 100%;
+        text-align: center;
+        display: grid;
+        justify-content: center;
+        justify-content: center;
+        align-items: center;
+        color: $koomkin-blue !important;
+        font-weight: bold;
+        font-size: 5vw;
     }
 }
