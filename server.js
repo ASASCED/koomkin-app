@@ -266,7 +266,7 @@ app.get('/getLead12Meses/:id', function (req, res) {
     });
 });
 
-app.get('/SP_GetLeadLastMonth/:id', function (req, res) {
+app.get('/getLeadLastMonth/:id', function (req, res) {
     var id = parseInt(req.params.id, 10);
     var command = 'SP_GetLeadLastMonth';
     db.executeGetById(id, command, function (err, rows) {
