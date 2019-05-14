@@ -6,7 +6,6 @@ page-membresia {
     }
     .cuadro {
         text-align: center;
-        height: auto;
     }
     .cuadro1 {
         text-align: right;
@@ -25,6 +24,10 @@ page-membresia {
         font-size: 5.5vw;
         margin-bottom: 4%;
         font-weight: bold !important;
+    }
+    .contacto-segment {
+        width: 90%;
+        margin: 5%;
     }
     table {
         border-collapse: collapse;
@@ -59,13 +62,14 @@ page-membresia {
     .cancelar-suscripcion {
         background: #f06922;
         border: transparent;
-        font-size: 4.5vw;
+        font-size: 6vw;
+        font-weight: bold;
         text-align: center;
         color: white;
         border-radius: 10px;
         cursor: pointer;
         padding: 2%;
-        width: 45%;
+        width: 60%;
     }
     .campos {
         font-size: 4.5vw;
@@ -100,12 +104,13 @@ page-membresia {
         cursor: pointer;
         box-shadow: none;
     }
+    
     .segment-md .segment-button {
         color: #707070 !important;
         background: #ECECEC !important;
         opacity: 1 !important;
         transition: 100ms all linear !important;
-        font-size: 3.8vw !important;
+        font-size: 4.3vw !important;
         font-weight: bold !important;
         text-transform: none !important;
         padding: 0% !important;
@@ -122,16 +127,20 @@ page-membresia {
         -webkit-transition: 100ms all linear !important;
         transition: 100ms all linear !important;
         border-color: none !important;
-        font-size: 3.8vw !important;
+        font-size: 4.5vw !important;
         text-transform: none !important;
         background: $koomkin-green !important;
         padding: 0% !important;    
         border-radius: 5px;
         border: 1px solid $koomkin-green;
         margin: 1%;
+        font-weight: bold;
         box-shadow: 6px 6px 12px -6px rgba(0,0,0,0.75);
     }
+
     .activity-title {
+        position: absolute;
+        top: 17%;
         height: 45px;
         width: 90%;
         margin-left: 5%;
@@ -148,6 +157,21 @@ page-membresia {
     }
 
     .activity-subtitle {
+        background: #288AC1;
+        margin-top: 12%;
+        color:  white;
+        text-align: center;
+        height: 45px;
+        width: 90%;
+        margin-left: 5%;
+        font-size: 5vw;
+        display: grid;
+        justify-content: center;
+        align-items: center;
+        font-weight: bold;
+    }
+
+    .activity-subtitle-gray {
         color:  #707070;
         text-align: center;
         height: 45px;
@@ -159,6 +183,7 @@ page-membresia {
         align-items: center;
         font-weight: bold;
     }
+
     .activity-oferta {
         width: 100%;
         text-align: center;
@@ -166,8 +191,23 @@ page-membresia {
         justify-content: center;
         justify-content: center;
         align-items: center;
-        color: $koomkin-blue !important;
+        color: $koomkin-green !important;
         font-weight: bold;
-        font-size: 5vw;
+        font-size: 8vw;
+    }
+
+    .activity-header {
+        grid-area: activity-header;
+        height: 100%;
+        width: 100%;
+    }
+
+    .nota {
+        margin-top: 10%; 
+        margin-right: 2%;
+        color:  #707070;
+        text-align: right;
+        position: absoluto;
+        bottom: 0;
     }
 }

@@ -683,5 +683,25 @@ export class RestProvider {
       });
     });
   }
+
+  getUpdateMembership(RecurringPaymentID, RecurringPaymentUUID, amount) {
+    return new Promise(resolve => {
+      this.http.get(this.apiUrl + '/getUpdateMembership/'  + RecurringPaymentID + '/' + RecurringPaymentUUID + '/' + amount).subscribe(data => {
+        resolve(data);
+      }, err => {
+         console.log(err);
+      });
+    });
+  }
+
+  getCancelUpdateMembership(RecurringPaymentID) {
+    return new Promise(resolve => {
+      this.http.get(this.apiUrl + '/getCancelUpdateMembership/' + RecurringPaymentID).subscribe(data => {
+        resolve(data);
+      }, err => {
+         console.log(err);
+      });
+    });
+  }
   
 }

@@ -31,7 +31,6 @@ export class MembresiaPage {
   public oferta;
   public ofertaLeads;
   public diasTranscurridos;
-  public enabled;
 
   // reactivar
   public datosMembresia;
@@ -40,7 +39,6 @@ export class MembresiaPage {
   public fin = [];
 
   //oferta 
-
   public primerOferta;
   public segundaOferta;
   public tercerOferta;
@@ -108,23 +106,41 @@ export class MembresiaPage {
           if (data[0]) {
             let newSelectedAmount = parseInt(this.selectedAmount);
             this.leadsMes = data;
-            this.leadsMesPasado = this.leadsMes[0].LEADS;
-            this.leadsMesActual = this.leadsMes[1].LEADS;
-            if(this.leadsMes.length > 0) {
-              if (this.leadsMesActual > 0) {
+            if(this.leadsMes.length == 1) {
+              this.leadsMesActual = this.leadsMes[0].LEADS;
+            } else if (this.leadsMes.length == 2) {
+              this.leadsMesPasado = this.leadsMes[0].LEADS;
+              this.leadsMesActual = this.leadsMes[1].LEADS;
+            }
+            if (this.leadsMesActual > 0) {
+              if(parseInt(this.diasRestantes) > 30) {
+                this.diasTranscurridos = 61 - parseInt(this.diasRestantes);
+              } else {
                 this.diasTranscurridos = 30 - parseInt(this.diasRestantes);
-                if (this.diasTranscurridos > 0) {
-                  this.oferta = Math.round(this.monto / (( this.leadsMesActual / this.diasTranscurridos) * 30));
-                  this.ofertaLeads = Math.round(newSelectedAmount/this.oferta);
-                  this.primerOferta = this.ofertaLeads;
-                } 
-                else {
-                  this.oferta = this.monto / this.leadsMesPasado;
-                  this.ofertaLeads = Math.round(newSelectedAmount/this.oferta);
-                  this.primerOferta = this.ofertaLeads;
+              }
+              if (this.diasTranscurridos > 0) {
+                let estimado = (( this.leadsMesActual / this.diasTranscurridos) * 30);
+                console.log('Pago',this.monto);
+                console.log('Estimado de leads',estimado);
+                this.oferta = Math.round(this.monto / estimado);
+                console.log('Costo por lead',this.oferta)
+                this.ofertaLeads = Math.round(newSelectedAmount/this.oferta);
+                console.log('Nueva inversión',newSelectedAmount);
+                console.log('Clientes Potenciales',this.ofertaLeads);
+                this.primerOferta = this.ofertaLeads;
+                if( this.ofertaLeads < 4) {
+                  this.ofertaLeads = 4;
+                }
+              } else {
+                this.oferta = this.monto / this.leadsMesPasado;
+                this.ofertaLeads = Math.round(newSelectedAmount/this.oferta);
+                this.primerOferta = this.ofertaLeads;
+                if( this.ofertaLeads < 4) {
+                  this.ofertaLeads = 4;
                 }
               }
-            } 
+            }
+            console.log(this.ofertaLeads );
           } else {
             console.log('vacio');
           }
@@ -139,26 +155,54 @@ export class MembresiaPage {
     switch (oferta) {
       case 'first':
         this.ofertaLeads = Math.round(newSelectedAmount/this.oferta);
+        if( this.ofertaLeads < 4) {
+          this.ofertaLeads = 4;
+        }
         this.primerOferta = this.ofertaLeads;
         break;
       case 'second':
         if(this.primerOferta == 0) {
           this.ofertaLeads = Math.round(newSelectedAmount/this.oferta);
-          this.segundaOferta = this.ofertaLeads;
+          if( this.ofertaLeads < 8 ) {
+            this.ofertaLeads = 8;
+          } else if (this.ofertaLeads >= 12){
+            this.ofertaLeads = 8;
+          }
         } else {
-          this.ofertaLeads = (this.ofertaLeads * 2)
+          this.ofertaLeads = (this.primerOferta * 2)
+          if( this.ofertaLeads < 8) {
+            this.ofertaLeads = 8;
+          } else if (this.ofertaLeads >= 12 && this.primerOferta < 8){
+            this.ofertaLeads = 8;
+          }
+          this.segundaOferta = this.ofertaLeads;
         }
         break;
       case 'three':
         if(this.segundaOferta == 0) {
           this.ofertaLeads = Math.round(newSelectedAmount/this.oferta);
           this.tercerOferta = this.ofertaLeads;
+          if( this.ofertaLeads < 12) {
+            this.ofertaLeads = 12;
+          }  else if (this.ofertaLeads >= 16){
+            this.ofertaLeads = 12;
+          }
         } else if (this.primerOferta == 0) {
           this.ofertaLeads = Math.round(newSelectedAmount/this.oferta);
-          this.ofertaLeads = (this.ofertaLeads * 4)
+          this.ofertaLeads = (this.ofertaLeads * 2)
           this.tercerOferta = this.ofertaLeads; 
+          if( this.ofertaLeads < 12) {
+            this.ofertaLeads = 12;
+          } else if (this.ofertaLeads >= 16){
+            this.ofertaLeads = 12;
+          }
         } else {
-          this.ofertaLeads = (this.ofertaLeads * 4)
+          this.ofertaLeads = (this.segundaOferta * 2)
+          if( this.ofertaLeads < 12) {
+            this.ofertaLeads = 12;
+          } else if (this.ofertaLeads >= 16 && this.segundaOferta < 12){
+            this.ofertaLeads = 12;
+          }
         }        
         break;
       default:
@@ -197,8 +241,8 @@ export class MembresiaPage {
     let newSelectedAmount = parseInt(this.selectedAmount);
     this.nuevoMonto = this.monto + newSelectedAmount;
     swal({
-      title: '¿Estás seguro que deseas mejorar tu membresía?',
-      text: 'En tu próximo pago tendrás un cargo de $' + this.nuevoMonto + 'MXN por un periodo de ' + this.periodo + ' días, a la tarjeta con terminación: ' + this.tarjeta,
+      title: 'Confirma el incremento de $' + newSelectedAmount + 'MXN',
+      text: 'Además tomaremos este monto para tu nueva Membresía',
       showCancelButton: true,
       confirmButtonColor: '#288AC1',
       cancelButtonColor: '#2AB4BC',
@@ -213,7 +257,28 @@ export class MembresiaPage {
   }  
 
   public upgradeMembership() {
-    this.enabled = 1;
-    console.log(this.id, this.idRecurrente, this.uuidRecurrente, this.selectedAmount, this.enabled, 'NULL' );
+    console.log(this.idRecurrente, this.uuidRecurrente, this.selectedAmount );
+    this.provedor.getUpdateMembership(this.idRecurrente, this.uuidRecurrente, this.selectedAmount) 
+      .then(
+        (data) => {
+          console.log();
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+  }
+
+  public cancelUpgradeMembership() {
+    console.log(this.idRecurrente);
+    this.provedor.getCancelUpdateMembership(this.idRecurrente) 
+      .then(
+        (data) => {
+          console.log();
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
   }
 }

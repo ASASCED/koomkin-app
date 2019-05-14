@@ -1168,7 +1168,6 @@ app.get('/getEficiencyType/:cuartaPantalla', function (req, res) {
 
     const idTipo = parseInt(req.params.cuartaPantalla, 10);
 
-
     db.executeGetEficiencyType(idTipo)
          .then(rows => {
             res.json(rows).status(200).send();
@@ -1179,7 +1178,6 @@ app.get('/getEficiencyType/:cuartaPantalla', function (req, res) {
     });
 
 app.get('/getEficiencyRanking', function (req, res) {
-
 
     db.executeGetEficiencyRanking()
          .then(rows => {
@@ -1382,6 +1380,34 @@ app.get('/clickCambioInformacion/:usuario/:tipo/:acceso', function(req, res) {
 
     db.executeInsertaRegistro(command, usuario, tipo, acceso) 
         .then(rows => {
+            res.json(rows).status(200).send();
+        })
+        .catch(err => {
+            res.status(500).json({ error: err }).send();
+        });
+});
+
+app.get('/getUpdateMembership/:RecurringPaymentID/:RecurringPaymentUUID/:amount', function (req, res) {
+
+    const RecurringPaymentID = parseInt(req.params.cuartaPantalla, 10);
+    const RecurringPaymentUUID = req.params.cuartaPantalla; 
+    const amount = req.params.cuartaPantalla;
+
+    db.executeUpdateMembership(RecurringPaymentID, RecurringPaymentUUID, amount)
+         .then(rows => {
+            res.json(rows).status(200).send();
+        })
+        .catch(err => {
+            res.status(500).json({ error: err }).send();
+        });
+});
+
+app.get('/getUpdateMembership/:RecurringPaymentID/:RecurringPaymentUUID/:amount', function (req, res) {
+
+    const RecurringPaymentID= parseInt(req.params.cuartaPantalla, 10);
+
+    db.executeCancelUpdateMembership(RecurringPaymentID)
+         .then(rows => {
             res.json(rows).status(200).send();
         })
         .catch(err => {

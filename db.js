@@ -1400,6 +1400,39 @@ db.executeGetCobertura = function (idUsuario, idCampania) {
         });
     };
 
+db.executeUpdateMembership = function (RecurringPaymentID, RecurringPaymentUUID, amount) {
+
+    const requestStr = `insert into RecurringPaymentUpsell (RecurringPaymentID,RecurringPaymentUUID,Amount,Enabled,RegistrationDate)
+    VALUES (${RecurringPaymentID},'${RecurringPaymentUUID}','${amount}',1,GETDATE());`;
+        return new Promise((resolve, reject) => {
+            tp.sql(requestStr)
+                .execute()
+                .then(results => {
+                    resolve(results);
+                })
+                .catch(err => {
+                    console.log(err);
+                    reject(err);
+                });
+    });
+};
+
+db.executeCancelUpdateMembership = function (RecurringPaymentID) {
+
+    const requestStr = `update RecurringPaymentUpsell set CancellationDate = GETDATE(),Enabled = 0 where RecurringPaymentID = ${RecurringPaymentID}`
+        return new Promise((resolve, reject) => {
+            tp.sql(requestStr)
+                .execute()
+                .then(results => {
+                    resolve(results);
+                })
+                .catch(err => {
+                    console.log(err);
+                    reject(err);
+                });
+    });
+};
+
 
 db.executeGetEstados = function () {
 

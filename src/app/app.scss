@@ -100,19 +100,6 @@ ion-icon {
         height: 5vh;
     }
     // custom icons
-    /* &[class*="appname-bandeja"] {
-        mask-image: url(../assets/imgs/menu/bandeja.svg);
-    }
-    &[class*="appname-datos"] {
-        mask-image: url(../assets/imgs/menu/datos.svg);
-    }
-    &[class*="appname-reporte"] {
-        mask-image: url(../assets/imgs/menu/reporte.svg);
-    }
-    &[class*="appname-logout"] {
-        mask-image: url(../assets/imgs/menu/logout.svg);
-    }*/
-    // custom icons
     &[class*="appname-bandeja"] {
         mask-image: url(../assets/imgs/inicio/leads.svg);
     }
@@ -127,6 +114,9 @@ ion-icon {
     }
     &[class*="appname-eficiencia"] {
         mask-image: url(../assets/imgs/inicio/eficiencia.svg);
+    }
+    &[class*="appname-membresia"] {
+        mask-image: url(../assets/imgs/inicio/membresia.svg);
     }
     &[class*="appname-logout"] {
         mask-image: url(../assets/imgs/menu/logout.svg);
