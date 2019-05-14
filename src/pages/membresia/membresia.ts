@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
 import { RestProvider } from './../../providers/rest/rest';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import swal from 'sweetalert2';
 
 @IonicPage()
 @Component({
@@ -18,23 +19,31 @@ export class MembresiaPage {
   public uuidRecurrente;
 
   public fechaInicio;
+  public nuevoMonto;
   public monto;
   public diasRestantes;
   public dias;
-  public selectedAmount = '250';
+  public selectedAmount:any = '250';
   public fechaActual;
   public leadsMesActual;
   public leadsMesPasado;
   public leadsMes;
   public oferta;
+  public ofertaLeads;
   public diasTranscurridos;
   public enabled;
 
-    // reactivar
-    public datosMembresia;
-    public tarjeta = [];
-    public periodo = [];
-    public fin = [];
+  // reactivar
+  public datosMembresia;
+  public tarjeta = [];
+  public periodo = [];
+  public fin = [];
+
+  //oferta 
+
+  public primerOferta;
+  public segundaOferta;
+  public tercerOferta;
 
   constructor(
     public navCtrl: NavController, 
@@ -60,7 +69,6 @@ export class MembresiaPage {
         this.fechaInicio = data[0].FInicio;
         this.dias = data[0].PenultimoDiasPagados;
         this.monto = data[0].Monto;
-        this.diasTranscurridos = data[0].duracion;
           if (this.recurrente == true) {
             this.getLeadLastMonth();
           }
@@ -78,7 +86,6 @@ export class MembresiaPage {
         (data) => {
           if (data[0]) {
             let result = data[0].DIAS_RESTANTES;
-            console.log(result);
             if (result > 0) {
               this.diasRestantes = result + ' días';
             } else {
@@ -99,19 +106,25 @@ export class MembresiaPage {
       .then(
         (data) => {
           if (data[0]) {
+            let newSelectedAmount = parseInt(this.selectedAmount);
             this.leadsMes = data;
             this.leadsMesPasado = this.leadsMes[0].LEADS;
             this.leadsMesActual = this.leadsMes[1].LEADS;
-            if (this.leadsMesActual > 0) {
-              if (this.diasTranscurridos > 0) {
-                this.oferta = this.monto / (( this.leadsMesActual / this.diasTranscurridos) * 30);
-              } 
-              
-              else {
-                this.oferta = this.monto / this.leadsMesPasado;
+            if(this.leadsMes.length > 0) {
+              if (this.leadsMesActual > 0) {
+                this.diasTranscurridos = 30 - parseInt(this.diasRestantes);
+                if (this.diasTranscurridos > 0) {
+                  this.oferta = Math.round(this.monto / (( this.leadsMesActual / this.diasTranscurridos) * 30));
+                  this.ofertaLeads = Math.round(newSelectedAmount/this.oferta);
+                  this.primerOferta = this.ofertaLeads;
+                } 
+                else {
+                  this.oferta = this.monto / this.leadsMesPasado;
+                  this.ofertaLeads = Math.round(newSelectedAmount/this.oferta);
+                  this.primerOferta = this.ofertaLeads;
+                }
               }
-              console.log(this.oferta);
-            }
+            } 
           } else {
             console.log('vacio');
           }
@@ -120,6 +133,38 @@ export class MembresiaPage {
           // console.log(error);
         });
   } 
+
+  onChangeAmount(oferta) {
+    let newSelectedAmount = parseInt(this.selectedAmount);
+    switch (oferta) {
+      case 'first':
+        this.ofertaLeads = Math.round(newSelectedAmount/this.oferta);
+        this.primerOferta = this.ofertaLeads;
+        break;
+      case 'second':
+        if(this.primerOferta == 0) {
+          this.ofertaLeads = Math.round(newSelectedAmount/this.oferta);
+          this.segundaOferta = this.ofertaLeads;
+        } else {
+          this.ofertaLeads = (this.ofertaLeads * 2)
+        }
+        break;
+      case 'three':
+        if(this.segundaOferta == 0) {
+          this.ofertaLeads = Math.round(newSelectedAmount/this.oferta);
+          this.tercerOferta = this.ofertaLeads;
+        } else if (this.primerOferta == 0) {
+          this.ofertaLeads = Math.round(newSelectedAmount/this.oferta);
+          this.ofertaLeads = (this.ofertaLeads * 4)
+          this.tercerOferta = this.ofertaLeads; 
+        } else {
+          this.ofertaLeads = (this.ofertaLeads * 4)
+        }        
+        break;
+      default:
+    }
+    
+  }
 
   public infoCard() {
     const cuerpo = `{'user_id': '${this.id}'}`;
@@ -134,7 +179,6 @@ export class MembresiaPage {
       const url = 'https://www.koomkin.com.mx/api/openPay/creditCardData';
       this.http.post(url, cuerpo, options).subscribe(
         data => {
-          console.log(data);
           if(data['result'] !== 'error') {
             this.datosMembresia = data;
             this.tarjeta = data['credit_card'];       
@@ -148,6 +192,25 @@ export class MembresiaPage {
       );
     });
   }
+
+  public btnUpgradeMembership() {
+    let newSelectedAmount = parseInt(this.selectedAmount);
+    this.nuevoMonto = this.monto + newSelectedAmount;
+    swal({
+      title: '¿Estás seguro que deseas mejorar tu membresía?',
+      text: 'En tu próximo pago tendrás un cargo de $' + this.nuevoMonto + 'MXN por un periodo de ' + this.periodo + ' días, a la tarjeta con terminación: ' + this.tarjeta,
+      showCancelButton: true,
+      confirmButtonColor: '#288AC1',
+      cancelButtonColor: '#2AB4BC',
+      confirmButtonText: 'Confirmar',
+      cancelButtonText: 'Cancelar',
+      reverseButtons: true
+    }).then(result => {
+      if (result.value) {
+        this.upgradeMembership();
+      }
+    });
+  }  
 
   public upgradeMembership() {
     this.enabled = 1;

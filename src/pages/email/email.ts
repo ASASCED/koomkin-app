@@ -33,7 +33,7 @@ export class EmailPage implements OnInit {
   public uuid;
   // apiUrl = 'http://18.235.164.159/call-tracking/api/v1/mailing/';
 
-  apiUrl = '  https://www.koomkin.com.mx/call-tracking/api/v1/mailing/';
+  apiUrl = 'https://www.koomkin.com.mx/call-tracking/api/v1/mailing/';
 
   channelsidaux = "CHbc465fbe83434937b7382db97e8896b1";
 

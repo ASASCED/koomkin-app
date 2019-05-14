@@ -4,7 +4,6 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/timeout';
 import {Platform} from "ionic-angular";
 
-
 @Injectable()
 export class AuthServiceProvider {
 
@@ -73,7 +72,6 @@ export class AuthServiceProvider {
     });
   }
 
-
   setUserIsLogged(value:boolean) {
     this.userLogged = value;
   }
@@ -82,7 +80,6 @@ export class AuthServiceProvider {
     return this.userLogged;
   }
 
-
   setEnableChat(value:any) {
     this.enableChat = value;
   }
@@ -90,7 +87,6 @@ export class AuthServiceProvider {
   getEnableChat() {
     return this.enableChat;
   }
-
 
   setClientUUID(value:any) {
     this.clientUUID = value;
@@ -102,7 +98,6 @@ export class AuthServiceProvider {
     //alert(this.clientUUID)
     return this.clientUUID;
   }
-
 
   setNotificationActive(value:any) {
     this.notificationActive = value;
@@ -131,8 +126,4 @@ export class AuthServiceProvider {
         .toPromise();
     }
   }
-
-
 }
-
-//password con + sustituir con %2B o %2b

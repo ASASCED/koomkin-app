@@ -35,13 +35,13 @@
         <br>
         <div class="contacto">
             <ion-segment class="adiconal-header" [(ngModel)]="selectedAmount">
-                <ion-segment-button value="250" class="segment-datos">
+                <ion-segment-button value="250" class="segment-datos" (click)='onChangeAmount("first")'>
                     $ 250 MXN
                 </ion-segment-button>
-                <ion-segment-button value="500" class="segment-empresa">
+                <ion-segment-button value="500" class="segment-empresa" (click)='onChangeAmount("second")'>
                     $ 500 MXN   
                 </ion-segment-button>
-                <ion-segment-button value="1000" class="segment-objetivo">
+                <ion-segment-button value="1000" class="segment-objetivo" (click)='onChangeAmount("three")'>
                     $ 1,000 MXN
                 </ion-segment-button>
             </ion-segment>
@@ -51,11 +51,11 @@
         </div>
         <br>
         <div class="activity-oferta">
-            10 Clientes Potenciales
+            {{ ofertaLeads }} Clientes Potenciales
         </div>
         <br> 
         <div class="cuadro">
-            <button class="cancelar-suscripcion" (click)='upgradeMembership()'>Invertir</button>
+            <button class="cancelar-suscripcion" (click)='btnUpgradeMembership()'>Invertir</button>
         </div>
     </div>
 </ion-content>

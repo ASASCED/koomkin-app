@@ -347,11 +347,11 @@ export class UsuarioPage implements OnInit {
 
   public btnReactivar() {
     swal({
-      title: '¿Estás seguro que deseas reactivar tu Membresía?',
-      text: 'Vamos a realizarte el cobro de $' + this.monto + 'MXN por un periodo de ' + this.periodo + ' días a la tarjeta con terminación: ' + this.tarjeta,
+      title: '¿Estás seguro que deseas reactivar tu membresía?',
+      text: 'Vamos a realizarte el cobro de $' + this.monto + 'MXN por un periodo de ' + this.periodo + ' días, a la tarjeta con terminación: ' + this.tarjeta,
       showCancelButton: true,
       confirmButtonColor: '#288AC1',
-      cancelButtonColor: '#d33',
+      cancelButtonColor: '#2AB4BC',
       confirmButtonText: 'Confirmar',
       cancelButtonText: 'Cancelar',
       reverseButtons: true
@@ -375,7 +375,7 @@ export class UsuarioPage implements OnInit {
       const url = 'https://www.koomkin.com.mx/api/openPay/reinstateRecurringPayments';
       this.http.post(url, cuerpo, options).subscribe(
         data => {
-          console.log(data);
+          // console.log(data);
           if (data['result'] == 'OK') {
             this.showSuccessReinstate();
             resolve();
@@ -428,7 +428,7 @@ export class UsuarioPage implements OnInit {
       const url = 'https://www.koomkin.com.mx/api/openPay/creditCardData';
       this.http.post(url, cuerpo, options).subscribe(
         data => {
-          console.log(data);
+          // console.log(data);
           if(data['result'] !== 'error') {
             this.datosMembresia = data;
             this.monto = data['amount'];
