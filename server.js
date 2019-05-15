@@ -1404,6 +1404,20 @@ app.get('/getInsertUpgradeMembresia/:usuario/:id/:acceso', function (req, res) {
         });
 });
 
+app.get('/getLastUpdateMembership/:RecurringPaymentID/:RecurringPaymentUUID', function (req, res) {
+
+    const RecurringPaymentID = parseInt(req.params.RecurringPaymentID, 10);
+    const RecurringPaymentUUID = req.params.RecurringPaymentUUID; 
+
+    db.executeLastUpdateMembership(RecurringPaymentID, RecurringPaymentUUID)
+         .then(rows => {
+            res.json(rows).status(200).send();
+        })
+        .catch(err => {
+            res.status(500).json({ error: err }).send();
+        });
+});
+
 app.get('/getUpdateMembership/:RecurringPaymentID/:RecurringPaymentUUID/:amount', function (req, res) {
 
     const RecurringPaymentID = parseInt(req.params.RecurringPaymentID, 10);

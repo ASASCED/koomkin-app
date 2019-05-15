@@ -57,6 +57,7 @@ export class MembresiaPage {
    // this.uuidRecurrente = this.authService.uuidRecurrente;
     this.idRecurrente = 1026;
     this.uuidRecurrente = 'a565d7c9-f5b1-40ed-9a63-eea3418f9a2e';
+    this.getLastUpdateMembership();
     this.getInicioCampana();
     this.getDiasRestantes();
     this.infoCard();
@@ -259,12 +260,31 @@ export class MembresiaPage {
     });
   }  
 
+  public btnCancelMembership() {
+    let newSelectedAmount = parseInt(this.selectedAmount);
+    this.nuevoMonto = this.monto + newSelectedAmount;
+    swal({
+      title: 'Confirma el incremento de $' + newSelectedAmount + 'MXN',
+      text: 'Además tomaremos este monto para tu nueva Membresía',
+      showCancelButton: true,
+      confirmButtonColor: '#288AC1',
+      cancelButtonColor: '#2AB4BC',
+      confirmButtonText: 'Confirmar',
+      cancelButtonText: 'Cancelar',
+      reverseButtons: true
+    }).then(result => {
+      if (result.value) {
+        this.getCancelUpgradeMembership();
+      }
+    });
+  }  
+
   public getUpgradeMembership() {
     console.log(this.idRecurrente, this.uuidRecurrente, this.selectedAmount );
     this.provedor.getUpdateMembership(this.idRecurrente, this.uuidRecurrente, this.selectedAmount) 
       .then(
         (data) => {
-          console.log();
+          console.log(data);
         },
         (error) => {
           console.log(error);
@@ -277,7 +297,19 @@ export class MembresiaPage {
     this.provedor.getCancelUpdateMembership(this.idRecurrente) 
       .then(
         (data) => {
-          console.log();
+          console.log(data);
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+  }
+
+  public getLastUpdateMembership() {
+    this.provedor.getLastUpdateMembership(this.idRecurrente,this.uuidRecurrente) 
+      .then(
+        (data) => {
+          console.log(data);
         },
         (error) => {
           console.log(error);
@@ -291,7 +323,7 @@ export class MembresiaPage {
     this.provedor.getInsertUpgradeMembresia(this.id, this.idRecurrente, acceso)
       .then(
         (data) => {
-          console.log();
+          console.log(data);
         },
         (error) => {
           console.log(error);

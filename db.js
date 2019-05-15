@@ -1398,7 +1398,23 @@ db.executeGetCobertura = function (idUsuario, idCampania) {
                     reject(err);
                 });
         });
-    };
+};
+
+db.executeLastUpdateMembership = function (RecurringPaymentID, RecurringPaymentUUID) {
+
+    const requestStr = `select top 1 * from RecurringPaymentUpsell where RecurringPaymentID = ${RecurringPaymentID} and RecurringPaymentUUID = '${RecurringPaymentUUID}' order by ID desc`;
+        return new Promise((resolve, reject) => {
+            tp.sql(requestStr)
+                .execute()
+                .then(results => {
+                    resolve(results);
+                })
+                .catch(err => {
+                    console.log(err);
+                    reject(err);
+                });
+    });
+};
 
 db.executeUpdateMembership = function (RecurringPaymentID, RecurringPaymentUUID, amount) {
 
