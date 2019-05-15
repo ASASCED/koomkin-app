@@ -1419,7 +1419,8 @@ db.executeUpdateMembership = function (RecurringPaymentID, RecurringPaymentUUID,
 
 db.executeCancelUpdateMembership = function (RecurringPaymentID) {
 
-    const requestStr = `update RecurringPaymentUpsell set CancellationDate = GETDATE(),Enabled = 0 where RecurringPaymentID = ${RecurringPaymentID}`
+    const requestStr = `UPDATE RecurringPaymentUpsell SET CancellationDate = GETDATE(),Enabled = 0 WHERE RecurringPaymentID = ${RecurringPaymentID} and ID = (select top 1 ID from RecurringPaymentUpsell where RecurringPaymentID = ${RecurringPaymentID} order by ID desc);`
+
         return new Promise((resolve, reject) => {
             tp.sql(requestStr)
                 .execute()

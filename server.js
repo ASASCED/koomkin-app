@@ -1419,7 +1419,7 @@ app.get('/getUpdateMembership/:RecurringPaymentID/:RecurringPaymentUUID/:amount'
         });
 });
 
-app.get('/getUpdateMembership/:RecurringPaymentID/:RecurringPaymentUUID/:amount', function (req, res) {
+app.get('/getCancelUpdateMembership/:RecurringPaymentID', function (req, res) {
 
     const RecurringPaymentID = parseInt(req.params.RecurringPaymentID, 10);
 
