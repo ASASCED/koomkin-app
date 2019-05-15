@@ -1433,7 +1433,6 @@ db.executeCancelUpdateMembership = function (RecurringPaymentID) {
     });
 };
 
-
 db.executeGetEstados = function () {
 
     const requestStr = `select IDESTADO,NOMBRE From CATESTADO where IDPAIS = 156`;

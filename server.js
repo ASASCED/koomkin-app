@@ -1387,6 +1387,23 @@ app.get('/clickCambioInformacion/:usuario/:tipo/:acceso', function(req, res) {
         });
 });
 
+// Llena tabla UpgradeMembresia con los upgrades que se han hecho
+
+app.get('/getInsertUpgradeMembresia/:usuario/:id/:acceso', function (req, res) {
+    const usuario = req.params.usuario;
+    const id = req.params.id;
+    const acceso = req.params.acceso;
+
+    const command = 'SP_InsertUpgradeMembresia';
+    db.executeInsertarRegistro(command, usuario, id, acceso)
+        .then(rows => {
+            res.json(rows).status(200).send();
+        })
+        .catch(err => {
+            res.status(500).json({ error: err }).send();
+        });
+});
+
 app.get('/getUpdateMembership/:RecurringPaymentID/:RecurringPaymentUUID/:amount', function (req, res) {
 
     const RecurringPaymentID = parseInt(req.params.cuartaPantalla, 10);

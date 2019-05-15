@@ -703,5 +703,15 @@ export class RestProvider {
       });
     });
   }
+
+  getInsertUpgradeMembresia(usuario, RecurringPaymentID, acceso) {
+    return new Promise(resolve => {
+      this.http.get(this.apiUrl + '/getInsertUpgradeMembresia/' + usuario + '/' +  RecurringPaymentID + '/' + acceso).subscribe(data => {
+        resolve(data);
+      }, err => {
+         console.log(err);
+      });
+    });
+  } 
   
 }
