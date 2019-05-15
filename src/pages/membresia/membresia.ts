@@ -53,8 +53,10 @@ export class MembresiaPage {
     this.empresa = this.authService.empresa;
     this.id = this.authService.id;
     this.recurrente = this.authService.recurrente;
-    this.idRecurrente = this.authService.idRecurrente;
-    this.uuidRecurrente = this.authService.uuidRecurrente;
+   // this.idRecurrente = this.authService.idRecurrente;
+   // this.uuidRecurrente = this.authService.uuidRecurrente;
+    this.idRecurrente = 1026;
+    this.uuidRecurrente = 'a565d7c9-f5b1-40ed-9a63-eea3418f9a2e';
     this.getInicioCampana();
     this.getDiasRestantes();
     this.infoCard();
@@ -251,12 +253,13 @@ export class MembresiaPage {
       reverseButtons: true
     }).then(result => {
       if (result.value) {
-        this.upgradeMembership();
+        this.getUpgradeMembership();
+        this.getInsertUpgradeMembresia();
       }
     });
   }  
 
-  public upgradeMembership() {
+  public getUpgradeMembership() {
     console.log(this.idRecurrente, this.uuidRecurrente, this.selectedAmount );
     this.provedor.getUpdateMembership(this.idRecurrente, this.uuidRecurrente, this.selectedAmount) 
       .then(
@@ -269,9 +272,23 @@ export class MembresiaPage {
       );
   }
 
-  public cancelUpgradeMembership() {
+  public getCancelUpgradeMembership() {
     console.log(this.idRecurrente);
     this.provedor.getCancelUpdateMembership(this.idRecurrente) 
+      .then(
+        (data) => {
+          console.log();
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+  }
+
+  public getInsertUpgradeMembresia() {
+    let acceso = 'pagina';
+
+    this.provedor.getInsertUpgradeMembresia(this.id, this.idRecurrente, acceso)
       .then(
         (data) => {
           console.log();

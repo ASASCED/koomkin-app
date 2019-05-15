@@ -1406,9 +1406,9 @@ app.get('/getInsertUpgradeMembresia/:usuario/:id/:acceso', function (req, res) {
 
 app.get('/getUpdateMembership/:RecurringPaymentID/:RecurringPaymentUUID/:amount', function (req, res) {
 
-    const RecurringPaymentID = parseInt(req.params.cuartaPantalla, 10);
-    const RecurringPaymentUUID = req.params.cuartaPantalla; 
-    const amount = req.params.cuartaPantalla;
+    const RecurringPaymentID = parseInt(req.params.RecurringPaymentID, 10);
+    const RecurringPaymentUUID = req.params.RecurringPaymentUUID; 
+    const amount = req.params.amount;
 
     db.executeUpdateMembership(RecurringPaymentID, RecurringPaymentUUID, amount)
          .then(rows => {
@@ -1421,7 +1421,7 @@ app.get('/getUpdateMembership/:RecurringPaymentID/:RecurringPaymentUUID/:amount'
 
 app.get('/getUpdateMembership/:RecurringPaymentID/:RecurringPaymentUUID/:amount', function (req, res) {
 
-    const RecurringPaymentID= parseInt(req.params.cuartaPantalla, 10);
+    const RecurringPaymentID = parseInt(req.params.RecurringPaymentID, 10);
 
     db.executeCancelUpdateMembership(RecurringPaymentID)
          .then(rows => {
