@@ -1,9 +1,11 @@
 banner {
+    
     .flex-col {
         display: flex;
         justify-content: center;
         align-items: center;
     }
+
     span {
         display: inline-block;
         vertical-align: middle;
@@ -13,6 +15,7 @@ banner {
         margin-top: 1% !important;
         text-align: left;
     }
+
     .row {
         margin-bottom: 1%;
         height: 100%;
@@ -21,11 +24,13 @@ banner {
         justify-content: center;
         text-align: left;
     }
+
     img {
         vertical-align: middle;
         max-height: 45px;
         max-width: 160px;
     }
+
     .anuncio {
         height: 70px;
         background: #288AC1;
@@ -33,6 +38,7 @@ banner {
         margin-bottom: 15%;
         align-items: center;
     }
+
     .anuncio-mensaje {
         position: absolute;
         height: 90px;
@@ -48,6 +54,23 @@ banner {
         box-shadow: 0 0 40px #FE703F;
         border: 2px solid #FE703F !important;
     }
+
+    .anuncio-upgrade {
+        position: absolute;
+        height: 90px;
+        background: url("../assets/imgs/banner/img_upgradeclick.svg");
+        vertical-align: middle;
+        margin-bottom: 0%;
+        align-items: center;
+        width: 85%;
+        margin-left: 10%;
+        top: 4.5%;
+        border-radius: 10px;
+       // box-shadow: 10px 10px 5px -6px rgba(0, 0, 0, 0.33);
+        box-shadow: 0 0 40px #FE703F;
+        border: 2px solid #FE703F !important;
+    }
+
     .anuncio-img {
         width: 20%;
         position: absolute;
@@ -55,6 +78,7 @@ banner {
         left: -10%;
         max-height: 60px;
     }
+
     .anuncio-grid {
         height: 100%;
         padding: 0px !important;
@@ -62,12 +86,36 @@ banner {
         width: 90%;
         border-radius: 10px;
     }
+
     .anuncio-titulo {
         color: #FE703F;
         font-size: 4.3vw;
     }
+
+    .anuncio-titulo-upgrade {
+        color: white;
+        font-size: 4.5vw;
+    }
+
     .anuncio-contenido {
         color: #707070;
         font-size: 3.75vw;
+    }
+
+    .anuncio-contenido-upgrade  {
+        color: white;
+        font-size: 4vw;
+        font-weight: 500;
+    }
+
+    .aceptar-upgrade {
+        color: white;
+        background: #FE703F;
+        font-size: 4vw;
+        padding: 4px 6px;
+        margin-left: 5%;
+        margin-top: 2%;
+        font-weight: 400;
+        border-radius: 5px;
     }
 }

@@ -39,8 +39,9 @@
         <div class="cuadro">
             <button class="cancelar-suscripcion" (click)='btnUpgradeMembership()'>Invertir</button>
         </div>
-        <div class="cuadro">
-            <button class="cancelar-suscripcion" (click)='getCancelUpgradeMembership()'>Cancelar Upgrade</button>
+        <br>
+        <div class="cuadro" *ngIf="tieneUpgrade == true">
+            <button class="cancelar-suscripcion" (click)='btnCancelMembership()'>Cancelar Upgrade</button>
         </div>
         <div class="nota">
             * Adicionales en el mes

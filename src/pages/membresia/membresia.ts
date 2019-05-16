@@ -43,6 +43,9 @@ export class MembresiaPage {
   public segundaOferta;
   public tercerOferta;
 
+  public tieneUpgrade;
+  public montoUpgrade;
+
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams, 
@@ -53,10 +56,10 @@ export class MembresiaPage {
     this.empresa = this.authService.empresa;
     this.id = this.authService.id;
     this.recurrente = this.authService.recurrente;
-   // this.idRecurrente = this.authService.idRecurrente;
-   // this.uuidRecurrente = this.authService.uuidRecurrente;
-    this.idRecurrente = 1026;
-    this.uuidRecurrente = 'a565d7c9-f5b1-40ed-9a63-eea3418f9a2e';
+    this.idRecurrente = this.authService.idRecurrente;
+    this.uuidRecurrente = this.authService.uuidRecurrente;
+   // this.idRecurrente = 1026;
+   // this.uuidRecurrente = 'a565d7c9-f5b1-40ed-9a63-eea3418f9a2e';
     this.getLastUpdateMembership();
     this.getInicioCampana();
     this.getDiasRestantes();
@@ -260,25 +263,6 @@ export class MembresiaPage {
     });
   }  
 
-  public btnCancelMembership() {
-    let newSelectedAmount = parseInt(this.selectedAmount);
-    this.nuevoMonto = this.monto + newSelectedAmount;
-    swal({
-      title: 'Confirma el incremento de $' + newSelectedAmount + 'MXN',
-      text: 'Además tomaremos este monto para tu nueva Membresía',
-      showCancelButton: true,
-      confirmButtonColor: '#288AC1',
-      cancelButtonColor: '#2AB4BC',
-      confirmButtonText: 'Confirmar',
-      cancelButtonText: 'Cancelar',
-      reverseButtons: true
-    }).then(result => {
-      if (result.value) {
-        this.getCancelUpgradeMembership();
-      }
-    });
-  }  
-
   public getUpgradeMembership() {
     console.log(this.idRecurrente, this.uuidRecurrente, this.selectedAmount );
     this.provedor.getUpdateMembership(this.idRecurrente, this.uuidRecurrente, this.selectedAmount) 
@@ -291,6 +275,22 @@ export class MembresiaPage {
         }
       );
   }
+  
+  public btnCancelMembership() {
+    swal({
+      title: '¿Estás seguro que deseas cancelar tu última inversión de $' + this.montoUpgrade + 'MXN ?',
+      showCancelButton: true,
+      confirmButtonColor: '#288AC1',
+      cancelButtonColor: '#2AB4BC',
+      confirmButtonText: 'Confirmar',
+      cancelButtonText: 'Cancelar',
+      reverseButtons: true
+    }).then(result => {
+      if (result.value) {
+        this.getCancelUpgradeMembership();
+      }
+    });
+  }  
 
   public getCancelUpgradeMembership() {
     console.log(this.idRecurrente);
@@ -310,6 +310,10 @@ export class MembresiaPage {
       .then(
         (data) => {
           console.log(data);
+          if(data[0]) {
+            this.tieneUpgrade = data[0].Enabled;
+            this.montoUpgrade = data[0].Amount;
+          }
         },
         (error) => {
           console.log(error);

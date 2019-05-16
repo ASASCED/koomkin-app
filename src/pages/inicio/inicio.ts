@@ -65,6 +65,7 @@ export class InicioPage implements OnInit {
   public description;
   public habilitado;
   public activo;
+  public recurrente;
 
   constructor(
     public navCtrl: NavController,
@@ -74,6 +75,8 @@ export class InicioPage implements OnInit {
     public http: HttpClient,
     public toastCtrl: ToastController
   ) {
+    this.recurrente = this.authService.recurrente;
+    console.log(this.recurrente);
     this.id = this.authService.id;
     this.activo = this.authService.activo;
     this.pages = [
@@ -132,6 +135,7 @@ export class InicioPage implements OnInit {
                 this.habilitado = 0;
               }
               this.notification = JSON.parse(datos[0].dataPage);
+              console.log(datos);
             } else if(datos.length == 0) {
               this.tipoBanner = 0;
               this.habilitado = 0;
