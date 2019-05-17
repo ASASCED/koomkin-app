@@ -55,7 +55,6 @@ export class EmailPage implements OnInit {
 
   ngOnInit() {
     this.vista = "informacion";
-    this.getMailCliente(this.id);
   }
 
   changePage(pagina) {
@@ -67,7 +66,7 @@ export class EmailPage implements OnInit {
       data => {
         this.datos = data;
         // console.log(this.datos);
-        if (this.datos) {
+        if (this.datos[0]) {
           this.facebook = this.datos[0].facebook;
           this.instagram = this.datos[0].instagram;
           this.linkedIn = this.datos[0].linkedin;

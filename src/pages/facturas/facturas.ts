@@ -71,7 +71,7 @@ export class FacturasPage implements OnInit {
   }
 
   navegarPagina() {
-    this.navCtrl.push(FacturaPage);
+    this.navCtrl.push('FacturaPage');
   }
 
   ionViewDidLoad() {
@@ -79,7 +79,7 @@ export class FacturasPage implements OnInit {
   }
 
   mostrar_modal() {
-    let modal = this.modalCtrl.create(FacturaPage);
+    let modal = this.modalCtrl.create('FacturaPage');
     modal.present();
   }
 

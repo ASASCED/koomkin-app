@@ -3,7 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { RestProvider } from './../../providers/rest/rest';
 import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
 
-@IonicPage({ name: 'reporte', segment: 'reporte-1/:param' })
+@IonicPage()
 @Component({
   selector: 'page-reporte',
   templateUrl: 'reporte.html',
@@ -311,11 +311,14 @@ export class ReportePage implements OnInit {
             let dt2 = new Date(this.meses[0].fechaReporte);
             let diastranscurridos = dt2.getDate()
             let estimado;
-            if (this.fechaInicio <= 30 && this.fechaInicio != null  && this.fechaInicio > 0) {
-              estimado = Math.ceil((outter[outter.length - 1][1] / (this.fechaInicio + 1 )) * 30);
+            if (this.fechaInicio >= diastranscurridos) {
+              this.duracion = 0;
+            }
+            if (this.fechaInicio <= 30 && this.fechaInicio != null  && this.fechaInicio > 0 && this.duracion > 0) {
+              estimado = Math.ceil((outter[outter.length - 1][1] / this.fechaInicio) * (30 - this.fechaInicio));
             } else {
               estimado = Math.ceil((outter[outter.length - 1][1] / (diastranscurridos + 1 )) * 30);
-            }     
+            }
             let inner = [];
             inner.push("ESTIM");
             inner.push(estimado);
@@ -893,12 +896,15 @@ export class ReportePage implements OnInit {
     this.provedor.getInicioCampana().then(
       data => {
         if (data['length'] > 0) {
-        this.fechaInicio = data[0].inicioCampana;
-        if (Math.sign(this.fechaInicio) == -1) {
-          this.fechaInicio = 0;
-        }
-        this.duracion = data[0].duracion;
-        // console.log(this.fechaInicio, 'if');
+          this.fechaInicio = data[0].inicioCampana;
+          this.duracion = data[0].duracion;
+            if (Math.sign(this.fechaInicio) == -1) {
+              this.fechaInicio = 0;
+            }
+  
+            if (this.duracion == null) {
+              this.duracion = this.fechaInicio;
+            }
         }
       },
       err => {

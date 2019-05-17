@@ -32,15 +32,7 @@
                 </ion-col>
             </ion-row>
         </ion-grid>
-
-
     </ion-toolbar>
-    <!--
-      <ion-toolbar class="reset-this" style="background: red !important;" id="chatheader" *ngIf="page=='Chat'">
-      </ion-toolbar>
-      <ion-navbar>
-        <ion-title>Header</ion-title>
-      </ion-navbar> <div><ion-spinner  style="" name="dots" *ngIf="true"></ion-spinner></div>  -->
 </ion-header>
 
 <ion-content padding class="falling">
@@ -280,26 +272,12 @@
     </div>
 
 </ion-content>
-<ion-footer *ngIf="(tel.substr(0, 3) == 'tel') && (page!='Chat')">
-    <a href="tel:{{leadActual.TELEFONO}}">
-        <button class="llamar" (click)="getInsertClickLlamar();">
-        <ion-icon class="telefono" name="md-call"></ion-icon>
-        <a class="phone" id="tel">Télefono: {{leadActual.TELEFONO}}</a>
-      </button>
-    </a>
-</ion-footer>
-<ion-footer *ngIf="(tel.substr(0, 1) == '0') && (page!='Chat')">
-    <button class="llamar" (click)="showConfirm();getInsertClickLlamar();">
-      <ion-icon class="telefono" name="md-call"></ion-icon>
-      <a class="phone" id="tel">Llamar a {{leadActual.NOMBRE | capitalize}}</a>
-    </button>
-</ion-footer>
-<ion-footer *ngIf="(tel.substr(0, 1) != '0' && tel.substr(0, 3) != 'tel') && (page!='Chat')">
-    <button class="llamar" (click)="showConfirm();getInsertClickLlamar();">
-      <ion-icon class="telefono" name="md-call"></ion-icon>
-      <a class="phone" id="tel">Llamar a {{leadActual.NOMBRE | capitalize}}</a>
-    </button>
-</ion-footer>
+<ion-footer *ngIf="page!='Chat'">
+        <button class="llamar" (click)="showConfirm();getInsertClickLlamar();">
+          <ion-icon class="telefono" name="md-call"></ion-icon>
+          <a class="phone" id="tel">Llamar a {{leadActual.NOMBRE | capitalize}}</a>
+        </button>
+    </ion-footer>
 
 <ion-footer class="chat-footer" *ngIf="page=='Chat'" no-border [style.height]="'55px'">
 

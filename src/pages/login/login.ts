@@ -10,9 +10,6 @@ import { Platform } from 'ionic-angular';
 import { HttpClient } from '@angular/common/http';
 
 import { ChatServiceProvider } from "../../providers/chat-service/chat-service";
-import { InicioPage } from '../inicio/inicio';
-
-import { HTTP } from '@ionic-native/http';
 
 // declare var Appsee: any;
 @IonicPage()
@@ -166,7 +163,7 @@ export class LoginPage implements OnInit {
           if(data[0]['uuid']){
             this.iniciarClienteChatTwilio(data[0]['uuid']);
           }
-          this.navCtrl.setRoot(InicioPage);
+          this.navCtrl.setRoot('InicioPage');
           // this.navCtrl.setRoot(LeadsPage);
         } else {
           if (this.plt.is('ios') || this.plt.is('android')) {
@@ -225,7 +222,7 @@ export class LoginPage implements OnInit {
                     this.authService.setNotificationActive(false);
 
                   }else{
-                    this.navCtrl.setRoot(InicioPage).then(()=>{
+                    this.navCtrl.setRoot('InicioPage').then(()=>{
                       //if(data[0]['uuid']){
                         //this.iniciarClienteChatTwilio(data[0]['uuid']);
                       //}

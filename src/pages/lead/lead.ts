@@ -6,13 +6,13 @@ import { AlertController, ModalController , LoadingController} from 'ionic-angul
 import { AuthServiceProvider } from "../../providers/auth-service/auth-service";
 import { StreamingMedia, StreamingAudioOptions } from '@ionic-native/streaming-media';
 import { Storage } from '@ionic/storage';
-import { ElementRef, ViewChild, ViewChildren } from '@angular/core';
+import { ElementRef, ViewChild } from '@angular/core';
 import { Content } from 'ionic-angular';
 import { ChatServiceProvider, ChatMessage} from "../../providers/chat-service/chat-service";
 import { HttpHeaders } from '@angular/common/http';
-import {FileOpener } from '@ionic-native/file-opener';
+import { FileOpener } from '@ionic-native/file-opener';
 import { File } from '@ionic-native/file';
-import { Transfer, FileUploadOptions, TransferObject } from '@ionic-native/transfer';
+import { Transfer, TransferObject } from '@ionic-native/transfer';
 
 
 import {DomSanitizer} from '@angular/platform-browser';
@@ -25,7 +25,6 @@ declare var cordova:any;
   templateUrl: 'lead.html',
 })
 
-
 export class LeadPage implements OnInit {
 
   leadActual;
@@ -34,12 +33,6 @@ export class LeadPage implements OnInit {
   apiUrl3 = 'https://www.koomkin.com.mx/call-tracking/api/v1/forward-app/?idLead=';
   CALLING = 'https://www.koomkin.com.mx/call-tracking/api/v1/forward-app-lead/?idLead=';
   AUDIO = 'https://www.koomkin.com.mx/call-tracking/api/v1/data-app/0/?idLead=';
-
-    /* url de amazon
-    apiUrl = 'https://www.koomkin.com.mx/api/app';
-    apiUrl3 = 'https://www.koomkin.com.mx/call-tracking/api/v1/forward-app/?idLead=';
-    CALLING = 'https://www.koomkin.com.mx/call-tracking/api/v1/forward-app-lead/?idLead=';
-    AUDIO = 'https://www.koomkin.com.mx/call-tracking/api/v1/data-app/0/?idLead='; */
 
   public califica;
   public calificacion;

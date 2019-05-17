@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController, AlertController} from 'ionic-angular';
-import { Clipboard } from '@ionic-native/clipboard';
 import { RestProvider } from './../../providers/rest/rest';
 import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
@@ -61,7 +60,7 @@ export class SocialPage implements OnInit{
       data => {
         this.datos = data;
         // console.log(this.datos);
-        if (this.datos) {
+        if (this.datos[0]) {
           this.facebook = this.datos[0].facebook;
           this.instagram = this.datos[0].instagram;
           this.linkedIn = this.datos[0].linkedin;

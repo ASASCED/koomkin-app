@@ -233,7 +233,7 @@ export class LeadsPage implements OnInit {
   verLead(lead) {
     let acceso = "App";
     // // console.log(lead.clave,lead.ID,acceso);
-    this.navCtrl.push(LeadPage, lead);
+    this.navCtrl.push('LeadPage', lead);
     this.getInsertClickLead(lead.clave, lead.ID, acceso);
   }
 
@@ -255,7 +255,7 @@ export class LeadsPage implements OnInit {
   }
 
   mostrar_modal() {
-    let modal = this.modalCtrl.create(LeadPage);
+    let modal = this.modalCtrl.create('LeadPage');
     modal.present();
   }
 
@@ -742,7 +742,7 @@ export class LeadsPage implements OnInit {
         data => {
           if (data == null) {
             this.mostrar = 0;
-          } else if (data) {
+          } else if (data[0]) {
             datos = data;
             
             this.title = datos[0].titulo;

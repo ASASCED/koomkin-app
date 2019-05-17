@@ -117,7 +117,6 @@ export class BriefPage implements OnInit, AfterContentChecked{
           this.mejor = this.datos[0].Mejor;
           this.producto = this.datos[0].Producto;
           this.productoInicial = this.datos[0].Producto;
-
           this.direccion = this.datos[0].Direccion;
           this.latitud = this.datos[0].Latitud;
           this.longitud = this.datos[0].Longitud;
@@ -129,7 +128,6 @@ export class BriefPage implements OnInit, AfterContentChecked{
              this.cobertura_empresa = 'Nacional';
           } 
           this.tipoempresa = this.datos[0].TipoEmpresa;
-
           if(this.tipoempresa == 1) {
             this.tipoempresa = 'Fabricante';
           } else if(this.tipoempresa == 2) {
@@ -141,13 +139,11 @@ export class BriefPage implements OnInit, AfterContentChecked{
           } else if(this.tipoempresa == 6) {
             this.tipoempresa = 'Profesionista';
           }
-
           this.correo1 = this.datos[0].Correo1;
           this.correo2 = this.datos[0].Correo2;
           this.correo3 = this.datos[0].Correo3;
           this.IdSubSector = this.datos[0].IdSubSector;
           this.IDMembresia = this.datos[0].IDMembresia;
-
           this.nombre = this.datos[0].NOMBRE;
           this.apaterno = this.datos[0].APEPATERNO;
           this.amaterno = this.datos[0].APEMATERNO;
@@ -171,7 +167,6 @@ export class BriefPage implements OnInit, AfterContentChecked{
           this.sector = this.datos[0].ClientesTargetSector;
           this.categoria = this.datos[0].ClientesTargetCategoria;
           this.sectores = this.datos[0].ClientesTargetSectores;
-          // console.log(this.datos);
           this.getCobertura(idUsuario,this.datos[0].IDCampania);
         },
         err => {
@@ -431,7 +426,7 @@ export class BriefPage implements OnInit, AfterContentChecked{
 
     pagina() {
       this.mas_informacion = false;
-      this.navCtrl.push(MasBriefPage, 
+      this.navCtrl.push('MasBriefPage', 
         { 
           target: this.target,
           fechaNacimiento : this.fechaNacimiento,

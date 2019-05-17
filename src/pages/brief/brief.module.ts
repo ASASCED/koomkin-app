@@ -7,7 +7,7 @@ import { BriefPage } from './brief';
     BriefPage,
   ],
   imports: [
-    IonicPageModule.forChild(BriefPage),
+    IonicPageModule.forChild(BriefPage)
   ],
 })
 export class BriefPageModule {}

@@ -8,12 +8,13 @@
 
 
 <ion-content>
-    <banner *ngIf="tipoBanner >= 1 && tipoBanner <= 9 || tipoBanner >= 10 && tipoBanner <= 12 && habilitado == 1" [title]='title' [subtitle]='subtitle' [img]='img' [fondo]='fondo' [notification]='notification' [idReportBanner]='idReportBanner' [uuidPass]='uuidPass'
-        [tipoBanner]='tipoBanner' [description]='description' (click)="clickBanner();"></banner>
-
+        
+        <banner *ngIf="tipoBanner >= 1 && tipoBanner <= 9 || tipoBanner >= 10 && tipoBanner <= 12 && habilitado == 1" [title]='title' [subtitle]='subtitle' [img]='img' [fondo]='fondo' [notification]='notification' [idReportBanner]='idReportBanner' [uuidPass]='uuidPass'
+        [tipoBanner]='tipoBanner' [description]='description' (click)="clickBanner();"></banner> 
+        
         <ion-grid padding *ngIf="tipoBanner == 0 || tipoBanner == 1 && recurrente == true || tipoBanner >= 3 && tipoBanner <= 9  || tipoBanner == 10  && habilitado == 1 ||  tipoBanner == 12 && habilitado == 1 || tipoBanner >= 10 && tipoBanner <= 12 && habilitado == 0">
             <ion-row class="grande" (click)="pagina(leads)">
-                <ion-col col-3>
+                    <ion-col col-3>
                     <img src="assets/imgs/inicio/leads.svg" width="100%" />
                 </ion-col>
                 <ion-col col-7>
@@ -25,7 +26,7 @@
             </ion-row>
     
             <ion-row class="grande dos" (click)="pagina(reporte)">
-                <ion-col col-3>
+                    <ion-col col-3>
                     <img src="assets/imgs/inicio/reporte.svg" width="100%" />
                 </ion-col>
                 <ion-col col-7>
@@ -37,7 +38,7 @@
             </ion-row>
     
             <ion-row class="grande" (click)="pagina(brief)">
-                <ion-col col-3>
+                    <ion-col col-3>
                     <img src="assets/imgs/inicio/brief.svg" width="100%" style="max-height: 65px !important;"/>
                 </ion-col>
                 <ion-col col-7>
@@ -49,7 +50,7 @@
             </ion-row>
     
             <ion-row class="grande tres" (click)="pagina(eficiencia)">
-                <ion-col col-3>
+                    <ion-col col-3>
                     <img src="assets/imgs/inicio/eficiencia.svg" width="100%" />
                 </ion-col>
                 <ion-col col-7>
@@ -61,7 +62,7 @@
             </ion-row>
     
             <ion-row class="grande" (click)="pagina(datos)">
-                <ion-col col-3>
+                    <ion-col col-3>
                     <img src="assets/imgs/inicio/ajustes.svg" width="100%" />
                 </ion-col>
                 <ion-col col-7>

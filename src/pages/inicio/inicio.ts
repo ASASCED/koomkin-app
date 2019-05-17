@@ -1,29 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  IonicPage,
-  MenuController,
-  NavController,
-  NavParams
-} from "ionic-angular";
-
-import { LoginPage } from '../../pages/login/login';
-import { LeadsPage } from '../../pages/leads/leads';
-import { LeadPage } from '../../pages/lead/lead';
-import { ReportePage } from '../../pages/reporte/reporte';
-import { UsuarioPage } from '../../pages/usuario/usuario';
-import { FacturasPage } from '../../pages/facturas/facturas';
-import { FacturaPage } from '../../pages/factura/factura';
-import { DatosPage } from '../../pages/datos/datos';
-import { CancelarPage } from '../../pages/cancelar/cancelar';
-import { PreguntaPage } from '../../pages/pregunta/pregunta';
+import { IonicPage, MenuController, NavController, NavParams } from "ionic-angular";
 import { HttpClient } from '@angular/common/http';
 import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
-import { EficienciaPage } from '../eficiencia/eficiencia';
-import { BriefPage } from '../brief/brief';
-import { MasBriefPage } from '../mas-brief/mas-brief';
-import { MembresiaPage } from '../membresia/membresia';
 import { ToastController } from 'ionic-angular';
-import { DatosFinancierosPage } from '../datos-financieros/datos-financieros';
 
 @IonicPage()
 @Component({
@@ -32,23 +11,15 @@ import { DatosFinancierosPage } from '../datos-financieros/datos-financieros';
 })
 export class InicioPage implements OnInit {
 
-  rootPage: any = LoginPage;
-  leads = LeadsPage;
-  reporte = ReportePage;
-  datos = DatosPage;
-  facturas = FacturasPage;
-  usuario = UsuarioPage;
-  factura = FacturaPage;
-  cancelar = CancelarPage;
-  pregunta = PreguntaPage;
-  login = LoginPage;
-  lead = LeadPage;
-  inicio = InicioPage;
-  eficiencia = EficienciaPage;
-  brief = BriefPage;
-  masbrief = MasBriefPage;
-  membresia = MembresiaPage;
-  financieros = DatosFinancierosPage;
+  rootPage: any = 'LoginPage';
+  leads = 'LeadsPage';
+  reporte = 'ReportePage';
+  datos = 'DatosPage';
+  login = 'LoginPage';
+  inicio = 'InicioPage';
+  eficiencia = 'EficienciaPage';
+  brief = 'BriefPage';
+  financieros = 'DatosFinancierosPage';
 
   pages: Array<{ title: string, component: any }>;
 
@@ -76,29 +47,11 @@ export class InicioPage implements OnInit {
     public toastCtrl: ToastController
   ) {
     this.recurrente = this.authService.recurrente;
-    console.log(this.recurrente);
     this.id = this.authService.id;
     this.activo = this.authService.activo;
-    this.pages = [
-      { title: "Reporte", component: ReportePage },
-      { title: "Leads", component: LeadsPage },
-      { title: "Datos", component: DatosPage },
-      { title: "Facturas", component: FacturasPage },
-      { title: "Usuario", component: UsuarioPage },
-      { title: "Factura", component: FacturaPage },
-      { title: "Cancelar", component: CancelarPage },
-      { title: "Pregunta", component: PreguntaPage },
-      { title: "Lead", component: LeadPage },
-      { title: "Login", component: LoginPage },
-      { title: "Inicio", component: InicioPage },
-      { title: "Eficiencia", component: EficienciaPage },
-      { title: "Brief", component: BriefPage },
-      { title: "Membresia", component: MembresiaPage }
-    ];
   }
 
   ngOnInit() {
-    // this.getLeadsArray();
     this.showBanner();
   }
 
@@ -121,7 +74,7 @@ export class InicioPage implements OnInit {
               this.habilitado = 0;
           } else if (data) {
             datos = data;
-            if(datos.length > 0) {
+            if(datos[0]) {
               this.title = datos[0].titulo;
               this.subtitle = datos[0].subtitulo;
               this.fondo = datos[0].fondo;
@@ -135,7 +88,6 @@ export class InicioPage implements OnInit {
                 this.habilitado = 0;
               }
               this.notification = JSON.parse(datos[0].dataPage);
-              console.log(datos);
             } else if(datos.length == 0) {
               this.tipoBanner = 0;
               this.habilitado = 0;

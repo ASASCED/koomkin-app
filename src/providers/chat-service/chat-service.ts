@@ -67,7 +67,6 @@ export class ChatServiceProvider {
   fetchAccessToken(username, handler) {
     console.log('fetchAccessToken');
     return new Promise((resolve, reject)=> {
-      // http://www.koomkin.com:4835/token
       this.http.post('https://www.koomkin.com.mx/chat/token' , {device: "mobile", identity: username})
         .subscribe(data => {
           var token = data['token'];

@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from "@angular/core";
-import { NavController, NavParams, Platform, App } from 'ionic-angular';
+import { NavController, NavParams, Platform } from 'ionic-angular';
 import { ModalNotificationPage } from '../../pages/modal-notification/modal-notification';
 import { HttpClient } from '@angular/common/http';
 import { Market } from '@ionic-native/market';
@@ -39,7 +39,6 @@ export class BannerComponent implements OnInit {
     public platform: Platform,
     public http: HttpClient,
     public provedor: RestProvider,
-    public app: App,
     private market: Market) {
       this.id = this.authService.id;
       this.recurrente = this.authService.recurrente;
@@ -88,7 +87,6 @@ export class BannerComponent implements OnInit {
   }  
   
   public getUpgradeMembership() {
-    console.log(this.idRecurrente, this.uuidRecurrente, this.selectedAmount );
     this.provedor.getUpdateMembership(this.idRecurrente, this.uuidRecurrente, this.selectedAmount) 
       .then(
         (data) => {
