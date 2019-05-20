@@ -83,7 +83,7 @@ export class ReportePage implements OnInit {
       vAxis: {
 
       },
-      colors: ['#10cebc']
+      colors: ['#00B9BE']
     }
   };
 
@@ -95,7 +95,7 @@ export class ReportePage implements OnInit {
       region: 'MX',
       resolution: 'provinces',
       legend: 'none',
-      colorAxis: { colors: ['#10cebc', '#165a88'] }
+      colorAxis: { colors: ['#00B9BE', '#243e56'] }
     }
   };
 
@@ -123,7 +123,7 @@ export class ReportePage implements OnInit {
         },
         format: 0
       },
-      colors: ['#10cebc']
+      colors: ['#00B9BE']
     }
   };
 
@@ -303,7 +303,7 @@ export class ReportePage implements OnInit {
             } else {
               inner.push(0);
             }
-            inner.push("#00A6d4");
+            inner.push("#288AC1");
             outter.push(inner);
           }
 
@@ -322,7 +322,7 @@ export class ReportePage implements OnInit {
             let inner = [];
             inner.push("ESTIM");
             inner.push(estimado);
-            inner.push("#10cebc");
+            inner.push("#00B9BE");
             outter.push(inner);
           }
 
@@ -340,7 +340,7 @@ export class ReportePage implements OnInit {
                 }
               },
               vAxis: {},
-              colors: ['#10cebc']
+              colors: ['#00B9BE']
             }
           };
         }
@@ -400,7 +400,7 @@ export class ReportePage implements OnInit {
               region: 'MX',
               resolution: 'provinces',
               legend: 'none',
-              colorAxis: { colors: ['#10cebc', '#165a88'] }
+              colorAxis: { colors: ['#00B9BE', '#243e56'] }
             }
           };
 
@@ -534,7 +534,7 @@ export class ReportePage implements OnInit {
                 },
                 format: 0
               },
-              colors: ['#10cebc']
+              colors: ['#00B9BE']
             }
           };
         },

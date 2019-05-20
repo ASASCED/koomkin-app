@@ -3,7 +3,6 @@ import { IonicPage, NavController, NavParams, AlertController, Slides, SegmentBu
 import { RestProvider } from '../../providers/rest/rest';
 import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
 import swal from 'sweetalert2';
-import { InicioPage } from '../inicio/inicio';
 
 @IonicPage()
 @Component({
@@ -46,7 +45,6 @@ export class MasBriefPage implements OnInit{
     public idCampania;
     public datos;
     mas_informacion: boolean = false;
-  
     // Varios ingresos
     public ingresosArray = [];
     public ultIngresosArray;
@@ -54,8 +52,6 @@ export class MasBriefPage implements OnInit{
     public ingresosMedio;
     public ingresosMedioAlto;
     public ingresosAlto;
-
-
     public edadArray = [];
     public ultEdadArray;
     public edad18;
@@ -164,7 +160,6 @@ export class MasBriefPage implements OnInit{
           this.intereses = '';
         }
 
-
         if (this.ingresosAnuales != null && this.ingresosAnuales != undefined && this.ingresosAnuales != 'null' && this.ingresosAnuales != 'null' && this.ingresosAnuales != ''  ) {
 
           if ( this.ingresosAnuales.includes('Bajo') ) {
@@ -187,9 +182,6 @@ export class MasBriefPage implements OnInit{
           this.ingresosArray.push('Alto');
           }
         } 
-        
-        console.log('entro');
-
 
         if (this.edad !== null && this.edad !== undefined && this.edad !== 'null' && this.edad !== ''  ) {
           console.log('entro edad' );
@@ -534,6 +526,6 @@ export class MasBriefPage implements OnInit{
       }
 
       public irInicio() {
-        this.app.getRootNav().setRoot(InicioPage); 
+        this.app.getRootNav().setRoot('InicioPage'); 
       }
 }

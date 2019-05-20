@@ -14,9 +14,6 @@ import { FileOpener } from '@ionic-native/file-opener';
 import { File } from '@ionic-native/file';
 import { Transfer, TransferObject } from '@ionic-native/transfer';
 
-
-import {DomSanitizer} from '@angular/platform-browser';
-
 declare var cordova:any;
 
 @IonicPage()
@@ -137,16 +134,11 @@ export class LeadPage implements OnInit {
   public exitosa_c = '0';
   public buzon = '0';
   public invalido = '0';
-
   public tel: any = ' ';
-
   public page: string = "Lead";
   public pages: Array<string> = ['Lead', 'Llamadas', 'Chat'];
-
   isAndroid: boolean = false;
-
   public tc: any;
-
   public loadingMessages: boolean;
 
   private autoScroller: MutationObserver;
@@ -404,7 +396,6 @@ export class LeadPage implements OnInit {
     public file:File,
     private fileOpener: FileOpener,
     private transfer: Transfer,
-    private sanitizer:DomSanitizer,
     public ngz:NgZone,
     public loadingCtrl: LoadingController
   ) {
@@ -1179,7 +1170,7 @@ export class LeadPage implements OnInit {
 
     loading.present().then(()=>{
 
-      var filename= 'koomkinfile';
+      // var filename= 'koomkinfile';
       // this.fileTransfers.download( resultUrl["changingThisBreaksApplicationSecurity"], this.file.dataDirectory + filename,true ).then((entry) => {
       this.fileOpener.open( url['__zone_symbol__value'], contentType
       ).then(() => {

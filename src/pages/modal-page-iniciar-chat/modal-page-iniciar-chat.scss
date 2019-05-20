@@ -10,10 +10,17 @@ ion-modal {
         font-size: 15pt;
     }
     .btn-modal {
-        background-color: #00b9bf;
+        background-color: #00B9BE;
         color: white;
         font-size: 10pt;
     }
+
+    .cancelmodalchat {
+        background-color: white !important;
+        color: #00B9BE !important;
+        border: 1px solid #00B9BE;
+    }
+    
     .message-modal {
         color: #7c7c7c;
         text-align: center;

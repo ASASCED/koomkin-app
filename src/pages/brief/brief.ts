@@ -2,7 +2,6 @@ import { Component, OnInit,ViewChild, AfterContentChecked } from '@angular/core'
 import { IonicPage, NavController, NavParams, AlertController, Slides } from 'ionic-angular';
 import { RestProvider } from '../../providers/rest/rest';
 import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
-import { MasBriefPage } from '../mas-brief/mas-brief';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import swal from 'sweetalert2';
 

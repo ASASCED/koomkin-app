@@ -2,22 +2,22 @@ page-lead {
 
     .segment-ios .segment-button.segment-activated {
         color: white;
-        background-color: #00b9bf;
+        background-color: #00B9BE;
         opacity: 1;
         -webkit-transition: 100ms all linear;
         transition: 100ms all linear;
-        border-color: #00b9bf;
+        border-color: #00B9BE;
         font-size: 5vw;
         text-transform: none;
     }
     
     .segment-ios .segment-button {
-        color: #00b9bf;
+        color: #00B9BE;
         background-color: transparent;
         opacity: 1;
         -webkit-transition: 100ms all linear;
         transition: 100ms all linear;
-        border-color: #00b9bf;
+        border-color: #00B9BE;
         background: white;
         font-size: 5vw;
         text-transform: none;
@@ -30,7 +30,7 @@ page-lead {
         opacity: .5 !important;
         -webkit-transition: 100ms all linear !important;
         transition: 100ms all linear !important;
-        border-color: #00b9bf !important;
+        border-color: #00B9BE !important;
         background: transparent !important;
         font-size: 5vw !important;
         text-transform: none !important;
@@ -41,7 +41,7 @@ page-lead {
         opacity: 1 !important;
         -webkit-transition: 100ms all linear !important;
         transition: 100ms all linear !important;
-        border-color: #00b9bf !important;
+        border-color: #00B9BE !important;
         font-size: 5vw !important;
         text-transform: none !important;
         background: transparent !important;
@@ -132,7 +132,7 @@ ion-app.md [padding] .scroll-content {
 }
 
 .toggle-ios.toggle-checked .toggle-icon {
-    background-color: #10cebc;
+    background-color: #00B9BE;
 }
 
 .row {
@@ -148,7 +148,7 @@ ion-app.md [padding] .scroll-content {
 }
 
 .toolbar-background-ios {
-    //background: linear-gradient(to right, #3CCDBB, #33a4bc);
+    //background: linear-gradient(to right, #, #33a4bc);
     background: white;
 }
 
@@ -225,7 +225,7 @@ hr {
 //Calidad del Lead
 .rate-calidad {
     font-size: 4.8vw !important;
-    color: #00b9bf;
+    color: #00B9BE;
     margin-top: .2em;
 }
 
@@ -244,14 +244,14 @@ hr {
 
 //Correo del Lead
 .inf-correo {
-    color: lightskyblue;
+    color: #288AC1;
     font-style: italic;
     font-size: 4.5vw !important;
 }
 
 //
 .cotiza {
-    color: #00b9bf;
+    color: #00B9BE;
     font-weight: bold;
     font-size: 5vw;
     margin-top: 0%;
@@ -304,7 +304,7 @@ hr {
 //Mensaje de Descarga
 .descarga {
     font-size: 5vw;
-    color: coral;
+    color: #FE703F;
     text-decoration: underline;
     margin-left: .7em;
     position: absolute;
@@ -315,7 +315,7 @@ hr {
 .califica {
     text-align: center;
     font-size: 4.8vw;
-    color: #00a3bf;
+    color: #00B9BE;
     font-weight: bold;
     margin-top: .5em;
     margin-bottom: 0;
@@ -356,7 +356,7 @@ hr {
     font-size: 5vw;
     margin-bottom: 2%;
     color: white;
-    background-color: #00b9bf !important
+    background-color: #00B9BE !important
 }
 
 .proceso {
@@ -376,7 +376,7 @@ hr {
     font-size: 5vw;
     margin-bottom: 2%;
     color: white;
-    background-color: #F2631C !important
+    background-color: #FE703F !important
 }
 
 .sincontacto {
@@ -386,12 +386,12 @@ hr {
     font-size: 5vw;
     margin-bottom: 2%;
     color: white;
-    background-color: #419BD6 !important
+    background-color: #288AC1 !important
 }
 
 //
 .like {
-    color: #00b9bf;
+    color: #00B9BE;
 }
 
 //
@@ -412,14 +412,14 @@ hr {
     padding: 2%;
     color: white;
     font-weight: bold;
-    background: coral;
+    background: #FE703F;
     position: fixed;
     bottom: 0;
 }
 
 //
 .url {
-    background: #00b9bf;
+    background: #00B9BE;
     width: 80%;
     font-size: 2.5vh;
     color: white;
@@ -445,14 +445,14 @@ hr {
 
 //vista 3
 .paciente {
-    color: #00b9bf;
+    color: #00B9BE;
     font-size: 5vw;
     margin-bottom: 0;
 }
 
 //
 .edadpaciente {
-    color: #00b9bf;
+    color: #00B9BE;
     font-weight: bold;
     font-size: 1em;
     margin-top: 1em;
@@ -461,7 +461,7 @@ hr {
 
 //
 .paciented {
-    color: #00b9bf;
+    color: #00B9BE;
     font-size: 5vw;
     font-weight: bold;
     margin-left: 0.3em;
@@ -485,7 +485,7 @@ hr {
 
 //
 .tipo {
-    color: #00b9bf;
+    color: #00B9BE;
     font-weight: bold;
     font-size: 5.2vw;
     margin-bottom: 0.1em;
@@ -530,7 +530,7 @@ $toUserBackgroundColor: red;
     textarea {
         flex: 1;
         border: 0;
-        border-bottom: 1px coral;
+        border-bottom: 1px #FE703F;
         border-style: solid;
         resize: none;
     }
@@ -753,7 +753,7 @@ ion-icon {
 .line-text-area {
     flex: 1;
     border: 0;
-    border-bottom: 1px coral;
+    border-bottom: 1px #FE703F;
     border-style: solid;
     resize: none;
 }

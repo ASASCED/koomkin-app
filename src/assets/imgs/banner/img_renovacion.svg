@@ -33,7 +33,7 @@
 <g id="Group_10174" transform="translate(-16415 -10832)">
 	
 		<linearGradient id="Rectangle_5993_1_" gradientUnits="userSpaceOnUse" x1="16804.7168" y1="11407.5371" x2="16803.7168" y2="11407.5459" gradientTransform="matrix(1373.493 0 0 -312.189 -23063374 3572297)">
-		<stop  offset="0" style="stop-color:#33A2BD"/>
+		<stop  offset="0" style="stop-color:#00B9BE"/>
 		<stop  offset="1" style="stop-color:#34BCC4"/>
 	</linearGradient>
 	<rect id="Rectangle_5993" x="16415" y="10832" class="st0" width="1373.5" height="312.2"/>

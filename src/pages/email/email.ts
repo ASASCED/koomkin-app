@@ -1,11 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import {
-  AlertController,
-  IonicPage,
-  LoadingController,
-  NavController,
-  NavParams
-} from "ionic-angular";
+import { AlertController, IonicPage, LoadingController, NavController, NavParams } from "ionic-angular";
 import { RestProvider } from "./../../providers/rest/rest";
 import { AuthServiceProvider } from "../../providers/auth-service/auth-service";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
@@ -31,7 +25,6 @@ export class EmailPage implements OnInit {
   public web;
   public twitter;
   public uuid;
-  // apiUrl = 'http://18.235.164.159/call-tracking/api/v1/mailing/';
 
   apiUrl = 'https://www.koomkin.com.mx/call-tracking/api/v1/mailing/';
 
@@ -227,64 +220,6 @@ export class EmailPage implements OnInit {
         });
       })();
     });
-  }
-
-
-  chooseFile2() {
-    let loading = this.loadingCtrl.create({
-      content: "Cargando carta presentación..."
-    });
-    this.chatService.connectAuxiliarChannel().then(() => {
-
-      (async () => {
-        const file = await (<any>window).chooser.getFile('application/pdf');
-        var formData = new FormData();
-        var blob = new Blob([file.data], { type: file.mediaType });
-        formData.append(file.name, blob, file.name);
-        this.chatService.tc.currentChannel.sendMessage(formData).then(() => {
-          loading.present().then(() => {
-            this.chatService.tc.currentChannel.getMessages().then((messagesPaginator) => {
-
-              const message = messagesPaginator.items[messagesPaginator.items.length - 1];
-              if (message.type === 'media') {
-                // console.log('Media attributes', message.media);
-                message.media.getContentUrl().then((url) => {
-                  const httpOptions = {
-                    headers: new HttpHeaders({
-                      "Content-Type": "application/x-www-form-urlencoded",
-                    })
-                  };
-                  url = encodeURIComponent(url);
-                  //alert(url);
-                  this.http.post(this.apiUrl, { nombre_archivo: this.pdf, url_archivo: url }, httpOptions)
-                    .subscribe(data => {
-                      loading.dismiss();
-                      this.mostrarAlertaEstatusPdf('Carta Presentación', 'El documento se guardó exitosamente');
-                      //alert('enviado a whatsapp'+ JSON.stringify(data));
-                    }, err => {
-                      loading.dismiss()
-                      if (err.status === 200) {
-                        this.mostrarAlertaEstatusPdf('Carta Presentación', 'El documento se guardó exitosamente.');
-                      } else {
-                        this.mostrarAlertaEstatusPdf('Carta Presentación', 'Ocurrió un problema durante la carga del documento.');
-                      }
-
-                      ;
-                      // console.log(JSON.stringify(err));
-                    });
-                }).catch(() => {
-                  loading.dismiss();
-                });
-              }
-            }).catch(() => { loading.dismiss(); });
-
-          });
-
-        });
-      })();
-
-    });
-
   }
 
   changeMail() {

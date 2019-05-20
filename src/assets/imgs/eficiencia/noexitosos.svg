@@ -10,7 +10,7 @@
                     <g id="Group-10" transform="translate(19.000000, 0.000000)">
                         <g id="baseline-supervised_user_circle-24px-2">
                             <g id="baseline-supervised_user_circle-24px">
-                                <path d="M30,5 C16.2,5 5,16.2 5,30 C5,43.8 16.2,55 30,55 C43.8,55 55,43.8 55,30 C55,16.2 43.8,5 30,5 Z" id="Path" fill="#33A2BD" fill-rule="nonzero"></path>
+                                <path d="M30,5 C16.2,5 5,16.2 5,30 C5,43.8 16.2,55 30,55 C43.8,55 55,43.8 55,30 C55,16.2 43.8,5 30,5 Z" id="Path" fill="#00B9BE" fill-rule="nonzero"></path>
                                 <polygon id="Path" points="0 0 60 0 60 60 0 60"></polygon>
                             </g>
                         </g>

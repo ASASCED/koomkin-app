@@ -1,14 +1,6 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
-import {
-  IonicPage,
-  NavController,
-  LoadingController,
-  NavParams,
-  ModalController,
-  Refresher
-} from "ionic-angular";
+import { IonicPage, NavController, LoadingController, NavParams, ModalController, Refresher } from "ionic-angular";
 import { RestProvider } from "../../providers/rest/rest";
-import { LeadPage } from "../lead/lead";
 import { HttpClient } from "@angular/common/http";
 import { AuthServiceProvider } from "../../providers/auth-service/auth-service";
 import { AlertController, InfiniteScroll, Content } from "ionic-angular";
@@ -19,18 +11,14 @@ import { AlertController, InfiniteScroll, Content } from "ionic-angular";
   templateUrl: "leads.html"
 })
 export class LeadsPage implements OnInit {
+  
   @ViewChild(Content)
   content: Content;
   leads: any = [];
-
   leadsfiltroseleccion: string;
-
   leadsfiltrados: any = [];
-
   showspinner = false;
-
   infinitespinnerisactive = false;
-
   page = 1;
   selectedLike;
   public califica;
@@ -46,7 +34,6 @@ export class LeadsPage implements OnInit {
   public llamada;
   public status;
   public datosenvio;
-
   public title;
   public subtitle;
   public img;
@@ -58,17 +45,15 @@ export class LeadsPage implements OnInit {
   public fondo;
   public description;
   public habilitado;
+  public url = "sinaudio";
+  public audio;
+  leads_pagination_min = 0;
+  leads_pagination_max = 0;
+  leads_download_available = true;
 
   apiUrl = "https://www.koomkin.com.mx/api/app";
   apiUrl3 = "https://www.koomkin.com.mx/call-tracking/api/v1/forward-app/";
   apiUrl4 = "https://www.koomkin.com.mx/call-tracking/api/v1/extra-info/?id=";
-
-  public url = "sinaudio";
-  public audio;
-
-  leads_pagination_min = 0;
-  leads_pagination_max = 0;
-  leads_download_available = true;
 
   constructor(
     public navCtrl: NavController,

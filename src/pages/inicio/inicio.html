@@ -13,7 +13,7 @@
         [tipoBanner]='tipoBanner' [description]='description' (click)="clickBanner();"></banner> 
         
         <ion-grid padding *ngIf="tipoBanner == 0 || tipoBanner == 1 && recurrente == true || tipoBanner >= 3 && tipoBanner <= 9  || tipoBanner == 10  && habilitado == 1 ||  tipoBanner == 12 && habilitado == 1 || tipoBanner >= 10 && tipoBanner <= 12 && habilitado == 0">
-            <ion-row class="grande" (click)="pagina(leads)">
+            <ion-row class="grande tres" (click)="pagina(leads)">
                     <ion-col col-3>
                     <img src="assets/imgs/inicio/leads.svg" width="100%" />
                 </ion-col>
@@ -61,7 +61,7 @@
                 </ion-col>
             </ion-row>
     
-            <ion-row class="grande" (click)="pagina(datos)">
+            <ion-row class="grande dos" (click)="pagina(datos)">
                     <ion-col col-3>
                     <img src="assets/imgs/inicio/ajustes.svg" width="100%" />
                 </ion-col>
@@ -73,7 +73,7 @@
                 </ion-col>
             </ion-row>
 
-            <ion-row class="grande dos" (click)="pagina(financieros)">
+            <ion-row class="grande" (click)="pagina(financieros)">
                     <ion-col col-3 style="text-align: center;">
                             <img src="assets/imgs/inicio/membresia.svg" width="60%" /> 
                         </ion-col>

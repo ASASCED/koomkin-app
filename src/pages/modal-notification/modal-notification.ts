@@ -1,17 +1,8 @@
 import { Component, OnInit } from "@angular/core";
-import {
-  IonicPage,
-  NavController,
-  NavParams,
-  ViewController,
-  App,
-  MenuController
-} from "ionic-angular";
+import { IonicPage, NavController, NavParams, ViewController, App, MenuController } from "ionic-angular";
 import { AuthServiceProvider } from "../../providers/auth-service/auth-service";
 import { HttpClient } from "@angular/common/http";
 import { AlertController } from "ionic-angular";
-import { InicioPage } from "../inicio/inicio";
-
 
 @IonicPage()
 @Component({
@@ -42,10 +33,10 @@ export class ModalNotificationPage implements OnInit {
   public modal_titulo_no_notificacion;
   public modal_subtitulo_no_notificacion;
   public modal_mensaje_no_notificacion;
-
   public p1_estilo_notificacion;
   public p2_estilo_notificacion;
   public p3_estilo_notificacion;
+
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -61,7 +52,6 @@ export class ModalNotificationPage implements OnInit {
     this.notificacion = navParams.get("notificacion");
     this.idReporteBanner = navParams.get("idReporteBanner");
     this.tipoBanner = navParams.get("tipo");
-    console.log(this.tipoBanner);
     this.uuidPase = navParams.get("uuidPase");
   }
 
@@ -146,6 +136,6 @@ export class ModalNotificationPage implements OnInit {
   }
 
   public irInicio() {
-    this.app.getRootNav().setRoot(InicioPage); 
+    this.app.getRootNav().setRoot('InicioPage'); 
   }
 }

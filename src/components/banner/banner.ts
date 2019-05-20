@@ -1,9 +1,7 @@
 import { Component, Input, OnInit } from "@angular/core";
 import { NavController, NavParams, Platform } from 'ionic-angular';
-import { ModalNotificationPage } from '../../pages/modal-notification/modal-notification';
 import { HttpClient } from '@angular/common/http';
 import { Market } from '@ionic-native/market';
-import { ModalSurveyPage } from '../../pages/modal-survey/modal-survey';
 import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
 import swal from 'sweetalert2';
 import { RestProvider } from "../../providers/rest/rest";
@@ -54,11 +52,11 @@ export class BannerComponent implements OnInit {
   }
 
   mostrar_modal() {
-    this.navCtrl.setRoot(ModalNotificationPage, { notificacion: this.notificacion, idReporteBanner: this.idReporteBanner,tipo: this.tipo, uuidPase:this.uuidPase });
+    this.navCtrl.setRoot('ModalNotificationPage', { notificacion: this.notificacion, idReporteBanner: this.idReporteBanner,tipo: this.tipo, uuidPase:this.uuidPase });
   }
 
   mostrar_encuesta() {
-    this.navCtrl.setRoot(ModalSurveyPage, { notificacion: this.notificacion, idReporteBanner: this.idReporteBanner,tipo: this.tipo, uuidPase:this.uuidPase });
+    this.navCtrl.setRoot('ModalSurveyPage', { notificacion: this.notificacion, idReporteBanner: this.idReporteBanner,tipo: this.tipo, uuidPase:this.uuidPase });
   }
 
   goStore(){

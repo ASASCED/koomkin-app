@@ -16,7 +16,11 @@ export class DatosPage {
   public empresa;
   public id;
   
-  constructor(public navCtrl: NavController, public navParams: NavParams, public authService: AuthServiceProvider) {
+  constructor(
+    public navCtrl: NavController, 
+    public navParams: NavParams, 
+    public authService: AuthServiceProvider
+  ) {
     this.empresa = this.authService.empresa;
     this.id = this.authService.id;
   }

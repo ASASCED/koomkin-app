@@ -30,7 +30,7 @@ page-eficiencia {
     }
     .section1 {
         grid-area: section1;
-        border: 2px solid #33A2BD;
+        border: 2px solid #00B9BE;
         border-radius: 3px;
         height: 100%;
         margin-left: 5%;
@@ -55,7 +55,7 @@ page-eficiencia {
             height: 30%;
             width: 90%;
             text-align: center;
-            border-bottom: 2px solid #33A2BD;
+            border-bottom: 2px solid #00B9BE;
             align-items: center;
             display: grid;
             @media (max-width: 36rem) {
@@ -63,7 +63,7 @@ page-eficiencia {
             }
             .titulo {
                 font-size: 1.3em;
-                color: #33A2BD;
+                color: #00B9BE;
                 font-family: Helvetica;
                 font-weight: bold;
                 margin-top: 0;
@@ -81,7 +81,7 @@ page-eficiencia {
             }
             .numero {
                 font-size: 2.8em;
-                color: #3DCDBB;
+                color: #00B9BE;
                 font-family: Helvetica;
             }
             .mas-koomkin {
@@ -159,7 +159,7 @@ page-eficiencia {
     }
     .section3 {
         grid-area: section3;
-        border: 2px solid #33A2BD;
+        border: 2px solid #00B9BE;
         border-radius: 3px;
         height: 100%;
         margin-left: 2.5%;
@@ -190,7 +190,7 @@ page-eficiencia {
         .section1-momento {
             grid-area: section1-momento;
             text-align: center;
-            border-bottom: 2px solid #33A2BD;
+            border-bottom: 2px solid #00B9BE;
             align-items: center;
             display: grid;
             height: 100%;
@@ -199,7 +199,7 @@ page-eficiencia {
             }
             .titulo {
                 font-size: 1.3em;
-                color: #33A2BD;
+                color: #00B9BE;
                 font-family: Helvetica;
                 font-weight: bold;
                 line-height: 18px;
@@ -210,7 +210,7 @@ page-eficiencia {
             grid-area: section2-momento;
             text-align: center;
             align-items: center;
-            border-bottom: 2px solid #33A2BD;
+            border-bottom: 2px solid #00B9BE;
             display: grid;
             height: 100%;
             @media (max-width: 36rem) {
@@ -218,7 +218,7 @@ page-eficiencia {
             }
             .titulo {
                 font-size: 1.3em;
-                color: #33A2BD;
+                color: #00B9BE;
                 font-family: Helvetica;
                 font-weight: bold;
                 line-height: 18px;
@@ -248,7 +248,7 @@ page-eficiencia {
             align-items: center;
             display: grid;
             height: 100%;
-            border-left: 2px solid #33A2BD;
+            border-left: 2px solid #00B9BE;
             @media (max-width: 36rem) {
                 order: 1;
             }
@@ -260,7 +260,7 @@ page-eficiencia {
                 color: #707070;
             }
             .azul {
-                color: #33A2BD;
+                color: #00B9BE;
                 font-weight: bold;
             }
         }
@@ -282,7 +282,7 @@ page-eficiencia {
     }
     .section1-ranking {
         grid-area: section1-ranking;
-        border: 2px solid #33A2BD;
+        border: 2px solid #00B9BE;
         border-radius: 3px;
         height: 100%;
         margin-left: 5%;
@@ -307,7 +307,7 @@ page-eficiencia {
             height: 30%;
             width: 90%;
             text-align: center;
-            border-bottom: 2px solid #33A2BD;
+            border-bottom: 2px solid #00B9BE;
             align-items: center;
             display: grid;
             @media (max-width: 36rem) {
@@ -315,7 +315,7 @@ page-eficiencia {
             }
             .titulo {
                 font-size: 1.3em;
-                color: #33A2BD;
+                color: #00B9BE;
                 font-family: Helvetica;
                 font-weight: bold;
                 margin-top: 0;
@@ -333,7 +333,7 @@ page-eficiencia {
             }
             .numero {
                 font-size: 2.8em;
-                color: #3DCDBB;
+                color: #00B9BE;
                 font-family: Helvetica;
             }
             .mas-koomkin {
@@ -353,7 +353,7 @@ page-eficiencia {
     }
     .section2-ranking {
         grid-area: section2-ranking;
-        border: 2px solid #33A2BD;
+        border: 2px solid #00B9BE;
         border-radius: 3px;
         height: 100%;
         margin-left: 5%;
@@ -378,7 +378,7 @@ page-eficiencia {
             height: 30%;
             width: 90%;
             text-align: center;
-            border-bottom: 2px solid #33A2BD;
+            border-bottom: 2px solid #00B9BE;
             align-items: center;
             display: grid;
             @media (max-width: 36rem) {
@@ -386,7 +386,7 @@ page-eficiencia {
             }
             .titulo {
                 font-size: 1.2em;
-                color: #33A2BD;
+                color: #00B9BE;
                 font-family: Helvetica;
                 font-weight: bold;
                 line-height: 16px;
@@ -405,12 +405,12 @@ page-eficiencia {
             }
             .tiempo-numero {
                 font-size: 2.8em;
-                color: #3DCDBB;
+                color: #00B9BE;
                 font-family: Helvetica;
             }
             .tiempo {
                 font-size: 1.1em;
-                color: #33A2BD;
+                color: #00B9BE;
                 font-family: Helvetica;
             }
             .mas-koomkin {
@@ -421,7 +421,7 @@ page-eficiencia {
     }
     .section3-ranking {
         grid-area: section3-ranking;
-        border: 2px solid #33A2BD;
+        border: 2px solid #00B9BE;
         border-radius: 3px;
         height: 100%;
         margin-left: 2.5%;
@@ -447,7 +447,7 @@ page-eficiencia {
         .section1-koomkin {
             grid-area: section1-koomkin;
             text-align: center;
-            border-bottom: 2px solid #33A2BD;
+            border-bottom: 2px solid #00B9BE;
             align-items: center;
             display: grid;
             height: 100%;
@@ -458,7 +458,7 @@ page-eficiencia {
             }
             .titulo {
                 font-size: 1.3em;
-                color: #33A2BD;
+                color: #00B9BE;
                 font-family: Helvetica;
                 font-weight: bold;
                 line-height: 18px;
@@ -476,7 +476,7 @@ page-eficiencia {
             }
             .titulo {
                 font-size: 1.3em;
-                color: #33A2BD;
+                color: #00B9BE;
                 font-family: Helvetica;
                 font-weight: bold;
                 line-height: 18px;
@@ -494,7 +494,7 @@ page-eficiencia {
     }
     .section4-ranking {
         grid-area: section4-ranking;
-        border: 2px solid #33A2BD;
+        border: 2px solid #00B9BE;
         border-radius: 3px;
         height: 100%;
         margin-left: 2.5%;
@@ -520,7 +520,7 @@ page-eficiencia {
         .section1-grafica {
             grid-area: section1-grafica;
             text-align: center;
-            border-bottom: 2px solid #33A2BD;
+            border-bottom: 2px solid #00B9BE;
             align-items: center;
             display: grid;
             height: 100%;
@@ -531,7 +531,7 @@ page-eficiencia {
             }
             .titulo {
                 font-size: 1.3em;
-                color: #33A2BD;
+                color: #00B9BE;
                 font-family: Helvetica;
                 font-weight: bold;
                 line-height: 18px;
@@ -549,7 +549,7 @@ page-eficiencia {
             }
             .titulo {
                 font-size: 1.3em;
-                color: #33A2BD;
+                color: #00B9BE;
                 font-family: Helvetica;
                 font-weight: bold;
                 line-height: 18px;
@@ -590,7 +590,7 @@ page-eficiencia {
     }
     p {
         text-align: center;
-        color: #33A2BD;
+        color: #00B9BE;
     }
     .cuadros-sector {
         height: 90%;
@@ -605,7 +605,7 @@ page-eficiencia {
     }
     .wrapper-sector {
         grid-area: wrapper-sector;
-        border: 2px solid #33A2BD;
+        border: 2px solid #00B9BE;
         border-radius: 3px;
         height: 100%;
         margin-left: 3%;
@@ -624,14 +624,14 @@ page-eficiencia {
         height: 100%;
         display: grid;
         align-items: center;
-        border-bottom: 2px solid #33A2BD;
+        border-bottom: 2px solid #00B9BE;
         @media (max-width: 36rem) {
             order: 1;
         }
         .titulo {
             text-align: right;
             font-size: 1.2em;
-            color: #33A2BD;
+            color: #00B9BE;
             font-family: Helvetica;
             font-weight: bold;
             line-height: 18px;
@@ -644,14 +644,14 @@ page-eficiencia {
         height: 100%;
         display: grid;
         align-items: center;
-        border-bottom: 2px solid #33A2BD;
+        border-bottom: 2px solid #00B9BE;
         @media (max-width: 36rem) {
             order: 1;
         }
         .titulo {
             text-align: left;
             font-size: 1.2em;
-            color: #33A2BD;
+            color: #00B9BE;
             font-family: Helvetica;
             font-weight: bold;
             line-height: 18px;
@@ -669,7 +669,7 @@ page-eficiencia {
         }
         .tema {
             font-size: 4vw;
-            color: #33A2BD;
+            color: #00B9BE;
             margin-bottom: 3%;
         }
         .tiempo {
@@ -690,7 +690,7 @@ page-eficiencia {
         }
         .tema {
             font-size: 4vw;
-            color: #33A2BD;
+            color: #00B9BE;
             margin-bottom: 3%;
         }
         .tiempo {
@@ -711,7 +711,7 @@ page-eficiencia {
         }
         .tema {
             font-size: 4vw;
-            color: #33A2BD;
+            color: #00B9BE;
             margin-bottom: 3%;
         }
         .tiempo {
@@ -732,7 +732,7 @@ page-eficiencia {
         }
         .tema {
             font-size: 4vw;
-            color: #33A2BD;
+            color: #00B9BE;
             margin-bottom: 3%;
         }
         .tiempo {
@@ -753,7 +753,7 @@ page-eficiencia {
         }
         .tema {
             font-size: 4vw;
-            color: #33A2BD;
+            color: #00B9BE;
             margin-bottom: 3%;
         }
         .tiempo {
@@ -774,7 +774,7 @@ page-eficiencia {
         }
         .tema {
             font-size: 4vw;
-            color: #33A2BD;
+            color: #00B9BE;
             margin-bottom: 3%;
         }
         .tiempo {
@@ -800,7 +800,7 @@ page-eficiencia {
     }
     .section1-tendencia {
         grid-area: section1-tendencia;
-        border: 2px solid #33A2BD;
+        border: 2px solid #00B9BE;
         border-radius: 3px;
         height: 100%;
         margin-left: 3%;
@@ -826,7 +826,7 @@ page-eficiencia {
             height: 10%;
             width: 90%;
             text-align: center;
-            border-bottom: 2px solid #33A2BD;
+            border-bottom: 2px solid #00B9BE;
             align-items: center;
             display: grid;
             @media (max-width: 36rem) {
@@ -834,7 +834,7 @@ page-eficiencia {
             }
             .titulo {
                 font-size: 1.3em;
-                color: #33A2BD;
+                color: #00B9BE;
                 font-family: Helvetica;
                 font-weight: bold;
                 margin-top: 0;
@@ -852,7 +852,7 @@ page-eficiencia {
             }
             .numero {
                 font-size: 2.8em;
-                color: #3DCDBB;
+                color: #00B9BE;
                 font-family: Helvetica;
             }
             .mas-koomkin {
@@ -909,7 +909,7 @@ page-eficiencia {
                 }
                 .titulo {
                     line-height: 17px;
-                    color: #10cebc;
+                    color: #00B9BE;
                     font-size: 1em;
                     font-family: Helvetica;
                     margin-top: 0;
@@ -945,7 +945,7 @@ page-eficiencia {
                 }
                 .titulo {
                     line-height: 17px;
-                    color: #10cebc;
+                    color: #00B9BE;
                     font-size: 1em;
                     font-family: Helvetica;
                     margin-top: 0;
@@ -956,7 +956,7 @@ page-eficiencia {
     }
     .section2-tendencia {
         grid-area: section2-tendencia;
-        border: 2px solid #33A2BD;
+        border: 2px solid #00B9BE;
         border-radius: 3px;
         height: 100%;
         margin-left: 3%;
@@ -982,7 +982,7 @@ page-eficiencia {
             height: 14%;
             width: 90%;
             text-align: center;
-            border-bottom: 2px solid #33A2BD;
+            border-bottom: 2px solid #00B9BE;
             align-items: center;
             display: grid;
             @media (max-width: 36rem) {
@@ -991,7 +991,7 @@ page-eficiencia {
             .titulo {
                 font-size: 1.3em;
                 line-height: 17px;
-                color: #33A2BD;
+                color: #00B9BE;
                 font-family: Helvetica;
                 font-weight: bold;
                 margin-top: 0;
@@ -1009,12 +1009,12 @@ page-eficiencia {
             }
             .tiempo-numero {
                 font-size: 2.8em;
-                color: #33A2BD;
+                color: #00B9BE;
                 font-family: Helvetica;
             }
             .tiempo {
                 font-size: 1.1em;
-                color: #33A2BD;
+                color: #00B9BE;
                 font-family: Helvetica;
                 font-size: 1.2em;
                 line-height: 15px;
@@ -1146,7 +1146,7 @@ page-eficiencia {
 }
 
 .collapsible {
-    background-color: #33A2BD;
+    background-color: #00B9BE;
     color: white;
     cursor: pointer;
     padding: 4%;

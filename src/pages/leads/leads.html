@@ -54,16 +54,6 @@
                             <ion-card [ngClass]="{'leido':lead.leido === 'leido','noleido':lead.leido === 'noleido'}">
                                 <ion-card-content [ngClass]="{'V':lead.clasificaLead == 'V','D':lead.clasificaLead == 'D','P':lead.clasificaLead == 'P','S':lead.clasificaLead == 'S','M':lead.clasificaLead == 'M','banda':lead.clasificaLead == 'banda'}">
                                     <ion-row align-items-center style="margin:0%">
-                                        <!--  <a *ngIf="lead.status == 'perdida'" (click)="showConfirm(lead)">
-                                            <img src="assets/imgs/llamadas/llamadaperdida.svg" style="width: 7.5% !important;
-                        width: 7.5% !important;
-    position: absolute;
-    height: 150%;
-    top: 0;
-    left: .5%;
-    bottom: 10%;
-    text-align: center !important;" />
-                                        </a>-->
                                         <ion-col col-10 align-self-center style="display: inherit;">
                                             <a class="rate-nombre">
                                                 <strong>{{lead.NOMBRE | capitalize}}</strong>
@@ -78,22 +68,12 @@
                                             <img src="assets/imgs/leads/sin-audio.svg" style="vertical-align: middle;width: 100% !important;display: inline-block;    margin-left: 15%;" />
                                         </ion-col>
                                         <ion-col col-1 *ngIf="lead.mensajesnoleidos > 0 && lead.mensajesnoleidos < 10">
-                                            <p style="color: white !important;
-                      position: absolute;
-                      margin-left: 57% !important;
-                      margin-top: 24% !important;
-                      font-size: 1em;
-                      font-weight: bold;">{{lead.mensajesnoleidos}}</p>
+                                            <p style="color: white !important; position: absolute; margin-left: 57% !important; margin-top: 24% !important; font-size: 1em; font-weight: bold;">{{lead.mensajesnoleidos}}</p>
                                             <img src="assets/imgs/leads/mensajes.svg" style="vertical-align: middle;width: 140% !important;max-width:150px !important;display: inline-block;" />
                                         </ion-col>
 
                                         <ion-col col-1 *ngIf="lead.mensajesnoleidos > 10">
-                                            <p style="color: white !important;
-                      position: absolute;
-
-                      margin-top: 24%;
-                      font-size: 1em;
-                      font-weight: bold;">{{lead.mensajesnoleidos}}</p>
+                                            <p style="color: white !important; position: absolute; margin-top: 24%; font-size: 1em; font-weight: bold;">{{lead.mensajesnoleidos}}</p>
                                             <img src="assets/imgs/leads/mensajes.svg" style="vertical-align: middle;width: 140% !important;max-width:150px !important;display: inline-block;" />
                                         </ion-col>
                                         <ion-col col-1 *ngIf="lead.mensajesnoleidos == null">
@@ -125,7 +105,7 @@
                             </ion-card>
                         </ion-item>
                         <ion-item-options side="left" (ionSwipe)="showConfirm(lead)">
-                            <!--<button ion-button (click)="showConfirm(lead)" style="background: #00b9bf;">
+                            <!--<button ion-button (click)="showConfirm(lead)" style="background: #00B9BE;">
                   <ion-icon ios="ios-call" md="md-call"></ion-icon>
                 </button>-->
                         </ion-item-options>

@@ -2,7 +2,6 @@ import { Component, OnInit } from "@angular/core";
 import { IonicPage, NavController, NavParams, App, MenuController } from "ionic-angular";
 import { RestProvider } from "../../providers/rest/rest";
 import { AuthServiceProvider } from "../../providers/auth-service/auth-service";
-import { InicioPage } from "../inicio/inicio";
 import { HttpHeaders } from "@angular/common/http";
 import { HttpClient } from '@angular/common/http';
 import swal from 'sweetalert2';
@@ -166,7 +165,7 @@ export class ModalSurveyPage implements OnInit {
         );
     }
     this.createTicket();
-    this.navCtrl.setRoot(InicioPage);
+    this.navCtrl.setRoot('InicioPage');
   }
 
   public createTicket() {
@@ -243,7 +242,7 @@ export class ModalSurveyPage implements OnInit {
   }
 
   public irInicio() {
-    this.app.getRootNav().setRoot(InicioPage); 
+    this.app.getRootNav().setRoot('InicioPage'); 
   }
 
   public cancelMembershipOP() {

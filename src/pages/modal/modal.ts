@@ -11,38 +11,29 @@ import { HttpClient } from '@angular/common/http';
 export class ModalPage {
 
   respuesta = false;
-
   uuid : any;
-
-  constructor(public navCtrl: NavController, public navParams: NavParams, public http: HttpClient, public viewCtrl: ViewController) {
-
-  }
-
-  ionViewDidLoad() {
-    // // console.log('ionViewDidLoad ModalPage');
+  
+  constructor(
+    public navCtrl: NavController, 
+    public navParams: NavParams, 
+    public http: HttpClient, 
+    public viewCtrl: ViewController
+  ) {
   }
 
   closeModal(){
     this.viewCtrl.dismiss();
-
   }
 
   ionViewWillLoad(){
     this.uuid = this.navParams.get('uuid');
-    // alert(this.uuid);
   }
 
   public modalChatAction(preferencia: string) {
 
-    //0 inactivo
-    //1 chat activo
-    //2 me interesa
-    //3 no me interesa
-
     const body = new URLSearchParams();
     body.set('id', this.uuid);
     body.set('chat', preferencia);
-
 
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')

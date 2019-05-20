@@ -49,9 +49,9 @@ page-brief {
                 .boton-cobertura-brief-blanco{ 
                     width: 23%;
                     display: inline-block;
-                    border: 1px #10cebc solid;
+                    border: 1px #00B9BE solid;
                     border-radius: 7px;
-                    background: #10cebc;
+                    background: #00B9BE;
                     .texto-boton-brief {
                         color: white;
                         margin: 0;
@@ -88,16 +88,16 @@ page-brief {
                     height: 56px;
                     margin: 2% 1%;
                     display: inline-block;
-                    border: 1px #10cebc solid;
-                    background: #10cebc;
+                    border: 1px #00B9BE solid;
+                    background: #00B9BE;
                     border-radius: 7px;
                     display:table-cell;
                 }
             } 
             .guardar-brief {
-                background-color: #f06922;
+                background-color: #FE703F;
                 color: white;
-                border: 1.1px solid #f06922;
+                border: 1.1px solid #FE703F;
                 width: 60%;
                 margin-left: 20%;
                 height: 32px;
@@ -115,11 +115,11 @@ page-brief {
     width: 100%;
     height: 10px;
     .left {
-        background-color: #00a3bf;
+        background-color: #288AC1;
         width: 50%;
     }
     .right {
-        background-color: #10cebc;
+        background-color: #00B9BE;
         width: 50%;
     }
 }

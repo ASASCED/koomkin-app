@@ -23,17 +23,17 @@ page-inicio {
     }
     .grande {
         height: 90px;
-        background: #3DCDBB;
+        background: #00B9BE;
         border-radius: 10px;
         vertical-align: middle;
         margin-bottom: 5%;
         align-items: center;
     }
+    .tres {
+        background: #005999;
+    }
     .dos {
         background: #288AC1;
-    }
-    .tres {
-        background: #33A2BD;
     }
     img {
         vertical-align: middle;
@@ -45,11 +45,11 @@ page-inicio {
         width: 100%;
         height: 10px;
         .left {
-            background-color: #00a3bf;
+            background-color: #288AC1;
             width: 50%;
         }
         .right {
-            background-color: #10cebc;
+            background-color: #00B9BE;
             width: 50%;
         }
     }

@@ -8,10 +8,8 @@ import { Storage } from '@ionic/storage';
 import { Network } from '@ionic-native/network';
 import { Platform } from 'ionic-angular';
 import { HttpClient } from '@angular/common/http';
-
 import { ChatServiceProvider } from "../../providers/chat-service/chat-service";
 
-// declare var Appsee: any;
 @IonicPage()
 @Component({
   selector: 'page-login',
@@ -71,7 +69,7 @@ export class LoginPage implements OnInit {
   ) {
     let disconnectSubscription = this.network.onDisconnect().subscribe(() => {
       this.showError("Error de conexión.", "Verifica tu conexión a internet.");
-     // // console.log(disconnectSubscription);
+      // console.log(disconnectSubscription);
     });
   }
 
@@ -89,7 +87,6 @@ export class LoginPage implements OnInit {
   ionViewWillLeave() {
     this.menuCtrl.swipeEnable(true);
   }
-
 
   onValueChanged(data?: any) {
     if (!this.loginForm) { return; }
@@ -135,7 +132,6 @@ export class LoginPage implements OnInit {
     this.authService.getUserByEmail(this.email).then((data) => {
       this.loading.dismiss();
       this.leads = data;
-      console.log(this.leads);
 
       if (this.leads.length > 0) {
         if (this.plt.is('ios') || this.plt.is('android')) {
@@ -154,8 +150,6 @@ export class LoginPage implements OnInit {
             window["plugins"].OneSignal.sendTag("id_usuario", this.id);
           }
 
-          //Appsee.setUserId(this.id);
-
           this.authService.setUserIsLogged(true);
           this.storage.set('email', this.email);
           this.storage.set('password', this.password);
@@ -164,7 +158,6 @@ export class LoginPage implements OnInit {
             this.iniciarClienteChatTwilio(data[0]['uuid']);
           }
           this.navCtrl.setRoot('InicioPage');
-          // this.navCtrl.setRoot(LeadsPage);
         } else {
           if (this.plt.is('ios') || this.plt.is('android')) {
             window["plugins"].OneSignal.sendTag("email", this.email);
@@ -197,15 +190,12 @@ export class LoginPage implements OnInit {
             this.authService.getUserByEmail(this.email).then((data) => {
               this.loading.dismiss();
               this.leads = data;
-              console.log(this.leads);
               if (this.leads.length > 0) {
                 this.id = this.leads[0].IDUSUARIO;
                 if (Md5.hashStr(this.password) === this.leads[0].PASSWORD2) {
                 this.app = this.leads[0].app;
-                //  // console.log("entro");
                   this.authService.setUserIsLogged(true);
                   this.restService.setUser(this.id);
-                // this.restService.setApp(this.app);
                    if (this.plt.is('ios') || this.plt.is('android')) {
                     window["plugins"].OneSignal.getPermissionSubscriptionState((status) => {
                       const deviceId = status.subscriptionStatus.userId;
@@ -223,16 +213,13 @@ export class LoginPage implements OnInit {
 
                   }else{
                     this.navCtrl.setRoot('InicioPage').then(()=>{
-                      //if(data[0]['uuid']){
-                        //this.iniciarClienteChatTwilio(data[0]['uuid']);
-                      //}
+
                     });
                   }
                   this.iniciarClienteChatTwilio(data[0]['uuid']);
                 }
               }
             }, (err) => {
-              // this.navCtrl.setRoot(LoginPage);
               this.loading.dismiss();
               this.showError("Error de conexión.", "No fue posible establecer una conexión con el servidor.\n Verifique su conexión a internet.");
             });

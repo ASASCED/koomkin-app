@@ -6,8 +6,8 @@
       }
 
       .cls-2 {
-        fill: #32b5a8;
-        stroke: #32b5a8;
+        fill: #00B9BE;
+        stroke: #00B9BE;
         stroke-width: 0.5px;
       }
     </style>

@@ -28,18 +28,6 @@ page-mas-brief {
         box-shadow: 6px 6px 12px -6px rgba(0,0,0,0.75);
     }
     
-    .segment-datos {
-       // border-right: 5px solid gray !important;
-    }
-    
-    .segment-objetivo {
-       // border-right: none !important;
-    }
-
-    .segment-empresa {
-       // border-right: 5px solid gray !important;
-    }
-    
     .segment-md .segment-button.segment-activated {
         color: white !important;
         opacity: 1 !important;
@@ -78,9 +66,9 @@ page-mas-brief {
     }
 
     .guardar {
-        background-color: #f06922;
+        background-color: #FE703F;
         color: white;
-        border: 1.1px solid #f06922;
+        border: 1.1px solid #FE703F;
         width: 60%;
         margin-top: 5%;
         height: 32px;
@@ -299,8 +287,8 @@ page-mas-brief {
             height: 56px;
             margin: 2% 1%;
             display: inline-block;
-            border: 1px #10cebc solid;
-            background: #10cebc;
+            border: 1px #00B9BE solid;
+            background: #00B9BE;
             border-radius: 7px;
             display:table-cell;
         }
@@ -321,7 +309,7 @@ page-mas-brief {
     }
 
     .img-mitad {
-        width: 100%;
+        width: 60%;
         margin-bottom: 20%;
     }
 
@@ -348,9 +336,9 @@ page-mas-brief {
     }
 
     .elegida-brief {
-        border: 1px #288AC1 solid !important;
+        border: 1px #00B9BE solid !important;
         color: white !important;
-        background: #288AC1 !important;
+        background: #00B9BE !important;
         font-weight: bold !important;
     }
 }

@@ -1,19 +1,10 @@
 import { Component, OnInit } from "@angular/core";
-import {
-  IonicPage,
-  NavController,
-  NavParams,
-  ModalController,
-  AlertController,
-  App
-} from "ionic-angular";
-import { CancelarPage } from "./../cancelar/cancelar";
+import { IonicPage, NavController, NavParams, ModalController, AlertController, App } from "ionic-angular";
 import { Payment } from "../../models/Payment";
 import { UserProvider } from "../../providers/user/user";
 import { AuthServiceProvider } from "../../providers/auth-service/auth-service";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import swal from 'sweetalert2';
-import { ModalSurveyPage } from '../../pages/modal-survey/modal-survey';
 
 @IonicPage()
 @Component({
@@ -206,7 +197,7 @@ export class UsuarioPage implements OnInit {
   }
 
   mostrar_modal() {
-    let modal = this.modalCtrl.create(CancelarPage);
+    let modal = this.modalCtrl.create('CancelarPage');
     modal.present();
   }
 
@@ -341,8 +332,7 @@ export class UsuarioPage implements OnInit {
   }
 
   mostrar_encuesta() {
-  // this.navCtrl.setRoot(ModalSurveyPage, { tipo: this.tipo });
-    this.app.getRootNav().setRoot(ModalSurveyPage, { tipo: this.tipo }); 
+    this.app.getRootNav().setRoot('ModalSurveyPage', { tipo: this.tipo }); 
   }
 
   public btnReactivar() {

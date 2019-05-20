@@ -1,10 +1,5 @@
 import { Component } from "@angular/core";
-import {
-  IonicPage,
-  NavController,
-  NavParams,
-  ViewController
-} from "ionic-angular";
+import { IonicPage, NavController, NavParams, ViewController } from "ionic-angular";
 import { HttpHeaders } from "@angular/common/http";
 import { HttpClient } from "@angular/common/http";
 
@@ -14,6 +9,7 @@ import { HttpClient } from "@angular/common/http";
   templateUrl: "modal-page-iniciar-chat.html"
 })
 export class ModalPageIniciarChatPage {
+
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -22,23 +18,16 @@ export class ModalPageIniciarChatPage {
   ) {}
 
   enviado = false;
-
   uuid: any;
-
   nombre: any;
 
   closeModal() {
     this.viewCtrl.dismiss(false);
   }
 
-  ionViewDidLoad() {
-    // // console.log('ionViewDidLoad ModalPageIniciarChatPage');
-  }
-
   ionViewWillLoad() {
     this.uuid = this.navParams.get("uuid");
     this.nombre = this.navParams.get("nombrelead");
-    // alert(this.uuid);
   }
 
   public iniciarConversacion() {

@@ -14,7 +14,7 @@
     margin-left: 77% !important;
     font-size: 2rem !important;
     font-weight: 500 !important;
-    background: #00b9bf !important;
+    background: #00B9BE !important;
     position: fixed !important;
     bottom: 5px !important;
     right: 5px !important;
@@ -58,8 +58,8 @@
     background-color: white;
     -webkit-box-shadow: 0 16px 20px rgba(0, 0, 0, 0.4);
     box-shadow: 0 16px 20px rgba(0, 0, 0, 0.4);
-    border-top: 15px solid #00b9bf;
-    border-image: linear-gradient(to right, #10cebc 0%, #00a3bf 100%);
+    border-top: 15px solid #00B9BE;
+    border-image: #00B9BE;
     border-image-slice: 1;
     border-width: 15px;
 }
@@ -83,13 +83,13 @@
     background-color: white;
     -webkit-box-shadow: none;
     box-shadow: none;
-    border-top: 15px solid #00b9bf;
+    border-top: 15px solid #00B9BE;
 }
 
 .alert-ios .alert-button:last-child {
     border-right: 0 !important;
     font-weight: bold !important;
-    background: #00b9bf !important;
+    background: #00B9BE !important;
     color: white !important;
 }
 
@@ -103,7 +103,7 @@
     color: white !important;
     margin: 0 8px 0 0 !important;
     padding: 10px !important;
-    background: linear-gradient(to right, #10cebc 0%, #00a3bf 100%) !important;
+    background: #00B9BE  !important;
 }
 
 .alert-ios .alert-button {
@@ -116,10 +116,10 @@
     flex: 1 1 auto;
     min-width: 50%;
     height: 44px !important;
-    border-top: 0.55px solid #00b9bf !important;
-    border-right: 0.55px solid #00b9bf !important;
+    border-top: 0.55px solid #00B9BE !important;
+    border-right: 0.55px solid #00B9BE !important;
     font-size: 17px;
-    color: #00b9bf !important;
+    color: #00B9BE !important;
     background-color: transparent !important;
     min-width: 0% !important;
     width: 40% !important;
@@ -259,7 +259,7 @@ ion-select {
 
 .rate-icon-fill {
     position: relative;
-    color: #10cebc;
+    color: #00B9BE;
 }
 
 .circulo {
@@ -286,7 +286,7 @@ ion-select {
 }
 
 .fillv {
-    background-color: #00b9bf;
+    background-color: #00B9BE;
     ;
 }
 
@@ -304,11 +304,11 @@ ion-select {
 }
 
 .btn-estatusv:hover {
-    background-color: darkturquoise;
+    background-color: #00B9BE;
 }
 
 .btn-estatusv:active {
-    background-color: darkturquoise;
+    background-color: #00B9BE;
 }
 
 .btn-estatusp {
@@ -338,11 +338,11 @@ ion-select {
 }
 
 .btn-estatusc:hover {
-    background-color: #419BD6;
+    background-color: #288AC1;
 }
 
 .fillc {
-    background-color: #419BD6;
+    background-color: #288AC1;
 }
 
 .btn-estatusd {
@@ -355,11 +355,11 @@ ion-select {
 }
 
 .btn-estatusd:hover {
-    background-color: #F2631C;
+    background-color: #FE703F;
 }
 
 .filld {
-    background-color: #F2631C;
+    background-color: #FE703F;
 }
 
 label {
@@ -381,7 +381,7 @@ label {
 
 [type="date"]::-webkit-calendar-picker-indicator {
     opacity: 0;
-    color: #10cebc;
+    color: #00B9BE;
 }
 
 input {
@@ -420,7 +420,7 @@ input {
 
 .V {
     padding: 2% !important;
-    border-left: 20px solid #00b9bf !important;
+    border-left: 20px solid #00B9BE !important;
 }
 
 .P {
@@ -430,12 +430,12 @@ input {
 
 .D {
     padding: 2% !important;
-    border-left: 20px solid #F2631C !important;
+    border-left: 20px solid #FE703F !important;
 }
 
 .S {
     padding: 2% !important;
-    border-left: 20px solid #419BD6 !important;
+    border-left: 20px solid #288AC1 !important;
 }
 
 .M {
@@ -444,7 +444,7 @@ input {
 }
 
 .like {
-    color: #00b9bf !important;
+    color: #00B9BE !important;
     font-size: 9vw;
     cursor: pointer;
 }

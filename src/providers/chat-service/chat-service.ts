@@ -1,11 +1,11 @@
-import { Injectable  } from '@angular/core';
-import {AlertController, Events, LoadingController} from 'ionic-angular';
-import { HttpClient , HttpHeaders} from "@angular/common/http";
-import { BehaviorSubject} from "rxjs";
-import {DomSanitizer} from '@angular/platform-browser';
-import {HTTP} from '@ionic-native/http'
+import { Injectable } from '@angular/core';
+import { AlertController, LoadingController} from 'ionic-angular';
+import { HttpClient } from "@angular/common/http";
+import { BehaviorSubject } from "rxjs";
+import { DomSanitizer } from '@angular/platform-browser';
+import { HTTP } from '@ionic-native/http'
 import { Storage } from '@ionic/storage';
-import {File} from "@ionic-native/file";
+import { File } from "@ionic-native/file";
 
 @Injectable()
 
@@ -319,10 +319,7 @@ export class ChatServiceProvider {
               channel: message.channel.sid
             };
           }
-
           arr.push(messageGUI);
-
-
         }
 
         Promise.all(mediaPromisesArray).then((values) => {
@@ -346,7 +343,6 @@ export class ChatServiceProvider {
       // console.log(reason);
       this.loadingMessagesSource.next(false);
     }));
-
   }
 
   loadMessagesStorageless(fromstring: string): any {
@@ -476,7 +472,6 @@ export class ChatServiceProvider {
           }
         }
       ]
-
     });
     alert.present();
   }

@@ -1,11 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import {
-  IonicPage,
-  NavController,
-  NavParams,
-  AlertController,
-  ModalController
-} from "ionic-angular";
+import { IonicPage, NavController, NavParams, AlertController, ModalController } from "ionic-angular";
 import { RestProvider } from "../../providers/rest/rest";
 import { AuthServiceProvider } from "../../providers/auth-service/auth-service";
 
@@ -480,7 +474,7 @@ export class EficienciaPage implements OnInit {
             } else if (this.datos[i].Clientes === 1) {
               inner.push('#f5a623');
             } else {
-              inner.push('#3DCDBB');
+              inner.push('#00B9BE');
             }
             outter.push(inner);
           }

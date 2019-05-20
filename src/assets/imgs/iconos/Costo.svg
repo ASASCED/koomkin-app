@@ -6,12 +6,12 @@
       }
 
       .cls-2 {
-        stroke: #32b5a8;
+        stroke: #00B9BE;
         stroke-width: 1.5px;
       }
 
       .cls-3 {
-        fill: #32b5a8;
+        fill: #00B9BE;
         font-size: 14px;
         font-family: Roboto-Regular, Roboto;
       }

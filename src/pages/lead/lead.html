@@ -1,9 +1,9 @@
 <ion-header>
-    <ion-navbar style="min-height: 30px;">
+    <ion-navbar style="min-height: 30px;" color="azul">
 
     </ion-navbar>
 
-    <ion-toolbar no-border-top>
+    <ion-toolbar no-border-top color="azul">
         <ion-segment [(ngModel)]="page" (ngModelChange)="pageChanged()">
             <ion-segment-button value="Lead">
                 Lead
@@ -18,7 +18,7 @@
 
     </ion-toolbar>
 
-    <ion-toolbar class="help" *ngIf="page=='Chat'">
+    <ion-toolbar class="help" *ngIf="page == 'Chat'">
         <ion-grid>
             <ion-row style="background: white !important" align-items-center style="margin: 0">
                 <ion-col col-8 align-self-center style="display: inherit;padding-left: 5%">
@@ -147,21 +147,21 @@
                     <ion-col col-2 style="text-align: right;padding-right: 1% !important">
                         <p class="llamadas">Llamadas<br>Entrantes</p>
                     </ion-col>
-                    <ion-col col-2 style="border: 1pt solid #e6e6e6;border-radius: 4px;text-align: center;color: #00b9bf;font-weight: 700;padding: 2px !important;">
+                    <ion-col col-2 style="border: 1pt solid #e6e6e6;border-radius: 4px;text-align: center;color: #00B9BE;font-weight: 700;padding: 2px !important;">
                         <img src="assets/imgs/llamadas/comprador.svg" width="40%" style="vertical-align: middle;margin-left: 5%" /> {{exitosa_c}}
                     </ion-col>
 
                     <ion-col col-2 style="text-align: right;padding-right: 1% !important">
                         <p class="llamadas">Llamadas<br>Salientes</p>
                     </ion-col>
-                    <ion-col col-2 style="border: 1pt solid #e6e6e6;border-radius: 4px;text-align: center;color: #00b9bf;font-weight: 700;padding: 2px !important;">
+                    <ion-col col-2 style="border: 1pt solid #e6e6e6;border-radius: 4px;text-align: center;color: #00B9BE;font-weight: 700;padding: 2px !important;">
                         <img src="assets/imgs/llamadas/cliente.svg" width="40%" style="vertical-align: middle;margin-left: 5%" /> {{exitosa_v}}
                     </ion-col>
 
                     <ion-col col-2 style="text-align: right;padding-right: 1% !important">
                         <p class="llamadas">Llamadas<br>Exitosas</p>
                     </ion-col>
-                    <ion-col col-2 style="border: 1pt solid #e6e6e6;border-radius: 4px;text-align: center;color: #00b9bf;font-weight: 700;padding: 2px !important;">
+                    <ion-col col-2 style="border: 1pt solid #e6e6e6;border-radius: 4px;text-align: center;color: #00B9BE;font-weight: 700;padding: 2px !important;">
                         <img src="assets/imgs/llamadas/cliente.svg" width="40%" style="vertical-align: middle;margin-left: 5%" /> {{exitosa}}
                     </ion-col>
                 </ion-row>
@@ -169,19 +169,19 @@
                     <ion-col col-2 style="text-align: right;padding-right: 1% !important">
                         <p class="llamadas">Llamadas<br>a Buzón</p>
                     </ion-col>
-                    <ion-col col-2 style="border: 1pt solid #e6e6e6;border-radius: 4px;text-align: center;color: #00b9bf;font-weight: 700;padding: 2px !important;">
+                    <ion-col col-2 style="border: 1pt solid #e6e6e6;border-radius: 4px;text-align: center;color: #00B9BE;font-weight: 700;padding: 2px !important;">
                         <img src="assets/imgs/llamadas/buzon.svg" width="40%" style="vertical-align: middle;margin-left: 5%" /> {{buzon}}
                     </ion-col>
                     <ion-col col-2 style="text-align: right;padding-right: 1% !important">
                         <p class="llamadas">Llamadas<br>Perdidas</p>
                     </ion-col>
-                    <ion-col col-2 style="border: 1pt solid #e6e6e6;border-radius: 4px;text-align: center;color: #00b9bf;font-weight: 700;padding: 2px !important;">
+                    <ion-col col-2 style="border: 1pt solid #e6e6e6;border-radius: 4px;text-align: center;color: #00B9BE;font-weight: 700;padding: 2px !important;">
                         <img src="assets/imgs/llamadas/perdida.svg" width="40%" style="vertical-align: middle;margin-left: 5%" /> {{perdida}}
                     </ion-col>
                     <ion-col col-2 style="text-align: right;padding-right: 1% !important">
                         <p class="llamadas">Número<br>Inválido</p>
                     </ion-col>
-                    <ion-col col-2 style="border: 1pt solid #e6e6e6;border-radius: 4px;text-align: center;color: #00b9bf;font-weight: 700;padding: 2px !important;">
+                    <ion-col col-2 style="border: 1pt solid #e6e6e6;border-radius: 4px;text-align: center;color: #00B9BE;font-weight: 700;padding: 2px !important;">
                         <img src="assets/imgs/llamadas/invalido.svg" width="40%" style="vertical-align: middle;margin-left: 5%" /> {{invalido}}
                     </ion-col>
                 </ion-row>

@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import {IonicPage, NavController, NavParams, ViewController} from 'ionic-angular';
-import {HttpHeaders} from "@angular/common/http";
+import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
 import { HttpClient } from '@angular/common/http';
 
 @IonicPage()
@@ -11,12 +10,16 @@ import { HttpClient } from '@angular/common/http';
 export class ModalEficiencyPage {
 
   respuesta = false;
-
   uuid : any;
   image: any;
   title: any;
   message: any;
-  constructor(public navCtrl: NavController, public navParams: NavParams, public http: HttpClient, public viewCtrl: ViewController) {
+
+  constructor(
+    public navCtrl: NavController, 
+    public navParams: NavParams, 
+    public http: HttpClient, 
+    public viewCtrl: ViewController) {
 
   }
 

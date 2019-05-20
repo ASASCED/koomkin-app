@@ -22,16 +22,14 @@ export class RestProvider {
   leads_pagination_min;
   leads_pagination_max;
 
-  getDate(datefin,date){
+  getDate(){
     let currentDate = new Date();
     let twoDigitMonth=((currentDate.getMonth()+1)>=10)? (currentDate.getMonth()+1) : '0' + (currentDate.getMonth()+1);
     let twoDigitDate=((currentDate.getDate())>=10)? (currentDate.getDate()) : '0' + (currentDate.getDate());
     let DigitYear=(currentDate.getFullYear() - 1);
-
     this.datefin = currentDate.getFullYear() + "-" + twoDigitMonth + "-" + twoDigitDate;
     this.date = DigitYear + "-" + twoDigitMonth + "-" + twoDigitDate;
   }
-
 
   setUser(user: any) {
     this.user = user;

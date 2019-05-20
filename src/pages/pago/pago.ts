@@ -3,8 +3,7 @@ import { IonicPage, NavController, NavParams, ModalController, AlertController }
 import { Payment } from '../../models/Payment';
 import { UserProvider } from '../../providers/user/user';
 import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
-import { CancelarPage } from './../cancelar/cancelar';
-import { HttpHeaders, HttpClient } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import swal from 'sweetalert2';
 
 @IonicPage()
@@ -168,7 +167,7 @@ export class PagoPage implements OnInit{
   }
 
   mostrar_modal() {
-    let modal = this.modalCtrl.create(CancelarPage);
+    let modal = this.modalCtrl.create('CancelarPage');
     modal.present();
   }
 

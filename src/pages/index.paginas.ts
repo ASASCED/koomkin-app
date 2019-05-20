@@ -1,6 +1,5 @@
 export { SocialPage } from './social/social';
 export { EmailPage } from './email/email';
-export { FacturasPage } from './facturas/facturas';
 export { DatosPage } from './datos/datos';
 export { ReportePage } from './reporte/reporte';
 export { LeadsPage } from './leads/leads';

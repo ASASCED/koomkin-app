@@ -12,7 +12,7 @@ ion-modal {
         white-space: normal;
     }
     .btn-modal {
-        background: linear-gradient(to right, #3CCDBB, #33a4bc) !important;
+        background: #00B9BE !important;
         color: white;
         font-size: 11pt;
     }
@@ -27,7 +27,7 @@ ion-modal {
         font-size: 1em !important;
     }
     .blue {
-        color: #33a4bc;
+        color: #288AC1;
         font-weight: bold;
     }
     .text-center {
@@ -81,5 +81,9 @@ ion-modal {
 }
 
 .modal-wrapper .toolbar-background-ios {
-    background: linear-gradient(to right, #3CCDBB, #33a4bc) !important
+    background: #00B9BE !important;
+}
+
+.modal-wrapper .toolbar-background-md {
+    background: #00B9BE !important;
 }
