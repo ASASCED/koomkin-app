@@ -14,32 +14,11 @@
     background: white !important;
 }
 
-.toolbar-ios {
-    padding: 4px;
-    padding-left: 4px;
-    padding-right: 4px;
-    min-height: 44px;
-    background-color: #243e56 !important;
-}
-
-.item-ios p {
-    vertical-align: top;
-    margin-top: 1.7% !important;
-}
-
 .text {
     padding: 0 !important;
     color: slategrey !important;
     font-size: 3.3vh !important;
     display: inline-block !important;
-}
-
-.toolbar-ios-azul .toolbar-background-ios {
-    background: #243e56;
-}
-
-.header-ios .toolbar-ios:last-child .toolbar-background-ios {
-    border-width: 0 0 0;
 }
 
 .segment-md .segment-button.segment-activated {
@@ -63,11 +42,6 @@
 .salir {
     position: absolute !important;
     bottom: 0 !important;
-}
-
-.back-button-text-ios {
-    letter-spacing: -.01em;
-    color: black;
 }
 
 .alert-md .alert-message {
@@ -242,8 +216,4 @@ ion-icon {
 
 .range-md:not(.range-has-pin) .range-knob-handle .range-knob {
     transform: scale(1);
-}
-
-.range-ios .range-knob-handle .range-pin {
-    transform: translate3d(0, 0, 0) scale(1);
 }

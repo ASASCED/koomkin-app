@@ -1,28 +1,4 @@
 page-lead {
-
-    .segment-ios .segment-button.segment-activated {
-        color: white;
-        background-color: #00B9BE;
-        opacity: 1;
-        -webkit-transition: 100ms all linear;
-        transition: 100ms all linear;
-        border-color: #00B9BE;
-        font-size: 5vw;
-        text-transform: none;
-    }
-    
-    .segment-ios .segment-button {
-        color: #00B9BE;
-        background-color: transparent;
-        opacity: 1;
-        -webkit-transition: 100ms all linear;
-        transition: 100ms all linear;
-        border-color: #00B9BE;
-        background: white;
-        font-size: 5vw;
-        text-transform: none;
-    }
- 
     
     .segment-md .segment-button {
         color: white !important;
@@ -58,21 +34,6 @@ page-lead {
     margin-bottom: 1px rgba(0, 0, 0, 0.14);
     -webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
-}
-
-.back-button-icon-ios {
-    margin: -1px 0 0;
-    display: inherit;
-    min-width: 18px;
-    font-size: 3.4rem;
-    color: black;
-}
-
-.toolbar-ios .segment-button {
-    max-width: 40%;
-    height: 3.6rem;
-    font-size: 2.5vh;
-    line-height: 3.5rem;
 }
 
 .segment-md .segment-button {
@@ -127,14 +88,6 @@ ion-app.md [padding] .scroll-content {
     line-height: 1.5;
 }
 
-.label-ios {
-    margin: 0px !important;
-}
-
-.toggle-ios.toggle-checked .toggle-icon {
-    background-color: #00B9BE;
-}
-
 .row {
     margin-bottom: 1%;
 }
@@ -147,21 +100,14 @@ ion-app.md [padding] .scroll-content {
     font-size: 2.8vw !important;
 }
 
-.toolbar-background-ios {
-    //background: linear-gradient(to right, #, #33a4bc);
-    background: white;
-}
-
 .toolbar.md {
     min-height: 20px !important;
     padding: 2px;
 }
 
-.bar-button-default-ios,
-.bar-button-default.bar-button-ios-default,
-.bar-button-clear-ios-default {
-    color: black;
-    background-color: transparent;
+.toolbar-background-md {
+    border-color: #b2b2b2;
+    background: #243e56;
 }
 
 .complemento {

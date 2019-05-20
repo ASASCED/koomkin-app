@@ -120,11 +120,7 @@ export class LeadPage implements OnInit {
   public unidades;
   public datosenvio;
 
-  public clientUUID = this.authService.getClientUUID();
-  //llamada lead
-  //0 si la inicio el cliente
-  //1 si la inicio el lead
-
+  public clientUUID = this.authService.getClientUUID();  
   //Estatus llamadas
   llamadas: any = [];
   public llamada;
@@ -148,21 +144,17 @@ export class LeadPage implements OnInit {
   @ViewChild('chat_input') messageInput: ElementRef;
 
   private autoScroll(): MutationObserver {
-
     const autoScroller = new MutationObserver(this.scrollDown.bind(this));
     autoScroller.observe(this.messageContent, {
       childList: true,
       subtree: true
     });
-
     return autoScroller;
-
   }
 
   private get messageContent(): Element {
     return document.querySelector('.falling');
   }
-
 
   private scrollDown() {
     if (this.content && this.page === 'Chat') {
@@ -184,14 +176,12 @@ export class LeadPage implements OnInit {
   showEmojiPicker = false;
 
   openModalFuncionalidadPrueba() {
-
     const myModal = this.modal.create('ModalPage', { uuid: this.clientUUID }, { enableBackdropDismiss: false, cssClass: "Modal-prueba-chat" });
     myModal.present();
     myModal.onDidDismiss(() => {
       this.page = 'Lead';
       this.content.resize();
     });
-
   }
   
   openModalIniciarConversacion() {
@@ -210,9 +200,7 @@ export class LeadPage implements OnInit {
       }
       this.content.resize();
     });
-
   }
-
 
   chatPageExecutelogic() {
     return new Promise((resolve, reject) => {
@@ -247,8 +235,6 @@ export class LeadPage implements OnInit {
       });
     }
   }
-
-
 
   mostrarAlertaInicioSesionRequerido() {
 
@@ -312,9 +298,6 @@ export class LeadPage implements OnInit {
     this.page = tabName;
   }
 
-  ngOnDestroy(){
-  }
-
   ngOnInit() {
     this.chatService.msgListActualizada.subscribe(
       result => {
@@ -326,14 +309,14 @@ export class LeadPage implements OnInit {
             this.msgListLead = result;
             setTimeout(()=>{ this.scrollDown.bind(this)}, 5000);
           });
-        }else{
+        } else{
           var temp = result[0];
           if(temp){
             if(temp.type === 'media'){
               this.ngz.run(()=>{
                 setTimeout(()=>{ this.scrollDown.bind(this)}, 2500);
               });
-            }else{
+            } else{
             }
           }
           this.ngz.run(()=>{
@@ -353,7 +336,6 @@ export class LeadPage implements OnInit {
 
     this.getLeadCalls();
     this.getCheckLeadComplement();
-
     this.getCountLeadCalls()
     this.getUrlAudio();
     this.showCall();
@@ -366,6 +348,7 @@ export class LeadPage implements OnInit {
       this.chatPageExecutelogic()
     }
     if (this.chatService.chatClientStarted === true) {
+      console.log(this.leadActual.uuid);
       this.chatService.connectToChatChannel(this.leadActual.uuid);
     } else {
       setTimeout(() => {
@@ -377,8 +360,6 @@ export class LeadPage implements OnInit {
   }
 
   public fileTransfers: TransferObject = this.transfer.create();
-
-  ionViewDidLoad() { }
 
   constructor(
     private modal: ModalController,
@@ -399,14 +380,11 @@ export class LeadPage implements OnInit {
     public ngz:NgZone,
     public loadingCtrl: LoadingController
   ) {
-
     this.leadActual = navParams.data; // Obtenemos parametros de la página de LEADS
-    //this.chatService.updateMsgList([]); // Limpiamos el arreglo de mensajes por si hay de conversaciones anteriores
     if (this.leadActual.fechaContacto) {
       this.leadActual.fechaContacto = this.leadActual.fechaContacto.substring(0, 16)
       .replace(/^(\d{4})-(\d{2})-(\d{2})T(\d{5})$/g, '$3/$2/$1$4');
     }
-    // console.log(this.leadActual.fechaContacto);
     if (!this.leadActual.clave) {
       this.leadActual.clave = this.leadActual.ID_LEAD;  // Por si llega el Lead por notificación.
     }
@@ -415,7 +393,6 @@ export class LeadPage implements OnInit {
       this.authService.setNotificationActive(true);
     }
   }
-
 
   dismiss() {
     this.viewCtrl.dismiss();
@@ -499,7 +476,6 @@ export class LeadPage implements OnInit {
         err => {
           // console.log("Error occured");
         });
-
   }
 
   showConfirm() {
@@ -606,7 +582,6 @@ export class LeadPage implements OnInit {
     return new Promise(resolve => {
       const apiUrl2 = this.apiUrl + '/getLeadComplement/' + this.leadActual.clave;
       this.http.get(apiUrl2).subscribe(data => {
-        // // console.log(data);
         if (data == null || Object.keys(data).length == 0) {
           this.mensaje = this.leadActual.MENSAJE;
           this.urgencia = "No";
@@ -992,7 +967,6 @@ export class LeadPage implements OnInit {
 
   public changeLike(classification: string, lead) {
 
-
     switch (classification) {
       case 'L': {
         this.leadActual.calificaLead = 'true';
@@ -1019,7 +993,6 @@ export class LeadPage implements OnInit {
     this.http.get(this.apiUrl + "/calificaLead2/" + body.clave + '/' + body.classification + '/app')
       .subscribe(data => {
         this.calificacion = data[0].calificaLead;
-        // // console.log(this.calificacion);
       },
         err => {
           // console.log("Error occured");
@@ -1054,7 +1027,6 @@ export class LeadPage implements OnInit {
     this.http.get(this.apiUrl + "/calificaLead2/" + body.clave + '/' + body.classification + '/appchat')
       .subscribe(data => {
         this.calificacion = data[0].calificaLead;
-        // // console.log(this.calificacion);
       },
         err => {
           // console.log("Error occured");
@@ -1098,16 +1070,12 @@ export class LeadPage implements OnInit {
     } else if (this.platform.is('android')) {
       this.dispositivo = 'android';
     }
-    //   // console.log(usuario, this.dispositivo, acceso, id);
+    // console.log(usuario, this.dispositivo, acceso, id);
     this.provedor.getInsertClickLlamar(usuario, id, acceso, this.dispositivo).then((data) => {
       this.datosenvio = data;
     }, (err) => {
       // console.log('error');
     });
-  }
-
-  verUrl() {
-    //  // console.log(this.urlaudio);
   }
 
   startAudio() {
@@ -1123,19 +1091,6 @@ export class LeadPage implements OnInit {
   stopAudio() {
     this.streamingMedia.stopAudio();
   }
-
-  getCircularReplacer = () => {
-    const seen = new WeakSet();
-    return (key, value) => {
-      if (typeof value === "object" && value !== null) {
-        if (seen.has(value)) {
-          return;
-        }
-        seen.add(value);
-      }
-      return value;
-    };
-  };
 
   chooseFile(){
 
@@ -1178,8 +1133,6 @@ export class LeadPage implements OnInit {
         // console.log('then');
       }).catch(e =>{
         loading.dismiss();
-        // console.log('catch');
-        // console.log('Open error' + e);
       });
 
     }).catch((err)=>{

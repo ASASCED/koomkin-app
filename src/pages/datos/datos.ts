@@ -10,8 +10,8 @@ import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
 export class DatosPage {
 
   Usuario: any = 'UsuarioPage';
-  Email: any = 'SocialPage';
-  Social: any = 'EmailPage';
+  Email: any = 'EmailPage';
+  Social: any = 'SocialPage';
 
   public empresa;
   public id;

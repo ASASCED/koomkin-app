@@ -71,7 +71,6 @@ export class LeadsPage implements OnInit {
   }
 
   ngOnInit() {
-    // this.getLeadsArray();
     this.showBanner();
     this.getInsertClickPagina();
   }
@@ -94,9 +93,6 @@ export class LeadsPage implements OnInit {
       leadsArray[k].status = "exitosa";
       this.callMissed(leadsArray[k].uuid).then(status => {
         leadsArray[k].status = status;
-       /* if(leadsArray[k].status == 'perdida') {
-          leadsArray[k].clasificaLead = "M";
-        } */
       });
       leadsArray[k].perdida = "";
 
@@ -213,17 +209,13 @@ export class LeadsPage implements OnInit {
       );
   }
 
-  ionViewDidLoad() {}
-
   verLead(lead) {
     let acceso = "App";
-    // // console.log(lead.clave,lead.ID,acceso);
     this.navCtrl.push('LeadPage', lead);
     this.getInsertClickLead(lead.clave, lead.ID, acceso);
   }
 
   public changeLeido(lead) {
-    //// console.log(lead);
     const url = this.apiUrl + "/leerLead/" + lead.clave + "/" + lead.ID;
     this.http.get(url).subscribe(
       data => {
@@ -547,7 +539,6 @@ export class LeadsPage implements OnInit {
   }
 
   doRefresh(refresher: Refresher) {
-    //  console.info(this.leads_pagination_min, this.leads_pagination_max);
     this.provedor.getLeadsReportPagination(1, this.leads_pagination_max).then(
       (data: Array<Object>) => {
         if (data.length === 0) {
@@ -562,7 +553,6 @@ export class LeadsPage implements OnInit {
       }
     );
     setTimeout(() => {
-      // console.log("Async operation has ended");
       refresher.complete();
     }, 50);
   }
@@ -607,7 +597,6 @@ export class LeadsPage implements OnInit {
   }
 
   public getInsertClickLead(usuario, id, acceso) {
-    //  // console.log(usuario, id, acceso);
     this.restService.getInsertClickLead(id, usuario, acceso).then(
       data => {
         this.datosenvio = data;

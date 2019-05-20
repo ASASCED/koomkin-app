@@ -5,7 +5,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { HttpModule } from '@angular/http';
 import { File } from '@ionic-native/file';
 import { StreamingMedia } from '@ionic-native/streaming-media'
-import { SwipeSegmentDirective } from '../directives/swipe-segment/swipe-segment';
 import { IonicStorageModule } from '@ionic/storage';
 import { Network } from '@ionic-native/network';
 import { FileOpener } from '@ionic-native/file-opener';
@@ -17,10 +16,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { RestProvider } from './../providers/rest/rest';
 import { AuthServiceProvider } from '../providers/auth-service/auth-service';
 import { ChatServiceProvider } from '../providers/chat-service/chat-service';
-import { RelativeTimePipe} from "../pipes/relative-time/relative-time";
 import { UserProvider } from '../providers/user/user';
 import { Ng2GoogleChartsModule } from 'ng2-google-charts';
-import { CapitalizePipe } from '../pipes/capitalize/capitalize';
 import { Market } from '@ionic-native/market';
 import { Transfer } from '@ionic-native/transfer';
 import { HTTP } from '@ionic-native/http';

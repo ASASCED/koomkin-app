@@ -153,8 +153,9 @@ export class LoginPage implements OnInit {
           this.authService.setUserIsLogged(true);
           this.storage.set('email', this.email);
           this.storage.set('password', this.password);
-
+          
           if(data[0]['uuid']){
+            console.log('entro');
             this.iniciarClienteChatTwilio(data[0]['uuid']);
           }
           this.navCtrl.setRoot('InicioPage');

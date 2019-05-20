@@ -28,8 +28,9 @@ export class ChatServiceProvider {
               public loadingCtrl: LoadingController,
               public alertCtrl: AlertController,
               public sanitizer: DomSanitizer,
-              public storage: Storage,public file:File) {
-
+              public storage: Storage,
+              public file:File
+  ) {
     this.tc = {
       messagingClient: null,
       channelArray: [],
@@ -38,7 +39,6 @@ export class ChatServiceProvider {
       messageList: [],
       username: null
     };
-
   }
 
   updateMsgList(data: any){
@@ -49,8 +49,8 @@ export class ChatServiceProvider {
     this.connectClientWithUsername(uuid).then(()=>{
       this.chatClientStarted = true;
     }).catch(function(error) {
-      //alert(error);
-      //window.location.reload();
+      // alert(error);
+      // window.location.reload();
       // console.log(("connectclient" +JSON.stringify(error, Object.getOwnPropertyNames(error))));
     });
   }
@@ -70,7 +70,6 @@ export class ChatServiceProvider {
       this.http.post('https://www.koomkin.com.mx/chat/token' , {device: "mobile", identity: username})
         .subscribe(data => {
           var token = data['token'];
-          //alert(token);
           handler(token);
           return resolve();
         }, err => {
@@ -81,7 +80,6 @@ export class ChatServiceProvider {
   }
 
   connectMessagingClient(token) {
-
     var self = this;
     self.tc.messagingClient = new window["TwilioChat"].Client(token);
     self.accessManager = window["TwilioCommon"].AccessManager(token);
@@ -93,7 +91,6 @@ export class ChatServiceProvider {
         // console.log(("" +JSON.stringify(error, Object.getOwnPropertyNames(error))));
       });
   }
-
 
   refreshToken() {
     var self = this;
@@ -117,7 +114,7 @@ export class ChatServiceProvider {
   }
 
   connectToChatChannel(channel_uniqueName: string) {
-    //alert(channel_uniqueName);
+    alert(channel_uniqueName);
     let self = this;
     this.updateMsgList([]);
     self.tc.messagingClient.getChannelByUniqueName(channel_uniqueName).then((channel) => {
@@ -205,9 +202,7 @@ export class ChatServiceProvider {
     }).catch((error) => {
       self.loadingMessagesSource.next(false);
       });
-
   }
-
 
   joinChannel(_channel) {
     const self = this;
@@ -254,7 +249,7 @@ export class ChatServiceProvider {
         var last = arr[arr.length-1];
         var storedConversationSize = storedConversation.length;  // longitud de la conversación (local)
         var lastStoredMessageIndex = last['index'];
-      }else{
+      } else{
       }
 
       self.tc.currentChannel.getMessages(self.MESSAGES_HISTORY_LIMIT).then((messages)=> { // Extraer mensajes del canal
@@ -268,7 +263,7 @@ export class ChatServiceProvider {
           if(data){
             if (message.index in arr) { // si ya esta el mensaje guardado
               continue; // Salta esta iteracion.
-            }else{
+            } else{
               //alert('adding message');
             }
           }
@@ -412,10 +407,7 @@ export class ChatServiceProvider {
             channel: message.channel.sid
           };
         }
-
         arr.push(messageGUI);
-
-
       }
       this.msgListSource.next(arr);
       return Promise.resolve(arr);
@@ -476,7 +468,6 @@ export class ChatServiceProvider {
     alert.present();
   }
 
-
   getAwsLeadImageUrl(message){
 
     var url = message.attributes.file_url;
@@ -493,7 +484,6 @@ export class ChatServiceProvider {
       }
     });
   }
-
 
   getTwilioImageUrl(message){
 
