@@ -41,13 +41,13 @@ export class EmailPage implements OnInit {
     public alertCtrl: AlertController
   ) {
     this.id = this.authService.id;
-    this.email = this.authService.email;
     this.uuid = this.authService.uuid;
     this.pdf = this.id + ".pdf";
   }
 
   ngOnInit() {
     this.vista = "informacion";
+    this.getMailCliente(this.id);
   }
 
   changePage(pagina) {
@@ -58,8 +58,9 @@ export class EmailPage implements OnInit {
     this.provedor.getMailCliente(idUsuario).then(
       data => {
         this.datos = data;
-        // console.log(this.datos);
+        console.log(this.datos);
         if (this.datos[0]) {
+          this.email = this.datos[0].email;
           this.facebook = this.datos[0].facebook;
           this.instagram = this.datos[0].instagram;
           this.linkedIn = this.datos[0].linkedin;
@@ -98,13 +99,7 @@ export class EmailPage implements OnInit {
   changeInfo() {
     const body = new URLSearchParams();
     body.set("id_usuario", this.id);
-    body.set("saludo", this.saludo);
-    body.set("instagram", this.instagram);
-    body.set("facebook", this.facebook);
-    body.set("web", this.web);
-    body.set("linkedin", this.linkedIn);
-    body.set("twitter", this.twitter);
-    body.set("tipo", "1");
+    body.set("message", this.saludo);
 
     const options = {
       headers: new HttpHeaders().set(
@@ -113,9 +108,9 @@ export class EmailPage implements OnInit {
       )
     };
 
-    this.http.post(this.apiUrl, body.toString(), options).subscribe(
+    this.http.post('https://www.koomkin.com.mx/mailing/update_message/', body.toString(), options).subscribe(
       data => {
-        // // console.log(JSON.stringify(data));
+        console.log(data);
         this.showSuccess();
       },
       err => {
@@ -127,6 +122,59 @@ export class EmailPage implements OnInit {
         }
       }
     );
+  }
+
+  changeMail() {
+    const body = new URLSearchParams();
+    body.set('id_usuario', this.id);
+    body.set('email', this.email);
+
+    const options = {
+      headers: new HttpHeaders().set(
+        'Content-Type',
+        'application/x-www-form-urlencoded'
+      )
+    };
+
+    this.http.post('https://www.koomkin.com.mx/mailing/update_email/', body.toString(), options).subscribe(
+      data => {
+        console.log(data);
+        // console.log(JSON.stringify(data), 'enviado');
+      },
+      err => {
+        // console.log(err);
+        if (err.status === 200) {
+          this.showSuccess();
+        } else {
+          this.showError();
+        }
+      }
+    );
+  }
+
+  enviarVistaPrevia() {
+
+    const body = new URLSearchParams();
+    body.set('user_uuid', this.uuid);
+
+    const options = {
+      headers: new HttpHeaders().set(
+        'Content-Type',
+        'application/x-www-form-urlencoded'
+      )
+    };
+
+    this.http.post('https://www.koomkin.com.mx/mailing/preview/', body.toString(), options).subscribe(
+      data => {
+        this.showSuccessP();
+
+      }, err => {
+        if (err.status === 200) {
+          this.showSuccessP();
+        } else {
+          this.showErrorP();
+        }
+      });
   }
 
   mostrarAlertaEstatusPdf(title, subTitle) {
@@ -222,68 +270,11 @@ export class EmailPage implements OnInit {
     });
   }
 
-  changeMail() {
-    // console.log(this.email);
-    const body = new URLSearchParams();
-    body.set('id_usuario', this.id);
-    body.set('correo', this.email);
-    body.set('tipo', '3');
-    const options = {
-      headers: new HttpHeaders().set(
-        'Content-Type',
-        'application/x-www-form-urlencoded'
-      )
-    };
-
-    this.http.post(this.apiUrl, body.toString(), options).subscribe(
-      data => {
-        // console.log(JSON.stringify(data), 'enviado');
-      },
-      err => {
-        // console.log(err);
-      }
-    );
-  }
-
-  enviarVistaPrevia() {
-
-    const body = new URLSearchParams();
-    body.set('id_usuario', this.uuid);
-    body.set('tipo_correo', '2');
-    body.set('asunto', 'Vista Previa');
-
-    const options = {
-      headers: new HttpHeaders().set(
-        'Content-Type',
-        'application/x-www-form-urlencoded'
-      )
-    };
-
-    this.http.put(this.apiUrl, body.toString(), options)
-      .subscribe(data => {
-        this.showSuccessP();
-
-      }, err => {
-        if (err.status === 200) {
-          this.showSuccessP();
-        } else {
-          this.showErrorP();
-        }
-      });
-  }
-
-
   public cambioInformacion() {
     const canal = "app";
     const tipo = "email-plantilla";
     return new Promise((resolve, reject) => {
-      const url =
-        "https://www.koomkin.com.mx/api/app/clickCambioInformacion/" +
-        this.id +
-        "/" +
-        canal +
-        "/" +
-        tipo;
+      const url = "https://www.koomkin.com.mx/api/app/clickCambioInformacion/" + this.id + "/" + canal + "/" + tipo;
       this.http.get(url).subscribe(
         data => {
           resolve();

@@ -100,6 +100,7 @@
         "tedious": "^2.1.1",
         "tedious-promises": "^0.4.1",
         "ts-md5": "^1.2.4",
+        "twilio-chat": "^3.2.3",
         "underscore": "^1.8.3",
         "zone.js": "0.8.18"
     },

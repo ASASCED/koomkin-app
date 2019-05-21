@@ -74,11 +74,8 @@ export class UsuarioPage implements OnInit {
   ) {
     this.id = this.authService.id;
     this.recurrente = this.authService.recurrente;
-    console.log( this.recurrente);
     this.tipo = "13";
     this.cancelar = this.authService.cancelar;
-    console.log( this.cancelar);
-
   }
 
   ngOnInit() {
@@ -171,7 +168,7 @@ export class UsuarioPage implements OnInit {
 
   public getPaymentData() {
     this.userService
-      .userRequest("/datosPagos?id=" + this.id)
+      .userRequest("datosPagos?id=" + this.id)
       .then((payments: [Payment]) => {
         this.paymentData = payments;
         // // console.log(this.userFiscal);
@@ -202,14 +199,7 @@ export class UsuarioPage implements OnInit {
   }
 
   updateUser() {
-    const str =
-      `actualizarUsuario?nombre=${this.nombre}&apaterno=${
-        this.paterno
-      }&amaterno=${this.materno}&empresa=` +
-      `${this.empresa}&email=${this.email}&telefono=${this.telefono}&celular=${
-        this.celular
-      }` +
-      `&uid=${this.id}`;
+    const str = `actualizarUsuario?nombre=${this.nombre}&apaterno=${this.paterno}&amaterno=${this.materno}&empresa=` + `${this.empresa}&email=${this.email}&telefono=${this.telefono}&celular=${this.celular}` + `&uid=${this.id}`;
     // // console.log(str);
     this.userService
       .updateUserData(str)
@@ -225,8 +215,8 @@ export class UsuarioPage implements OnInit {
 
   updateMessage(mensaje) {
     const body = new URLSearchParams();
-    body.set("id", this.uuid);
-    body.set("mensaje", mensaje);
+    body.set("uuid", this.uuid);
+    body.set("message", mensaje);
 
     const options = {
       headers: new HttpHeaders().set(
@@ -235,11 +225,11 @@ export class UsuarioPage implements OnInit {
       )
     };
 
-    const url = "hhttps://koomkin.com.mx/call-tracking/api/v1/extra-info/";
+    const url = "https://www.koomkin.com.mx/bot/update_message/";
     return new Promise((resolve, reject) => {
       this.http.post(url, body.toString(), options).subscribe(
         data => {
-          return resolve();
+          return resolve(data);
         },
         err => {
           return resolve(err);
@@ -250,11 +240,8 @@ export class UsuarioPage implements OnInit {
 
   public cambiarMensaje(mensaje) {
     return new Promise((resolve, reject) => {
-      const url =
-        "https://www.koomkin.com.mx/api/app/cambiarMensaje/" +
-        this.id +
-        "/App/" +
-        mensaje;
+      const url = "https://www.koomkin.com.mx/api/app/cambiarMensaje/" + this.id + "/App/" + mensaje;
+
       this.http.get(url).subscribe(
         data => {
           resolve();

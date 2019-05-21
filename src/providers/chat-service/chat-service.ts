@@ -114,7 +114,7 @@ export class ChatServiceProvider {
   }
 
   connectToChatChannel(channel_uniqueName: string) {
-    alert(channel_uniqueName);
+    // alert(channel_uniqueName);
     let self = this;
     this.updateMsgList([]);
     self.tc.messagingClient.getChannelByUniqueName(channel_uniqueName).then((channel) => {
@@ -528,14 +528,3 @@ export class ChatMessage {
   index: any;
   channel: any;
 }
-
-
-
-
-
-
-
-
-
-
-

@@ -35,8 +35,6 @@ export class ModalPageIniciarChatPage {
 
     const body = new URLSearchParams();
     body.set("uuid", this.uuid);
-    body.set("tipo", "2");
-    body.set("empieza_lead", "0");
 
     const options = {
       headers: new HttpHeaders().set(
@@ -45,12 +43,11 @@ export class ModalPageIniciarChatPage {
       )
     };
 
-    const url = "https://www.koomkin.com.mx/call-tracking/api/v1/scheduler/";
+    const url = "https://www.koomkin.com.mx/chat/send_coach/";
     return new Promise((resolve, reject) => {
       this.http.post(url, body.toString(), options).subscribe(
         data => {
-          //alert(JSON.stringify(data));
-
+          console.log(data);
           if (data["status"] == 200) {
             this.viewCtrl.dismiss(true);
           } else {
@@ -59,14 +56,11 @@ export class ModalPageIniciarChatPage {
           return resolve();
         },
         err => {
-          //alert(JSON.stringify(err));
-
-          if (err.status == 200) {
+          if (err["status"] == 200) {
             this.viewCtrl.dismiss(true);
           } else {
             this.viewCtrl.dismiss(false);
           }
-
           return resolve(err);
         }
       );

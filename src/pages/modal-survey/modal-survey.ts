@@ -37,14 +37,18 @@ export class ModalSurveyPage implements OnInit {
     private menuCtrl: MenuController
   ) {
     this.tipoBanner = navParams.get("tipo");
+    console.log(this.tipoBanner);
     this.idReporteBanner = navParams.get("idReporteBanner");
+    
     this.uuid = this.authService.uuid;
     this.id = this.authService.id;
   }
 
   ngOnInit() {
     this.getSurvey(this.tipoBanner);
-    this.registrarEntradaBanner();
+    if (this.tipoBanner != 13) {
+      this.registrarEntradaBanner();
+    }
   }
 
   ionViewDidEnter() {

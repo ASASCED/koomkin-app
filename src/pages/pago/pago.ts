@@ -143,7 +143,7 @@ export class PagoPage implements OnInit{
   }
 
   public getPaymentData() {
-    this.userService.userRequest('/datosPagos?id=' + this.id)
+    this.userService.userRequest('datosPagos?id=' + this.id)
       .then((payments: [Payment]) => {
         this.paymentData = payments;
         // // console.log(this.userFiscal);

@@ -102,13 +102,12 @@ export class SocialPage implements OnInit{
 
     const body = new URLSearchParams();
     body.set('id_usuario', this.id);
-    body.set('saludo', this.saludo);
     body.set('instagram', this.instagram);
     body.set('facebook', this.facebook);
     body.set('web', this.web);
     body.set('linkedin', this.linkedIn);
     body.set('twitter', this.twitter);
-    body.set('tipo', '2');
+
     const options = {
       headers: new HttpHeaders().set(
         'Content-Type',
@@ -116,7 +115,7 @@ export class SocialPage implements OnInit{
       )
     };
 
-    const url = 'https://www.koomkin.com.mx/call-tracking/api/v1/mailing/';
+    const url = 'https://www.koomkin.com.mx/mailing/update_social_media/';
     // console.log(url, body.toString(), options);
       this.http.post(url, body.toString(), options).subscribe(
         data => {

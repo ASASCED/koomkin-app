@@ -1,13 +1,9 @@
 <ion-header>
   <ion-navbar color="azul">
-      <button ion-button menuToggle>
-        <ion-icon name="menu"></ion-icon>
-      </button>
       <ion-title>Empresa: {{empresa}}
           <br>ID Cliente: {{id}}</ion-title>
   </ion-navbar>
 </ion-header>
-
 
 <ion-content>
   <div class="encuesta-container">
@@ -98,9 +94,7 @@
               </div>  
             </button>
           </div>
-
         <button class="guardar-brief" (click)="changeEdit(0)">Editar</button>
-
     </div>
     <div class="activity-content-container" *ngIf="editar == 1">
         <p class="titulo-brief">Producto/Servicio Principal</p>
@@ -185,9 +179,7 @@
             </div>  
           </button>
         </div>
-
         <button class="guardar-brief" (click)="changeEdit(1);enviarInfo()">Guardar Configuración</button>
-
     </div>
     <hr style="background-color: #fff;
     border-top: 2px dashed #8c8b8b;">
@@ -197,7 +189,6 @@
           <ion-label class="informacion-brief" style="opacity: 1 !Important;">Más información</ion-label>
           <ion-toggle *ngIf="lleno === false" disabled color="secondary" [(ngModel)]="mas_informacion" class="informacion-brief" (ionChange)="pagina()"></ion-toggle>
           <ion-toggle *ngIf="lleno === true" color="secondary" [(ngModel)]="mas_informacion" class="informacion-brief" (ionChange)="pagina()"></ion-toggle>
-
       </ion-item>
     </div>
   </div>

@@ -212,7 +212,6 @@ export class LeadPage implements OnInit {
             }
             return resolve();
           } else {
-            this.leerChat();
             return resolve();
           }
         } else {
@@ -281,19 +280,6 @@ export class LeadPage implements OnInit {
     }
   }
 
-  public leerChat() {
-
-    const url = 'https://www.koomkin.com.mx/chat/api/read-messages/';
-    return new Promise((resolve, reject) => {
-      this.http.post(url + this.leadActual.uuid, { device: "app" })
-        .subscribe(data => {
-          return resolve();
-        }, err => {
-          return resolve(err);
-        });
-    });
-  }
-
   onTabChanged(tabName) {
     this.page = tabName;
   }
@@ -338,7 +324,6 @@ export class LeadPage implements OnInit {
     this.getCheckLeadComplement();
     this.getCountLeadCalls()
     this.getUrlAudio();
-    this.showCall();
   }
 
   ionViewDidEnter() {
@@ -404,28 +389,27 @@ export class LeadPage implements OnInit {
     //  // console.log(this.leadActual);
   }
 
-  public getLlamada() {
-    return new Promise(resolve => {
-      this.http.get(this.apiUrl3 + this.leadActual.uuid).subscribe(data => {
-        // console.log(data);
-        this.tel = JSON.stringify(data);
-      }, err => {
-        //     // console.log(err);
-      });
-    });
-  }
+  public callClient() {
 
-  public showCall() {
+    const body = new URLSearchParams();
+    body.set("uuid", this.leadActual.uuid);
+    body.set("canal", 'reporte-app');
+
     const options = {
-      headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
+      headers: new HttpHeaders().set(
+        "Content-Type",
+        "application/x-www-form-urlencoded"
+      )
     };
-    const url = 'https://koomkin.com.mx/call-tracking/api/v1/data-app/?id=' + this.leadActual.uuid + '&md=app';
-    // console.log(url);
+
+    const url = 'https://koomkin.com.mx/calltracker/calling/';
+
     return new Promise(resolve => {
-      this.http.post(url, options).subscribe(data => {
+      this.http.post(url,body.toString(), options).subscribe(data => {
+        console.log(data);
         resolve(data);
       }, err => {
-        this.tel = err.error.text;
+        console.log(err);
       });
     });
   }
@@ -493,7 +477,7 @@ export class LeadPage implements OnInit {
       text: 'Aceptar',
       cssClass: 'exit-button',
       handler: () => {
-        this.getLlamada();
+        this.callClient();
         this.FbotonOn();
         // console.log('Agree clicked');
       }
@@ -544,7 +528,6 @@ export class LeadPage implements OnInit {
   }
 
   public getCountLeadCalls() {
-    //this.http.get(this.apiUrl + '/getCountLeadCalls/265850').subscribe(data => {
     this.http.get(this.apiUrl + '/getCountLeadCalls/' + this.leadActual.clave).subscribe(data => {
       //// console.log(data);
       this.llamada = data;

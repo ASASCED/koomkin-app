@@ -264,7 +264,6 @@ export class MembresiaPage {
   }  
 
   public getUpgradeMembership() {
-    console.log(this.idRecurrente, this.uuidRecurrente, this.selectedAmount );
     this.provedor.getUpdateMembership(this.idRecurrente, this.uuidRecurrente, this.selectedAmount) 
       .then(
         (data) => {
@@ -293,7 +292,6 @@ export class MembresiaPage {
   }  
 
   public getCancelUpgradeMembership() {
-    console.log(this.idRecurrente);
     this.provedor.getCancelUpdateMembership(this.idRecurrente) 
       .then(
         (data) => {

@@ -4,6 +4,7 @@ import { RestProvider } from "../../providers/rest/rest";
 import { HttpClient } from "@angular/common/http";
 import { AuthServiceProvider } from "../../providers/auth-service/auth-service";
 import { AlertController, InfiniteScroll, Content } from "ionic-angular";
+import { HttpHeaders } from '@angular/common/http';
 
 @IonicPage()
 @Component({
@@ -634,7 +635,7 @@ export class LeadsPage implements OnInit {
       text: "Aceptar",
       cssClass: "exit-button",
       handler: () => {
-        this.getLlamada(lead);
+        this.callClient(lead);
         // console.log("Agree clicked");
       }
     };
@@ -647,16 +648,28 @@ export class LeadsPage implements OnInit {
     confirm.present();
   }
 
-  public getLlamada(lead) {
+  public callClient(lead) {
+
+    const body = new URLSearchParams();
+    body.set("uuid", lead.uuid);
+    body.set("canal", 'reporte-app');
+
+    const options = {
+      headers: new HttpHeaders().set(
+        "Content-Type",
+        "application/x-www-form-urlencoded"
+      )
+    };
+
+    const url = 'https://koomkin.com.mx/calltracker/calling/';
+
     return new Promise(resolve => {
-      this.http.get(this.apiUrl3 + lead.uuid).subscribe(
-        data => {
-          resolve(data);
-        },
-        err => {
-          // console.log(err);
-        }
-      );
+      this.http.post(url,body.toString(), options).subscribe(data => {
+        console.log(data);
+        resolve(data);
+      }, err => {
+        console.log(err);
+      });
     });
   }
 
