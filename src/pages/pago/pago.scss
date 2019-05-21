@@ -50,6 +50,7 @@ page-pago {
         cursor: pointer;
         padding: 3%;
         width: 45%;
+        box-shadow: 8px 8px 10px -6px rgba(0, 0, 0, .9);
     }
     select {
         font-size: 16px;
@@ -75,6 +76,6 @@ page-pago {
         width: 99%;
         cursor: pointer;
         box-shadow: none;
-            color: #606060;
+        color: #606060;
     }
 }
