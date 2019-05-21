@@ -58,7 +58,6 @@ export class EmailPage implements OnInit {
     this.provedor.getMailCliente(idUsuario).then(
       data => {
         this.datos = data;
-        console.log(this.datos);
         if (this.datos[0]) {
           this.email = this.datos[0].email;
           this.facebook = this.datos[0].facebook;
