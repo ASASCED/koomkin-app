@@ -12,6 +12,7 @@ export class DatosPage {
   Usuario: any = 'UsuarioPage';
   Email: any = 'EmailPage';
   Social: any = 'SocialPage';
+  Pago: any = 'PagoPage';
 
   public empresa;
   public id;
