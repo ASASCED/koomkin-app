@@ -1,13 +1,7 @@
 page-login {
     .login-content {
-       // background-image: linear-gradient(#005999,#288AC1, #00B9BE);
-        background:#005999;
-        background-attachment: fixed;
-        background-repeat: no-repeat;
-        background-size: cover;
-        .logo-row {
-            padding-top: 30%;
-        }
+        background-image: linear-gradient( #00B9BE ,#005999 40%);
+        // background:url('../../assets/imgs/login/bck_login.svg');
         .alert-md .alert-button-group {
             -webkit-flex-wrap: wrap-reverse;
             -ms-flex-wrap: wrap-reverse;
@@ -24,15 +18,16 @@ page-login {
             text-align: center;
         }
         .bienvenido {
-            font-size: 1.6rem;
+            font-size: 2.4rem;
             color: white;
             padding: 0%;
+            margin: 0%;
         }
         .inicio {
             color: white;
-            font-size: 3.3rem;
+            font-size: 2.6rem;
             font-weight: bold;
-            margin: 5%;
+            margin: 0%;
         }
         .olvidaste {
             color: white;
@@ -42,6 +37,7 @@ page-login {
             margin: 2%;
             background: none;
             border: none;
+            margin-right: 5%;
         }
         .item-md {
             padding-left: 0;
@@ -74,6 +70,8 @@ page-login {
             margin-bottom: 10px;
             border: 3px solid #ffffff !important;
             background: transparent;
+            width: 90%;
+            margin-left: 5%;
         }
         .signup-col {
             margin: 0px 16px 0px 16px;
@@ -82,6 +80,10 @@ page-login {
         .submit-btn {
             background: #00B9BE;
             border-radius: 15px;
+            width: 90%;
+            margin-left: 5%;
+            box-shadow: 10px 10px 13px -6px rgba(0,0,0,0.75);
+
         }
         .register-btn {
             color: #ffffff;

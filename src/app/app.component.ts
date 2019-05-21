@@ -33,8 +33,6 @@ export class MyApp {
   membresia = 'MembresiaPage';
   datosFinancieros = 'DatosFinancierosPage';
 
-  apiUrl1 = 'https://fierce-spire-89861.herokuapp.com';
-  apiUrl0 = 'http://localhost:3000';
   apiUrl = 'https://www.koomkin.com.mx/api/app';
 
   pages: Array<{ title: string, component: any }>;
