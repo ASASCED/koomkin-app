@@ -207,11 +207,9 @@ export class EmailPage implements OnInit {
         formData.append(file.name, blob, file.name);
         this.chatService.tc.currentChannel.sendMessage(formData).then(() => {
           loading.present().then(() => {
-            this.chatService.tc.currentChannel
-              .getMessages()
+            this.chatService.tc.currentChannel.getMessages()
               .then(messagesPaginator => {
-                const message =
-                  messagesPaginator.items[messagesPaginator.items.length - 1];
+                const message = messagesPaginator.items[messagesPaginator.items.length - 1];
                 if (message.type === "media") {
                   message.media
                     .getContentUrl()
@@ -231,6 +229,7 @@ export class EmailPage implements OnInit {
                         )
                         .subscribe(
                           data => {
+                            this.chatService.disconnectAuxiliarChannel();
                             loading.dismiss();
                             this.mostrarAlertaEstatusPdf(
                               "Carta Presentación",
@@ -239,6 +238,7 @@ export class EmailPage implements OnInit {
                             //alert('enviado a whatsapp'+ JSON.stringify(data));
                           },
                           err => {
+                            this.chatService.disconnectAuxiliarChannel();
                             loading.dismiss();
                             if (err.status === 200) {
                               this.mostrarAlertaEstatusPdf(
@@ -259,14 +259,13 @@ export class EmailPage implements OnInit {
                       loading.dismiss();
                     });
                 }
-              })
-              .catch(() => {
+              }).catch(() => {
                 loading.dismiss();
               });
-          });
-        });
+          }).catch(reason => {console.log(reason)});
+        }).catch(reason=>{console.log(reason)});
       })();
-    });
+    }).catch(reason => {console.log(reason)});
   }
 
   public cambioInformacion() {

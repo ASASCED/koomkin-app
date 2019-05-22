@@ -113,6 +113,15 @@ export class ChatServiceProvider {
     });
   }
 
+  disconnectAuxiliarChannel() {
+
+    this.leaveCurrentChannel().then((data) => {
+      console.log(data);
+    }).catch(reason => {console.log(reason)});
+
+  }
+
+
   connectToChatChannel(channel_uniqueName: string) {
     // alert(channel_uniqueName);
     let self = this;
