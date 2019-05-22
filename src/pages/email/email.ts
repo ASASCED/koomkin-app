@@ -26,7 +26,7 @@ export class EmailPage implements OnInit {
   public twitter;
   public uuid;
 
-  apiUrl = 'https://www.koomkin.com.mx/call-tracking/api/v1/mailing/';
+  apiUrl = 'https://www.koomkin.com.mx/mailing/update_pdf/';
 
   channelsidaux = "CHbc465fbe83434937b7382db97e8896b1";
 
