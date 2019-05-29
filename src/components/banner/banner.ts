@@ -44,7 +44,7 @@ export class BannerComponent implements OnInit {
       this.recurrente = this.authService.recurrente;
       this.idRecurrente = this.authService.idRecurrente;
       this.uuidRecurrente = this.authService.uuidRecurrente;
-      console.log(this.recurrente, this.description);
+      console.log(this.idRecurrente, this.uuidRecurrente);
     }
 
   ngOnInit() {
