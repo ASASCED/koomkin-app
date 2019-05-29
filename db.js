@@ -120,14 +120,14 @@ db.executeGetLeadsPagination = function (id, finicio, ffin, filtro, command, min
 
     return new Promise((resolve, reject) => {
         tp.sql(requestStr)
-            .execute()
-            .then(results => {
-                resolve(results);
-            })
-            .catch(err => {
-                console.log(err);
-                reject(err);
-            });
+          .execute()
+          .then(results => {
+            resolve(results);
+          })
+          .catch(err => {
+            console.log(err);
+            reject(err);
+          });
     });
 };
 
@@ -1419,17 +1419,19 @@ db.executeLastUpdateMembership = function (RecurringPaymentID, RecurringPaymentU
 db.executeUpdateMembership = function (RecurringPaymentID, RecurringPaymentUUID, amount) {
 
     const requestStr = `insert into RecurringPaymentUpsell (RecurringPaymentID,RecurringPaymentUUID,Amount,Enabled,RegistrationDate)
-    VALUES (${RecurringPaymentID},'${RecurringPaymentUUID}','${amount}',1,GETDATE());`;
-        return new Promise((resolve, reject) => {
-            tp.sql(requestStr)
-                .execute()
-                .then(results => {
-                    resolve(results);
-                })
-                .catch(err => {
-                    console.log(err);
-                    reject(err);
-                });
+    VALUES (${RecurringPaymentID},'${RecurringPaymentUUID}','${amount}',1,GETDATE());
+    
+    select top 1 * from RecurringPaymentUpsell where RecurringPaymentID = ${RecurringPaymentID} and RecurringPaymentUUID = '${RecurringPaymentUUID}' order by ID desc`;
+        
+    return new Promise((resolve, reject) => {
+        tp.sql(requestStr)
+        .execute()
+        .then(results => {
+            resolve(results);
+        })
+        .catch(err => {
+            reject(err);
+        });
     });
 };
 

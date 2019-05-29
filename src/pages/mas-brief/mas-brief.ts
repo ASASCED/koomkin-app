@@ -1,4 +1,4 @@
-import { Component, OnInit,ViewChild } from '@angular/core';
+import { Component,ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController, Slides, SegmentButton, App } from 'ionic-angular';
 import { RestProvider } from '../../providers/rest/rest';
 import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
@@ -124,7 +124,6 @@ export class MasBriefPage {
       }
     ];
   
-    
       constructor(
         public navCtrl: NavController,
         public navParams: NavParams,
@@ -167,7 +166,6 @@ export class MasBriefPage {
         this.categoria = navParams.get('categoria');
         this.sectores = navParams.get('sectores');
         
-        console.log(this.sectores);
         if (this.sectores !== null && this.sectores !== 'null' && this.sectores !== undefined && this.sectores !== '') {
           this.sectores = this.sectores.split(',');
         }
@@ -269,10 +267,8 @@ export class MasBriefPage {
       updateBriefDatos() {
 
         this.positions.forEach(element=> {
-          console.log(this.idpuesto);
           if(element['nombre'] == this.idpuesto) {
             this.id_puesto = element['id'];
-            console.log(this.id_puesto);
           }
         });
 
@@ -578,7 +574,6 @@ export class MasBriefPage {
           data => {
             this.datos = data;
             this.idCampania = this.datos[0].IDCampania;
-            console.log(this.idCampania);
           },
           err => {
             //   // console.log('error');

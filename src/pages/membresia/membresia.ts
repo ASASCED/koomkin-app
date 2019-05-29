@@ -263,6 +263,28 @@ export class MembresiaPage {
     });
   }  
 
+  public immediateUpsell() {
+    const cuerpo = `{'user_id': '${this.id}', 'upsell_id': '${this.id}'}`;
+
+    const options = {
+      headers: new HttpHeaders().set(
+        'Content-Type',
+        'application/json'
+      )
+    };
+    return new Promise((resolve, reject) => {
+      const url = 'https://www.koomkin.com.mx/api/openPay/immediateUpsell';
+      this.http.post(url, cuerpo, options).subscribe(
+        data => {
+          console.log(resolve);
+        },
+        err => {
+          console.log(err);
+        }
+      );
+    });
+  }
+
   public getUpgradeMembership() {
     this.provedor.getUpdateMembership(this.idRecurrente, this.uuidRecurrente, this.selectedAmount) 
       .then(
