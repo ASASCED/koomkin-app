@@ -9,7 +9,7 @@ import swal from 'sweetalert2';
   selector: 'page-mas-brief',
   templateUrl: 'mas-brief.html',
 })
-export class MasBriefPage implements OnInit{
+export class MasBriefPage {
 
     @ViewChild('loopSlider') sliderComponent: Slides;
   
@@ -45,13 +45,16 @@ export class MasBriefPage implements OnInit{
     public idCampania;
     public datos;
     mas_informacion: boolean = false;
-    // Varios ingresos
+
+    // Multiples ingresos
     public ingresosArray = [];
     public ultIngresosArray;
     public ingresosBajo;
     public ingresosMedio;
     public ingresosMedioAlto;
     public ingresosAlto;
+
+    // Multiples edades
     public edadArray = [];
     public ultEdadArray;
     public edad18;
@@ -59,6 +62,18 @@ export class MasBriefPage implements OnInit{
     public edad33;
     public edad41;
     public edad55;
+      
+    // Multiples Sectores
+    public sectorArray = [];
+    public ultSectorArray;
+    public privado;
+    public gobierno;
+
+    // Multiples Categorias
+    public categoriaArray = [];
+    public ultCategoriaArray;
+    public pyme;
+    public corporativo;
 
     public positions = [
       {id: 1, nombre: 'Socio'},
@@ -152,6 +167,7 @@ export class MasBriefPage implements OnInit{
         this.categoria = navParams.get('categoria');
         this.sectores = navParams.get('sectores');
         
+        console.log(this.sectores);
         if (this.sectores !== null && this.sectores !== 'null' && this.sectores !== undefined && this.sectores !== '') {
           this.sectores = this.sectores.split(',');
         }
@@ -184,7 +200,6 @@ export class MasBriefPage implements OnInit{
         } 
 
         if (this.edad !== null && this.edad !== undefined && this.edad !== 'null' && this.edad !== ''  ) {
-          console.log('entro edad' );
 
           if ( this.edad.includes('18-25 años') ) {
             this.edad18 = true;
@@ -212,16 +227,35 @@ export class MasBriefPage implements OnInit{
           }
         } 
 
-        
+        if (this.categoria !== null && this.categoria !== undefined && this.categoria !== 'null' && this.categoria !== ''  ) {
+          if ( this.categoria.includes('PYME') ) {
+            this.pyme = true;
+            this.categoriaArray.push('PYME');
+          } 
+
+          if ( this.categoria.includes('Corporativo') ) {
+            this.corporativo = true;
+            this.categoriaArray.push('Corporativo');
+          } 
+        } 
+
+        if (this.sector !== null && this.sector !== 'null' && this.sector !== undefined && this.sector !== '') {
+          if ( this.sector.includes('Privado') ) {
+            this.privado = true;
+            this.sectorArray.push('Privado');
+          } 
+
+          if ( this.sector.includes('Gobierno') ) {
+            this.gobierno = true;
+            this.sectorArray.push('Gobierno');
+          } 
+        }
 
         this.idCampania = navParams.get('idCampania');
         if (this.idCampania == undefined) {
           this.getLastCampania();
         }
         
-      }
-   
-      ngOnInit() {
       }
   
       changeEdit(numero) {
@@ -288,19 +322,14 @@ export class MasBriefPage implements OnInit{
 
       updateBriefClienteEmpresas() {
 
-        let sectores = [];
-
-        if (this.sectores !== null && this.sectores !== undefined && this.sectores !== 'null' && this.sectores !== ''  ) {
-          for (let i = 0; this.sectores.length > i; i++ ) {
-            this.cat_sectores.forEach(element => {
-              if (element['id'] == this.sectores[i].id) {
-                sectores.push(element['nombre']);
-              }
-            });
-          }
+        this.categoria = this.categoriaArray.join('|');
+        this.sector = this.sectorArray.join('|');
+  
+        if (this.intereses == null || this.intereses == 'null' || this.intereses == undefined || this.intereses == 'NULL') {
+          this.intereses = '';
         }
 
-        this.provedor.updateBriefClienteEmpresas(this.sector,this.categoria,sectores,this.intereses,this.idCampania).then(
+        this.provedor.updateBriefClienteEmpresas(this.sector,this.categoria,this.sectores,this.intereses,this.idCampania).then(
           data => {
             this.showSuccess();
             this.irInicio();
@@ -481,12 +510,67 @@ export class MasBriefPage implements OnInit{
       }
 
       changeSector(sector) {
-        this.sector = sector;
-        
+      
+        switch (sector) {
+          case 'Privado':
+            if ( this.sectorArray.includes('Privado') == true ) {
+              let indice = this.sectorArray.indexOf('Privado'); 
+              this.sectorArray.splice(indice, 1);
+              this.ultSectorArray = this.sectorArray;
+              this.privado = false;
+            } else if ( this.sectorArray.includes('Privado') == false ) {
+              this.ultSectorArray = this.sectorArray.push(sector);
+              this.privado = true;
+            }
+          return;
+  
+          case 'Gobierno':
+            if ( this.sectorArray.includes('Gobierno') == true ) {
+              let indice = this.sectorArray.indexOf('Gobierno'); 
+              this.sectorArray.splice(indice, 1);
+              this.ultSectorArray = this.sectorArray;
+              this.gobierno = false;
+            } else if ( this.sectorArray.includes('Gobierno') == false ) {
+              this.ultSectorArray = this.sectorArray.push(sector);
+              this.gobierno = true;
+            }
+          return;
+  
+          default: 
+        }
+  
       }
-
+  
       changeCategoria(categoria) {
-        this.categoria = categoria;
+  
+        switch (categoria) {
+          case 'PYME':
+            if ( this.categoriaArray.includes('PYME') == true ) {
+              let indice = this.categoriaArray.indexOf('PYME'); 
+              this.categoriaArray.splice(indice, 1);
+              this.ultCategoriaArray = this.categoriaArray;
+              this.pyme = false;
+            } else if ( this.categoriaArray.includes('PYME') == false ) {
+              this.ultCategoriaArray = this.categoriaArray.push(categoria);
+              this.pyme = true;
+            }
+          return;
+  
+          case 'Corporativo':
+            if ( this.categoriaArray.includes('Corporativo') == true ) {
+              let indice = this.categoriaArray.indexOf('Corporativo'); 
+              this.categoriaArray.splice(indice, 1);
+              this.ultCategoriaArray = this.categoriaArray;
+              this.corporativo = false;
+            } else if ( this.categoriaArray.includes('Corporativo') == false ) {
+              this.ultCategoriaArray = this.categoriaArray.push(categoria);
+              this.corporativo = true;
+            }
+          return;
+  
+          default: 
+        }
+  
       }
 
       getLastCampania() {

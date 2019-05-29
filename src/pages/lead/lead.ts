@@ -25,11 +25,7 @@ declare var cordova:any;
 export class LeadPage implements OnInit {
 
   leadActual;
-  //url de producción
   apiUrl = 'https://www.koomkin.com.mx/api/app';
-  apiUrl3 = 'https://www.koomkin.com.mx/call-tracking/api/v1/forward-app/?idLead=';
-  CALLING = 'https://www.koomkin.com.mx/call-tracking/api/v1/forward-app-lead/?idLead=';
-  AUDIO = 'https://www.koomkin.com.mx/call-tracking/api/v1/data-app/0/?idLead=';
 
   public califica;
   public calificacion;
@@ -212,6 +208,7 @@ export class LeadPage implements OnInit {
             }
             return resolve();
           } else {
+            this.leerChat();
             return resolve();
           }
         } else {
@@ -233,6 +230,19 @@ export class LeadPage implements OnInit {
       }, (err) => {
       });
     }
+  }
+
+  public leerChat() {
+
+    const url = 'https://www.koomkin.com.mx/chat/api/read-messages/';
+    return new Promise((resolve, reject) => {
+      this.http.post(url + this.leadActual.uuid, { device: "app" })
+        .subscribe(data => {
+          return resolve();
+        }, err => {
+          return resolve(err);
+        });
+    });
   }
 
   mostrarAlertaInicioSesionRequerido() {
@@ -410,15 +420,6 @@ export class LeadPage implements OnInit {
         resolve(data);
       }, err => {
         console.log(err);
-      });
-    });
-  }
-
-  public getAudio() {
-    return new Promise(resolve => {
-      this.http.get(this.AUDIO + this.leadActual.uuid).subscribe(data => {
-        resolve(data);
-      }, err => {
       });
     });
   }

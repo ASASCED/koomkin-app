@@ -387,66 +387,66 @@
 
                     <p class="titulo-brief">Sector*</p>
                     <div class="botones-brief">
-                        <button class="boton-brief" style="margin-right: 0%;" [ngClass]="{'boton-brief-activo':sector === 'Privado'}" (click)="changeSector('Privado')">
+                        <button class="boton-brief" style="margin-right: 0%;" [ngClass]="{'boton-brief-activo':privado == true}" (click)="changeSector('Privado')">
                             <div class="botones-completo">
                                 <div class="botones-mitad">
-                                  <img class="img-mitad" *ngIf="sector !== 'Privado'" src="assets/imgs/masbrief/ic_empresa.svg">
-                                  <img class="img-mitad" *ngIf="sector === 'Privado'" src="assets/imgs/masbrief/ic_empresa_selected.svg">
+                                  <img class="img-mitad" *ngIf="privado !== true" src="assets/imgs/masbrief/ic_empresa.svg">
+                                  <img class="img-mitad" *ngIf="privado == true" src="assets/imgs/masbrief/ic_empresa_selected.svg">
                                 </div> 
                                 <div class="botones-mitad-izq">
                                     <div class="main2">
-                                        <div class="inner2" [ngStyle]="{'color':sector === 'Privado' ? 'white' : '#A09D9D'}">Privado</div>
+                                        <div class="inner2" [ngStyle]="{'color':privado == true ? 'white' : '#A09D9D'}">Privado</div>
                                     </div>
                                 </div> 
                               </div>   
                         </button>
-                        <button class="boton-brief" [ngClass]="{'boton-brief-activo':sector === 'Gobierno'}" (click)="changeSector('Gobierno')">
+                        <button class="boton-brief" [ngClass]="{'boton-brief-activo':gobierno == true}" (click)="changeSector('Gobierno')">
                           <div class="botones-completo">
                             <div class="botones-mitad">
-                              <img class="img-mitad" *ngIf="sector !== 'Gobierno'" src="assets/imgs/masbrief/ic_gobierno.svg">
-                              <img class="img-mitad" *ngIf="sector === 'Gobierno'" src="assets/imgs/masbrief/ic_gobierno_selected.svg">
+                              <img class="img-mitad" *ngIf="gobierno !== true" src="assets/imgs/masbrief/ic_gobierno.svg">
+                              <img class="img-mitad" *ngIf="gobierno == true" src="assets/imgs/masbrief/ic_gobierno_selected.svg">
                             </div> 
                             <div class="botones-mitad-izq">
                                 <div class="main2">
-                                    <div class="inner2" [ngStyle]="{'color':sector === 'Gobierno' ? 'white' : '#A09D9D'}">Gobierno</div>
+                                    <div class="inner2" [ngStyle]="{'color':gobierno == true ? 'white' : '#A09D9D'}">Gobierno</div>
                                   </div>
                             </div> 
                           </div>  
                         </button>
                     </div>
                    
-                    <p *ngIf="sector === 'Privado'" class="titulo-brief">Categoria*</p>
-                    <div *ngIf="sector === 'Privado'" class="botones-brief">
-                          <button class="boton-brief" style="margin-right: 0%;" [ngClass]="{'boton-brief-activo':categoria === 'PYME'}" (click)="changeCategoria('PYME')">
+                    <p *ngIf="privado == true" class="titulo-brief">Categoria*</p>
+                    <div *ngIf="privado == true" class="botones-brief">
+                          <button class="boton-brief" style="margin-right: 0%;" [ngClass]="{'boton-brief-activo':pyme == true}" (click)="changeCategoria('PYME')">
                               <div class="botones-completo">
                                   <div class="botones-mitad">
-                                    <img class="img-mitad"  *ngIf="categoria !== 'PYME'" src="assets/imgs/masbrief/ic_PYME.svg">
-                                    <img class="img-mitad"  *ngIf="categoria === 'PYME'" src="assets/imgs/masbrief/ic_PYME_selected.svg">
+                                    <img class="img-mitad"  *ngIf="pyme !== true" src="assets/imgs/masbrief/ic_PYME.svg">
+                                    <img class="img-mitad"  *ngIf="pyme == true" src="assets/imgs/masbrief/ic_PYME_selected.svg">
                                   </div> 
                                   <div class="botones-mitad-izq">
                                       <div class="main2">
-                                          <div class="inner2" [ngStyle]="{'color':categoria === 'PYME' ? 'white' : '#A09D9D'}">PYME</div>
+                                          <div class="inner2" [ngStyle]="{'color':pyme == true ? 'white' : '#A09D9D'}">PYME</div>
                                       </div>
                                   </div> 
                                 </div>   
                           </button>
-                          <button class="boton-brief" [ngClass]="{'boton-brief-activo':categoria === 'Corporativo'}" (click)="changeCategoria('Corporativo')">
+                          <button class="boton-brief" [ngClass]="{'boton-brief-activo':corporativo == true}" (click)="changeCategoria('Corporativo')">
                             <div class="botones-completo">
                               <div class="botones-mitad">
-                                <img class="img-mitad" *ngIf="categoria !== 'Corporativo'" src="assets/imgs/masbrief/ic_empresa.svg">
-                                <img class="img-mitad" *ngIf="categoria === 'Corporativo'" src="assets/imgs/masbrief/ic_empresa_selected.svg">
+                                <img class="img-mitad" *ngIf="corporativo !== true" src="assets/imgs/masbrief/ic_empresa.svg">
+                                <img class="img-mitad" *ngIf="corporativo == true" src="assets/imgs/masbrief/ic_empresa_selected.svg">
                               </div> 
                               <div class="botones-mitad-izq">
                                   <div class="main2">
-                                      <div class="inner2" [ngStyle]="{'color':categoria === 'Corporativo' ? 'white' : '#A09D9D'}">Corporativo</div>
+                                      <div class="inner2" [ngStyle]="{'color':corporativo == true ? 'white' : '#A09D9D'}">Corporativo</div>
                                     </div>
                               </div> 
                             </div>  
                           </button>
                     </div>
 
-                    <p *ngIf="sector === 'Privado'" class="titulo-brief">Sectores*</p>
-                    <ion-item *ngIf="sector === 'Privado'">
+                    <p *ngIf="privado == true" class="titulo-brief">Sectores*</p>
+                    <ion-item *ngIf="privado == true">
                         <ion-select class="seleccion-brief-grande" style="max-width: 100%;" [(ngModel)]="sectores" multiple>
                             <ion-option  *ngFor="let sector of cat_sectores">{{sector.nombre}}</ion-option>
                         </ion-select>

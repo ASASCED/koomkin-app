@@ -11,11 +11,8 @@ const _ = require('underscore');
 const KOOMKIN_KEY = 'K00mk1n@!xWz93OTkwMSwiZX';
 const conf = require('./conf/conf');
 const config = conf.config;
-
 const fb = require('./firebase/conf/services/brief-service.js');
-
 var app = express();
-
 
 if ('development' == app.get('env')) {
     console.log("Rejecting node tls");

@@ -53,8 +53,6 @@ export class LeadsPage implements OnInit {
   leads_download_available = true;
 
   apiUrl = "https://www.koomkin.com.mx/api/app";
-  apiUrl3 = "https://www.koomkin.com.mx/call-tracking/api/v1/forward-app/";
-  apiUrl4 = "https://www.koomkin.com.mx/call-tracking/api/v1/extra-info/?id=";
 
   constructor(
     public navCtrl: NavController,
@@ -253,7 +251,7 @@ export class LeadsPage implements OnInit {
   }
 
   public callMissed(uuid) {
-    const urlcallmissed = this.apiUrl4 + uuid;
+    const urlcallmissed = 'https://www.koomkin.com.mx/calltracker/missed_calls/' + uuid;
     return new Promise(resolve => {
       this.http.get(urlcallmissed).subscribe(
         data => {
