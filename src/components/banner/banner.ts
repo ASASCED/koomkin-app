@@ -31,17 +31,20 @@ export class BannerComponent implements OnInit {
   public uuidRecurrente;
   public selectedAmount = 500;
 
-  constructor(public navCtrl: NavController,
+  constructor(
+    public navCtrl: NavController,
     public navParams: NavParams,
     public authService: AuthServiceProvider,
     public platform: Platform,
     public http: HttpClient,
     public provedor: RestProvider,
-    private market: Market) {
+    private market: Market
+  ) {
       this.id = this.authService.id;
       this.recurrente = this.authService.recurrente;
       this.idRecurrente = this.authService.idRecurrente;
       this.uuidRecurrente = this.authService.uuidRecurrente;
+      console.log(this.recurrente, this.description);
     }
 
   ngOnInit() {

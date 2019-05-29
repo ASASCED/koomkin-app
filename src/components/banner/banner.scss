@@ -59,6 +59,8 @@ banner {
         position: absolute;
         height: 90px;
         background: url("../assets/imgs/banner/img_upgradeclick.svg");
+        background-size: cover;
+        background-repeat: no-repeat;
         vertical-align: middle;
         margin-bottom: 0%;
         align-items: center;
