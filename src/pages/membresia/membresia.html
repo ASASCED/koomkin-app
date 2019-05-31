@@ -12,6 +12,7 @@
             <img src="assets/imgs/banner/img_headerupgrade.svg" width="100%">
             <div class="activity-title">Mejora tu campaña</div>
         </div>
+        <p class="activity-title-gray">Incrementa tus clientes potenciales invirtiendo más en tu suscripción actual.</p>
         <div class="activity-subtitle">
             Elige tu inversión
         </div>
@@ -24,7 +25,7 @@
                 <ion-segment-button value="500" class="segment-empresa" (click)='onChangeAmount("second")'>
                     $ 500 <span style="font-size: 3vw !important;">MXN</span>   
                 </ion-segment-button>
-                <ion-segment-button value="1000" class="segment-objetivo" (click)='onChangeAmount("three")'>
+                <ion-segment-button value="1000" class="segment-objetivo" (click)='onChangeAmount("third")'>
                     $ 1,000 <span style="font-size: 3vw !important;">MXN</span>
                 </ion-segment-button>
             </ion-segment>
@@ -33,7 +34,7 @@
             CLIENTES POTENCIALES
         </div>
         <div class="activity-oferta">
-           +{{ ofertaLeads }}*
+           +{{ ofertaLeads }}<span class="asterisco">*</span>
         </div>
         <br> 
         <div class="cuadro">
@@ -43,6 +44,7 @@
         <div class="cuadro" *ngIf="tieneUpgrade == true">
             <button class="cancelar-suscripcion" (click)='btnCancelMembership()'>Cancelar Upgrade</button>
         </div>
+        <br>
         <div class="nota">
             * Adicionales en el mes
         </div>

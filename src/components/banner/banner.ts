@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from "@angular/core";
-import { NavController, NavParams, Platform } from 'ionic-angular';
-import { HttpClient } from '@angular/common/http';
+import { NavController, NavParams, Platform, LoadingController } from 'ionic-angular';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Market } from '@ionic-native/market';
 import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
 import swal from 'sweetalert2';
@@ -29,7 +29,7 @@ export class BannerComponent implements OnInit {
   public id;
   public idRecurrente;
   public uuidRecurrente;
-  public selectedAmount = 500;
+  public selectedAmount = 1;
 
   constructor(
     public navCtrl: NavController,
@@ -37,6 +37,7 @@ export class BannerComponent implements OnInit {
     public authService: AuthServiceProvider,
     public platform: Platform,
     public http: HttpClient,
+    public loadingCtrl: LoadingController,
     public provedor: RestProvider,
     private market: Market
   ) {
@@ -83,6 +84,7 @@ export class BannerComponent implements OnInit {
       if (result.value) {
         this.getUpgradeMembership();
         this.getInsertUpgradeMembresia();
+        this.registrarInteres(0);
       }
     });
   }  
@@ -92,6 +94,8 @@ export class BannerComponent implements OnInit {
       .then(
         (data) => {
           console.log(data);
+          let upsell_id = data[0].ID;
+          this.immediateUpsell(upsell_id);
         },
         (error) => {
           console.log(error);
@@ -99,8 +103,51 @@ export class BannerComponent implements OnInit {
       );
   }
 
+  public immediateUpsell(upsell_id) {
+
+    let loading = this.loadingCtrl.create({
+      content: "Realizando pago..."
+    });
+
+    const cuerpo = `{'user_id': '${this.id}', 'upsell_id': '${upsell_id}'}`;
+
+    const options = {
+      headers: new HttpHeaders().set(
+        'Content-Type',
+        'application/json'
+      )
+    };
+    
+    loading.present().then(() => {
+    }).catch(reason => {console.log(reason)});
+    return new Promise((resolve, reject) => {
+      const url = 'https://www.koomkin.com.mx/api/openPay/immediateUpsell';
+      this.http.post(url, cuerpo, options).subscribe(
+        data => {
+          console.log(data);
+          console.log(data['result']);
+          if(data['result'] == 'OK') {
+            loading.dismiss();
+            this.showSuccessUpgrade();
+            this.navCtrl.setRoot('InicioPage');
+          } else if(data['result'] == 'Upsell aplicado pero no se aplicó el cargo. Se intentará en el siguiente pago recurrente.') {
+            loading.dismiss();
+            this.showErrorUpgrade();
+            this.navCtrl.setRoot('InicioPage');
+          } 
+          resolve();
+        },
+        err => {
+          console.log(err);
+          reject(err);
+        }
+      );
+    });
+    
+  }
+
   public getInsertUpgradeMembresia() {
-    let acceso = 'pagina';
+    let acceso = 'banner';
 
     this.provedor.getInsertUpgradeMembresia(this.id, this.idRecurrente, acceso)
       .then(
@@ -112,5 +159,45 @@ export class BannerComponent implements OnInit {
         }
       );
   }
+
+  public registrarInteres(interes: number) {
+    return new Promise((resolve, reject) => {
+      const urlBanner =
+        "https://www.koomkin.com.mx/api/app/registrarInteresBanner/" + interes + "/" + this.idReporteBanner + "/" + this.uuidPase;
+      this.http.get(urlBanner).subscribe(
+        data => {
+          resolve();
+        },
+        err => {
+          // console.log(err);
+          reject(err);
+        }
+      );
+    });
+  }
+
+  public showSuccessUpgrade() {
+    swal({
+      title: 'Se ha realizado el Upgrade con éxito',
+      type: 'success',
+      showCancelButton: false,
+      confirmButtonColor: '#3085d6',
+      confirmButtonText: 'OK',
+      reverseButtons: true,
+    });
+  }
+
+  public showErrorUpgrade() {
+    swal({
+      title: 'No se ha podido realizar el Upgrade.',
+      text: 'Se intentará en el siguiente pago recurrente.',
+      type: 'error',
+      showCancelButton: false,
+      confirmButtonColor: '#3085d6',
+      confirmButtonText: 'OK',
+      reverseButtons: true
+    });
+  }
+
 }
 

@@ -58,6 +58,7 @@ page-membresia {
         cursor: pointer;
         padding: 3%;
         width: 45%;
+        box-shadow: 8px 8px 10px -6px rgba(0, 0, 0, .9);
     }
     .cancelar-suscripcion {
         background: #FE703F;
@@ -70,6 +71,7 @@ page-membresia {
         cursor: pointer;
         padding: 2%;
         width: 60%;
+        box-shadow: 8px 8px 10px -6px rgba(0, 0, 0, .9);
     }
     .campos {
         font-size: 4.5vw;
@@ -156,9 +158,23 @@ page-membresia {
         box-shadow: 2px 2px 5px -1px $koomkin-grey-light;
     }
 
+    .activity-title-gray {
+        color:  #707070;
+        text-align: justify;
+        margin-top: 14%;
+        height: 45px;
+        width: 90%;
+        margin-left: 5%;
+        font-size: 4.2vw;
+        display: grid;
+        justify-content: center;
+        align-items: center;
+        font-weight: bold;
+    }
+
     .activity-subtitle {
-        background: #288AC1;
-        margin-top: 12%;
+        background: $koomkin-green;
+        margin-top: 6%;
         color:  white;
         text-align: center;
         height: 45px;
@@ -187,10 +203,6 @@ page-membresia {
     .activity-oferta {
         width: 100%;
         text-align: center;
-        display: grid;
-        justify-content: center;
-        justify-content: center;
-        align-items: center;
         color: $koomkin-green !important;
         font-weight: bold;
         font-size: 8vw;
@@ -203,11 +215,12 @@ page-membresia {
     }
 
     .nota {
-        margin-top: 10%; 
-        margin-right: 2%;
         color:  #707070;
-        text-align: right;
-        position: absoluto;
-        bottom: 0;
+        text-align: center;
+    }
+
+    .asterisco {
+        font-size: 4vw;
+        position: absolute;
     }
 }

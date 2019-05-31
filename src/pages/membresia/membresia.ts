@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
 import { RestProvider } from './../../providers/rest/rest';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -51,6 +51,7 @@ export class MembresiaPage {
     public navParams: NavParams, 
     public authService: AuthServiceProvider,
     public provedor: RestProvider,
+    public loadingCtrl: LoadingController,
     public http: HttpClient,
   ) {
     this.empresa = this.authService.empresa;
@@ -96,7 +97,7 @@ export class MembresiaPage {
               this.diasRestantes = 'Renueva tu campaña';
             }
           } else {
-            this.diasRestantes = "Renueva tu campaña";
+            this.diasRestantes = 'Renueva tu campaña';
           }
         },
         (error) => {
@@ -119,26 +120,29 @@ export class MembresiaPage {
               this.leadsMesActual = this.leadsMes[1].LEADS;
             }
             if (this.leadsMesActual > 0) {
+
               if(parseInt(this.diasRestantes) > 30) {
                 this.diasTranscurridos = 61 - parseInt(this.diasRestantes);
               } else {
                 this.diasTranscurridos = 30 - parseInt(this.diasRestantes);
               }
+
               if (this.diasTranscurridos > 0) {
                 let estimado = (( this.leadsMesActual / this.diasTranscurridos) * 30);
-                console.log('Pago',this.monto);
-                console.log('Estimado de leads',estimado);
                 this.oferta = Math.round(this.monto / estimado);
-                console.log('Costo por lead',this.oferta)
+                if(this.oferta < 1) {
+                  this.oferta = 100;
+                }
                 this.ofertaLeads = Math.round(newSelectedAmount/this.oferta);
-                console.log('Nueva inversión',newSelectedAmount);
-                console.log('Clientes Potenciales',this.ofertaLeads);
                 this.primerOferta = this.ofertaLeads;
                 if( this.ofertaLeads < 4) {
                   this.ofertaLeads = 4;
                 }
               } else {
                 this.oferta = this.monto / this.leadsMesPasado;
+                if(this.oferta < 1) {
+                  this.oferta = 100;
+                }
                 this.ofertaLeads = Math.round(newSelectedAmount/this.oferta);
                 this.primerOferta = this.ofertaLeads;
                 if( this.ofertaLeads < 4) {
@@ -184,7 +188,7 @@ export class MembresiaPage {
           this.segundaOferta = this.ofertaLeads;
         }
         break;
-      case 'three':
+      case 'third':
         if(this.segundaOferta == 0) {
           this.ofertaLeads = Math.round(newSelectedAmount/this.oferta);
           this.tercerOferta = this.ofertaLeads;
@@ -245,7 +249,6 @@ export class MembresiaPage {
 
   public btnUpgradeMembership() {
     let newSelectedAmount = parseInt(this.selectedAmount);
-    this.nuevoMonto = this.monto + newSelectedAmount;
     swal({
       title: 'Confirma el incremento de $' + newSelectedAmount + 'MXN',
       text: 'Además tomaremos este monto para tu nueva Membresía',
@@ -263,8 +266,13 @@ export class MembresiaPage {
     });
   }  
 
-  public immediateUpsell() {
-    const cuerpo = `{'user_id': '${this.id}', 'upsell_id': '${this.id}'}`;
+  public immediateUpsell(upsell_id) {
+
+    let loading = this.loadingCtrl.create({
+      content: "Realizando pago..."
+    });
+
+    const cuerpo = `{'user_id': '${this.id}', 'upsell_id': '${upsell_id}'}`;
 
     const options = {
       headers: new HttpHeaders().set(
@@ -272,24 +280,66 @@ export class MembresiaPage {
         'application/json'
       )
     };
+    
+    loading.present().then(() => {
+    }).catch(reason => {console.log(reason)});
     return new Promise((resolve, reject) => {
       const url = 'https://www.koomkin.com.mx/api/openPay/immediateUpsell';
       this.http.post(url, cuerpo, options).subscribe(
         data => {
-          console.log(resolve);
+          console.log(data);
+          console.log(data['result']);
+          if(data['result'] == 'OK') {
+            loading.dismiss();
+            this.showSuccessUpgrade();
+            this.navCtrl.setRoot('InicioPage');
+          } else if(data['result'] == 'Upsell aplicado pero no se aplicó el cargo. Se intentará en el siguiente pago recurrente.') {
+            loading.dismiss();
+            this.showErrorUpgrade();
+            this.navCtrl.setRoot('InicioPage');
+          } 
+          resolve();
         },
         err => {
           console.log(err);
+          reject(err);
         }
       );
+    });
+    
+  }
+
+  public showSuccessUpgrade() {
+    swal({
+      title: 'Se ha realizado el Upgrade con éxito',
+      type: 'success',
+      showCancelButton: false,
+      confirmButtonColor: '#3085d6',
+      confirmButtonText: 'OK',
+      reverseButtons: true,
+    });
+  }
+
+  public showErrorUpgrade() {
+    swal({
+      title: 'No se ha podido realizar el Upgrade.',
+      text: 'Se intentará en el siguiente pago recurrente.',
+      type: 'error',
+      showCancelButton: false,
+      confirmButtonColor: '#3085d6',
+      confirmButtonText: 'OK',
+      reverseButtons: true
     });
   }
 
   public getUpgradeMembership() {
+    this.selectedAmount = 1;
     this.provedor.getUpdateMembership(this.idRecurrente, this.uuidRecurrente, this.selectedAmount) 
       .then(
         (data) => {
           console.log(data);
+          let upsell_id = data[0].ID;
+          this.immediateUpsell(upsell_id);
         },
         (error) => {
           console.log(error);
@@ -309,6 +359,7 @@ export class MembresiaPage {
     }).then(result => {
       if (result.value) {
         this.getCancelUpgradeMembership();
+        this.navCtrl.setRoot('InicioPage');
       }
     });
   }  
@@ -317,12 +368,24 @@ export class MembresiaPage {
     this.provedor.getCancelUpdateMembership(this.idRecurrente) 
       .then(
         (data) => {
+          this.showSuccessCancelUpgrade()
           console.log(data);
         },
         (error) => {
           console.log(error);
         }
       );
+  }
+
+  public showSuccessCancelUpgrade() {
+    swal({
+      title: 'Se ha cancelado el último Upgrade con éxito',
+      type: 'success',
+      showCancelButton: false,
+      confirmButtonColor: '#3085d6',
+      confirmButtonText: 'OK',
+      reverseButtons: true,
+    });
   }
 
   public getLastUpdateMembership() {

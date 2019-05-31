@@ -511,6 +511,7 @@ $toUserBackgroundColor: red;
                 }
             }
             .msg-content {
+                text-align: justify;
                 position: relative;
                 margin-top: 5px;
                 border-radius: 5px;
@@ -548,6 +549,7 @@ $toUserBackgroundColor: red;
             left: 0;
         }
         .msg-content {
+            text-align: justify;
             color: black;
             border: 1px outset #ddd;
             box-shadow: 0 1px 0.5px rgba(0, 0, 0, 0.13);
@@ -564,7 +566,6 @@ $toUserBackgroundColor: red;
         .msg-content {
             background-color: white;
             float: left;
-            //border-width: 2px;
         }
         .msg-detail {
             padding-left: 0px;
@@ -573,6 +574,7 @@ $toUserBackgroundColor: red;
             left: 0;
         }
         .msg-content {
+            text-align: justify;
             color: black;
             span.triangle {
                 background-color: white;
@@ -586,7 +588,6 @@ $toUserBackgroundColor: red;
         .msg-content {
             background-color: white;
             float: left;
-            //border-width: 2px;
         }
         .msg-detail {
             padding-left: 0px;
@@ -596,6 +597,7 @@ $toUserBackgroundColor: red;
         }
         .msg-content {
             color: black;
+            text-align: justify;
             span.triangle {
                 background-color: white;
                 border-top-width: 0;
@@ -620,6 +622,7 @@ $toUserBackgroundColor: red;
             top: 50px;
         }
         .msg-content {
+            text-align: justify;
             background-color: #dcf8c6;
             float: right;
             color: black;
@@ -664,6 +667,41 @@ $toUserBackgroundColor: red;
                 right: -5px;
                 display: none // left: 250px;
             }
+        }
+    }
+    .message.rightbot {
+
+        .msg-detail {
+          padding-right: 0px;
+          .msg-info {
+            text-align: right;
+          }
+        }
+      
+        .user-img {
+          right: 0;
+        }
+      
+        ion-spinner {
+          position: absolute;
+          right: 10px;
+          top: 50px;
+        }
+      
+        .msg-content {
+          text-align: justify;
+          color: #707070 !important;
+          background-color: #3DCDBB;
+          float: right;
+          border: 1px solid #ddd;
+          box-shadow: 0 1px 0.5px rgba(0, 0, 0, 0.13);
+          span.triangle {
+            background-color: #3DCDBB;
+            // background-color: #6EFFEE;
+            border-bottom-width: 0;
+            border-left-width: 0;
+            right: -5px;
+          }
         }
     }
 }

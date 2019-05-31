@@ -166,8 +166,9 @@ export class EmailPage implements OnInit {
     this.http.post('https://www.koomkin.com.mx/mailing/preview/', body.toString(), options).subscribe(
       data => {
         this.showSuccessP();
-
+        console.log(data);
       }, err => {
+        console.log(err);
         if (err.status === 200) {
           this.showSuccessP();
         } else {

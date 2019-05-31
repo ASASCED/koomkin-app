@@ -226,8 +226,14 @@
 
         <div class="message-wrap">
 
-          <div *ngFor="let msg of msgListLead;" class="message" [class.koomkin-gen]="msg.userId === 'koomkin-gen'" [class.left]=" msg.userId === leadActual.uuid || msg.userId==='system'" [class.system]="msg.userId === 'system'" [class.rightcoach]=" msg.userId === 'koomkin-coach'"
-               [class.right]=" (msg.userId === clientUUID) || ((msg.userId != 'koomkin-gen') && (msg.userId != leadActual.uuid) && (msg.userId != 'system') && (msg.userId != 'koomkin-coach'))">
+          <div *ngFor="let msg of msgListLead;" 
+            class="message" 
+            [class.koomkin-gen]="msg.userId === 'koomkin-gen'" 
+            [class.left]=" msg.userId === leadActual.uuid || msg.userId==='system'" 
+            [class.system]="msg.userId === 'system'" 
+            [class.rightcoach]=" msg.userId === 'koomkin-coach'"
+            [class.rightbot]="msg.userId === 'koomkin-followup' || msg.userId === 'koomkin-bot'"
+            [class.right]="(msg.userId === clientUUID || msg.userId === 'koomkin-followup' || msg.userId === 'koomkin-bot') || ((msg.userId != 'koomkin-gen') && (msg.userId != leadActual.uuid) && (msg.userId != 'system') && (msg.userId != 'koomkin-coach'))">
 
             <div class="msg-detail">
               <div class="msg-info">
