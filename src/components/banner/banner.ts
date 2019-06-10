@@ -29,7 +29,7 @@ export class BannerComponent implements OnInit {
   public id;
   public idRecurrente;
   public uuidRecurrente;
-  public selectedAmount = 250;
+  public selectedAmount = 500;
 
   constructor(
     public navCtrl: NavController,
