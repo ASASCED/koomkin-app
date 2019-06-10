@@ -333,7 +333,6 @@ export class MembresiaPage {
   }
 
   public getUpgradeMembership() {
-    this.selectedAmount = 1;
     this.provedor.getUpdateMembership(this.idRecurrente, this.uuidRecurrente, this.selectedAmount) 
       .then(
         (data) => {
