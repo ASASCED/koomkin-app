@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>agregarLead</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+  <div class="brief-contenedor">
+    <p class="titulo-brief">Nombre Completo*</p>
+    <input type="text" class="input-brief" style="width: 95%">
+
+    <p class="titulo-brief">Empresa</p>
+    <input type="text" class="input-brief" style="width: 95%">
+
+    <p class="titulo-brief">Correo Electrónico</p>
+    <input type="text" class="input-brief" style="width: 95%">
+
+    <p class="titulo-brief">Teléfono</p>
+    <input type="text" class="input-brief" style="width: 95%">
+
+    <ion-grid class="anuncio-grid">
+      <p class="titulo-brief">Estado</p>
+      <!--
+        <select type="text" class="seleccion-brief" [(ngModel)]="idpuesto">
+          <option *ngFor="let puesto of positions">
+            {{puesto.nombre}}
+          </option>
+        </select>
+      -->
+    </ion-grid>
+
+    <button class="guardar">Guardar</button>
+  </div>
+</ion-content>
