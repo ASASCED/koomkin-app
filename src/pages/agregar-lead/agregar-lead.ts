@@ -95,6 +95,7 @@ export class AgregarLeadPage implements OnInit {
     this.registerForm.valueChanges
     .subscribe(data => this.onValueChanged(data))
     this.onValueChanged();
+    this.getInsertClickPagina();
   }
 
   public registerLead(name_sender, email, company, phone_number, region_id ) {
@@ -224,6 +225,21 @@ export class AgregarLeadPage implements OnInit {
       },
       err => {
         // console.log('error');
+      }
+    );
+  }
+
+  public getInsertClickPagina() {
+    const usuario = this.id;
+    const pagina = "agregarLead";
+    const acceso = "App";
+    //  // console.log(usuario, pagina, acceso);
+    this.restService.getInsertClickPagina(usuario, pagina, acceso).then(
+      data => {
+        // this.datosenvio = data;
+      },
+      err => {
+        // console.log("error");
       }
     );
   }
