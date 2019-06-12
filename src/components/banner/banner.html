@@ -1,5 +1,6 @@
 <div class="anuncio">
-    <div *ngIf="description !== 'actualizacion' && description !== 'encuesta' && recurrente == false || description == 'upgrade' && recurrente == false" class="anuncio-mensaje" (click)="mostrar_modal(notification);">
+    <div *ngIf="description !== 'actualizacion' && description !== 'encuesta' && recurrente == false || description == 'upgrade' && recurrente == false"
+        class="anuncio-mensaje" (click)="mostrar_modal(notification);">
         <img src="assets/imgs/banner/{{img}}.svg" width="100%" class="anuncio-img" />
         <ion-grid class="anuncio-grid">
             <ion-row style="width: 97%;margin-bottom: 0%;">
@@ -10,20 +11,21 @@
             </ion-row>
         </ion-grid>
     </div>
-    
+
     <div *ngIf="description == 'upgrade' && recurrente == true" class="anuncio-upgrade">
         <img src="assets/imgs/banner/upgradeclick.svg" width="100%" class="anuncio-img" />
         <ion-grid class="anuncio-grid">
             <ion-row style="width: 100%;margin-bottom: 0%;display: grid;align-items: center;">
                 <ion-col col-12>
-                    <span class="anuncio-titulo-upgrade">Gana 8 clientes potenciales adicionales y eleva tus ventas</span>
+                    <span class="anuncio-titulo-upgrade">Gana 8 clientes potenciales adicionales y eleva tus
+                        ventas</span>
                     <span class="anuncio-contenido-upgrade">Por $500MXN extras al mes</span>
                     <button class="aceptar-upgrade" (click)="btnUpgradeMembership()">Aceptar</button>
                 </ion-col>
             </ion-row>
         </ion-grid>
     </div>
-    
+
     <div *ngIf="description == 'actualizacion'" class="anuncio-mensaje" (click)="goStore()">
         <img src="assets/imgs/banner/{{img}}.svg" width="100%" class="anuncio-img" />
         <ion-grid class="anuncio-grid">
@@ -46,5 +48,5 @@
             </ion-row>
         </ion-grid>
     </div>
-    
+
 </div>

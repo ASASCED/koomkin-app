@@ -1,194 +1,219 @@
 <ion-header>
   <ion-navbar color="azul">
-      <ion-title>Empresa: {{empresa}}
-          <br>ID Cliente: {{id}}</ion-title>
+    <ion-title>Empresa: {{empresa}}
+      <br>ID Cliente: {{id}}</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content>
   <div class="encuesta-container">
     <div class="activity-header">
-        <img src="https://firebasestorage.googleapis.com/v0/b/chatcintanegra.appspot.com/o/img_config.svg?alt=media&token=17192549-7ef5-439b-9aab-b9a6ab3beee0" width="100%">
-        <div class="encabezado-encuesta">Configuración Campaña Digital</div>
+      <img
+        src="https://firebasestorage.googleapis.com/v0/b/chatcintanegra.appspot.com/o/img_config.svg?alt=media&token=17192549-7ef5-439b-9aab-b9a6ab3beee0"
+        width="100%">
+      <div class="encabezado-encuesta">Configuración Campaña Digital</div>
     </div>
     <div class="activity-content-container" *ngIf="editar == 0">
-        <p class="titulo-brief">Producto/Servicio Principal</p>
-        <input disabled type="text" class="input-brief" [(ngModel)]="producto">
+      <p class="titulo-brief">Producto/Servicio Principal</p>
+      <input disabled type="text" class="input-brief" [(ngModel)]="producto">
 
-        <div class="bloque">
-          <div class="mitad-izq">
-            <p class="titulo-brief">Tipo en Empresa</p>
-            <select disabled type="text" class="seleccion-brief" style="width: 99%;" [(ngModel)]="tipoempresa">
-                <option *ngFor="let tipo_empresa of tipo_empresas">
-                  {{tipo_empresa.TIPOEMPRESA}}
-                </option>
-              </select>
-          </div>
-          <div class="mitad-der">
-            <p class="titulo-brief">Código Postal</p>
-            <input disabled type="number" class="seleccion-brief" [(ngModel)]="cp" style="width: 99%;">
-          </div>
+      <div class="bloque">
+        <div class="mitad-izq">
+          <p class="titulo-brief">Tipo en Empresa</p>
+          <select disabled type="text" class="seleccion-brief" style="width: 99%;" [(ngModel)]="tipoempresa">
+            <option *ngFor="let tipo_empresa of tipo_empresas">
+              {{tipo_empresa.TIPOEMPRESA}}
+            </option>
+          </select>
         </div>
+        <div class="mitad-der">
+          <p class="titulo-brief">Código Postal</p>
+          <input disabled type="number" class="seleccion-brief" [(ngModel)]="cp" style="width: 99%;">
+        </div>
+      </div>
 
-        <p class="titulo-brief">Cobertura Campaña</p>
-        <div class="botones-cobertura-brief">
-          <button [ngClass]="{'boton-cobertura-brief-blanco':cobertura_empresa === 'Local','boton-cobertura-brief':cobertura_empresa !== 'Local'}" style="margin-right: 1%;">
-            <img *ngIf="cobertura_empresa !== 'Local'" src="assets/imgs/brief/local.svg" width="65%">
-              <img *ngIf="cobertura_empresa === 'Local'" src="assets/imgs/brief/local-b.svg" width="65%">
-              <p class="texto-boton-brief">Local</p>
-            </button>
-            <button [ngClass]="{'boton-cobertura-brief-blanco':cobertura_empresa === 'Estado','boton-cobertura-brief':cobertura_empresa !== 'Estado'}" style="margin-right: 1%;">
-                <img *ngIf="cobertura_empresa !== 'Estado'" src="assets/imgs/brief/estado.svg" width="65%">
-                <img *ngIf="cobertura_empresa === 'Estado'" src="assets/imgs/brief/estado-b.svg" width="65%">
-                <p class="texto-boton-brief">Estado</p>
-            </button>
-            <button [ngClass]="{'boton-cobertura-brief-blanco':cobertura_empresa === 'Region','boton-cobertura-brief':cobertura_empresa !== 'Region'}" style="margin-right: 1%;">
-                <img *ngIf="cobertura_empresa !== 'Region'" src="assets/imgs/brief/region.svg" width="65%">
-                <img *ngIf="cobertura_empresa === 'Region'" src="assets/imgs/brief/region-b.svg" width="65%">
+      <p class="titulo-brief">Cobertura Campaña</p>
+      <div class="botones-cobertura-brief">
+        <button
+          [ngClass]="{'boton-cobertura-brief-blanco':cobertura_empresa === 'Local','boton-cobertura-brief':cobertura_empresa !== 'Local'}"
+          style="margin-right: 1%;">
+          <img *ngIf="cobertura_empresa !== 'Local'" src="assets/imgs/brief/local.svg" width="65%">
+          <img *ngIf="cobertura_empresa === 'Local'" src="assets/imgs/brief/local-b.svg" width="65%">
+          <p class="texto-boton-brief">Local</p>
+        </button>
+        <button
+          [ngClass]="{'boton-cobertura-brief-blanco':cobertura_empresa === 'Estado','boton-cobertura-brief':cobertura_empresa !== 'Estado'}"
+          style="margin-right: 1%;">
+          <img *ngIf="cobertura_empresa !== 'Estado'" src="assets/imgs/brief/estado.svg" width="65%">
+          <img *ngIf="cobertura_empresa === 'Estado'" src="assets/imgs/brief/estado-b.svg" width="65%">
+          <p class="texto-boton-brief">Estado</p>
+        </button>
+        <button
+          [ngClass]="{'boton-cobertura-brief-blanco':cobertura_empresa === 'Region','boton-cobertura-brief':cobertura_empresa !== 'Region'}"
+          style="margin-right: 1%;">
+          <img *ngIf="cobertura_empresa !== 'Region'" src="assets/imgs/brief/region.svg" width="65%">
+          <img *ngIf="cobertura_empresa === 'Region'" src="assets/imgs/brief/region-b.svg" width="65%">
 
-                <p class="texto-boton-brief">Región</p>
-            </button>
-            <button [ngClass]="{'boton-cobertura-brief-blanco':cobertura_empresa === 'Nacional','boton-cobertura-brief':cobertura_empresa !== 'Nacional'}">
-                <img *ngIf="cobertura_empresa !== 'Nacional'" src="assets/imgs/brief/nacional.svg" width="65%">
-                <img *ngIf="cobertura_empresa === 'Nacional'" src="assets/imgs/brief/nacional-b.svg" width="65%">
-                <p class="texto-boton-brief">Nacional</p>
-            </button>
+          <p class="texto-boton-brief">Región</p>
+        </button>
+        <button
+          [ngClass]="{'boton-cobertura-brief-blanco':cobertura_empresa === 'Nacional','boton-cobertura-brief':cobertura_empresa !== 'Nacional'}">
+          <img *ngIf="cobertura_empresa !== 'Nacional'" src="assets/imgs/brief/nacional.svg" width="65%">
+          <img *ngIf="cobertura_empresa === 'Nacional'" src="assets/imgs/brief/nacional-b.svg" width="65%">
+          <p class="texto-boton-brief">Nacional</p>
+        </button>
+      </div>
+
+      <ion-item *ngIf="cobertura_empresa === 'Region'" style="max-width: 330px;">
+        <ion-label style="opacity: 1 !Important;">Estados</ion-label>
+        <ion-select disabled [(ngModel)]="estado" multiple style="opacity: 1 !Important;">
+          <ion-option *ngFor="let estados of cat_estados" [value]="estados.value">{{estados.NOMBRE}}</ion-option>
+        </ion-select>
+      </ion-item>
+
+      <p class="titulo-brief">¿En qué eres mejor que tu competencia?</p>
+      <input disabled type="text" class="input-brief" [(ngModel)]="mejor">
+
+      <p class="titulo-brief" style="margin-bottom: 1%;">Cliente Objetivo</p>
+      <div class="botones-brief">
+        <button class="boton-brief" style="margin-right: 0%;"
+          [ngClass]="{'boton-brief-activo':target === 'Particulares'}">
+          <div class="botones-completo">
+            <div class="botones-mitad">
+              <img *ngIf="target !== 'Particulares'" src="assets/imgs/brief/particulares.svg" width="55px">
+              <img *ngIf="target === 'Particulares'" src="assets/imgs/brief/particulares-b.svg" width="55px">
+            </div>
+            <div class="botones-mitad-izq">
+              <div class="main2">
+                <div class="inner2" [ngStyle]="{'color':target === 'Particulares' ? 'white' : '#A09D9D'}"> Particulares
+                </div>
+              </div>
+            </div>
           </div>
-
-          <ion-item *ngIf="cobertura_empresa === 'Region'" style="max-width: 330px;">
-            <ion-label style="opacity: 1 !Important;">Estados</ion-label>
-                <ion-select disabled [(ngModel)]="estado" multiple style="opacity: 1 !Important;">
-                  <ion-option *ngFor="let estados of cat_estados" [value]="estados.value">{{estados.NOMBRE}}</ion-option>
-                </ion-select>
-              </ion-item>
-        
-        <p class="titulo-brief">¿En qué eres mejor que tu competencia?</p>
-        <input disabled type="text" class="input-brief" [(ngModel)]="mejor">
-
-        <p class="titulo-brief" style="margin-bottom: 1%;">Cliente Objetivo</p>
-        <div class="botones-brief">
-            <button class="boton-brief" style="margin-right: 0%;" [ngClass]="{'boton-brief-activo':target === 'Particulares'}">
-                <div class="botones-completo">
-                    <div class="botones-mitad">
-                      <img *ngIf="target !== 'Particulares'" src="assets/imgs/brief/particulares.svg" width="55px">
-                      <img *ngIf="target === 'Particulares'" src="assets/imgs/brief/particulares-b.svg" width="55px">
-                    </div> 
-                    <div class="botones-mitad-izq">
-                        <div class="main2">
-                            <div class="inner2" [ngStyle]="{'color':target === 'Particulares' ? 'white' : '#A09D9D'}"> Particulares</div>
-                        </div>
-                    </div> 
-                  </div>   
-            </button>
-            <button class="boton-brief" [ngClass]="{'boton-brief-activo':target === 'Empresas'}">
-              <div class="botones-completo">
-                <div class="botones-mitad">
-                  <img *ngIf="target !== 'Empresas'" src="assets/imgs/brief/empresas.svg" width="55px">
-                  <img *ngIf="target === 'Empresas'" src="assets/imgs/brief/empresas-b.svg" width="55px">
-                </div> 
-                <div class="botones-mitad-izq">
-                    <div class="main2">
-                        <div class="inner2" [ngStyle]="{'color':target === 'Empresas' ? 'white' : '#A09D9D'}">Empresas</div>
-                      </div>
-                </div> 
-              </div>  
-            </button>
+        </button>
+        <button class="boton-brief" [ngClass]="{'boton-brief-activo':target === 'Empresas'}">
+          <div class="botones-completo">
+            <div class="botones-mitad">
+              <img *ngIf="target !== 'Empresas'" src="assets/imgs/brief/empresas.svg" width="55px">
+              <img *ngIf="target === 'Empresas'" src="assets/imgs/brief/empresas-b.svg" width="55px">
+            </div>
+            <div class="botones-mitad-izq">
+              <div class="main2">
+                <div class="inner2" [ngStyle]="{'color':target === 'Empresas' ? 'white' : '#A09D9D'}">Empresas</div>
+              </div>
+            </div>
           </div>
-        <button class="guardar-brief" (click)="changeEdit(0)">Editar</button>
+        </button>
+      </div>
+      <button class="guardar-brief" (click)="changeEdit(0)">Editar</button>
     </div>
     <div class="activity-content-container" *ngIf="editar == 1">
-        <p class="titulo-brief">Producto/Servicio Principal</p>
-        <input type="text" class="input-brief" [(ngModel)]="producto">
+      <p class="titulo-brief">Producto/Servicio Principal</p>
+      <input type="text" class="input-brief" [(ngModel)]="producto">
 
-        <div class="bloque">
-          <div class="mitad-izq">
-            <p class="titulo-brief">Tipo en Empresa</p>
-            <select type="text" class="seleccion-brief" style="width: 99%;" [(ngModel)]="tipoempresa">
-              <option *ngFor="let tipo_empresa of tipo_empresas">
-                {{tipo_empresa.TIPOEMPRESA}}
-              </option>
-            </select>
-          </div>
-          <div class="mitad-der">
-            <p class="titulo-brief">Código Postal</p>
-            <input type="number" class="seleccion-brief" [(ngModel)]="cp" style="width: 99%;">
-          </div>
+      <div class="bloque">
+        <div class="mitad-izq">
+          <p class="titulo-brief">Tipo en Empresa</p>
+          <select type="text" class="seleccion-brief" style="width: 99%;" [(ngModel)]="tipoempresa">
+            <option *ngFor="let tipo_empresa of tipo_empresas">
+              {{tipo_empresa.TIPOEMPRESA}}
+            </option>
+          </select>
         </div>
-
-        <p class="titulo-brief">Cobertura Campaña</p>
-        <div class="botones-cobertura-brief"> 
-          <button [ngClass]="{'boton-cobertura-brief-blanco':cobertura_empresa === 'Local','boton-cobertura-brief':cobertura_empresa !== 'Local'}" style="margin-right: 1%;" (click)="changeCobertura('Local')">
-            <img *ngIf="cobertura_empresa !== 'Local'" src="assets/imgs/brief/local.svg" width="65%">
-              <img *ngIf="cobertura_empresa === 'Local'" src="assets/imgs/brief/local-b.svg" width="65%">
-              <p class="texto-boton-brief">Local</p>
-            </button>
-            <button [ngClass]="{'boton-cobertura-brief-blanco':cobertura_empresa === 'Estado','boton-cobertura-brief':cobertura_empresa !== 'Estado'}" style="margin-right: 1%;" (click)="changeCobertura('Estado')">
-                <img *ngIf="cobertura_empresa !== 'Estado'" src="assets/imgs/brief/estado.svg" width="65%">
-                <img *ngIf="cobertura_empresa === 'Estado'" src="assets/imgs/brief/estado-b.svg" width="65%">
-                <p class="texto-boton-brief">Estado</p>
-            </button>
-            <button [ngClass]="{'boton-cobertura-brief-blanco':cobertura_empresa === 'Region','boton-cobertura-brief':cobertura_empresa !== 'Region'}" style="margin-right: 1%;" (click)="changeCobertura('Region')">
-                <img *ngIf="cobertura_empresa !== 'Region'" src="assets/imgs/brief/region.svg" width="65%">
-                <img *ngIf="cobertura_empresa === 'Region'" src="assets/imgs/brief/region-b.svg" width="65%">
-
-                <p class="texto-boton-brief">Región</p>
-            </button>
-            <button [ngClass]="{'boton-cobertura-brief-blanco':cobertura_empresa === 'Nacional','boton-cobertura-brief':cobertura_empresa !== 'Nacional'}" (click)="changeCobertura('Nacional')">
-                <img *ngIf="cobertura_empresa !== 'Nacional'" src="assets/imgs/brief/nacional.svg" width="65%">
-                <img *ngIf="cobertura_empresa === 'Nacional'" src="assets/imgs/brief/nacional-b.svg" width="65%">
-                <p class="texto-boton-brief">Nacional</p>
-            </button>
-          </div>
-
-          <ion-item *ngIf="cobertura_empresa === 'Region'" style="max-width: 330px;">
-            <ion-label>Estados</ion-label>
-            <ion-select [(ngModel)]="estado" multiple>
-              <ion-option  *ngFor="let estados of cat_estados" [value]="estados.value">{{estados.NOMBRE}}</ion-option>
-            </ion-select>
-          </ion-item>  
-
-        <p class="titulo-brief">¿En qué eres mejor que tu competencia?</p>
-        <input type="text" class="input-brief" [(ngModel)]="mejor">
-
-        <p class="titulo-brief" style="margin-bottom: 1%;">Cliente Objetivo</p>
-        <div class="botones-brief">
-          <button class="boton-brief" style="margin-right: 0%;" [ngClass]="{'boton-brief-activo':target === 'Particulares'}" (click)="changeTarget('Particulares')">
-              <div class="botones-completo">
-                  <div class="botones-mitad">
-                    <img *ngIf="target !== 'Particulares'" src="assets/imgs/brief/particulares.svg" width="55px">
-                    <img *ngIf="target === 'Particulares'" src="assets/imgs/brief/particulares-b.svg" width="55px">
-                  </div> 
-                  <div class="botones-mitad-izq">
-                      <div class="main2">
-                          <div class="inner2" [ngStyle]="{'color':target === 'Particulares' ? 'white' : '#A09D9D'}"> Particulares</div>
-                      </div>
-                  </div> 
-                </div>   
-          </button>
-          <button class="boton-brief" [ngClass]="{'boton-brief-activo':target === 'Empresas'}" (click)="changeTarget('Empresas')">
-            <div class="botones-completo">
-              <div class="botones-mitad">
-                <img *ngIf="target !== 'Empresas'" src="assets/imgs/brief/empresas.svg" width="55px">
-                <img *ngIf="target === 'Empresas'" src="assets/imgs/brief/empresas-b.svg" width="55px">
-              </div> 
-              <div class="botones-mitad-izq">
-                  <div class="main2">
-                      <div class="inner2" [ngStyle]="{'color':target === 'Empresas' ? 'white' : '#A09D9D'}">Empresas</div>
-                    </div>
-              </div> 
-            </div>  
-          </button>
+        <div class="mitad-der">
+          <p class="titulo-brief">Código Postal</p>
+          <input type="number" class="seleccion-brief" [(ngModel)]="cp" style="width: 99%;">
         </div>
-        <button class="guardar-brief" (click)="changeEdit(1);enviarInfo()">Guardar Configuración</button>
+      </div>
+
+      <p class="titulo-brief">Cobertura Campaña</p>
+      <div class="botones-cobertura-brief">
+        <button
+          [ngClass]="{'boton-cobertura-brief-blanco':cobertura_empresa === 'Local','boton-cobertura-brief':cobertura_empresa !== 'Local'}"
+          style="margin-right: 1%;" (click)="changeCobertura('Local')">
+          <img *ngIf="cobertura_empresa !== 'Local'" src="assets/imgs/brief/local.svg" width="65%">
+          <img *ngIf="cobertura_empresa === 'Local'" src="assets/imgs/brief/local-b.svg" width="65%">
+          <p class="texto-boton-brief">Local</p>
+        </button>
+        <button
+          [ngClass]="{'boton-cobertura-brief-blanco':cobertura_empresa === 'Estado','boton-cobertura-brief':cobertura_empresa !== 'Estado'}"
+          style="margin-right: 1%;" (click)="changeCobertura('Estado')">
+          <img *ngIf="cobertura_empresa !== 'Estado'" src="assets/imgs/brief/estado.svg" width="65%">
+          <img *ngIf="cobertura_empresa === 'Estado'" src="assets/imgs/brief/estado-b.svg" width="65%">
+          <p class="texto-boton-brief">Estado</p>
+        </button>
+        <button
+          [ngClass]="{'boton-cobertura-brief-blanco':cobertura_empresa === 'Region','boton-cobertura-brief':cobertura_empresa !== 'Region'}"
+          style="margin-right: 1%;" (click)="changeCobertura('Region')">
+          <img *ngIf="cobertura_empresa !== 'Region'" src="assets/imgs/brief/region.svg" width="65%">
+          <img *ngIf="cobertura_empresa === 'Region'" src="assets/imgs/brief/region-b.svg" width="65%">
+
+          <p class="texto-boton-brief">Región</p>
+        </button>
+        <button
+          [ngClass]="{'boton-cobertura-brief-blanco':cobertura_empresa === 'Nacional','boton-cobertura-brief':cobertura_empresa !== 'Nacional'}"
+          (click)="changeCobertura('Nacional')">
+          <img *ngIf="cobertura_empresa !== 'Nacional'" src="assets/imgs/brief/nacional.svg" width="65%">
+          <img *ngIf="cobertura_empresa === 'Nacional'" src="assets/imgs/brief/nacional-b.svg" width="65%">
+          <p class="texto-boton-brief">Nacional</p>
+        </button>
+      </div>
+
+      <ion-item *ngIf="cobertura_empresa === 'Region'" style="max-width: 330px;">
+        <ion-label>Estados</ion-label>
+        <ion-select [(ngModel)]="estado" multiple>
+          <ion-option *ngFor="let estados of cat_estados" [value]="estados.value">{{estados.NOMBRE}}</ion-option>
+        </ion-select>
+      </ion-item>
+
+      <p class="titulo-brief">¿En qué eres mejor que tu competencia?</p>
+      <input type="text" class="input-brief" [(ngModel)]="mejor">
+
+      <p class="titulo-brief" style="margin-bottom: 1%;">Cliente Objetivo</p>
+      <div class="botones-brief">
+        <button class="boton-brief" style="margin-right: 0%;"
+          [ngClass]="{'boton-brief-activo':target === 'Particulares'}" (click)="changeTarget('Particulares')">
+          <div class="botones-completo">
+            <div class="botones-mitad">
+              <img *ngIf="target !== 'Particulares'" src="assets/imgs/brief/particulares.svg" width="55px">
+              <img *ngIf="target === 'Particulares'" src="assets/imgs/brief/particulares-b.svg" width="55px">
+            </div>
+            <div class="botones-mitad-izq">
+              <div class="main2">
+                <div class="inner2" [ngStyle]="{'color':target === 'Particulares' ? 'white' : '#A09D9D'}"> Particulares
+                </div>
+              </div>
+            </div>
+          </div>
+        </button>
+        <button class="boton-brief" [ngClass]="{'boton-brief-activo':target === 'Empresas'}"
+          (click)="changeTarget('Empresas')">
+          <div class="botones-completo">
+            <div class="botones-mitad">
+              <img *ngIf="target !== 'Empresas'" src="assets/imgs/brief/empresas.svg" width="55px">
+              <img *ngIf="target === 'Empresas'" src="assets/imgs/brief/empresas-b.svg" width="55px">
+            </div>
+            <div class="botones-mitad-izq">
+              <div class="main2">
+                <div class="inner2" [ngStyle]="{'color':target === 'Empresas' ? 'white' : '#A09D9D'}">Empresas</div>
+              </div>
+            </div>
+          </div>
+        </button>
+      </div>
+      <button class="guardar-brief" (click)="changeEdit(1);enviarInfo()">Guardar Configuración</button>
     </div>
     <hr style="background-color: #fff;
     border-top: 2px dashed #8c8b8b;">
     <div class="mas-brief">
-      <p class="deseas-brief">¿Deseas agregar mayor información o detalle de tu empresa para mejorar la configuración de tu campaña?</p>
+      <p class="deseas-brief">¿Deseas agregar mayor información o detalle de tu empresa para mejorar la configuración de
+        tu campaña?</p>
       <ion-item>
-          <ion-label class="informacion-brief" style="opacity: 1 !Important;">Más información</ion-label>
-          <ion-toggle *ngIf="lleno === false" disabled color="secondary" [(ngModel)]="mas_informacion" class="informacion-brief" (ionChange)="pagina()"></ion-toggle>
-          <ion-toggle *ngIf="lleno === true" color="secondary" [(ngModel)]="mas_informacion" class="informacion-brief" (ionChange)="pagina()"></ion-toggle>
+        <ion-label class="informacion-brief" style="opacity: 1 !Important;">Más información</ion-label>
+        <ion-toggle *ngIf="lleno === false" disabled color="secondary" [(ngModel)]="mas_informacion"
+          class="informacion-brief" (ionChange)="pagina()"></ion-toggle>
+        <ion-toggle *ngIf="lleno === true" color="secondary" [(ngModel)]="mas_informacion" class="informacion-brief"
+          (ionChange)="pagina()"></ion-toggle>
       </ion-item>
     </div>
   </div>
@@ -196,7 +221,7 @@
 
 <ion-footer>
   <div class="footer">
-      <div class="left"></div>
-      <div class="right"></div>
+    <div class="left"></div>
+    <div class="right"></div>
   </div>
 </ion-footer>

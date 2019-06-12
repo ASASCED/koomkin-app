@@ -1,3 +1,45 @@
 page-agregar-lead {
+    .contacto {
+        text-align: center !important;
+        color: #288AC1;
+        font-size: 5.5vw;
+        margin-bottom: 4%;
+        font-weight: bold !important;
+    }
 
+    .titulo-agregar{
+        color: #288AC1;
+        font-weight: bold;
+        font-size: 4vw;
+        text-align: left;
+        margin: 3% 0;
+    }
+    
+    .input-agregar {
+        height: 26px;
+        width: 100%;
+        color: #707070;
+        border: none;
+        border-bottom: 1px #CECECE solid;
+        font-weight: bold;
+        border-radius: 0px;
+        box-shadow: none;
+        font-size: 4vw;
+        padding: 3px 5px;
+        font-style: italic;
+    }
+
+    .guardar-agregar {
+        background-color: #FE703F;
+        color: white;
+        border: 1.1px solid #FE703F;
+        width: 60%;
+        margin-left: 20%;
+        height: 32px;
+        font-size: 4.5vw;
+        border-radius: 30px;
+        font-weight: bold;
+        box-shadow: 8px 8px 10px -6px rgba(0, 0, 0, .9);
+    }
+    
 }

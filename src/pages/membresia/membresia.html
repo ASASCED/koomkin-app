@@ -1,9 +1,9 @@
 <ion-header>
-  <ion-navbar color="azul">
-    <ion-title>Empresa: {{empresa}}
-        <br>ID Cliente: {{id}}    
-    </ion-title>
-  </ion-navbar>
+    <ion-navbar color="azul">
+        <ion-title>Empresa: {{empresa}}
+            <br>ID Cliente: {{id}}
+        </ion-title>
+    </ion-navbar>
 </ion-header>
 
 <ion-content *ngIf="recurrente == true">
@@ -23,7 +23,7 @@
                     $ 250 <span style="font-size: 3vw !important;">MXN</span>
                 </ion-segment-button>
                 <ion-segment-button value="500" class="segment-empresa" (click)='onChangeAmount("second")'>
-                    $ 500 <span style="font-size: 3vw !important;">MXN</span>   
+                    $ 500 <span style="font-size: 3vw !important;">MXN</span>
                 </ion-segment-button>
                 <ion-segment-button value="1000" class="segment-objetivo" (click)='onChangeAmount("third")'>
                     $ 1,000 <span style="font-size: 3vw !important;">MXN</span>
@@ -34,9 +34,9 @@
             CLIENTES POTENCIALES
         </div>
         <div class="activity-oferta">
-           +{{ ofertaLeads }}<span class="asterisco">*</span>
+            +{{ ofertaLeads }}<span class="asterisco">*</span>
         </div>
-        <br> 
+        <br>
         <div class="cuadro">
             <button class="cancelar-suscripcion" (click)='btnUpgradeMembership()'>Invertir</button>
         </div>

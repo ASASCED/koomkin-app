@@ -53,18 +53,21 @@
             <td class="datos">
                 <div style="border: 1px solid #c4c4c4;border-radius: 5px;">
                     <span class="datos">{{pdf}}</span>
-                    <button class="subirarchivo" ion-button clear icon-only item-right (click)="chooseFile()">Subir Archivo</button>
+                    <button class="subirarchivo" ion-button clear icon-only item-right (click)="chooseFile()">Subir
+                        Archivo</button>
                 </div>
             </td>
         </tr>
     </table>
     <div class="cuadro" style="margin-bottom: 6%;">
-        <button *ngIf="vista == 'informacion'" class="enviar-mail" (click)="enviarVistaPrevia();">Enviar Vista Previa</button>
+        <button *ngIf="vista == 'informacion'" class="enviar-mail" (click)="enviarVistaPrevia();">Enviar Vista
+            Previa</button>
     </div>
     <div class="cuadro">
         <button *ngIf="vista == 'informacion'" class="edit" (click)="changePage('editar')">Modificar Datos</button>
         <button *ngIf="vista === 'editar'" class="edit" (click)="changePage('informacion');">Cancelar</button>
-        <button *ngIf="vista === 'editar'" class="edit" (click)="changePage('informacion');changeInfo();changeMail();cambioInformacion()">Guardar</button>
+        <button *ngIf="vista === 'editar'" class="edit"
+            (click)="changePage('informacion');changeInfo();changeMail();cambioInformacion()">Guardar</button>
     </div>
 
 </ion-content>

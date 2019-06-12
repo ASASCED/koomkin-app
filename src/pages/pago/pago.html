@@ -84,46 +84,47 @@
         <tr>
             <td class="campos">Estado *</td>
             <select type="text" [(ngModel)]="stateId" [name]="dictionary[getState(estado)]">
-        <option value="0">Seleccionar estado</option>
-        <option value="2537">Aguascalientes</option>
-        <option value="2538">Baja California N</option>
-        <option value="2539">Baja California S</option>
-        <option value="2540">Campeche</option>
-        <option value="2541">Chiapas</option>
-        <option value="2542">Chihuahua</option>
-        <option value="2543">Coahuila</option>
-        <option value="2544">Colima</option>
-        <option value="2545">Ciudad de México</option>
-        <option value="2546">Durango</option>
-        <option value="2547">Guanajuato</option>
-        <option value="2548">Guerrero</option>
-        <option value="2549">Hidalgo</option>
-        <option value="2550">Jalisco</option>
-        <option value="2551">Estado de México</option>
-        <option value="2552">Michoacán</option>
-        <option value="2553">Morelos</option>
-        <option value="2554">Nayarit</option>
-        <option value="2555">Nuevo León</option>
-        <option value="2556">Oaxaca</option>
-        <option value="2557">Puebla</option>
-        <option value="2558">Querétaro</option>
-        <option value="2559">Quintana Roo</option>
-        <option value="2560">San Luis Potosí</option>
-        <option value="2561">Sinaloa</option>
-        <option value="2562">Sonora</option>
-        <option value="2563">Tabasco</option>
-        <option value="2564">Tamaulipas</option>
-        <option value="2565">Tlaxcala</option>
-        <option value="2566">Veracruz</option>
-        <option value="2567">Yucatán</option>
-        <option value="2568">Zacatecas</option>
-      </select>
+                <option value="0">Seleccionar estado</option>
+                <option value="2537">Aguascalientes</option>
+                <option value="2538">Baja California N</option>
+                <option value="2539">Baja California S</option>
+                <option value="2540">Campeche</option>
+                <option value="2541">Chiapas</option>
+                <option value="2542">Chihuahua</option>
+                <option value="2543">Coahuila</option>
+                <option value="2544">Colima</option>
+                <option value="2545">Ciudad de México</option>
+                <option value="2546">Durango</option>
+                <option value="2547">Guanajuato</option>
+                <option value="2548">Guerrero</option>
+                <option value="2549">Hidalgo</option>
+                <option value="2550">Jalisco</option>
+                <option value="2551">Estado de México</option>
+                <option value="2552">Michoacán</option>
+                <option value="2553">Morelos</option>
+                <option value="2554">Nayarit</option>
+                <option value="2555">Nuevo León</option>
+                <option value="2556">Oaxaca</option>
+                <option value="2557">Puebla</option>
+                <option value="2558">Querétaro</option>
+                <option value="2559">Quintana Roo</option>
+                <option value="2560">San Luis Potosí</option>
+                <option value="2561">Sinaloa</option>
+                <option value="2562">Sonora</option>
+                <option value="2563">Tabasco</option>
+                <option value="2564">Tamaulipas</option>
+                <option value="2565">Tlaxcala</option>
+                <option value="2566">Veracruz</option>
+                <option value="2567">Yucatán</option>
+                <option value="2568">Zacatecas</option>
+            </select>
         </tr>
 
     </table>
     <div class="cuadro">
         <button *ngIf="vista == 'informacion'" class="edit" (click)="changePage('editar')">Modificar Datos</button>
         <button *ngIf="vista === 'editar'" class="edit" (click)="changePage('informacion');">Cancelar</button>
-        <button *ngIf="vista === 'editar'" class="edit" (click)="changePage('informacion');updateFiscal();cambioInformacion()">Guardar</button>
+        <button *ngIf="vista === 'editar'" class="edit"
+            (click)="changePage('informacion');updateFiscal();cambioInformacion()">Guardar</button>
     </div>
 </ion-content>

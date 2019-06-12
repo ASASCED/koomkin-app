@@ -214,6 +214,10 @@ export class LeadsPage implements OnInit {
     this.getInsertClickLead(lead.clave, lead.ID, acceso);
   }
 
+  agregarLead() {
+    this.navCtrl.push('AgregarLeadPage');
+  }
+
   public changeLeido(lead) {
     const url = this.apiUrl + "/leerLead/" + lead.clave + "/" + lead.ID;
     this.http.get(url).subscribe(
@@ -228,11 +232,6 @@ export class LeadsPage implements OnInit {
         // console.log("Error occured");
       }
     );
-  }
-
-  mostrar_modal() {
-    let modal = this.modalCtrl.create('LeadPage');
-    modal.present();
   }
 
   public checkNoleidos() {

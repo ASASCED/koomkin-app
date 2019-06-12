@@ -24,13 +24,17 @@
         <ion-col>
           <ion-list inset>
             <ion-item class="lower">
-              <ion-input value="{{email}}" style="text-align:center;text-transform: lowercase;" id="inputEmail" type="email" name="email" placeholder="Correo Electrónico"
-                formControlName="email" autofocus></ion-input>
+              <ion-input value="{{email}}" style="text-align:center;text-transform: lowercase;" id="inputEmail"
+                type="email" name="email" placeholder="Correo Electrónico" formControlName="email" autofocus>
+              </ion-input>
             </ion-item>
             <ion-item>
-              <ion-input value="{{password}}" id="inputPassword" type="password" name="password" formControlName="password" placeholder="Contraseña"></ion-input>
+              <ion-input value="{{password}}" id="inputPassword" type="password" name="password"
+                formControlName="password" placeholder="Contraseña"></ion-input>
             </ion-item>
-            <a><p class="olvidaste" (click)="showPrompt()">¿Olvidaste tu contraseña?</p></a>
+            <a>
+              <p class="olvidaste" (click)="showPrompt()">¿Olvidaste tu contraseña?</p>
+            </a>
           </ion-list>
         </ion-col>
       </ion-row>

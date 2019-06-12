@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+  <g id="Grupo_964" data-name="Grupo 964" transform="translate(82 -4068)">
+    <rect id="Path" width="24" height="24" transform="translate(-82 4068)" fill="rgba(0,0,0,0)"/>
+    <g id="Grupo_4" data-name="Grupo 4" transform="translate(-25 30)">
+      <path id="Op_component_1" data-name="Op component 1" d="M252,4115.25V4117H238v-1.75c0-2.33,4.66-3.5,7-3.5S252,4112.919,252,4115.25Z" transform="translate(-287 -60)" fill="#33a3bd"/>
+      <path id="Op_component_2" data-name="Op component 2" d="M249.66,4115a9.311,9.311,0,0,0-9.32,0Z" transform="translate(-287 -60)" fill="#33a3bd"/>
+      <circle id="Op_component_3" data-name="Op component 3" cx="3.5" cy="3.5" r="3.5" transform="translate(-45.5 4043)" fill="#33a3bd"/>
+      <circle id="Op_component_4" data-name="Op component 4" cx="1.5" cy="1.5" r="1.5" transform="translate(-43.5 4045)" fill="#33a3bd"/>
+      <path id="Op_component_5" data-name="Op component 5" d="M174,4113v-3h3v-2h-3v-3h-2v3h-3v2h3v3Z" transform="translate(-224 -60)" fill="#33a3bd"/>
+    </g>
+  </g>
+</svg>

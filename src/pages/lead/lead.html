@@ -25,10 +25,14 @@
                     <p class="nombre">{{leadActual.NOMBRE | capitalize}}</p>
                 </ion-col>
                 <ion-col col-2 style="text-align: right">
-                    <ion-icon style="margin-left: 10% !important;font-size: 2.6em !important;color: rgb(209, 209, 209)" [ngClass]="{'like':leadActual.calificaLead === 'like','sin':leadActual.calificaLead === 'dislike'}" name="md-thumbs-up" (click)="changeLikeToggle()"></ion-icon>
+                    <ion-icon style="margin-left: 10% !important;font-size: 2.6em !important;color: rgb(209, 209, 209)"
+                        [ngClass]="{'like':leadActual.calificaLead === 'like','sin':leadActual.calificaLead === 'dislike'}"
+                        name="md-thumbs-up" (click)="changeLikeToggle()"></ion-icon>
                 </ion-col>
                 <ion-col col-2>
-                    <ion-icon style="margin-right: .2em !important;font-size: 2.6em !important;color: rgb(77,77,77)" class="telefono-v-chat" name="md-call" (click)="showConfirm();getInsertClickLlamar();"></ion-icon>
+                    <ion-icon style="margin-right: .2em !important;font-size: 2.6em !important;color: rgb(77,77,77)"
+                        class="telefono-v-chat" name="md-call" (click)="showConfirm();getInsertClickLlamar();">
+                    </ion-icon>
                 </ion-col>
             </ion-row>
         </ion-grid>
@@ -37,7 +41,8 @@
 
 <ion-content padding class="falling">
 
-    <div [ngSwitch]="page" swipeSegment [tabsList]="pages" [(currentTab)]="page" (tabChanged)="onTabChanged($event)" class="swipe-area">
+    <div [ngSwitch]="page" swipeSegment [tabsList]="pages" [(currentTab)]="page" (tabChanged)="onTabChanged($event)"
+        class="swipe-area">
         <ion-list *ngSwitchCase="'Lead'">
             <ion-grid class="vista">
                 <ion-card class="dentro">
@@ -46,8 +51,11 @@
                             <ion-col col-8 align-self-center style="display: inherit;">
                                 <a class="inf-nombre">
                                     <strong>{{leadActual.NOMBRE | capitalize}} </strong>
-                                    <img *ngIf="leadActual.urgencia !== 'Sí'" src="assets/imgs/urgencia/{{leadActual.urgencia}}.svg" style="vertical-align: middle;width: 10% !important;display: inline-block;" />
-                                    <img *ngIf="leadActual.urgencia === 'Sí'" src="assets/imgs/urgencia/Si.svg" style="vertical-align: middle;width: 10% !important;display: inline-block;" />
+                                    <img *ngIf="leadActual.urgencia !== 'Sí'"
+                                        src="assets/imgs/urgencia/{{leadActual.urgencia}}.svg"
+                                        style="vertical-align: middle;width: 10% !important;display: inline-block;" />
+                                    <img *ngIf="leadActual.urgencia === 'Sí'" src="assets/imgs/urgencia/Si.svg"
+                                        style="vertical-align: middle;width: 10% !important;display: inline-block;" />
                                 </a>
                             </ion-col>
                             <ion-col col-4 style="text-align:right">
@@ -80,22 +88,36 @@
                 </ion-card>
                 <br>
 
-                <proveedor *ngIf="this.categoria == '1'" [urgenciaproveedor]='urgenciaproveedor' [frecuenciaproveedor]='frecuenciaproveedor' [usoproveedor]='usoproveedor' [mensajeproveedor]='mensajeproveedor' [cantidadproveedor]='cantidadproveedor' [unidadesproveedor]='unidadesproveedor'
-                    [envioproveedor]='envioproveedor' [mensaje]='mensaje'></proveedor>
+                <proveedor *ngIf="this.categoria == '1'" [urgenciaproveedor]='urgenciaproveedor'
+                    [frecuenciaproveedor]='frecuenciaproveedor' [usoproveedor]='usoproveedor'
+                    [mensajeproveedor]='mensajeproveedor' [cantidadproveedor]='cantidadproveedor'
+                    [unidadesproveedor]='unidadesproveedor' [envioproveedor]='envioproveedor' [mensaje]='mensaje'>
+                </proveedor>
 
-                <servicio *ngIf="this.categoria == '2'" [mensajeservicio]='mensajeservicio' [urgenciaservicio]='urgenciaservicio' [frecuenciaservicio]='frecuenciaservicio' [usoservicio]='usoservicio'></servicio>
+                <servicio *ngIf="this.categoria == '2'" [mensajeservicio]='mensajeservicio'
+                    [urgenciaservicio]='urgenciaservicio' [frecuenciaservicio]='frecuenciaservicio'
+                    [usoservicio]='usoservicio'></servicio>
 
-                <medico *ngIf="this.categoria == '3'" [urgenciamedico]='urgenciamedico' [mensajemedico]='mensajemedico' [edadM]='edadM' [generoM]='generoM' [fechaCitaM]='fechaCitaM' [horaCitaM]='horaCitaM'></medico>
+                <medico *ngIf="this.categoria == '3'" [urgenciamedico]='urgenciamedico' [mensajemedico]='mensajemedico'
+                    [edadM]='edadM' [generoM]='generoM' [fechaCitaM]='fechaCitaM' [horaCitaM]='horaCitaM'></medico>
 
-                <profesionista *ngIf="this.categoria == '4'" [urgenciaprofesionista]='urgenciaprofesionista' [mensajeprofesionista]='mensajeprofesionista' [usoprofesionista]='usoprofesionista' [fechaCitaP]='fechaCitaP' [horaCitaP]='horaCitaP'></profesionista>
+                <profesionista *ngIf="this.categoria == '4'" [urgenciaprofesionista]='urgenciaprofesionista'
+                    [mensajeprofesionista]='mensajeprofesionista' [usoprofesionista]='usoprofesionista'
+                    [fechaCitaP]='fechaCitaP' [horaCitaP]='horaCitaP'></profesionista>
 
-                <puntoventa *ngIf="this.categoria == '5'" [urgenciaventa]='urgenciaventa' [mensajeventa]='mensajeventa' [usoventa]='usoventa'></puntoventa>
+                <puntoventa *ngIf="this.categoria == '5'" [urgenciaventa]='urgenciaventa' [mensajeventa]='mensajeventa'
+                    [usoventa]='usoventa'></puntoventa>
 
-                <restaurante *ngIf="this.categoria == '6'" [mensajerestaurante]='mensajerestaurante' [personasrestaurante]='personasrestaurante' [horaCitarestaurante]='horaCitarestaurante' [fechaCitarestaurante]='fechaCitarestaurante'></restaurante>
+                <restaurante *ngIf="this.categoria == '6'" [mensajerestaurante]='mensajerestaurante'
+                    [personasrestaurante]='personasrestaurante' [horaCitarestaurante]='horaCitarestaurante'
+                    [fechaCitarestaurante]='fechaCitarestaurante'></restaurante>
 
-                <hotel *ngIf="this.categoria == '7'" [mensajehotel]='mensajehotel' [personashotel]='personashotel' [hotelEntrada]='hotelEntrada' [hotelSalida]='hotelSalida'></hotel>
+                <hotel *ngIf="this.categoria == '7'" [mensajehotel]='mensajehotel' [personashotel]='personashotel'
+                    [hotelEntrada]='hotelEntrada' [hotelSalida]='hotelSalida'></hotel>
 
-                <inmobiliaria *ngIf="this.categoria == '8'" [urgenciainmobiliaria]='urgenciainmobiliaria' [mensajeinmobiliaria]='mensajeinmobiliaria' [edadinmobiliaria]='edadinmobiliaria' [fechaCitainmobiliaria]='fechaCitainmobiliaria' [horaCitainmobiliaria]='horaCitainmobiliaria'
+                <inmobiliaria *ngIf="this.categoria == '8'" [urgenciainmobiliaria]='urgenciainmobiliaria'
+                    [mensajeinmobiliaria]='mensajeinmobiliaria' [edadinmobiliaria]='edadinmobiliaria'
+                    [fechaCitainmobiliaria]='fechaCitainmobiliaria' [horaCitainmobiliaria]='horaCitainmobiliaria'
                     [personasinmobiliaria]='personasinmobiliaria'></inmobiliaria>
 
                 <ion-row>
@@ -108,8 +130,13 @@
                 </ion-row>
                 <ion-row>
                     <ion-col col-6 style="text-align:center">
-                        <ion-icon style="margin-right: .2em !important;font-size: 4em !important;color: rgb(209, 209, 209)" [ngClass]="{'like':leadActual.calificaLead === 'like','sin':leadActual.calificaLead === 'dislike'}" name="md-thumbs-up" (click)="changeLike('L')"></ion-icon>
-                        <ion-icon style="font-size: 4em !important;color: rgb(209, 209, 209)" [ngClass]="{'like':leadActual.calificaLead === 'dislike','sin':leadActual.calificaLead === 'like'}" name="md-thumbs-down" (click)="changeLike('DL')"></ion-icon>
+                        <ion-icon
+                            style="margin-right: .2em !important;font-size: 4em !important;color: rgb(209, 209, 209)"
+                            [ngClass]="{'like':leadActual.calificaLead === 'like','sin':leadActual.calificaLead === 'dislike'}"
+                            name="md-thumbs-up" (click)="changeLike('L')"></ion-icon>
+                        <ion-icon style="font-size: 4em !important;color: rgb(209, 209, 209)"
+                            [ngClass]="{'like':leadActual.calificaLead === 'dislike','sin':leadActual.calificaLead === 'like'}"
+                            name="md-thumbs-down" (click)="changeLike('DL')"></ion-icon>
                     </ion-col>
                     <ion-col col-6>
                         <p class="contacto">Fecha y Hora:</p>
@@ -127,15 +154,19 @@
                 </ion-row>
                 <ion-row>
                     <ion-col col-12>
-                        <button class="arribab" [ngClass]="{'vendido':leadActual.clasificaLead === 'V'}" (click)="changeClassification('V')">Vendido</button>
-                        <button class="arribab" [ngClass]="{'proceso':leadActual.clasificaLead === 'P'}" (click)="changeClassification('P')">En
-                proceso
-              </button>
+                        <button class="arribab" [ngClass]="{'vendido':leadActual.clasificaLead === 'V'}"
+                            (click)="changeClassification('V')">Vendido</button>
+                        <button class="arribab" [ngClass]="{'proceso':leadActual.clasificaLead === 'P'}"
+                            (click)="changeClassification('P')">En
+                            proceso
+                        </button>
                         <br>
-                        <button class="arribab" [ngClass]="{'sincontacto':leadActual.clasificaLead === 'S'}" (click)="changeClassification('C')">Sin
-                Contacto
-              </button>
-                        <button class="arribab" [ngClass]="{'descartado':leadActual.clasificaLead === 'D'}" (click)="changeClassification('D')">Descartado</button>
+                        <button class="arribab" [ngClass]="{'sincontacto':leadActual.clasificaLead === 'S'}"
+                            (click)="changeClassification('C')">Sin
+                            Contacto
+                        </button>
+                        <button class="arribab" [ngClass]="{'descartado':leadActual.clasificaLead === 'D'}"
+                            (click)="changeClassification('D')">Descartado</button>
                     </ion-col>
                 </ion-row>
             </ion-grid>
@@ -143,50 +174,65 @@
 
         <ion-list *ngSwitchCase="'Llamadas'">
             <ion-item>
-                <ion-row style="display: flex !important; align-content: center !important; align-items: center !important;margin-top:5%;margin-bottom:2%;">
+                <ion-row
+                    style="display: flex !important; align-content: center !important; align-items: center !important;margin-top:5%;margin-bottom:2%;">
                     <ion-col col-2 style="text-align: right;padding-right: 1% !important">
                         <p class="llamadas">Llamadas<br>Entrantes</p>
                     </ion-col>
-                    <ion-col col-2 style="border: 1pt solid #e6e6e6;border-radius: 4px;text-align: center;color: #00B9BE;font-weight: 700;padding: 2px !important;">
-                        <img src="assets/imgs/llamadas/comprador.svg" width="40%" style="vertical-align: middle;margin-left: 5%" /> {{exitosa_c}}
+                    <ion-col col-2
+                        style="border: 1pt solid #e6e6e6;border-radius: 4px;text-align: center;color: #00B9BE;font-weight: 700;padding: 2px !important;">
+                        <img src="assets/imgs/llamadas/comprador.svg" width="40%"
+                            style="vertical-align: middle;margin-left: 5%" /> {{exitosa_c}}
                     </ion-col>
 
                     <ion-col col-2 style="text-align: right;padding-right: 1% !important">
                         <p class="llamadas">Llamadas<br>Salientes</p>
                     </ion-col>
-                    <ion-col col-2 style="border: 1pt solid #e6e6e6;border-radius: 4px;text-align: center;color: #00B9BE;font-weight: 700;padding: 2px !important;">
-                        <img src="assets/imgs/llamadas/cliente.svg" width="40%" style="vertical-align: middle;margin-left: 5%" /> {{exitosa_v}}
+                    <ion-col col-2
+                        style="border: 1pt solid #e6e6e6;border-radius: 4px;text-align: center;color: #00B9BE;font-weight: 700;padding: 2px !important;">
+                        <img src="assets/imgs/llamadas/cliente.svg" width="40%"
+                            style="vertical-align: middle;margin-left: 5%" /> {{exitosa_v}}
                     </ion-col>
 
                     <ion-col col-2 style="text-align: right;padding-right: 1% !important">
                         <p class="llamadas">Llamadas<br>Exitosas</p>
                     </ion-col>
-                    <ion-col col-2 style="border: 1pt solid #e6e6e6;border-radius: 4px;text-align: center;color: #00B9BE;font-weight: 700;padding: 2px !important;">
-                        <img src="assets/imgs/llamadas/cliente.svg" width="40%" style="vertical-align: middle;margin-left: 5%" /> {{exitosa}}
+                    <ion-col col-2
+                        style="border: 1pt solid #e6e6e6;border-radius: 4px;text-align: center;color: #00B9BE;font-weight: 700;padding: 2px !important;">
+                        <img src="assets/imgs/llamadas/cliente.svg" width="40%"
+                            style="vertical-align: middle;margin-left: 5%" /> {{exitosa}}
                     </ion-col>
                 </ion-row>
-                <ion-row style="display: flex !important; align-content: center !important; align-items: center !important;margin-bottom:5%;">
+                <ion-row
+                    style="display: flex !important; align-content: center !important; align-items: center !important;margin-bottom:5%;">
                     <ion-col col-2 style="text-align: right;padding-right: 1% !important">
                         <p class="llamadas">Llamadas<br>a Buzón</p>
                     </ion-col>
-                    <ion-col col-2 style="border: 1pt solid #e6e6e6;border-radius: 4px;text-align: center;color: #00B9BE;font-weight: 700;padding: 2px !important;">
-                        <img src="assets/imgs/llamadas/buzon.svg" width="40%" style="vertical-align: middle;margin-left: 5%" /> {{buzon}}
+                    <ion-col col-2
+                        style="border: 1pt solid #e6e6e6;border-radius: 4px;text-align: center;color: #00B9BE;font-weight: 700;padding: 2px !important;">
+                        <img src="assets/imgs/llamadas/buzon.svg" width="40%"
+                            style="vertical-align: middle;margin-left: 5%" /> {{buzon}}
                     </ion-col>
                     <ion-col col-2 style="text-align: right;padding-right: 1% !important">
                         <p class="llamadas">Llamadas<br>Perdidas</p>
                     </ion-col>
-                    <ion-col col-2 style="border: 1pt solid #e6e6e6;border-radius: 4px;text-align: center;color: #00B9BE;font-weight: 700;padding: 2px !important;">
-                        <img src="assets/imgs/llamadas/perdida.svg" width="40%" style="vertical-align: middle;margin-left: 5%" /> {{perdida}}
+                    <ion-col col-2
+                        style="border: 1pt solid #e6e6e6;border-radius: 4px;text-align: center;color: #00B9BE;font-weight: 700;padding: 2px !important;">
+                        <img src="assets/imgs/llamadas/perdida.svg" width="40%"
+                            style="vertical-align: middle;margin-left: 5%" /> {{perdida}}
                     </ion-col>
                     <ion-col col-2 style="text-align: right;padding-right: 1% !important">
                         <p class="llamadas">Número<br>Inválido</p>
                     </ion-col>
-                    <ion-col col-2 style="border: 1pt solid #e6e6e6;border-radius: 4px;text-align: center;color: #00B9BE;font-weight: 700;padding: 2px !important;">
-                        <img src="assets/imgs/llamadas/invalido.svg" width="40%" style="vertical-align: middle;margin-left: 5%" /> {{invalido}}
+                    <ion-col col-2
+                        style="border: 1pt solid #e6e6e6;border-radius: 4px;text-align: center;color: #00B9BE;font-weight: 700;padding: 2px !important;">
+                        <img src="assets/imgs/llamadas/invalido.svg" width="40%"
+                            style="vertical-align: middle;margin-left: 5%" /> {{invalido}}
                     </ion-col>
                 </ion-row>
                 <button *ngIf="url !== 'sinaudio'" (click)="startAudio()" class="url">Escuchar Llamada</button>
-                <ion-row style="display: flex !important; align-content: center !important; align-items: center !important;">
+                <ion-row
+                    style="display: flex !important; align-content: center !important; align-items: center !important;">
                     <ion-col col-12>
                         <h1 style="color:darkgray;margin-top:2%;">Historial</h1>
                     </ion-col>
@@ -195,16 +241,19 @@
 
             <!--Listado de llamadas-->
             <ion-item style="border-bottom:none" *ngFor="let call of llamadas; let i = index;">
-                <ion-row style="display: flex !important; align-content: center !important; align-items: center !important;margin-top: 1%;">
+                <ion-row
+                    style="display: flex !important; align-content: center !important; align-items: center !important;margin-top: 1%;">
                     <ion-col col-3 *ngIf="call.CallStatus !== 'no-answer'">
                         <p style="color:gray;">{{call.FechaLlamada}}</p>
                     </ion-col>
                     <ion-col col-9>
                     </ion-col>
                 </ion-row>
-                <ion-row style="display: flex !important; align-content: center !important; align-items: center !important;margin-bottom: 2% !important;">
+                <ion-row
+                    style="display: flex !important; align-content: center !important; align-items: center !important;margin-bottom: 2% !important;">
                     <ion-col *ngIf="call.CallStatus !== 'no-answer'" col-1>
-                        <img src="assets/imgs/llamadas/{{call.CallStatus}}.svg" width="70%" style="vertical-align: middle;margin-left: 1%;" />
+                        <img src="assets/imgs/llamadas/{{call.CallStatus}}.svg" width="70%"
+                            style="vertical-align: middle;margin-left: 1%;" />
                     </ion-col>
                     <ion-col *ngIf="call.CallStatus !== 'no-answer'" col-7>
                         <a style="color:#606060">{{leadActual.NOMBRE | capitalize}}</a>
@@ -216,86 +265,102 @@
             </ion-item>
         </ion-list>
 
-      <ion-list *ngSwitchCase="'Chat'" #Chat>
-        <ion-grid *ngIf="loadingMessages">
-          <br>
-          <ion-spinner id="spinnermensajes" loadingText="Cargando más Leads..." item-start name="crescent">Cargando más Leads...
-          </ion-spinner>
-          <p class="text-spinner">Cargando Mensajes...</p>
-        </ion-grid>
+        <ion-list *ngSwitchCase="'Chat'" #Chat>
+            <ion-grid *ngIf="loadingMessages">
+                <br>
+                <ion-spinner id="spinnermensajes" loadingText="Cargando más Leads..." item-start name="crescent">
+                    Cargando más Leads...
+                </ion-spinner>
+                <p class="text-spinner">Cargando Mensajes...</p>
+            </ion-grid>
 
-        <div class="message-wrap">
+            <div class="message-wrap">
 
-          <div *ngFor="let msg of msgListLead;" 
-            class="message" 
-            [class.koomkin-gen]="msg.userId === 'koomkin-gen'" 
-            [class.left]=" msg.userId === leadActual.uuid || msg.userId==='system'" 
-            [class.system]="msg.userId === 'system'" 
-            [class.rightcoach]=" msg.userId === 'koomkin-coach'"
-            [class.rightbot]="msg.userId === 'koomkin-followup' || msg.userId === 'koomkin-bot'"
-            [class.right]="(msg.userId === clientUUID || msg.userId === 'koomkin-followup' || msg.userId === 'koomkin-bot') || ((msg.userId != 'koomkin-gen') && (msg.userId != leadActual.uuid) && (msg.userId != 'system') && (msg.userId != 'koomkin-coach'))">
+                <div *ngFor="let msg of msgListLead;" class="message" [class.koomkin-gen]="msg.userId === 'koomkin-gen'"
+                    [class.left]=" msg.userId === leadActual.uuid || msg.userId==='system'"
+                    [class.system]="msg.userId === 'system'" [class.rightcoach]=" msg.userId === 'koomkin-coach'"
+                    [class.rightbot]="msg.userId === 'koomkin-followup' || msg.userId === 'koomkin-bot'"
+                    [class.right]="(msg.userId === clientUUID || msg.userId === 'koomkin-followup' || msg.userId === 'koomkin-bot') || ((msg.userId != 'koomkin-gen') && (msg.userId != leadActual.uuid) && (msg.userId != 'system') && (msg.userId != 'koomkin-coach'))">
 
-            <div class="msg-detail">
-              <div class="msg-info">
-                <p>{{msg.userName | capitalize}}&nbsp;&nbsp;&nbsp;{{msg.time | relativeTime}}</p>
-              </div>
-              <div *ngIf="msg.type === 'text'" class="msg-content">
-                <span class="triangle"></span>
-                <p class="line-breaker ">{{msg.message}}</p>
-              </div>
+                    <div class="msg-detail">
+                        <div class="msg-info">
+                            <p>{{msg.userName | capitalize}}&nbsp;&nbsp;&nbsp;{{msg.time | relativeTime}}</p>
+                        </div>
+                        <div *ngIf="msg.type === 'text'" class="msg-content">
+                            <span class="triangle"></span>
+                            <p class="line-breaker ">{{msg.message}}</p>
+                        </div>
 
-              <div *ngIf="msg.type === 'media' && msg.contentType.startsWith('image')" class="msg-content">
-                <span class="triangle"></span>
-                <!-- attributes {{msg.attributes.mime}} -->
-                <img #spy class="twilioImage" style="max-width: 180px; max-height: 180px; cursor: pointer" (click)="openFile(msg.url ,msg.contentType)" [src]="msg.url['__zone_symbol__value']">
-              </div>
+                        <div *ngIf="msg.type === 'media' && msg.contentType.startsWith('image')" class="msg-content">
+                            <span class="triangle"></span>
+                            <!-- attributes {{msg.attributes.mime}} -->
+                            <img #spy class="twilioImage" style="max-width: 180px; max-height: 180px; cursor: pointer"
+                                (click)="openFile(msg.url ,msg.contentType)" [src]="msg.url['__zone_symbol__value']">
+                        </div>
 
-              <div *ngIf="msg.type === 'media' && msg.contentType.startsWith('image') == false" class="msg-content">
-                <span class="triangle" *ngIf="!msg.contentType.startsWith('audio')"></span>
-                <!-- {{msg.contentType}}-->
-                <!-- <br> not file url -->
-                <div *ngIf="(msg.contentType.startsWith('video') || msg.contentType.startsWith('application/pdf'))" (click)="openFile(msg.url ,msg.contentType)" style=" display: flex; align-items: center; cursor: pointer;">
-                  <ion-icon style="padding-left: 4%;  font-size:24px; color:#30a3bc" name="document"></ion-icon>
-                  <p class="for-fontsize" style=" justify-content: space-around; text-align: center; display: flex; align-items: center; text-decoration: none;">&nbsp;&nbsp;&nbsp;{{msg.filename }}</p>
+                        <div *ngIf="msg.type === 'media' && msg.contentType.startsWith('image') == false"
+                            class="msg-content">
+                            <span class="triangle" *ngIf="!msg.contentType.startsWith('audio')"></span>
+                            <!-- {{msg.contentType}}-->
+                            <!-- <br> not file url -->
+                            <div *ngIf="(msg.contentType.startsWith('video') || msg.contentType.startsWith('application/pdf'))"
+                                (click)="openFile(msg.url ,msg.contentType)"
+                                style=" display: flex; align-items: center; cursor: pointer;">
+                                <ion-icon style="padding-left: 4%;  font-size:24px; color:#30a3bc" name="document">
+                                </ion-icon>
+                                <p class="for-fontsize"
+                                    style=" justify-content: space-around; text-align: center; display: flex; align-items: center; text-decoration: none;">
+                                    &nbsp;&nbsp;&nbsp;{{msg.filename }}</p>
+                            </div>
+
+                            <div *ngIf="msg.contentType.startsWith('video') == false && msg.contentType.startsWith('application/pdf') == false && msg.contentType.startsWith('audio')== false"
+                                style=" cursor: pointer;">
+                                <a style="padding-left: 4%; justify-content: space-around; text-align: center; display: flex; align-items: center; text-decoration: none; color: #707070;"
+                                    (click)="launch(msg.url['__zone_symbol__value'] ,msg.contentType)" download
+                                    target="_blank"><span style="font-size:24px; color:#30a3bc"
+                                        class="fa fa-file"></span>
+                                    <ion-icon style="font-size:24px; color:#30a3bc" name="document"></ion-icon>
+                                    <p class="for-fontsize" style="">&nbsp;&nbsp;{{msg.filename}}</p>
+                                </a>
+                            </div>
+
+                            <div style="box-shadow:rgba(0, 0, 0, 0.13) 0px 0px 0px;  background: transparent">
+                                <audio #spy2 *ngIf="msg.contentType.startsWith('audio')" style="width: 67vw" controls
+                                    [src]="msg.url['__zone_symbol__value']" crossOrigin="anonymous"
+                                    controlsList="nodownload">
+                                    Tu navegador no soporta achivos de audio.
+                                </audio>
+                            </div>
+                            <p class="line-breaker "></p>
+                        </div>
+                    </div>
                 </div>
-
-                <div *ngIf="msg.contentType.startsWith('video') == false && msg.contentType.startsWith('application/pdf') == false && msg.contentType.startsWith('audio')== false"    style=" cursor: pointer;">
-                  <a style="padding-left: 4%; justify-content: space-around; text-align: center; display: flex; align-items: center; text-decoration: none; color: #707070;" (click)="launch(msg.url['__zone_symbol__value'] ,msg.contentType)" download  target="_blank"><span style="font-size:24px; color:#30a3bc" class="fa fa-file"></span><ion-icon style="font-size:24px; color:#30a3bc" name="document"></ion-icon>
-                    <p class="for-fontsize" style="">&nbsp;&nbsp;{{msg.filename}}</p></a>
-                </div>
-
-                <div style="box-shadow:rgba(0, 0, 0, 0.13) 0px 0px 0px;  background: transparent">
-                  <audio #spy2  *ngIf="msg.contentType.startsWith('audio')" style="width: 67vw" controls [src]="msg.url['__zone_symbol__value']" crossOrigin="anonymous" controlsList="nodownload">
-                    Tu navegador no soporta achivos de audio.
-                  </audio>
-                </div>
-                <p class="line-breaker "></p>
-              </div>
             </div>
-          </div>
-        </div>
-      </ion-list>
+        </ion-list>
     </div>
 
 </ion-content>
 <ion-footer *ngIf="page!='Chat'">
-        <button class="llamar" (click)="showConfirm();getInsertClickLlamar();">
-          <ion-icon class="telefono" name="md-call"></ion-icon>
-          <a class="phone" id="tel">Llamar a {{leadActual.NOMBRE | capitalize}}</a>
-        </button>
-    </ion-footer>
+    <button class="llamar" (click)="showConfirm();getInsertClickLlamar();">
+        <ion-icon class="telefono" name="md-call"></ion-icon>
+        <a class="phone" id="tel">Llamar a {{leadActual.NOMBRE | capitalize}}</a>
+    </button>
+</ion-footer>
 
 <ion-footer class="chat-footer" *ngIf="page=='Chat'" no-border [style.height]="'55px'">
 
     <div class="input-wrap" style="width: 100%;">
-      <button class="chat-send-message" ion-button clear icon-only item-right (click)="chooseFile()">
-        <ion-icon style=" position: relative;  display: inline-block; vertical-align: middle; text-align: center; font-size: 2em; color:#37B9BB;" name="add" ios="ios-add" md="md-add"></ion-icon>
-      </button>
-      <textarea id="chat_input" placeholder="Escribe un mensaje" [placeholder]="false ? '' : 'Escribe un mensaje'" [(ngModel)]="editorMsg" (keyup.enter)="sendMsg()" (focusin)="onFocus()">
+        <button class="chat-send-message" ion-button clear icon-only item-right (click)="chooseFile()">
+            <ion-icon
+                style=" position: relative;  display: inline-block; vertical-align: middle; text-align: center; font-size: 2em; color:#37B9BB;"
+                name="add" ios="ios-add" md="md-add"></ion-icon>
+        </button>
+        <textarea id="chat_input" placeholder="Escribe un mensaje" [placeholder]="false ? '' : 'Escribe un mensaje'"
+            [(ngModel)]="editorMsg" (keyup.enter)="sendMsg()" (focusin)="onFocus()">
       </textarea>
-      <button class="chat-send-message" ion-button clear icon-only item-right (click)="sendMsg()">
-        <ion-icon style="color:#37B9BB;" name="ios-add-circle-outline" ios="ios-send" md="md-send"></ion-icon>
-      </button>
+        <button class="chat-send-message" ion-button clear icon-only item-right (click)="sendMsg()">
+            <ion-icon style="color:#37B9BB;" name="ios-add-circle-outline" ios="ios-send" md="md-send"></ion-icon>
+        </button>
     </div>
 
 </ion-footer>

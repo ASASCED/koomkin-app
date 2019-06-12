@@ -2,7 +2,7 @@
     <ion-navbar color="azul">
         <ion-buttons *ngIf="tipoBanner == 10 || tipoBanner == 12 || tipoBanner == 13">
             <button class="regre" (click)="irInicio()">
-                <ion-icon class="regre" name="ios-arrow-back"  style="font-size: 1.8em;"></ion-icon>
+                <ion-icon class="regre" name="ios-arrow-back" style="font-size: 1.8em;"></ion-icon>
                 Regresar
             </button>
         </ion-buttons>
@@ -12,13 +12,15 @@
 <ion-content *ngIf="tipoBanner == 10">
     <div class="encuesta-container" *ngIf="pagina == 1">
         <div class="activity-header">
-            <img src="https://firebasestorage.googleapis.com/v0/b/chatcintanegra.appspot.com/o/img_encuesta.svg?alt=media&token=d573e9e2-b5f5-4371-82df-39b1bd3ff414" width="100%">
+            <img src="https://firebasestorage.googleapis.com/v0/b/chatcintanegra.appspot.com/o/img_encuesta.svg?alt=media&token=d573e9e2-b5f5-4371-82df-39b1bd3ff414"
+                width="100%">
             <div class="encabezado-encuesta">Encuesta</div>
         </div>
         <div class="activity-content-container">
             <p class="azul-encuesta">¡Tu opinión es muy importante!</p>
             <p class="gris">Te pedimos que completes la siguiente encuesta para poder ofrecerte un mejor servicio</p>
-            <p class="gris">Evalúe en una escala del 1 al 5, donde 1 es Totalmente Desacuerdo y 5 es Totalmente de Acuerdo</p>
+            <p class="gris">Evalúe en una escala del 1 al 5, donde 1 es Totalmente Desacuerdo y 5 es Totalmente de
+                Acuerdo</p>
         </div>
         <div class="activity-footer">
             <button class="encuesta-comenzar" (click)="nextQuestion();setChoice(0)">Comenzar</button>
@@ -26,16 +28,22 @@
     </div>
     <div class="encuesta-container" *ngIf="pagina == 2">
         <div class="activity-header">
-            <img src="https://firebasestorage.googleapis.com/v0/b/chatcintanegra.appspot.com/o/img_encuesta.svg?alt=media&token=d573e9e2-b5f5-4371-82df-39b1bd3ff414" width="100%">
+            <img src="https://firebasestorage.googleapis.com/v0/b/chatcintanegra.appspot.com/o/img_encuesta.svg?alt=media&token=d573e9e2-b5f5-4371-82df-39b1bd3ff414"
+                width="100%">
             <div class="encabezado-encuesta">Encuesta</div>
         </div>
         <div class="activity-content-container">
             <p class="azul">1. ¿La cantidad de clientes potenciales que recibes es satisfactoria?</p>
-            <button class="encuesta-opcion" [ngClass]="{'elegida':eleccion === 1}" (click)="changeChoice(1)">(1) Totalmente en desacuerdo</button>
-            <button class="encuesta-opcion" [ngClass]="{'elegida':eleccion === 2}" (click)="changeChoice(2)">(2) En desacuerdo</button>
-            <button class="encuesta-opcion" [ngClass]="{'elegida':eleccion === 3}" (click)="changeChoice(3)">(3) Ni estoy de acuerdo, ni desacuerdo</button>
-            <button class="encuesta-opcion" [ngClass]="{'elegida':eleccion === 4}" (click)="changeChoice(4)">(4) Deacuerdo</button>
-            <button class="encuesta-opcion" [ngClass]="{'elegida':eleccion === 5}" (click)="changeChoice(5)">(5) Totalmente de acuerdo</button>
+            <button class="encuesta-opcion" [ngClass]="{'elegida':eleccion === 1}" (click)="changeChoice(1)">(1)
+                Totalmente en desacuerdo</button>
+            <button class="encuesta-opcion" [ngClass]="{'elegida':eleccion === 2}" (click)="changeChoice(2)">(2) En
+                desacuerdo</button>
+            <button class="encuesta-opcion" [ngClass]="{'elegida':eleccion === 3}" (click)="changeChoice(3)">(3) Ni
+                estoy de acuerdo, ni desacuerdo</button>
+            <button class="encuesta-opcion" [ngClass]="{'elegida':eleccion === 4}" (click)="changeChoice(4)">(4)
+                Deacuerdo</button>
+            <button class="encuesta-opcion" [ngClass]="{'elegida':eleccion === 5}" (click)="changeChoice(5)">(5)
+                Totalmente de acuerdo</button>
         </div>
         <div class="activity-footer">
             <div class="progress-bar-container">
@@ -51,21 +59,28 @@
                 </div>
             </div>
             <button class="encuesta-regresar" (click)="previousQuestion();">Regresar</button>
-            <button [disabled]="apagado === true" class="encuesta-siguiente" (click)="nextQuestion();saveAnswer(0,eleccion);changeChoice();setChoice(1);disabledButton();">Siguiente</button>
+            <button [disabled]="apagado === true" class="encuesta-siguiente"
+                (click)="nextQuestion();saveAnswer(0,eleccion);changeChoice();setChoice(1);disabledButton();">Siguiente</button>
         </div>
     </div>
     <div class="encuesta-container" *ngIf="pagina == 3">
         <div class="activity-header">
-            <img src="https://firebasestorage.googleapis.com/v0/b/chatcintanegra.appspot.com/o/img_encuesta.svg?alt=media&token=d573e9e2-b5f5-4371-82df-39b1bd3ff414" width="100%">
+            <img src="https://firebasestorage.googleapis.com/v0/b/chatcintanegra.appspot.com/o/img_encuesta.svg?alt=media&token=d573e9e2-b5f5-4371-82df-39b1bd3ff414"
+                width="100%">
             <div class="encabezado-encuesta">Encuesta</div>
         </div>
         <div class="activity-content-container">
             <p class="azul">2. ¿El perfil o la calidad de estos clientes potenciales ha sido de tu agrado?</p>
-            <button class="encuesta-opcion" [ngClass]="{'elegida':eleccion === 1}" (click)="changeChoice(1)">(1) Totalmente en desacuerdo</button>
-            <button class="encuesta-opcion" [ngClass]="{'elegida':eleccion === 2}" (click)="changeChoice(2)">(2) En desacuerdo</button>
-            <button class="encuesta-opcion" [ngClass]="{'elegida':eleccion === 3}" (click)="changeChoice(3)">(3) Ni estoy de acuerdo, ni desacuerdo</button>
-            <button class="encuesta-opcion" [ngClass]="{'elegida':eleccion === 4}" (click)="changeChoice(4)">(4) Deacuerdo</button>
-            <button class="encuesta-opcion" [ngClass]="{'elegida':eleccion === 5}" (click)="changeChoice(5)">(5) Totalmente de acuerdo</button>
+            <button class="encuesta-opcion" [ngClass]="{'elegida':eleccion === 1}" (click)="changeChoice(1)">(1)
+                Totalmente en desacuerdo</button>
+            <button class="encuesta-opcion" [ngClass]="{'elegida':eleccion === 2}" (click)="changeChoice(2)">(2) En
+                desacuerdo</button>
+            <button class="encuesta-opcion" [ngClass]="{'elegida':eleccion === 3}" (click)="changeChoice(3)">(3) Ni
+                estoy de acuerdo, ni desacuerdo</button>
+            <button class="encuesta-opcion" [ngClass]="{'elegida':eleccion === 4}" (click)="changeChoice(4)">(4)
+                Deacuerdo</button>
+            <button class="encuesta-opcion" [ngClass]="{'elegida':eleccion === 5}" (click)="changeChoice(5)">(5)
+                Totalmente de acuerdo</button>
         </div>
         <div class="activity-footer">
             <div class="progress-bar-container">
@@ -81,21 +96,28 @@
                 </div>
             </div>
             <button class="encuesta-regresar" (click)="previousQuestion();setChoice(0);">Regresar</button>
-            <button [disabled]="apagado === true" class="encuesta-siguiente" (click)="nextQuestion();saveAnswer(1,eleccion);changeChoice();setChoice(2);disabledButton();">Siguiente</button>
+            <button [disabled]="apagado === true" class="encuesta-siguiente"
+                (click)="nextQuestion();saveAnswer(1,eleccion);changeChoice();setChoice(2);disabledButton();">Siguiente</button>
         </div>
     </div>
     <div class="encuesta-container" *ngIf="pagina == 4">
         <div class="activity-header">
-            <img src="https://firebasestorage.googleapis.com/v0/b/chatcintanegra.appspot.com/o/img_encuesta.svg?alt=media&token=d573e9e2-b5f5-4371-82df-39b1bd3ff414" width="100%">
+            <img src="https://firebasestorage.googleapis.com/v0/b/chatcintanegra.appspot.com/o/img_encuesta.svg?alt=media&token=d573e9e2-b5f5-4371-82df-39b1bd3ff414"
+                width="100%">
             <div class="encabezado-encuesta">Encuesta</div>
         </div>
         <div class="activity-content-container">
             <p class="azul">3. ¿Consideras buena la atención brindada por nuestro personal de Servicio al Cliente?</p>
-            <button class="encuesta-opcion" [ngClass]="{'elegida':eleccion === 1}" (click)="changeChoice(1)">(1) Totalmente en desacuerdo</button>
-            <button class="encuesta-opcion" [ngClass]="{'elegida':eleccion === 2}" (click)="changeChoice(2)">(2) En desacuerdo</button>
-            <button class="encuesta-opcion" [ngClass]="{'elegida':eleccion === 3}" (click)="changeChoice(3)">(3) Ni estoy de acuerdo, ni desacuerdo</button>
-            <button class="encuesta-opcion" [ngClass]="{'elegida':eleccion === 4}" (click)="changeChoice(4)">(4) Deacuerdo</button>
-            <button class="encuesta-opcion" [ngClass]="{'elegida':eleccion === 5}" (click)="changeChoice(5)">(5) Totalmente de acuerdo</button>
+            <button class="encuesta-opcion" [ngClass]="{'elegida':eleccion === 1}" (click)="changeChoice(1)">(1)
+                Totalmente en desacuerdo</button>
+            <button class="encuesta-opcion" [ngClass]="{'elegida':eleccion === 2}" (click)="changeChoice(2)">(2) En
+                desacuerdo</button>
+            <button class="encuesta-opcion" [ngClass]="{'elegida':eleccion === 3}" (click)="changeChoice(3)">(3) Ni
+                estoy de acuerdo, ni desacuerdo</button>
+            <button class="encuesta-opcion" [ngClass]="{'elegida':eleccion === 4}" (click)="changeChoice(4)">(4)
+                Deacuerdo</button>
+            <button class="encuesta-opcion" [ngClass]="{'elegida':eleccion === 5}" (click)="changeChoice(5)">(5)
+                Totalmente de acuerdo</button>
         </div>
         <div class="activity-footer">
             <div class="progress-bar-container">
@@ -111,21 +133,28 @@
                 </div>
             </div>
             <button class="encuesta-regresar" (click)="previousQuestion();setChoice(1);">Regresar</button>
-            <button [disabled]="apagado === true" class="encuesta-siguiente" (click)="nextQuestion();saveAnswer(2,eleccion);changeChoice();setChoice(3);disabledButton();">Siguiente</button>
+            <button [disabled]="apagado === true" class="encuesta-siguiente"
+                (click)="nextQuestion();saveAnswer(2,eleccion);changeChoice();setChoice(3);disabledButton();">Siguiente</button>
         </div>
     </div>
     <div class="encuesta-container" *ngIf="pagina == 5">
         <div class="activity-header">
-            <img src="https://firebasestorage.googleapis.com/v0/b/chatcintanegra.appspot.com/o/img_encuesta.svg?alt=media&token=d573e9e2-b5f5-4371-82df-39b1bd3ff414" width="100%">
+            <img src="https://firebasestorage.googleapis.com/v0/b/chatcintanegra.appspot.com/o/img_encuesta.svg?alt=media&token=d573e9e2-b5f5-4371-82df-39b1bd3ff414"
+                width="100%">
             <div class="encabezado-encuesta">Encuesta</div>
         </div>
         <div class="activity-content-container">
             <p class="azul">4. ¿La calidad de las tecnologías que Koomkin pone a tu alcance es de tu agrado?</p>
-            <button class="encuesta-opcion" [ngClass]="{'elegida':eleccion === 1}" (click)="changeChoice(1)">(1) Totalmente en desacuerdo</button>
-            <button class="encuesta-opcion" [ngClass]="{'elegida':eleccion === 2}" (click)="changeChoice(2)">(2) En desacuerdo</button>
-            <button class="encuesta-opcion" [ngClass]="{'elegida':eleccion === 3}" (click)="changeChoice(3)">(3) Ni estoy de acuerdo, ni desacuerdo</button>
-            <button class="encuesta-opcion" [ngClass]="{'elegida':eleccion === 4}" (click)="changeChoice(4)">(4) Deacuerdo</button>
-            <button class="encuesta-opcion" [ngClass]="{'elegida':eleccion === 5}" (click)="changeChoice(5)">(5) Totalmente de acuerdo</button>
+            <button class="encuesta-opcion" [ngClass]="{'elegida':eleccion === 1}" (click)="changeChoice(1)">(1)
+                Totalmente en desacuerdo</button>
+            <button class="encuesta-opcion" [ngClass]="{'elegida':eleccion === 2}" (click)="changeChoice(2)">(2) En
+                desacuerdo</button>
+            <button class="encuesta-opcion" [ngClass]="{'elegida':eleccion === 3}" (click)="changeChoice(3)">(3) Ni
+                estoy de acuerdo, ni desacuerdo</button>
+            <button class="encuesta-opcion" [ngClass]="{'elegida':eleccion === 4}" (click)="changeChoice(4)">(4)
+                Deacuerdo</button>
+            <button class="encuesta-opcion" [ngClass]="{'elegida':eleccion === 5}" (click)="changeChoice(5)">(5)
+                Totalmente de acuerdo</button>
         </div>
         <div class="activity-footer">
             <div class="progress-bar-container">
@@ -141,21 +170,29 @@
                 </div>
             </div>
             <button class="encuesta-regresar" (click)="previousQuestion();setChoice(2);">Regresar</button>
-            <button [disabled]="apagado === true" class="encuesta-siguiente" (click)="nextQuestion();saveAnswer(3,eleccion);changeChoice();setChoice(4);disabledButton();">Siguiente</button>
+            <button [disabled]="apagado === true" class="encuesta-siguiente"
+                (click)="nextQuestion();saveAnswer(3,eleccion);changeChoice();setChoice(4);disabledButton();">Siguiente</button>
         </div>
     </div>
     <div class="encuesta-container" *ngIf="pagina == 6">
         <div class="activity-header">
-            <img src="https://firebasestorage.googleapis.com/v0/b/chatcintanegra.appspot.com/o/img_encuesta.svg?alt=media&token=d573e9e2-b5f5-4371-82df-39b1bd3ff414" width="100%">
+            <img src="https://firebasestorage.googleapis.com/v0/b/chatcintanegra.appspot.com/o/img_encuesta.svg?alt=media&token=d573e9e2-b5f5-4371-82df-39b1bd3ff414"
+                width="100%">
             <div class="encabezado-encuesta">Encuesta</div>
         </div>
         <div class="activity-content-container">
-            <p class="azul">5. Hasta el momento, ¿Consideras como bueno el valor generado por la campaña digital de Koomkin?</p>
-            <button class="encuesta-opcion" [ngClass]="{'elegida':eleccion === 1}" (click)="changeChoice(1)">(1) Totalmente en desacuerdo</button>
-            <button class="encuesta-opcion" [ngClass]="{'elegida':eleccion === 2}" (click)="changeChoice(2)">(2) En desacuerdo</button>
-            <button class="encuesta-opcion" [ngClass]="{'elegida':eleccion === 3}" (click)="changeChoice(3)">(3) Ni estoy de acuerdo, ni desacuerdo</button>
-            <button class="encuesta-opcion" [ngClass]="{'elegida':eleccion === 4}" (click)="changeChoice(4)">(4) Deacuerdo</button>
-            <button class="encuesta-opcion" [ngClass]="{'elegida':eleccion === 5}" (click)="changeChoice(5)">(5) Totalmente de acuerdo</button>
+            <p class="azul">5. Hasta el momento, ¿Consideras como bueno el valor generado por la campaña digital de
+                Koomkin?</p>
+            <button class="encuesta-opcion" [ngClass]="{'elegida':eleccion === 1}" (click)="changeChoice(1)">(1)
+                Totalmente en desacuerdo</button>
+            <button class="encuesta-opcion" [ngClass]="{'elegida':eleccion === 2}" (click)="changeChoice(2)">(2) En
+                desacuerdo</button>
+            <button class="encuesta-opcion" [ngClass]="{'elegida':eleccion === 3}" (click)="changeChoice(3)">(3) Ni
+                estoy de acuerdo, ni desacuerdo</button>
+            <button class="encuesta-opcion" [ngClass]="{'elegida':eleccion === 4}" (click)="changeChoice(4)">(4)
+                Deacuerdo</button>
+            <button class="encuesta-opcion" [ngClass]="{'elegida':eleccion === 5}" (click)="changeChoice(5)">(5)
+                Totalmente de acuerdo</button>
         </div>
         <div class="activity-footer">
             <div class="progress-bar-container">
@@ -171,12 +208,14 @@
                 </div>
             </div>
             <button class="encuesta-regresar" (click)="previousQuestion();setChoice(3);">Regresar</button>
-            <button [disabled]="apagado === true" class="encuesta-siguiente" (click)="nextQuestion();saveAnswer(4,eleccion);changeChoice();disabledButton();">Siguiente</button>
+            <button [disabled]="apagado === true" class="encuesta-siguiente"
+                (click)="nextQuestion();saveAnswer(4,eleccion);changeChoice();disabledButton();">Siguiente</button>
         </div>
     </div>
     <div class="encuesta-container" *ngIf="pagina == 7">
         <div class="activity-header">
-            <img src="https://firebasestorage.googleapis.com/v0/b/chatcintanegra.appspot.com/o/img_encuesta.svg?alt=media&token=d573e9e2-b5f5-4371-82df-39b1bd3ff414" width="100%">
+            <img src="https://firebasestorage.googleapis.com/v0/b/chatcintanegra.appspot.com/o/img_encuesta.svg?alt=media&token=d573e9e2-b5f5-4371-82df-39b1bd3ff414"
+                width="100%">
             <div class="encabezado-encuesta">Encuesta</div>
         </div>
         <div class="activity-content-container">
@@ -192,7 +231,8 @@
 <ion-content *ngIf="tipoBanner == 11">
     <div class="encuesta-container" *ngIf="pagina == 1">
         <div class="activity-header">
-            <img src="https://firebasestorage.googleapis.com/v0/b/chatcintanegra.appspot.com/o/img_encuesta.svg?alt=media&token=d573e9e2-b5f5-4371-82df-39b1bd3ff414" width="100%">
+            <img src="https://firebasestorage.googleapis.com/v0/b/chatcintanegra.appspot.com/o/img_encuesta.svg?alt=media&token=d573e9e2-b5f5-4371-82df-39b1bd3ff414"
+                width="100%">
             <div class="encabezado-encuesta">Encuesta</div>
         </div>
         <div class="activity-content-container">
@@ -206,7 +246,8 @@
     </div>
     <div class="encuesta-container" *ngIf="pagina == 2">
         <div class="activity-header">
-            <img src="https://firebasestorage.googleapis.com/v0/b/chatcintanegra.appspot.com/o/img_encuesta.svg?alt=media&token=d573e9e2-b5f5-4371-82df-39b1bd3ff414" width="100%">
+            <img src="https://firebasestorage.googleapis.com/v0/b/chatcintanegra.appspot.com/o/img_encuesta.svg?alt=media&token=d573e9e2-b5f5-4371-82df-39b1bd3ff414"
+                width="100%">
             <div class="encabezado-encuesta">Encuesta</div>
         </div>
         <div class="activity-content-container" style="display: grid;align-items: center;">
@@ -247,12 +288,14 @@
         </div>
         <div class="activity-footer">
             <button class="encuesta-regresar" (click)="previousQuestion();">Regresar</button>
-            <button [disabled]="apagado === true" class="encuesta-siguiente" (click)="nextQuestion();saveAnswer(0,eleccion);">Siguiente</button>
+            <button [disabled]="apagado === true" class="encuesta-siguiente"
+                (click)="nextQuestion();saveAnswer(0,eleccion);">Siguiente</button>
         </div>
     </div>
     <div class="encuesta-container" *ngIf="pagina == 3">
         <div class="activity-header">
-            <img src="https://firebasestorage.googleapis.com/v0/b/chatcintanegra.appspot.com/o/img_encuesta.svg?alt=media&token=d573e9e2-b5f5-4371-82df-39b1bd3ff414" width="100%">
+            <img src="https://firebasestorage.googleapis.com/v0/b/chatcintanegra.appspot.com/o/img_encuesta.svg?alt=media&token=d573e9e2-b5f5-4371-82df-39b1bd3ff414"
+                width="100%">
             <div class="encabezado-encuesta">Encuesta</div>
         </div>
         <div class="activity-content-container">
@@ -268,7 +311,8 @@
 <ion-content *ngIf="tipoBanner == 12">
     <div class="encuesta-container" *ngIf="pagina == 1">
         <div class="activity-header">
-            <img src="https://firebasestorage.googleapis.com/v0/b/chatcintanegra.appspot.com/o/img_encuesta.svg?alt=media&token=d573e9e2-b5f5-4371-82df-39b1bd3ff414" width="100%">
+            <img src="https://firebasestorage.googleapis.com/v0/b/chatcintanegra.appspot.com/o/img_encuesta.svg?alt=media&token=d573e9e2-b5f5-4371-82df-39b1bd3ff414"
+                width="100%">
             <div class="encabezado-encuesta">Encuesta</div>
         </div>
         <div class="activity-content-container">
@@ -281,7 +325,8 @@
     </div>
     <div class="encuesta-container" *ngIf="pagina == 2">
         <div class="activity-header">
-            <img src="https://firebasestorage.googleapis.com/v0/b/chatcintanegra.appspot.com/o/img_encuesta.svg?alt=media&token=d573e9e2-b5f5-4371-82df-39b1bd3ff414" width="100%">
+            <img src="https://firebasestorage.googleapis.com/v0/b/chatcintanegra.appspot.com/o/img_encuesta.svg?alt=media&token=d573e9e2-b5f5-4371-82df-39b1bd3ff414"
+                width="100%">
             <div class="encabezado-encuesta">Encuesta</div>
         </div>
         <div class="activity-content-container" style="display: grid;align-items: center;">
@@ -339,12 +384,14 @@
                 </div>
             </div>
             <button class="encuesta-regresar" (click)="previousQuestion();">Regresar</button>
-            <button [disabled]="apagado === true" class="encuesta-siguiente" (click)="nextQuestion();saveAnswer(0,eleccion);changeChoice();disabledButton();">Siguiente</button>
+            <button [disabled]="apagado === true" class="encuesta-siguiente"
+                (click)="nextQuestion();saveAnswer(0,eleccion);changeChoice();disabledButton();">Siguiente</button>
         </div>
     </div>
     <div class="encuesta-container" *ngIf="pagina == 3">
         <div class="activity-header">
-            <img src="https://firebasestorage.googleapis.com/v0/b/chatcintanegra.appspot.com/o/img_encuesta.svg?alt=media&token=d573e9e2-b5f5-4371-82df-39b1bd3ff414" width="100%">
+            <img src="https://firebasestorage.googleapis.com/v0/b/chatcintanegra.appspot.com/o/img_encuesta.svg?alt=media&token=d573e9e2-b5f5-4371-82df-39b1bd3ff414"
+                width="100%">
             <div class="encabezado-encuesta">Encuesta</div>
         </div>
         <div class="activity-content-container" style="display: grid;align-items: center;">
@@ -402,12 +449,14 @@
                 </div>
             </div>
             <button class="encuesta-regresar" (click)="previousQuestion();setChoice(0);">Regresar</button>
-            <button [disabled]="apagado === true" class="encuesta-siguiente" (click)="nextQuestion();saveAnswer(1,eleccion);changeChoice();disabledButton();">Siguiente</button>
+            <button [disabled]="apagado === true" class="encuesta-siguiente"
+                (click)="nextQuestion();saveAnswer(1,eleccion);changeChoice();disabledButton();">Siguiente</button>
         </div>
     </div>
     <div class="encuesta-container" *ngIf="pagina == 4">
         <div class="activity-header">
-            <img src="https://firebasestorage.googleapis.com/v0/b/chatcintanegra.appspot.com/o/img_encuesta.svg?alt=media&token=d573e9e2-b5f5-4371-82df-39b1bd3ff414" width="100%">
+            <img src="https://firebasestorage.googleapis.com/v0/b/chatcintanegra.appspot.com/o/img_encuesta.svg?alt=media&token=d573e9e2-b5f5-4371-82df-39b1bd3ff414"
+                width="100%">
             <div class="encabezado-encuesta">Encuesta</div>
         </div>
         <div class="activity-content-container" style="display: grid;align-items: center;">
@@ -465,12 +514,14 @@
                 </div>
             </div>
             <button class="encuesta-regresar" (click)="previousQuestion();setChoice(1);">Regresar</button>
-            <button [disabled]="apagado === true" class="encuesta-siguiente" (click)="nextQuestion();saveAnswer(2,eleccion);changeChoice();disabledButton();">Siguiente</button>
+            <button [disabled]="apagado === true" class="encuesta-siguiente"
+                (click)="nextQuestion();saveAnswer(2,eleccion);changeChoice();disabledButton();">Siguiente</button>
         </div>
     </div>
     <div class="encuesta-container" *ngIf="pagina == 5">
         <div class="activity-header">
-            <img src="https://firebasestorage.googleapis.com/v0/b/chatcintanegra.appspot.com/o/img_encuesta.svg?alt=media&token=d573e9e2-b5f5-4371-82df-39b1bd3ff414" width="100%">
+            <img src="https://firebasestorage.googleapis.com/v0/b/chatcintanegra.appspot.com/o/img_encuesta.svg?alt=media&token=d573e9e2-b5f5-4371-82df-39b1bd3ff414"
+                width="100%">
             <div class="encabezado-encuesta">Encuesta</div>
         </div>
         <div class="activity-content-container" style="display: grid;align-items: center;">
@@ -529,16 +580,19 @@
                 </div>
             </div>
             <button class="encuesta-regresar" (click)="previousQuestion();setChoice(2);">Regresar</button>
-            <button [disabled]="apagado === true" class="encuesta-siguiente" (click)="nextQuestion();saveAnswer(3,eleccion);changeChoice();disabledButton();">Siguiente</button>
+            <button [disabled]="apagado === true" class="encuesta-siguiente"
+                (click)="nextQuestion();saveAnswer(3,eleccion);changeChoice();disabledButton();">Siguiente</button>
         </div>
     </div>
     <div class="encuesta-container" *ngIf="pagina == 6">
         <div class="activity-header">
-            <img src="https://firebasestorage.googleapis.com/v0/b/chatcintanegra.appspot.com/o/img_encuesta.svg?alt=media&token=d573e9e2-b5f5-4371-82df-39b1bd3ff414" width="100%">
+            <img src="https://firebasestorage.googleapis.com/v0/b/chatcintanegra.appspot.com/o/img_encuesta.svg?alt=media&token=d573e9e2-b5f5-4371-82df-39b1bd3ff414"
+                width="100%">
             <div class="encabezado-encuesta">Encuesta</div>
         </div>
         <div class="activity-content-container" style="display: grid;align-items: center;">
-            <p class="azul">5. Del 1 al 10, ¿Cómo calificarías la atención por parte del área de Servicio al Cliente?</p>
+            <p class="azul">5. Del 1 al 10, ¿Cómo calificarías la atención por parte del área de Servicio al Cliente?
+            </p>
             <ul class="grade">
                 <li class="zero" [ngClass]="{'selection':eleccion === 1}" (click)="changeChoice(1)">
                     <span>1</span>
@@ -592,12 +646,14 @@
                 </div>
             </div>
             <button class="encuesta-regresar" (click)="previousQuestion();setChoice(3);">Regresar</button>
-            <button [disabled]="apagado === true" class="encuesta-siguiente" (click)="nextQuestion();saveAnswer(4,eleccion);changeChoice();disabledButton();">Siguiente</button>
+            <button [disabled]="apagado === true" class="encuesta-siguiente"
+                (click)="nextQuestion();saveAnswer(4,eleccion);changeChoice();disabledButton();">Siguiente</button>
         </div>
     </div>
     <div class="encuesta-container" *ngIf="pagina == 7">
         <div class="activity-header">
-            <img src="https://firebasestorage.googleapis.com/v0/b/chatcintanegra.appspot.com/o/img_encuesta.svg?alt=media&token=d573e9e2-b5f5-4371-82df-39b1bd3ff414" width="100%">
+            <img src="https://firebasestorage.googleapis.com/v0/b/chatcintanegra.appspot.com/o/img_encuesta.svg?alt=media&token=d573e9e2-b5f5-4371-82df-39b1bd3ff414"
+                width="100%">
             <div class="encabezado-encuesta">Encuesta</div>
         </div>
         <div class="activity-content-container" style="display: grid;align-items: center;">
@@ -605,7 +661,8 @@
             <button class="encuesta-opcion" [ngClass]="{'elegida':eleccion === 1}" (click)="changeChoice(1)">Sí</button>
             <button class="encuesta-opcion" [ngClass]="{'elegida':eleccion === 2}" (click)="changeChoice(2)">No</button>
             <p class="azul">¿Cuál?</p>
-            <textarea class="comentario" rows="2" cols="50" maxlength="150" [(ngModel)]="comentario" required placeholder="Escribe el nombre de la Agencia"></textarea>
+            <textarea class="comentario" rows="2" cols="50" maxlength="150" [(ngModel)]="comentario" required
+                placeholder="Escribe el nombre de la Agencia"></textarea>
         </div>
         <div class="activity-footer">
             <div class="progress-bar-container-eight">
@@ -627,19 +684,24 @@
                 </div>
             </div>
             <button class="encuesta-regresar" (click)="previousQuestion();setChoice(4);">Regresar</button>
-            <button [disabled]="apagado === true" class="encuesta-siguiente" (click)="nextQuestion();saveAnswer(5,eleccion);changeChoice();disabledButton();">Siguiente</button>
+            <button [disabled]="apagado === true" class="encuesta-siguiente"
+                (click)="nextQuestion();saveAnswer(5,eleccion);changeChoice();disabledButton();">Siguiente</button>
         </div>
     </div>
     <div class="encuesta-container" *ngIf="pagina == 8">
         <div class="activity-header">
-            <img src="https://firebasestorage.googleapis.com/v0/b/chatcintanegra.appspot.com/o/img_encuesta.svg?alt=media&token=d573e9e2-b5f5-4371-82df-39b1bd3ff414" width="100%">
+            <img src="https://firebasestorage.googleapis.com/v0/b/chatcintanegra.appspot.com/o/img_encuesta.svg?alt=media&token=d573e9e2-b5f5-4371-82df-39b1bd3ff414"
+                width="100%">
             <div class="encabezado-encuesta">Encuesta</div>
         </div>
         <div class="activity-content-container" style="display: grid;align-items: center;">
             <p class="azul">7. Comparado con otras agencias o competidores, nuestra campaña digital fue...</p>
-            <button class="encuesta-opcion" [ngClass]="{'elegida':eleccion === 1}" (click)="changeChoice(1)">a) Mejor</button>
-            <button class="encuesta-opcion" [ngClass]="{'elegida':eleccion === 2}" (click)="changeChoice(2)">b) Igual</button>
-            <button class="encuesta-opcion" [ngClass]="{'elegida':eleccion === 3}" (click)="changeChoice(3)">c) Peor</button>
+            <button class="encuesta-opcion" [ngClass]="{'elegida':eleccion === 1}" (click)="changeChoice(1)">a)
+                Mejor</button>
+            <button class="encuesta-opcion" [ngClass]="{'elegida':eleccion === 2}" (click)="changeChoice(2)">b)
+                Igual</button>
+            <button class="encuesta-opcion" [ngClass]="{'elegida':eleccion === 3}" (click)="changeChoice(3)">c)
+                Peor</button>
         </div>
         <div class="activity-footer">
             <div class="progress-bar-container-eight">
@@ -661,17 +723,21 @@
                 </div>
             </div>
             <button class="encuesta-regresar" (click)="previousQuestion();setChoice(5);">Regresar</button>
-            <button [disabled]="apagado === true" class="encuesta-siguiente" (click)="nextQuestion();saveAnswer(6,eleccion);changeChoice();disabledButton();">Siguiente</button>
+            <button [disabled]="apagado === true" class="encuesta-siguiente"
+                (click)="nextQuestion();saveAnswer(6,eleccion);changeChoice();disabledButton();">Siguiente</button>
         </div>
     </div>
     <div class="encuesta-container" *ngIf="pagina == 9">
         <div class="activity-header">
-            <img src="https://firebasestorage.googleapis.com/v0/b/chatcintanegra.appspot.com/o/img_encuesta.svg?alt=media&token=d573e9e2-b5f5-4371-82df-39b1bd3ff414" width="100%">
+            <img src="https://firebasestorage.googleapis.com/v0/b/chatcintanegra.appspot.com/o/img_encuesta.svg?alt=media&token=d573e9e2-b5f5-4371-82df-39b1bd3ff414"
+                width="100%">
             <div class="encabezado-encuesta">Encuesta</div>
         </div>
         <div class="activity-content-container" style="display: grid;align-items: center;">
-            <p class="azul">8. ¿Deseas agregar algún comentario? Esto con el objetivo de que la Dirección de Servicio al Cliente lo tome en cuenta</p>
-            <textarea class="comentario" rows="8" cols="50" maxlength="250" [(ngModel)]="comentarios" placeholder="Escribe tu comentario..." (click)="changeChoice(1)" required></textarea>
+            <p class="azul">8. ¿Deseas agregar algún comentario? Esto con el objetivo de que la Dirección de Servicio al
+                Cliente lo tome en cuenta</p>
+            <textarea class="comentario" rows="8" cols="50" maxlength="250" [(ngModel)]="comentarios"
+                placeholder="Escribe tu comentario..." (click)="changeChoice(1)" required></textarea>
         </div>
         <div class="activity-footer">
             <div class="progress-bar-container-eight">
@@ -693,12 +759,14 @@
                 </div>
             </div>
             <button class="encuesta-regresar" (click)="previousQuestion();setChoice(6);">Regresar</button>
-            <button [disabled]="apagado === true" class="encuesta-siguiente" (click)="nextQuestion();saveAnswer(7,eleccion);changeChoice();disabledButton();">Siguiente</button>
+            <button [disabled]="apagado === true" class="encuesta-siguiente"
+                (click)="nextQuestion();saveAnswer(7,eleccion);changeChoice();disabledButton();">Siguiente</button>
         </div>
     </div>
     <div class="encuesta-container" *ngIf="pagina == 10">
         <div class="activity-header">
-            <img src="https://firebasestorage.googleapis.com/v0/b/chatcintanegra.appspot.com/o/img_encuesta.svg?alt=media&token=d573e9e2-b5f5-4371-82df-39b1bd3ff414" width="100%">
+            <img src="https://firebasestorage.googleapis.com/v0/b/chatcintanegra.appspot.com/o/img_encuesta.svg?alt=media&token=d573e9e2-b5f5-4371-82df-39b1bd3ff414"
+                width="100%">
             <div class="encabezado-encuesta">Encuesta</div>
         </div>
         <div class="activity-content-container">
@@ -715,7 +783,8 @@
 <ion-content *ngIf="tipoBanner == 13">
     <div class="encuesta-container" *ngIf="pagina == 1">
         <div class="activity-header">
-            <img src="https://firebasestorage.googleapis.com/v0/b/chatcintanegra.appspot.com/o/img_encuesta.svg?alt=media&token=d573e9e2-b5f5-4371-82df-39b1bd3ff414" width="100%">
+            <img src="https://firebasestorage.googleapis.com/v0/b/chatcintanegra.appspot.com/o/img_encuesta.svg?alt=media&token=d573e9e2-b5f5-4371-82df-39b1bd3ff414"
+                width="100%">
             <div class="encabezado-encuesta">Encuesta</div>
         </div>
         <div class="activity-content-container">
@@ -728,7 +797,8 @@
     </div>
     <div class="encuesta-container" *ngIf="pagina == 2">
         <div class="activity-header">
-            <img src="https://firebasestorage.googleapis.com/v0/b/chatcintanegra.appspot.com/o/img_encuesta.svg?alt=media&token=d573e9e2-b5f5-4371-82df-39b1bd3ff414" width="100%">
+            <img src="https://firebasestorage.googleapis.com/v0/b/chatcintanegra.appspot.com/o/img_encuesta.svg?alt=media&token=d573e9e2-b5f5-4371-82df-39b1bd3ff414"
+                width="100%">
             <div class="encabezado-encuesta">Encuesta</div>
         </div>
         <div class="activity-content-container" style="display: grid;align-items: center;">
@@ -786,12 +856,14 @@
                 </div>
             </div>
             <button class="encuesta-regresar" (click)="previousQuestion();">Regresar</button>
-            <button [disabled]="apagado === true" class="encuesta-siguiente" (click)="nextQuestion();saveAnswer(0,eleccion);changeChoice();disabledButton();">Siguiente</button>
+            <button [disabled]="apagado === true" class="encuesta-siguiente"
+                (click)="nextQuestion();saveAnswer(0,eleccion);changeChoice();disabledButton();">Siguiente</button>
         </div>
     </div>
     <div class="encuesta-container" *ngIf="pagina == 3">
         <div class="activity-header">
-            <img src="https://firebasestorage.googleapis.com/v0/b/chatcintanegra.appspot.com/o/img_encuesta.svg?alt=media&token=d573e9e2-b5f5-4371-82df-39b1bd3ff414" width="100%">
+            <img src="https://firebasestorage.googleapis.com/v0/b/chatcintanegra.appspot.com/o/img_encuesta.svg?alt=media&token=d573e9e2-b5f5-4371-82df-39b1bd3ff414"
+                width="100%">
             <div class="encabezado-encuesta">Encuesta</div>
         </div>
         <div class="activity-content-container" style="display: grid;align-items: center;">
@@ -849,12 +921,14 @@
                 </div>
             </div>
             <button class="encuesta-regresar" (click)="previousQuestion();setChoice(0);">Regresar</button>
-            <button [disabled]="apagado === true" class="encuesta-siguiente" (click)="nextQuestion();saveAnswer(1,eleccion);changeChoice();disabledButton();">Siguiente</button>
+            <button [disabled]="apagado === true" class="encuesta-siguiente"
+                (click)="nextQuestion();saveAnswer(1,eleccion);changeChoice();disabledButton();">Siguiente</button>
         </div>
     </div>
     <div class="encuesta-container" *ngIf="pagina == 4">
         <div class="activity-header">
-            <img src="https://firebasestorage.googleapis.com/v0/b/chatcintanegra.appspot.com/o/img_encuesta.svg?alt=media&token=d573e9e2-b5f5-4371-82df-39b1bd3ff414" width="100%">
+            <img src="https://firebasestorage.googleapis.com/v0/b/chatcintanegra.appspot.com/o/img_encuesta.svg?alt=media&token=d573e9e2-b5f5-4371-82df-39b1bd3ff414"
+                width="100%">
             <div class="encabezado-encuesta">Encuesta</div>
         </div>
         <div class="activity-content-container" style="display: grid;align-items: center;">
@@ -912,12 +986,14 @@
                 </div>
             </div>
             <button class="encuesta-regresar" (click)="previousQuestion();setChoice(1);">Regresar</button>
-            <button [disabled]="apagado === true" class="encuesta-siguiente" (click)="nextQuestion();saveAnswer(2,eleccion);changeChoice();disabledButton();">Siguiente</button>
+            <button [disabled]="apagado === true" class="encuesta-siguiente"
+                (click)="nextQuestion();saveAnswer(2,eleccion);changeChoice();disabledButton();">Siguiente</button>
         </div>
     </div>
     <div class="encuesta-container" *ngIf="pagina == 5">
         <div class="activity-header">
-            <img src="https://firebasestorage.googleapis.com/v0/b/chatcintanegra.appspot.com/o/img_encuesta.svg?alt=media&token=d573e9e2-b5f5-4371-82df-39b1bd3ff414" width="100%">
+            <img src="https://firebasestorage.googleapis.com/v0/b/chatcintanegra.appspot.com/o/img_encuesta.svg?alt=media&token=d573e9e2-b5f5-4371-82df-39b1bd3ff414"
+                width="100%">
             <div class="encabezado-encuesta">Encuesta</div>
         </div>
         <div class="activity-content-container" style="display: grid;align-items: center;">
@@ -976,16 +1052,19 @@
                 </div>
             </div>
             <button class="encuesta-regresar" (click)="previousQuestion();setChoice(2);">Regresar</button>
-            <button [disabled]="apagado === true" class="encuesta-siguiente" (click)="nextQuestion();saveAnswer(3,eleccion);changeChoice();disabledButton();">Siguiente</button>
+            <button [disabled]="apagado === true" class="encuesta-siguiente"
+                (click)="nextQuestion();saveAnswer(3,eleccion);changeChoice();disabledButton();">Siguiente</button>
         </div>
     </div>
     <div class="encuesta-container" *ngIf="pagina == 6">
         <div class="activity-header">
-            <img src="https://firebasestorage.googleapis.com/v0/b/chatcintanegra.appspot.com/o/img_encuesta.svg?alt=media&token=d573e9e2-b5f5-4371-82df-39b1bd3ff414" width="100%">
+            <img src="https://firebasestorage.googleapis.com/v0/b/chatcintanegra.appspot.com/o/img_encuesta.svg?alt=media&token=d573e9e2-b5f5-4371-82df-39b1bd3ff414"
+                width="100%">
             <div class="encabezado-encuesta">Encuesta</div>
         </div>
         <div class="activity-content-container" style="display: grid;align-items: center;">
-            <p class="azul">5. Del 1 al 10, ¿Cómo calificarías la atención por parte del área de Servicio al Cliente?</p>
+            <p class="azul">5. Del 1 al 10, ¿Cómo calificarías la atención por parte del área de Servicio al Cliente?
+            </p>
             <ul class="grade">
                 <li class="zero" [ngClass]="{'selection':eleccion === 1}" (click)="changeChoice(1)">
                     <span>1</span>
@@ -1039,12 +1118,14 @@
                 </div>
             </div>
             <button class="encuesta-regresar" (click)="previousQuestion();setChoice(3);">Regresar</button>
-            <button [disabled]="apagado === true" class="encuesta-siguiente" (click)="nextQuestion();saveAnswer(4,eleccion);changeChoice();disabledButton();">Siguiente</button>
+            <button [disabled]="apagado === true" class="encuesta-siguiente"
+                (click)="nextQuestion();saveAnswer(4,eleccion);changeChoice();disabledButton();">Siguiente</button>
         </div>
     </div>
     <div class="encuesta-container" *ngIf="pagina == 7">
         <div class="activity-header">
-            <img src="https://firebasestorage.googleapis.com/v0/b/chatcintanegra.appspot.com/o/img_encuesta.svg?alt=media&token=d573e9e2-b5f5-4371-82df-39b1bd3ff414" width="100%">
+            <img src="https://firebasestorage.googleapis.com/v0/b/chatcintanegra.appspot.com/o/img_encuesta.svg?alt=media&token=d573e9e2-b5f5-4371-82df-39b1bd3ff414"
+                width="100%">
             <div class="encabezado-encuesta">Encuesta</div>
         </div>
         <div class="activity-content-container" style="display: grid;align-items: center;">
@@ -1052,7 +1133,8 @@
             <button class="encuesta-opcion" [ngClass]="{'elegida':eleccion === 1}" (click)="changeChoice(1)">Sí</button>
             <button class="encuesta-opcion" [ngClass]="{'elegida':eleccion === 2}" (click)="changeChoice(2)">No</button>
             <p class="azul">¿Cuál?</p>
-            <textarea class="comentario" rows="2" cols="50" maxlength="150" [(ngModel)]="comentario" required placeholder="Escribe el nombre de la Agencia"></textarea>
+            <textarea class="comentario" rows="2" cols="50" maxlength="150" [(ngModel)]="comentario" required
+                placeholder="Escribe el nombre de la Agencia"></textarea>
         </div>
         <div class="activity-footer">
             <div class="progress-bar-container-eight">
@@ -1074,19 +1156,24 @@
                 </div>
             </div>
             <button class="encuesta-regresar" (click)="previousQuestion();setChoice(4);">Regresar</button>
-            <button [disabled]="apagado === true" class="encuesta-siguiente" (click)="nextQuestion();saveAnswer(5,eleccion);changeChoice();disabledButton();">Siguiente</button>
+            <button [disabled]="apagado === true" class="encuesta-siguiente"
+                (click)="nextQuestion();saveAnswer(5,eleccion);changeChoice();disabledButton();">Siguiente</button>
         </div>
     </div>
     <div class="encuesta-container" *ngIf="pagina == 8">
         <div class="activity-header">
-            <img src="https://firebasestorage.googleapis.com/v0/b/chatcintanegra.appspot.com/o/img_encuesta.svg?alt=media&token=d573e9e2-b5f5-4371-82df-39b1bd3ff414" width="100%">
+            <img src="https://firebasestorage.googleapis.com/v0/b/chatcintanegra.appspot.com/o/img_encuesta.svg?alt=media&token=d573e9e2-b5f5-4371-82df-39b1bd3ff414"
+                width="100%">
             <div class="encabezado-encuesta">Encuesta</div>
         </div>
         <div class="activity-content-container" style="display: grid;align-items: center;">
             <p class="azul">7. Comparado con otras agencias o competidores, nuestra campaña digital fue...</p>
-            <button class="encuesta-opcion" [ngClass]="{'elegida':eleccion === 1}" (click)="changeChoice(1)">a) Mejor</button>
-            <button class="encuesta-opcion" [ngClass]="{'elegida':eleccion === 2}" (click)="changeChoice(2)">b) Igual</button>
-            <button class="encuesta-opcion" [ngClass]="{'elegida':eleccion === 3}" (click)="changeChoice(3)">c) Peor</button>
+            <button class="encuesta-opcion" [ngClass]="{'elegida':eleccion === 1}" (click)="changeChoice(1)">a)
+                Mejor</button>
+            <button class="encuesta-opcion" [ngClass]="{'elegida':eleccion === 2}" (click)="changeChoice(2)">b)
+                Igual</button>
+            <button class="encuesta-opcion" [ngClass]="{'elegida':eleccion === 3}" (click)="changeChoice(3)">c)
+                Peor</button>
         </div>
         <div class="activity-footer">
             <div class="progress-bar-container-eight">
@@ -1108,17 +1195,21 @@
                 </div>
             </div>
             <button class="encuesta-regresar" (click)="previousQuestion();setChoice(5);">Regresar</button>
-            <button [disabled]="apagado === true" class="encuesta-siguiente" (click)="nextQuestion();saveAnswer(6,eleccion);changeChoice();disabledButton();">Siguiente</button>
+            <button [disabled]="apagado === true" class="encuesta-siguiente"
+                (click)="nextQuestion();saveAnswer(6,eleccion);changeChoice();disabledButton();">Siguiente</button>
         </div>
     </div>
     <div class="encuesta-container" *ngIf="pagina == 9">
         <div class="activity-header">
-            <img src="https://firebasestorage.googleapis.com/v0/b/chatcintanegra.appspot.com/o/img_encuesta.svg?alt=media&token=d573e9e2-b5f5-4371-82df-39b1bd3ff414" width="100%">
+            <img src="https://firebasestorage.googleapis.com/v0/b/chatcintanegra.appspot.com/o/img_encuesta.svg?alt=media&token=d573e9e2-b5f5-4371-82df-39b1bd3ff414"
+                width="100%">
             <div class="encabezado-encuesta">Encuesta</div>
         </div>
         <div class="activity-content-container" style="display: grid;align-items: center;">
-            <p class="azul">8. ¿Deseas agregar algún comentario? Esto con el objetivo de que la Dirección de Servicio al Cliente lo tome en cuenta</p>
-            <textarea class="comentario" rows="8" cols="50" maxlength="250" [(ngModel)]="comentarios" placeholder="Escribe tu comentario..." (click)="changeChoice(1)" required></textarea>
+            <p class="azul">8. ¿Deseas agregar algún comentario? Esto con el objetivo de que la Dirección de Servicio al
+                Cliente lo tome en cuenta</p>
+            <textarea class="comentario" rows="8" cols="50" maxlength="250" [(ngModel)]="comentarios"
+                placeholder="Escribe tu comentario..." (click)="changeChoice(1)" required></textarea>
         </div>
         <div class="activity-footer">
             <div class="progress-bar-container-eight">
@@ -1140,12 +1231,14 @@
                 </div>
             </div>
             <button class="encuesta-regresar" (click)="previousQuestion();setChoice(6);">Regresar</button>
-            <button [disabled]="apagado === true" class="encuesta-siguiente" (click)="nextQuestion();saveAnswer(7,eleccion);changeChoice();disabledButton();">Siguiente</button>
+            <button [disabled]="apagado === true" class="encuesta-siguiente"
+                (click)="nextQuestion();saveAnswer(7,eleccion);changeChoice();disabledButton();">Siguiente</button>
         </div>
     </div>
     <div class="encuesta-container" *ngIf="pagina == 10">
         <div class="activity-header">
-            <img src="https://firebasestorage.googleapis.com/v0/b/chatcintanegra.appspot.com/o/img_encuesta.svg?alt=media&token=d573e9e2-b5f5-4371-82df-39b1bd3ff414" width="100%">
+            <img src="https://firebasestorage.googleapis.com/v0/b/chatcintanegra.appspot.com/o/img_encuesta.svg?alt=media&token=d573e9e2-b5f5-4371-82df-39b1bd3ff414"
+                width="100%">
             <div class="encabezado-encuesta">Encuesta</div>
         </div>
         <div class="activity-content-container">

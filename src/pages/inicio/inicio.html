@@ -8,87 +8,91 @@
 
 
 <ion-content>
-        
-        <banner *ngIf="tipoBanner >= 1 && tipoBanner <= 9 || tipoBanner >= 10 && tipoBanner <= 12 && habilitado == 1" [title]='title' [subtitle]='subtitle' [img]='img' [fondo]='fondo' [notification]='notification' [idReportBanner]='idReportBanner' [uuidPass]='uuidPass'
-        [tipoBanner]='tipoBanner' [description]='description' (click)="clickBanner();"></banner> 
-        <ion-grid padding *ngIf="tipoBanner == 0 || tipoBanner == 1 && recurrente == true || tipoBanner >= 3 && tipoBanner <= 9  || tipoBanner == 10  && habilitado == 1 ||  tipoBanner == 12 && habilitado == 1 || tipoBanner >= 10 && tipoBanner <= 12 && habilitado == 0"> 
-            <ion-row class="grande tres" (click)="pagina(leads)">
-                    <ion-col col-3>
-                    <img src="assets/imgs/inicio/leads.svg" width="100%" />
-                </ion-col>
-                <ion-col col-7>
-                    <span>Leads o Clientes Potenciales</span>
-                </ion-col>
-                <ion-col col-2 style="text-align:center">
-                    <ion-icon name="ios-arrow-forward" style="font-size: 4em;"></ion-icon>
-                </ion-col>
-            </ion-row>
-    
-            <ion-row class="grande dos" (click)="pagina(reporte)">
-                    <ion-col col-3>
-                    <img src="assets/imgs/inicio/reporte.svg" width="100%" />
-                </ion-col>
-                <ion-col col-7>
-                    <span>Reporte</span>
-                </ion-col>
-                <ion-col col-2 style="text-align:center">
-                    <ion-icon name="ios-arrow-forward" style="font-size: 4em;"></ion-icon>
-                </ion-col>
-            </ion-row>
-    
-            <ion-row class="grande" (click)="pagina(brief)">
-                    <ion-col col-3>
-                    <img src="assets/imgs/inicio/brief.svg" width="100%" style="max-height: 65px !important;"/>
-                </ion-col>
-                <ion-col col-7>
-                    <span>Configuración de Campaña</span>
-                </ion-col>
-                <ion-col col-2 style="text-align:center">
-                    <ion-icon name="ios-arrow-forward" style="font-size: 4em;"></ion-icon>
-                </ion-col>
-            </ion-row>
-    
-            <ion-row class="grande tres" (click)="pagina(eficiencia)">
-                    <ion-col col-3>
-                    <img src="assets/imgs/inicio/eficiencia.svg" width="100%" />
-                </ion-col>
-                <ion-col col-7>
-                    <span>Eficiencia Comercial</span>
-                </ion-col>
-                <ion-col col-2 style="text-align:center">
-                    <ion-icon name="ios-arrow-forward" style="font-size: 4em;"></ion-icon>
-                </ion-col>
-            </ion-row>
-    
-            <ion-row class="grande dos" (click)="pagina(datos)">
-                    <ion-col col-3>
-                    <img src="assets/imgs/inicio/ajustes.svg" width="100%" />
-                </ion-col>
-                <ion-col col-7>
-                    <span>Ajustes</span>
-                </ion-col>
-                <ion-col col-2 style="text-align:center">
-                    <ion-icon name="ios-arrow-forward" style="font-size: 4em;"></ion-icon>
-                </ion-col>
-            </ion-row>
-            
-            <ion-row class="grande" (click)="pagina(financieros)">
-                    <ion-col col-3 style="text-align: center;">
-                            <img src="assets/imgs/inicio/membresia.svg" width="60%" /> 
-                        </ion-col>
-                <ion-col col-7>
-                    <span>Membresía</span>
-                </ion-col>
-                <ion-col col-2 style="text-align:center">
-                    <ion-icon name="ios-arrow-forward" style="font-size: 4em;"></ion-icon>
-                </ion-col>
-            </ion-row>
-            
-        </ion-grid>
-        
-        <ion-grid padding *ngIf="tipoBanner == 1 && recurrente == false || tipoBanner == 2 || tipoBanner == 11 && habilitado == 1"> 
 
-            <ion-row class="grande tres" (click)="presentToast()">
+    <banner *ngIf="tipoBanner >= 1 && tipoBanner <= 9 || tipoBanner >= 10 && tipoBanner <= 12 && habilitado == 1"
+        [title]='title' [subtitle]='subtitle' [img]='img' [fondo]='fondo' [notification]='notification'
+        [idReportBanner]='idReportBanner' [uuidPass]='uuidPass' [tipoBanner]='tipoBanner' [description]='description'
+        (click)="clickBanner();"></banner>
+    <ion-grid padding
+        *ngIf="tipoBanner == 0 || tipoBanner == 1 && recurrente == true || tipoBanner >= 3 && tipoBanner <= 9  || tipoBanner == 10  && habilitado == 1 ||  tipoBanner == 12 && habilitado == 1 || tipoBanner >= 10 && tipoBanner <= 12 && habilitado == 0">
+        <ion-row class="grande tres" (click)="pagina(leads)">
+            <ion-col col-3>
+                <img src="assets/imgs/inicio/leads.svg" width="100%" />
+            </ion-col>
+            <ion-col col-7>
+                <span>Leads o Clientes Potenciales</span>
+            </ion-col>
+            <ion-col col-2 style="text-align:center">
+                <ion-icon name="ios-arrow-forward" style="font-size: 4em;"></ion-icon>
+            </ion-col>
+        </ion-row>
+
+        <ion-row class="grande dos" (click)="pagina(reporte)">
+            <ion-col col-3>
+                <img src="assets/imgs/inicio/reporte.svg" width="100%" />
+            </ion-col>
+            <ion-col col-7>
+                <span>Reporte</span>
+            </ion-col>
+            <ion-col col-2 style="text-align:center">
+                <ion-icon name="ios-arrow-forward" style="font-size: 4em;"></ion-icon>
+            </ion-col>
+        </ion-row>
+
+        <ion-row class="grande" (click)="pagina(brief)">
+            <ion-col col-3>
+                <img src="assets/imgs/inicio/brief.svg" width="100%" style="max-height: 65px !important;" />
+            </ion-col>
+            <ion-col col-7>
+                <span>Configuración de Campaña</span>
+            </ion-col>
+            <ion-col col-2 style="text-align:center">
+                <ion-icon name="ios-arrow-forward" style="font-size: 4em;"></ion-icon>
+            </ion-col>
+        </ion-row>
+
+        <ion-row class="grande tres" (click)="pagina(eficiencia)">
+            <ion-col col-3>
+                <img src="assets/imgs/inicio/eficiencia.svg" width="100%" />
+            </ion-col>
+            <ion-col col-7>
+                <span>Eficiencia Comercial</span>
+            </ion-col>
+            <ion-col col-2 style="text-align:center">
+                <ion-icon name="ios-arrow-forward" style="font-size: 4em;"></ion-icon>
+            </ion-col>
+        </ion-row>
+
+        <ion-row class="grande dos" (click)="pagina(datos)">
+            <ion-col col-3>
+                <img src="assets/imgs/inicio/ajustes.svg" width="100%" />
+            </ion-col>
+            <ion-col col-7>
+                <span>Ajustes</span>
+            </ion-col>
+            <ion-col col-2 style="text-align:center">
+                <ion-icon name="ios-arrow-forward" style="font-size: 4em;"></ion-icon>
+            </ion-col>
+        </ion-row>
+
+        <ion-row class="grande" (click)="pagina(financieros)">
+            <ion-col col-3 style="text-align: center;">
+                <img src="assets/imgs/inicio/membresia.svg" width="60%" />
+            </ion-col>
+            <ion-col col-7>
+                <span>Membresía</span>
+            </ion-col>
+            <ion-col col-2 style="text-align:center">
+                <ion-icon name="ios-arrow-forward" style="font-size: 4em;"></ion-icon>
+            </ion-col>
+        </ion-row>
+
+    </ion-grid>
+
+    <ion-grid padding
+        *ngIf="tipoBanner == 1 && recurrente == false || tipoBanner == 2 || tipoBanner == 11 && habilitado == 1">
+
+        <ion-row class="grande tres" (click)="presentToast()">
             <ion-col col-3>
                 <img src="assets/imgs/inicio/leads.svg" width="100%" />
             </ion-col>
@@ -114,7 +118,7 @@
 
         <ion-row class="grande" (click)="presentToast()">
             <ion-col col-3>
-                <img src="assets/imgs/inicio/brief.svg" width="100%" style="max-height: 65px !important;"/>
+                <img src="assets/imgs/inicio/brief.svg" width="100%" style="max-height: 65px !important;" />
             </ion-col>
             <ion-col col-7>
                 <span>Configuración de Campaña</span>
@@ -147,10 +151,10 @@
                 <ion-icon name="ios-arrow-forward" style="font-size: 4em;"></ion-icon>
             </ion-col>
         </ion-row>
-        
+
         <ion-row class="grande" (click)="presentToast()">
             <ion-col col-3 style="text-align: center;">
-                <img src="assets/imgs/inicio/membresia.svg" width="60%" /> 
+                <img src="assets/imgs/inicio/membresia.svg" width="60%" />
             </ion-col>
             <ion-col col-7>
                 <span>Membresía</span>
@@ -159,7 +163,7 @@
                 <ion-icon name="ios-arrow-forward" style="font-size: 4em;"></ion-icon>
             </ion-col>
         </ion-row>
-        
+
     </ion-grid>
 </ion-content>
 

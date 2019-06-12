@@ -1,35 +1,37 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title>agregarLead</ion-title>
+  <ion-navbar color="azul">
+    <ion-title>Empresa: {{empresa}}
+      <br>ID Cliente: {{id}}
+    </ion-title>
   </ion-navbar>
 </ion-header>
 
-
 <ion-content padding>
-  <div class="brief-contenedor">
-    <p class="titulo-brief">Nombre Completo*</p>
-    <input type="text" class="input-brief" style="width: 95%">
+  <div class="contacto">Ingresa la información de tu Nuevo Lead</div>
+  <form [formGroup]="registerForm">
+    <div class="brief-contenedor">
+      <p class="titulo-agregar">Nombre Completo*</p>
+      <input type="text" class="input-agregar" style="width: 95%" formControlName="name_sender">
 
-    <p class="titulo-brief">Empresa</p>
-    <input type="text" class="input-brief" style="width: 95%">
+      <p class="titulo-agregar">Empresa</p>
+      <input type="text" class="input-agregar" style="width: 95%" formControlName="company">
 
-    <p class="titulo-brief">Correo Electrónico</p>
-    <input type="text" class="input-brief" style="width: 95%">
+      <p class="titulo-agregar">Correo Electrónico*</p>
+      <input type="email" class="input-agregar" style="width: 95%" formControlName="email">
 
-    <p class="titulo-brief">Teléfono</p>
-    <input type="text" class="input-brief" style="width: 95%">
+      <p class="titulo-agregar">Teléfono (10 dígitos)*</p>
+      <input type="number" class="input-agregar" style="width: 95%"
+        formControlName="phone_number">
 
-    <ion-grid class="anuncio-grid">
-      <p class="titulo-brief">Estado</p>
-      <!--
-        <select type="text" class="seleccion-brief" [(ngModel)]="idpuesto">
-          <option *ngFor="let puesto of positions">
-            {{puesto.nombre}}
-          </option>
-        </select>
-      -->
-    </ion-grid>
-
-    <button class="guardar">Guardar</button>
-  </div>
+      <p class="titulo-agregar">Estado</p>
+      <select type="text" class="seleccion-brief" formControlName="state">
+        <option *ngFor="let estados of cat_estados">
+          {{estados.NOMBRE}}
+        </option>
+      </select>
+      <br>
+      <br>
+      <button class="guardar-agregar" [disabled]="!registerForm.valid" (click)="validarCampos()">Agregar</button>
+    </div>
+  </form>
 </ion-content>
