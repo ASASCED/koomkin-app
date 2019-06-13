@@ -1221,7 +1221,7 @@ db.executeGetByClave = function (command, clave) {
 //getDataComplement
 db.executeGetLeadsAgregados = function (idUsuario) {
 
-    const requestStr = `SELECT top 10 * FROM TACotizacion WHERE IdUsuarioRecibio = ${idUsuario}`;
+    const requestStr = `SELECT COUNT(Canal) as LeadsAgregados FROM TACotizacion WHERE IdUsuarioRecibio = ${idUsuario} and Canal = 'Reporte' or Canal = 'App';`;
 
     console.log(requestStr);
     

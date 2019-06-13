@@ -392,12 +392,12 @@ app.get('/getLeadsAgregados/:id', function (req, res) {
 
     var id = parseInt(req.params.id, 10);
 
-    db.executeGetLeadsAgregados(id, function (err, rows) {
-        if (err) {
-            res.status(500).json({ error: err }).send();
-        } else {
-            res.json(rows);
-        }
+    db.executeGetLeadsAgregados(id)
+    .then(rows => {
+        res.json(rows).status(200)
+    })
+    .catch(err => {
+        res.status(500).json({ error: err }).send();
     });
 });
 
