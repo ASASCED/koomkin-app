@@ -1224,6 +1224,8 @@ db.executeGetLeadsAgregados = function (idUsuario) {
     const requestStr = `SELECT COUNT(Canal) as LeadsAgregados
     FROM TACotizacion
     WHERE IdUsuarioRecibio = ${idUsuario} and Canal = 'Reporte' or Canal = 'App';`;
+
+    console.log(requestStr);
     
     return new Promise((resolve, reject) => {
         tp.sql(requestStr)
