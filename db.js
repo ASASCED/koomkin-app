@@ -1221,9 +1221,7 @@ db.executeGetByClave = function (command, clave) {
 //getDataComplement
 db.executeGetLeadsAgregados = function (idUsuario) {
 
-    const requestStr = `SELECT COUNT(Canal) as LeadsAgregados
-    FROM TACotizacion
-    WHERE IdUsuarioRecibio = ${idUsuario} and Canal = 'Reporte' or Canal = 'App';`;
+    const requestStr = `SELECT COUNT(Canal) as LeadsAgregados FROM TACotizacion WHERE IdUsuarioRecibio = ${idUsuario} and Canal = 'Reporte' or Canal = 'App';`;
 
     console.log(requestStr);
     
@@ -1238,7 +1236,7 @@ db.executeGetLeadsAgregados = function (idUsuario) {
                 reject(err);
             });
     });
-  };
+};
 
 db.updateBriefDatos = function (idUsuario, nombre, aPaterno, aMaterno, fechaNac, idPuesto, cpDomicilio, aniosEmpresa, educacion) {
 
