@@ -1218,6 +1218,26 @@ db.executeGetByClave = function (command, clave) {
               .execute()
   };
 
+//getDataComplement
+db.executeGetLeadsAgregados = function (idUsuario) {
+
+    const requestStr = `SELECT COUNT(Canal) as LeadsAgregados
+    FROM TACotizacion
+    WHERE IdUsuarioRecibio = ${idUsuario} and Canal = 'Reporte' or Canal = 'App';`;
+    
+    return new Promise((resolve, reject) => {
+        tp.sql(requestStr)
+            .execute()
+            .then(results => {
+                resolve(results);
+            })
+            .catch(err => {
+                console.log(err);
+                reject(err);
+            });
+    });
+  };
+
 db.updateBriefDatos = function (idUsuario, nombre, aPaterno, aMaterno, fechaNac, idPuesto, cpDomicilio, aniosEmpresa, educacion) {
 
     const requestStr = `Update CATUSUARIO set NOMBRE = '${nombre}', APEPATERNO = '${aPaterno}', APEMATERNO = '${aMaterno}' where IDUSUARIO = ${idUsuario};

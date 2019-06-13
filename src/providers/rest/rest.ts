@@ -721,5 +721,15 @@ export class RestProvider {
       });
     });
   } 
+
+  getLeadsAgregados(usuario) {
+    return new Promise(resolve => {
+      this.http.get(this.apiUrl + '/getLeadsAgregados/' + usuario).subscribe(data => {
+        resolve(data);
+      }, err => {
+         console.log(err);
+      });
+    });
+  }
   
 }

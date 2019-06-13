@@ -388,6 +388,19 @@ app.get('/getUserByEmail/:email', function (req, res) {
     });
 });
 
+app.get('/getLeadsReport/:id', function (req, res) {
+
+    var id = parseInt(req.params.id, 10);
+    
+    db.executeGetLeadsAgregados(id, function (err, rows) {
+        if (err) {
+            res.status(500).json({ error: err }).send();
+        } else {
+            res.json(rows);
+        }
+    });
+});
+
 app.get('/getLeadsReport/:id/:finicio/:ffin/:filtro', function (req, res) {
 
     var urlArray = req.url.split('/');

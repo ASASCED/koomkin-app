@@ -31,7 +31,7 @@ export class AgregarLeadPage implements OnInit {
   public city = '';
   public product_id = 0;
   public facebook_lead_id = '';
-  public channel = 'Reporte';
+  public channel = 'App';
   public postal_code = 0;
   public lead_uuid;
 
@@ -186,10 +186,11 @@ export class AgregarLeadPage implements OnInit {
     const re = /^(([^<>()[\]\.,;:\s@\']+(\.[^<>()[\]\.,;:\s@\']+)*)|(\'.+\'))@(([^<>()[\]\.,;:\s@\']+\.)+[^<>()[\]\.,;:\s@\']{2,})$/i;
     if (re.test(data)) {
       this.email = data;
-      console.log(this.name_sender,this.company,this.email,this.phone_number,this.region_id);
+      console.log(this.phone_number.length);
       this.registerLead(this.name_sender, this.email, this.company, this.phone_number, this.region_id);
+
     } else {
-      Swal('No se ha agregado el lead por que el correo no es valido');
+      Swal('No se ha agregado el lead por que el correo no es válido','', 'error');
     }
   }
 
@@ -209,7 +210,7 @@ export class AgregarLeadPage implements OnInit {
   public showSuccessError() {
     Swal({
       title: 'El lead no se ha agregado ',
-      type: 'success',
+      type: 'error',
       showCancelButton: false,
       confirmButtonColor: '#3085d6',
       confirmButtonText: 'OK',
