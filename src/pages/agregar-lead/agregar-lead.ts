@@ -35,8 +35,8 @@ export class AgregarLeadPage implements OnInit {
   public postal_code = 0;
   public lead_uuid;
   public date;
-  public hour;
   public dateComplete;
+  public disableButton = false;
 
   erroresForm = {
     'name_sender': '',
@@ -94,8 +94,7 @@ export class AgregarLeadPage implements OnInit {
       'email': ['', [Validators.required, Validators.email]],
       'phone_number': ['', [Validators.required]],
       'state': [''],
-      'date': [''],
-      'hour': ['']
+      'date': ['']
     });
     this.registerForm.valueChanges
     .subscribe(data => this.onValueChanged(data))
@@ -104,6 +103,8 @@ export class AgregarLeadPage implements OnInit {
   }
 
   public registerLead(name_sender, email, company, phone_number, region_id ) {
+    this.disableButton = true;
+
     let loading = this.loadingCtrl.create({
       content: "Agregando Lead..."
     });
@@ -138,7 +139,7 @@ export class AgregarLeadPage implements OnInit {
         }; 
 
         console.log(cuerpo);
-        /*
+      
         return new Promise((resolve, reject) => {
           const url = 'https://www.koomkin.com.mx/api/leads/register';
           this.http.post(url, cuerpo, options).subscribe(
@@ -161,7 +162,7 @@ export class AgregarLeadPage implements OnInit {
                 }
             }
           );
-        }); /*/
+        }); 
       } 
   }
 
@@ -200,13 +201,8 @@ export class AgregarLeadPage implements OnInit {
       }
     });
     this.date = this.registerForm.get('date').value;
-    this.hour = this.registerForm.get('hour').value;
-    if (this.date.length > 0 && this.hour.length > 0) {
-      this.dateComplete = this.date.replace (/-/g, '') + ' ' + this.hour;
-    } else if (this.date.length > 0 && this.hour.length == 0) {
+    if (this.date.length > 0) {
       this.dateComplete = this.date.replace (/-/g, '') + ' ' + n;
-    } else if (this.date.length == 0 && this.hour.length > 0) {
-      this.dateComplete = yyyy + '' + mm + '' + dd  + ' ' + this.hour;
     } else {
       this.dateComplete = yyyy + '' + mm + '' + dd  + ' ' + n;
     }
@@ -218,7 +214,7 @@ export class AgregarLeadPage implements OnInit {
     const re = /^(([^<>()[\]\.,;:\s@\']+(\.[^<>()[\]\.,;:\s@\']+)*)|(\'.+\'))@(([^<>()[\]\.,;:\s@\']+\.)+[^<>()[\]\.,;:\s@\']{2,})$/i;
     if (re.test(data)) {
       this.email = data;
-     // this.registerLead(this.name_sender, this.email, this.company, this.phone_number, this.region_id);
+      this.registerLead(this.name_sender, this.email, this.company, this.phone_number, this.region_id);
     } else {
       Swal('No se ha agregado el lead por que el correo no es válido','', 'error');
     }
