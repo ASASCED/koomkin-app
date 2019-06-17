@@ -381,7 +381,7 @@ app.get('/getUserById/:id', function (req, res) {
 app.get('/getUserByEmail/:email', function (req, res) {
     var email = "'" + req.params.email + "'";
     var command = 'SP_GetUsuarioByEmail';
-    dogstatsd.increment('login.app')
+    dogstatsd.increment('login.reporte')
 
     db.executeGetById(email, command, function (err, rows) {
         if (err) {
