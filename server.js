@@ -13,6 +13,8 @@ const conf = require('./conf/conf');
 const config = conf.config;
 const fb = require('./firebase/conf/services/brief-service.js');
 var app = express();
+var StatsD = require('hot-shots');
+var dogstatsd = new StatsD();
 
 if ('development' == app.get('env')) {
     console.log("Rejecting node tls");
@@ -379,6 +381,8 @@ app.get('/getUserById/:id', function (req, res) {
 app.get('/getUserByEmail/:email', function (req, res) {
     var email = "'" + req.params.email + "'";
     var command = 'SP_GetUsuarioByEmail';
+    dogstatsd.increment('login.app')
+
     db.executeGetById(email, command, function (err, rows) {
         if (err) {
             res.status(500).json({ error: err }).send();

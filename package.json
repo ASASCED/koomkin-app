@@ -81,6 +81,7 @@
         "debug": "~2.6.9",
         "express": "~4.15.5",
         "firebase-admin": "^7.2.0",
+        "hot-shots": "^6.3.0",
         "install": "^0.12.2",
         "ionic-angular": "3.8.0",
         "ionic-native": "^2.9.0",
