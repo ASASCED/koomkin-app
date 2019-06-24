@@ -1674,6 +1674,62 @@ app.post('/passLogin', (req, res) => {
     }
 });
 
+//Genera un comentario por lead
+
+app.post('/registerComment/:idUsuario/:claveLead/:comentario', function (req, res) {
+
+    const idUsuario = parseInt(req.body.idUsuario, 10);
+    const claveLead = parseInt(req.body.claveLead, 10);
+    const comentario = req.body.comentario;
+
+    db.executeInsertComment(idUsuario,claveLead,comentario)
+        .then(rows => {
+            res.json(rows).status(200).send();
+        })
+        .catch(err => {
+            res.status(500).json({ error: err }).send();
+        });
+});
+
+//Elimina un comentario por lead
+
+app.post('/registerComment/:idUsuario/:claveLead/:comentario', function (req, res) {
+
+    const idUsuario = parseInt(req.body.idUsuario, 10);
+    const claveLead = parseInt(req.body.claveLead, 10);
+    const comentario = req.body.comentario;
+
+    db.executeInsertComment(idUsuario,claveLead,comentario)
+        .then(rows => {
+            res.json(rows).status(200).send();
+        })
+        .catch(err => {
+            res.status(500).json({ error: err }).send();
+        });
+});
+
+
+//Genera 
+
+app.post('/registerSale/:idUsuario/:claveLead/:caracteristicas/:monto/:recurrente', function (req, res) {
+
+    const idUsuario = parseInt(req.body.idUsuario, 10);
+    const claveLead = parseInt(req.body.claveLead, 10);
+    const caracteristicas = req.body.caracteristicas;
+    const monto = req.body.monto;
+    const recurrente = parseInt(req.body.recurrente, 10);
+
+
+    db.executeInsertSale(idUsuario,claveLead,caracteristicas,monto,recurrente)
+        .then(rows => {
+            res.json(rows).status(200).send();
+        })
+        .catch(err => {
+            res.status(500).json({ error: err }).send();
+        });
+});
+
+
 var facturaAPICrearUsuario = (json) => {
 
     //const url = 'http://devfactura.in/api/v1/clients/create'

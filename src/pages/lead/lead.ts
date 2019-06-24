@@ -13,6 +13,8 @@ import { HttpHeaders } from '@angular/common/http';
 import { FileOpener } from '@ionic-native/file-opener';
 import { File } from '@ionic-native/file';
 import { Transfer, TransferObject } from '@ionic-native/transfer';
+import * as distanceinWordsStrict from 'date-fns/distance_in_words_strict';
+import * as esLocale from 'date-fns/locale/es';
 
 declare var cordova:any;
 
@@ -26,7 +28,9 @@ export class LeadPage implements OnInit {
 
   leadActual;
   apiUrl = 'https://www.koomkin.com.mx/api/app';
-
+  public tipoempresa:any;
+  public tipo_empresas: any;
+  public tipo_empresa: any;
   public califica;
   public calificacion;
   public categoria;
@@ -132,6 +136,9 @@ export class LeadPage implements OnInit {
   isAndroid: boolean = false;
   public tc: any;
   public loadingMessages: boolean;
+  
+  public attentionSpeed;
+  public contacto;
 
   private autoScroller: MutationObserver;
 
@@ -321,6 +328,7 @@ export class LeadPage implements OnInit {
 
         }
       }
+      
     )
 
     this.chatService.loadingMessagesActualizado.subscribe(
@@ -332,8 +340,9 @@ export class LeadPage implements OnInit {
 
     this.getLeadCalls();
     this.getCheckLeadComplement();
-    this.getCountLeadCalls()
+    this.getCountLeadCalls();
     this.getUrlAudio();
+    this.getEmpresas();
   }
 
   ionViewDidEnter() {
@@ -379,11 +388,45 @@ export class LeadPage implements OnInit {
     if (this.leadActual.fechaContacto) {
       this.leadActual.fechaContacto = this.leadActual.fechaContacto.substring(0, 16)
       .replace(/^(\d{4})-(\d{2})-(\d{2})T(\d{5})$/g, '$3/$2/$1$4');
+    }        
+    if (this.leadActual.fechaContacto) {
+      this.leadActual.fechaContacto = this.leadActual.fechaContacto
+        .substring(0, 16)
+        .replace(/^(\d{4})-(\d{2})-(\d{2})T(\d{5})$/g, '$3/$2/$1$4');
+      const diff =
+        (new Date(this.leadActual.fechaContacto).getTime() -
+          new Date(this.leadActual.FECHA).getTime()) /
+        1000;
+      // diff = Math.abs(diff>10800);
+      if (diff > 7200) {
+        this.attentionSpeed = distanceinWordsStrict(
+          new Date(this.leadActual.FECHA),
+          new Date(this.leadActual.fechaContacto),
+          { locale: esLocale, addSuffix: false }
+        );
+      } else {
+        this.attentionSpeed = distanceinWordsStrict(
+          new Date(this.leadActual.FECHA),
+          new Date(this.leadActual.fechaContacto),
+          { locale: esLocale, addSuffix: false, unit: 'm' }
+        );
+      }
     }
     if (!this.leadActual.clave) {
       this.leadActual.clave = this.leadActual.ID_LEAD;  // Por si llega el Lead por notificación.
     }
-
+    console.log(this.leadActual.canalContacto)
+    if(this.leadActual.canalContacto == '' || this.leadActual.canalContacto == 'null' || this.leadActual.canalContacto == null){
+      this.leadActual.canalContacto = '-'
+    }
+    if(this.leadActual.fechaContacto == '' || this.leadActual.fechaContacto == 'null' || this.leadActual.fechaContacto == null){
+      this.leadActual.fechaContacto = ''
+    }
+    if(this.leadActual.canalContacto == 'chat' || this.leadActual.canalContacto == 'llamada') {
+      this.contacto = 'Sí';
+    } else {
+      this.contacto = 'No';
+    }
     if (this.leadActual.desdeNotificacion === true) {
       this.authService.setNotificationActive(true);
     }
@@ -1133,6 +1176,19 @@ export class LeadPage implements OnInit {
       cordova.InAppBrowser.open(url, "_system", "location=no");
     });
     //});
+  }
+
+  getEmpresas() {
+    this.provedor.getEmpresas().then(
+      data => {
+        let empresas = data;
+        this.tipo_empresas = empresas;
+        // console.log(this.tipo_empresas);
+      },
+      err => {
+        // console.log('error');
+      }
+    );
   }
 }
 

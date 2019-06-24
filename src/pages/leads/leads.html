@@ -18,7 +18,7 @@
             <ion-grid>
                 <ion-row>
                     <ion-col col-2>
-                        <img src="assets/imgs/iconos/DLeads.svg" class="carta"/>
+                        <img src="assets/imgs/iconos/DLeads.svg" class="carta" />
                     </ion-col>
                     <ion-col col-8>
                         <h1 style="font-size: 5.5vw;">
@@ -27,7 +27,7 @@
                         <h3 style="font-size: 3.2vw;">Descripción de las oportunidades de venta</h3>
                     </ion-col>
                     <ion-col col-2>
-                        <img src="assets/imgs/iconos/ALead.svg" class="carta" (click)="agregarLead();"/>
+                        <img src="assets/imgs/iconos/ALead.svg" class="carta" (click)="agregarLead();" />
                     </ion-col>
                 </ion-row>
             </ion-grid>
@@ -119,9 +119,15 @@
                                                 style="vertical-align: middle;width: 15% !important;max-width:150px !important;display: inline-block;margin-top: 6%;"
                                                 (click)="showConfirm(lead)" />
                                         </ion-col>
-                                        <ion-col col-2 style="text-align: right;">
-                                            <ion-icon class="{{lead.calificaLead}} icon icon-md ion-md-thumbs-up"
+
+                                        <ion-col col-2 style="text-align:right">
+                                            <ion-icon
+                                                style="margin-right: .2em !important;font-size: 2em !important;color: rgb(209, 209, 209)"
+                                                [ngClass]="{'like':lead.calificaLead === 'like','sin':lead.calificaLead === 'dislike'}"
                                                 name="md-thumbs-up" (click)="changeLike('L',lead)"></ion-icon>
+                                            <ion-icon style="font-size: 2em !important;color: rgb(209, 209, 209)"
+                                                [ngClass]="{'like':lead.calificaLead === 'dislike','sin':lead.calificaLead === 'like'}"
+                                                name="md-thumbs-down" (click)="changeLike('DL',lead)"></ion-icon>
                                         </ion-col>
                                     </ion-row>
                                 </ion-card-content>

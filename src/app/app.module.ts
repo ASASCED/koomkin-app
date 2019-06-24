@@ -23,12 +23,16 @@ import { Transfer } from '@ionic-native/transfer';
 import { HTTP } from '@ionic-native/http';
 import { Clipboard } from '@ionic-native/clipboard';
 import { SweetAlert2Module } from '@toverux/ngx-sweetalert2';
+import { TooltipsModule } from 'ionic-tooltips';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
     MyApp
   ],
   imports: [
+    TooltipsModule.forRoot(),
+    BrowserAnimationsModule,
     BrowserModule,
     HttpClientModule,
     HttpModule,

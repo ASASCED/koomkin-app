@@ -15,7 +15,6 @@
                 Chat
             </ion-segment-button>
         </ion-segment>
-
     </ion-toolbar>
 
     <ion-toolbar class="help" *ngIf="page == 'Chat'">
@@ -60,7 +59,7 @@
                             </ion-col>
                             <ion-col col-4 style="text-align:right">
                                 <div>
-                                    <div class="rate-fecha">{{leadActual.FECHA | date: 'HH:mm' }}</div>
+                                    <div class="rate-fechal">{{leadActual.FECHA | date: 'HH:mm' }}</div>
                                 </div>
                             </ion-col>
                         </ion-row>
@@ -121,52 +120,114 @@
                     [personasinmobiliaria]='personasinmobiliaria'></inmobiliaria>
 
                 <ion-row>
-                    <ion-col col-6>
-                        <p class="califica">Califica este Lead</p>
+                    <ion-col col-12>
+                        <p class="califica">Detalles de Contacto</p>
                     </ion-col>
-                    <ion-col col-6>
-                        <p class="califica">Hora de Atención</p>
+                </ion-row>
+
+                <ion-row>
+                    <ion-col col-3 class="tex">
+                        <img icon-only tooltip="Contacto" positionV="top" mobileEvent="click" hideOthers=true duration=2000
+                         src="assets/imgs/lead/ic_cliente.svg"
+                            style="vertical-align: middle;width: 25% !important;display: inline-block;" />
+                        {{contacto}}
+                    </ion-col>
+                    <ion-col col-6 class="tex">
+                        <img icon-only tooltip="Fecha Atención" positionV="top" mobileEvent="click" hideOthers=true duration=2000
+                         src="assets/imgs/lead/ic_fecha.svg"
+                            style="vertical-align: middle;width: 10% !important;display: inline-block;" />
+                        &nbsp; {{leadActual.fechaContacto | date: 'dd/MM/yyyy HH:mm'}}
+                    </ion-col>
+                    <ion-col col-3 class="tex">
+                        <img icon-only tooltip="No. de Intentos" positionV="top" mobileEvent="click" hideOthers=true duration=2000
+                            src="assets/imgs/lead/ic_numintentos.svg"
+                            style="vertical-align: middle;width: 30% !important;display: inline-block;" />
+                        5
                     </ion-col>
                 </ion-row>
                 <ion-row>
-                    <ion-col col-6 style="text-align:center">
-                        <ion-icon
-                            style="margin-right: .2em !important;font-size: 4em !important;color: rgb(209, 209, 209)"
-                            [ngClass]="{'like':leadActual.calificaLead === 'like','sin':leadActual.calificaLead === 'dislike'}"
-                            name="md-thumbs-up" (click)="changeLike('L')"></ion-icon>
-                        <ion-icon style="font-size: 4em !important;color: rgb(209, 209, 209)"
-                            [ngClass]="{'like':leadActual.calificaLead === 'dislike','sin':leadActual.calificaLead === 'like'}"
-                            name="md-thumbs-down" (click)="changeLike('DL')"></ion-icon>
+                    <ion-col col-3 class="tex">
+                        <img icon-only tooltip="Canal" positionV="bottom" mobileEvent="click" hideOthers=true duration=2000
+                            src="assets/imgs/lead/ic_canal.svg"
+                            style="vertical-align: middle;width: 25% !important;display: inline-block;" />
+                            {{leadActual.canalContacto}}
                     </ion-col>
-                    <ion-col col-6>
-                        <p class="contacto">Fecha y Hora:</p>
-                        <p class="existio">{{leadActual.fechaContacto | date: 'dd/MM/yyyy HH:mm'}}</p>
-                        <p class="existio" style="font-style:italic" *ngIf="!leadActual?.fechaContacto">Sin Contacto</p>
-                        <p class="contacto">Canal:</p>
-                        <p class="existio">{{leadActual.canalContacto}}</p>
-                        <p class="existio" style="font-style:italic" *ngIf="!leadActual?.canalContacto">Sin Contacto</p>
+                    <ion-col col-3 class="tex">
+                        <img icon-only tooltip="Velocidad" positionV="bottom" mobileEvent="click" hideOthers=true duration=2000
+                            src="assets/imgs/lead/ic_hora.svg"
+                            style="vertical-align: middle;width: 20% !important;display: inline-block;" />
+                        &nbsp; {{attentionSpeed}}
+                    </ion-col>
+                    <ion-col col-3 class="tex">
+                        <img  icon-only tooltip="Garantía" positionV="bottom" mobileEvent="click" hideOthers=true duration=2000
+                        src="assets/imgs/lead/ic_garantia.svg"
+                            style="vertical-align: middle;width: 20% !important;display: inline-block;" />
+                        &nbsp; Sí
+                    </ion-col>
+                    <ion-col col-3 class="tex">
+                        <img icon-only tooltip="Últ. Contacto" positionV="bottom" mobileEvent="click" hideOthers=true duration=2000
+                        src="assets/imgs/lead/ic_ultimocontacto.svg"
+                            style="vertical-align: middle;width: 20% !important;display: inline-block;" />
+                        &nbsp;1 día
                     </ion-col>
                 </ion-row>
+
                 <ion-row>
                     <ion-col col-12>
                         <p class="califica">Estatus del Lead</p>
                     </ion-col>
                 </ion-row>
                 <ion-row>
-                    <ion-col col-12>
-                        <button class="arribab" [ngClass]="{'vendido':leadActual.clasificaLead === 'V'}"
-                            (click)="changeClassification('V')">Vendido</button>
-                        <button class="arribab" [ngClass]="{'proceso':leadActual.clasificaLead === 'P'}"
-                            (click)="changeClassification('P')">En
-                            proceso
-                        </button>
-                        <br>
-                        <button class="arribab" [ngClass]="{'sincontacto':leadActual.clasificaLead === 'S'}"
-                            (click)="changeClassification('C')">Sin
-                            Contacto
-                        </button>
+                    <ion-col col-6>
                         <button class="arribab" [ngClass]="{'descartado':leadActual.clasificaLead === 'D'}"
-                            (click)="changeClassification('D')">Descartado</button>
+                            (click)="changeClassification('D')">
+                            Descartado
+                        </button>
+                        <button class="arribab" [ngClass]="{'proceso':leadActual.clasificaLead === 'P'}"
+                            (click)="changeClassification('P')">
+                            En Seguimiento
+                        </button>
+                        <button class="arribab" [ngClass]="{'sincontacto':leadActual.clasificaLead === 'S'}"
+                            (click)="changeClassification('C')">
+                            Negociación
+                        </button>
+                        <button class="arribab" [ngClass]="{'vendido':leadActual.clasificaLead === 'V'}"
+                            (click)="changeClassification('V')">
+                            Vendido
+                        </button>
+                    </ion-col>
+                    <ion-col col-6 class="normal">
+                        <p class="razon">
+                            Razón
+                        </p>
+                        <select type="text" class="seleccion-brief" style="width: 99%;" [(ngModel)]="tipoempresa">
+                            <option *ngFor="let tipo_empresa of tipo_empresas">
+                                {{tipo_empresa.TIPOEMPRESA}}
+                            </option>
+                        </select>
+                    </ion-col>
+                </ion-row>
+
+                <ion-row>
+                    <ion-col col-1>
+
+                    </ion-col>
+                    <ion-col col-10>
+                        <p class="califica">Comentarios</p>
+                    </ion-col>
+                    <ion-col col-1>
+                        <img src="assets/imgs/lead/ic_comentario.svg"
+                            style="vertical-align: middle;width: 60% !important;display: inline-block;" />
+                    </ion-col>
+                </ion-row>
+
+                <ion-row class="comentarios"> 
+                    <ion-col col-11 class="comentario">
+                        'Quedamos en una segunda llamada, lo va a consultar con su esposa'
+                    </ion-col>
+                    <ion-col col-1 style="text-align: center">
+                            <img src="assets/imgs/lead/ic_borrar.svg"
+                            style="vertical-align: middle;width: 60% !important;margin-left: 10%;" />
                     </ion-col>
                 </ion-row>
             </ion-grid>
@@ -179,8 +240,7 @@
                     <ion-col col-2 style="text-align: right;padding-right: 1% !important">
                         <p class="llamadas">Llamadas<br>Entrantes</p>
                     </ion-col>
-                    <ion-col col-2
-                        style="border: 1pt solid #e6e6e6;border-radius: 4px;text-align: center;color: #00B9BE;font-weight: 700;padding: 2px !important;">
+                    <ion-col col-2 class="llamadas-area">
                         <img src="assets/imgs/llamadas/comprador.svg" width="40%"
                             style="vertical-align: middle;margin-left: 5%" /> {{exitosa_c}}
                     </ion-col>
@@ -188,8 +248,7 @@
                     <ion-col col-2 style="text-align: right;padding-right: 1% !important">
                         <p class="llamadas">Llamadas<br>Salientes</p>
                     </ion-col>
-                    <ion-col col-2
-                        style="border: 1pt solid #e6e6e6;border-radius: 4px;text-align: center;color: #00B9BE;font-weight: 700;padding: 2px !important;">
+                    <ion-col col-2 class="llamadas-area">
                         <img src="assets/imgs/llamadas/cliente.svg" width="40%"
                             style="vertical-align: middle;margin-left: 5%" /> {{exitosa_v}}
                     </ion-col>
@@ -197,8 +256,7 @@
                     <ion-col col-2 style="text-align: right;padding-right: 1% !important">
                         <p class="llamadas">Llamadas<br>Exitosas</p>
                     </ion-col>
-                    <ion-col col-2
-                        style="border: 1pt solid #e6e6e6;border-radius: 4px;text-align: center;color: #00B9BE;font-weight: 700;padding: 2px !important;">
+                    <ion-col col-2 class="llamadas-area">
                         <img src="assets/imgs/llamadas/cliente.svg" width="40%"
                             style="vertical-align: middle;margin-left: 5%" /> {{exitosa}}
                     </ion-col>
@@ -208,24 +266,21 @@
                     <ion-col col-2 style="text-align: right;padding-right: 1% !important">
                         <p class="llamadas">Llamadas<br>a Buzón</p>
                     </ion-col>
-                    <ion-col col-2
-                        style="border: 1pt solid #e6e6e6;border-radius: 4px;text-align: center;color: #00B9BE;font-weight: 700;padding: 2px !important;">
+                    <ion-col col-2 class="llamadas-area">
                         <img src="assets/imgs/llamadas/buzon.svg" width="40%"
                             style="vertical-align: middle;margin-left: 5%" /> {{buzon}}
                     </ion-col>
                     <ion-col col-2 style="text-align: right;padding-right: 1% !important">
                         <p class="llamadas">Llamadas<br>Perdidas</p>
                     </ion-col>
-                    <ion-col col-2
-                        style="border: 1pt solid #e6e6e6;border-radius: 4px;text-align: center;color: #00B9BE;font-weight: 700;padding: 2px !important;">
+                    <ion-col col-2 class="llamadas-area">
                         <img src="assets/imgs/llamadas/perdida.svg" width="40%"
                             style="vertical-align: middle;margin-left: 5%" /> {{perdida}}
                     </ion-col>
                     <ion-col col-2 style="text-align: right;padding-right: 1% !important">
                         <p class="llamadas">Número<br>Inválido</p>
                     </ion-col>
-                    <ion-col col-2
-                        style="border: 1pt solid #e6e6e6;border-radius: 4px;text-align: center;color: #00B9BE;font-weight: 700;padding: 2px !important;">
+                    <ion-col col-2 class="llamadas-area">
                         <img src="assets/imgs/llamadas/invalido.svg" width="40%"
                             style="vertical-align: middle;margin-left: 5%" /> {{invalido}}
                     </ion-col>

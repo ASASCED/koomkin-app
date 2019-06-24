@@ -843,9 +843,31 @@ db.executeGetTicket = function (command, ticket,  requerimiento ,area  ,estatus 
 
 //updateAgenda
 
-db.executeUpdateAgenda = function (idUsuario,idTicket,estatusOptimizacion) {
+db.executeUpdateAgenda = function (idUsuario,idTicket,estatusOptimizacion) {A
+
 
     const requestStr = `insert into Tbl_AgendaOptimizaciones (idUsuario, idTicket, estatusOptimizacion) values (${idUsuario},${idTicket}, '${estatusOptimizacion}')`;
+
+    return new Promise((resolve, reject) => {
+        tp.sql(requestStr)
+            .execute()
+            .then(results => {
+                resolve(results);
+            })
+            .catch(err => {
+                console.log(err);
+                reject(err);
+            });
+    });
+};
+
+db.executeUpdateAgenda2 = function (idUsuario,idTicket,estatusOptimizacion) {
+
+
+    const requestStr = `INSERT INTO Tbl_AgendaOptimizaciones (idUsuario, idTicket, estatusOptimizacion)
+    SELECT IDUSUARIO, ${idTicket} AS idTicket, ${estatusOptimizacion} AS estatusOptimizacion FROM CATUSUARIO
+    WHERE IDUSUARIO IN (SELECT IDUSUARIO FROM kad_Tbl_PagosClientesKoomkinAdmin)
+    AND idUsuario = ${idUsuario}`;
 
     return new Promise((resolve, reject) => {
         tp.sql(requestStr)
@@ -1509,6 +1531,41 @@ db.executeGetEmpresas = function () {
 db.executeGetCodigoPostal = function (cp) {
 
     const requestStr = `select CP, Estado From Tbl_SEPOMEX where CP = ${cp}`;
+        
+    return new Promise((resolve, reject) => {
+        tp.sql(requestStr)
+            .execute()
+            .then(results => {
+                resolve(results);
+            })
+            .catch(err => {
+                console.log(err);
+                reject(err);
+            });
+        });
+};
+
+
+db.executeInsertComment = function (idUsuario,claveLead,comentario) {
+
+    const requestStr = `insert into LeadComentario (IdUsuario,ClaveLead,Comentario,FechaRegistro) values (${idUsuario},${claveLead},'${comentario}',getdate())`;
+        
+    return new Promise((resolve, reject) => {
+        tp.sql(requestStr)
+            .execute()
+            .then(results => {
+                resolve(results);
+            })
+            .catch(err => {
+                console.log(err);
+                reject(err);
+            });
+        });
+};
+
+db.executeInsertSale = function (idUsuario,claveLead,caracteristicas,monto,recurrente) {
+
+    const requestStr = `insert into LeadVenta (IdUsuario,ClaveLead,Caracteristicas,Monto,Recurrente,FechaRegistro) values (${idUsuario},${claveLead},'${caracteristicas}',${monto},${recurrente},getdate())`;
         
     return new Promise((resolve, reject) => {
         tp.sql(requestStr)

@@ -4,6 +4,7 @@ import { LeadPage } from './lead';
 import { ComponentsModule } from '../../components/components.module';
 import { PipesModule } from '../../pipes/pipes.module';
 import { DirectivesModule } from '../../directives/directives.module';
+import { TooltipsModule } from 'ionic-tooltips';
 
 @NgModule({
   declarations: [
@@ -13,7 +14,8 @@ import { DirectivesModule } from '../../directives/directives.module';
     IonicPageModule.forChild(LeadPage),
     ComponentsModule,
     PipesModule,
-    DirectivesModule
+    DirectivesModule,
+    TooltipsModule.forRoot()
   ],
 })
 export class LeadPageModule {}

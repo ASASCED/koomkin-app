@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+  <g id="Grupo_2750" data-name="Grupo 2750" transform="translate(-542 -641)">
+    <path id="Icon" d="M658,388H648v-1.875c0-.512.325-1.253,1.874-1.873a8.11,8.11,0,0,1,6.251,0c1.549.621,1.874,1.361,1.874,1.873V388Zm-5-3.125c-1.687,0-3.625.806-3.75,1.256v.619h7.5v-.625C656.624,385.677,654.685,384.875,653,384.875ZM653,383a2.5,2.5,0,1,1,2.5-2.5A2.5,2.5,0,0,1,653,383Zm0-3.75a1.25,1.25,0,1,0,1.25,1.25A1.251,1.251,0,0,0,653,379.25Z" transform="translate(-96 270)" fill="#288ac1"/>
+    <g id="Group" transform="translate(116 354)">
+      <path id="Path" d="M0,0H24V24H0Z" transform="translate(426 287)" fill="rgba(0,0,0,0)" opacity="0.871"/>
+    </g>
+    <path id="Op_component_1" data-name="Op component 1" d="M429,291.01v14a1.989,1.989,0,0,1-2,1.98H409a1.989,1.989,0,0,1-2-1.98V301h2v4.02h18V290.99H409V295h-2v-3.99a2.006,2.006,0,0,1,2-2h18A2,2,0,0,1,429,291.01Z" transform="translate(136 355)" fill="#288ac1"/>
+    <path id="Op_component_2" data-name="Op component 2" d="M417,302l4-4-4-4v3h-4v2h4Z" transform="translate(130 355)" fill="#288ac1"/>
+  </g>
+</svg>

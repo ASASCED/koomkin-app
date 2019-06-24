@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+  <g id="watch_later" transform="translate(-576 -550)">
+    <rect id="Rectangle" width="24" height="24" transform="translate(576 550)" fill="rgba(0,0,0,0)"/>
+    <path id="Icon" d="M588,572a10,10,0,1,1,10-10A10.012,10.012,0,0,1,588,572Zm0-18a8,8,0,1,0,8,8A8.009,8.009,0,0,0,588,554Zm4.2,12.2h0L587,563v-6h1.5v5.2l4.5,2.7-.8,1.3Z" fill="#288ac1"/>
+  </g>
+</svg>

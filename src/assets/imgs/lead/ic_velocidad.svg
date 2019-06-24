@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+  <g id="Grupo_6" data-name="Grupo 6" transform="translate(-630 -1907)">
+    <rect id="Path" width="24" height="24" transform="translate(630 1907)" fill="rgba(0,0,0,0)"/>
+    <path id="Icon" d="M860,1726a9,9,0,1,1,9-9A9.01,9.01,0,0,1,860,1726Zm0-16a7,7,0,1,0,7,7A7.008,7.008,0,0,0,860,1710Zm8.709,1.25h0l-4.6-3.859,1.29-1.53,4.6,3.86-1.29,1.529Zm-17.419-.011h0L850,1709.71l4.6-3.85,1.281,1.53-4.589,3.849Z" transform="translate(-218 203)" fill="#288ac1"/>
+    <path id="Op_component_3" data-name="Op component 3" d="M894.5,1711H893v6l5.25,3.15.75-1.23-4.5-2.67Z" transform="translate(-252 204)" fill="#288ac1"/>
+  </g>
+</svg>
