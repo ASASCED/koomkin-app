@@ -1460,6 +1460,30 @@ app.get('/getCancelUpdateMembership/:RecurringPaymentID', function (req, res) {
         });
 });
 
+app.get('/getComments/:claveLead', function (req, res) {
+
+    const claveLead = parseInt(req.params.claveLead, 10);
+
+    db.executeGetComments(claveLead)
+         .then(rows => {
+            res.json(rows).status(200).send();
+        })
+        .catch(err => {
+            res.status(500).json({ error: err }).send();
+        });
+});
+
+app.get('/getReasons', function (req, res) {
+
+    db.executeGetReasons()
+         .then(rows => {
+            res.json(rows).status(200).send();
+        })
+        .catch(err => {
+            res.status(500).json({ error: err }).send();
+        });
+});
+
 //PUT Methods
 
 app.put('/actualizarUsuario', function (req, res) {
@@ -1693,13 +1717,11 @@ app.post('/registerComment/:idUsuario/:claveLead/:comentario', function (req, re
 
 //Elimina un comentario por lead
 
-app.post('/registerComment/:idUsuario/:claveLead/:comentario', function (req, res) {
+app.post('/deleteComment/:idComentario', function (req, res) {
 
-    const idUsuario = parseInt(req.body.idUsuario, 10);
-    const claveLead = parseInt(req.body.claveLead, 10);
-    const comentario = req.body.comentario;
+    const idComentario = parseInt(req.body.idComentario, 10);
 
-    db.executeInsertComment(idUsuario,claveLead,comentario)
+    db.executeDeleteComment(idComentario)
         .then(rows => {
             res.json(rows).status(200).send();
         })
@@ -1708,8 +1730,7 @@ app.post('/registerComment/:idUsuario/:claveLead/:comentario', function (req, re
         });
 });
 
-
-//Genera 
+//Registra los datos de la venta 
 
 app.post('/registerSale/:idUsuario/:claveLead/:caracteristicas/:monto/:recurrente', function (req, res) {
 

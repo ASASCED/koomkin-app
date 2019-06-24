@@ -1545,10 +1545,60 @@ db.executeGetCodigoPostal = function (cp) {
         });
 };
 
+db.executeGetReasons = function () {
+
+    const requestStr = `select * from CatDescartado`;
+    
+        return new Promise((resolve, reject) => {
+            tp.sql(requestStr)
+                .execute()
+                .then(results => {
+                    resolve(results);
+                })
+                .catch(err => {
+                    console.log(err);
+                    reject(err);
+                });
+        });
+    };
+
+db.executeGetComments = function (claveLead) {
+
+    const requestStr = `select * from LeadComentario where ClaveLead = ${claveLead}`;
+        
+    return new Promise((resolve, reject) => {
+        tp.sql(requestStr)
+            .execute()
+            .then(results => {
+                resolve(results);
+            })
+            .catch(err => {
+                console.log(err);
+                reject(err);
+            });
+        });
+};
 
 db.executeInsertComment = function (idUsuario,claveLead,comentario) {
 
     const requestStr = `insert into LeadComentario (IdUsuario,ClaveLead,Comentario,FechaRegistro) values (${idUsuario},${claveLead},'${comentario}',getdate())`;
+        
+    return new Promise((resolve, reject) => {
+        tp.sql(requestStr)
+            .execute()
+            .then(results => {
+                resolve(results);
+            })
+            .catch(err => {
+                console.log(err);
+                reject(err);
+            });
+        });
+};
+
+db.executeDeleteComment = function (idComentario) {
+
+    const requestStr = `DELETE FROM LeadComentario WHERE IdComentario = ${idComentario}`;
         
     return new Promise((resolve, reject) => {
         tp.sql(requestStr)
