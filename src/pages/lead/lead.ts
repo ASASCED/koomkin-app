@@ -135,11 +135,13 @@ export class LeadPage implements OnInit {
   public tc: any;
   public loadingMessages: boolean;
   
+  public intentos = '-';
   public attentionSpeed;
   public contacto;
   public razones;
   public razonDescarto;
   public garantia = 'No';
+  public diasContacto = '-';
 
   public comentarios;
 

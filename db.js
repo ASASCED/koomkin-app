@@ -1179,8 +1179,6 @@ db.executeUpdateBriefInformation = function (idUsuario,idProducto,new_Producto,n
                                     '${new_PorqueEresMejor}',
                                     '${new_ClientesTarget}',
                                     '${new_Correo1}',
-                                    '${new_Correo1}',
-                                    '${new_Correo1}',
                                     ${new_IdSubSector});
         select top 1 * from tbl_tuCampania where IDUSUARIO = ${idUsuario} order by IDCampania desc`;                       
 
