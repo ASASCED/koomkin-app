@@ -731,5 +731,25 @@ export class RestProvider {
       });
     });
   }
+
+  getComments(claveLead) {
+    return new Promise(resolve => {
+      this.http.get(this.apiUrl + '/getComments/' + claveLead).subscribe(data => {
+        resolve(data);
+      }, err => {
+         console.log(err);
+      });
+    });
+  }
+
+  getReasons() {
+    return new Promise(resolve => {
+      this.http.get(this.apiUrl + '/getReasons').subscribe(data => {
+        resolve(data);
+      }, err => {
+         console.log(err);
+      });
+    });
+  }
   
 }

@@ -28,9 +28,7 @@ export class LeadPage implements OnInit {
 
   leadActual;
   apiUrl = 'https://www.koomkin.com.mx/api/app';
-  public tipoempresa:any;
-  public tipo_empresas: any;
-  public tipo_empresa: any;
+
   public califica;
   public calificacion;
   public categoria;
@@ -139,6 +137,11 @@ export class LeadPage implements OnInit {
   
   public attentionSpeed;
   public contacto;
+  public razones;
+  public razonDescarto;
+  public garantia = 'No';
+
+  public comentarios;
 
   private autoScroller: MutationObserver;
 
@@ -337,12 +340,12 @@ export class LeadPage implements OnInit {
         this.loadingMessages = result;
       }
     );
-
+    this.getRazones();
+    this.getComentarios();
     this.getLeadCalls();
     this.getCheckLeadComplement();
     this.getCountLeadCalls();
     this.getUrlAudio();
-    this.getEmpresas();
   }
 
   ionViewDidEnter() {
@@ -410,6 +413,7 @@ export class LeadPage implements OnInit {
           new Date(this.leadActual.fechaContacto),
           { locale: esLocale, addSuffix: false, unit: 'm' }
         );
+        this.garantia = 'Sí'
       }
     }
     if (!this.leadActual.clave) {
@@ -1178,12 +1182,25 @@ export class LeadPage implements OnInit {
     //});
   }
 
-  getEmpresas() {
-    this.provedor.getEmpresas().then(
+  getRazones() {
+    this.provedor.getReasons().then(
       data => {
-        let empresas = data;
-        this.tipo_empresas = empresas;
-        // console.log(this.tipo_empresas);
+        let razones = data;
+        this.razones = razones;
+        console.log(this.razones);
+      },
+      err => {
+        // console.log('error');
+      }
+    );
+  }
+
+  getComentarios() {
+    this.provedor.getComments(this.leadActual).then(
+      data => {
+        let comentarios = data;
+        this.comentarios = comentarios;
+        console.log(this.razones);
       },
       err => {
         // console.log('error');

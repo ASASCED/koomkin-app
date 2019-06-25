@@ -1172,8 +1172,6 @@ db.executeUpdateBriefInformation = function (idUsuario,idProducto,new_Producto,n
                                     PorqueEresMejor,
                                     ClientesTarget,
                                     Correo1,
-                                    Correo2,
-                                    Correo3,
                                     IdSubSector)
                                 values (
                                     ${new_IDMembresia},
@@ -1181,8 +1179,8 @@ db.executeUpdateBriefInformation = function (idUsuario,idProducto,new_Producto,n
                                     '${new_PorqueEresMejor}',
                                     '${new_ClientesTarget}',
                                     '${new_Correo1}',
-                                    '${new_Correo2}',
-                                    '${new_Correo3}',
+                                    '${new_Correo1}',
+                                    '${new_Correo1}',
                                     ${new_IdSubSector});
         select top 1 * from tbl_tuCampania where IDUSUARIO = ${idUsuario} order by IDCampania desc`;                       
 
@@ -1206,8 +1204,8 @@ db.executeUpdateBriefInformation = function (idUsuario,idProducto,new_Producto,n
                                                     '${new_PorqueEresMejor}',
                                                     '${new_ClientesTarget}',
                                                     '${new_Correo1}',
-                                                    '${new_Correo2}',
-                                                    '${new_Correo3}',
+                                                    '${new_Correo1}',
+                                                    '${new_Correo1}',
                                                     ${new_IdSubSector});
                         select top 1 * from tbl_tuCampania where IDUSUARIO = ${idUsuario} order by IDCampania desc`;   
                         
