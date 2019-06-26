@@ -115,6 +115,19 @@ page-lead {
     color: #707070;
     font-size: 3.2vw;
   }
+  .sold {
+    border-left: 10px #00b9be solid;
+  } 
+  .discard {
+    border-left: 10px #fe703f solid;
+  } 
+  .track{
+    border-left: 10px #6b4595 solid;
+  }
+  .negotiation {
+    border-left: 10px #288ac1 solid;
+  } 
+
 }
 
 ion-icon {
@@ -220,7 +233,7 @@ hr {
 .rate-fechal {
   font-size: 4.3vw !important;
   color: dimgray;
-  text-align: right;
+  text-align: left;
 }
 
 //Calidad del Lead
@@ -240,7 +253,8 @@ hr {
 .inf-estado {
   font-size: 4.3vw !important;
   color: dimgray !important;
-  text-align: right !important;
+  text-align: left !important;
+  font-weight: bold;
 }
 
 //Correo del Lead
@@ -260,6 +274,23 @@ hr {
   text-align: left;
 }
 
+.titulo-azul {
+ color:#288ac1;
+ margin: 0%;
+ margin-top:2%;
+ font-size: 6vw;
+}
+
+.tarjeta-comentario {
+    margin: 0px !important;
+    margin-top: 2% !important;
+    border-radius: 2px;
+    width: 100% !important;
+    background: #efefef !important;
+    border-top: 0px solid #d0d0d0 !important;
+    border-bottom: 0px solid #d0d0d0 !important;
+    border-right: 0px solid #d0d0d0 !important;
+}
 //
 .cotizagris {
   color: lightslategray;
@@ -375,6 +406,7 @@ hr {
   color: #818181;
   font-weight: bold;
   font-size: 4vw;
+  text-align: center;
 }
 //
 .like {

@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+  <g id="chat" transform="translate(-508 -1216)">
+    <rect id="Path" width="32" height="32" transform="translate(508 1216)" fill="rgba(0,0,0,0)"/>
+    <path id="Icon" d="M0,28v0L.014,2.8A2.8,2.8,0,0,1,2.8,0H25.2A2.8,2.8,0,0,1,28,2.8V19.6a2.8,2.8,0,0,1-2.8,2.8H5.6L0,28ZM2.8,2.8V21.237L4.438,19.6H25.2V2.8Zm14,14H5.6V14H16.8v2.8Zm5.6-4.2H5.6V9.8H22.4v2.8Zm0-4.2H5.6V5.6H22.4V8.4Z" transform="translate(510 1218)" fill="#fff"/>
+  </g>
+</svg>

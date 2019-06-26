@@ -1198,16 +1198,17 @@ export class LeadPage implements OnInit {
   }
 
   getComentarios() {
-    this.provedor.getComments(this.leadActual).then(
+    this.provedor.getComments(this.leadActual.clave).then(
       data => {
         let comentarios = data;
         this.comentarios = comentarios;
-        console.log(this.razones);
+        console.log(this.comentarios);
       },
       err => {
         // console.log('error');
       }
     );
   }
+
 }
 

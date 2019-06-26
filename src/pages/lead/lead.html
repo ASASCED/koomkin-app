@@ -6,13 +6,20 @@
     <ion-toolbar no-border-top color="azul">
         <ion-segment [(ngModel)]="page" (ngModelChange)="pageChanged()">
             <ion-segment-button value="Lead">
-                Lead
+                <img src="assets/imgs/lead/ic_lead.svg"
+                    style="vertical-align: middle;width: 25% !important;display: inline-block;" />
+            </ion-segment-button>
+            <ion-segment-button value="Comentarios">
+                <img src="assets/imgs/lead/ic_comentarios.svg"
+                    style="vertical-align: middle;width: 25% !important;display: inline-block;" />
             </ion-segment-button>
             <ion-segment-button value="Llamadas">
-                Llamadas
+                <img src="assets/imgs/lead/ic_llamada.svg"
+                    style="vertical-align: middle;width: 25% !important;display: inline-block;" />
             </ion-segment-button>
             <ion-segment-button value="Chat">
-                Chat
+                <img src="assets/imgs/lead/ic_chat.svg"
+                    style="vertical-align: middle;width: 25% !important;display: inline-block;" />
             </ion-segment-button>
         </ion-segment>
     </ion-toolbar>
@@ -47,7 +54,7 @@
                 <ion-card class="dentro">
                     <ion-card-content class="{{leadActual.clasificaLead}}">
                         <ion-row align-items-center>
-                            <ion-col col-8 align-self-center style="display: inherit;">
+                            <ion-col col-10 align-self-center style="display: inherit;">
                                 <a class="inf-nombre">
                                     <strong>{{leadActual.NOMBRE | capitalize}} </strong>
                                     <img *ngIf="leadActual.urgencia !== 'Sí'"
@@ -57,30 +64,64 @@
                                         style="vertical-align: middle;width: 10% !important;display: inline-block;" />
                                 </a>
                             </ion-col>
-                            <ion-col col-4 style="text-align:right">
-                                <div>
-                                    <div class="rate-fechal">{{leadActual.FECHA | date: 'HH:mm' }}</div>
-                                </div>
+                            <ion-col col-1 style="text-align: right;" *ngIf="leadActual.url !== 'sinaudio'">
+                                <img src="assets/imgs/leads/audio.svg"
+                                    style="vertical-align: middle;width: 85% !important;display: inline-block;    margin-left: 15%;" />
+                            </ion-col>
+                            <ion-col col-1 style="text-align: right;" *ngIf="leadActual.url == 'sinaudio'">
+                                <img src="assets/imgs/leads/sin-audio.svg"
+                                    style="vertical-align: middle;width: 85% !important;display: inline-block;    margin-left: 15%;" />
+                            </ion-col>
+                            <ion-col col-1 *ngIf="leadActual.mensajesnoleidos > 0 && leadActual.mensajesnoleidos < 10">
+                                <p
+                                    style="color: white !important; position: absolute; margin-left: 57% !important; margin-top: 24% !important; font-size: 1em; font-weight: bold;">
+                                    {{leadActual.mensajesnoleidos}}</p>
+                                <img src="assets/imgs/leads/mensajes.svg"
+                                    style="vertical-align: middle;width: 100% !important;max-width:150px !important;display: inline-block;" />
+                            </ion-col>
+
+                            <ion-col col-1 *ngIf="leadActual.mensajesnoleidos > 10">
+                                <img src="assets/imgs/leads/mensajes.svg"
+                                    style="vertical-align: middle;width: 100% !important;max-width:150px !important;display: inline-block;" />
+                            </ion-col>
+                            <ion-col col-1 *ngIf="leadActual.mensajesnoleidos == null">
+                                <img src="assets/imgs/leads/sin-mensaje.svg"
+                                    style="vertical-align: middle;width: 100% !important;max-width:150px !important;display: inline-block;" />
+                            </ion-col>
+                            <ion-col col-1 *ngIf="leadActual.mensajesnoleidos == 0">
+                                <img src="assets/imgs/leads/mensaje.svg"
+                                    style="vertical-align: middle;width: 100% !important;max-width:150px !important;display: inline-block;" />
                             </ion-col>
                         </ion-row>
 
                         <ion-row>
-                            <ion-col col-8>
+                            <ion-col col-10>
                                 <a href="mailto:{{leadActual.EMAIL}}" style="text-decoration: none;">
                                     <div class="inf-correo">{{leadActual.EMAIL}}</div>
                                 </a>
                             </ion-col>
-                            <ion-col col-4>
-                                <div class="rate-fechal">{{leadActual.FECHA | date: 'dd/MM/yyyy'}}</div>
+                            <ion-col col-2>
                             </ion-col>
                         </ion-row>
                         <ion-row>
-                            <ion-col col-6>
-                                <div class="inf-empresa">{{leadActual.EMPRESA | capitalize}}</div>
-                            </ion-col>
-                            <ion-col col-6>
+                            <ion-col col-10>
                                 <div class="inf-estado">{{leadActual.ESTADO}}</div>
-
+                            </ion-col>
+                            <ion-col col-2>
+                            </ion-col>
+                        </ion-row>
+                        <ion-row>
+                            <ion-col col-10>
+                                <div class="rate-fechal">{{leadActual.FECHA | date: 'dd/MM/yyyy HH:mm'}}</div>
+                            </ion-col>
+                            <ion-col col-2 style="display: inline-block">
+                                <ion-icon
+                                    style="margin-right: 2px !important;font-size: 2em !important;color: rgb(209, 209, 209)"
+                                    [ngClass]="{'like':leadActual.calificaLead === 'like','sin':leadActual.calificaLead === 'dislike'}"
+                                    name="md-thumbs-up" (click)="changeLike('L',leadActual)"></ion-icon>
+                                <ion-icon style="font-size: 2em !important;color: rgb(209, 209, 209)"
+                                    [ngClass]="{'like':leadActual.calificaLead === 'dislike','sin':leadActual.calificaLead === 'like'}"
+                                    name="md-thumbs-down" (click)="changeLike('DL',leadActual)"></ion-icon>
                             </ion-col>
                         </ion-row>
                     </ion-card-content>
@@ -142,7 +183,7 @@
                         <img icon-only tooltip="No. de Intentos" positionV="top" mobileEvent="click" hideOthers=true
                             duration=2000 src="assets/imgs/lead/ic_numintentos.svg"
                             style="vertical-align: middle;width: 30% !important;display: inline-block;" />
-                       {{intentos}} 
+                        {{intentos}}
                     </ion-col>
                 </ion-row>
                 <ion-row>
@@ -200,8 +241,7 @@
                         <p class="razon" *ngIf="leadActual.clasificaLead === 'D'">
                             Razón
                         </p>
-                        <br *ngIf="leadActual.clasificaLead === 'D'">
-                        <ion-row  *ngIf="leadActual.clasificaLead === 'D'">
+                        <ion-row *ngIf="leadActual.clasificaLead === 'D'">
                             <ion-col col-2 class="tex">
                                 <img src="assets/imgs/lead/ic_advertencia.svg"
                                     style="vertical-align: middle;width: 80% !important;display: inline-block;" />
@@ -220,7 +260,6 @@
                         <p class="razon" *ngIf="leadActual.clasificaLead === 'P' || leadActual.clasificaLead === 'S'">
                             Próxima comunicación
                         </p>
-                        <br *ngIf="leadActual.clasificaLead === 'P' || leadActual.clasificaLead === 'S'">
                         <ion-row *ngIf="leadActual.clasificaLead === 'P' || leadActual.clasificaLead === 'S'">
                             <ion-col col-2 class="tex">
                                 <img src="assets/imgs/lead/ic_hora.svg"
@@ -228,9 +267,9 @@
                             </ion-col>
                             <ion-col col-10 class="tex">
                                 <ion-item>
-                                    <ion-datetime class="seleccion-brief"
-                                        style="width: 99%;margin-top: 0%" displayFormat="DD MMMM YYYY" [(ngModel)]="fecha"
-                                        cancelText="Cancelar" doneText="Aceptar">
+                                    <ion-datetime class="seleccion-brief" style="width: 99%;margin-top: 0%"
+                                        displayFormat="DD MMMM YYYY" [(ngModel)]="fecha" cancelText="Cancelar"
+                                        doneText="Aceptar">
                                     </ion-datetime>
                                 </ion-item>
                             </ion-col>
@@ -243,13 +282,19 @@
                             </ion-col>
                             <ion-col col-10 class="tex">
                                 <ion-item>
-                                    <ion-datetime class="seleccion-brief"
-                                        style="width: 99%;margin-top: 0%" displayFormat="HH:mm" [(ngModel)]="hora"
-                                        cancelText="Cancelar" doneText="Aceptar">
+                                    <ion-datetime class="seleccion-brief" style="width: 99%;margin-top: 0%"
+                                        displayFormat="HH:mm" [(ngModel)]="hora" cancelText="Cancelar"
+                                        doneText="Aceptar">
                                     </ion-datetime>
                                 </ion-item>
                             </ion-col>
                         </ion-row>
+
+                        <p class="razon" *ngIf="leadActual.clasificaLead === 'D'">
+                            Valor del lead
+                        </p>
+
+
                     </ion-col>
                 </ion-row>
 
@@ -277,6 +322,40 @@
                 </ion-row>
             </ion-grid>
         </ion-list>
+
+        <ion-list *ngSwitchCase="'Comentarios'">
+            <ion-row style="display: flex !important; align-content: center !important; align-items: center !important;">
+                <ion-col col-11>
+                    <span class="titulo-azul">Historial de comentarios</span>
+                </ion-col>
+                <ion-col col-1>
+                        <span class="titulo-azul">+</span>
+                    </ion-col>
+            </ion-row>
+            <ion-item class="tarjeta-comentario" *ngFor="let registro of comentarios; let i = index;" [ngClass]="{'sold':registro.ClasificaLead == 'Vendido','negotiation':registro.ClasificaLead == 'Negociacion','track':registro.ClasificaLead == 'Seguimiento' ,'discard':registro.ClasificaLead == 'Descartado'}" style="border-bottom: 1px solid #dedede;" >
+                <ion-row
+                    style="display: flex !important; align-content: center !important; align-items: center !important;margin-top: 1%;">
+                    <ion-col col-10>
+                        <p style="color:gray;margin-left: 5px;">{{registro.FechaRegistro | date: 'dd/MM/yyyy HH:mm'}}</p>
+                    </ion-col>
+                    <ion-col col-1 style="text-align: center">
+                            <img src="assets/imgs/lead/ic_comentario.svg"
+                                style="vertical-align: middle;width: 60% !important;margin-left: 10%;" />
+                        </ion-col>
+                    <ion-col col-1 style="text-align: center">
+                            <img src="assets/imgs/lead/ic_borrar.svg"
+                                style="vertical-align: middle;width: 60% !important;margin-left: 10%;" />
+                        </ion-col>
+                </ion-row>
+                <ion-row style="display: flex !important; align-content: center !important; align-items: center !important;margin-bottom: 2% !important;margin-left: 5px;">
+                    <ion-col col-10>
+                        <a style="color:#606060;font-size: small;">"{{registro.Comentario}}"</a>
+                    </ion-col>
+                    
+                </ion-row>
+            </ion-item>
+        </ion-list>
+
 
         <ion-list *ngSwitchCase="'Llamadas'">
             <ion-item>
@@ -334,13 +413,13 @@
                 <ion-row
                     style="display: flex !important; align-content: center !important; align-items: center !important;">
                     <ion-col col-12>
-                        <h1 style="color:darkgray;margin-top:2%;">Historial</h1>
+                        <span class="titulo-azul">Historial</span>
                     </ion-col>
                 </ion-row>
             </ion-item>
 
             <!--Listado de llamadas-->
-            <ion-item  style="border-bottom: 1px solid #dedede;" *ngFor="let call of llamadas; let i = index;">
+            <ion-item style="border-bottom: 1px solid #dedede;" *ngFor="let call of llamadas; let i = index;">
                 <ion-row
                     style="display: flex !important; align-content: center !important; align-items: center !important;margin-top: 1%;">
                     <ion-col col-3 *ngIf="call.CallStatus !== 'no-answer'">

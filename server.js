@@ -1717,6 +1717,22 @@ app.post('/registerComment/:idUsuario/:claveLead/:comentario', function (req, re
 
 //Elimina un comentario por lead
 
+app.post('/editComment/:idComentario/:comentario', function (req, res) {
+
+    const idComentario = parseInt(req.body.idComentario, 10);
+    const comentario = req.body.comentario;
+
+    db.executeEditComment(idComentario,comentario)
+        .then(rows => {
+            res.json(rows).status(200).send();
+        })
+        .catch(err => {
+            res.status(500).json({ error: err }).send();
+        });
+});
+
+//Elimina un comentario por lead
+
 app.post('/deleteComment/:idComentario', function (req, res) {
 
     const idComentario = parseInt(req.body.idComentario, 10);

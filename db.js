@@ -1560,7 +1560,7 @@ db.executeGetReasons = function () {
 
 db.executeGetComments = function (claveLead) {
 
-    const requestStr = `select * from LeadComentario where ClaveLead = ${claveLead}`;
+    const requestStr = `select * from LeadComentario where ClaveLead = ${claveLead} order by FechaRegistro desc`;
         
     return new Promise((resolve, reject) => {
         tp.sql(requestStr)
@@ -1592,9 +1592,28 @@ db.executeInsertComment = function (idUsuario,claveLead,comentario) {
         });
 };
 
+db.executeEditComment = function (idComentario,comentario) {
+
+    const requestStr = `update LeadComentario
+    set Comentario = '${comentario}'
+    where IdComentario = ${idComentario};`;
+        
+    return new Promise((resolve, reject) => {
+        tp.sql(requestStr)
+            .execute()
+            .then(results => {
+                resolve(results);
+            })
+            .catch(err => {
+                console.log(err);
+                reject(err);
+            });
+        });
+};
+
 db.executeDeleteComment = function (idComentario) {
 
-    const requestStr = `DELETE FROM LeadComentario WHERE IdComentario = ${idComentario}`;
+    const requestStr = `delete from LeadComentario where IdComentario = ${idComentario}`;
         
     return new Promise((resolve, reject) => {
         tp.sql(requestStr)
