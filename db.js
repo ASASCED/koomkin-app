@@ -1597,6 +1597,8 @@ db.executeEditComment = function (idComentario,comentario) {
     const requestStr = `update LeadComentario
     set Comentario = '${comentario}'
     where IdComentario = ${idComentario};`;
+
+    console.log(requestStr);
         
     return new Promise((resolve, reject) => {
         tp.sql(requestStr)
