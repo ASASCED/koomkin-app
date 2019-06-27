@@ -15,6 +15,7 @@ import { File } from '@ionic-native/file';
 import { Transfer, TransferObject } from '@ionic-native/transfer';
 import * as distanceinWordsStrict from 'date-fns/distance_in_words_strict';
 import * as esLocale from 'date-fns/locale/es';
+import swal from 'sweetalert2';
 
 declare var cordova:any;
 
@@ -142,7 +143,6 @@ export class LeadPage implements OnInit {
   public razonDescarto;
   public garantia = 'No';
   public diasContacto = '-';
-
   public comentarios;
 
   private autoScroller: MutationObserver;
@@ -307,6 +307,147 @@ export class LeadPage implements OnInit {
   }
 
   ngOnInit() {
+
+    var dictionary = [];
+
+    dictionary.push({
+      key:   "Aguascalientes",
+      value: "AGS"
+    },
+    {
+      key:   "Baja California",
+      value: "B.C."
+    },
+    {
+      key:   "Baja California Sur",
+      value: "B.C.S."
+    },
+    {
+      key:   "Campeche",
+      value: "CAMP"
+    },
+    {
+      key:   "Chiapas",
+      value: "CHIS"
+    },
+    {
+      key:   "Chihuahua",
+      value: "CHIH"
+    },
+    {
+      key:   "Ciudad de México",
+      value: "CDMX"
+    },
+    {
+      key:   "Coahuila de Zaragoza",
+      value: "COAH"
+    },
+    {
+      key:   "Colima",
+      value: "COL"
+    },
+    {
+      key:   "Durango",
+      value: "DGO"
+    },
+    {
+      key:   "Guanajuato",
+      value: "GTO"
+    },
+    {
+      key:   "Guerrero",
+      value: "GRO"
+    },
+    {
+      key:   "Hidalgo",
+      value: "HGO"
+    },
+    {
+      key:   "Jalisco",
+      value: "JAL"
+    },
+    {
+      key:   "Mexico",
+      value: "MEX"
+    },
+    {
+      key:   "Michoacan de Ocampo",
+      value: "MICH"
+    },
+    {
+      key:   "Morelos",
+      value: "MOR"
+    },
+    {
+      key:   "Nayarit",
+      value: "NAY"
+    },
+    {
+      key:   "Nuevo Leon",
+      value: "N.L."
+    },
+    {
+      key:   "Oaxaca",
+      value: "OAX"
+    },
+    {
+      key:   "Puebla",
+      value: "PUE"
+    },
+    {
+      key:   "Queretaro de Arteaga",
+      value: "QRO"
+    },
+    {
+      key:   "Quintana Roo",
+      value: "Q.R."
+    },
+    {
+      key:   "San Luis Potosi",
+      value: "S.L.P."
+    },
+    {
+      key:   "Sinaloa",
+      value: "SIN"
+    },
+    {
+      key:   "Sonora",
+      value: "SON"
+    },
+    {
+      key:   "Tabasco",
+      value: "TAB"
+    },
+    {
+      key:   "Tamaulipas",
+      value: "TAMPS"
+    },
+    {
+      key:   "Tlaxcala",
+      value: "TLAX"
+    },
+    {
+      key:   "Veracruz-Llave",
+      value: "VER"
+    },
+    {
+      key:   "Yucatan",
+      value: "YUC"
+    },
+    {
+      key:   "Zacatecas",
+      value: "ZAC"
+    });
+
+    console.log(dictionary);
+
+    dictionary.forEach(element=> {
+      if(element.key == this.leadActual.ESTADO) {
+        this.leadActual.ESTADO = element.value;
+        console.log(this.leadActual.ESTADO);
+      }
+    });
+
     this.chatService.msgListActualizada.subscribe(
       result => {
         if(result.length===0){
@@ -1209,6 +1350,61 @@ export class LeadPage implements OnInit {
       }
     );
   }
+
+  public deleteComentario(idComentario) {
+
+    const body = new URLSearchParams();
+    body.set('idComentario', idComentario);
+
+    const options = {
+      headers: new HttpHeaders().set(
+        'Content-Type',
+        'application/x-www-form-urlencoded'
+      )
+    };
+
+    const url = 'https://www.koomkin.com.mx/api/app/deleteComment/' + idComentario;
+
+    console.log(url);
+    return new Promise((resolve, reject) => {
+      this.http.post(url,body.toString(), options).subscribe(
+        data => {
+          console.log(data);
+        },
+        err => {
+          return reject(err);
+        }
+      );
+    });
+  }
+
+  openModal(image, title, message) {
+    const myModal = this.modal.create(
+      "ModalComentariosPage",
+      { imagen: image, titulo: title, mensaje: message },
+      { enableBackdropDismiss: false, cssClass: "Modal-comentario" }
+    );
+    myModal.present();
+    myModal.onDidDismiss(() => {});
+  }
+
+  public btnDeleteComentario(idComentario) {
+    console.log(idComentario);
+    swal({
+      title: '¿Estás seguro que deseas eliminar este comentario?',
+      showCancelButton: true,
+      confirmButtonColor: '#288AC1',
+      cancelButtonColor: '#2AB4BC',
+      confirmButtonText: 'Confirmar',
+      cancelButtonText: 'Cancelar',
+      reverseButtons: true
+    }).then(result => {
+      if (result.value) {
+        this.deleteComentario(idComentario);
+      }
+    });
+  }  
+  
 
 }
 

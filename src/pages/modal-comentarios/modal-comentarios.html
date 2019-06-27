@@ -1,0 +1,170 @@
+<ion-header color="azul">
+  <ion-toolbar color="azul">
+    <ion-title>Escribe los detalles del estatus</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-grid *ngIf="tipo == 1">
+    <ion-row>
+      <ion-col col-3>
+      </ion-col>
+      <ion-col col-6>
+        <img src="assets/imgs/comentarios/comentario.svg" width="80%" style="margin-left: 10%" />
+      </ion-col>
+      <ion-col col-3>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-5 class="centrar-img">
+        <span class="gris-comentario">Razón</span>
+        <img src="assets/imgs/lead/ic_advertencia.svg" width="20%" />
+      </ion-col>
+      <ion-col col-7>
+        <ion-item>
+          <select type="text" class="seleccion-comentario" style="width: 95%;margin-top: 0%"
+            [(ngModel)]="razonDescarto">
+            <option *ngFor="let razon of razones">
+              {{razon.Descripcion}}
+            </option>
+          </select>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-5 class="centrar-img">
+        <span class="gris-comentario">Valor del Lead</span>
+      </ion-col>
+      <ion-col col-7>
+        <input class="input-comentario" type="number" name="valor">
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-5 class="centrar-img">
+        <span class="gris-comentario">Comentario</span>
+      </ion-col>
+      <ion-col col-7>
+        <textarea class="area-comentario" rows="4" cols="50" maxlength="190"></textarea>
+      </ion-col>
+    </ion-row>
+    <br>
+    <ion-row>
+      <ion-col col-6>
+        <button ion-button class="btn-cancelar-comentario" (click)="closeModal()">Cancelar</button>
+      </ion-col>
+      <ion-col col-6>
+        <button ion-button class="btn-guardar-comentario" (click)="closeModal()">Guardar</button>
+      </ion-col>
+      <ion-col col-2>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid *ngIf="tipo == 2">
+    <ion-row>
+      <ion-col col-3>
+      </ion-col>
+      <ion-col col-6>
+        <img src="assets/imgs/comentarios/comentario.svg" width="80%" style="margin-left: 10%" />
+      </ion-col>
+      <ion-col col-3>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-12>
+        <span class="gris-comentario">Seguimiento</span>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-5 class="centrar-img">
+        <img src="assets/imgs/lead/ic_fecha.svg" width="25%" />
+      </ion-col>
+      <ion-col col-7>
+        <ion-item>
+          <ion-datetime class="seleccion-comentario" style="width: 99%;margin-top: 0%" displayFormat="DD MMMM YYYY"
+            placeholder="Fecha" [(ngModel)]="fecha" cancelText="Cancelar" min="2019-06-26" max="2020-06-26"
+            doneText="Aceptar">
+          </ion-datetime>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-5 class="centrar-img">
+        <img src="assets/imgs/lead/ic_hora.svg" width="25%" />
+      </ion-col>
+      <ion-col col-7>
+        <ion-item style="border-bottom: 0px solid rgb(222, 222, 222) !important;">
+          <ion-datetime class="seleccion-comentario" style="width: 99%;margin-top: 0%" displayFormat="HH:mm"
+            placeholder="Hora" [(ngModel)]="hora" cancelText="Cancelar" doneText="Aceptar">
+          </ion-datetime>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-5 class="centrar-img">
+        <span class="gris-comentario">Valor del Lead</span>
+      </ion-col>
+      <ion-col col-7>
+        <input class="input-comentario" type="number" name="valor">
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-5 class="centrar-img">
+        <span class="gris-comentario">Comentario</span>
+      </ion-col>
+      <ion-col col-7>
+        <textarea class="area-comentario" rows="4" cols="50" maxlength="190"></textarea>
+      </ion-col>
+    </ion-row>
+    <br>
+    <ion-row>
+      <ion-col col-6>
+        <button ion-button class="btn-cancelar-comentario" (click)="closeModal()">Cancelar</button>
+      </ion-col>
+      <ion-col col-6>
+        <button ion-button class="btn-guardar-comentario" (click)="closeModal()">Guardar</button>
+      </ion-col>
+      <ion-col col-2>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid *ngIf="tipo == 3">
+    <ion-row>
+      <ion-col col-3>
+      </ion-col>
+      <ion-col col-6>
+        <img src="assets/imgs/comentarios/venta.svg" width="80%" style="margin-left: 10%" />
+      </ion-col>
+      <ion-col col-3>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-5 class="centrar-img">
+        <span class="gris-comentario">Valor del Lead</span>
+      </ion-col>
+      <ion-col col-7>
+        <input class="input-comentario" type="number" name="valor">
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-5 class="centrar-img">
+        <span class="gris-comentario">Comentario</span>
+      </ion-col>
+      <ion-col col-7>
+        <textarea class="area-comentario" rows="4" cols="50" maxlength="190"></textarea>
+      </ion-col>
+    </ion-row>
+    <br>
+    <ion-row>
+      <ion-col col-6>
+        <button ion-button class="btn-cancelar-comentario" (click)="closeModal()">Cancelar</button>
+      </ion-col>
+      <ion-col col-6>
+        <button ion-button class="btn-guardar-comentario" (click)="closeModal()">Guardar</button>
+      </ion-col>
+      <ion-col col-2>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

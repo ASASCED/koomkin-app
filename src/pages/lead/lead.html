@@ -293,8 +293,6 @@
                         <p class="razon" *ngIf="leadActual.clasificaLead === 'D'">
                             Valor del lead
                         </p>
-
-
                     </ion-col>
                 </ion-row>
 
@@ -324,34 +322,40 @@
         </ion-list>
 
         <ion-list *ngSwitchCase="'Comentarios'">
-            <ion-row style="display: flex !important; align-content: center !important; align-items: center !important;">
+            <ion-row
+                style="display: flex !important; align-content: center !important; align-items: center !important;">
                 <ion-col col-11>
                     <span class="titulo-azul">Historial de comentarios</span>
                 </ion-col>
                 <ion-col col-1>
-                        <span class="titulo-azul">+</span>
-                    </ion-col>
+                        <img src="assets/imgs/lead/ic_plus.svg"
+                        style="vertical-align: middle;width: 70% !important;margin-left: 10%;" (click)="openModal()"/>
+                </ion-col>
             </ion-row>
-            <ion-item class="tarjeta-comentario" *ngFor="let registro of comentarios; let i = index;" [ngClass]="{'sold':registro.ClasificaLead == 'Vendido','negotiation':registro.ClasificaLead == 'Negociacion','track':registro.ClasificaLead == 'Seguimiento' ,'discard':registro.ClasificaLead == 'Descartado'}" style="border-bottom: 1px solid #dedede;" >
+            <ion-item class="tarjeta-comentario" *ngFor="let registro of comentarios; let i = index;"
+                [ngClass]="{'sold':registro.ClasificaLead == 'Vendido','negotiation':registro.ClasificaLead == 'Negociacion','track':registro.ClasificaLead == 'Seguimiento' ,'discard':registro.ClasificaLead == 'Descartado'}"
+                style="border-bottom: 1px solid #dedede;">
                 <ion-row
                     style="display: flex !important; align-content: center !important; align-items: center !important;margin-top: 1%;">
                     <ion-col col-10>
-                        <p style="color:gray;margin-left: 5px;">{{registro.FechaRegistro | date: 'dd/MM/yyyy HH:mm'}}</p>
+                        <p style="color:gray;margin-left: 5px;font-size: small;">{{registro.FechaRegistro | date: 'dd/MM/yyyy HH:mm'}}
+                        </p>
                     </ion-col>
                     <ion-col col-1 style="text-align: center">
-                            <img src="assets/imgs/lead/ic_comentario.svg"
-                                style="vertical-align: middle;width: 60% !important;margin-left: 10%;" />
-                        </ion-col>
+                        <img src="assets/imgs/lead/ic_comentario.svg"
+                            style="vertical-align: middle;width: 70% !important;margin-left: 10%;"/>
+                    </ion-col>
                     <ion-col col-1 style="text-align: center">
-                            <img src="assets/imgs/lead/ic_borrar.svg"
-                                style="vertical-align: middle;width: 60% !important;margin-left: 10%;" />
-                        </ion-col>
+                        <img src="assets/imgs/lead/ic_borrar.svg"
+                            style="vertical-align: middle;width: 70% !important;margin-left: 10%;" (click)="btnDeleteComentario(registro.IdComentario)"/>
+                    </ion-col>
                 </ion-row>
-                <ion-row style="display: flex !important; align-content: center !important; align-items: center !important;margin-bottom: 2% !important;margin-left: 5px;">
+                <ion-row
+                    style="display: flex !important; align-content: center !important; align-items: center !important;margin-bottom: 2% !important;margin-left: 5px;">
                     <ion-col col-10>
                         <a style="color:#606060;font-size: small;">"{{registro.Comentario}}"</a>
                     </ion-col>
-                    
+
                 </ion-row>
             </ion-item>
         </ion-list>
