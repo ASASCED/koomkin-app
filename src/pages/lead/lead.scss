@@ -236,6 +236,15 @@ hr {
   text-align: left;
 }
 
+//Valor del Lead
+.rate-valor {
+  font-size: 4.3vw !important;
+  color: #1F639E;
+  text-align: left;
+  font-weight: bold;
+  margin-top: 1%;
+}
+
 //Calidad del Lead
 .rate-calidad {
   font-size: 4.8vw !important;
@@ -253,7 +262,7 @@ hr {
 .inf-estado {
   font-size: 4.3vw !important;
   color: dimgray !important;
-  text-align: left !important;
+  text-align: right !important;
   font-weight: bold;
 }
 
@@ -310,10 +319,10 @@ hr {
 
 //Mensaje del Lead
 .mensaje {
-  color: lightslategray;
+  color: #6B7E8D;
   font-size: 4vw;
   margin-left: 0.5em;
-  font-weight: 500;
+  font-weight: bold;
   margin-top: 1%;
   margin-bottom: 1%;
   text-align: justify;

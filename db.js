@@ -575,7 +575,6 @@ db.executeGetBanner = function (command,idUsuario) {
     });
 };
 
-
 db.executeFechaEntradaBanner = function (idReporteBanner,canal) {
 
     const requestStr = `UPDATE dbo.Tbl_ReporteBanner SET fechaEntradaBanner = GETDATE() where idReporteBanner = ${idReporteBanner};
@@ -863,7 +862,6 @@ db.executeUpdateAgenda = function (idUsuario,idTicket,estatusOptimizacion) {A
 
 db.executeUpdateAgenda2 = function (idUsuario,idTicket,estatusOptimizacion) {
 
-
     const requestStr = `INSERT INTO Tbl_AgendaOptimizaciones (idUsuario, idTicket, estatusOptimizacion)
     SELECT IDUSUARIO, ${idTicket} AS idTicket, ${estatusOptimizacion} AS estatusOptimizacion FROM CATUSUARIO
     WHERE IDUSUARIO IN (SELECT IDUSUARIO FROM kad_Tbl_PagosClientesKoomkinAdmin)
@@ -974,7 +972,6 @@ db.executePostRecurringPayment = function (idUsuario) {
 
 };
 
-
 db.updateDatosFiscales = function (body) {
 
     const str = body.uid + ", '" + body.f_nombre + "', '" + body.f_apaterno + "', '" + body.f_amaterno + "', '" + body.f_email + "', '" +
@@ -997,7 +994,7 @@ db.updateDatosFiscales = function (body) {
   
   }
   
-  db.updateDatosUsuario = function (body) {
+db.updateDatosUsuario = function (body) {
   
     const str = body.uid + ", '" + body.nombre + "', '" + body.apaterno + "', '" + body.amaterno + "', '" + body.empresa + "', '" + body.email + "', '" +
       body.telefono + "', '" + body.celular + "'";
@@ -1015,9 +1012,9 @@ db.updateDatosFiscales = function (body) {
           reject(err)
         });
     });
-  }
+}
   
-  db.insertDatosFiscales = function (body, id, uid) {
+db.insertDatosFiscales = function (body, id, uid) {
   
     const d = body
     const nombre = d.nombre
@@ -1071,7 +1068,6 @@ const requestStr = `insert into Tbl_RespuestasEncuestas (idUsuario,idAgenda,idPr
     });
 };
 
-
 db.executeGetWords = function (idUsuario) {
 
 const requestStr = `select top 5 * from palabrasporcliente where idusuario = ${idUsuario}`;
@@ -1122,7 +1118,6 @@ const requestStr = `select lugar , Nombre from Eficiencia where lugar <= 10 orde
             });
     });
 };
-
 
 db.executeGetBriefInformation = function (idUsuario) {
 
@@ -1556,7 +1551,24 @@ db.executeGetReasons = function () {
                     reject(err);
                 });
         });
-    };
+};
+
+db.executeGetLastComment = function (claveLead) {
+
+    const requestStr = `select top 1 * from LeadComentario where ClaveLead = ${claveLead} order by FechaRegistro desc`;
+        
+    return new Promise((resolve, reject) => {
+        tp.sql(requestStr)
+            .execute()
+            .then(results => {
+                resolve(results);
+            })
+            .catch(err => {
+                console.log(err);
+                reject(err);
+            });
+        });
+};
 
 db.executeGetComments = function (claveLead) {
 

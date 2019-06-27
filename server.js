@@ -1460,6 +1460,19 @@ app.get('/getCancelUpdateMembership/:RecurringPaymentID', function (req, res) {
         });
 });
 
+app.get('/getLastComment/:claveLead', function (req, res) {
+
+    const claveLead = parseInt(req.params.claveLead, 10);
+
+    db.executeGetLastComment(claveLead)
+         .then(rows => {
+            res.json(rows).status(200).send();
+        })
+        .catch(err => {
+            res.status(500).json({ error: err }).send();
+        });
+});
+
 app.get('/getComments/:claveLead', function (req, res) {
 
     const claveLead = parseInt(req.params.claveLead, 10);

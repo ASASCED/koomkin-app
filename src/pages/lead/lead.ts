@@ -1,14 +1,14 @@
-import { Component, OnInit, NgZone} from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
 import { IonicPage, NavController, ViewController, NavParams, Platform } from 'ionic-angular';
 import { RestProvider } from './../../providers/rest/rest';
 import { HttpClient } from '@angular/common/http';
-import { AlertController, ModalController , LoadingController} from 'ionic-angular';
+import { AlertController, ModalController, LoadingController } from 'ionic-angular';
 import { AuthServiceProvider } from "../../providers/auth-service/auth-service";
 import { StreamingMedia, StreamingAudioOptions } from '@ionic-native/streaming-media';
 import { Storage } from '@ionic/storage';
 import { ElementRef, ViewChild } from '@angular/core';
 import { Content } from 'ionic-angular';
-import { ChatServiceProvider, ChatMessage} from "../../providers/chat-service/chat-service";
+import { ChatServiceProvider, ChatMessage } from "../../providers/chat-service/chat-service";
 import { HttpHeaders } from '@angular/common/http';
 import { FileOpener } from '@ionic-native/file-opener';
 import { File } from '@ionic-native/file';
@@ -17,7 +17,7 @@ import * as distanceinWordsStrict from 'date-fns/distance_in_words_strict';
 import * as esLocale from 'date-fns/locale/es';
 import swal from 'sweetalert2';
 
-declare var cordova:any;
+declare var cordova: any;
 
 @IonicPage()
 @Component({
@@ -119,7 +119,7 @@ export class LeadPage implements OnInit {
   public unidades;
   public datosenvio;
 
-  public clientUUID = this.authService.getClientUUID();  
+  public clientUUID = this.authService.getClientUUID();
   //Estatus llamadas
   llamadas: any = [];
   public llamada;
@@ -131,14 +131,14 @@ export class LeadPage implements OnInit {
   public invalido = '0';
   public tel: any = ' ';
   public page: string = "Lead";
-  public pages: Array<string> = ['Lead', 'Llamadas', 'Chat'];
+  public pages: Array<string> = ['Lead', 'Comentarios', 'Llamadas', 'Chat'];
   isAndroid: boolean = false;
   public tc: any;
   public loadingMessages: boolean;
-  
-  public intentos = '-';
-  public attentionSpeed;
-  public contacto;
+
+  public intentos:any = '-';
+  public attentionSpeed:any = '-';
+  public contacto:any = '-';
   public razones;
   public razonDescarto;
   public garantia = 'No';
@@ -191,7 +191,7 @@ export class LeadPage implements OnInit {
       this.content.resize();
     });
   }
-  
+
   openModalIniciarConversacion() {
 
     const myModal2 = this.modal.create('ModalPageIniciarChatPage', { uuid: this.leadActual.uuid, nombrelead: this.leadActual.NOMBRE }, { enableBackdropDismiss: false, cssClass: "Modal-iniciar-chat" });
@@ -245,7 +245,6 @@ export class LeadPage implements OnInit {
   }
 
   public leerChat() {
-
     const url = 'https://www.koomkin.com.mx/chat/api/read-messages/';
     return new Promise((resolve, reject) => {
       this.http.post(url + this.leadActual.uuid, { device: "app" })
@@ -283,7 +282,6 @@ export class LeadPage implements OnInit {
     this.scrollDown.bind(this);
   }
 
-
   sendMsg() {
     if (!this.editorMsg.trim()) return;
     if (this.chatService.tc.currentChannel) {
@@ -311,138 +309,138 @@ export class LeadPage implements OnInit {
     var dictionary = [];
 
     dictionary.push({
-      key:   "Aguascalientes",
+      key: "Aguascalientes",
       value: "AGS"
     },
-    {
-      key:   "Baja California",
-      value: "B.C."
-    },
-    {
-      key:   "Baja California Sur",
-      value: "B.C.S."
-    },
-    {
-      key:   "Campeche",
-      value: "CAMP"
-    },
-    {
-      key:   "Chiapas",
-      value: "CHIS"
-    },
-    {
-      key:   "Chihuahua",
-      value: "CHIH"
-    },
-    {
-      key:   "Ciudad de México",
-      value: "CDMX"
-    },
-    {
-      key:   "Coahuila de Zaragoza",
-      value: "COAH"
-    },
-    {
-      key:   "Colima",
-      value: "COL"
-    },
-    {
-      key:   "Durango",
-      value: "DGO"
-    },
-    {
-      key:   "Guanajuato",
-      value: "GTO"
-    },
-    {
-      key:   "Guerrero",
-      value: "GRO"
-    },
-    {
-      key:   "Hidalgo",
-      value: "HGO"
-    },
-    {
-      key:   "Jalisco",
-      value: "JAL"
-    },
-    {
-      key:   "Mexico",
-      value: "MEX"
-    },
-    {
-      key:   "Michoacan de Ocampo",
-      value: "MICH"
-    },
-    {
-      key:   "Morelos",
-      value: "MOR"
-    },
-    {
-      key:   "Nayarit",
-      value: "NAY"
-    },
-    {
-      key:   "Nuevo Leon",
-      value: "N.L."
-    },
-    {
-      key:   "Oaxaca",
-      value: "OAX"
-    },
-    {
-      key:   "Puebla",
-      value: "PUE"
-    },
-    {
-      key:   "Queretaro de Arteaga",
-      value: "QRO"
-    },
-    {
-      key:   "Quintana Roo",
-      value: "Q.R."
-    },
-    {
-      key:   "San Luis Potosi",
-      value: "S.L.P."
-    },
-    {
-      key:   "Sinaloa",
-      value: "SIN"
-    },
-    {
-      key:   "Sonora",
-      value: "SON"
-    },
-    {
-      key:   "Tabasco",
-      value: "TAB"
-    },
-    {
-      key:   "Tamaulipas",
-      value: "TAMPS"
-    },
-    {
-      key:   "Tlaxcala",
-      value: "TLAX"
-    },
-    {
-      key:   "Veracruz-Llave",
-      value: "VER"
-    },
-    {
-      key:   "Yucatan",
-      value: "YUC"
-    },
-    {
-      key:   "Zacatecas",
-      value: "ZAC"
-    });
+      {
+        key: "Baja California",
+        value: "B.C."
+      },
+      {
+        key: "Baja California Sur",
+        value: "B.C.S."
+      },
+      {
+        key: "Campeche",
+        value: "CAMP"
+      },
+      {
+        key: "Chiapas",
+        value: "CHIS"
+      },
+      {
+        key: "Chihuahua",
+        value: "CHIH"
+      },
+      {
+        key: "Ciudad de México",
+        value: "CDMX"
+      },
+      {
+        key: "Coahuila de Zaragoza",
+        value: "COAH"
+      },
+      {
+        key: "Colima",
+        value: "COL"
+      },
+      {
+        key: "Durango",
+        value: "DGO"
+      },
+      {
+        key: "Guanajuato",
+        value: "GTO"
+      },
+      {
+        key: "Guerrero",
+        value: "GRO"
+      },
+      {
+        key: "Hidalgo",
+        value: "HGO"
+      },
+      {
+        key: "Jalisco",
+        value: "JAL"
+      },
+      {
+        key: "Mexico",
+        value: "MEX"
+      },
+      {
+        key: "Michoacan de Ocampo",
+        value: "MICH"
+      },
+      {
+        key: "Morelos",
+        value: "MOR"
+      },
+      {
+        key: "Nayarit",
+        value: "NAY"
+      },
+      {
+        key: "Nuevo Leon",
+        value: "N.L."
+      },
+      {
+        key: "Oaxaca",
+        value: "OAX"
+      },
+      {
+        key: "Puebla",
+        value: "PUE"
+      },
+      {
+        key: "Queretaro de Arteaga",
+        value: "QRO"
+      },
+      {
+        key: "Quintana Roo",
+        value: "Q.R."
+      },
+      {
+        key: "San Luis Potosi",
+        value: "S.L.P."
+      },
+      {
+        key: "Sinaloa",
+        value: "SIN"
+      },
+      {
+        key: "Sonora",
+        value: "SON"
+      },
+      {
+        key: "Tabasco",
+        value: "TAB"
+      },
+      {
+        key: "Tamaulipas",
+        value: "TAMPS"
+      },
+      {
+        key: "Tlaxcala",
+        value: "TLAX"
+      },
+      {
+        key: "Veracruz-Llave",
+        value: "VER"
+      },
+      {
+        key: "Yucatan",
+        value: "YUC"
+      },
+      {
+        key: "Zacatecas",
+        value: "ZAC"
+      });
 
     console.log(dictionary);
 
-    dictionary.forEach(element=> {
-      if(element.key == this.leadActual.ESTADO) {
+    dictionary.forEach(element => {
+      if (element.key == this.leadActual.ESTADO) {
         this.leadActual.ESTADO = element.value;
         console.log(this.leadActual.ESTADO);
       }
@@ -450,36 +448,36 @@ export class LeadPage implements OnInit {
 
     this.chatService.msgListActualizada.subscribe(
       result => {
-        if(result.length===0){
+        if (result.length === 0) {
           this.msgListLead = result;
         }
-        if(result.length>1){
-          this.ngz.run(()=>{
+        if (result.length > 1) {
+          this.ngz.run(() => {
             this.msgListLead = result;
-            setTimeout(()=>{ this.scrollDown.bind(this)}, 5000);
+            setTimeout(() => { this.scrollDown.bind(this) }, 5000);
           });
-        } else{
+        } else {
           var temp = result[0];
-          if(temp){
-            if(temp.type === 'media'){
-              this.ngz.run(()=>{
-                setTimeout(()=>{ this.scrollDown.bind(this)}, 2500);
+          if (temp) {
+            if (temp.type === 'media') {
+              this.ngz.run(() => {
+                setTimeout(() => { this.scrollDown.bind(this) }, 2500);
               });
-            } else{
+            } else {
             }
           }
-          this.ngz.run(()=>{
+          this.ngz.run(() => {
             this.msgListLead = this.msgListLead.concat(result);
           });
 
         }
       }
-      
+
     )
 
     this.chatService.loadingMessagesActualizado.subscribe(
       result => {
-        this.ngz.run(()=>{});
+        this.ngz.run(() => { });
         this.loadingMessages = result;
       }
     );
@@ -524,17 +522,17 @@ export class LeadPage implements OnInit {
     public chatService: ChatServiceProvider,
     private streamingMedia: StreamingMedia,
     public storage: Storage,
-    public file:File,
+    public file: File,
     private fileOpener: FileOpener,
     private transfer: Transfer,
-    public ngz:NgZone,
+    public ngz: NgZone,
     public loadingCtrl: LoadingController
   ) {
     this.leadActual = navParams.data; // Obtenemos parametros de la página de LEADS
     if (this.leadActual.fechaContacto) {
       this.leadActual.fechaContacto = this.leadActual.fechaContacto.substring(0, 16)
-      .replace(/^(\d{4})-(\d{2})-(\d{2})T(\d{5})$/g, '$3/$2/$1$4');
-    }        
+        .replace(/^(\d{4})-(\d{2})-(\d{2})T(\d{5})$/g, '$3/$2/$1$4');
+    }
     if (this.leadActual.fechaContacto) {
       this.leadActual.fechaContacto = this.leadActual.fechaContacto
         .substring(0, 16)
@@ -563,13 +561,13 @@ export class LeadPage implements OnInit {
       this.leadActual.clave = this.leadActual.ID_LEAD;  // Por si llega el Lead por notificación.
     }
     console.log(this.leadActual.canalContacto)
-    if(this.leadActual.canalContacto == '' || this.leadActual.canalContacto == 'null' || this.leadActual.canalContacto == null){
+    if (this.leadActual.canalContacto == '' || this.leadActual.canalContacto == 'null' || this.leadActual.canalContacto == null) {
       this.leadActual.canalContacto = '-'
     }
-    if(this.leadActual.fechaContacto == '' || this.leadActual.fechaContacto == 'null' || this.leadActual.fechaContacto == null){
+    if (this.leadActual.fechaContacto == '' || this.leadActual.fechaContacto == 'null' || this.leadActual.fechaContacto == null) {
       this.leadActual.fechaContacto = ''
     }
-    if(this.leadActual.canalContacto == 'chat' || this.leadActual.canalContacto == 'llamada') {
+    if (this.leadActual.canalContacto == 'chat' || this.leadActual.canalContacto == 'llamada') {
       this.contacto = 'Sí';
     } else {
       this.contacto = 'No';
@@ -605,7 +603,7 @@ export class LeadPage implements OnInit {
     const url = 'https://koomkin.com.mx/calltracker/calling/';
 
     return new Promise(resolve => {
-      this.http.post(url,body.toString(), options).subscribe(data => {
+      this.http.post(url, body.toString(), options).subscribe(data => {
         console.log(data);
         resolve(data);
       }, err => {
@@ -694,7 +692,7 @@ export class LeadPage implements OnInit {
           // console.log(this.llamadas[k].CallStatus,this.llamadas[k].LlamadaLead);
           if (this.llamadas[k].CallStatus == 'failed' || this.llamadas[k].CallStatus == 'completed' && this.llamadas[k].exitosa == 0) {
             this.llamadas[k].CallStatus = 'perdida';
-          }          
+          }
           if (this.llamadas[k].CallStatus == 'inv-lead' || this.llamadas[k].CallStatus == 'inv-cliente') {
             this.llamadas[k].CallStatus = 'invalido';
           }
@@ -1266,20 +1264,20 @@ export class LeadPage implements OnInit {
     this.streamingMedia.stopAudio();
   }
 
-  chooseFile(){
+  chooseFile() {
 
     (async () => {
       const file = await (<any>window).chooser.getFile("");
       var formData = new FormData();
-      var blob = new Blob([file.data],{type: file.mediaType});
-      formData.append(file.name,blob,file.name);
-      this.chatService.tc.currentChannel.sendMessage( formData ).then(()=>{
-        this.chatService.tc.currentChannel.getMessages().then((messagesPaginator)=> {
-          const message = messagesPaginator.items[messagesPaginator.items.length-1];
+      var blob = new Blob([file.data], { type: file.mediaType });
+      formData.append(file.name, blob, file.name);
+      this.chatService.tc.currentChannel.sendMessage(formData).then(() => {
+        this.chatService.tc.currentChannel.getMessages().then((messagesPaginator) => {
+          const message = messagesPaginator.items[messagesPaginator.items.length - 1];
           if (message.type === 'media') {
             // console.log('Media attributes', message.media);
-            message.media.getContentUrl().then((url)=>{
-              this.http.post('https://koomkin.com.mx/call-tracking/api/twilio-media-message', { channelsid: this.chatService.tc.currentChannel.sid, url: url, mime: file.mediaType, filename: file.name})
+            message.media.getContentUrl().then((url) => {
+              this.http.post('https://koomkin.com.mx/call-tracking/api/twilio-media-message', { channelsid: this.chatService.tc.currentChannel.sid, url: url, mime: file.mediaType, filename: file.name })
                 .subscribe(data => {
                   //alert('enviado a whatsapp'+ JSON.stringify(data));
                 }, err => {
@@ -1292,24 +1290,24 @@ export class LeadPage implements OnInit {
     })();
   }
 
-  openFile(url,contentType){
+  openFile(url, contentType) {
     let loading = this.loadingCtrl.create({
       content: 'Cargando archivo multimedia...'
     });
 
-    loading.present().then(()=>{
+    loading.present().then(() => {
 
       // var filename= 'koomkinfile';
       // this.fileTransfers.download( resultUrl["changingThisBreaksApplicationSecurity"], this.file.dataDirectory + filename,true ).then((entry) => {
-      this.fileOpener.open( url['__zone_symbol__value'], contentType
+      this.fileOpener.open(url['__zone_symbol__value'], contentType
       ).then(() => {
         loading.dismiss();
         // console.log('then');
-      }).catch(e =>{
+      }).catch(e => {
         loading.dismiss();
       });
 
-    }).catch((err)=>{
+    }).catch((err) => {
       //loading.dismiss();
       //alert(err);
 
@@ -1367,7 +1365,7 @@ export class LeadPage implements OnInit {
 
     console.log(url);
     return new Promise((resolve, reject) => {
-      this.http.post(url,body.toString(), options).subscribe(
+      this.http.post(url, body.toString(), options).subscribe(
         data => {
           console.log(data);
         },
@@ -1385,7 +1383,7 @@ export class LeadPage implements OnInit {
       { enableBackdropDismiss: false, cssClass: "Modal-comentario" }
     );
     myModal.present();
-    myModal.onDidDismiss(() => {});
+    myModal.onDidDismiss(() => { });
   }
 
   public btnDeleteComentario(idComentario) {
@@ -1403,8 +1401,8 @@ export class LeadPage implements OnInit {
         this.deleteComentario(idComentario);
       }
     });
-  }  
-  
+  }
+
 
 }
 

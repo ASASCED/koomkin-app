@@ -66,11 +66,11 @@
                             </ion-col>
                             <ion-col col-1 style="text-align: right;" *ngIf="leadActual.url !== 'sinaudio'">
                                 <img src="assets/imgs/leads/audio.svg"
-                                    style="vertical-align: middle;width: 85% !important;display: inline-block;    margin-left: 15%;" />
+                                    style="vertical-align: middle;width: 95% !important;display: inline-block;    margin-left: 15%;" />
                             </ion-col>
                             <ion-col col-1 style="text-align: right;" *ngIf="leadActual.url == 'sinaudio'">
                                 <img src="assets/imgs/leads/sin-audio.svg"
-                                    style="vertical-align: middle;width: 85% !important;display: inline-block;    margin-left: 15%;" />
+                                    style="vertical-align: middle;width: 95% !important;display: inline-block;    margin-left: 15%;" />
                             </ion-col>
                             <ion-col col-1 *ngIf="leadActual.mensajesnoleidos > 0 && leadActual.mensajesnoleidos < 10">
                                 <p
@@ -104,26 +104,23 @@
                             </ion-col>
                         </ion-row>
                         <ion-row>
-                            <ion-col col-10>
-                                <div class="inf-estado">{{leadActual.ESTADO}}</div>
+                            <ion-col col-9>
+                                <div class="rate-fechal"><span class="inf-estado">{{leadActual.ESTADO}}</span>
+                                    {{leadActual.FECHA | date: 'dd/MM/yyyy HH:mm'}}</div>
+                                <div class="rate-valor">Valor del Lead: $2,000</div>
                             </ion-col>
-                            <ion-col col-2>
-                            </ion-col>
-                        </ion-row>
-                        <ion-row>
-                            <ion-col col-10>
-                                <div class="rate-fechal">{{leadActual.FECHA | date: 'dd/MM/yyyy HH:mm'}}</div>
-                            </ion-col>
-                            <ion-col col-2 style="display: inline-block">
+                            <ion-col col-3 align-items-end style="display: inline-block;text-align: right;">
                                 <ion-icon
-                                    style="margin-right: 2px !important;font-size: 2em !important;color: rgb(209, 209, 209)"
+                                    style="margin-right: 2px !important;font-size: 2.5em !important;color: rgb(209, 209, 209)"
                                     [ngClass]="{'like':leadActual.calificaLead === 'like','sin':leadActual.calificaLead === 'dislike'}"
                                     name="md-thumbs-up" (click)="changeLike('L',leadActual)"></ion-icon>
-                                <ion-icon style="font-size: 2em !important;color: rgb(209, 209, 209)"
+                                <ion-icon style="font-size: 2.5em !important;color: rgb(209, 209, 209);margin-right: 5%" 
                                     [ngClass]="{'like':leadActual.calificaLead === 'dislike','sin':leadActual.calificaLead === 'like'}"
                                     name="md-thumbs-down" (click)="changeLike('DL',leadActual)"></ion-icon>
                             </ion-col>
+
                         </ion-row>
+
                     </ion-card-content>
                 </ion-card>
                 <br>
@@ -328,8 +325,8 @@
                     <span class="titulo-azul">Historial de comentarios</span>
                 </ion-col>
                 <ion-col col-1>
-                        <img src="assets/imgs/lead/ic_plus.svg"
-                        style="vertical-align: middle;width: 70% !important;margin-left: 10%;" (click)="openModal()"/>
+                    <img src="assets/imgs/lead/ic_plus.svg"
+                        style="vertical-align: middle;width: 70% !important;margin-left: 10%;" (click)="openModal()" />
                 </ion-col>
             </ion-row>
             <ion-item class="tarjeta-comentario" *ngFor="let registro of comentarios; let i = index;"
@@ -338,16 +335,18 @@
                 <ion-row
                     style="display: flex !important; align-content: center !important; align-items: center !important;margin-top: 1%;">
                     <ion-col col-10>
-                        <p style="color:gray;margin-left: 5px;font-size: small;">{{registro.FechaRegistro | date: 'dd/MM/yyyy HH:mm'}}
+                        <p style="color:gray;margin-left: 5px;font-size: small;">
+                            {{registro.FechaRegistro | date: 'dd/MM/yyyy HH:mm'}}
                         </p>
                     </ion-col>
                     <ion-col col-1 style="text-align: center">
                         <img src="assets/imgs/lead/ic_comentario.svg"
-                            style="vertical-align: middle;width: 70% !important;margin-left: 10%;"/>
+                            style="vertical-align: middle;width: 70% !important;margin-left: 10%;" />
                     </ion-col>
                     <ion-col col-1 style="text-align: center">
                         <img src="assets/imgs/lead/ic_borrar.svg"
-                            style="vertical-align: middle;width: 70% !important;margin-left: 10%;" (click)="btnDeleteComentario(registro.IdComentario)"/>
+                            style="vertical-align: middle;width: 70% !important;margin-left: 10%;"
+                            (click)="btnDeleteComentario(registro.IdComentario)" />
                     </ion-col>
                 </ion-row>
                 <ion-row
