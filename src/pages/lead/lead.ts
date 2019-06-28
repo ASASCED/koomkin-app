@@ -144,6 +144,11 @@ export class LeadPage implements OnInit {
   public garantia = 'No';
   public diasContacto = '-';
   public comentarios;
+  public comentario;
+
+  public fechaComentario;
+  public idComentario;
+  public clasificaComentario;
 
   private autoScroller: MutationObserver;
 
@@ -308,10 +313,11 @@ export class LeadPage implements OnInit {
 
     var dictionary = [];
 
-    dictionary.push({
-      key: "Aguascalientes",
-      value: "AGS"
-    },
+    dictionary.push(
+      {
+        key: "Aguascalientes",
+        value: "AGS"
+      },
       {
         key: "Baja California",
         value: "B.C."
@@ -437,12 +443,9 @@ export class LeadPage implements OnInit {
         value: "ZAC"
       });
 
-    console.log(dictionary);
-
     dictionary.forEach(element => {
       if (element.key == this.leadActual.ESTADO) {
         this.leadActual.ESTADO = element.value;
-        console.log(this.leadActual.ESTADO);
       }
     });
 
@@ -496,7 +499,6 @@ export class LeadPage implements OnInit {
       this.chatPageExecutelogic()
     }
     if (this.chatService.chatClientStarted === true) {
-      console.log(this.leadActual.uuid);
       this.chatService.connectToChatChannel(this.leadActual.uuid);
     } else {
       setTimeout(() => {
@@ -528,7 +530,13 @@ export class LeadPage implements OnInit {
     public ngz: NgZone,
     public loadingCtrl: LoadingController
   ) {
-    this.leadActual = navParams.data; // Obtenemos parametros de la página de LEADS
+    // Obtenemos parametros de la página de LEADS
+    this.leadActual = navParams.data;
+    this.comentario = this.leadActual.comentario[0].Comentario;
+    this.fechaComentario = this.leadActual.comentario[0].FechaRegistro;
+    this.idComentario = this.leadActual.comentario[0].IdComentario;
+    this.clasificaComentario = this.leadActual.comentario[0].ClasificaLead;
+    console.log(this.comentario); 
     if (this.leadActual.fechaContacto) {
       this.leadActual.fechaContacto = this.leadActual.fechaContacto.substring(0, 16)
         .replace(/^(\d{4})-(\d{2})-(\d{2})T(\d{5})$/g, '$3/$2/$1$4');
@@ -560,7 +568,6 @@ export class LeadPage implements OnInit {
     if (!this.leadActual.clave) {
       this.leadActual.clave = this.leadActual.ID_LEAD;  // Por si llega el Lead por notificación.
     }
-    console.log(this.leadActual.canalContacto)
     if (this.leadActual.canalContacto == '' || this.leadActual.canalContacto == 'null' || this.leadActual.canalContacto == null) {
       this.leadActual.canalContacto = '-'
     }

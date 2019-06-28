@@ -51,7 +51,7 @@ export class LeadsPage implements OnInit {
   leads_pagination_min = 0;
   leads_pagination_max = 0;
   leads_download_available = true;
-
+  public comentario;
   apiUrl = "https://www.koomkin.com.mx/api/app";
 
   constructor(
@@ -136,7 +136,13 @@ export class LeadsPage implements OnInit {
           leadsArray[k].url = url;
         })
         .catch();
-      // // console.log(leadsArray[k]);
+
+        this.getUltimoComentario(leadsArray[k].clave)
+        .then(comentario => {
+          leadsArray[k].comentario = comentario;
+          
+        })
+        .catch();
 
       if (leadsArray[k].calificaLead == "True") {
         leadsArray[k].calificaLead = "like";
@@ -684,6 +690,21 @@ export class LeadsPage implements OnInit {
         // console.log(error);
       }
     );
+  }
+
+  getUltimoComentario(clave) {
+    return new Promise(resolve => {
+    this.provedor.getLastComment(clave).then(
+      data => {
+        let comentario = data;
+        this.comentario = comentario;
+        resolve(comentario);
+      },
+      err => {
+        // console.log('error');
+      }
+    )
+    });
   }
 
   public getUrlAudio(clave) {

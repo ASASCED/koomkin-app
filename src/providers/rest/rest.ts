@@ -732,6 +732,16 @@ export class RestProvider {
     });
   }
 
+  getLastComment(claveLead) {
+    return new Promise(resolve => {
+      this.http.get(this.apiUrl + '/getLastComment/' + claveLead).subscribe(data => {
+        resolve(data);
+      }, err => {
+         console.log(err);
+      });
+    });
+  }
+
   getComments(claveLead) {
     return new Promise(resolve => {
       this.http.get(this.apiUrl + '/getComments/' + claveLead).subscribe(data => {

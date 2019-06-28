@@ -1587,9 +1587,10 @@ db.executeGetComments = function (claveLead) {
         });
 };
 
-db.executeInsertComment = function (idUsuario,claveLead,comentario) {
+db.executeInsertComment = function (idUsuario,claveLead,comentario,clasificaLead,valorLead) {
 
-    const requestStr = `insert into LeadComentario (IdUsuario,ClaveLead,Comentario,FechaRegistro) values (${idUsuario},${claveLead},'${comentario}',getdate())`;
+    const requestStr = `insert into LeadComentario (IdUsuario,ClaveLead,Comentario,FechaRegistro,ClasificaLead) values (${idUsuario},${claveLead},'${comentario}',getdate(),'${clasificaLead}')
+    UPDATE TACotizacion SET ValorLead = ${valorLead} WHERE Clave = ${claveLead};`;
         
     return new Promise((resolve, reject) => {
         tp.sql(requestStr)

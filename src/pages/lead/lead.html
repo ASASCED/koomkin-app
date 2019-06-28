@@ -287,9 +287,12 @@
                             </ion-col>
                         </ion-row>
 
-                        <p class="razon" *ngIf="leadActual.clasificaLead === 'D'">
+                        <p class="razon">
                             Valor del lead
                         </p>
+
+                        <input class="input-comentario" type="number" name="valor">
+
                     </ion-col>
                 </ion-row>
 
@@ -298,23 +301,40 @@
 
                     </ion-col>
                     <ion-col col-10>
-                        <p class="califica">Comentarios</p>
+                        <p class="califica">Último Comentario</p>
                     </ion-col>
                     <ion-col col-1>
-                        <img src="assets/imgs/lead/ic_comentario.svg"
-                            style="vertical-align: middle;width: 60% !important;display: inline-block;" />
+
                     </ion-col>
                 </ion-row>
 
-                <ion-row class="comentarios">
-                    <ion-col col-11 class="comentario">
-                        'Quedamos en una segunda llamada, lo va a consultar con su esposa'
+                <ion-item class="tarjeta-comentario" [ngClass]="{'sold':clasificaComentario == 'Vendido','negotiation':clasificaComentario == 'Negociacion','track':clasificaComentario == 'Seguimiento' ,'discard':clasificaComentario== 'Descartado'}" style="border-bottom: 1px solid #dedede;">
+                <ion-row
+                    style="display: flex !important; align-content: center !important; align-items: center !important;margin-top: 1%;">
+                    <ion-col col-10>
+                        <p style="color:gray;margin-left: 5px;font-size: small;">
+                            {{fechaComentario | date: 'dd/MM/yyyy HH:mm'}}
+                        </p>
+                    </ion-col>
+                    <ion-col col-1 style="text-align: center">
+                        <img src="assets/imgs/lead/ic_comentario.svg"
+                            style="vertical-align: middle;width: 70% !important;margin-left: 10%;" />
                     </ion-col>
                     <ion-col col-1 style="text-align: center">
                         <img src="assets/imgs/lead/ic_borrar.svg"
-                            style="vertical-align: middle;width: 60% !important;margin-left: 10%;" />
+                            style="vertical-align: middle;width: 70% !important;margin-left: 10%;"
+                            (click)="btnDeleteComentario(idComentario)" />
                     </ion-col>
                 </ion-row>
+                <ion-row
+                    style="display: flex !important; align-content: center !important; align-items: center !important;margin-bottom: 2% !important;margin-left: 5px;">
+                    <ion-col col-10>
+                        <a style="color:#606060;font-size: small;">"{{comentario}}"</a>
+                    </ion-col>
+
+                </ion-row>
+            </ion-item>
+
             </ion-grid>
         </ion-list>
 
@@ -363,7 +383,7 @@
         <ion-list *ngSwitchCase="'Llamadas'">
             <ion-item>
                 <ion-row
-                    style="display: flex !important; align-content: center !important; align-items: center !important;margin-top:5%;margin-bottom:2%;">
+                    style="display: flex !important; align-content: center !important; align-items: center !important;margin-top:2%;margin-bottom:2%;">
                     <ion-col col-2 style="text-align: right;padding-right: 1% !important">
                         <p class="llamadas">Llamadas<br>Entrantes</p>
                     </ion-col>

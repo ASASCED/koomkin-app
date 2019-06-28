@@ -1586,7 +1586,6 @@ app.put('/registraDatosFiscales', function (req, res) {
 //POST methods
 
 //Genera el requerimiento del  ticket 
-
 app.post('/getRequirementTicket/', function (req, res) {
 
     const ticket = parseInt(req.body.ticket, 10);
@@ -1609,7 +1608,6 @@ app.post('/getRequirementTicket/', function (req, res) {
 });
 
 //Genera el requerimiento del  ticket 
-
 app.post('/getRequirementTicketOptimizacion/', function (req, res) {
 
     const ticket = parseInt(req.body.ticket, 10);
@@ -1632,7 +1630,6 @@ app.post('/getRequirementTicketOptimizacion/', function (req, res) {
 });
 
 //Genera el requerimiento del  ticket 
-
 app.post('/updateAgendaOptimizaciones/', function (req, res) {
 
     const idUsuario = parseInt(req.body.idUsuario, 10);
@@ -1712,14 +1709,19 @@ app.post('/passLogin', (req, res) => {
 });
 
 //Genera un comentario por lead
-
-app.post('/registerComment/:idUsuario/:claveLead/:comentario', function (req, res) {
+app.post('/registerComment/:idUsuario/:claveLead/:comentario/:clasificaLead/:valorLead?', function (req, res) {
 
     const idUsuario = parseInt(req.body.idUsuario, 10);
     const claveLead = parseInt(req.body.claveLead, 10);
     const comentario = req.body.comentario;
+    const clasificaLead = req.body.clasificaLead;
+    const valorLead = req.body.valorLead;
 
-    db.executeInsertComment(idUsuario,claveLead,comentario)
+    if(!valorLead){
+        valorLead = 'NULL';
+    }
+
+    db.executeInsertComment(idUsuario,claveLead,comentario,clasificaLead,valorLead)
         .then(rows => {
             res.json(rows).status(200).send();
         })
@@ -1729,7 +1731,6 @@ app.post('/registerComment/:idUsuario/:claveLead/:comentario', function (req, re
 });
 
 //Elimina un comentario por lead
-
 app.post('/editComment/:idComentario/:comentario', function (req, res) {
 
     const idComentario = parseInt(req.body.idComentario, 10);
@@ -1758,27 +1759,6 @@ app.post('/deleteComment/:idComentario', function (req, res) {
             res.status(500).json({ error: err }).send();
         });
 });
-
-//Registra los datos de la venta 
-
-app.post('/registerSale/:idUsuario/:claveLead/:caracteristicas/:monto/:recurrente', function (req, res) {
-
-    const idUsuario = parseInt(req.body.idUsuario, 10);
-    const claveLead = parseInt(req.body.claveLead, 10);
-    const caracteristicas = req.body.caracteristicas;
-    const monto = req.body.monto;
-    const recurrente = parseInt(req.body.recurrente, 10);
-
-
-    db.executeInsertSale(idUsuario,claveLead,caracteristicas,monto,recurrente)
-        .then(rows => {
-            res.json(rows).status(200).send();
-        })
-        .catch(err => {
-            res.status(500).json({ error: err }).send();
-        });
-});
-
 
 var facturaAPICrearUsuario = (json) => {
 
@@ -1840,7 +1820,6 @@ var facturaAPIUpdateUsuario = (uid, rows) => {
         request(options, callback);
     });
 };
-
 
 // catch 404 and forward to error handler
 app.use(function (req, res) {
