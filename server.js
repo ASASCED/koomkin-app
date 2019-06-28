@@ -45,7 +45,7 @@ app.get('/upcoming', (req, res) => {
 
 app.get('/getDiasRestantes/:id', function (req, res) {
 
-    var id = parseInt(req.params.id, 10);
+    const id = parseInt(req.params.id, 10);
     const command = 'SP_DIAS_RESTANTES_CAMP';
 
     db.executeGetById(id, command, function (err, rows) {
@@ -60,7 +60,7 @@ app.get('/getDiasRestantes/:id', function (req, res) {
 
 app.get('/getUrlAudio/:id', function (req, res) {
 
-    var id = parseInt(req.params.id, 10);
+    const id = parseInt(req.params.id, 10);
     const command = 'SP_GetUrlAudio';
 
     db.executeGetById(id, command, function (err, rows) {
@@ -100,7 +100,7 @@ app.get('/getInfoPago/:uuid', function (req, res) {
 
 app.get('/getLeadCalls/:id', function (req, res) {
 
-    var id = parseInt(req.params.id, 10);
+    const id = parseInt(req.params.id, 10);
     const command = 'SP_GetLeadCalls';
 
     db.executeGetById(id, command, function (err, rows) {
@@ -114,7 +114,7 @@ app.get('/getLeadCalls/:id', function (req, res) {
 
 app.get('/getCountLeadCalls/:id', function (req, res) {
 
-    var id = parseInt(req.params.id, 10);
+    const id = parseInt(req.params.id, 10);
     const command = 'SP_CountLeadCalls';
 
     db.executeGetById(id, command, function (err, rows) {
@@ -130,7 +130,7 @@ app.get('/getCountLeadCalls/:id', function (req, res) {
 
 app.get('/getSurvey/:id', function (req, res) {
 
-    var id = parseInt(req.params.id, 10);
+    const id = parseInt(req.params.id, 10);
     const command = 'SP_getSurvey';
 
     db.executeGetById(id, command, function (err, rows) {
@@ -147,7 +147,7 @@ app.get('/getSurvey/:id', function (req, res) {
 
 app.get('/getMailCliente/:id', function (req, res) {
 
-    var id = parseInt(req.params.id, 10);
+    const id = parseInt(req.params.id, 10);
 
     db.executeGetMailCliente(id)
         .then(rows => {
@@ -183,8 +183,8 @@ app.get('/getTicket/:id/:fecha/:descripcion', function (req, res) {
 
 app.get('/datosFiscales', function (req, res) {
 
-    const id = req.query.id
-    const command = 'SP_GetDatosFiscalesByUserId'
+    const id = req.query.id;
+    const command = 'SP_GetDatosFiscalesByUserId';
 
     db.executeSPById(command, id)
         .then(rows => {
@@ -200,8 +200,8 @@ app.get('/datosFiscales', function (req, res) {
 
 app.get('/datosPagos', function (req, res) {
 
-    const id = req.query.id
-    const command = 'SP_GetPagosByUserId'
+    const id = req.query.id;
+    const command = 'SP_GetPagosByUserId';
 
     db.executeSPById(command, id)
         .then(rows => {
@@ -216,8 +216,10 @@ app.get('/datosPagos', function (req, res) {
 });
 
 app.get('/getObtieneContactoCte/:id', function (req, res) {
-    var id = parseInt(req.params.id, 10);
-    var command = 'SP_ObtieneContactoSexCte';
+    
+    const id = parseInt(req.params.id, 10);
+    const command = 'SP_ObtieneContactoSexCte';
+    
     db.executeGetById(id, command, function (err, rows) {
         if (err) {
             res.status(500).json({ error: err }).send();
@@ -228,9 +230,10 @@ app.get('/getObtieneContactoCte/:id', function (req, res) {
 });
 
 app.get('/getLead30Dias/:id', function (req, res) {
-    var id = parseInt(req.params.id, 10);
-    var command = 'SP_GetLead30Dias';
-    //console.log("command", command);
+    
+    const id = parseInt(req.params.id, 10);
+    const command = 'SP_GetLead30Dias';
+
     db.executeGetById(id, command, function (err, rows) {
         if (err) {
             res.status(500).json({ error: err }).send();
@@ -241,9 +244,10 @@ app.get('/getLead30Dias/:id', function (req, res) {
 });
 
 app.get('/getLike90Dias/:id', function (req, res) {
-    var id = parseInt(req.params.id, 10);
-    var command = 'SP_GetLike90Dias';
-    //console.log("command", command);
+    
+    const id = parseInt(req.params.id, 10);
+    const command = 'SP_GetLike90Dias';
+
     db.executeGetById(id, command, function (err, rows) {
         if (err) {
             res.status(500).json({ error: err }).send();
@@ -254,8 +258,10 @@ app.get('/getLike90Dias/:id', function (req, res) {
 });
 
 app.get('/getLead12Meses/:id', function (req, res) {
-    var id = parseInt(req.params.id, 10);
-    var command = 'SP_GetLead12Meses';
+    
+    const id = parseInt(req.params.id, 10);
+    const command = 'SP_GetLead12Meses';
+
     db.executeGetById(id, command, function (err, rows) {
         if (err) {
             res.status(500).json({ error: err }).send();
@@ -266,8 +272,10 @@ app.get('/getLead12Meses/:id', function (req, res) {
 });
 
 app.get('/getLeadLastMonth/:id', function (req, res) {
-    var id = parseInt(req.params.id, 10);
-    var command = 'SP_GetLeadLastMonth';
+    
+    const id = parseInt(req.params.id, 10);
+    const command = 'SP_GetLeadLastMonth';
+    
     db.executeGetById(id, command, function (err, rows) {
         if (err) {
             res.status(500).json({ error: err }).send();
@@ -278,9 +286,10 @@ app.get('/getLeadLastMonth/:id', function (req, res) {
 });
 
 app.get('/getLike30Dias/:id', function (req, res) {
-    var id = parseInt(req.params.id, 10);
-    console.log("id", id);
-    var command = 'SP_GetLike30Dias';
+
+    const id = parseInt(req.params.id, 10);
+    const command = 'SP_GetLike30Dias';
+
     db.executeGetById(id, command, function (err, rows) {
         if (err) {
             res.status(500).json({ error: err }).send();
@@ -291,8 +300,10 @@ app.get('/getLike30Dias/:id', function (req, res) {
 });
 
 app.get('/getLeadsMapa/:id', function (req, res) {
-    var id = parseInt(req.params.id, 10);
-    var command = 'SP_GetLeadsMapa';
+    
+    const id = parseInt(req.params.id, 10);
+    const command = 'SP_GetLeadsMapa';
+
     db.executeGetById(id, command, function (err, rows) {
         if (err) {
             res.status(500).json({ error: err }).send();
@@ -303,8 +314,10 @@ app.get('/getLeadsMapa/:id', function (req, res) {
 });
 
 app.get('/getLeadCountMonth/:id', function (req, res) {
-    var id = parseInt(req.params.id, 10);
-    var command = 'SP_GetLeadCountMonth';
+    
+    const id = parseInt(req.params.id, 10);
+    const command = 'SP_GetLeadCountMonth';
+
     db.executeGetById(id, command, function (err, rows) {
         if (err) {
             res.status(500).json({ error: err }).send();
@@ -316,8 +329,8 @@ app.get('/getLeadCountMonth/:id', function (req, res) {
 
 app.get('/getCostoCampania/:id', function (req, res) {
 
-    var id = parseInt(req.params.id, 10);
-    var command = 'SP_GetCostoCampania'
+    const id = parseInt(req.params.id, 10);
+    const command = 'SP_GetCostoCampania'
 
     db.executeGetById(id, command, function (err, rows) {
         if (err) {
@@ -329,8 +342,10 @@ app.get('/getCostoCampania/:id', function (req, res) {
 });
 
 app.get('/getLeadById/:id', function (req, res) {
-    var id = parseInt(req.params.id, 10);
-    var command = 'SP_GetLeadById';
+    
+    const id = parseInt(req.params.id, 10);
+    const command = 'SP_GetLeadById';
+    
     db.executeGetById(id, command, function (err, rows) {
         if (err) {
             res.status(500).json({ error: err }).send();
@@ -342,8 +357,10 @@ app.get('/getLeadById/:id', function (req, res) {
 
 
 app.get('/getObtieneContactoSexCte/:id', function (req, res) {
-    var id = parseInt(req.params.id, 10);
-    var command = 'SP_ObtieneContactoSexCte';
+    
+    const id = parseInt(req.params.id, 10);
+    const command = 'SP_ObtieneContactoSexCte';
+
     db.executeGetById(id, command, function (err, rows) {
         if (err) {
             res.status(500).json({ error: err }).send();
@@ -354,9 +371,10 @@ app.get('/getObtieneContactoSexCte/:id', function (req, res) {
 });
 
 app.get('/getReporteWeb', function (req, res) {
-    var id = parseInt(req.query.param1, 10);
-    console.log(id);
-    var command = 'SP_GetReporteWeb';
+    
+    const id = parseInt(req.query.param1, 10);
+    const command = 'SP_GetReporteWeb';
+    
     db.executeGetById(id, command, function (err, rows) {
         if (err) {
             res.status(500).json({ error: err }).send();
@@ -367,8 +385,10 @@ app.get('/getReporteWeb', function (req, res) {
 });
 
 app.get('/getUserById/:id', function (req, res) {
-    var id = parseInt(req.params.id, 10);
-    var command = 'SP_GetUsuarioById';
+    
+    const id = parseInt(req.params.id, 10);
+    const command = 'SP_GetUsuarioById';
+
     db.executeGetById(id, command, function (err, rows) {
         if (err) {
             res.status(500).json({ error: err }).send();
@@ -379,8 +399,9 @@ app.get('/getUserById/:id', function (req, res) {
 });
 
 app.get('/getUserByEmail/:email', function (req, res) {
-    var email = "'" + req.params.email + "'";
-    var command = 'SP_GetUsuarioByEmail';
+    
+    const email = "'" + req.params.email + "'";
+    const command = 'SP_GetUsuarioByEmail';
     dogstatsd.increment('login.reporte')
 
     db.executeGetById(email, command, function (err, rows) {
@@ -394,7 +415,7 @@ app.get('/getUserByEmail/:email', function (req, res) {
 
 app.get('/getLeadsAgregados/:id', function (req, res) {
 
-    var id = parseInt(req.params.id, 10);
+    const id = parseInt(req.params.id, 10);
 
     db.executeGetLeadsAgregados(id)
     .then(rows => {
@@ -407,13 +428,13 @@ app.get('/getLeadsAgregados/:id', function (req, res) {
 
 app.get('/getLeadsReport/:id/:finicio/:ffin/:filtro', function (req, res) {
 
-    var urlArray = req.url.split('/');
-    var id = urlArray[2];
-    var finicio = "'" + urlArray[3] + "'";
-    var ffin = "'" + urlArray[4] + "'";
-    var filtroTemp = urlArray[5];
-    var filtro = filtroTemp.split('_').join(' ');
-    var command = 'SP_RPT_Leads2';
+    const urlArray = req.url.split('/');
+    const id = urlArray[2];
+    const finicio = "'" + urlArray[3] + "'";
+    const ffin = "'" + urlArray[4] + "'";
+    const filtroTemp = urlArray[5];
+    const filtro = filtroTemp.split('_').join(' ');
+    const command = 'SP_RPT_Leads2';
 
     db.executeGetSpByDate(id, finicio, ffin, filtro, command, function (err, rows) {
         if (err) {
@@ -565,6 +586,7 @@ app.get('/leerLead/:leadId/:userId', function (req, res) {
 });
 
 app.get('/getIntentoSesion/:email/:password', function (req, res) {
+    
     const email = req.params.email;
     const password = req.params.password;
     console.log(email,password);
@@ -612,13 +634,14 @@ app.get('/getIntentoSesion/:email/:password', function (req, res) {
 });
 
 app.get('/getAccesoReporte/:id/:acceso/:dispositivo/:sistema/:idioma', function (req, res) {
+    
     const id = req.params.id;
     const acceso = req.params.acceso;
     const dispositivo = req.params.dispositivo;
     const sistema = req.params.sistema;
     const idioma = req.params.idioma;
+    const command = 'SP_AccesoReporte';
 
-    var command = 'SP_AccesoReporte';
     db.executeAccesoReporte(command, id, acceso, dispositivo, sistema, idioma)
         .then(rows => {
             res.json(rows).status(200).send();
@@ -629,12 +652,13 @@ app.get('/getAccesoReporte/:id/:acceso/:dispositivo/:sistema/:idioma', function 
 });
 
 app.get('/getLoginReporte/:id/:acceso/:dispositivo/:sistema', function (req, res) {
+    
     const id = req.params.id;
     const acceso = req.params.acceso;
     const dispositivo = req.params.dispositivo;
     const sistema = req.params.sistema;
+    const command = 'SP_LoginReporte';
 
-    var command = 'SP_LoginReporte';
     db.executeLoginReporte(command, id, acceso, dispositivo, sistema)
         .then(rows => {
             res.json(rows).status(200).send();
@@ -645,10 +669,10 @@ app.get('/getLoginReporte/:id/:acceso/:dispositivo/:sistema', function (req, res
 });
 
 app.get('/getInsertClickPagina/:usuario/:pagina/:acceso', function (req, res) {
+    
     const usuario = req.params.usuario;
     const pagina = req.params.pagina;
     const acceso = req.params.acceso;
-
     const command = 'SP_InsertClickPagina';
 
     db.executeInsertaRegistro(command, usuario, pagina, acceso)
@@ -661,10 +685,10 @@ app.get('/getInsertClickPagina/:usuario/:pagina/:acceso', function (req, res) {
 });
 
 app.get('/getInsertClickFiltro/:usuario/:pagina/:acceso', function (req, res) {
+    
     const usuario = req.params.usuario;
     const pagina = req.params.pagina;
     const acceso = req.params.acceso;
-
     const command = 'SP_InsertClickFiltro';
 
     db.executeInsertaRegistro(command, usuario, pagina, acceso)
@@ -691,6 +715,7 @@ app.get('/getLeadComplement/:clave', function (req, res) {
 });
 
 app.get('/getInsertClickLead/:usuario/:id/:acceso', function (req, res) {
+    
     const usuario = req.params.usuario;
     const id = req.params.id;
     const acceso = req.params.acceso;
@@ -706,6 +731,7 @@ app.get('/getInsertClickLead/:usuario/:id/:acceso', function (req, res) {
 });
 
 app.get('/getInsertClickLlamar/:usuario/:id/:acceso/:dispositivo', function (req, res) {
+    
     const usuario = req.params.usuario;
     const id = req.params.id;
     const acceso = req.params.acceso;
@@ -722,6 +748,7 @@ app.get('/getInsertClickLlamar/:usuario/:id/:acceso/:dispositivo', function (req
 });
 
 app.get('/getInsertClickChat/:usuario/:id/:acceso/:dispositivo/:metodo', function (req, res) {
+    
     const usuario = req.params.usuario;
     const id = req.params.id;
     const acceso = req.params.acceso;
@@ -1168,7 +1195,6 @@ app.get('/getEficiency/:idUsuario', function (req, res) {
 
     const id = parseInt(req.params.idUsuario, 10);
 
-
     db.executeGetEficiency(id)
          .then(rows => {
             res.json(rows).status(200).send();
@@ -1205,7 +1231,6 @@ app.get('/getEficiencyRanking', function (req, res) {
 app.get('/getWordsType/:cuartaPantalla', function (req, res) {
 
     const idTipo = parseInt(req.params.cuartaPantalla, 10);
-
 
     db.executeGetWordsType(idTipo)
          .then(rows => {
@@ -1262,7 +1287,6 @@ app.get('/getTips/:idtip1/:idtip2/:idtip3' , function (req, res) {
     const tip1 = parseInt(req.params.idtip1, 10);
     const tip2 = parseInt(req.params.idtip2, 10);
     const tip3 = parseInt(req.params.idtip3, 10);
-
 
     db.executeGetTips(tip1,tip2,tip3)
          .then(rows => {
@@ -1636,8 +1660,6 @@ app.post('/updateAgendaOptimizaciones/', function (req, res) {
     const idTicket = parseInt(req.body.idTicket, 10);
     const estatusOptimizacion = req.body.estatusOptimizacion;
 
-    console.log(idUsuario,idTicket,estatusOptimizacion);
-
     db.executeUpdateAgenda(idUsuario,idTicket,estatusOptimizacion)
         .then(rows => {
             res.json(rows).status(200).send();
@@ -1651,8 +1673,8 @@ app.post('/updateAgendaOptimizaciones/', function (req, res) {
 app.post('/registerDeviceId/:idUsuario/:idDevice', function (req, res) {
 
     console.log("Registrando DeviceID");
-    var idDevice = req.params.idDevice;
-    var idUser = req.params.idUsuario;
+    const idDevice = req.params.idDevice;
+    const idUser = req.params.idUsuario;
 
     db.PostRegisterDeviceId(idUser, idDevice, function (err, rows) {
         if (err) {
@@ -1668,9 +1690,9 @@ app.post('/registerDeviceId/:idUsuario/:idDevice/:platform', function (req, res)
 
     console.log("Registrando DeviceID2");
 
-    var idDevice = req.params.idDevice;
-    var idUser = req.params.idUsuario;
-    var platform = req.params.platform;
+    const idDevice = req.params.idDevice;
+    const idUser = req.params.idUsuario;
+    const platform = req.params.platform;
 
     db.PostRegisterDeviceId2(idUser, idDevice, platform, function (err, rows) {
         if (err) {
@@ -1691,10 +1713,11 @@ app.post('/registerDeviceId/:idUsuario/:idDevice/:platform', function (req, res)
 });
 
 app.post('/passLogin', (req, res) => {
+    
     const body = req.body;
     const id = parseInt(body.id);
     const command = 'SP_GetUsuarioById';
-    console.log(id, command)
+
     if (body.key === KOOMKIN_KEY) {
       db.executeSPById(command, id)
         .then(rows => {
@@ -1709,13 +1732,13 @@ app.post('/passLogin', (req, res) => {
 });
 
 //Genera un comentario por lead
-app.post('/registerComment/:idUsuario/:claveLead/:comentario/:clasificaLead/:valorLead?', function (req, res) {
+app.post('/registerComment/', function (req, res) {
 
     const idUsuario = parseInt(req.body.idUsuario, 10);
     const claveLead = parseInt(req.body.claveLead, 10);
     const comentario = req.body.comentario;
     const clasificaLead = req.body.clasificaLead;
-    const valorLead = req.body.valorLead;
+    let valorLead = req.body.valorLead;
 
     if(!valorLead){
         valorLead = 'NULL';
@@ -1731,7 +1754,7 @@ app.post('/registerComment/:idUsuario/:claveLead/:comentario/:clasificaLead/:val
 });
 
 //Elimina un comentario por lead
-app.post('/editComment/:idComentario/:comentario', function (req, res) {
+app.post('/editComment/', function (req, res) {
 
     const idComentario = parseInt(req.body.idComentario, 10);
     const comentario = req.body.comentario;
@@ -1747,7 +1770,7 @@ app.post('/editComment/:idComentario/:comentario', function (req, res) {
 
 //Elimina un comentario por lead
 
-app.post('/deleteComment/:idComentario', function (req, res) {
+app.post('/deleteComment/', function (req, res) {
 
     const idComentario = parseInt(req.body.idComentario, 10);
 
