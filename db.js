@@ -1555,8 +1555,11 @@ db.executeGetReasons = function () {
 
 db.executeInsertReason = function (claveLead,valorLead,razonDescarto) {
 
+
     const requestStr = `UPDATE TACotizacion SET ValorLead = ${valorLead}, RazonDescartado = ${razonDescarto} WHERE Clave = ${claveLead};`;
         
+    console.log(requestStr);
+    
     return new Promise((resolve, reject) => {
         tp.sql(requestStr)
             .execute()

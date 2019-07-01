@@ -87,9 +87,9 @@ export class ModalComentariosPage implements OnInit{
   discart() {
 
     const body = new URLSearchParams();
-    body.set('claveLead', this.leadActual.clave);
+    body.set('claveLead', 'this.leadActual.clave');
     body.set('valorLead', this.valorLead);
-    body.set('razonDescarto', this.razonDescarto);
+    body.set('razonDescarto', 'this.razonDescarto');
 
     const options = {
       headers: new HttpHeaders().set(
@@ -98,7 +98,7 @@ export class ModalComentariosPage implements OnInit{
       )
     };
 
-    console.log(body);
+    console.log(body.toString());
 
     const url = 'https://www.koomkin.com.mx/api/app/registerReason/';
     return new Promise((resolve, reject) => {
