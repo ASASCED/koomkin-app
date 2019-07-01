@@ -44,7 +44,7 @@ export class LeadPage implements OnInit {
   public noleidos;
   public complemento;
   public mensaje;
-
+  public mensajeLead;
   public mensajeMailing;
   public urgencia = 'No';
   public cantidad;
@@ -109,8 +109,8 @@ export class LeadPage implements OnInit {
   public personasinmobiliaria;
   public horaCitainmobiliaria;
   public fechaCitainmobiliaria;
+  
   //
-
   public fechaCita;
   public horaCita;
   public genero;
@@ -118,8 +118,8 @@ export class LeadPage implements OnInit {
   public envio;
   public unidades;
   public datosenvio;
-
   public clientUUID = this.authService.getClientUUID();
+  
   //Estatus llamadas
   llamadas: any = [];
   public llamada;
@@ -135,8 +135,7 @@ export class LeadPage implements OnInit {
   isAndroid: boolean = false;
   public tc: any;
   public loadingMessages: boolean;
-
-  public intentos:any = '-';
+  public intentosExitoso:any = '-';
   public attentionSpeed:any = '-';
   public contacto:any = '-';
   public razones;
@@ -145,10 +144,13 @@ export class LeadPage implements OnInit {
   public diasContacto = '-';
   public comentarios;
   public comentario;
-
+  public show = false;
   public fechaComentario;
   public idComentario;
   public clasificaComentario;
+  public valorLead;
+  public fecha;
+  public fechaExitoso;
 
   private autoScroller: MutationObserver;
 
@@ -311,144 +313,6 @@ export class LeadPage implements OnInit {
 
   ngOnInit() {
 
-    var dictionary = [];
-
-    dictionary.push(
-      {
-        key: "Aguascalientes",
-        value: "AGS"
-      },
-      {
-        key: "Baja California",
-        value: "B.C."
-      },
-      {
-        key: "Baja California Sur",
-        value: "B.C.S."
-      },
-      {
-        key: "Campeche",
-        value: "CAMP"
-      },
-      {
-        key: "Chiapas",
-        value: "CHIS"
-      },
-      {
-        key: "Chihuahua",
-        value: "CHIH"
-      },
-      {
-        key: "Ciudad de México",
-        value: "CDMX"
-      },
-      {
-        key: "Coahuila de Zaragoza",
-        value: "COAH"
-      },
-      {
-        key: "Colima",
-        value: "COL"
-      },
-      {
-        key: "Durango",
-        value: "DGO"
-      },
-      {
-        key: "Guanajuato",
-        value: "GTO"
-      },
-      {
-        key: "Guerrero",
-        value: "GRO"
-      },
-      {
-        key: "Hidalgo",
-        value: "HGO"
-      },
-      {
-        key: "Jalisco",
-        value: "JAL"
-      },
-      {
-        key: "Mexico",
-        value: "MEX"
-      },
-      {
-        key: "Michoacan de Ocampo",
-        value: "MICH"
-      },
-      {
-        key: "Morelos",
-        value: "MOR"
-      },
-      {
-        key: "Nayarit",
-        value: "NAY"
-      },
-      {
-        key: "Nuevo Leon",
-        value: "N.L."
-      },
-      {
-        key: "Oaxaca",
-        value: "OAX"
-      },
-      {
-        key: "Puebla",
-        value: "PUE"
-      },
-      {
-        key: "Queretaro de Arteaga",
-        value: "QRO"
-      },
-      {
-        key: "Quintana Roo",
-        value: "Q.R."
-      },
-      {
-        key: "San Luis Potosi",
-        value: "S.L.P."
-      },
-      {
-        key: "Sinaloa",
-        value: "SIN"
-      },
-      {
-        key: "Sonora",
-        value: "SON"
-      },
-      {
-        key: "Tabasco",
-        value: "TAB"
-      },
-      {
-        key: "Tamaulipas",
-        value: "TAMPS"
-      },
-      {
-        key: "Tlaxcala",
-        value: "TLAX"
-      },
-      {
-        key: "Veracruz-Llave",
-        value: "VER"
-      },
-      {
-        key: "Yucatan",
-        value: "YUC"
-      },
-      {
-        key: "Zacatecas",
-        value: "ZAC"
-      });
-
-    dictionary.forEach(element => {
-      if (element.key == this.leadActual.ESTADO) {
-        this.leadActual.ESTADO = element.value;
-      }
-    });
-
     this.chatService.msgListActualizada.subscribe(
       result => {
         if (result.length === 0) {
@@ -530,13 +394,40 @@ export class LeadPage implements OnInit {
     public ngz: NgZone,
     public loadingCtrl: LoadingController
   ) {
+    var f = new Date();
+    this.fecha = f.getDate() + '/' + (f.getMonth() + 1) + '/' + f.getFullYear();
+    let fecha2 = f.getFullYear() + '-' +  ('0' + (f.getMonth()+1)).slice(-2) + '-' + f.getDate();
+
     // Obtenemos parametros de la página de LEADS
     this.leadActual = navParams.data;
-    this.comentario = this.leadActual.comentario[0].Comentario;
-    this.fechaComentario = this.leadActual.comentario[0].FechaRegistro;
-    this.idComentario = this.leadActual.comentario[0].IdComentario;
-    this.clasificaComentario = this.leadActual.comentario[0].ClasificaLead;
-    console.log(this.comentario); 
+    this.razonDescarto = this.leadActual.RazonDescartado;
+    this.mensajeLead = this.leadActual.MENSAJE;
+    this.valorLead = this.leadActual.ValorLead;
+    this.intentosExitoso = this.leadActual.IntentosAntesExitoso;
+    if(this.intentosExitoso == null || this.intentosExitoso == 'null') {
+      this.intentosExitoso = '-';
+    }
+
+    this.fechaExitoso = this.leadActual.FechaExitoso;
+
+    if( this.fechaExitoso != null && this.fechaExitoso != 'null') {
+
+      this.diasContacto = distanceinWordsStrict(
+        new Date(this.fechaExitoso.substring(0,10)),
+        new Date(fecha2),
+        { locale: esLocale, addSuffix: false }
+      );
+
+    }
+    
+    if(this.leadActual.comentario.hasOwnProperty('IdComentario')) {
+      this.show = true;
+      this.comentario = this.leadActual.comentario[0].Comentario;
+      this.fechaComentario = this.leadActual.comentario[0].FechaRegistro;
+      this.idComentario = this.leadActual.comentario[0].IdComentario;
+      this.clasificaComentario = this.leadActual.comentario[0].ClasificaLead;
+    }
+    
     if (this.leadActual.fechaContacto) {
       this.leadActual.fechaContacto = this.leadActual.fechaContacto.substring(0, 16)
         .replace(/^(\d{4})-(\d{2})-(\d{2})T(\d{5})$/g, '$3/$2/$1$4');
@@ -713,9 +604,8 @@ export class LeadPage implements OnInit {
           }
           this.llamadas[k].horallamada = this.llamadas[k].FechaLlamada.substring(11, 16);
           this.llamadas[k].FechaLlamada = this.llamadas[k].FechaLlamada.substring(0, 10).replace(/^(\d{4})-(\d{2})-(\d{2})$/g, '$3/$2/$1');
-          var f = new Date();
-          var fecha = f.getDate() + '/' + (f.getMonth() + 1) + '/' + f.getFullYear();
-          if (this.llamadas[k].FechaLlamada == fecha) {
+
+          if (this.llamadas[k].FechaLlamada == this.fecha) {
             this.llamadas[k].FechaLlamada = 'Hoy';
           }
         }
@@ -779,7 +669,8 @@ export class LeadPage implements OnInit {
             switch (this.categoria) {
               case 1:
                 if ((data[0] === null)) {
-                  this.mensajeproveedor = this.leadActual.MENSAJE;
+                  // this.mensajeproveedor = this.leadActual.MENSAJE;
+                  this.mensaje = this.leadActual.MENSAJE;
                   this.urgencia = "No";
                   this.cantidadproveedor = "";
                   this.frecuenciaproveedor = "";
@@ -793,12 +684,17 @@ export class LeadPage implements OnInit {
                     if (this.urgencia == "0" || this.urgencia == "null" || this.urgencia == "None" || this.urgencia == undefined) {
                       this.urgencia = "No";
                     }
-                    this.mensajeproveedor = data[0].Details;
+                    /*this.mensajeproveedor = data[0].Details;
                     if (this.mensajeproveedor == "Escribe aquí..." || this.mensajeproveedor == "" ||
                       this.mensajeproveedor == null || this.mensajeproveedor == undefined || this.mensajeproveedor == "null" || this.mensajeproveedor == "None") {
                       this.mensajeproveedor = this.leadActual.MENSAJE;
-                    }
+                    }*/
 
+                    this.mensaje = data[0].Details;
+                    if (this.mensaje == "Escribe aquí..." || this.mensaje == "" ||
+                      this.mensaje == null || this.mensaje == undefined || this.mensaje == "null" || this.mensaje == "None") {
+                      this.mensaje = this.leadActual.MENSAJE;
+                    }
                     this.cantidadproveedor = data[0].Quantity;
                     if (this.cantidadproveedor == "0" || this.cantidadproveedor == "null" || this.cantidadproveedor == null || this.cantidadproveedor == "None" || this.cantidadproveedor == undefined) {
                       this.cantidadproveedor = "";
@@ -829,7 +725,8 @@ export class LeadPage implements OnInit {
                 }
               case 2:
                 if (data[0] === null) {
-                  this.mensajeservicio = this.leadActual.MENSAJE;
+                  // this.mensajeservicio = this.leadActual.MENSAJE;
+                  this.mensaje = this.leadActual.MENSAJE;
                   this.urgencia = "No";
                   this.frecuenciaservicio = "";
                   this.usoservicio = "";
@@ -839,10 +736,16 @@ export class LeadPage implements OnInit {
                     if (this.urgencia == "0" || this.urgencia == "null" || this.urgencia == undefined || this.urgencia == null || this.urgencia == "None") {
                       this.urgencia = "No";
                     }
-                    this.mensajeservicio = data[0].Details;
+                    /*this.mensajeservicio = data[0].Details;
                     if (this.mensajeservicio == "Escribe aquí..." || this.mensajeservicio == "" ||
                       this.mensajeservicio == null || this.mensajeservicio == "null" || this.mensajeservicio == undefined || this.mensajeservicio == null || this.mensaje == "None") {
                       this.mensajeservicio = this.leadActual.MENSAJE;
+                    }*/
+
+                    this.mensaje = data[0].Details;
+                    if (this.mensaje == "Escribe aquí..." || this.mensaje == "" ||
+                      this.mensaje == null || this.mensaje == undefined || this.mensaje == "null" || this.mensaje == "None") {
+                      this.mensaje = this.leadActual.MENSAJE;
                     }
                     this.usoservicio = data[0].Usage;
                     if (this.usoservicio == "null" || this.usoservicio == null || this.usoservicio == undefined || this.usoservicio == "None") {
@@ -862,7 +765,8 @@ export class LeadPage implements OnInit {
                 return;
               case 3:
                 if (data[0] === null) {
-                  this.mensajemedico = this.leadActual.MENSAJE;
+                  // this.mensajemedico = this.leadActual.MENSAJE;
+                  this.mensaje = this.leadActual.MENSAJE;
                   this.urgencia = "No";
                   this.generoM = "";
                   this.fechaCitaM = "";
@@ -870,7 +774,7 @@ export class LeadPage implements OnInit {
                   this.edadM = "";
                 } else {
                   if (data) {
-                    if (data[0].Details) {
+                    /*if (data[0].Details) {
                       this.mensajemedico = data[0].Details;
                       if (this.mensajemedico == "Escribe aquí..." || this.mensajemedico == "" || this.mensajemedico == null || this.mensajemedico == undefined || this.mensajemedico == "null" || this.mensajemedico ==
                         "None") {
@@ -878,6 +782,12 @@ export class LeadPage implements OnInit {
                       }
                     } else {
                       this.mensajemedico = this.leadActual.MENSAJE;
+                    }*/
+
+                    this.mensaje = data[0].Details;
+                    if (this.mensaje == "Escribe aquí..." || this.mensaje == "" ||
+                      this.mensaje == null || this.mensaje == undefined || this.mensaje == "null" || this.mensaje == "None") {
+                      this.mensaje = this.leadActual.MENSAJE;
                     }
                     this.urgencia = data[0].Urgency;
                     if (this.urgencia == "0" || this.urgencia == undefined || this.urgencia == "null" || this.urgencia == "None") {
@@ -916,7 +826,8 @@ export class LeadPage implements OnInit {
                 }
               case 4:
                 if (data[0] === null) {
-                  this.mensajeprofesionista = this.leadActual.MENSAJE;
+                  // this.mensajeprofesionista = this.leadActual.MENSAJE;
+                  this.mensaje = this.leadActual.MENSAJE;
                   this.urgencia = "No";
                   this.usoprofesionista = "";
                   this.fechaCitaP = "";
@@ -924,10 +835,16 @@ export class LeadPage implements OnInit {
 
                 } else {
                   if (data) {
-                    this.mensajeprofesionista = data[0].Details;
+                    /*this.mensajeprofesionista = data[0].Details;
                     if (this.mensajeprofesionista == "Escribe aquí..." || this.mensajeprofesionista == "" ||
                       this.mensajeprofesionista == "null" || this.mensajeprofesionista == null || this.mensajeprofesionista == undefined || this.mensajeprofesionista == "None") {
                       this.mensajeprofesionista = this.leadActual.MENSAJE;
+                    }*/
+
+                    this.mensaje = data[0].Details;
+                    if (this.mensaje == "Escribe aquí..." || this.mensaje == "" ||
+                      this.mensaje == null || this.mensaje == undefined || this.mensaje == "null" || this.mensaje == "None") {
+                      this.mensaje = this.leadActual.MENSAJE;
                     }
                     this.usoprofesionista = data[0].Usage;
                     if (this.usoprofesionista == null || this.usoprofesionista == "null" || this.usoprofesionista == undefined || this.usoprofesionista == "None") {
@@ -962,16 +879,23 @@ export class LeadPage implements OnInit {
 
               case 5:
                 if (data[0] === null) {
-                  this.mensajeventa = this.leadActual.MENSAJE;
+                  // this.mensajeventa = this.leadActual.MENSAJE;
+                  this.mensaje = this.leadActual.MENSAJE;
                   this.usoventa = "";
                   this.urgencia = "No";
                 } else {
                   if (data) {
-                    this.mensajeventa = data[0].Details;
+                    /*this.mensajeventa = data[0].Details;
                     if (this.mensajeventa == "Escribe aquí..." || this.mensajeventa ==
                       "" || this.mensajeventa == null || this.mensajeventa == "null" || this.mensajeventa == undefined || this.mensajeventa ==
                       "None") {
                       this.mensajeventa = this.leadActual.MENSAJE;
+                    }*/
+
+                    this.mensaje = data[0].Details;
+                    if (this.mensaje == "Escribe aquí..." || this.mensaje == "" ||
+                      this.mensaje == null || this.mensaje == undefined || this.mensaje == "null" || this.mensaje == "None") {
+                      this.mensaje = this.leadActual.MENSAJE;
                     }
                     this.usoventa = data[0].Usage;
                     if (this.usoventa == null || this.usoventa == "null" || this.usoventa == undefined || this.usoventa == "None") {
@@ -990,16 +914,23 @@ export class LeadPage implements OnInit {
                 }
               case 6:
                 if (data[0] === null) {
-                  this.mensajerestaurante = this.leadActual.MENSAJE;
+                  // this.mensajerestaurante = this.leadActual.MENSAJE;
+                  this.mensaje = this.leadActual.MENSAJE;
                   this.fechaCitarestaurante = "";
                   this.personasrestaurante = "";
                   this.horaCitarestaurante = "";
                 } else {
                   if (data) {
-                    this.mensajerestaurante = data[0].RestaurantUsage;
+                    /*this.mensajerestaurante = data[0].RestaurantUsage;
                     if (this.mensajerestaurante == "Escribe aquí..." || this.mensajerestaurante == "" ||
                       this.mensajerestaurante == null || this.mensajerestaurante == "null" || this.mensajerestaurante == undefined || this.mensajerestaurante == "None") {
                       this.mensajerestaurante = "";
+                    }*/
+
+                    this.mensaje = data[0].RestaurantUsage;
+                    if (this.mensaje == "Escribe aquí..." || this.mensaje == "" ||
+                      this.mensaje == null || this.mensaje == undefined || this.mensaje == "null" || this.mensaje == "None") {
+                      this.mensaje = this.leadActual.MENSAJE;
                     }
                     if (data[0].Date) {
                       this.fechaCitarestaurante = data[0].Date.substring(0, 10);
@@ -1025,16 +956,23 @@ export class LeadPage implements OnInit {
                 }
               case 7:
                 if (data[0] === null) {
-                  this.mensajehotel = this.leadActual.MENSAJE;
+                  // this.mensajehotel = this.leadActual.MENSAJE;
+                  this.mensaje = this.leadActual.MENSAJE;
                   this.personashotel = "";
                   this.hotelEntrada = "";
                   this.hotelSalida = "";
                 } else {
                   if (data) {
-                    this.mensajehotel = data[0].HotelUsage;
+                    /*this.mensajehotel = data[0].HotelUsage;
                     if (this.mensajehotel == "Escribe aquí..." || this.mensajehotel == "" ||
                       this.mensajehotel == null || this.mensajehotel == "null" || this.mensajehotel == undefined || this.mensajehotel == "None") {
                       this.mensajehotel = this.leadActual.MENSAJE;
+                    }*/
+
+                    this.mensaje = data[0].HotelUsage;
+                    if (this.mensaje == "Escribe aquí..." || this.mensaje == "" ||
+                      this.mensaje == null || this.mensaje == undefined || this.mensaje == "null" || this.mensaje == "None") {
+                      this.mensaje = this.leadActual.MENSAJE;
                     }
 
                     if (data[0].CheckIn) {
@@ -1058,7 +996,8 @@ export class LeadPage implements OnInit {
                 }
               case 8:
                 if (data[0] === null) {
-                  this.mensajeinmobiliaria = this.leadActual.MENSAJE;
+                  // this.mensajeinmobiliaria = this.leadActual.MENSAJE;
+                  this.mensaje = this.leadActual.MENSAJE;
                   this.fechaCitainmobiliaria = "";
                   this.edadinmobiliaria = "";
                   this.horaCitainmobiliaria = "";
@@ -1066,10 +1005,16 @@ export class LeadPage implements OnInit {
                   this.urgencia = "No";
                 } else {
                   if (data) {
-                    this.mensajeinmobiliaria = data[0].Details;
+                    /*this.mensajeinmobiliaria = data[0].Details;
                     if (this.mensajeinmobiliaria == "Escribe aquí..." || this.mensajeinmobiliaria == "" ||
                       this.mensajeinmobiliaria == null || this.mensajeinmobiliaria == "null" || this.mensajeinmobiliaria == undefined || this.mensajeinmobiliaria == "None") {
                       this.mensajeinmobiliaria = this.leadActual.MENSAJE;
+                    }*/
+
+                    this.mensaje = data[0].Details;
+                    if (this.mensaje == "Escribe aquí..." || this.mensaje == "" ||
+                      this.mensaje == null || this.mensaje == undefined || this.mensaje == "null" || this.mensaje == "None") {
+                      this.mensaje = this.leadActual.MENSAJE;
                     }
                     this.personasinmobiliaria = data[0].BookingFor;
                     if (this.personasinmobiliaria == " " || this.personasinmobiliaria == "null" || this.personasinmobiliaria == undefined || this.personasinmobiliaria == null || this
@@ -1103,16 +1048,23 @@ export class LeadPage implements OnInit {
                 }
               case 9:
                 if (data[0] === null) {
-                  this.mensajeMailing = this.leadActual.MENSAJE;
+                  // this.mensajeMailing = this.leadActual.MENSAJE;
+                  this.mensaje = this.leadActual.MENSAJE;
                   this.frecuencia = "";
                   this.uso = "";
                   this.urgencia = "No";
                 } else {
-                  this.mensajeMailing = data[0].Details;
+                  /*this.mensajeMailing = data[0].Details;
                   if (this.mensajeMailing == "Escribe aquí..." || this.mensajeMailing == "" ||
                     this.mensajeMailing == null || this.mensajeMailing == undefined || this.mensajeMailing == "null" || this.mensajeMailing == "None") {
                     this.mensajeMailing = this.leadActual.MENSAJE;
                   } else {
+                    this.mensaje = this.leadActual.MENSAJE;
+                  }*/
+
+                  this.mensaje = data[0].Details;
+                  if (this.mensaje == "Escribe aquí..." || this.mensaje == "" ||
+                    this.mensaje == null || this.mensaje == undefined || this.mensaje == "null" || this.mensaje == "None") {
                     this.mensaje = this.leadActual.MENSAJE;
                   }
                   this.uso = data[0].Usage;
@@ -1173,9 +1125,9 @@ export class LeadPage implements OnInit {
       .subscribe(data => {
         this.calificacion = data[0].calificaLead;
       },
-        err => {
+      err => {
           // console.log("Error occured");
-        });
+      });
   }
 
   public changeLikeChat(classification: string, lead) {
@@ -1207,10 +1159,9 @@ export class LeadPage implements OnInit {
       .subscribe(data => {
         this.calificacion = data[0].calificaLead;
       },
-        err => {
+      err => {
           // console.log("Error occured");
-        });
-
+      });
   }
 
   public changeLikeToggle() {
@@ -1298,36 +1249,28 @@ export class LeadPage implements OnInit {
   }
 
   openFile(url, contentType) {
+
     let loading = this.loadingCtrl.create({
       content: 'Cargando archivo multimedia...'
     });
 
     loading.present().then(() => {
-
-      // var filename= 'koomkinfile';
-      // this.fileTransfers.download( resultUrl["changingThisBreaksApplicationSecurity"], this.file.dataDirectory + filename,true ).then((entry) => {
       this.fileOpener.open(url['__zone_symbol__value'], contentType
       ).then(() => {
         loading.dismiss();
-        // console.log('then');
       }).catch(e => {
         loading.dismiss();
       });
-
     }).catch((err) => {
-      //loading.dismiss();
-      //alert(err);
 
     });
 
   }
 
   launch(url) {
-    //url.then((url2)=>{
     this.platform.ready().then(() => {
       cordova.InAppBrowser.open(url, "_system", "location=no");
     });
-    //});
   }
 
   getRazones() {
@@ -1335,7 +1278,7 @@ export class LeadPage implements OnInit {
       data => {
         let razones = data;
         this.razones = razones;
-        console.log(this.razones);
+        // console.log(this.razones);
       },
       err => {
         // console.log('error');
@@ -1348,7 +1291,7 @@ export class LeadPage implements OnInit {
       data => {
         let comentarios = data;
         this.comentarios = comentarios;
-        console.log(this.comentarios);
+        // console.log(this.comentarios);
       },
       err => {
         // console.log('error');
@@ -1356,45 +1299,7 @@ export class LeadPage implements OnInit {
     );
   }
 
-  public deleteComentario(idComentario) {
-
-    const body = new URLSearchParams();
-    body.set('idComentario', idComentario);
-
-    const options = {
-      headers: new HttpHeaders().set(
-        'Content-Type',
-        'application/x-www-form-urlencoded'
-      )
-    };
-
-    const url = 'https://www.koomkin.com.mx/api/app/deleteComment/' + idComentario;
-
-    console.log(url);
-    return new Promise((resolve, reject) => {
-      this.http.post(url, body.toString(), options).subscribe(
-        data => {
-          console.log(data);
-        },
-        err => {
-          return reject(err);
-        }
-      );
-    });
-  }
-
-  openModal(image, title, message) {
-    const myModal = this.modal.create(
-      "ModalComentariosPage",
-      { imagen: image, titulo: title, mensaje: message },
-      { enableBackdropDismiss: false, cssClass: "Modal-comentario" }
-    );
-    myModal.present();
-    myModal.onDidDismiss(() => { });
-  }
-
   public btnDeleteComentario(idComentario) {
-    console.log(idComentario);
     swal({
       title: '¿Estás seguro que deseas eliminar este comentario?',
       showCancelButton: true,
@@ -1410,6 +1315,98 @@ export class LeadPage implements OnInit {
     });
   }
 
+  public deleteComentario(idComentario) {
+
+    const body = new URLSearchParams();
+    body.set('idComentario', idComentario);
+
+    const options = {
+      headers: new HttpHeaders().set(
+        'Content-Type',
+        'application/x-www-form-urlencoded'
+      )
+    };
+
+    const url = 'https://www.koomkin.com.mx/api/app/deleteComment/';
+
+    return new Promise((resolve, reject) => {
+      this.http.post(url, body.toString(), options).subscribe(
+        data => {
+          console.log(data);
+        },
+        err => {
+          return reject(err);
+        }
+      );
+    });
+  }
+
+  public editComentario(idComentario,comentario) {
+
+    const body = new URLSearchParams();
+    body.set('idComentario', idComentario);
+    body.set('comentario', comentario);
+
+    const options = {
+      headers: new HttpHeaders().set(
+        'Content-Type',
+        'application/x-www-form-urlencoded'
+      )
+    };
+
+    const url = 'https://www.koomkin.com.mx/api/app/editComment/';
+
+    return new Promise((resolve, reject) => {
+      this.http.post(url, body.toString(), options).subscribe(
+        data => {
+          console.log(data);
+        },
+        err => {
+          return reject(err);
+        }
+      );
+    });
+  }
+
+  public registerComentario(idUsuario,claveLead,comentario,clasificaLead,valorLead) {
+
+    const body = new URLSearchParams();
+    body.set('idUsuario', idUsuario);
+    body.set('claveLead', claveLead);
+    body.set('comentario', comentario);
+    body.set('clasificaLead', clasificaLead);
+    body.set('valorLead', valorLead);
+
+    const options = {
+      headers: new HttpHeaders().set(
+        'Content-Type',
+        'application/x-www-form-urlencoded'
+      )
+    };
+
+    const url = 'https://www.koomkin.com.mx/api/app/registerComment/';
+
+    return new Promise((resolve, reject) => {
+      this.http.post(url, body.toString(), options).subscribe(
+        data => {
+          console.log(data);
+        },
+        err => {
+          return reject(err);
+        }
+      );
+    });
+  }
+
+  openModal(tipo) {
+    const myModal = this.modal.create(
+      "ModalComentariosPage",
+      { tipo: tipo, leadActual: this.leadActual },
+      { enableBackdropDismiss: false, cssClass: "Modal-comentario" }
+    );
+    myModal.present();
+    myModal.onDidDismiss(() => { });
+  }
 
 }
 

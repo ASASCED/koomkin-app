@@ -171,7 +171,7 @@ export class LeadsPage implements OnInit {
         leadsArray[k].clasificaLead = "P";
       }
     }
-    // // console.log(leadsArray);
+    console.log(leadsArray);
     this.checkNoleidos();
     return leadsArray;
   }

@@ -1553,6 +1553,23 @@ db.executeGetReasons = function () {
         });
 };
 
+db.executeInsertReason = function (claveLead,valorLead,razonDescarto) {
+
+    const requestStr = `UPDATE TACotizacion SET ValorLead = ${valorLead}, RazonDescartado = ${razonDescarto} WHERE Clave = ${claveLead};`;
+        
+    return new Promise((resolve, reject) => {
+        tp.sql(requestStr)
+            .execute()
+            .then(results => {
+                resolve(results);
+            })
+            .catch(err => {
+                console.log(err);
+                reject(err);
+            });
+        });
+};
+
 db.executeGetLastComment = function (claveLead) {
 
     const requestStr = `select top 1 * from LeadComentario where ClaveLead = ${claveLead} order by FechaRegistro desc`;

@@ -1732,6 +1732,26 @@ app.post('/passLogin', (req, res) => {
 });
 
 //Genera un comentario por lead
+app.post('/registerReason/', function (req, res) {
+
+    const claveLead = parseInt(req.body.claveLead, 10);
+    let valorLead = req.body.valorLead;
+    let razonDescarto = req.body.razonDescarto;
+
+    if(!valorLead){
+        valorLead = 'NULL';
+    }
+
+    db.executeInsertReason(claveLead,valorLead,razonDescarto)
+        .then(rows => {
+            res.json(rows).status(200).send();
+        })
+        .catch(err => {
+            res.status(500).json({ error: err }).send();
+        });
+});
+
+//Genera un comentario por lead
 app.post('/registerComment/', function (req, res) {
 
     const idUsuario = parseInt(req.body.idUsuario, 10);

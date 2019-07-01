@@ -104,19 +104,23 @@
                                     </ion-row>
                                     <ion-row>
                                         <ion-col col-12>
-                                            <div class="rate-empresa">{{lead.EMPRESA | capitalize}}</div>
+                                            <a style="text-decoration: none;">
+                                                <div class="inf-correo">{{lead.EMAIL}}</div>
+                                            </a>
                                         </ion-col>
                                     </ion-row>
                                     <ion-row>
-                                        <ion-col col-6 style="margin-top: 1%;">
+                                        <ion-col col-8 style="margin-top: 1%;">
                                             <div>
-                                                <div class="rate-fecha">{{lead.FECHA | date: 'dd/MM/yyyy HH:mm' }}</div>
+                                                <div class="rate-fecha"><span
+                                                        class="inf-estado">{{lead.ESTADO}}</span>&nbsp;{{lead.FECHA | date: 'dd/MM/yyyy HH:mm' }}
+                                                </div>
                                             </div>
                                         </ion-col>
-                                        <ion-col col-4>
+                                        <ion-col col-2>
                                             <img *ngIf="lead.status == 'perdida'"
                                                 src="assets/imgs/llamadas/callmissed.svg"
-                                                style="vertical-align: middle;width: 15% !important;max-width:150px !important;display: inline-block;margin-top: 6%;"
+                                                style="vertical-align: middle;width: 30% !important;max-width:150px !important;display: inline-block;margin-top: 6%;"
                                                 (click)="showConfirm(lead)" />
                                         </ion-col>
 

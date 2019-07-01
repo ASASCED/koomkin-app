@@ -105,16 +105,17 @@
                         </ion-row>
                         <ion-row>
                             <ion-col col-9>
-                                <div class="rate-fechal"><span class="inf-estado">{{leadActual.ESTADO}}</span>
+                                <div class="rate-fechal"><span class="inf-estado">{{leadActual.ESTADO}}</span>&nbsp;
                                     {{leadActual.FECHA | date: 'dd/MM/yyyy HH:mm'}}</div>
-                                <div class="rate-valor">Valor del Lead: $2,000</div>
+                                <div class="rate-valor">Valor del Lead: {{valorLead | currency:'MXN':'symbol-narrow': '1.0'}}
+                                </div>
                             </ion-col>
                             <ion-col col-3 align-items-end style="display: inline-block;text-align: right;">
                                 <ion-icon
                                     style="margin-right: 2px !important;font-size: 2.5em !important;color: rgb(209, 209, 209)"
                                     [ngClass]="{'like':leadActual.calificaLead === 'like','sin':leadActual.calificaLead === 'dislike'}"
                                     name="md-thumbs-up" (click)="changeLike('L',leadActual)"></ion-icon>
-                                <ion-icon style="font-size: 2.5em !important;color: rgb(209, 209, 209);margin-right: 5%" 
+                                <ion-icon style="font-size: 2.5em !important;color: rgb(209, 209, 209);margin-right: 5%"
                                     [ngClass]="{'like':leadActual.calificaLead === 'dislike','sin':leadActual.calificaLead === 'like'}"
                                     name="md-thumbs-down" (click)="changeLike('DL',leadActual)"></ion-icon>
                             </ion-col>
@@ -124,7 +125,12 @@
                     </ion-card-content>
                 </ion-card>
                 <br>
-
+                <ion-row>
+                    <ion-col>
+                        <p class="mensaje">“{{mensaje}}”</p>
+                    </ion-col>
+                </ion-row>
+                <!--        
                 <proveedor *ngIf="this.categoria == '1'" [urgenciaproveedor]='urgenciaproveedor'
                     [frecuenciaproveedor]='frecuenciaproveedor' [usoproveedor]='usoproveedor'
                     [mensajeproveedor]='mensajeproveedor' [cantidadproveedor]='cantidadproveedor'
@@ -156,7 +162,7 @@
                     [mensajeinmobiliaria]='mensajeinmobiliaria' [edadinmobiliaria]='edadinmobiliaria'
                     [fechaCitainmobiliaria]='fechaCitainmobiliaria' [horaCitainmobiliaria]='horaCitainmobiliaria'
                     [personasinmobiliaria]='personasinmobiliaria'></inmobiliaria>
-
+                -->
                 <ion-row>
                     <ion-col col-12>
                         <p class="califica">Detalles de Contacto</p>
@@ -180,7 +186,7 @@
                         <img icon-only tooltip="No. de Intentos" positionV="top" mobileEvent="click" hideOthers=true
                             duration=2000 src="assets/imgs/lead/ic_numintentos.svg"
                             style="vertical-align: middle;width: 30% !important;display: inline-block;" />
-                        {{intentos}}
+                        {{intentosExitoso}}
                     </ion-col>
                 </ion-row>
                 <ion-row>
@@ -216,21 +222,35 @@
                     </ion-col>
                 </ion-row>
                 <ion-row>
-                    <ion-col col-6>
+                    <ion-col col-6 *ngIf="contacto == 'No'">
+                        <button class="arribab" [ngClass]="{'descartado':leadActual.clasificaLead === 'D'}">
+                            Descartado
+                        </button>
+                        <button class="arribab" [ngClass]="{'proceso':leadActual.clasificaLead === 'P'}">
+                            En Seguimiento
+                        </button>
+                        <button class="arribab" [ngClass]="{'sincontacto':leadActual.clasificaLead === 'S'}">
+                            Negociación
+                        </button>
+                        <button class="arribab" [ngClass]="{'vendido':leadActual.clasificaLead === 'V'}">
+                            Vendido
+                        </button>
+                    </ion-col>
+                    <ion-col col-6 *ngIf="contacto == 'Sí'">
                         <button class="arribab" [ngClass]="{'descartado':leadActual.clasificaLead === 'D'}"
-                            (click)="changeClassification('D')">
+                            (click)="changeClassification('D');openModal(1)">
                             Descartado
                         </button>
                         <button class="arribab" [ngClass]="{'proceso':leadActual.clasificaLead === 'P'}"
-                            (click)="changeClassification('P')">
+                            (click)="changeClassification('P');openModal(2)">
                             En Seguimiento
                         </button>
                         <button class="arribab" [ngClass]="{'sincontacto':leadActual.clasificaLead === 'S'}"
-                            (click)="changeClassification('C')">
+                            (click)="changeClassification('C');openModal(2)">
                             Negociación
                         </button>
                         <button class="arribab" [ngClass]="{'vendido':leadActual.clasificaLead === 'V'}"
-                            (click)="changeClassification('V')">
+                            (click)="changeClassification('V');openModal(3)">
                             Vendido
                         </button>
                     </ion-col>
@@ -243,18 +263,23 @@
                                 <img src="assets/imgs/lead/ic_advertencia.svg"
                                     style="vertical-align: middle;width: 80% !important;display: inline-block;" />
                             </ion-col>
-                            <ion-col col-10 class="tex">
+                            <ion-col col-10 class="razon">
+                                <p class="descarto">
+                                  {{razonDescarto}}
+                                </p>
+                                <!--
                                 <select *ngIf="leadActual.clasificaLead === 'D'" type="text" class="seleccion-brief"
                                     style="width: 99%;margin-top: 0%" [(ngModel)]="razonDescarto">
                                     <option *ngFor="let razon of razones">
                                         {{razon.Descripcion}}
                                     </option>
                                 </select>
+                               -->
                             </ion-col>
                         </ion-row>
 
-
-                        <p class="razon" *ngIf="leadActual.clasificaLead === 'P' || leadActual.clasificaLead === 'S'">
+                        <p class="razon"
+                            *ngIf="leadActual.clasificaLead === 'P' || leadActual.clasificaLead === 'S' || leadActual.clasificaLead === 'V'">
                             Próxima comunicación
                         </p>
                         <ion-row *ngIf="leadActual.clasificaLead === 'P' || leadActual.clasificaLead === 'S'">
@@ -263,27 +288,32 @@
                                     style="vertical-align: middle;width: 80% !important;display: inline-block;" />
                             </ion-col>
                             <ion-col col-10 class="tex">
+                                <!--
                                 <ion-item>
                                     <ion-datetime class="seleccion-brief" style="width: 99%;margin-top: 0%"
                                         displayFormat="DD MMMM YYYY" [(ngModel)]="fecha" cancelText="Cancelar"
                                         doneText="Aceptar">
                                     </ion-datetime>
                                 </ion-item>
+                                -->
                             </ion-col>
                         </ion-row>
 
-                        <ion-row *ngIf="leadActual.clasificaLead === 'P' || leadActual.clasificaLead === 'S'">
+                        <ion-row
+                            *ngIf="leadActual.clasificaLead === 'P' || leadActual.clasificaLead === 'S' || leadActual.clasificaLead === 'V'">
                             <ion-col col-2 class="tex">
                                 <img src="assets/imgs/lead/ic_fecha.svg"
                                     style="vertical-align: middle;width: 80% !important;display: inline-block;" />
                             </ion-col>
                             <ion-col col-10 class="tex">
+                                <!--
                                 <ion-item>
                                     <ion-datetime class="seleccion-brief" style="width: 99%;margin-top: 0%"
                                         displayFormat="HH:mm" [(ngModel)]="hora" cancelText="Cancelar"
                                         doneText="Aceptar">
                                     </ion-datetime>
                                 </ion-item>
+                                -->
                             </ion-col>
                         </ion-row>
 
@@ -291,12 +321,11 @@
                             Valor del lead
                         </p>
 
-                        <input class="input-comentario" type="number" name="valor">
+                        <p class="valor">{{valorLead | currency: 'MXN':'symbol-narrow' : '1.0'}}</p>
 
                     </ion-col>
                 </ion-row>
-
-                <ion-row>
+                <ion-row *ngIf="show == true">
                     <ion-col col-1>
 
                     </ion-col>
@@ -308,33 +337,33 @@
                     </ion-col>
                 </ion-row>
 
-                <ion-item class="tarjeta-comentario" [ngClass]="{'sold':clasificaComentario == 'Vendido','negotiation':clasificaComentario == 'Negociacion','track':clasificaComentario == 'Seguimiento' ,'discard':clasificaComentario== 'Descartado'}" style="border-bottom: 1px solid #dedede;">
-                <ion-row
-                    style="display: flex !important; align-content: center !important; align-items: center !important;margin-top: 1%;">
-                    <ion-col col-10>
-                        <p style="color:gray;margin-left: 5px;font-size: small;">
-                            {{fechaComentario | date: 'dd/MM/yyyy HH:mm'}}
-                        </p>
-                    </ion-col>
-                    <ion-col col-1 style="text-align: center">
-                        <img src="assets/imgs/lead/ic_comentario.svg"
-                            style="vertical-align: middle;width: 70% !important;margin-left: 10%;" />
-                    </ion-col>
-                    <ion-col col-1 style="text-align: center">
-                        <img src="assets/imgs/lead/ic_borrar.svg"
-                            style="vertical-align: middle;width: 70% !important;margin-left: 10%;"
-                            (click)="btnDeleteComentario(idComentario)" />
-                    </ion-col>
-                </ion-row>
-                <ion-row
-                    style="display: flex !important; align-content: center !important; align-items: center !important;margin-bottom: 2% !important;margin-left: 5px;">
-                    <ion-col col-10>
-                        <a style="color:#606060;font-size: small;">"{{comentario}}"</a>
-                    </ion-col>
-
-                </ion-row>
-            </ion-item>
-
+                <ion-item *ngIf="show == true" class="tarjeta-comentario"
+                    [ngClass]="{'sold':clasificaComentario == 'Vendido','negotiation':clasificaComentario == 'Negociacion','track':clasificaComentario == 'Seguimiento' ,'discard':clasificaComentario== 'Descartado'}"
+                    style="border-bottom: 1px solid #dedede;">
+                    <ion-row
+                        style="display: flex !important; align-content: center !important; align-items: center !important;margin-top: 1%;">
+                        <ion-col col-10>
+                            <p style="color:gray;margin-left: 5px;font-size: small;">
+                                {{fechaComentario | date: 'dd/MM/yyyy HH:mm'}}
+                            </p>
+                        </ion-col>
+                        <ion-col col-1 style="text-align: center">
+                            <img src="assets/imgs/lead/ic_comentario.svg"
+                                style="vertical-align: middle;width: 70% !important;margin-left: 10%;" />
+                        </ion-col>
+                        <ion-col col-1 style="text-align: center">
+                            <img src="assets/imgs/lead/ic_borrar.svg"
+                                style="vertical-align: middle;width: 70% !important;margin-left: 10%;"
+                                (click)="btnDeleteComentario(idComentario)" />
+                        </ion-col>
+                    </ion-row>
+                    <ion-row
+                        style="display: flex !important; align-content: center !important; align-items: center !important;margin-bottom: 2% !important;margin-left: 5px;">
+                        <ion-col col-10>
+                            <a style="color:#606060;font-size: small;">"{{comentario}}"</a>
+                        </ion-col>
+                    </ion-row>
+                </ion-item>
             </ion-grid>
         </ion-list>
 
@@ -374,11 +403,9 @@
                     <ion-col col-10>
                         <a style="color:#606060;font-size: small;">"{{registro.Comentario}}"</a>
                     </ion-col>
-
                 </ion-row>
             </ion-item>
         </ion-list>
-
 
         <ion-list *ngSwitchCase="'Llamadas'">
             <ion-item>

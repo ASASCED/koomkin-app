@@ -20,7 +20,8 @@ page-modal-comentarios {
     background: #fe703f !important;
     color: white;
     border-radius: 15px;
-    font-size: 11pt;
+    font-size: 4vw;
+    height: 3rem;
   }
 
   .btn-cancelar-comentario {
@@ -31,7 +32,8 @@ page-modal-comentarios {
     border: 1px solid #fe703f;
     border-radius: 15px;
     color: #fe703f;
-    font-size: 11pt;
+    font-size: 4vw;
+    height: 3rem;
   }
 
   .message-modal {
@@ -74,10 +76,10 @@ page-modal-comentarios {
   }
 
   .seleccion-comentario {
-    height: 26px;
-    width: 98%;
-    margin-left: 5%;
-    margin-top: 4%;
+    height: 28px;
+    width: 100%;
+    margin-left: 0%;
+    margin-top: 0%;
     background: transparent;
     border: 1px #cecece solid;
     color: #707070;
@@ -85,13 +87,13 @@ page-modal-comentarios {
     border-radius: 5px;
     box-shadow: none !important;
     padding: 3px 5px;
-    font-size: 4vw;
+    font-size: 3.8vw;
   }
 
   .input-comentario {
     height: 26px;
-    width: 95%;
-    margin-left: 5%;
+    width: 100%;
+    margin-top: 2%;
     background: transparent;
     border: 1px #cecece solid;
     color: #707070;
@@ -111,9 +113,8 @@ page-modal-comentarios {
   }
 
   .area-comentario {
-    width: 95%;
-    margin-top: 5%;
-    margin-left: 5%;
+    width: 100%;
+    margin-top: 2%;
     background: transparent;
     border: 1px #cecece solid;
     color: #707070;
