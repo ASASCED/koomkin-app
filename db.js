@@ -1556,7 +1556,7 @@ db.executeGetReasons = function () {
 db.executeInsertReason = function (claveLead,valorLead,razonDescarto) {
 
 
-    const requestStr = `UPDATE TACotizacion SET ValorLead = ${valorLead}, RazonDescartado = ${razonDescarto} WHERE Clave = ${claveLead};`;
+    const requestStr = `UPDATE TACotizacion SET ValorLead = ${valorLead}, RazonDescartado = '${razonDescarto}' WHERE Clave = ${claveLead};`;
         
     console.log(requestStr);
 
