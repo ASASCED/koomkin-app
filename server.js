@@ -1734,8 +1734,8 @@ app.post('/passLogin', (req, res) => {
 //Genera un comentario por lead
 app.post('/registerReason/', function (req, res) {
 
-    const claveLead = parseInt(req.body.claveLead, 10);
-    let valorLead = req.body.valorLead;
+    let claveLead = req.body.claveLead;
+    let valorLead = parseInt(req.body.valorLead, 10);
     let razonDescarto = req.body.razonDescarto;
 
     if(!valorLead){
