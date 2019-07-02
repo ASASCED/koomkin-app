@@ -37,8 +37,6 @@ export class ModalComentariosPage implements OnInit{
     this.id = this.leadActual.ID;
     this.clave = this.leadActual.clave;
     this.uuid = this.leadActual.uuid;
-
-    console.log(this.clasificaLead)
     
     if(this.leadActual.ValorLead != 'null' && this.leadActual.ValorLead != null && this.leadActual.ValorLead != undefined) {
       this.valorLead = this.leadActual.ValorLead;
@@ -54,6 +52,48 @@ export class ModalComentariosPage implements OnInit{
 
   closeModal(){
     this.viewCtrl.dismiss();
+  }
+
+  getRazones() {
+    this.provedor.getReasons().then(
+      data => {
+        let razones = data;
+        this.razones = razones;
+      },
+      err => {
+        // console.log('error');
+      }
+    );
+  }
+
+  public registerComentario() {
+
+    const body = new URLSearchParams();
+    body.set('idUsuario', this.id);
+    body.set('claveLead', this.clave);
+    body.set('comentario', this.comentario);
+    body.set('clasificaLead', this.clasificaLead);
+    body.set('valorLead', this.valorLead);
+
+    const options = {
+      headers: new HttpHeaders().set(
+        'Content-Type',
+        'application/x-www-form-urlencoded'
+      )
+    };
+
+    const url = 'https://www.koomkin.com.mx/api/app/registerComment/';
+
+    return new Promise((resolve, reject) => {
+      this.http.post(url, body.toString(), options).subscribe(
+        data => {
+          console.log(data);
+        },
+        err => {
+          return reject(err);
+        }
+      );
+    });
   }
 
   public updateComentario(idComentario,comentario) {
@@ -80,19 +120,6 @@ export class ModalComentariosPage implements OnInit{
         }
       );
     });
-  }
-
-  getRazones() {
-    this.provedor.getReasons().then(
-      data => {
-        let razones = data;
-        this.razones = razones;
-        // console.log(this.razones);
-      },
-      err => {
-        // console.log('error');
-      }
-    );
   }
 
   discart() {

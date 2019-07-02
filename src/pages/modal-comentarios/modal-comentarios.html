@@ -1,10 +1,51 @@
 <ion-header color="azul">
   <ion-toolbar color="azul">
-    <ion-title>Escribe los detalles del estatus</ion-title>
+    <ion-title *ngIf="tipo == 0">Escribe los detalles</ion-title>
+    <ion-title *ngIf="tipo !== 0">Escribe los detalles del Estatus</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
+  <ion-grid *ngIf="tipo == 0">
+    <ion-row>
+      <ion-col col-3>
+      </ion-col>
+      <ion-col col-6>
+        <img src="assets/imgs/comentarios/comentario.svg" width="80%" style="margin-left: 10%" />
+      </ion-col>
+      <ion-col col-3>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-12 class="centrar-img">
+        <span class="gris-comentario">Valor del Lead</span>
+      </ion-col>
+      <ion-col col-12>
+        <input [(ngModel)]="valorLead" class="input-comentario" type="number" name="valor">
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-12 class="centrar-img">
+        <span class="gris-comentario">Comentario</span>
+      </ion-col>
+      <ion-col col-12>
+        <textarea [(ngModel)]="comentario" class="area-comentario" rows="4" cols="50" maxlength="190"></textarea>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col col-6>
+        <button ion-button class="btn-cancelar-comentario" (click)="closeModal()">Cancelar</button>
+      </ion-col>
+      <ion-col col-6>
+        <button ion-button class="btn-guardar-comentario"
+          (click)="closeModal();sold();registerComentario()">Guardar</button>
+      </ion-col>
+      <ion-col col-2>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
   <ion-grid *ngIf="tipo == 1">
     <ion-row>
       <ion-col col-3>
@@ -17,7 +58,7 @@
     </ion-row>
     <ion-row>
       <ion-col col-12 class="centrar-img">
-        <img src="assets/imgs/lead/ic_advertencia.svg" width="6%" style="margin-right: 2%"/>
+        <img src="assets/imgs/lead/ic_advertencia.svg" width="6%" style="margin-right: 2%" />
         <span class="gris-comentario">Razón</span>
       </ion-col>
       <ion-col col-12>
@@ -36,7 +77,7 @@
         <span class="gris-comentario">Valor del Lead</span>
       </ion-col>
       <ion-col col-12>
-       <input [(ngModel)]="valorLead" class="input-comentario" type="number" name="valor">
+        <input [(ngModel)]="valorLead" class="input-comentario" type="number" name="valor">
       </ion-col>
     </ion-row>
     <ion-row>
@@ -53,7 +94,8 @@
         <button ion-button class="btn-cancelar-comentario" (click)="closeModal()">Cancelar</button>
       </ion-col>
       <ion-col col-6>
-        <button ion-button class="btn-guardar-comentario" (click)="closeModal();discart()">Guardar</button>
+        <button ion-button class="btn-guardar-comentario"
+          (click)="closeModal();discart();registerComentario()">Guardar</button>
       </ion-col>
       <ion-col col-2>
       </ion-col>
@@ -81,9 +123,9 @@
       </ion-col>
       <ion-col col-11>
         <ion-item>
-          <ion-datetime class="seleccion-comentario" style="width: 96%;margin-top: 0%;margin-left: 4%" displayFormat="DD MMMM YYYY"
-            placeholder="Fecha" [(ngModel)]="fecha" cancelText="Cancelar" min="2019-06-26" max="2020-06-26"
-            doneText="Aceptar">
+          <ion-datetime class="seleccion-comentario" style="width: 96%;margin-top: 0%;margin-left: 4%"
+            displayFormat="DD MMMM YYYY" placeholder="Fecha" [(ngModel)]="fecha" cancelText="Cancelar" min="2019-06-26"
+            max="2020-06-26" doneText="Aceptar">
           </ion-datetime>
         </ion-item>
       </ion-col>
@@ -94,8 +136,8 @@
       </ion-col>
       <ion-col col-11>
         <ion-item style="border-bottom: 0px solid rgb(222, 222, 222) !important;">
-          <ion-datetime class="seleccion-comentario" style="width: 96%;margin-top: 0%;margin-left: 4%" displayFormat="HH:mm"
-            placeholder="Hora" [(ngModel)]="hora" cancelText="Cancelar" doneText="Aceptar">
+          <ion-datetime class="seleccion-comentario" style="width: 96%;margin-top: 0%;margin-left: 4%"
+            displayFormat="HH:mm" placeholder="Hora" [(ngModel)]="hora" cancelText="Cancelar" doneText="Aceptar">
           </ion-datetime>
         </ion-item>
       </ion-col>
@@ -122,7 +164,8 @@
         <button ion-button class="btn-cancelar-comentario" (click)="closeModal()">Cancelar</button>
       </ion-col>
       <ion-col col-6>
-        <button ion-button class="btn-guardar-comentario" (click)="closeModal();rescheduler()">Guardar</button>
+        <button ion-button class="btn-guardar-comentario"
+          (click)="closeModal();rescheduler();registerComentario()">Guardar</button>
       </ion-col>
       <ion-col col-2>
       </ion-col>
@@ -161,7 +204,8 @@
         <button ion-button class="btn-cancelar-comentario" (click)="closeModal()">Cancelar</button>
       </ion-col>
       <ion-col col-6>
-        <button ion-button class="btn-guardar-comentario" (click)="closeModal();sold()">Guardar</button>
+        <button ion-button class="btn-guardar-comentario"
+          (click)="closeModal();sold();registerComentario()">Guardar</button>
       </ion-col>
       <ion-col col-2>
       </ion-col>

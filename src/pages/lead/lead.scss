@@ -92,13 +92,13 @@ page-lead {
     padding: 2px !important;
   }
 
-  .seleccion-brief { 
-    height: 26px;                
+  .seleccion-brief {
+    height: 26px;
     width: 95%;
     margin-right: 5%;
     margin-top: 4%;
     background: transparent;
-    border: 1px #CECECE solid;
+    border: 1px #cecece solid;
     color: #707070;
     font-weight: bold;
     border-radius: 5px;
@@ -107,7 +107,7 @@ page-lead {
     font-size: 4vw;
   }
   .comentarios {
-    background: #EFEFEF;
+    background: #efefef;
     padding: 2% 0% 2% 2%;
     border-radius: 5px;
   }
@@ -115,19 +115,21 @@ page-lead {
     color: #707070;
     font-size: 3.2vw;
   }
+  .sin-estatus {
+    border-left: 10px #76797b solid;
+  }
   .sold {
     border-left: 10px #00b9be solid;
-  } 
+  }
   .discard {
     border-left: 10px #fe703f solid;
-  } 
-  .track{
+  }
+  .track {
     border-left: 10px #6b4595 solid;
   }
   .negotiation {
     border-left: 10px #288ac1 solid;
-  } 
-
+  }
 }
 
 ion-icon {
@@ -239,7 +241,7 @@ hr {
 //Valor del Lead
 .rate-valor {
   font-size: 4.3vw !important;
-  color: #1F639E;
+  color: #1f639e;
   text-align: left;
   font-weight: bold;
   margin-top: 1%;
@@ -284,13 +286,13 @@ hr {
 }
 
 .titulo-azul {
- color:#288ac1;
- margin: 0%;
- margin-top:2%;
- font-size: 6vw;
+  color: #288ac1;
+  margin: 0%;
+  margin-top: 2%;
+  font-size: 6vw;
 }
 
-.descarto{
+.descarto {
   margin: 2%;
   color: #818181;
   font-size: 3.8vw;
@@ -300,20 +302,20 @@ hr {
 
 .valor {
   margin: 2%;
-  color: #1F639E;
+  color: #1f639e;
   text-align: center;
   font-size: 3.8vw;
 }
 
 .tarjeta-comentario {
-    margin: 0px !important;
-    margin-top: 2% !important;
-    border-radius: 2px;
-    width: 100% !important;
-    background: #efefef !important;
-    border-top: 0px solid #d0d0d0 !important;
-    border-bottom: 0px solid #d0d0d0 !important;
-    border-right: 0px solid #d0d0d0 !important;
+  margin: 0px !important;
+  margin-top: 2% !important;
+  border-radius: 2px;
+  width: 100% !important;
+  background: #efefef !important;
+  border-top: 0px solid #d0d0d0 !important;
+  border-bottom: 0px solid #d0d0d0 !important;
+  border-right: 0px solid #d0d0d0 !important;
 }
 //
 .cotizagris {
@@ -334,7 +336,7 @@ hr {
 
 //Mensaje del Lead
 .mensaje {
-  color: #6B7E8D;
+  color: #6b7e8d;
   font-size: 4vw;
   margin-left: 0.5em;
   font-weight: bold;

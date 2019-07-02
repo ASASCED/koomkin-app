@@ -93,7 +93,6 @@ export class LeadsPage implements OnInit {
       this.callMissed(leadsArray[k].uuid).then(status => {
         leadsArray[k].status = status;
       });
-      leadsArray[k].perdida = "";
 
       leadsArray[k].url = "sinaudio";
 

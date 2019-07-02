@@ -420,19 +420,20 @@ export class LeadPage implements OnInit {
       );
 
     }
-    
-    if(this.leadActual.comentario.hasOwnProperty('IdComentario')) {
-      this.show = true;
-      this.comentario = this.leadActual.comentario[0].Comentario;
-      this.fechaComentario = this.leadActual.comentario[0].FechaRegistro;
-      this.idComentario = this.leadActual.comentario[0].IdComentario;
-      this.clasificaComentario = this.leadActual.comentario[0].ClasificaLead;
+
+    if(this.leadActual.comentario.length > 0) {
+      if(this.leadActual.comentario[0].IdComentario) {
+        this.show = true;
+        this.comentario = this.leadActual.comentario[0].Comentario;
+        this.fechaComentario = this.leadActual.comentario[0].FechaRegistro;
+        this.idComentario = this.leadActual.comentario[0].IdComentario;
+        if(this.leadActual.comentario[0].ClasificaLead !== 'null' && this.leadActual.comentario[0].ClasificaLead !== null ) {
+          this.clasificaComentario = this.leadActual.comentario[0].ClasificaLead;
+        }
+      } 
     }
+
     
-    if (this.leadActual.fechaContacto) {
-      this.leadActual.fechaContacto = this.leadActual.fechaContacto.substring(0, 16)
-        .replace(/^(\d{4})-(\d{2})-(\d{2})T(\d{5})$/g, '$3/$2/$1$4');
-    }
     if (this.leadActual.fechaContacto) {
       this.leadActual.fechaContacto = this.leadActual.fechaContacto
         .substring(0, 16)
@@ -603,8 +604,12 @@ export class LeadPage implements OnInit {
           } else if (this.llamadas[k].LlamadaLead == 1 && this.llamadas[k].exitosa == 1) {
             this.llamadas[k].CallStatus = 'comprador';
           }
-          this.llamadas[k].horallamada = this.llamadas[k].FechaLlamada.substring(11, 16);
-          this.llamadas[k].FechaLlamada = this.llamadas[k].FechaLlamada.substring(0, 10).replace(/^(\d{4})-(\d{2})-(\d{2})$/g, '$3/$2/$1');
+
+          this.llamadas[k].horallamada = this.llamadas[k].FechaLlamada
+          if(this.llamadas[k].horallamada != 'null' && this.llamadas[k].horallamada != null){
+            this.llamadas[k].horallamada = this.llamadas[k].FechaLlamada.substring(11, 16);
+            this.llamadas[k].FechaLlamada = this.llamadas[k].FechaLlamada.substring(0, 10).replace(/^(\d{4})-(\d{2})-(\d{2})$/g, '$3/$2/$1');
+          }
 
           if (this.llamadas[k].FechaLlamada == this.fecha) {
             this.llamadas[k].FechaLlamada = 'Hoy';
