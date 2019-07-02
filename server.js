@@ -1510,6 +1510,20 @@ app.get('/getComments/:claveLead', function (req, res) {
         });
 });
 
+app.get('/getScheduled/:claveLead', function (req, res) {
+
+    const claveLead = parseInt(req.params.claveLead, 10);
+
+    db.executeGetScheduled(claveLead)
+         .then(rows => {
+            res.json(rows).status(200).send();
+        })
+        .catch(err => {
+            res.status(500).json({ error: err }).send();
+        });
+});
+
+
 app.get('/getReasons', function (req, res) {
 
     db.executeGetReasons()

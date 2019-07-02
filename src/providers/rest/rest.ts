@@ -752,6 +752,16 @@ export class RestProvider {
     });
   }
 
+  getScheduled(claveLead) {
+    return new Promise(resolve => {
+      this.http.get(this.apiUrl + '/getScheduled/' + claveLead).subscribe(data => {
+        resolve(data);
+      }, err => {
+         console.log(err);
+      });
+    });
+  }
+
   getReasons() {
     return new Promise(resolve => {
       this.http.get(this.apiUrl + '/getReasons').subscribe(data => {
@@ -761,5 +771,5 @@ export class RestProvider {
       });
     });
   }
-  
+
 }

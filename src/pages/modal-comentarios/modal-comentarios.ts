@@ -10,6 +10,10 @@ import { RestProvider } from '../../providers/rest/rest';
 })
 export class ModalComentariosPage implements OnInit{
 
+  public id;
+  public clave;
+  public uuid;
+  public clasificaLead;
   public leadActual;
   public razones;
   public razonDescarto;
@@ -29,6 +33,13 @@ export class ModalComentariosPage implements OnInit{
   ) {
     this.tipo = navParams.get("tipo");
     this.leadActual = navParams.get("leadActual");
+    this.clasificaLead = navParams.get("clasificaLead");
+    this.id = this.leadActual.ID;
+    this.clave = this.leadActual.clave;
+    this.uuid = this.leadActual.uuid;
+
+    console.log(this.clasificaLead)
+    
     if(this.leadActual.ValorLead != 'null' && this.leadActual.ValorLead != null && this.leadActual.ValorLead != undefined) {
       this.valorLead = this.leadActual.ValorLead;
     }
@@ -87,7 +98,7 @@ export class ModalComentariosPage implements OnInit{
   discart() {
 
     const body = new URLSearchParams();
-    body.set('claveLead', this.leadActual.clave);
+    body.set('claveLead', this.clave);
     body.set('valorLead', this.valorLead);
     body.set('razonDescarto', this.razonDescarto);
 
@@ -112,11 +123,11 @@ export class ModalComentariosPage implements OnInit{
   }
 
   rescheduler() {
-    console.log(this.leadActual.uuid,this.fecha,this.hora,this.valorLead,this.comentario);
+    console.log(this.uuid,this.fecha,this.hora,this.valorLead,this.comentario);
 
     this.datetime = this.fecha + 'T' + this.hora + ':00.00Z';
 
-    const cuerpo = `{'uuid': '${this.leadActual.uuid}', 'date': '${this.datetime}', 'active': 1}`;
+    const cuerpo = `{'uuid': '${this.uuid}', 'date': '${this.datetime}', 'active': 1}`;
 
     const options = {
       headers: new HttpHeaders().set(
@@ -125,7 +136,9 @@ export class ModalComentariosPage implements OnInit{
       )
     };
 
-    /*const url = 'https://koomkin.com.mx/calltracker/rescheduler/';
+    console.log(cuerpo);
+
+    const url = 'https://koomkin.com.mx/calltracker/rescheduler/';
     return new Promise((resolve, reject) => {
       this.http.post(url, cuerpo, options).subscribe(
         data => {
@@ -135,10 +148,14 @@ export class ModalComentariosPage implements OnInit{
           return reject(err);
         }
       );
-    });*/
+    });
   }
 
   sold() {
     console.log(this.valorLead,this.comentario);
+  }
+
+  registrarComentario() {
+
   }
 }

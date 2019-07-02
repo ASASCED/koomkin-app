@@ -1553,8 +1553,26 @@ db.executeGetReasons = function () {
         });
 };
 
-db.executeInsertReason = function (claveLead,valorLead,razonDescarto) {
+db.executeGetScheduled = function (claveLead) {
 
+    const requestStr = `select top 1 scheduledAt from llamadaclientealead where CallStatus = 'scheduled' and IDCotizacion = ${claveLead};`;
+        
+    console.log(requestStr);
+
+    return new Promise((resolve, reject) => {
+        tp.sql(requestStr)
+            .execute()
+            .then(results => {
+                resolve(results);
+            })
+            .catch(err => {
+                console.log(err);
+                reject(err);
+            });
+        });
+};
+
+db.executeInsertReason = function (claveLead,valorLead,razonDescarto) {
 
     const requestStr = `UPDATE TACotizacion SET ValorLead = ${valorLead}, RazonDescartado = '${razonDescarto}' WHERE Clave = ${claveLead};`;
         
@@ -1679,6 +1697,7 @@ db.executeInsertSale = function (idUsuario,claveLead,caracteristicas,monto,recur
             });
         });
 };
+
 
 function getDateTime() {
 

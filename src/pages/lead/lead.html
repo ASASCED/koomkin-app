@@ -107,7 +107,8 @@
                             <ion-col col-9>
                                 <div class="rate-fechal"><span class="inf-estado">{{leadActual.ESTADO}}</span>&nbsp;
                                     {{leadActual.FECHA | date: 'dd/MM/yyyy HH:mm'}}</div>
-                                <div class="rate-valor">Valor del Lead: {{valorLead | currency:'MXN':'symbol-narrow': '1.0'}}
+                                <div class="rate-valor">Valor del Lead:
+                                    {{valorLead | currency:'MXN':'symbol-narrow': '1.0'}}
                                 </div>
                             </ion-col>
                             <ion-col col-3 align-items-end style="display: inline-block;text-align: right;">
@@ -238,19 +239,19 @@
                     </ion-col>
                     <ion-col col-6 *ngIf="contacto == 'Sí'">
                         <button class="arribab" [ngClass]="{'descartado':leadActual.clasificaLead === 'D'}"
-                            (click)="changeClassification('D');openModal(1)">
+                            (click)="changeClassification('D');openModal(1,'Descartado')">
                             Descartado
                         </button>
                         <button class="arribab" [ngClass]="{'proceso':leadActual.clasificaLead === 'P'}"
-                            (click)="changeClassification('P');openModal(2)">
+                            (click)="changeClassification('P');openModal(2,'Seguimiento')">
                             En Seguimiento
                         </button>
                         <button class="arribab" [ngClass]="{'sincontacto':leadActual.clasificaLead === 'S'}"
-                            (click)="changeClassification('C');openModal(2)">
+                            (click)="changeClassification('C');openModal(2,'Negociacion')">
                             Negociación
                         </button>
                         <button class="arribab" [ngClass]="{'vendido':leadActual.clasificaLead === 'V'}"
-                            (click)="changeClassification('V');openModal(3)">
+                            (click)="changeClassification('V');openModal(3,'Vendido')">
                             Vendido
                         </button>
                     </ion-col>
@@ -265,7 +266,7 @@
                             </ion-col>
                             <ion-col col-10 class="razon">
                                 <p class="descarto">
-                                  {{razonDescarto}}
+                                    {{razonDescarto}}
                                 </p>
                                 <!--
                                 <select *ngIf="leadActual.clasificaLead === 'D'" type="text" class="seleccion-brief"

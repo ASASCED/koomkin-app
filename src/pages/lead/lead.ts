@@ -151,7 +151,7 @@ export class LeadPage implements OnInit {
   public valorLead;
   public fecha;
   public fechaExitoso;
-
+  public scheduledAt;
   private autoScroller: MutationObserver;
 
   @ViewChild(Content) content: Content;
@@ -350,6 +350,7 @@ export class LeadPage implements OnInit {
     );
     this.getRazones();
     this.getComentarios();
+    this.getScheduled();
     this.getLeadCalls();
     this.getCheckLeadComplement();
     this.getCountLeadCalls();
@@ -1398,14 +1399,27 @@ export class LeadPage implements OnInit {
     });
   }
 
-  openModal(tipo) {
+  openModal(tipo,clasificaLead) {
     const myModal = this.modal.create(
       "ModalComentariosPage",
-      { tipo: tipo, leadActual: this.leadActual },
+      { tipo: tipo, leadActual: this.leadActual, clasificaLead: clasificaLead },
       { enableBackdropDismiss: false, cssClass: "Modal-comentario" }
     );
     myModal.present();
     myModal.onDidDismiss(() => { });
+  }
+
+  getScheduled() {
+    this.provedor.getScheduled(this.leadActual.clave).then(
+      data => {
+        let scheduledAt = data;
+        this.scheduledAt = scheduledAt;
+        // console.log(this.razones);
+      },
+      err => {
+        // console.log('error');
+      }
+    );
   }
 
 }
