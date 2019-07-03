@@ -1,7 +1,9 @@
 <ion-header color="azul">
   <ion-toolbar color="azul">
     <ion-title *ngIf="tipo == 0">Escribe los detalles</ion-title>
-    <ion-title *ngIf="tipo !== 0">Escribe los detalles del Estatus</ion-title>
+    <ion-title *ngIf="tipo !== 0 && tipo !== 4">Escribe los detalles del Estatus</ion-title>
+    <ion-title *ngIf="tipo !== 0">Editar Comentario</ion-title>
+
   </ion-toolbar>
 </ion-header>
 
@@ -18,7 +20,7 @@
     </ion-row>
     <ion-row>
       <ion-col col-12 class="centrar-img">
-        <span class="gris-comentario">Valor del Lead</span>
+        <span class="gris-comentario">Valor del Lead $</span>
       </ion-col>
       <ion-col col-12>
         <input [(ngModel)]="valorLead" class="input-comentario" type="number" name="valor">
@@ -206,6 +208,37 @@
       <ion-col col-6>
         <button ion-button class="btn-guardar-comentario"
           (click)="closeModal();sold();registerComentario()">Guardar</button>
+      </ion-col>
+      <ion-col col-2>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid *ngIf="tipo == 4">
+    <ion-row>
+      <ion-col col-3>
+      </ion-col>
+      <ion-col col-6>
+        <img src="assets/imgs/comentarios/comentario.svg" width="80%" style="margin-left: 10%" />
+      </ion-col>
+      <ion-col col-3>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-12 class="centrar-img">
+        <span class="gris-comentario">Comentario</span>
+      </ion-col>
+      <ion-col col-12>
+        <textarea [(ngModel)]="comentario" class="area-comentario" rows="4" cols="50" maxlength="190"></textarea>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col col-6>
+        <button ion-button class="btn-cancelar-comentario" (click)="closeModal()">Cancelar</button>
+      </ion-col>
+      <ion-col col-6>
+        <button ion-button class="btn-guardar-comentario" (click)="closeModal();updateComentario()">Guardar</button>
       </ion-col>
       <ion-col col-2>
       </ion-col>

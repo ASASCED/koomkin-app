@@ -842,7 +842,7 @@ db.executeGetTicket = function (command, ticket,  requerimiento ,area  ,estatus 
 
 //updateAgenda
 
-db.executeUpdateAgenda = function (idUsuario,idTicket,estatusOptimizacion) {A
+db.executeUpdateAgenda2 = function (idUsuario,idTicket,estatusOptimizacion) {A
 
 
     const requestStr = `insert into Tbl_AgendaOptimizaciones (idUsuario, idTicket, estatusOptimizacion) values (${idUsuario},${idTicket}, '${estatusOptimizacion}')`;
@@ -860,12 +860,14 @@ db.executeUpdateAgenda = function (idUsuario,idTicket,estatusOptimizacion) {A
     });
 };
 
-db.executeUpdateAgenda2 = function (idUsuario,idTicket,estatusOptimizacion) {
+db.executeUpdateAgenda = function (idUsuario,idTicket,estatusOptimizacion) {
 
     const requestStr = `INSERT INTO Tbl_AgendaOptimizaciones (idUsuario, idTicket, estatusOptimizacion)
     SELECT IDUSUARIO, ${idTicket} AS idTicket, ${estatusOptimizacion} AS estatusOptimizacion FROM CATUSUARIO
     WHERE IDUSUARIO IN (SELECT IDUSUARIO FROM kad_Tbl_PagosClientesKoomkinAdmin)
     AND idUsuario = ${idUsuario}`;
+
+    console.log(requestStr);
 
     return new Promise((resolve, reject) => {
         tp.sql(requestStr)

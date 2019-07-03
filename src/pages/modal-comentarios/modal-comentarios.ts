@@ -15,6 +15,7 @@ export class ModalComentariosPage implements OnInit{
   public uuid;
   public clasificaLead;
   public leadActual;
+  public idComentario;
   public razones;
   public razonDescarto;
   public tipo;
@@ -34,6 +35,9 @@ export class ModalComentariosPage implements OnInit{
     this.tipo = navParams.get("tipo");
     this.leadActual = navParams.get("leadActual");
     this.clasificaLead = navParams.get("clasificaLead");
+    this.idComentario = navParams.get("idComentario");
+    this.comentario = navParams.get("comentario");
+    console.log(this.idComentario, this.comentario );
     this.id = this.leadActual.ID;
     this.clave = this.leadActual.clave;
     this.uuid = this.leadActual.uuid;
@@ -96,11 +100,11 @@ export class ModalComentariosPage implements OnInit{
     });
   }
 
-  public updateComentario(idComentario,comentario) {
+  public updateComentario() {
 
     const body = new URLSearchParams();
-    body.set('idComentario', idComentario);
-    body.set('comentario', comentario);
+    body.set('idComentario', this.idComentario);
+    body.set('comentario', this.comentario);
 
     const options = {
       headers: new HttpHeaders().set(

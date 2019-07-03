@@ -317,10 +317,12 @@ export class LeadPage implements OnInit {
       result => {
         if (result.length === 0) {
           this.msgListLead = result;
+          console.log(this.msgListLead);
         }
         if (result.length > 1) {
           this.ngz.run(() => {
             this.msgListLead = result;
+            console.log(this.msgListLead);
             setTimeout(() => { this.scrollDown.bind(this) }, 5000);
           });
         } else {
@@ -335,6 +337,7 @@ export class LeadPage implements OnInit {
           }
           this.ngz.run(() => {
             this.msgListLead = this.msgListLead.concat(result);
+            console.log(this.msgListLead);
           });
 
         }
@@ -1347,67 +1350,10 @@ export class LeadPage implements OnInit {
     });
   }
 
-  public editComentario(idComentario,comentario) {
-
-    const body = new URLSearchParams();
-    body.set('idComentario', idComentario);
-    body.set('comentario', comentario);
-
-    const options = {
-      headers: new HttpHeaders().set(
-        'Content-Type',
-        'application/x-www-form-urlencoded'
-      )
-    };
-
-    const url = 'https://www.koomkin.com.mx/api/app/editComment/';
-
-    return new Promise((resolve, reject) => {
-      this.http.post(url, body.toString(), options).subscribe(
-        data => {
-          console.log(data);
-        },
-        err => {
-          return reject(err);
-        }
-      );
-    });
-  }
-
-  public registerComentario(idUsuario,claveLead,comentario,clasificaLead,valorLead) {
-
-    const body = new URLSearchParams();
-    body.set('idUsuario', idUsuario);
-    body.set('claveLead', claveLead);
-    body.set('comentario', comentario);
-    body.set('clasificaLead', clasificaLead);
-    body.set('valorLead', valorLead);
-
-    const options = {
-      headers: new HttpHeaders().set(
-        'Content-Type',
-        'application/x-www-form-urlencoded'
-      )
-    };
-
-    const url = 'https://www.koomkin.com.mx/api/app/registerComment/';
-
-    return new Promise((resolve, reject) => {
-      this.http.post(url, body.toString(), options).subscribe(
-        data => {
-          console.log(data);
-        },
-        err => {
-          return reject(err);
-        }
-      );
-    });
-  }
-
-  openModal(tipo,clasificaLead) {
+  openModal(tipo,clasificaLead,idComentario,comentario) {
     const myModal = this.modal.create(
       "ModalComentariosPage",
-      { tipo: tipo, leadActual: this.leadActual, clasificaLead: clasificaLead },
+      { tipo: tipo, leadActual: this.leadActual, clasificaLead: clasificaLead, idComentario: idComentario, comentario: comentario},
       { enableBackdropDismiss: false, cssClass: "Modal-comentario" }
     );
     myModal.present();
