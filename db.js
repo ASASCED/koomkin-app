@@ -842,13 +842,16 @@ db.executeGetTicket = function (command, ticket,  requerimiento ,area  ,estatus 
 
 //updateAgenda
 
-db.executeUpdateAgenda = function (idUsuario,idTicket,estatusOptimizacion) {
+db.executeUpdateAgenda2 = function (idUsuario,idTicket,estatusOptimizacion) {
 
     var requestStr = '';
 
     if(idUsuario != 1) {
         requestStr = `insert into Tbl_AgendaOptimizaciones (idUsuario, idTicket, estatusOptimizacion) values (${idUsuario},${idTicket}, '${estatusOptimizacion}')`;
     }
+
+    console.log(requestStr);
+
     return new Promise((resolve, reject) => {
         tp.sql(requestStr)
             .execute()
@@ -862,7 +865,7 @@ db.executeUpdateAgenda = function (idUsuario,idTicket,estatusOptimizacion) {
     });
 };
 
-db.executeUpdateAgenda2 = function (idUsuario,idTicket,estatusOptimizacion) {
+db.executeUpdateAgenda = function (idUsuario,idTicket,estatusOptimizacion) {
 
     const requestStr = `INSERT INTO Tbl_AgendaOptimizaciones (idUsuario, idTicket, estatusOptimizacion)
     SELECT IDUSUARIO, ${idTicket} AS idTicket, '${estatusOptimizacion}' AS estatusOptimizacion FROM CATUSUARIO
