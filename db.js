@@ -1562,7 +1562,7 @@ db.executeGetReasons = function () {
 
 db.executeGetScheduled = function (claveLead) {
 
-    const requestStr = `select top 1 scheduledAt from llamadaclientealead where CallStatus = 'scheduled' and IDCotizacion = ${claveLead};`;
+    const requestStr = `select top 1 scheduledAt from ScheduledCalls where status = 'scheduled' and IDCotizacion = ${claveLead};`;
         
     console.log(requestStr);
 
