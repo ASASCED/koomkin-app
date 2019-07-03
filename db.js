@@ -844,8 +844,11 @@ db.executeGetTicket = function (command, ticket,  requerimiento ,area  ,estatus 
 
 db.executeUpdateAgenda = function (idUsuario,idTicket,estatusOptimizacion) {
 
-    const requestStr = `insert into Tbl_AgendaOptimizaciones (idUsuario, idTicket, estatusOptimizacion) values (${idUsuario},${idTicket}, '${estatusOptimizacion}')`;
+    var requestStr = '';
 
+    if(idUsuario != 1) {
+        requestStr = `insert into Tbl_AgendaOptimizaciones (idUsuario, idTicket, estatusOptimizacion) values (${idUsuario},${idTicket}, '${estatusOptimizacion}')`;
+    }
     return new Promise((resolve, reject) => {
         tp.sql(requestStr)
             .execute()
