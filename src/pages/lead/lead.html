@@ -53,16 +53,17 @@
             <ion-grid class="vista">
                 <ion-card class="dentro">
                     <ion-card-content class="{{leadActual.clasificaLead}}">
-                        <ion-row align-items-center>
+
+                        <ion-row align-items-center style="margin:0%">
                             <ion-col col-10 align-self-center style="display: inherit;">
-                                <a class="inf-nombre">
-                                    <strong>{{leadActual.NOMBRE | capitalize}} </strong>
-                                    <img *ngIf="leadActual.urgencia !== 'Sí'"
-                                        src="assets/imgs/urgencia/{{leadActual.urgencia}}.svg"
-                                        style="vertical-align: middle;width: 10% !important;display: inline-block;" />
-                                    <img *ngIf="leadActual.urgencia === 'Sí'" src="assets/imgs/urgencia/Si.svg"
-                                        style="vertical-align: middle;width: 10% !important;display: inline-block;" />
+                                <a class="rate-nombre">
+                                    <strong>{{leadActual.NOMBRE | capitalize}}</strong>
                                 </a>
+                                <img *ngIf="leadActual.urgencia !== 'Sí'"
+                                    src="assets/imgs/urgencia/{{leadActual.urgencia}}.svg"
+                                    style="vertical-align: middle;width: 9% !important;display: inline-block;margin-left: 2%;" />
+                                <img *ngIf="leadActual.urgencia === 'Sí'" src="assets/imgs/urgencia/Si.svg"
+                                    style="vertical-align: middle;width: 9% !important;display: inline-block;margin-left: 2%;" />
                             </ion-col>
                             <ion-col col-1 style="text-align: right;" *ngIf="leadActual.url !== 'sinaudio'">
                                 <img src="assets/imgs/leads/audio.svg"
@@ -93,34 +94,53 @@
                                     style="vertical-align: middle;width: 100% !important;max-width:150px !important;display: inline-block;" />
                             </ion-col>
                         </ion-row>
-
                         <ion-row>
-                            <ion-col col-10>
-                                <a href="mailto:{{leadActual.EMAIL}}" style="text-decoration: none;">
-                                    <div class="inf-correo">{{leadActual.EMAIL}}</div>
+                            <ion-col col-12>
+                                <a style="text-decoration: none;">
+                                    <div class="inf-correo">
+                                        <span class="inf-estado">{{leadActual.ESTADO}}</span>
+                                        &nbsp;&nbsp; {{leadActual.EMAIL}}</div>
                                 </a>
-                            </ion-col>
-                            <ion-col col-2>
                             </ion-col>
                         </ion-row>
                         <ion-row>
-                            <ion-col col-9>
-                                <div class="rate-fechal"><span class="inf-estado">{{leadActual.ESTADO}}</span>&nbsp;
-                                    {{leadActual.FECHA | date: 'dd/MM/yyyy HH:mm'}}</div>
-                                <div class="rate-valor">Valor del Lead:
-                                    {{valorLead | currency:'MXN':'symbol-narrow': '1.0'}}
+                            <ion-col col-7 style="margin-top: 1%;">
+                                <div>
+                                    <div class="rate-fecha">
+                                        {{leadActual.FECHA | date: 'dd-MM HH:mm' }}
+                                        <span class="inf-agenda"
+                                            [ngClass]="{'vendido-agenda':leadActual.clasificaLead == 'V','descartado-agenda':leadActual.clasificaLead == 'D','seguimiento-agenda':leadActual.clasificaLead == 'P','negociacion-agenda':leadActual.clasificaLead == 'M'}"
+                                            *ngIf="leadActual.reagenda !== 'Sin agenda'">&nbsp;{{leadActual.reagenda | date: 'dd-MM HH:mm' }}</span>
+                                        <span class="inf-agenda"
+                                            [ngClass]="{'vendido-agenda':leadActual.clasificaLead == 'V','descartado-agenda':leadActual.clasificaLead == 'D','seguimiento-agenda':leadActual.clasificaLead == 'P','negociacion-agenda':leadActual.clasificaLead == 'M'}"
+                                            *ngIf="leadActual.reagenda == 'Sin agenda'">&nbsp;{{leadActual.reagenda}}</span>
+                                        <br>
+                                        <div class="inf-valor">
+                                            Valor del Lead = 
+                                            {{leadActual.ValorLead | currency: 'MXN':'symbol' : '1.0'}}
+                                        </div>
+                                    </div>
                                 </div>
                             </ion-col>
-                            <ion-col col-3 align-items-end style="display: inline-block;text-align: right;">
+                            <ion-col col-2>
+                                <img *ngIf="leadActual.status == 'perdida'"
+                                    src="assets/imgs/llamadas/callmissed.svg"
+                                    style="vertical-align: middle;width: 30% !important;max-width:150px !important;display: inline-block;margin-top: 6%;"
+                                    (click)="showConfirm(leadActual)" />
+                            </ion-col>
+
+                            <ion-col col-3 style="display: flex;
+                            text-align: right;
+                            justify-content: flex-end;
+                            align-items: flex-end;">
                                 <ion-icon
-                                    style="margin-right: 2px !important;font-size: 2.5em !important;color: rgb(209, 209, 209)"
+                                    style="margin-right: .2em !important;font-size: 2.5em !important;color: rgb(209, 209, 209)"
                                     [ngClass]="{'like':leadActual.calificaLead === 'like','sin':leadActual.calificaLead === 'dislike'}"
                                     name="md-thumbs-up" (click)="changeLike('L',leadActual)"></ion-icon>
-                                <ion-icon style="font-size: 2.5em !important;color: rgb(209, 209, 209);margin-right: 5%"
+                                <ion-icon style="font-size: 2.5em !important;color: rgb(209, 209, 209)"
                                     [ngClass]="{'like':leadActual.calificaLead === 'dislike','sin':leadActual.calificaLead === 'like'}"
                                     name="md-thumbs-down" (click)="changeLike('DL',leadActual)"></ion-icon>
                             </ion-col>
-
                         </ion-row>
 
                     </ion-card-content>
@@ -291,6 +311,7 @@
                                     style="vertical-align: middle;width: 80% !important;display: inline-block;" />
                             </ion-col>
                             <ion-col col-10 class="tex">
+                                    {{scheduledAt | date: 'dd/MM/yyyy'}}
                                 <!--
                                 <ion-item>
                                     <ion-datetime class="seleccion-brief" style="width: 99%;margin-top: 0%"
@@ -309,6 +330,7 @@
                                     style="vertical-align: middle;width: 80% !important;display: inline-block;" />
                             </ion-col>
                             <ion-col col-10 class="tex">
+                                    {{scheduledAt | date: 'HH:mm'}}
                                 <!--
                                 <ion-item>
                                     <ion-datetime class="seleccion-brief" style="width: 99%;margin-top: 0%"

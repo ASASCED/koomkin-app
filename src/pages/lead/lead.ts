@@ -353,7 +353,6 @@ export class LeadPage implements OnInit {
     );
     this.getRazones();
     this.getComentarios();
-    this.getScheduled();
     this.getLeadCalls();
     this.getCheckLeadComplement();
     this.getCountLeadCalls();
@@ -1360,18 +1359,6 @@ export class LeadPage implements OnInit {
     myModal.onDidDismiss(() => { });
   }
 
-  getScheduled() {
-    this.provedor.getScheduled(this.leadActual.clave).then(
-      data => {
-        let scheduledAt = data;
-        this.scheduledAt = scheduledAt;
-        // console.log(this.razones);
-      },
-      err => {
-        // console.log('error');
-      }
-    );
-  }
 
 }
 

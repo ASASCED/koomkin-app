@@ -206,7 +206,7 @@ ion-app.md [padding] .scroll-content {
 
 //Nombre del Lead
 .inf-nombre {
-  font-size: 5vw;
+  font-size: 4.5vw;
   color: darkslategray;
   overflow: hidden;
   white-space: nowrap;
@@ -233,14 +233,14 @@ hr {
 
 //Fecha del Lead
 .rate-fechal {
-  font-size: 4.3vw !important;
+  font-size: 4vw !important;
   color: dimgray;
   text-align: left;
 }
 
 //Valor del Lead
 .rate-valor {
-  font-size: 4.3vw !important;
+  font-size: 4vw !important;
   color: #1f639e;
   text-align: left;
   font-weight: bold;
@@ -249,23 +249,49 @@ hr {
 
 //Calidad del Lead
 .rate-calidad {
-  font-size: 4.8vw !important;
+  font-size: 4.3vw !important;
   color: #00b9be;
   margin-top: 0.2em;
 }
 
 //Nombre de la empresa Lead
 .inf-empresa {
-  font-size: 4.3vw;
+  font-size: 4vw;
   color: dimgray;
 }
 
 //Estado del Lead
 .inf-estado {
-  font-size: 4.3vw !important;
+  font-size: 4vw !important;
   color: dimgray !important;
   text-align: right !important;
   font-weight: bold;
+  font-style: normal;
+
+}
+
+//Agenda
+.inf-agenda {
+  font-size: 4vw !important;
+  text-align: right !important;
+  color: #76797b;
+  border-left: 1px solid dimgray;
+}
+
+.vendido-agenda  {
+  color: #00b9be !important;
+}
+
+.seguimiento-agenda  {
+  color: #6b4595 !important;
+}
+
+.descartado-agenda  {
+  color:  #fe703f !important;
+}
+
+.negociacion-agenda  {
+  color:  #288ac1 !important;
 }
 
 //Correo del Lead
@@ -275,11 +301,18 @@ hr {
   font-size: 4.3vw !important;
 }
 
+.inf-valor {
+  color: darkslategray;
+  font-size: 4vw !important;
+  font-weight: bold;
+  text-align: left;
+  margin-top: 2%;
+}
 //
 .cotiza {
   color: #00b9be;
   font-weight: bold;
-  font-size: 5vw;
+  font-size: 4.5vw;
   margin-top: 0%;
   margin-bottom: 0%;
   text-align: left;

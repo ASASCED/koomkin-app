@@ -105,15 +105,28 @@
                                     <ion-row>
                                         <ion-col col-12>
                                             <a style="text-decoration: none;">
-                                                <div class="inf-correo">{{lead.EMAIL}}</div>
+                                                <div class="inf-correo">
+                                                    <span class="inf-estado">{{lead.ESTADO}}</span>
+                                                    &nbsp;&nbsp; {{lead.EMAIL}}</div>
                                             </a>
                                         </ion-col>
                                     </ion-row>
                                     <ion-row>
-                                        <ion-col col-8 style="margin-top: 1%;">
+                                        <ion-col col-7 style="margin-top: 1%;">
                                             <div>
-                                                <div class="rate-fecha"><span
-                                                        class="inf-estado">{{lead.ESTADO}}</span>&nbsp;{{lead.FECHA | date: 'dd/MM/yyyy HH:mm' }}
+                                                <div class="rate-fecha">
+                                                    {{lead.FECHA | date: 'dd-MM HH:mm' }}
+                                                    <span class="inf-agenda"
+                                                        [ngClass]="{'vendido-agenda':lead.clasificaLead == 'V','descartado-agenda':lead.clasificaLead == 'D','seguimiento-agenda':lead.clasificaLead == 'P','negociacion-agenda':lead.clasificaLead == 'M'}"
+                                                        *ngIf="lead.reagenda !== 'Sin agenda'">&nbsp;{{lead.reagenda | date: 'dd-MM HH:mm' }}</span>
+                                                    <span class="inf-agenda"
+                                                        [ngClass]="{'vendido-agenda':lead.clasificaLead == 'V','descartado-agenda':lead.clasificaLead == 'D','seguimiento-agenda':lead.clasificaLead == 'P','negociacion-agenda':lead.clasificaLead == 'M'}"
+                                                        *ngIf="lead.reagenda == 'Sin agenda'">&nbsp;{{lead.reagenda}}</span>
+                                                    <br>
+                                                    <div class="inf-valor">
+                                                        Valor del Lead = 
+                                                        {{lead.ValorLead | currency: 'MXN':'symbol' : '1.0'}}
+                                                    </div>
                                                 </div>
                                             </div>
                                         </ion-col>
@@ -124,16 +137,20 @@
                                                 (click)="showConfirm(lead)" />
                                         </ion-col>
 
-                                        <ion-col col-2 style="text-align:right">
+                                        <ion-col col-3 style="display: flex;
+                                        text-align: right;
+                                        justify-content: flex-end;
+                                        align-items: flex-end;">
                                             <ion-icon
-                                                style="margin-right: .2em !important;font-size: 2em !important;color: rgb(209, 209, 209)"
+                                                style="margin-right: .2em !important;font-size: 2.5em !important;color: rgb(209, 209, 209)"
                                                 [ngClass]="{'like':lead.calificaLead === 'like','sin':lead.calificaLead === 'dislike'}"
                                                 name="md-thumbs-up" (click)="changeLike('L',lead)"></ion-icon>
-                                            <ion-icon style="font-size: 2em !important;color: rgb(209, 209, 209)"
+                                            <ion-icon style="font-size: 2.5em !important;color: rgb(209, 209, 209)"
                                                 [ngClass]="{'like':lead.calificaLead === 'dislike','sin':lead.calificaLead === 'like'}"
                                                 name="md-thumbs-down" (click)="changeLike('DL',lead)"></ion-icon>
                                         </ion-col>
                                     </ion-row>
+
                                 </ion-card-content>
                             </ion-card>
                         </ion-item>

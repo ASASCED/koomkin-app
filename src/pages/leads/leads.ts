@@ -39,6 +39,7 @@ export class LeadsPage implements OnInit {
   public subtitle;
   public img;
   public idReportBanner;
+  public scheduledAt: any;
   public uuidPass;
   public mostrar;
   public notification;
@@ -140,6 +141,13 @@ export class LeadsPage implements OnInit {
         .then(comentario => {
           leadsArray[k].comentario = comentario;
           
+        })
+        .catch();
+
+        this.getScheduled(leadsArray[k].clave)
+        .then(scheduledAt => {
+          console.log(scheduledAt);
+          leadsArray[k].reagenda = scheduledAt;
         })
         .catch();
 
@@ -697,7 +705,27 @@ export class LeadsPage implements OnInit {
       data => {
         let comentario = data;
         this.comentario = comentario;
-        resolve(comentario);
+        resolve(this.comentario);
+      },
+      err => {
+        // console.log('error');
+      }
+    )
+    });
+  }
+
+  getScheduled(clave) {
+    return new Promise(resolve => {
+    this.provedor.getScheduled(clave).then(
+      data => {
+        let scheduledAt = data;
+        if(scheduledAt[0]) {
+          this.scheduledAt = scheduledAt[0].scheduledAt;
+          console.log(this.scheduledAt);
+        } else {
+          this.scheduledAt = 'Sin agenda';
+        }
+        resolve(this.scheduledAt);
       },
       err => {
         // console.log('error');
