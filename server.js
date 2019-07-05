@@ -1751,10 +1751,6 @@ app.post('/registerReason/', function (req, res) {
     let claveLead = parseInt(req.body.claveLead, 10);
     let razonDescarto = req.body.razonDescarto;
 
-    if(!valorLead){
-        valorLead = 'NULL';
-    }
-
     db.executeInsertReason(claveLead,razonDescarto)
         .then(rows => {
             res.json(rows).status(200).send();

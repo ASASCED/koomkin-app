@@ -1579,7 +1579,7 @@ db.executeGetScheduled = function (claveLead) {
         });
 };
 
-db.executeInsertReason = function (claveLead,razonDescarto) {
+db.executeInsertReason = function (razonDescarto,claveLead) {
 
     const requestStr = `UPDATE TACotizacion SET RazonDescartado = '${razonDescarto}' WHERE Clave = ${claveLead};`;
         

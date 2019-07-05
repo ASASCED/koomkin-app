@@ -17,7 +17,7 @@ export class ModalComentariosPage implements OnInit {
   public leadActual;
   public idComentario;
   public razones;
-  public razonDescarto;
+  public razonDescarto = 'No logro contactarlo';
   public tipo;
   public fecha;
   public hora;
@@ -179,8 +179,9 @@ export class ModalComentariosPage implements OnInit {
         'application/x-www-form-urlencoded'
       )
     };
-    console.log(body.toString());
+
     const url = 'https://www.koomkin.com.mx/api/app/registerReason/';
+    
     return new Promise((resolve, reject) => {
       this.http.post(url, body.toString(), options).subscribe(
         data => {
