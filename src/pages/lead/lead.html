@@ -147,39 +147,6 @@
                         <p class="mensaje">“{{mensaje}}”</p>
                     </ion-col>
                 </ion-row>
-                <!--        
-                <proveedor *ngIf="this.categoria == '1'" [urgenciaproveedor]='urgenciaproveedor'
-                    [frecuenciaproveedor]='frecuenciaproveedor' [usoproveedor]='usoproveedor'
-                    [mensajeproveedor]='mensajeproveedor' [cantidadproveedor]='cantidadproveedor'
-                    [unidadesproveedor]='unidadesproveedor' [envioproveedor]='envioproveedor' [mensaje]='mensaje'>
-                </proveedor>
-
-                <servicio *ngIf="this.categoria == '2'" [mensajeservicio]='mensajeservicio'
-                    [urgenciaservicio]='urgenciaservicio' [frecuenciaservicio]='frecuenciaservicio'
-                    [usoservicio]='usoservicio'></servicio>
-
-                <medico *ngIf="this.categoria == '3'" [urgenciamedico]='urgenciamedico' [mensajemedico]='mensajemedico'
-                    [edadM]='edadM' [generoM]='generoM' [fechaCitaM]='fechaCitaM' [horaCitaM]='horaCitaM'></medico>
-
-                <profesionista *ngIf="this.categoria == '4'" [urgenciaprofesionista]='urgenciaprofesionista'
-                    [mensajeprofesionista]='mensajeprofesionista' [usoprofesionista]='usoprofesionista'
-                    [fechaCitaP]='fechaCitaP' [horaCitaP]='horaCitaP'></profesionista>
-
-                <puntoventa *ngIf="this.categoria == '5'" [urgenciaventa]='urgenciaventa' [mensajeventa]='mensajeventa'
-                    [usoventa]='usoventa'></puntoventa>
-
-                <restaurante *ngIf="this.categoria == '6'" [mensajerestaurante]='mensajerestaurante'
-                    [personasrestaurante]='personasrestaurante' [horaCitarestaurante]='horaCitarestaurante'
-                    [fechaCitarestaurante]='fechaCitarestaurante'></restaurante>
-
-                <hotel *ngIf="this.categoria == '7'" [mensajehotel]='mensajehotel' [personashotel]='personashotel'
-                    [hotelEntrada]='hotelEntrada' [hotelSalida]='hotelSalida'></hotel>
-
-                <inmobiliaria *ngIf="this.categoria == '8'" [urgenciainmobiliaria]='urgenciainmobiliaria'
-                    [mensajeinmobiliaria]='mensajeinmobiliaria' [edadinmobiliaria]='edadinmobiliaria'
-                    [fechaCitainmobiliaria]='fechaCitainmobiliaria' [horaCitainmobiliaria]='horaCitainmobiliaria'
-                    [personasinmobiliaria]='personasinmobiliaria'></inmobiliaria>
-                -->
                 <ion-row>
                     <ion-col col-12>
                         <p class="califica">Detalles de Contacto</p>
@@ -239,22 +206,6 @@
                     </ion-col>
                 </ion-row>
                 <ion-row>
-                    <!--
-                    <ion-col col-6 *ngIf="contacto == 'No'">
-                        <button class="arribab" [ngClass]="{'descartado':leadActual.clasificaLead === 'D'}">
-                            Descartado
-                        </button>
-                        <button class="arribab" [ngClass]="{'proceso':leadActual.clasificaLead === 'P'}">
-                            En Seguimiento
-                        </button>
-                        <button class="arribab" [ngClass]="{'sincontacto':leadActual.clasificaLead === 'S'}">
-                            Negociación
-                        </button>
-                        <button class="arribab" [ngClass]="{'vendido':leadActual.clasificaLead === 'V'}">
-                            Vendido
-                        </button>
-                    </ion-col>
-                  -->
                     <ion-col col-6>
                         <button class="arribab" [ngClass]="{'descartado':leadActual.clasificaLead === 'D'}"
                             (click)="changeClassification('D');openModal(1,'Descartado')">
@@ -311,7 +262,7 @@
                                     style="vertical-align: middle;width: 80% !important;display: inline-block;" />
                             </ion-col>
                             <ion-col col-10 class="tex">
-                                  <span *ngIf="reagenda != 'Sin agenda'">{{reagenda | date: 'HH:mm'}}</span>  
+                                  <span *ngIf="reagenda != 'Sin agenda'">{{reagenda | date: 'HH:mm' : 'GMT+5:00'}}</span>  
                                   <span *ngIf="reagenda == 'Sin agenda'">{{reagenda}}</span>  
                             </ion-col>
                         </ion-row>

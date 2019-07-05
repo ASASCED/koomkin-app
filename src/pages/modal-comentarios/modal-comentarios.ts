@@ -230,7 +230,7 @@ export class ModalComentariosPage implements OnInit {
   public showSuccess() {
 
     swal({
-      title: 'Estatus actalizado con éxito',
+      title: 'Estatus actualizado con éxito',
       text: 'Por favor actualiza tus leads para visualizar la información',
       type: 'success',
       showCancelButton: false,
