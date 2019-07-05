@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { RestProvider } from '../../providers/rest/rest';
+import swal from 'sweetalert2';
 
 @IonicPage()
 @Component({
@@ -181,7 +182,7 @@ export class ModalComentariosPage implements OnInit {
     };
 
     const url = 'https://www.koomkin.com.mx/api/app/registerReason/';
-    
+
     return new Promise((resolve, reject) => {
       this.http.post(url, body.toString(), options).subscribe(
         data => {
@@ -226,5 +227,16 @@ export class ModalComentariosPage implements OnInit {
       });
     }
   }
+  public showSuccess() {
 
+    swal({
+      title: 'Estatus actalizado con éxito',
+      text: 'Por favor actualiza tus leads para visualizar la información',
+      type: 'success',
+      showCancelButton: false,
+      confirmButtonColor: '#3085d6',
+      confirmButtonText: 'OK',
+      reverseButtons: true,
+    });
+  }
 }
