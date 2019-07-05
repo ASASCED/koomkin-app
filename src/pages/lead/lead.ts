@@ -151,7 +151,7 @@ export class LeadPage implements OnInit {
   public valorLead;
   public fecha;
   public fechaExitoso;
-  public scheduledAt;
+  public reagenda: any = '-';
   private autoScroller: MutationObserver;
 
   @ViewChild(Content) content: Content;
@@ -407,6 +407,8 @@ export class LeadPage implements OnInit {
     this.mensajeLead = this.leadActual.MENSAJE;
     this.valorLead = this.leadActual.ValorLead;
     this.intentosExitoso = this.leadActual.IntentosAntesExitoso;
+
+    this.reagenda = this.leadActual.reagenda;
     if(this.intentosExitoso == null || this.intentosExitoso == 'null') {
       this.intentosExitoso = '-';
     }
@@ -435,7 +437,6 @@ export class LeadPage implements OnInit {
       } 
     }
 
-    
     if (this.leadActual.fechaContacto) {
       this.leadActual.fechaContacto = this.leadActual.fechaContacto
         .substring(0, 16)
@@ -1358,7 +1359,6 @@ export class LeadPage implements OnInit {
     myModal.present();
     myModal.onDidDismiss(() => { });
   }
-
 
 }
 

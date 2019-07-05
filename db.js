@@ -1579,9 +1579,9 @@ db.executeGetScheduled = function (claveLead) {
         });
 };
 
-db.executeInsertReason = function (claveLead,valorLead,razonDescarto) {
+db.executeInsertReason = function (claveLead,razonDescarto) {
 
-    const requestStr = `UPDATE TACotizacion SET ValorLead = ${valorLead}, RazonDescartado = '${razonDescarto}' WHERE Clave = ${claveLead};`;
+    const requestStr = `UPDATE TACotizacion SET RazonDescartado = '${razonDescarto}' WHERE Clave = ${claveLead};`;
         
     console.log(requestStr);
 
@@ -1632,11 +1632,31 @@ db.executeGetComments = function (claveLead) {
         });
 };
 
-db.executeInsertComment = function (idUsuario,claveLead,comentario,clasificaLead,valorLead) {
+db.executeUpdateValor = function (claveLead,valorLead) {
 
-    const requestStr = `insert into LeadComentario (IdUsuario,ClaveLead,Comentario,FechaRegistro,ClasificaLead) values (${idUsuario},${claveLead},'${comentario}',getdate(),'${clasificaLead}')
-    UPDATE TACotizacion SET ValorLead = ${valorLead} WHERE Clave = ${claveLead};`;
+    const requestStr = `UPDATE TACotizacion SET ValorLead = ${valorLead} WHERE Clave = ${claveLead};`;
         
+    console.log(requestStr);
+
+    return new Promise((resolve, reject) => {
+        tp.sql(requestStr)
+            .execute()
+            .then(results => {
+                resolve(results);
+            })
+            .catch(err => {
+                console.log(err);
+                reject(err);
+            });
+        });
+};
+
+db.executeInsertComment = function (idUsuario,claveLead,comentario,clasificaLead) {
+
+    const requestStr = `insert into LeadComentario (IdUsuario,ClaveLead,Comentario,FechaRegistro,ClasificaLead) values (${idUsuario},${claveLead},'${comentario}',getdate(),'${clasificaLead}')`;
+        
+    console.log(requestStr);
+
     return new Promise((resolve, reject) => {
         tp.sql(requestStr)
             .execute()

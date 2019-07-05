@@ -1749,14 +1749,13 @@ app.post('/passLogin', (req, res) => {
 app.post('/registerReason/', function (req, res) {
 
     let claveLead = parseInt(req.body.claveLead, 10);
-    let valorLead = parseInt(req.body.valorLead, 10);
     let razonDescarto = req.body.razonDescarto;
 
     if(!valorLead){
         valorLead = 'NULL';
     }
 
-    db.executeInsertReason(claveLead,valorLead,razonDescarto)
+    db.executeInsertReason(claveLead,razonDescarto)
         .then(rows => {
             res.json(rows).status(200).send();
         })
@@ -1772,13 +1771,27 @@ app.post('/registerComment/', function (req, res) {
     const claveLead = parseInt(req.body.claveLead, 10);
     const comentario = req.body.comentario;
     const clasificaLead = req.body.clasificaLead;
+
+    db.executeInsertComment(idUsuario,claveLead,comentario,clasificaLead)
+        .then(rows => {
+            res.json(rows).status(200).send();
+        })
+        .catch(err => {
+            res.status(500).json({ error: err }).send();
+        });
+});
+
+//Genera un comentario por lead
+app.post('/registerCost/', function (req, res) {
+
+    const claveLead = parseInt(req.body.claveLead, 10);
     let valorLead = req.body.valorLead;
 
     if(!valorLead){
         valorLead = 'NULL';
     }
 
-    db.executeInsertComment(idUsuario,claveLead,comentario,clasificaLead,valorLead)
+    db.executeUpdateValor(claveLead,valorLead)
         .then(rows => {
             res.json(rows).status(200).send();
         })
