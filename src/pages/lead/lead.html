@@ -286,22 +286,14 @@
                                 <p class="descarto">
                                     {{razonDescarto}}
                                 </p>
-                                <!--
-                                <select *ngIf="leadActual.clasificaLead === 'D'" type="text" class="seleccion-brief"
-                                    style="width: 99%;margin-top: 0%" [(ngModel)]="razonDescarto">
-                                    <option *ngFor="let razon of razones">
-                                        {{razon.Descripcion}}
-                                    </option>
-                                </select>
-                               -->
                             </ion-col>
                         </ion-row>
 
                         <p class="razon"
-                            *ngIf="leadActual.clasificaLead === 'P' || leadActual.clasificaLead === 'S' || leadActual.clasificaLead === 'V'">
+                            *ngIf="leadActual.clasificaLead === 'P' || leadActual.clasificaLead === 'S'">
                             Próxima comunicación
                         </p>
-                        <ion-row *ngIf="leadActual.clasificaLead === 'P' || leadActual.clasificaLead === 'S' || leadActual.clasificaLead === 'V'">
+                        <ion-row *ngIf="leadActual.clasificaLead === 'P' || leadActual.clasificaLead === 'S'">
                             <ion-col col-2 class="tex">
                                 <img src="assets/imgs/lead/ic_hora.svg"
                                     style="vertical-align: middle;width: 80% !important;display: inline-block;" />
@@ -309,19 +301,11 @@
                             <ion-col col-10 class="tex">
                                     <span *ngIf="reagenda != 'Sin agenda'">{{reagenda | date: 'dd/MM/yyyy'}}</span>  
                                     <span *ngIf="reagenda == 'Sin agenda'">{{reagenda}}</span>  
-                                <!--
-                                <ion-item>
-                                    <ion-datetime class="seleccion-brief" style="width: 99%;margin-top: 0%"
-                                        displayFormat="DD MMMM YYYY" [(ngModel)]="fecha" cancelText="Cancelar"
-                                        doneText="Aceptar">
-                                    </ion-datetime>
-                                </ion-item>
-                                -->
                             </ion-col>
                         </ion-row>
 
                         <ion-row
-                            *ngIf="leadActual.clasificaLead === 'P' || leadActual.clasificaLead === 'S' || leadActual.clasificaLead === 'V'">
+                            *ngIf="leadActual.clasificaLead === 'P' || leadActual.clasificaLead === 'S'">
                             <ion-col col-2 class="tex">
                                 <img src="assets/imgs/lead/ic_fecha.svg"
                                     style="vertical-align: middle;width: 80% !important;display: inline-block;" />
@@ -329,14 +313,6 @@
                             <ion-col col-10 class="tex">
                                   <span *ngIf="reagenda != 'Sin agenda'">{{reagenda | date: 'HH:mm'}}</span>  
                                   <span *ngIf="reagenda == 'Sin agenda'">{{reagenda}}</span>  
-                                <!--
-                                <ion-item>
-                                    <ion-datetime class="seleccion-brief" style="width: 99%;margin-top: 0%"
-                                        displayFormat="HH:mm" [(ngModel)]="hora" cancelText="Cancelar"
-                                        doneText="Aceptar">
-                                    </ion-datetime>
-                                </ion-item>
-                                -->
                             </ion-col>
                         </ion-row>
 
