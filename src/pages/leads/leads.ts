@@ -146,8 +146,10 @@ export class LeadsPage implements OnInit {
 
         this.getScheduled(leadsArray[k].clave)
         .then(scheduledAt => {
-          console.log(scheduledAt);
           leadsArray[k].reagenda = scheduledAt;
+           if(leadsArray[k].reagenda != 'Sin agenda') {
+            leadsArray[k].reagenda = this.agregarHoras(scheduledAt).toString();
+           }     
         })
         .catch();
 
@@ -827,7 +829,7 @@ export class LeadsPage implements OnInit {
 
   agregarHoras(time){
     let date = new Date(time);
-    date.setTime(date.getTime() + (6*60*60*1000));
+    date.setTime(date.getTime() + (5*60*60*1000));
     return date.toISOString();
   }
 

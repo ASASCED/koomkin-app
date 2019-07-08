@@ -164,7 +164,7 @@
                         <img icon-only tooltip="Fecha Atención" positionV="top" mobileEvent="click" hideOthers=true
                             duration=2000 src="assets/imgs/lead/ic_fecha.svg"
                             style="vertical-align: middle;width: 10% !important;display: inline-block;" />
-                        &nbsp; {{leadActual.fechaContacto | date: 'dd/MM/yyyy HH:mm'}}
+                        &nbsp; {{leadActual.fechaContacto | date: 'dd/MM/yyyy HH:mm' }}
                     </ion-col>
                     <ion-col col-3 class="tex">
                         <img icon-only tooltip="No. de Intentos" positionV="top" mobileEvent="click" hideOthers=true
@@ -262,7 +262,7 @@
                                     style="vertical-align: middle;width: 80% !important;display: inline-block;" />
                             </ion-col>
                             <ion-col col-10 class="tex">
-                                  <span *ngIf="reagenda != 'Sin agenda'">{{reagenda | date: 'HH:mm' : 'GMT+5:00'}}</span>  
+                                  <span *ngIf="reagenda != 'Sin agenda'">{{reagenda | date: 'HH:mm'}}</span>  
                                   <span *ngIf="reagenda == 'Sin agenda'">{{reagenda}}</span>  
                             </ion-col>
                         </ion-row>
