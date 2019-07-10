@@ -69,6 +69,8 @@
                                                 style="vertical-align: middle;width: 9% !important;display: inline-block;margin-left: 2%;" />
                                             <img *ngIf="lead.urgencia === 'Sí'" src="assets/imgs/urgencia/Si.svg"
                                                 style="vertical-align: middle;width: 9% !important;display: inline-block;margin-left: 2%;" />
+                                            &nbsp;<img *ngIf="lead.Canal != 'Reporte' && lead.Canal != 'App'"
+                                                src="assets/imgs/lead/ic_koomkinlead.svg" style="vertical-align: middle;width: 8% !important;display: inline-block;margin-left: 2%;" />
                                         </ion-col>
                                         <ion-col col-1 style="text-align: right;" *ngIf="lead.url !== 'sinaudio'">
                                             <img src="assets/imgs/leads/audio.svg"

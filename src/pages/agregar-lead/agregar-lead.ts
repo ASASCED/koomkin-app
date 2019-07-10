@@ -35,6 +35,7 @@ export class AgregarLeadPage implements OnInit {
   public postal_code = 0;
   public lead_uuid;
   public date;
+  public hour;
   public dateComplete;
   public disableButton = false;
 
@@ -94,7 +95,8 @@ export class AgregarLeadPage implements OnInit {
       'email': ['', [Validators.required, Validators.email]],
       'phone_number': ['', [Validators.required]],
       'state': [''],
-      'date': ['']
+      'date': [''],
+      'hour': ['']
     });
     this.registerForm.valueChanges
     .subscribe(data => this.onValueChanged(data))
@@ -201,8 +203,12 @@ export class AgregarLeadPage implements OnInit {
       }
     });
     this.date = this.registerForm.get('date').value;
-    if (this.date.length > 0) {
+    if (this.date.length > 0 && this.hour.length > 0) {
+      this.dateComplete = this.date.replace (/-/g, '') + ' ' + this.hour;
+    } else if (this.date.length > 0 && this.hour.length == 0) {
       this.dateComplete = this.date.replace (/-/g, '') + ' ' + n;
+    } else if (this.date.length == 0 && this.hour.length > 0) {
+      this.dateComplete = yyyy + '' + mm + '' + dd  + ' ' + this.hour;
     } else {
       this.dateComplete = yyyy + '' + mm + '' + dd  + ' ' + n;
     }

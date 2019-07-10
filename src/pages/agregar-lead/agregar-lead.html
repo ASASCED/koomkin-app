@@ -29,8 +29,18 @@
           {{estados.NOMBRE}}
         </option>
       </select>
-      <p class="titulo-brief">Fecha</p>
-      <input type="date" class="input-agregar" placeholder="Fecha" formControlName="date" style="width: 95%">
+      <ion-grid class="date-grid">
+        <ion-row style="width: 100%;margin-bottom: 0%;">
+          <ion-col col-6>
+            <p class="titulo-brief">Fecha</p>
+            <input type="date" class="input-date" placeholder="Fecha" formControlName="date">
+          </ion-col>
+          <ion-col col-6>
+            <p class="titulo-brief">Hora</p>
+            <input type="time" class="input-date" placeholder="Hora" formControlName="hour">
+          </ion-col>
+        </ion-row>
+      </ion-grid>
       <br>
       <br>
       <button ng class="guardar-agregar" [disabled]="!registerForm.valid || disableButton" (click)="validarCampos()">Agregar</button>

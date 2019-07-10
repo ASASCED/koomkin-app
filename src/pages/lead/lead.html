@@ -250,7 +250,7 @@
                                     style="vertical-align: middle;width: 80% !important;display: inline-block;" />
                             </ion-col>
                             <ion-col col-10 class="tex">
-                                    <span *ngIf="reagenda != 'Sin agenda'">{{reagenda | date: 'dd/MM/yyyy'}}</span>  
+                                    <span *ngIf="reagenda != 'Sin agenda'">{{reagenda | date: 'dd-MM-yyyy'}}</span>  
                                     <span *ngIf="reagenda == 'Sin agenda'">{{reagenda}}</span>  
                             </ion-col>
                         </ion-row>
@@ -294,7 +294,7 @@
                         style="display: flex !important; align-content: center !important; align-items: center !important;margin-top: 1%;">
                         <ion-col col-10>
                             <p style="color:gray;margin-left: 5px;font-size: small;">
-                                {{fechaComentario | date: 'dd/MM/yyyy HH:mm'}}
+                                {{fechaComentario | date: 'dd-MMMM-yyyy HH:mm'}}
                             </p>
                         </ion-col>
                         <ion-col col-1 style="text-align: center">
@@ -337,7 +337,7 @@
                     style="display: flex !important; align-content: center !important; align-items: center !important;margin-top: 1%;">
                     <ion-col col-10>
                         <p style="color:gray;margin-left: 5px;font-size: small;">
-                            {{registro.FechaRegistro | date: 'dd/MM/yyyy HH:mm'}}
+                            {{registro.FechaRegistro | date: 'dd-MMMM-yyyy HH:mm'}}
                         </p>
                     </ion-col>
                     <ion-col col-1 style="text-align: center">
