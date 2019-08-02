@@ -47,6 +47,21 @@ export class LeadsPage implements OnInit {
   public fondo;
   public description;
   public habilitado;
+  public busquedaSin = 'W';
+  public busquedaDescartado = 'D';
+  public busquedaSeguimiento = 'S';
+  public busquedaNegociacion = 'N';
+  public busquedaVendido = 'V';
+  public contadorSin = 0;
+  public contadorDescartado = 0;
+  public contadorSeguimiento = 0;
+  public contadorNegociacion = 0;
+  public contadorVendido = 0;
+  public valorSin = 0;
+  public valorDescartado = 0;
+  public valorSeguimiento = 0;
+  public valorNegociacion = 0;
+  public valorVendido = 0;
   public url = "sinaudio";
   public audio;
   leads_pagination_min = 0;
@@ -82,13 +97,14 @@ export class LeadsPage implements OnInit {
   public stylizeLeads(leadsArray: any) {
     for (let k in leadsArray) {
       //leadsArray[k].FECHA = this.agregarHoras(leadsArray[k].FECHA).toString();
-      leadsArray[k].FECHA = leadsArray[k].FECHA.substring(0, 16).replace(
+      leadsArray[k].fechaenvio = leadsArray[k].FECHA.substring(0, 16).replace(
         /^(\d{4})-(\d{2})-(\d{2})T(\d{5})$/g,
         "$3/$2/$1$4"
       );
-
-      leadsArray[k].NOMBRE = leadsArray[k].NOMBRE.substring(0, 16);
-      leadsArray[k].EMPRESA = leadsArray[k].EMPRESA.substring(0, 28);
+      leadsArray[k].EmailUsuarioEnvio = leadsArray[k].EMAIL;
+      leadsArray[k].ABREVIACION = leadsArray[k].ESTADO;
+      leadsArray[k].NombreUsuarioEnvio = leadsArray[k].NOMBRE.substring(0, 16);
+      leadsArray[k].EmpresaUsuarioEnvio = leadsArray[k].EMPRESA.substring(0, 28);
       leadsArray[k].urgencia = "No";
       leadsArray[k].status = "exitosa";
       this.callMissed(leadsArray[k].uuid).then(status => {
@@ -146,9 +162,9 @@ export class LeadsPage implements OnInit {
 
         this.getScheduled(leadsArray[k].clave)
         .then(scheduledAt => {
-          leadsArray[k].reagenda = scheduledAt;
-           if(leadsArray[k].reagenda != 'Sin agenda') {
-            leadsArray[k].reagenda = this.agregarHoras(scheduledAt).toString();
+          leadsArray[k].scheduledAt = scheduledAt;
+           if(leadsArray[k].scheduledAt != 'Sin agenda') {
+            leadsArray[k].scheduledAt = this.agregarHoras(scheduledAt).toString();
            }     
         })
         .catch();
@@ -166,18 +182,19 @@ export class LeadsPage implements OnInit {
         leadsArray[k].leido = "noleido";
       }
       if (
-        leadsArray[k].clasificaLead == "" ||
+        leadsArray[k].clasificaLead == '' ||
+        leadsArray[k].clasificaLead == 'null' ||
         leadsArray[k].clasificaLead == null
       ) {
-        leadsArray[k].clasificaLead = "banda";
-      } else if (leadsArray[k].clasificaLead == "Descartado") {
-        leadsArray[k].clasificaLead = "D";
-      } else if (leadsArray[k].clasificaLead == "Vendido") {
-        leadsArray[k].clasificaLead = "V";
-      } else if (leadsArray[k].clasificaLead.toLowerCase() == "sin contacto") {
-        leadsArray[k].clasificaLead = "S";
-      } else if (leadsArray[k].clasificaLead == "En proceso de venta") {
-        leadsArray[k].clasificaLead = "P";
+        leadsArray[k].clasificaLead = 'W';
+      } else if (leadsArray[k].clasificaLead == 'Descartado' || leadsArray[k].clasificaLead.toLowerCase() == 'sin contacto') {
+        leadsArray[k].clasificaLead = 'D';
+      } else if (leadsArray[k].clasificaLead == 'Seguimiento') {
+        leadsArray[k].clasificaLead = 'S';
+      } else if (leadsArray[k].clasificaLead == 'Negociacion' || leadsArray[k].clasificaLead == 'En proceso de venta') {
+        leadsArray[k].clasificaLead = 'N';
+      } else if (leadsArray[k].clasificaLead == 'Vendido') {
+        leadsArray[k].clasificaLead = 'V';
       }
     }
     console.log(leadsArray);
@@ -512,15 +529,11 @@ export class LeadsPage implements OnInit {
   public resetLeadsArray() {
     this.leads_pagination_min = 0;
     this.leads_pagination_max = 0;
-
     this.leads = [];
-
     this.leadsfiltrados = [];
-
     this.leads_pagination_min = this.leads_pagination_max + 1;
     this.leads_pagination_max += 10;
 
-    // console.info(this.leads_pagination_min, this.leads_pagination_max);
     this.provedor.getLeadsReportPagination(1, this.leads_pagination_max).then(
       (data: Array<Object>) => {
         if (data.length === 0) {
@@ -540,7 +553,6 @@ export class LeadsPage implements OnInit {
     const usuario = this.id;
     const pagina = "leads";
     const acceso = "App";
-    //  // console.log(usuario, pagina, acceso);
     this.provedor.getInsertClickPagina(usuario, pagina, acceso).then(
       data => {
         this.datosenvio = data;
@@ -580,19 +592,19 @@ export class LeadsPage implements OnInit {
     ) {
       // No filtrar
     } else {
-      if (this.leadsfiltroseleccion == "Descartado") {
-        this.filterLeadsClasificacion("D");
-      } else if (this.leadsfiltroseleccion == "Vendido") {
-        this.filterLeadsClasificacion("V");
-      } else if (this.leadsfiltroseleccion == "SinContacto") {
-        this.filterLeadsClasificacion("S");
-      } else if (this.leadsfiltroseleccion == "proceso") {
-        this.filterLeadsClasificacion("P");
-      } else if (this.leadsfiltroseleccion == "Leidos") {
+      if (this.leadsfiltroseleccion == "Leidos") {
         this.filterLeadsLeido("leido");
       } else if (this.leadsfiltroseleccion == "NoLeidos") {
         this.filterLeadsLeido("noleido");
-      }
+      } else if (this.leadsfiltroseleccion == "Like") {
+        this.filterLeadsLike("like");
+      } else if (this.leadsfiltroseleccion == "Dislike") {
+        this.filterLeadsLike("dislike");
+      } else if (this.leadsfiltroseleccion == "Audio") {
+        this.filterLeadsAudio("sinaudio");
+      } else if (this.leadsfiltroseleccion == "Chat") {
+        this.filterLeadsChat("chat");
+      } 
       var afterfilterlenght = this.leadsfiltrados.length;
     }
     if (this.leadsfiltrados.length < 5 && this.leads_download_available) {
@@ -620,16 +632,27 @@ export class LeadsPage implements OnInit {
     );
   }
 
-  public filterLeadsClasificacion(criterioFiltro: string) {
-    this.leadsfiltrados = this.leadsfiltrados.filter(function(data) {
-      //// console.log(data);
-      return data.clasificaLead == criterioFiltro;
-    });
-  }
-
   public filterLeadsLeido(criterioFiltro: string) {
     this.leadsfiltrados = this.leadsfiltrados.filter(function(data) {
       return data.leido == criterioFiltro;
+    });
+  }
+
+  public filterLeadsLike(criterioFiltro: string) {
+    this.leadsfiltrados = this.leadsfiltrados.filter(function(data) {
+      return data.calificaLead == criterioFiltro;
+    });
+  }
+
+  public filterLeadsAudio(criterioFiltro: string) {
+    this.leadsfiltrados = this.leadsfiltrados.filter(function(data) {
+      return data.url !== criterioFiltro;
+    });
+  }
+
+  public filterLeadsChat(criterioFiltro: string) {
+    this.leadsfiltrados = this.leadsfiltrados.filter(function(data) {
+      return data.canalContacto == criterioFiltro;
     });
   }
 

@@ -347,19 +347,9 @@ input {
     cursor: pointer;
 }
 
-.banda {
+.W {
     padding: 2% !important;
     border-left: 20px solid #76797b !important;
-}
-
-.V {
-    padding: 2% !important;
-    border-left: 20px solid #00B9BE !important;
-}
-
-.P {
-    padding: 2% !important;
-    border-left: 20px solid #6B4595 !important;
 }
 
 .D {
@@ -370,6 +360,16 @@ input {
 .S {
     padding: 2% !important;
     border-left: 20px solid #288AC1 !important;
+}
+
+.N {
+    padding: 2% !important;
+    border-left: 20px solid #6B4595 !important;
+}
+
+.V {
+    padding: 2% !important;
+    border-left: 20px solid #00B9BE !important;
 }
 
 .M {

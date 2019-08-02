@@ -43,10 +43,10 @@
                             <ion-option value="Todos" selected>Todos los recibidos</ion-option>
                             <ion-option value="Leidos">Leidos</ion-option>
                             <ion-option value="NoLeidos">No Leidos</ion-option>
-                            <ion-option value="Vendido">Vendido</ion-option>
-                            <ion-option value="proceso">En proceso de venta</ion-option>
-                            <ion-option value="SinContacto">Sin Contacto</ion-option>
-                            <ion-option value="Descartado">Descartado</ion-option>
+                            <ion-option value="Like">Con Like</ion-option>
+                            <ion-option value="Dislike">Con Dislike</ion-option>
+                            <ion-option value="Audio">Con Audio</ion-option>
+                            <ion-option value="Chat">Con Chat</ion-option>
                         </ion-select>
                     </ion-item>
                 </div>
@@ -58,11 +58,11 @@
                         <ion-item no-lines>
                             <ion-card [ngClass]="{'leido':lead.leido === 'leido','noleido':lead.leido === 'noleido'}">
                                 <ion-card-content
-                                    [ngClass]="{'V':lead.clasificaLead == 'V','D':lead.clasificaLead == 'D','P':lead.clasificaLead == 'P','S':lead.clasificaLead == 'S','M':lead.clasificaLead == 'M','banda':lead.clasificaLead == 'banda'}">
+                                    [ngClass]="{'D':lead.clasificaLead == 'D','S':lead.clasificaLead == 'S','N':lead.clasificaLead == 'N','V':lead.clasificaLead == 'V','W':lead.clasificaLead == 'W'}">
                                     <ion-row align-items-center style="margin:0%">
                                         <ion-col col-10 align-self-center style="display: inherit;">
                                             <a class="rate-nombre">
-                                                <strong>{{lead.NOMBRE | capitalize}}</strong>
+                                                <strong>{{lead.NombreUsuarioEnvio | capitalize}}</strong>
                                             </a>
                                             <img *ngIf="lead.urgencia !== 'Sí'"
                                                 src="assets/imgs/urgencia/{{lead.urgencia}}.svg"
@@ -70,7 +70,9 @@
                                             <img *ngIf="lead.urgencia === 'Sí'" src="assets/imgs/urgencia/Si.svg"
                                                 style="vertical-align: middle;width: 9% !important;display: inline-block;margin-left: 2%;" />
                                             &nbsp;<img *ngIf="lead.Canal != 'Reporte' && lead.Canal != 'App'"
-                                                src="assets/imgs/lead/ic_koomkinlead.svg" style="vertical-align: middle;width: 8% !important;display: inline-block;margin-left: 2%;" />
+                                                src="assets/imgs/leads/ic_koomkinlead.svg" style="vertical-align: middle;width: 8% !important;display: inline-block;margin-left: 2%;" />
+                                                <img *ngIf="lead.Canal == 'Reporte' || lead.Canal == 'App'"
+                                                src="assets/imgs/leads/ic_leadsExternos.svg" style="vertical-align: middle;width: 9% !important;display: inline-block;margin-left: 2%;" />
                                         </ion-col>
                                         <ion-col col-1 style="text-align: right;" *ngIf="lead.url !== 'sinaudio'">
                                             <img src="assets/imgs/leads/audio.svg"
@@ -108,8 +110,8 @@
                                         <ion-col col-12>
                                             <a style="text-decoration: none;">
                                                 <div class="inf-correo">
-                                                    <span class="inf-estado">{{lead.ESTADO}}</span>
-                                                    &nbsp;&nbsp; {{lead.EMAIL}}</div>
+                                                    <span class="inf-estado">{{lead.ABREVIACION}}</span>
+                                                    &nbsp;&nbsp; {{lead.EmailUsuarioEnvio}}</div>
                                             </a>
                                         </ion-col>
                                     </ion-row>
@@ -117,13 +119,13 @@
                                         <ion-col col-7 style="margin-top: 1%;">
                                             <div>
                                                 <div class="rate-fecha">
-                                                    {{lead.FECHA | date: 'dd-MM HH:mm' }}
+                                                    {{lead.fechaenvio | date: 'dd-MM HH:mm' }}
                                                     <span class="inf-agenda"
-                                                        [ngClass]="{'vendido-agenda':lead.clasificaLead == 'V','descartado-agenda':lead.clasificaLead == 'D','seguimiento-agenda':lead.clasificaLead == 'P','negociacion-agenda':lead.clasificaLead == 'M'}"
-                                                        *ngIf="lead.reagenda !== 'Sin agenda'">&nbsp;{{lead.reagenda | date: 'dd-MM HH:mm' }}</span>
+                                                        [ngClass]="{'descartado-agenda':lead.clasificaLead == 'D','seguimiento-agenda':lead.clasificaLead == 'S','negociacion-agenda':lead.clasificaLead == 'N','vendido-agenda':lead.clasificaLead == 'V'}"
+                                                        *ngIf="lead.scheduledAt !== 'Sin agenda'">&nbsp;{{lead.scheduledAt | date: 'dd-MM HH:mm' }}</span>
                                                     <span class="inf-agenda"
-                                                        [ngClass]="{'vendido-agenda':lead.clasificaLead == 'V','descartado-agenda':lead.clasificaLead == 'D','seguimiento-agenda':lead.clasificaLead == 'P','negociacion-agenda':lead.clasificaLead == 'M'}"
-                                                        *ngIf="lead.reagenda == 'Sin agenda'">&nbsp;{{lead.reagenda}}</span>
+                                                        [ngClass]="{'descartado-agenda':lead.clasificaLead == 'D','seguimiento-agenda':lead.clasificaLead == 'S','negociacion-agenda':lead.clasificaLead == 'N','vendido-agenda':lead.clasificaLead == 'V'}"
+                                                        *ngIf="lead.scheduledAt == 'Sin agenda'">&nbsp;{{lead.scheduledAt}}</span>
                                                     <br>
                                                     <div class="inf-valor">
                                                         Valor del Lead = 

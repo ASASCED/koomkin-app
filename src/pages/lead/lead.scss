@@ -82,6 +82,14 @@ page-lead {
     color: #818181;
   }
 
+  .text {
+    display: flex;
+    vertical-align: middle;
+    align-items: center;
+    color: #818181;
+    text-align: center
+  }
+
   .llamadas-area {
     display: inline-block !important;
     border: 1pt solid #e6e6e6;
@@ -124,10 +132,10 @@ page-lead {
   .discard {
     border-left: 10px #fe703f solid;
   }
-  .track {
+  .negotiation {
     border-left: 10px #6b4595 solid;
   }
-  .negotiation {
+  .track {
     border-left: 10px #288ac1 solid;
   }
 }
@@ -283,7 +291,7 @@ hr {
 }
 
 .seguimiento-agenda  {
-  color: #6b4595 !important;
+  color:  #288ac1 !important;
 }
 
 .descartado-agenda  {
@@ -291,7 +299,7 @@ hr {
 }
 
 .negociacion-agenda  {
-  color:  #288ac1 !important;
+  color: #6b4595 !important;
 }
 
 //Correo del Lead
@@ -329,7 +337,7 @@ hr {
   margin: 2%;
   color: #818181;
   font-size: 3.8vw;
-  text-align: left;
+  text-align: center;
   font-weight: normal;
 }
 
@@ -445,7 +453,12 @@ hr {
   background-color: #00b9be !important;
 }
 
-.proceso {
+.seguimiento {
+  color: white;
+  background-color: #288ac1 !important;
+}
+
+.negociacion {
   color: white;
   background-color: #6b4595 !important;
 }
@@ -455,10 +468,6 @@ hr {
   background-color: #fe703f !important;
 }
 
-.sincontacto {
-  color: white;
-  background-color: #288ac1 !important;
-}
 
 .razon {
   margin: 0;

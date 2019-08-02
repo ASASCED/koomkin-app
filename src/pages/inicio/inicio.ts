@@ -20,6 +20,7 @@ export class InicioPage implements OnInit {
   eficiencia = 'EficienciaPage';
   brief = 'BriefPage';
   financieros = 'DatosFinancierosPage';
+  crm = 'CrmPage';
 
   pages: Array<{ title: string, component: any }>;
 

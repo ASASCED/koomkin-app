@@ -57,7 +57,7 @@
                         <ion-row align-items-center style="margin:0%">
                             <ion-col col-10 align-self-center style="display: inherit;">
                                 <a class="rate-nombre">
-                                    <strong>{{leadActual.NOMBRE | capitalize}}</strong>
+                                    <strong>{{leadActual.NombreUsuarioEnvio | capitalize}}</strong>
                                 </a>
                                 <img *ngIf="leadActual.urgencia !== 'Sí'"
                                     src="assets/imgs/urgencia/{{leadActual.urgencia}}.svg"
@@ -98,8 +98,8 @@
                             <ion-col col-12>
                                 <a style="text-decoration: none;">
                                     <div class="inf-correo">
-                                        <span class="inf-estado">{{leadActual.ESTADO}}</span>
-                                        &nbsp;&nbsp; {{leadActual.EMAIL}}</div>
+                                        <span class="inf-estado">{{leadActual.ABREVIACION}}</span>
+                                        &nbsp;&nbsp; {{leadActual.EmailUsuarioEnvio}}</div>
                                 </a>
                             </ion-col>
                         </ion-row>
@@ -107,16 +107,16 @@
                             <ion-col col-8 style="margin-top: 1%;">
                                 <div>
                                     <div class="rate-fecha">
-                                        {{leadActual.FECHA | date: 'dd-MM HH:mm' }}
+                                        {{leadActual.fechaenvio | date: 'dd-MM HH:mm' }}
                                         <span class="inf-agenda"
-                                            [ngClass]="{'vendido-agenda':leadActual.clasificaLead == 'V','descartado-agenda':leadActual.clasificaLead == 'D','seguimiento-agenda':leadActual.clasificaLead == 'P','negociacion-agenda':leadActual.clasificaLead == 'M'}"
-                                            *ngIf="leadActual.reagenda !== 'Sin agenda'">&nbsp;{{leadActual.reagenda | date: 'dd-MM HH:mm' }}</span>
+                                            [ngClass]="{'descartado-agenda':leadActual.clasificaLead == 'D','seguimiento-agenda':leadActual.clasificaLead == 'S','negociacion-agenda':leadActual.clasificaLead == 'N','vendido-agenda':leadActual.clasificaLead == 'V'}"
+                                            *ngIf="leadActual.scheduledAt !== 'Sin agenda'">&nbsp;{{leadActual.scheduledAt | date: 'dd-MM HH:mm' }}</span>
                                         <span class="inf-agenda"
-                                            [ngClass]="{'vendido-agenda':leadActual.clasificaLead == 'V','descartado-agenda':leadActual.clasificaLead == 'D','seguimiento-agenda':leadActual.clasificaLead == 'P','negociacion-agenda':leadActual.clasificaLead == 'M'}"
-                                            *ngIf="leadActual.reagenda == 'Sin agenda'">&nbsp;{{leadActual.reagenda}}</span>
+                                            [ngClass]="{'descartado-agenda':leadActual.clasificaLead == 'D','seguimiento-agenda':leadActual.clasificaLead == 'S','negociacion-agenda':leadActual.clasificaLead == 'N','vendido-agenda':leadActual.clasificaLead == 'V'}"
+                                            *ngIf="leadActual.scheduledAt == 'Sin agenda'">&nbsp;{{leadActual.scheduledAt}}</span>
                                         <br>
                                         <div class="inf-valor">
-                                            Valor del Lead = 
+                                            Valor del Lead =
                                             {{leadActual.ValorLead | currency: 'MXN':'symbol' : '1.0'}}
                                         </div>
                                     </div>
@@ -211,12 +211,12 @@
                             (click)="changeClassification('D');openModal(1,'Descartado')">
                             Descartado
                         </button>
-                        <button class="arribab" [ngClass]="{'proceso':leadActual.clasificaLead === 'P'}"
-                            (click)="changeClassification('P');openModal(2,'Seguimiento')">
+                        <button class="arribab" [ngClass]="{'seguimiento':leadActual.clasificaLead === 'S'}"
+                            (click)="changeClassification('S');openModal(2,'Seguimiento')">
                             En Seguimiento
                         </button>
-                        <button class="arribab" [ngClass]="{'sincontacto':leadActual.clasificaLead === 'S'}"
-                            (click)="changeClassification('C');openModal(2,'Negociacion')">
+                        <button class="arribab" [ngClass]="{'negociacion':leadActual.clasificaLead === 'N'}"
+                            (click)="changeClassification('N');openModal(2,'Negociacion')">
                             Negociación
                         </button>
                         <button class="arribab" [ngClass]="{'vendido':leadActual.clasificaLead === 'V'}"
@@ -240,30 +240,28 @@
                             </ion-col>
                         </ion-row>
 
-                        <p class="razon"
-                            *ngIf="leadActual.clasificaLead === 'P' || leadActual.clasificaLead === 'S'">
+                        <p class="razon" *ngIf="leadActual.clasificaLead === 'N' || leadActual.clasificaLead === 'S'">
                             Próxima comunicación
                         </p>
-                        <ion-row *ngIf="leadActual.clasificaLead === 'P' || leadActual.clasificaLead === 'S'">
-                            <ion-col col-2 class="tex">
+                        <ion-row *ngIf="leadActual.clasificaLead === 'N' || leadActual.clasificaLead === 'S'">
+                            <ion-col col-2 class="text">
                                 <img src="assets/imgs/lead/ic_hora.svg"
                                     style="vertical-align: middle;width: 80% !important;display: inline-block;" />
                             </ion-col>
-                            <ion-col col-10 class="tex">
-                                    <span *ngIf="reagenda != 'Sin agenda'">{{reagenda | date: 'dd-MM-yyyy'}}</span>  
-                                    <span *ngIf="reagenda == 'Sin agenda'">{{reagenda}}</span>  
+                            <ion-col col-10 class="text">
+                                <span *ngIf="reagenda != 'Sin agenda'">{{reagenda | date: 'dd-MM-yyyy'}}</span>
+                                <span *ngIf="reagenda == 'Sin agenda'">{{reagenda}}</span>
                             </ion-col>
                         </ion-row>
 
-                        <ion-row
-                            *ngIf="leadActual.clasificaLead === 'P' || leadActual.clasificaLead === 'S'">
-                            <ion-col col-2 class="tex">
+                        <ion-row *ngIf="leadActual.clasificaLead === 'N' || leadActual.clasificaLead === 'S'">
+                            <ion-col col-2 class="text">
                                 <img src="assets/imgs/lead/ic_fecha.svg"
                                     style="vertical-align: middle;width: 80% !important;display: inline-block;" />
                             </ion-col>
-                            <ion-col col-10 class="tex">
-                                  <span *ngIf="reagenda != 'Sin agenda'">{{reagenda | date: 'HH:mm'}}</span>  
-                                  <span *ngIf="reagenda == 'Sin agenda'">{{reagenda}}</span>  
+                            <ion-col col-10 class="text">
+                                <span *ngIf="reagenda != 'Sin agenda'">{{reagenda | date: 'HH:mm'}}</span>
+                                <span *ngIf="reagenda == 'Sin agenda'">{{reagenda}}</span>
                             </ion-col>
                         </ion-row>
 
@@ -299,8 +297,8 @@
                         </ion-col>
                         <ion-col col-1 style="text-align: center">
                             <img src="assets/imgs/lead/ic_comentario.svg"
-                                style="vertical-align: middle;width: 70% !important;margin-left: 10%;" 
-                                (click)="openModal(4,'',idComentario,comentario)"/>
+                                style="vertical-align: middle;width: 70% !important;margin-left: 10%;"
+                                (click)="openModal(4,'',idComentario,comentario)" />
                         </ion-col>
                         <ion-col col-1 style="text-align: center">
                             <img src="assets/imgs/lead/ic_borrar.svg"
@@ -342,8 +340,8 @@
                     </ion-col>
                     <ion-col col-1 style="text-align: center">
                         <img src="assets/imgs/lead/ic_comentario.svg"
-                            style="vertical-align: middle;width: 70% !important;margin-left: 10%;" 
-                            (click)="openModal(4,'',registro.IdComentario,registro.Comentario)"/>
+                            style="vertical-align: middle;width: 70% !important;margin-left: 10%;"
+                            (click)="openModal(4,'',registro.IdComentario,registro.Comentario)" />
                     </ion-col>
                     <ion-col col-1 style="text-align: center">
                         <img src="assets/imgs/lead/ic_borrar.svg"

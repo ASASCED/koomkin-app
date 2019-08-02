@@ -403,7 +403,9 @@ export class LeadPage implements OnInit {
 
     // Obtenemos parametros de la página de LEADS
     this.leadActual = navParams.data;
-    this.razonDescarto = this.leadActual.RazonDescartado;
+    if (this.leadActual.RazonDescartado != 'null' && this.leadActual.RazonDescartado != null && this.leadActual.RazonDescartado != undefined) {
+      this.razonDescarto = this.leadActual.RazonDescartado;
+    }
     this.mensajeLead = this.leadActual.MENSAJE;
     this.valorLead = this.leadActual.ValorLead;
     this.intentosExitoso = this.leadActual.IntentosAntesExitoso;

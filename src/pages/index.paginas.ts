@@ -13,3 +13,4 @@ export { BriefPage } from './brief/brief';
 export { MasBriefPage } from './mas-brief/mas-brief';
 export { MembresiaPage } from './membresia/membresia';
 export { DatosFinancierosPage } from './datos-financieros/datos-financieros';
+export { CrmPage } from './crm/crm';
