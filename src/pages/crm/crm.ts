@@ -18,7 +18,6 @@ export class CrmPage implements OnInit {
   leads: any = [];
   leadsfiltroseleccion: string;
   leadsfiltrados: any = [];
-  leadsVendidos: any = [];
   showspinner = false;
   infinitespinnerisactive = false;
   page = 1;
@@ -83,14 +82,20 @@ export class CrmPage implements OnInit {
   public estatus: string = "Lead";
   public listaEstatus: Array<string> = ['Lead', 'Descartado', 'Seguimiento', 'Negociacion','Vendido'];
   public filtro: any = 'actividad';
-  public dias = 'Total';
   public tipo = 'Todos';
+  public dias = 'Total';
   public listaLeads;
   public mayor: any = '';
   public menor: any = '';
   public ultimoLead;
   public fechafiltroinicial;
   public fechafiltrofinal;
+
+  public leadsEstatus: any = [];
+  public leadsDescartados: any = [];
+  public leadsSeguimiento: any = [];
+  public leadsNegociacion: any = [];
+  public leadsVendidos: any = [];
 
   constructor(
     public navCtrl: NavController,
@@ -152,29 +157,6 @@ export class CrmPage implements OnInit {
     this.verFiltros();
   }
 
-  public resetLeadsArray() {
-    this.leads_pagination_min = 0;
-    this.leads_pagination_max = 0;
-    this.leads = [];
-    this.leadsfiltrados = [];
-    this.leads_pagination_min = this.leads_pagination_max + 1;
-    this.leads_pagination_max += 10;
-
-    this.provedor.getLeadsReportPagination(1, this.leads_pagination_max).then(
-      (data: Array<Object>) => {
-        if (data.length === 0) {
-          this.leads_download_available = false;
-        }
-        this.leads = [];
-        this.leads = this.leads.concat(this.stylizeLeads(data));
-        this.clasificacionSeleccionadaFiltrar();
-      },
-      error => {
-        // console.log(error);
-      }
-    );
-  }
-
   public getLeads() {
     const cuerpo = this.url;
 
@@ -212,7 +194,7 @@ export class CrmPage implements OnInit {
       this.leadsfiltrados = [];
       this.leads = [];
       this.leads_pagination_min = 1;
-      this.leads_pagination_max = 10;
+      this.leads_pagination_max = 20;
       this.contadorSin = 0;
       this.contadorDescartado = 0;
       this.contadorSeguimiento = 0;
@@ -225,7 +207,7 @@ export class CrmPage implements OnInit {
       this.valorVendido = 0;
     } else {
       this.leads_pagination_min = this.leads_pagination_max + 1;
-      this.leads_pagination_max += 10;
+      this.leads_pagination_max += 20;
     }
 
     switch (this.filtro) {
@@ -1495,30 +1477,6 @@ export class CrmPage implements OnInit {
     }
   }
 
-  public getLeadsArray() {
-    this.leads_pagination_min = this.leads_pagination_max + 1;
-    this.leads_pagination_max += 10;
-    return this.provedor
-      .getLeadsReportPagination(
-        this.leads_pagination_min,
-        this.leads_pagination_max
-      )
-      .then(
-        (data: Array<Object>) => {
-          if (data.length === 0) {
-            this.leads_download_available = false;
-          }
-          // // console.log(JSON.stringify(this.leads));
-          this.leads = this.leads.concat(this.stylizeLeads(data));
-          this.clasificacionSeleccionadaFiltrar();
-        },
-        error => {
-          // console.log(error);
-        }
-      );
-  }
-
-
   public stylizeLeads(leadsArray: any) {
     // tslint:disable-next-line: forin
     for (let k in leadsArray) {
@@ -1636,123 +1594,11 @@ export class CrmPage implements OnInit {
         this.valorVendido = this.valorVendido + parseInt(leadsArray[k].ValorLead);
       }
     }
-    return leadsArray;
-  }
-
-  public stylizeLeads2(leadsArray: any) {
-    for (let k in leadsArray) {
-      //leadsArray[k].FECHA = this.agregarHoras(leadsArray[k].FECHA).toString();
-      leadsArray[k].FECHA = leadsArray[k].FECHA.substring(0, 16).replace(
-        /^(\d{4})-(\d{2})-(\d{2})T(\d{5})$/g,
-        "$3/$2/$1$4"
-      );
-
-      leadsArray[k].NOMBRE = leadsArray[k].NOMBRE.substring(0, 16);
-      leadsArray[k].EMPRESA = leadsArray[k].EMPRESA.substring(0, 28);
-      leadsArray[k].urgencia = "No";
-      leadsArray[k].status = "exitosa";
-      this.callMissed(leadsArray[k].uuid).then(status => {
-        leadsArray[k].status = status;
-      });
-
-      leadsArray[k].url = "sinaudio";
-
-      this.getCheckLeadComplement(leadsArray[k].clave)
-        .then(urgencia => {
-          leadsArray[k].urgencia = urgencia;
-          if (leadsArray[k].urgencia == null || this.urgencia == "None") {
-            leadsArray[k].urgencia = "No";
-          } else if (leadsArray[k].urgencia == "Sí") {
-            leadsArray[k].urgencia == "Si";
-          }
-        })
-        .catch();
-      this.getCheckLeadComplement2(leadsArray[k].clave)
-        .then(mensaje => {
-          if (
-            mensaje == "Escribe aquí..." ||
-            mensaje == "" ||
-            mensaje == "null" ||
-            mensaje == "None" ||
-            mensaje == null
-          ) {
-            leadsArray[k].MENSAJE = leadsArray[k].MENSAJE;
-          }
-          leadsArray[k].MENSAJE = mensaje;
-        })
-        .catch();
-
-      this.getUrlAudio(leadsArray[k].clave)
-        .then(url => {
-          if (
-            url == "Escribe aquí..." ||
-            url == "" ||
-            url == "null" ||
-            url == "None" ||
-            url == null
-          ) {
-            leadsArray[k].url = "sinaudio";
-          }
-          leadsArray[k].url = url;
-        })
-        .catch();
-
-        this.getUltimoComentario(leadsArray[k].clave)
-        .then(comentario => {
-          leadsArray[k].comentario = comentario;
-          
-        })
-        .catch();
-
-        this.getScheduled(leadsArray[k].clave)
-        .then(scheduledAt => {
-          leadsArray[k].reagenda = scheduledAt;
-           if(leadsArray[k].reagenda != 'Sin agenda') {
-            leadsArray[k].reagenda = this.agregarHoras(scheduledAt).toString();
-           }     
-        })
-        .catch();
-
-      if (leadsArray[k].calificaLead == "True") {
-        leadsArray[k].calificaLead = "like";
-      } else if (leadsArray[k].calificaLead == "False") {
-        leadsArray[k].calificaLead = "dislike";
-      } else {
-        leadsArray[k].calificaLead = "vacio";
-      }
-      if (leadsArray[k].leido == "True" || leadsArray[k].leido == true) {
-        leadsArray[k].leido = "leido";
-      } else {
-        leadsArray[k].leido = "noleido";
-      }
-      if (
-        leadsArray[k].clasificaLead == '' ||
-        leadsArray[k].clasificaLead == 'null' ||
-        leadsArray[k].clasificaLead == null
-      ) {
-        leadsArray[k].clasificaLead = 'W';
-        this.contadorSin = this.contadorSin + 1;
-        this.valorSin = this.valorSin + parseInt(leadsArray[k].ValorLead);
-      } else if (leadsArray[k].clasificaLead == 'Descartado' || leadsArray[k].clasificaLead.toLowerCase() == 'sin contacto') {
-        leadsArray[k].clasificaLead = 'D';
-        this.contadorDescartado = this.contadorDescartado + 1;
-        this.valorDescartado = this.valorDescartado + parseInt(leadsArray[k].ValorLead);
-      } else if (leadsArray[k].clasificaLead == 'Seguimiento') {
-        leadsArray[k].clasificaLead = 'S';
-        this.contadorSeguimiento = this.contadorSeguimiento + 1;
-        this.valorSeguimiento = this.valorSeguimiento + parseInt(leadsArray[k].ValorLead);
-      } else if (leadsArray[k].clasificaLead == 'Negociacion' || leadsArray[k].clasificaLead == 'En proceso de venta') {
-        leadsArray[k].clasificaLead = 'N';
-        this.contadorNegociacion = this.contadorNegociacion + 1;
-        this.valorNegociacion = this.valorNegociacion + parseInt(leadsArray[k].ValorLead);
-      } else if (leadsArray[k].clasificaLead == 'Vendido') {
-        leadsArray[k].clasificaLead = 'V';
-        this.contadorVendido = this.contadorVendido + 1;
-        this.valorVendido = this.valorVendido + parseInt(leadsArray[k].ValorLead);
-      }
-    }
+    this.filterLeadsEstatus(leadsArray);
+    this.filterLeadsDescartado(leadsArray);
+    this.filterLeadsSeguimiento(leadsArray);
+    this.filterLeadsNegociacion(leadsArray);
     this.filterLeadsVendido(leadsArray);
-    this.checkNoleidos();
     return leadsArray;
   }
 
@@ -2075,45 +1921,6 @@ export class CrmPage implements OnInit {
     this.getLeads();
   }
 
-  public clasificacionSeleccionadaFiltrar() {
-    var beforefilterlenght = this.leadsfiltrados.length;
-    this.leadsfiltrados = this.leads;
-    if (
-      this.leadsfiltroseleccion == "Todos" ||
-      this.leadsfiltroseleccion == null ||
-      this.leadsfiltroseleccion == ""
-    ) {
-      // No filtrar
-    } else {
-      if (this.leadsfiltroseleccion == "Leidos") {
-        this.filterLeadsLeido("leido");
-      } else if (this.leadsfiltroseleccion == "NoLeidos") {
-        this.filterLeadsLeido("noleido");
-      } else if (this.leadsfiltroseleccion == "Like") {
-        this.filterLeadsLike("like");
-      } else if (this.leadsfiltroseleccion == "Dislike") {
-        this.filterLeadsLike("dislike");
-      } else if (this.leadsfiltroseleccion == "Audio") {
-        this.filterLeadsAudio("sinaudio");
-      } else if (this.leadsfiltroseleccion == "Chat") {
-        this.filterLeadsChat("chat");
-      } 
-      var afterfilterlenght = this.leadsfiltrados.length;
-    }
-    if (this.leadsfiltrados.length < 5 && this.leads_download_available) {
-      this.showspinner = true;
-      this.getLeadsArray();
-    } else if (
-      beforefilterlenght == afterfilterlenght &&
-      this.leads_download_available
-    ) {
-      this.showspinner = true;
-      this.getLeadsArray();
-    } else {
-      this.showspinner = false;
-    }
-  }
-
   public getInsertClickLead(usuario, id, acceso) {
     this.restService.getInsertClickLead(id, usuario, acceso).then(
       data => {
@@ -2125,42 +1932,59 @@ export class CrmPage implements OnInit {
     );
   }
 
+  public filterLeadsEstatus(leadsArray) {
+    this.leadsEstatus = leadsArray.filter(function(data) {
+      return data.clasificaLead == 'W';
+    });
+  }
+
+  public filterLeadsDescartado(leadsArray) {
+    this.leadsDescartados = leadsArray.filter(function(data) {
+      return data.clasificaLead == 'D';
+    });
+  }
+
+  public filterLeadsSeguimiento(leadsArray) {
+    console.log(leadsArray,'leads');
+    this.leadsSeguimiento = leadsArray.filter(function(data) {
+      return data.clasificaLead == 'S';
+    });
+  }
+
+  public filterLeadsNegociacion(leadsArray) {
+    this.leadsNegociacion = leadsArray.filter(function(data) {
+      return data.clasificaLead == 'N';
+    });
+  }
+
   public filterLeadsVendido(leadsArray) {
-    console.log(leadsArray);
     this.leadsVendidos = leadsArray.filter(function(data) {
       return data.clasificaLead == 'V';
     });
   }
 
-  public filterLeadsLeido(criterioFiltro: string) {
-    this.leadsfiltrados = this.leadsfiltrados.filter(function(data) {
-      return data.leido == criterioFiltro;
-    });
+  public eraseFilters() {
+    this.filtro = 'actividad';
+    this.tipo = 'Todos';
+    this.dias = 'Total';
+    this.mayor = '';
+    this.menor = '';
   }
 
-  public filterLeadsLike(criterioFiltro: string) {
-    this.leadsfiltrados = this.leadsfiltrados.filter(function(data) {
-      return data.calificaLead == criterioFiltro;
-    });
+  public showFilters() {
+    console.log(this.filtro,
+    this.dias,
+    this.tipo,
+    this.mayor,
+    this.menor);
   }
 
-  public filterLeadsAudio(criterioFiltro: string) {
-    this.leadsfiltrados = this.leadsfiltrados.filter(function(data) {
-      return data.url !== criterioFiltro;
-    });
-  }
-
-  public filterLeadsChat(criterioFiltro: string) {
-    this.leadsfiltrados = this.leadsfiltrados.filter(function(data) {
-      return data.canalContacto == criterioFiltro;
-    });
-  }
-
-  changeFilter(valor) {
+  public changeFilter(valor) {
     this.filtro = valor;
+    this.dias = 'Total';
   }
 
-  advancedFilters() {
+  public advancedFilters() {
     if(this.filtros == false) {
       this.filtros = true;
     } else {
@@ -2168,7 +1992,7 @@ export class CrmPage implements OnInit {
     }
   }
 
-  showConfirm(lead) {
+  public showConfirm(lead) {
     let btnCancel = {
       text: "Cancelar",
       role: "cancelar",
@@ -2225,7 +2049,7 @@ export class CrmPage implements OnInit {
     if (this.leads_download_available == false) {
       infiniteScroll.enable(false);
     }
-    this.getLeadsArray().then(
+    this.verFiltros('cargar').then(
       () => {
         infiniteScroll.complete();
         this.infinitespinnerisactive = false;

@@ -33,10 +33,10 @@
                             Descartados
                         </ion-segment-button>
                         <ion-segment-button value="Seguimiento">
-                            En Seguimiento
+                            Seguimiento
                         </ion-segment-button>
                         <ion-segment-button value="Negociacion">
-                            En Negociación
+                            Negociación
                         </ion-segment-button>
                         <ion-segment-button value="Vendido">
                             Vendidos
@@ -50,13 +50,18 @@
             <section>
                 <ion-row align-items-center>
                     <ion-col col-4 class="centrar">
-                        <button [ngClass]="{'ordenamiento':filtro !== 'actividad','ordenamiento-activo':filtro === 'actividad'}"  (click)="changeFilter('actividad')">Act. Reciente</button>
+                        <button
+                            [ngClass]="{'ordenamiento':filtro !== 'actividad','ordenamiento-activo':filtro === 'actividad'}"
+                            (click)="changeFilter('actividad')">Act. Reciente</button>
                     </ion-col>
                     <ion-col col-4 class="centrar">
-                        <button [ngClass]="{'ordenamiento':filtro !== 'fecha','ordenamiento-activo':filtro === 'fecha'}"  (click)="changeFilter('fecha')">Fecha de Llegada</button>
+                        <button [ngClass]="{'ordenamiento':filtro !== 'fecha','ordenamiento-activo':filtro === 'fecha'}"
+                            (click)="changeFilter('fecha')">Fecha de Llegada</button>
                     </ion-col>
                     <ion-col col-4 class="centrar">
-                        <button [ngClass]="{'ordenamiento':filtro !== 'siguiente','ordenamiento-activo':filtro === 'siguiente'}"  (click)="changeFilter('siguiente')">Sig. Contacto</button>
+                        <button
+                            [ngClass]="{'ordenamiento':filtro !== 'siguiente','ordenamiento-activo':filtro === 'siguiente'}"
+                            (click)="changeFilter('siguiente')">Sig. Contacto</button>
                     </ion-col>
                 </ion-row>
 
@@ -64,12 +69,11 @@
                     <ion-col col-12 class="centrar" *ngIf="filtro !== 'siguiente'">
                         <ion-item>
                             <ion-label class="filtrar">Filtrar por:</ion-label>
-                            <ion-select [(ngModel)]="leadsfiltroseleccion"
-                                (ionChange)="clasificacionSeleccionadaFiltrar()" interface="action-sheet">
-                                <ion-option value="Todos" selected>Todos</ion-option>
-                                <ion-option value="Leidos">Últ. 3 días</ion-option>
-                                <ion-option value="NoLeidos">Últ. 7 días</ion-option>
-                                <ion-option value="Like">Últ. 14 días</ion-option>
+                            <ion-select [(ngModel)]="dias" interface="action-sheet">
+                                <ion-option value="Total" selected>Total</ion-option>
+                                <ion-option value={{tresDias}}>Últ. 3 días</ion-option>
+                                <ion-option value={{sieteDias}}>Últ. 7 días</ion-option>
+                                <ion-option value={{catorceDias}}>Últ. 14 días</ion-option>
                             </ion-select>
                         </ion-item>
                     </ion-col>
@@ -77,12 +81,11 @@
                     <ion-col col-12 class="centrar" *ngIf="filtro == 'siguiente'">
                         <ion-item>
                             <ion-label class="filtrar">Filtrar por:</ion-label>
-                            <ion-select [(ngModel)]="leadsfiltroseleccion"
-                                (ionChange)="clasificacionSeleccionadaFiltrar()" interface="action-sheet">
-                                <ion-option value="Todos" selected>Todos</ion-option>
-                                <ion-option value="Leidos">Sig. 3 días</ion-option>
-                                <ion-option value="NoLeidos">Sig. 7 días</ion-option>
-                                <ion-option value="Like">Sig. 14 días</ion-option>
+                            <ion-select [(ngModel)]="dias" interface="action-sheet">
+                                <ion-option value="Total" selected>Total</ion-option>
+                                <ion-option value={{sigTresDias}}>Sig. 3 días</ion-option>
+                                <ion-option value={{sigSieteDias}}>Sig. 7 días</ion-option>
+                                <ion-option value={{sigCatorceDias}}>Sig. 14 días</ion-option>
                             </ion-select>
                         </ion-item>
                     </ion-col>
@@ -108,10 +111,10 @@
                     <ion-col col-1 class="centrar">
                     </ion-col>
                     <ion-col col-5 class="centrar">
-                        <button class="borrar">Borrar</button>
+                        <button class="borrar" (click)="eraseFilters()">Borrar</button>
                     </ion-col>
                     <ion-col col-5 class="centrar">
-                        <button class="aplicar">Aplicar</button>
+                        <button class="aplicar" (click)="showFilters()">Aplicar</button>
                     </ion-col>
                     <ion-col col-1 class="izquierda">
                     </ion-col>
@@ -120,7 +123,7 @@
             <div [ngSwitch]="estatus" swipeSegment [tabsList]="listaEstatus" [(currentTab)]="estatus"
                 (tabChanged)="onTabChanged($event)" class="swipe-area">
                 <section *ngSwitchCase="'Lead'">
-                    <ion-list detail-none ion-item *ngFor="let lead of leadsfiltrados; let i = index;"
+                    <ion-list detail-none ion-item *ngFor="let lead of leadsEstatus; let i = index;"
                         (click)="verLead(lead); changeLeido(lead);"
                         style="margin-bottom: 1.5%; box-shadow: 0px 1px 2px 0.5px #ccc;">
                         <ion-item-sliding #item>
@@ -237,12 +240,472 @@
                     </ion-infinite-scroll>
                 </section>
                 <section *ngSwitchCase="'Descartado'">
+                    <ion-list detail-none ion-item *ngFor="let lead of leadsDescartados; let i = index;"
+                        (click)="verLead(lead); changeLeido(lead);"
+                        style="margin-bottom: 1.5%; box-shadow: 0px 1px 2px 0.5px #ccc;">
+                        <ion-item-sliding #item>
+                            <ion-item no-lines>
+                                <ion-card
+                                    [ngClass]="{'leido':lead.leido === 'leido','noleido':lead.leido === 'noleido'}">
+                                    <ion-card-content>
+                                        <ion-row align-items-center style="margin:0%">
+                                            <ion-col col-10 align-self-center style="display: inherit;">
+                                                <a class="rate-nombre">
+                                                    <strong>{{lead.NombreUsuarioEnvio | capitalize}}</strong>
+                                                </a>
+                                                <img *ngIf="lead.urgencia !== 'Sí'"
+                                                    src="assets/imgs/urgencia/{{lead.urgencia}}.svg"
+                                                    style="vertical-align: middle;width: 9% !important;display: inline-block;margin-left: 2%;" />
+                                                <img *ngIf="lead.urgencia === 'Sí'" src="assets/imgs/urgencia/Si.svg"
+                                                    style="vertical-align: middle;width: 9% !important;display: inline-block;margin-left: 2%;" />
+                                                &nbsp;<img *ngIf="lead.Canal != 'Reporte' && lead.Canal != 'App'"
+                                                    src="assets/imgs/leads/ic_koomkinlead.svg"
+                                                    style="vertical-align: middle;width: 8% !important;display: inline-block;margin-left: 2%;" />
+                                                <img *ngIf="lead.Canal == 'Reporte' || lead.Canal == 'App'"
+                                                    src="assets/imgs/leads/ic_leadsExternos.svg"
+                                                    style="vertical-align: middle;width: 9% !important;display: inline-block;margin-left: 2%;" />
+                                            </ion-col>
+                                            <ion-col col-1 style="text-align: right;" *ngIf="lead.url !== 'sinaudio'">
+                                                <img src="assets/imgs/leads/audio.svg"
+                                                    style="vertical-align: middle;width: 100% !important;display: inline-block;    margin-left: 15%;" />
+                                            </ion-col>
+                                            <ion-col col-1 style="text-align: right;" *ngIf="lead.url == 'sinaudio'">
+                                                <img src="assets/imgs/leads/sin-audio.svg"
+                                                    style="vertical-align: middle;width: 100% !important;display: inline-block;    margin-left: 15%;" />
+                                            </ion-col>
+                                            <ion-col col-1
+                                                *ngIf="lead.mensajesnoleidos > 0 && lead.mensajesnoleidos < 10">
+                                                <p
+                                                    style="color: white !important; position: absolute; margin-left: 57% !important; margin-top: 24% !important; font-size: 1em; font-weight: bold;">
+                                                    {{lead.mensajesnoleidos}}</p>
+                                                <img src="assets/imgs/leads/mensajes.svg"
+                                                    style="vertical-align: middle;width: 140% !important;max-width:150px !important;display: inline-block;" />
+                                            </ion-col>
+
+                                            <ion-col col-1 *ngIf="lead.mensajesnoleidos > 10">
+                                                <p
+                                                    style="color: white !important; position: absolute; margin-top: 24%; font-size: 1em; font-weight: bold;">
+                                                    {{lead.mensajesnoleidos}}</p>
+                                                <img src="assets/imgs/leads/mensajes.svg"
+                                                    style="vertical-align: middle;width: 140% !important;max-width:150px !important;display: inline-block;" />
+                                            </ion-col>
+                                            <ion-col col-1 *ngIf="lead.mensajesnoleidos == null">
+                                                <img src="assets/imgs/leads/sin-mensaje.svg"
+                                                    style="vertical-align: middle;width: 140% !important;max-width:150px !important;display: inline-block;" />
+                                            </ion-col>
+                                            <ion-col col-1 *ngIf="lead.mensajesnoleidos == 0">
+                                                <img src="assets/imgs/leads/mensaje.svg"
+                                                    style="vertical-align: middle;width: 140% !important;max-width:150px !important;display: inline-block;" />
+                                            </ion-col>
+                                        </ion-row>
+                                        <ion-row>
+                                            <ion-col col-8>
+                                                <div>
+                                                    <div class="rate-fecha">
+                                                        {{lead.fechaenvio | date: 'dd-MM HH:mm' }}
+                                                        <span class="inf-agenda"
+                                                            [ngClass]="{'descartado-agenda':lead.clasificaLead == 'D','seguimiento-agenda':lead.clasificaLead == 'S','negociacion-agenda':lead.clasificaLead == 'N','vendido-agenda':lead.clasificaLead == 'V'}"
+                                                            *ngIf="lead.scheduledAt !== 'Sin agenda'">&nbsp;{{lead.scheduledAt | date: 'dd-MM HH:mm' }}</span>
+                                                        <span class="inf-agenda"
+                                                            [ngClass]="{'descartado-agenda':lead.clasificaLead == 'D','seguimiento-agenda':lead.clasificaLead == 'S','negociacion-agenda':lead.clasificaLead == 'N','vendido-agenda':lead.clasificaLead == 'V'}"
+                                                            *ngIf="lead.scheduledAt == 'Sin agenda'">&nbsp;{{lead.scheduledAt}}</span>
+                                                        <br>
+                                                        <div class="inf-valor">
+                                                            Valor del Lead =
+                                                            {{lead.ValorLead | currency: 'MXN':'symbol' : '1.0'}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </ion-col>
+                                            <ion-col col-2>
+                                                <img *ngIf="lead.status == 'perdida'"
+                                                    src="assets/imgs/llamadas/callmissed.svg"
+                                                    style="vertical-align: middle;width: 30% !important;max-width:150px !important;display: inline-block;margin-top: 6%;"
+                                                    (click)="showConfirm(lead)" />
+                                            </ion-col>
+
+                                            <ion-col col-2 style="display: flex;
+                                        text-align: right;
+                                        justify-content: flex-end;
+                                        align-items: flex-end;">
+                                                <img src="assets/imgs/leads/ver.svg" class="ver">
+                                            </ion-col>
+                                        </ion-row>
+
+                                    </ion-card-content>
+                                </ion-card>
+                            </ion-item>
+                            <ion-item-options side="left" (ionSwipe)="showConfirm(lead)">
+                            </ion-item-options>
+                        </ion-item-sliding>
+                    </ion-list>
+
+                    <ion-refresher (ionRefresh)="doRefresh($event)">
+                    </ion-refresher>
+
+                    <ion-grid *ngIf="showspinner && !infinitespinnerisactive">
+                        <br>
+                        <ion-spinner loadingText="Cargando más Leads..." item-start name="bubbles">Cargando más Leads...
+                        </ion-spinner>
+                        <p class="text-spinner">Cargando más Leads...</p>
+                    </ion-grid>
+
+                    <ion-infinite-scroll threshold="1%" (ionInfinite)="doInfinite($event)">
+                        <br>
+                        <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Cargando más Leads...">
+                        </ion-infinite-scroll-content>
+                    </ion-infinite-scroll>
                 </section>
                 <section *ngSwitchCase="'Seguimiento'">
+                    <ion-list detail-none ion-item *ngFor="let lead of leadsSeguimiento; let i = index;"
+                        (click)="verLead(lead); changeLeido(lead);"
+                        style="margin-bottom: 1.5%; box-shadow: 0px 1px 2px 0.5px #ccc;">
+                        <ion-item-sliding #item>
+                            <ion-item no-lines>
+                                <ion-card
+                                    [ngClass]="{'leido':lead.leido === 'leido','noleido':lead.leido === 'noleido'}">
+                                    <ion-card-content>
+                                        <ion-row align-items-center style="margin:0%">
+                                            <ion-col col-10 align-self-center style="display: inherit;">
+                                                <a class="rate-nombre">
+                                                    <strong>{{lead.NombreUsuarioEnvio | capitalize}}</strong>
+                                                </a>
+                                                <img *ngIf="lead.urgencia !== 'Sí'"
+                                                    src="assets/imgs/urgencia/{{lead.urgencia}}.svg"
+                                                    style="vertical-align: middle;width: 9% !important;display: inline-block;margin-left: 2%;" />
+                                                <img *ngIf="lead.urgencia === 'Sí'" src="assets/imgs/urgencia/Si.svg"
+                                                    style="vertical-align: middle;width: 9% !important;display: inline-block;margin-left: 2%;" />
+                                                &nbsp;<img *ngIf="lead.Canal != 'Reporte' && lead.Canal != 'App'"
+                                                    src="assets/imgs/leads/ic_koomkinlead.svg"
+                                                    style="vertical-align: middle;width: 8% !important;display: inline-block;margin-left: 2%;" />
+                                                <img *ngIf="lead.Canal == 'Reporte' || lead.Canal == 'App'"
+                                                    src="assets/imgs/leads/ic_leadsExternos.svg"
+                                                    style="vertical-align: middle;width: 9% !important;display: inline-block;margin-left: 2%;" />
+                                            </ion-col>
+                                            <ion-col col-1 style="text-align: right;" *ngIf="lead.url !== 'sinaudio'">
+                                                <img src="assets/imgs/leads/audio.svg"
+                                                    style="vertical-align: middle;width: 100% !important;display: inline-block;    margin-left: 15%;" />
+                                            </ion-col>
+                                            <ion-col col-1 style="text-align: right;" *ngIf="lead.url == 'sinaudio'">
+                                                <img src="assets/imgs/leads/sin-audio.svg"
+                                                    style="vertical-align: middle;width: 100% !important;display: inline-block;    margin-left: 15%;" />
+                                            </ion-col>
+                                            <ion-col col-1
+                                                *ngIf="lead.mensajesnoleidos > 0 && lead.mensajesnoleidos < 10">
+                                                <p
+                                                    style="color: white !important; position: absolute; margin-left: 57% !important; margin-top: 24% !important; font-size: 1em; font-weight: bold;">
+                                                    {{lead.mensajesnoleidos}}</p>
+                                                <img src="assets/imgs/leads/mensajes.svg"
+                                                    style="vertical-align: middle;width: 140% !important;max-width:150px !important;display: inline-block;" />
+                                            </ion-col>
+
+                                            <ion-col col-1 *ngIf="lead.mensajesnoleidos > 10">
+                                                <p
+                                                    style="color: white !important; position: absolute; margin-top: 24%; font-size: 1em; font-weight: bold;">
+                                                    {{lead.mensajesnoleidos}}</p>
+                                                <img src="assets/imgs/leads/mensajes.svg"
+                                                    style="vertical-align: middle;width: 140% !important;max-width:150px !important;display: inline-block;" />
+                                            </ion-col>
+                                            <ion-col col-1 *ngIf="lead.mensajesnoleidos == null">
+                                                <img src="assets/imgs/leads/sin-mensaje.svg"
+                                                    style="vertical-align: middle;width: 140% !important;max-width:150px !important;display: inline-block;" />
+                                            </ion-col>
+                                            <ion-col col-1 *ngIf="lead.mensajesnoleidos == 0">
+                                                <img src="assets/imgs/leads/mensaje.svg"
+                                                    style="vertical-align: middle;width: 140% !important;max-width:150px !important;display: inline-block;" />
+                                            </ion-col>
+                                        </ion-row>
+                                        <ion-row>
+                                            <ion-col col-8>
+                                                <div>
+                                                    <div class="rate-fecha">
+                                                        {{lead.fechaenvio | date: 'dd-MM HH:mm' }}
+                                                        <span class="inf-agenda"
+                                                            [ngClass]="{'descartado-agenda':lead.clasificaLead == 'D','seguimiento-agenda':lead.clasificaLead == 'S','negociacion-agenda':lead.clasificaLead == 'N','vendido-agenda':lead.clasificaLead == 'V'}"
+                                                            *ngIf="lead.scheduledAt !== 'Sin agenda'">&nbsp;{{lead.scheduledAt | date: 'dd-MM HH:mm' }}</span>
+                                                        <span class="inf-agenda"
+                                                            [ngClass]="{'descartado-agenda':lead.clasificaLead == 'D','seguimiento-agenda':lead.clasificaLead == 'S','negociacion-agenda':lead.clasificaLead == 'N','vendido-agenda':lead.clasificaLead == 'V'}"
+                                                            *ngIf="lead.scheduledAt == 'Sin agenda'">&nbsp;{{lead.scheduledAt}}</span>
+                                                        <br>
+                                                        <div class="inf-valor">
+                                                            Valor del Lead =
+                                                            {{lead.ValorLead | currency: 'MXN':'symbol' : '1.0'}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </ion-col>
+                                            <ion-col col-2>
+                                                <img *ngIf="lead.status == 'perdida'"
+                                                    src="assets/imgs/llamadas/callmissed.svg"
+                                                    style="vertical-align: middle;width: 30% !important;max-width:150px !important;display: inline-block;margin-top: 6%;"
+                                                    (click)="showConfirm(lead)" />
+                                            </ion-col>
+
+                                            <ion-col col-2 style="display: flex;
+                                        text-align: right;
+                                        justify-content: flex-end;
+                                        align-items: flex-end;">
+                                                <img src="assets/imgs/leads/ver.svg" class="ver">
+                                            </ion-col>
+                                        </ion-row>
+
+                                    </ion-card-content>
+                                </ion-card>
+                            </ion-item>
+                            <ion-item-options side="left" (ionSwipe)="showConfirm(lead)">
+                            </ion-item-options>
+                        </ion-item-sliding>
+                    </ion-list>
+
+                    <ion-refresher (ionRefresh)="doRefresh($event)">
+                    </ion-refresher>
+
+                    <ion-grid *ngIf="showspinner && !infinitespinnerisactive">
+                        <br>
+                        <ion-spinner loadingText="Cargando más Leads..." item-start name="bubbles">Cargando más Leads...
+                        </ion-spinner>
+                        <p class="text-spinner">Cargando más Leads...</p>
+                    </ion-grid>
+
+                    <ion-infinite-scroll threshold="1%" (ionInfinite)="doInfinite($event)">
+                        <br>
+                        <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Cargando más Leads...">
+                        </ion-infinite-scroll-content>
+                    </ion-infinite-scroll>
                 </section>
                 <section *ngSwitchCase="'Negociacion'">
+                    <ion-list detail-none ion-item *ngFor="let lead of leadsNegociacion; let i = index;"
+                        (click)="verLead(lead); changeLeido(lead);"
+                        style="margin-bottom: 1.5%; box-shadow: 0px 1px 2px 0.5px #ccc;">
+                        <ion-item-sliding #item>
+                            <ion-item no-lines>
+                                <ion-card
+                                    [ngClass]="{'leido':lead.leido === 'leido','noleido':lead.leido === 'noleido'}">
+                                    <ion-card-content>
+                                        <ion-row align-items-center style="margin:0%">
+                                            <ion-col col-10 align-self-center style="display: inherit;">
+                                                <a class="rate-nombre">
+                                                    <strong>{{lead.NombreUsuarioEnvio | capitalize}}</strong>
+                                                </a>
+                                                <img *ngIf="lead.urgencia !== 'Sí'"
+                                                    src="assets/imgs/urgencia/{{lead.urgencia}}.svg"
+                                                    style="vertical-align: middle;width: 9% !important;display: inline-block;margin-left: 2%;" />
+                                                <img *ngIf="lead.urgencia === 'Sí'" src="assets/imgs/urgencia/Si.svg"
+                                                    style="vertical-align: middle;width: 9% !important;display: inline-block;margin-left: 2%;" />
+                                                &nbsp;<img *ngIf="lead.Canal != 'Reporte' && lead.Canal != 'App'"
+                                                    src="assets/imgs/leads/ic_koomkinlead.svg"
+                                                    style="vertical-align: middle;width: 8% !important;display: inline-block;margin-left: 2%;" />
+                                                <img *ngIf="lead.Canal == 'Reporte' || lead.Canal == 'App'"
+                                                    src="assets/imgs/leads/ic_leadsExternos.svg"
+                                                    style="vertical-align: middle;width: 9% !important;display: inline-block;margin-left: 2%;" />
+                                            </ion-col>
+                                            <ion-col col-1 style="text-align: right;" *ngIf="lead.url !== 'sinaudio'">
+                                                <img src="assets/imgs/leads/audio.svg"
+                                                    style="vertical-align: middle;width: 100% !important;display: inline-block;    margin-left: 15%;" />
+                                            </ion-col>
+                                            <ion-col col-1 style="text-align: right;" *ngIf="lead.url == 'sinaudio'">
+                                                <img src="assets/imgs/leads/sin-audio.svg"
+                                                    style="vertical-align: middle;width: 100% !important;display: inline-block;    margin-left: 15%;" />
+                                            </ion-col>
+                                            <ion-col col-1
+                                                *ngIf="lead.mensajesnoleidos > 0 && lead.mensajesnoleidos < 10">
+                                                <p
+                                                    style="color: white !important; position: absolute; margin-left: 57% !important; margin-top: 24% !important; font-size: 1em; font-weight: bold;">
+                                                    {{lead.mensajesnoleidos}}</p>
+                                                <img src="assets/imgs/leads/mensajes.svg"
+                                                    style="vertical-align: middle;width: 140% !important;max-width:150px !important;display: inline-block;" />
+                                            </ion-col>
+
+                                            <ion-col col-1 *ngIf="lead.mensajesnoleidos > 10">
+                                                <p
+                                                    style="color: white !important; position: absolute; margin-top: 24%; font-size: 1em; font-weight: bold;">
+                                                    {{lead.mensajesnoleidos}}</p>
+                                                <img src="assets/imgs/leads/mensajes.svg"
+                                                    style="vertical-align: middle;width: 140% !important;max-width:150px !important;display: inline-block;" />
+                                            </ion-col>
+                                            <ion-col col-1 *ngIf="lead.mensajesnoleidos == null">
+                                                <img src="assets/imgs/leads/sin-mensaje.svg"
+                                                    style="vertical-align: middle;width: 140% !important;max-width:150px !important;display: inline-block;" />
+                                            </ion-col>
+                                            <ion-col col-1 *ngIf="lead.mensajesnoleidos == 0">
+                                                <img src="assets/imgs/leads/mensaje.svg"
+                                                    style="vertical-align: middle;width: 140% !important;max-width:150px !important;display: inline-block;" />
+                                            </ion-col>
+                                        </ion-row>
+                                        <ion-row>
+                                            <ion-col col-8>
+                                                <div>
+                                                    <div class="rate-fecha">
+                                                        {{lead.fechaenvio | date: 'dd-MM HH:mm' }}
+                                                        <span class="inf-agenda"
+                                                            [ngClass]="{'descartado-agenda':lead.clasificaLead == 'D','seguimiento-agenda':lead.clasificaLead == 'S','negociacion-agenda':lead.clasificaLead == 'N','vendido-agenda':lead.clasificaLead == 'V'}"
+                                                            *ngIf="lead.scheduledAt !== 'Sin agenda'">&nbsp;{{lead.scheduledAt | date: 'dd-MM HH:mm' }}</span>
+                                                        <span class="inf-agenda"
+                                                            [ngClass]="{'descartado-agenda':lead.clasificaLead == 'D','seguimiento-agenda':lead.clasificaLead == 'S','negociacion-agenda':lead.clasificaLead == 'N','vendido-agenda':lead.clasificaLead == 'V'}"
+                                                            *ngIf="lead.scheduledAt == 'Sin agenda'">&nbsp;{{lead.scheduledAt}}</span>
+                                                        <br>
+                                                        <div class="inf-valor">
+                                                            Valor del Lead =
+                                                            {{lead.ValorLead | currency: 'MXN':'symbol' : '1.0'}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </ion-col>
+                                            <ion-col col-2>
+                                                <img *ngIf="lead.status == 'perdida'"
+                                                    src="assets/imgs/llamadas/callmissed.svg"
+                                                    style="vertical-align: middle;width: 30% !important;max-width:150px !important;display: inline-block;margin-top: 6%;"
+                                                    (click)="showConfirm(lead)" />
+                                            </ion-col>
+
+                                            <ion-col col-2 style="display: flex;
+                                        text-align: right;
+                                        justify-content: flex-end;
+                                        align-items: flex-end;">
+                                                <img src="assets/imgs/leads/ver.svg" class="ver">
+                                            </ion-col>
+                                        </ion-row>
+
+                                    </ion-card-content>
+                                </ion-card>
+                            </ion-item>
+                            <ion-item-options side="left" (ionSwipe)="showConfirm(lead)">
+                            </ion-item-options>
+                        </ion-item-sliding>
+                    </ion-list>
+
+                    <ion-refresher (ionRefresh)="doRefresh($event)">
+                    </ion-refresher>
+
+                    <ion-grid *ngIf="showspinner && !infinitespinnerisactive">
+                        <br>
+                        <ion-spinner loadingText="Cargando más Leads..." item-start name="bubbles">Cargando más Leads...
+                        </ion-spinner>
+                        <p class="text-spinner">Cargando más Leads...</p>
+                    </ion-grid>
+
+                    <ion-infinite-scroll threshold="1%" (ionInfinite)="doInfinite($event)">
+                        <br>
+                        <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Cargando más Leads...">
+                        </ion-infinite-scroll-content>
+                    </ion-infinite-scroll>
                 </section>
                 <section *ngSwitchCase="'Vendido'">
+                    <ion-list detail-none ion-item *ngFor="let lead of leadsVendidos; let i = index;"
+                        (click)="verLead(lead); changeLeido(lead);"
+                        style="margin-bottom: 1.5%; box-shadow: 0px 1px 2px 0.5px #ccc;">
+                        <ion-item-sliding #item>
+                            <ion-item no-lines>
+                                <ion-card
+                                    [ngClass]="{'leido':lead.leido === 'leido','noleido':lead.leido === 'noleido'}">
+                                    <ion-card-content>
+                                        <ion-row align-items-center style="margin:0%">
+                                            <ion-col col-10 align-self-center style="display: inherit;">
+                                                <a class="rate-nombre">
+                                                    <strong>{{lead.NombreUsuarioEnvio | capitalize}}</strong>
+                                                </a>
+                                                <img *ngIf="lead.urgencia !== 'Sí'"
+                                                    src="assets/imgs/urgencia/{{lead.urgencia}}.svg"
+                                                    style="vertical-align: middle;width: 9% !important;display: inline-block;margin-left: 2%;" />
+                                                <img *ngIf="lead.urgencia === 'Sí'" src="assets/imgs/urgencia/Si.svg"
+                                                    style="vertical-align: middle;width: 9% !important;display: inline-block;margin-left: 2%;" />
+                                                &nbsp;<img *ngIf="lead.Canal != 'Reporte' && lead.Canal != 'App'"
+                                                    src="assets/imgs/leads/ic_koomkinlead.svg"
+                                                    style="vertical-align: middle;width: 8% !important;display: inline-block;margin-left: 2%;" />
+                                                <img *ngIf="lead.Canal == 'Reporte' || lead.Canal == 'App'"
+                                                    src="assets/imgs/leads/ic_leadsExternos.svg"
+                                                    style="vertical-align: middle;width: 9% !important;display: inline-block;margin-left: 2%;" />
+                                            </ion-col>
+                                            <ion-col col-1 style="text-align: right;" *ngIf="lead.url !== 'sinaudio'">
+                                                <img src="assets/imgs/leads/audio.svg"
+                                                    style="vertical-align: middle;width: 100% !important;display: inline-block;    margin-left: 15%;" />
+                                            </ion-col>
+                                            <ion-col col-1 style="text-align: right;" *ngIf="lead.url == 'sinaudio'">
+                                                <img src="assets/imgs/leads/sin-audio.svg"
+                                                    style="vertical-align: middle;width: 100% !important;display: inline-block;    margin-left: 15%;" />
+                                            </ion-col>
+                                            <ion-col col-1
+                                                *ngIf="lead.mensajesnoleidos > 0 && lead.mensajesnoleidos < 10">
+                                                <p
+                                                    style="color: white !important; position: absolute; margin-left: 57% !important; margin-top: 24% !important; font-size: 1em; font-weight: bold;">
+                                                    {{lead.mensajesnoleidos}}</p>
+                                                <img src="assets/imgs/leads/mensajes.svg"
+                                                    style="vertical-align: middle;width: 140% !important;max-width:150px !important;display: inline-block;" />
+                                            </ion-col>
+
+                                            <ion-col col-1 *ngIf="lead.mensajesnoleidos > 10">
+                                                <p
+                                                    style="color: white !important; position: absolute; margin-top: 24%; font-size: 1em; font-weight: bold;">
+                                                    {{lead.mensajesnoleidos}}</p>
+                                                <img src="assets/imgs/leads/mensajes.svg"
+                                                    style="vertical-align: middle;width: 140% !important;max-width:150px !important;display: inline-block;" />
+                                            </ion-col>
+                                            <ion-col col-1 *ngIf="lead.mensajesnoleidos == null">
+                                                <img src="assets/imgs/leads/sin-mensaje.svg"
+                                                    style="vertical-align: middle;width: 140% !important;max-width:150px !important;display: inline-block;" />
+                                            </ion-col>
+                                            <ion-col col-1 *ngIf="lead.mensajesnoleidos == 0">
+                                                <img src="assets/imgs/leads/mensaje.svg"
+                                                    style="vertical-align: middle;width: 140% !important;max-width:150px !important;display: inline-block;" />
+                                            </ion-col>
+                                        </ion-row>
+                                        <ion-row>
+                                            <ion-col col-8>
+                                                <div>
+                                                    <div class="rate-fecha">
+                                                        {{lead.fechaenvio | date: 'dd-MM HH:mm' }}
+                                                        <span class="inf-agenda"
+                                                            [ngClass]="{'descartado-agenda':lead.clasificaLead == 'D','seguimiento-agenda':lead.clasificaLead == 'S','negociacion-agenda':lead.clasificaLead == 'N','vendido-agenda':lead.clasificaLead == 'V'}"
+                                                            *ngIf="lead.scheduledAt !== 'Sin agenda'">&nbsp;{{lead.scheduledAt | date: 'dd-MM HH:mm' }}</span>
+                                                        <span class="inf-agenda"
+                                                            [ngClass]="{'descartado-agenda':lead.clasificaLead == 'D','seguimiento-agenda':lead.clasificaLead == 'S','negociacion-agenda':lead.clasificaLead == 'N','vendido-agenda':lead.clasificaLead == 'V'}"
+                                                            *ngIf="lead.scheduledAt == 'Sin agenda'">&nbsp;{{lead.scheduledAt}}</span>
+                                                        <br>
+                                                        <div class="inf-valor">
+                                                            Valor del Lead =
+                                                            {{lead.ValorLead | currency: 'MXN':'symbol' : '1.0'}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </ion-col>
+                                            <ion-col col-2>
+                                                <img *ngIf="lead.status == 'perdida'"
+                                                    src="assets/imgs/llamadas/callmissed.svg"
+                                                    style="vertical-align: middle;width: 30% !important;max-width:150px !important;display: inline-block;margin-top: 6%;"
+                                                    (click)="showConfirm(lead)" />
+                                            </ion-col>
+
+                                            <ion-col col-2 style="display: flex;
+                                        text-align: right;
+                                        justify-content: flex-end;
+                                        align-items: flex-end;">
+                                                <img src="assets/imgs/leads/ver.svg" class="ver">
+                                            </ion-col>
+                                        </ion-row>
+
+                                    </ion-card-content>
+                                </ion-card>
+                            </ion-item>
+                            <ion-item-options side="left" (ionSwipe)="showConfirm(lead)">
+                            </ion-item-options>
+                        </ion-item-sliding>
+                    </ion-list>
+
+                    <ion-refresher (ionRefresh)="doRefresh($event)">
+                    </ion-refresher>
+
+                    <ion-grid *ngIf="showspinner && !infinitespinnerisactive">
+                        <br>
+                        <ion-spinner loadingText="Cargando más Leads..." item-start name="bubbles">Cargando más Leads...
+                        </ion-spinner>
+                        <p class="text-spinner">Cargando más Leads...</p>
+                    </ion-grid>
+
+                    <ion-infinite-scroll threshold="1%" (ionInfinite)="doInfinite($event)">
+                        <br>
+                        <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Cargando más Leads...">
+                        </ion-infinite-scroll-content>
+                    </ion-infinite-scroll>
                 </section>
             </div>
         </ion-card-content>
