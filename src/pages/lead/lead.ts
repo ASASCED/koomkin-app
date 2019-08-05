@@ -400,18 +400,26 @@ export class LeadPage implements OnInit {
     var f = new Date();
     this.fecha = f.getDate() + '/' + (f.getMonth() + 1) + '/' + f.getFullYear();
     let fecha2 = f.getFullYear() + '-' +  ('0' + (f.getMonth()+1)).slice(-2) + '-' + f.getDate();
-
+    this.garantia = 'No';
+    this.contacto = 'No';
+    this.intentosExitoso = '-';
+    this.diasContacto = '-';
+    this.attentionSpeed = '-';
     // Obtenemos parametros de la página de LEADS
     this.leadActual = navParams.data;
     if (this.leadActual.RazonDescartado != 'null' && this.leadActual.RazonDescartado != null && this.leadActual.RazonDescartado != undefined) {
       this.razonDescarto = this.leadActual.RazonDescartado;
     }
-    this.mensajeLead = this.leadActual.MENSAJE;
+    if(this.leadActual.MENSAJE) {
+      this.mensajeLead = this.leadActual.MENSAJE;
+    } else if (this.leadActual.MensajeCorreo) {
+      this.mensajeLead = this.leadActual.MensajeCorreo;
+    }
     this.valorLead = this.leadActual.ValorLead;
     this.intentosExitoso = this.leadActual.IntentosAntesExitoso;
 
     this.reagenda = this.leadActual.reagenda;
-    if(this.intentosExitoso == null || this.intentosExitoso == 'null') {
+    if(this.intentosExitoso == null || this.intentosExitoso == 'null' ) {
       this.intentosExitoso = '-';
     }
 
@@ -439,29 +447,50 @@ export class LeadPage implements OnInit {
       } 
     }
 
-    if (this.leadActual.fechaContacto) {
+    if (this.leadActual.fechaContacto && this.leadActual.fechaContacto !== 'null' ) {
       this.leadActual.fechaContacto = this.leadActual.fechaContacto
         .substring(0, 16)
         .replace(/^(\d{4})-(\d{2})-(\d{2})T(\d{5})$/g, '$3/$2/$1$4');
       const diff =
         (new Date(this.leadActual.fechaContacto).getTime() -
-          new Date(this.leadActual.FECHA).getTime()) /
+          new Date(this.leadActual.fechaenvio).getTime()) /
         1000;
-      // diff = Math.abs(diff>10800);
       if (diff > 7200) {
         this.attentionSpeed = distanceinWordsStrict(
-          new Date(this.leadActual.FECHA),
+          new Date(this.leadActual.fechaenvio),
           new Date(this.leadActual.fechaContacto),
           { locale: esLocale, addSuffix: false }
         );
       } else {
         this.attentionSpeed = distanceinWordsStrict(
-          new Date(this.leadActual.FECHA),
+          new Date(this.leadActual.fechaenvio),
           new Date(this.leadActual.fechaContacto),
           { locale: esLocale, addSuffix: false, unit: 'm' }
         );
-        this.garantia = 'Sí'
+        this.garantia = 'Sí';
       }
+      if (this.leadActual.canalContacto == 'chat' || this.leadActual.canalContacto == 'llamada') {
+        this.contacto = 'Sí';
+      } else {
+        this.contacto = 'No';
+      }
+
+      this.fechaExitoso = this.leadActual.FechaExitoso;
+
+      if (this.fechaExitoso != null && this.fechaExitoso != 'null') {
+        this.diasContacto = distanceinWordsStrict(
+          new Date(this.fechaExitoso.substring(0, 10)),
+          new Date(fecha2),
+          { locale: esLocale, addSuffix: false }
+        );
+      }
+    } else {
+      this.attentionSpeed = '-';
+      this.garantia = 'No';
+      this.contacto = 'No';
+      this.leadActual.canalContacto = '-';
+      this.diasContacto = '-';
+      this.leadActual.fechaContacto = '';
     }
     if (!this.leadActual.clave) {
       this.leadActual.clave = this.leadActual.ID_LEAD;  // Por si llega el Lead por notificación.

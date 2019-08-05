@@ -28,7 +28,7 @@
         <ion-grid>
             <ion-row style="background: white !important" align-items-center style="margin: 0">
                 <ion-col col-8 align-self-center style="display: inherit;padding-left: 5%">
-                    <p class="nombre">{{leadActual.NOMBRE | capitalize}}</p>
+                    <p class="NombreUsuarioEnvio">{{leadActual.NombreUsuarioEnvio | capitalize}}</p>
                 </ion-col>
                 <ion-col col-2 style="text-align: right">
                     <ion-icon style="margin-left: 10% !important;font-size: 2.6em !important;color: rgb(209, 209, 209)"
@@ -56,7 +56,7 @@
 
                         <ion-row align-items-center style="margin:0%">
                             <ion-col col-10 align-self-center style="display: inherit;">
-                                <a class="rate-nombre">
+                                <a class="rate-NombreUsuarioEnvio">
                                     <strong>{{leadActual.NombreUsuarioEnvio | capitalize}}</strong>
                                 </a>
                                 <img *ngIf="leadActual.urgencia !== 'Sí'"
@@ -144,7 +144,7 @@
                 <br>
                 <ion-row>
                     <ion-col>
-                        <p class="mensaje">“{{mensaje}}”</p>
+                        <p class="mensaje">“{{mensajeLead}}”</p>
                     </ion-col>
                 </ion-row>
                 <ion-row>
@@ -436,7 +436,7 @@
                             style="vertical-align: middle;margin-left: 1%;" />
                     </ion-col>
                     <ion-col *ngIf="call.CallStatus !== 'no-answer'" col-7>
-                        <a style="color:#606060">{{leadActual.NOMBRE | capitalize}}</a>
+                        <a style="color:#606060">{{leadActual.NombreUsuarioEnvio | capitalize}}</a>
                     </ion-col>
                     <ion-col *ngIf="call.CallStatus !== 'no-answer'" col-4 style="text-align: right;">
                         <a style="color:#606060">{{call.horallamada}}</a>
@@ -523,7 +523,7 @@
 <ion-footer *ngIf="page!='Chat'">
     <button class="llamar" (click)="showConfirm();getInsertClickLlamar();">
         <ion-icon class="telefono" name="md-call"></ion-icon>
-        <a class="phone" id="tel">Llamar a {{leadActual.NOMBRE | capitalize}}</a>
+        <a class="phone" id="tel">Llamar a {{leadActual.NombreUsuarioEnvio | capitalize}}</a>
     </button>
 </ion-footer>
 
