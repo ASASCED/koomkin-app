@@ -21,6 +21,7 @@ export class InicioPage implements OnInit {
   brief = 'BriefPage';
   financieros = 'DatosFinancierosPage';
   crm = 'CrmPage';
+  agenda = 'AgendaPage';
 
   pages: Array<{ title: string, component: any }>;
 

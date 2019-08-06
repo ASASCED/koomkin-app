@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+  <g id="local_atm" transform="translate(-100 -3166)">
+    <rect id="Path" width="24" height="24" transform="translate(100 3166)" fill="rgba(0,0,0,0)"/>
+    <path id="Icon" d="M120,3186H104a2,2,0,0,1-2-2l.01-12a1.974,1.974,0,0,1,1.991-2h16a2,2,0,0,1,2,2v12A2,2,0,0,1,120,3186Zm-16-14v12h16v-12Zm9,11h-2v-1h-2v-2h4v-1h-3a1,1,0,0,1-1-1v-3a1,1,0,0,1,1-1h1v-1h2v1h2v2h-4v1h3a1,1,0,0,1,1,1v3a1,1,0,0,1-1,1h-1v1Z" fill="#288ac1"/>
+  </g>
+</svg>
