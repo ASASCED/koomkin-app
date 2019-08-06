@@ -1906,7 +1906,7 @@ export class CrmPage implements OnInit {
 
   public getInsertClickPagina() {
     const usuario = this.id;
-    const pagina = "leads";
+    const pagina = "crm";
     const acceso = "App";
     this.provedor.getInsertClickPagina(usuario, pagina, acceso).then(
       data => {
