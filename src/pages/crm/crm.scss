@@ -43,16 +43,56 @@ page-crm {
     border-bottom-width: 2px;
     border-bottom-style: solid;
     border-bottom-color: rgba(0, 0, 0, 0.1);
-    font-size: xx-small;;
+    font-size: xx-small;
     font-weight: 500;
     line-height: 4rem;
-    text-transform: uppercase;
-    color: white;
-    background-color: gray;
+    text-transform: none;
+    color: black;
+    background-color: #F3F3F3;
     opacity: 0.7;
     -webkit-transition: 100ms all linear;
     transition: 100ms all linear;
     padding: 0 0px;
+  }
+
+  .segment-md .segment-button.segment-activated {
+    opacity: 1;
+    color: white;
+  }
+
+  .lead {
+    background: #76797b !important;
+    border-color: #76797b !important;
+    opacity: 1;
+    color: white;
+  }
+
+  .descartado {
+    background: #fe703f  !important;
+    border-color: #fe703f  !important;
+    opacity: 1;
+    color: white;
+  }
+
+  .seguimiento {
+    background: #288ac1 !important;
+    border-color: #288ac1 !important;
+    opacity: 1;
+    color: white;
+  }
+
+  .negociacion {
+    background: #6b4595 !important;
+    border-color: #6b4595 !important;
+    opacity: 1;
+    color: white;
+  }
+
+  .vendido {
+    background: #00b9be !important;
+    border-color: #00b9be !important;
+    opacity: 1;
+    color: white;
   }
 
   .detail-card {

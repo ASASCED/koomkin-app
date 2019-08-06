@@ -138,6 +138,13 @@ page-lead {
   .track {
     border-left: 10px #288ac1 solid;
   }
+  .rate-nombre {
+    font-size: 5vw;
+    color: darkslategray;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
 }
 
 ion-icon {
@@ -238,6 +245,8 @@ hr {
   font-weight: bold;
   margin-left: 15%;
 }
+
+
 
 //Fecha del Lead
 .rate-fechal {

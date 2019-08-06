@@ -194,7 +194,7 @@ export class CrmPage implements OnInit {
       this.leadsfiltrados = [];
       this.leads = [];
       this.leads_pagination_min = 1;
-      this.leads_pagination_max = 20;
+      this.leads_pagination_max = 50;
       this.contadorSin = 0;
       this.contadorDescartado = 0;
       this.contadorSeguimiento = 0;
@@ -207,7 +207,7 @@ export class CrmPage implements OnInit {
       this.valorVendido = 0;
     } else {
       this.leads_pagination_min = this.leads_pagination_max + 1;
-      this.leads_pagination_max += 20;
+      this.leads_pagination_max += 50;
     }
 
     switch (this.filtro) {

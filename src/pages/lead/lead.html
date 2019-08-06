@@ -28,7 +28,7 @@
         <ion-grid>
             <ion-row style="background: white !important" align-items-center style="margin: 0">
                 <ion-col col-8 align-self-center style="display: inherit;padding-left: 5%">
-                    <p class="NombreUsuarioEnvio">{{leadActual.NombreUsuarioEnvio | capitalize}}</p>
+                    <p class="nombre">{{leadActual.NombreUsuarioEnvio | capitalize}}</p>
                 </ion-col>
                 <ion-col col-2 style="text-align: right">
                     <ion-icon style="margin-left: 10% !important;font-size: 2.6em !important;color: rgb(209, 209, 209)"
@@ -56,7 +56,7 @@
 
                         <ion-row align-items-center style="margin:0%">
                             <ion-col col-10 align-self-center style="display: inherit;">
-                                <a class="rate-NombreUsuarioEnvio">
+                                <a class="rate-nombre">
                                     <strong>{{leadActual.NombreUsuarioEnvio | capitalize}}</strong>
                                 </a>
                                 <img *ngIf="leadActual.urgencia !== 'Sí'"
@@ -85,7 +85,7 @@
                                 <img src="assets/imgs/leads/mensajes.svg"
                                     style="vertical-align: middle;width: 100% !important;max-width:150px !important;display: inline-block;" />
                             </ion-col>
-                            <ion-col col-1 *ngIf="leadActual.mensajesnoleidos == null">
+                            <ion-col col-1 *ngIf="leadActual.mensajesnoleidos == null || leadActual.mensajesnoleidos == 'null'">
                                 <img src="assets/imgs/leads/sin-mensaje.svg"
                                     style="vertical-align: middle;width: 100% !important;max-width:150px !important;display: inline-block;" />
                             </ion-col>

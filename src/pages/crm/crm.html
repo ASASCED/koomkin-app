@@ -26,19 +26,19 @@
                 </ion-row>
                 <ion-row>
                     <ion-segment [(ngModel)]="estatus">
-                        <ion-segment-button value="Lead">
+                        <ion-segment-button [ngClass]="{'lead':estatus == 'Lead'}" value="Lead">
                             Leads
                         </ion-segment-button>
-                        <ion-segment-button value="Descartado">
+                        <ion-segment-button [ngClass]="{'descartado':estatus == 'Descartado'}" value="Descartado">
                             Descartados
                         </ion-segment-button>
-                        <ion-segment-button value="Seguimiento">
-                            Seguimiento
+                        <ion-segment-button [ngClass]="{'seguimiento':estatus == 'Seguimiento'}" value="Seguimiento">
+                            En Seguimiento
                         </ion-segment-button>
-                        <ion-segment-button value="Negociacion">
-                            Negociación
+                        <ion-segment-button [ngClass]="{'negociacion':estatus == 'Negociacion'}" value="Negociacion">
+                            En Negociación
                         </ion-segment-button>
-                        <ion-segment-button value="Vendido">
+                        <ion-segment-button [ngClass]="{'vendido':estatus == 'Vendido'}" value="Vendido">
                             Vendidos
                         </ion-segment-button>
                     </ion-segment>
@@ -90,6 +90,18 @@
                         </ion-item>
                     </ion-col>
                 </ion-row>
+                <ion-row align-items-center>
+                    <ion-col col-12 class="centrar" *ngIf="filtro !== 'siguiente'">
+                        <ion-item>
+                            <ion-label class="filtrar">Tipo de Leads:</ion-label>
+                            <ion-select [(ngModel)]="tipo" interface="action-sheet">
+                                <ion-option value="Todos" selected>Todos</ion-option>
+                                <ion-option value="Koomkin">Koomkin</ion-option>
+                                <ion-option value="Externos">Externos</ion-option>
+                            </ion-select>
+                        </ion-item>
+                    </ion-col>
+                </ion-row>
                 <ion-row align-items-center *ngIf="filtros == true">
                     <ion-col col-5 class="centrar">
                         <input type="date" class="input-date" placeholder="Fecha">
@@ -102,8 +114,14 @@
                     </ion-col>
                 </ion-row>
                 <ion-row align-items-center *ngIf="filtros == true">
-                    <ion-col col-12 class="centrar">
+                    <ion-col col-2 class="centrar">
                         <p>Valor del Lead</p>
+                    </ion-col>
+                    <ion-col col-4 class="centrar">
+                        <p>Mayor a $</p>
+                    </ion-col>
+                    <ion-col col-4 class="centrar">
+                        <p>Menor a $</p>
                     </ion-col>
 
                 </ion-row>
@@ -172,7 +190,8 @@
                                                 <img src="assets/imgs/leads/mensajes.svg"
                                                     style="vertical-align: middle;width: 140% !important;max-width:150px !important;display: inline-block;" />
                                             </ion-col>
-                                            <ion-col col-1 *ngIf="lead.mensajesnoleidos == null">
+                                            <ion-col col-1
+                                                *ngIf="lead.mensajesnoleidos == null || lead.mensajesnoleidos == 'null'">
                                                 <img src="assets/imgs/leads/sin-mensaje.svg"
                                                     style="vertical-align: middle;width: 140% !important;max-width:150px !important;display: inline-block;" />
                                             </ion-col>
@@ -289,7 +308,8 @@
                                                 <img src="assets/imgs/leads/mensajes.svg"
                                                     style="vertical-align: middle;width: 140% !important;max-width:150px !important;display: inline-block;" />
                                             </ion-col>
-                                            <ion-col col-1 *ngIf="lead.mensajesnoleidos == null">
+                                            <ion-col col-1
+                                                *ngIf="lead.mensajesnoleidos == null || lead.mensajesnoleidos == 'null'">
                                                 <img src="assets/imgs/leads/sin-mensaje.svg"
                                                     style="vertical-align: middle;width: 140% !important;max-width:150px !important;display: inline-block;" />
                                             </ion-col>
@@ -406,7 +426,8 @@
                                                 <img src="assets/imgs/leads/mensajes.svg"
                                                     style="vertical-align: middle;width: 140% !important;max-width:150px !important;display: inline-block;" />
                                             </ion-col>
-                                            <ion-col col-1 *ngIf="lead.mensajesnoleidos == null">
+                                            <ion-col col-1
+                                                *ngIf="lead.mensajesnoleidos == null || lead.mensajesnoleidos == 'null'">
                                                 <img src="assets/imgs/leads/sin-mensaje.svg"
                                                     style="vertical-align: middle;width: 140% !important;max-width:150px !important;display: inline-block;" />
                                             </ion-col>
@@ -523,7 +544,8 @@
                                                 <img src="assets/imgs/leads/mensajes.svg"
                                                     style="vertical-align: middle;width: 140% !important;max-width:150px !important;display: inline-block;" />
                                             </ion-col>
-                                            <ion-col col-1 *ngIf="lead.mensajesnoleidos == null">
+                                            <ion-col col-1
+                                                *ngIf="lead.mensajesnoleidos == null || lead.mensajesnoleidos == 'null'">
                                                 <img src="assets/imgs/leads/sin-mensaje.svg"
                                                     style="vertical-align: middle;width: 140% !important;max-width:150px !important;display: inline-block;" />
                                             </ion-col>
@@ -640,7 +662,8 @@
                                                 <img src="assets/imgs/leads/mensajes.svg"
                                                     style="vertical-align: middle;width: 140% !important;max-width:150px !important;display: inline-block;" />
                                             </ion-col>
-                                            <ion-col col-1 *ngIf="lead.mensajesnoleidos == null">
+                                            <ion-col col-1
+                                                *ngIf="lead.mensajesnoleidos == null || lead.mensajesnoleidos == 'null'">
                                                 <img src="assets/imgs/leads/sin-mensaje.svg"
                                                     style="vertical-align: middle;width: 140% !important;max-width:150px !important;display: inline-block;" />
                                             </ion-col>
