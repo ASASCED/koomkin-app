@@ -205,10 +205,25 @@ page-crm {
   }
 
   .filtrar {
+    font-size: 4vw;
     margin-left: 0.5em;
     color: #288ac1 !important;
     font-weight: bold;
   }
+
+  .select-text {
+    color: #707070 !important;
+    font-weight: bold;
+    overflow: hidden;
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    min-width: 16px;
+    font-size: inherit;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
 
   .input-date {
     height: 30px;

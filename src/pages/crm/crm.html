@@ -91,7 +91,7 @@
                     </ion-col>
                 </ion-row>
                 <ion-row align-items-center>
-                    <ion-col col-12 class="centrar" *ngIf="filtro !== 'siguiente'">
+                    <ion-col col-12 class="centrar" *ngIf="filtros == true">
                         <ion-item>
                             <ion-label class="filtrar">Tipo de Leads:</ion-label>
                             <ion-select [(ngModel)]="tipo" interface="action-sheet">
@@ -107,23 +107,24 @@
                         <input type="date" class="input-date" placeholder="Fecha">
                     </ion-col>
                     <ion-col col-2 class="centrar">
-                        <p>A</p>
+                        <p class="filtrar">A</p>
                     </ion-col>
                     <ion-col col-5 class="centrar">
                         <input type="date" class="input-date" placeholder="Fecha">
                     </ion-col>
                 </ion-row>
                 <ion-row align-items-center *ngIf="filtros == true">
-                    <ion-col col-2 class="centrar">
-                        <p>Valor del Lead</p>
+                    <ion-col col-4>
+                        <p class="filtrar">Valor del Lead: </p>
                     </ion-col>
                     <ion-col col-4 class="centrar">
-                        <p>Mayor a $</p>
+                        <input class="input-date" type="text" minlength="1" maxlength="12" [(ngModel)]="mayor"
+                            (keypress)="numberOnly($event)" placeholder="Mayor a $">
                     </ion-col>
                     <ion-col col-4 class="centrar">
-                        <p>Menor a $</p>
+                        <input class="input-date" type="text" minlength="1" maxlength="12" [(ngModel)]="menor"
+                            (keypress)="numberOnly($event)" placeholder="Menor a $">
                     </ion-col>
-
                 </ion-row>
                 <ion-row align-items-center>
                     <ion-col col-1 class="centrar">
@@ -201,7 +202,7 @@
                                             </ion-col>
                                         </ion-row>
                                         <ion-row>
-                                            <ion-col col-8>
+                                            <ion-col col-10>
                                                 <div>
                                                     <div class="rate-fecha">
                                                         {{lead.fechaenvio | date: 'dd-MM HH:mm' }}
@@ -211,20 +212,23 @@
                                                         <span class="inf-agenda"
                                                             [ngClass]="{'descartado-agenda':lead.clasificaLead == 'D','seguimiento-agenda':lead.clasificaLead == 'S','negociacion-agenda':lead.clasificaLead == 'N','vendido-agenda':lead.clasificaLead == 'V'}"
                                                             *ngIf="lead.scheduledAt == 'Sin agenda'">&nbsp;{{lead.scheduledAt}}</span>
+
                                                         <br>
                                                         <div class="inf-valor">
                                                             Valor del Lead =
                                                             {{lead.ValorLead | currency: 'MXN':'symbol' : '1.0'}}
+                                                            <img *ngIf="lead.status == 'perdida'"
+                                                                src="assets/imgs/llamadas/callmissed.svg" style="    vertical-align: middle;
+                                                            width: 6% !important;
+                                                            max-width: 150px !important;
+                                                            display: inline-block;
+                                                            margin-left: 2%;
+                                                            margin-top: -1%;" (click)="showConfirm(lead)" />
                                                         </div>
                                                     </div>
                                                 </div>
                                             </ion-col>
-                                            <ion-col col-2>
-                                                <img *ngIf="lead.status == 'perdida'"
-                                                    src="assets/imgs/llamadas/callmissed.svg"
-                                                    style="vertical-align: middle;width: 30% !important;max-width:150px !important;display: inline-block;margin-top: 6%;"
-                                                    (click)="showConfirm(lead)" />
-                                            </ion-col>
+
 
                                             <ion-col col-2 style="display: flex;
                                         text-align: right;
@@ -319,7 +323,7 @@
                                             </ion-col>
                                         </ion-row>
                                         <ion-row>
-                                            <ion-col col-8>
+                                            <ion-col col-10>
                                                 <div>
                                                     <div class="rate-fecha">
                                                         {{lead.fechaenvio | date: 'dd-MM HH:mm' }}
@@ -329,19 +333,21 @@
                                                         <span class="inf-agenda"
                                                             [ngClass]="{'descartado-agenda':lead.clasificaLead == 'D','seguimiento-agenda':lead.clasificaLead == 'S','negociacion-agenda':lead.clasificaLead == 'N','vendido-agenda':lead.clasificaLead == 'V'}"
                                                             *ngIf="lead.scheduledAt == 'Sin agenda'">&nbsp;{{lead.scheduledAt}}</span>
+
                                                         <br>
                                                         <div class="inf-valor">
                                                             Valor del Lead =
                                                             {{lead.ValorLead | currency: 'MXN':'symbol' : '1.0'}}
+                                                            <img *ngIf="lead.status == 'perdida'"
+                                                                src="assets/imgs/llamadas/callmissed.svg" style="    vertical-align: middle;
+                                                                    width: 6% !important;
+                                                                    max-width: 150px !important;
+                                                                    display: inline-block;
+                                                                    margin-left: 2%;
+                                                                    margin-top: -1%;" (click)="showConfirm(lead)" />
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </ion-col>
-                                            <ion-col col-2>
-                                                <img *ngIf="lead.status == 'perdida'"
-                                                    src="assets/imgs/llamadas/callmissed.svg"
-                                                    style="vertical-align: middle;width: 30% !important;max-width:150px !important;display: inline-block;margin-top: 6%;"
-                                                    (click)="showConfirm(lead)" />
                                             </ion-col>
 
                                             <ion-col col-2 style="display: flex;
@@ -437,7 +443,7 @@
                                             </ion-col>
                                         </ion-row>
                                         <ion-row>
-                                            <ion-col col-8>
+                                            <ion-col col-10>
                                                 <div>
                                                     <div class="rate-fecha">
                                                         {{lead.fechaenvio | date: 'dd-MM HH:mm' }}
@@ -447,21 +453,22 @@
                                                         <span class="inf-agenda"
                                                             [ngClass]="{'descartado-agenda':lead.clasificaLead == 'D','seguimiento-agenda':lead.clasificaLead == 'S','negociacion-agenda':lead.clasificaLead == 'N','vendido-agenda':lead.clasificaLead == 'V'}"
                                                             *ngIf="lead.scheduledAt == 'Sin agenda'">&nbsp;{{lead.scheduledAt}}</span>
+
                                                         <br>
                                                         <div class="inf-valor">
                                                             Valor del Lead =
                                                             {{lead.ValorLead | currency: 'MXN':'symbol' : '1.0'}}
+                                                            <img *ngIf="lead.status == 'perdida'"
+                                                                src="assets/imgs/llamadas/callmissed.svg" style="    vertical-align: middle;
+                                                                    width: 6% !important;
+                                                                    max-width: 150px !important;
+                                                                    display: inline-block;
+                                                                    margin-left: 2%;
+                                                                    margin-top: -1%;" (click)="showConfirm(lead)" />
                                                         </div>
                                                     </div>
                                                 </div>
                                             </ion-col>
-                                            <ion-col col-2>
-                                                <img *ngIf="lead.status == 'perdida'"
-                                                    src="assets/imgs/llamadas/callmissed.svg"
-                                                    style="vertical-align: middle;width: 30% !important;max-width:150px !important;display: inline-block;margin-top: 6%;"
-                                                    (click)="showConfirm(lead)" />
-                                            </ion-col>
-
                                             <ion-col col-2 style="display: flex;
                                         text-align: right;
                                         justify-content: flex-end;
@@ -555,7 +562,7 @@
                                             </ion-col>
                                         </ion-row>
                                         <ion-row>
-                                            <ion-col col-8>
+                                            <ion-col col-10>
                                                 <div>
                                                     <div class="rate-fecha">
                                                         {{lead.fechaenvio | date: 'dd-MM HH:mm' }}
@@ -565,19 +572,21 @@
                                                         <span class="inf-agenda"
                                                             [ngClass]="{'descartado-agenda':lead.clasificaLead == 'D','seguimiento-agenda':lead.clasificaLead == 'S','negociacion-agenda':lead.clasificaLead == 'N','vendido-agenda':lead.clasificaLead == 'V'}"
                                                             *ngIf="lead.scheduledAt == 'Sin agenda'">&nbsp;{{lead.scheduledAt}}</span>
+
                                                         <br>
                                                         <div class="inf-valor">
                                                             Valor del Lead =
                                                             {{lead.ValorLead | currency: 'MXN':'symbol' : '1.0'}}
+                                                            <img *ngIf="lead.status == 'perdida'"
+                                                                src="assets/imgs/llamadas/callmissed.svg" style="    vertical-align: middle;
+                                                                    width: 6% !important;
+                                                                    max-width: 150px !important;
+                                                                    display: inline-block;
+                                                                    margin-left: 2%;
+                                                                    margin-top: -1%;" (click)="showConfirm(lead)" />
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </ion-col>
-                                            <ion-col col-2>
-                                                <img *ngIf="lead.status == 'perdida'"
-                                                    src="assets/imgs/llamadas/callmissed.svg"
-                                                    style="vertical-align: middle;width: 30% !important;max-width:150px !important;display: inline-block;margin-top: 6%;"
-                                                    (click)="showConfirm(lead)" />
                                             </ion-col>
 
                                             <ion-col col-2 style="display: flex;
@@ -673,7 +682,7 @@
                                             </ion-col>
                                         </ion-row>
                                         <ion-row>
-                                            <ion-col col-8>
+                                            <ion-col col-10>
                                                 <div>
                                                     <div class="rate-fecha">
                                                         {{lead.fechaenvio | date: 'dd-MM HH:mm' }}
@@ -683,29 +692,29 @@
                                                         <span class="inf-agenda"
                                                             [ngClass]="{'descartado-agenda':lead.clasificaLead == 'D','seguimiento-agenda':lead.clasificaLead == 'S','negociacion-agenda':lead.clasificaLead == 'N','vendido-agenda':lead.clasificaLead == 'V'}"
                                                             *ngIf="lead.scheduledAt == 'Sin agenda'">&nbsp;{{lead.scheduledAt}}</span>
+
                                                         <br>
                                                         <div class="inf-valor">
                                                             Valor del Lead =
                                                             {{lead.ValorLead | currency: 'MXN':'symbol' : '1.0'}}
+                                                            <img *ngIf="lead.status == 'perdida'"
+                                                                src="assets/imgs/llamadas/callmissed.svg" style="    vertical-align: middle;
+                                                                    width: 6% !important;
+                                                                    max-width: 150px !important;
+                                                                    display: inline-block;
+                                                                    margin-left: 2%;
+                                                                    margin-top: -1%;" (click)="showConfirm(lead)" />
                                                         </div>
                                                     </div>
                                                 </div>
                                             </ion-col>
-                                            <ion-col col-2>
-                                                <img *ngIf="lead.status == 'perdida'"
-                                                    src="assets/imgs/llamadas/callmissed.svg"
-                                                    style="vertical-align: middle;width: 30% !important;max-width:150px !important;display: inline-block;margin-top: 6%;"
-                                                    (click)="showConfirm(lead)" />
-                                            </ion-col>
-
                                             <ion-col col-2 style="display: flex;
-                                        text-align: right;
-                                        justify-content: flex-end;
-                                        align-items: flex-end;">
+                                            text-align: right;
+                                            justify-content: flex-end;
+                                            align-items: flex-end;">
                                                 <img src="assets/imgs/leads/ver.svg" class="ver">
                                             </ion-col>
                                         </ion-row>
-
                                     </ion-card-content>
                                 </ion-card>
                             </ion-item>

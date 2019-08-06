@@ -85,6 +85,7 @@ export class CrmPage implements OnInit {
   public tipo = 'Todos';
   public dias = 'Total';
   public listaLeads;
+  public valor: any;
   public mayor: any = '';
   public menor: any = '';
   public ultimoLead;
@@ -194,7 +195,7 @@ export class CrmPage implements OnInit {
       this.leadsfiltrados = [];
       this.leads = [];
       this.leads_pagination_min = 1;
-      this.leads_pagination_max = 50;
+      this.leads_pagination_max = 30;
       this.contadorSin = 0;
       this.contadorDescartado = 0;
       this.contadorSeguimiento = 0;
@@ -207,7 +208,7 @@ export class CrmPage implements OnInit {
       this.valorVendido = 0;
     } else {
       this.leads_pagination_min = this.leads_pagination_max + 1;
-      this.leads_pagination_max += 50;
+      this.leads_pagination_max += 30;
     }
 
     switch (this.filtro) {
@@ -2195,6 +2196,13 @@ export class CrmPage implements OnInit {
     this.estatus = tabName;
   }
 
+  numberOnly(event): boolean {
+    const charCode = event.which ? event.which : event.keyCode;
+    if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+      return false;
+    }
+    return true;
+  }
 }
 
 

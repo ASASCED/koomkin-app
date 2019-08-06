@@ -548,24 +548,25 @@ export class LeadPage implements OnInit {
 
   public changeClassification(classification: string) {
     switch (classification) {
+      case 'D': {
+        this.leadActual.clasificaLead = 'D';
+        this.clasifica = 'Descartado';
+        break;
+      }
+      case 'S': {
+        this.leadActual.clasificaLead = 'S';
+        this.clasifica = 'Seguimiento';
+        break;
+      }
+      case 'N': {
+        this.leadActual.clasificaLead = 'N';
+        this.clasifica = 'Negociacion';
+        break;
+      }
       case 'V': {
         this.leadActual.clasificaLead = 'V';
         this.clasifica = 'Vendido';
-        break;
-      }
-      case 'D': {
-        this.leadActual.clasificaLead = 'D';
-        this.clasifica = 'Descartado'
-        break;
-      }
-      case 'P': {
-        this.leadActual.clasificaLead = 'P';
-        this.clasifica = 'En proceso de venta'
-        break;
-      }
-      case 'C': {
-        this.leadActual.clasificaLead = 'S';
-        this.clasifica = 'Sin Contacto'
+        //  // console.log(this.clasifica);
         break;
       }
       default:
