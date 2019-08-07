@@ -43,6 +43,7 @@ export class ModalComentariosPage implements OnInit {
     this.clave = this.leadActual.clave;
     this.uuid = this.leadActual.uuid;
 
+
     if (this.leadActual.ValorLead != 'null' && this.leadActual.ValorLead != null && this.leadActual.ValorLead != undefined) {
       this.valorLead = this.leadActual.ValorLead;
     }
@@ -201,7 +202,7 @@ export class ModalComentariosPage implements OnInit {
     if (this.fecha != null && this.fecha != 'null' && this.fecha != undefined && this.hora != null && this.hora != 'null' && this.hora != undefined) {
       this.datetime = this.fecha + 'T' + this.hora + ':00.00Z';
 
-      const cuerpo = `{"uuid": "${this.uuid}", "date": "${this.datetime}", "active": 1}`;
+      const cuerpo = `{"uuid": "${this.uuid}", "date": "${this.datetime}", "active": 1, "classification": "${this.clasificaLead}"}`;
 
       const options = {
         headers: new HttpHeaders().set(

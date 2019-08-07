@@ -5,6 +5,7 @@ import { HttpClient } from "@angular/common/http";
 import { AuthServiceProvider } from "../../providers/auth-service/auth-service";
 import { AlertController, InfiniteScroll, Content } from "ionic-angular";
 import { HttpHeaders } from '@angular/common/http';
+import { format } from 'date-fns';
 
 @IonicPage()
 @Component({
@@ -17,7 +18,7 @@ export class AgendaPage implements OnInit {
 
   public scheduleList;
   segment = 'hoy';
-  public listSegment: Array<string> = ['ayer', 'hoy', 'mañana'];
+  public listSegment: Array<string> = ['todos', 'hoy', 'manana'];
   excludeTracks: any = [];
   shownSessions: any = [];
   // groups: any = [{ time: '7 a. m.' }, { time: '8 a. m.' }, { time: '9 a. m.' }, { time: '10 a. m.' }, { time: '11 a. m.' }, { time: '12 p. m.' }, { time: '1 p. m.' }, { time: '2 p. m.' }, { time: '3 p. m.' }, { time: '4 p. m.' }, { time: '5 p. m.' }, { time: '6 p. m.' }, { time: '7 p. m.' }, { time: '8 p. m.' }, { time: '9 p. m.' }, { time: '10 p. m.' }];
@@ -57,7 +58,16 @@ export class AgendaPage implements OnInit {
   public fechaInic;
   public fechaFin;
   public hoy;
+  public manana;
   public treintaDias;
+  public listaLeadsHoy;
+  public clientesTotal;
+  public valorTotal = 0;
+  public valorTotalHoy = 0;
+  public clientesTotalHoy;
+  public listaLeadsManana;
+  public valorTotalManana = 0;
+  public clientesTotalManana;
   public busquedaSin = 'W';
   public busquedaDescartado = 'D';
   public busquedaSeguimiento = 'S';
@@ -93,7 +103,6 @@ export class AgendaPage implements OnInit {
   public ultimoLead;
   public fechafiltroinicial;
   public fechafiltrofinal;
-
   public leadsEstatus: any = [];
   public leadsDescartados: any = [];
   public leadsSeguimiento: any = [];
@@ -119,8 +128,12 @@ export class AgendaPage implements OnInit {
 
   ngOnInit() {
     let f = new Date();
+    this.manana = new Date();
     this.treintaDias = new Date();
     this.hoy = f.getFullYear() + '-' + ('0' + (f.getMonth() + 1)).slice(-2) + '-' + ('0' + f.getDate()).slice(-2);
+    this.manana.setDate(this.manana.getDate() + 1);
+    // tslint:disable-next-line: max-line-length
+    this.manana = this.manana.getFullYear() + '-' + ('0' + (this.manana.getMonth() + 1)).slice(-2) + '-' + ('0' + this.manana.getDate()).slice(-2);
     this.treintaDias.setDate(this.treintaDias.getDate() + 30);
     // tslint:disable-next-line: max-line-length
     this.treintaDias = this.treintaDias.getFullYear() + '-' + ('0' + (this.treintaDias.getMonth() + 1)).slice(-2) + '-' + ('0' + this.treintaDias.getDate()).slice(-2);
@@ -150,11 +163,50 @@ export class AgendaPage implements OnInit {
     return new Promise((resolve, reject) => {
       this.http.post(url, cuerpo, options).subscribe(
         data => {
-          console.log(data);
           this.listaLeads = data;
           if (this.listaLeads.length === 0) {
             this.leads_download_available = false;
           }
+          let minHoy = format(new Date(this.hoy + ' 00:00:00.000'), 'YYYY-MM-DD HH:mm:ss.SSS');
+          let maxHoy: any = format(new Date(this.hoy + ' 23:59:59.999'), 'YYYY-MM-DD HH:mm:ss.SSS');
+          this.listaLeadsHoy = this.listaLeads.filter((item: any) =>
+            item.scheduledAt >= minHoy && item.scheduledAt <= maxHoy
+          );
+          this.clientesTotalHoy = Object.keys(this.listaLeadsHoy).length;
+          // tslint:disable-next-line: forin
+          for (let k in this.listaLeadsHoy) {
+             // tslint:disable-next-line: radix
+             if (this.listaLeadsHoy[k].ValorLead == 'null' || this.listaLeadsHoy[k].ValorLead == null) {
+                // tslint:disable-next-line: no-unused-expression
+                this.listaLeadsHoy[k].ValorLead = 0;
+             }
+            this.valorTotalHoy = this.valorTotalHoy + parseInt(this.listaLeadsHoy[k].ValorLead);
+          }
+          let minManana = format(new Date(this.manana + ' 00:00:00.000'), 'YYYY-MM-DD HH:mm:ss.SSS');
+          let maxManana: any = format(new Date(this.manana + ' 23:59:59.999'), 'YYYY-MM-DD HH:mm:ss.SSS');
+          this.listaLeadsManana = this.listaLeads.filter((item: any) =>
+            item.scheduledAt >= minManana && item.scheduledAt <= maxManana
+          );
+          this.clientesTotalManana = Object.keys(this.listaLeadsManana).length;
+          // tslint:disable-next-line: forin
+          for (let k in this.listaLeadsManana) {
+             // tslint:disable-next-line: radix
+             if (this.listaLeadsManana[k].ValorLead == 'null' || this.listaLeadsManana[k].ValorLead == null) {
+                // tslint:disable-next-line: no-unused-expression
+                this.listaLeadsManana[k].ValorLead = 0;
+             }
+              this.valorTotalManana = this.valorTotalManana + parseInt(this.listaLeadsManana[k].ValorLead);
+          }
+          this.clientesTotal = Object.keys(this.listaLeads).length;
+
+          for (let k in this.listaLeads) {
+            // tslint:disable-next-line: radix
+            if (this.listaLeads[k].ValorLead == 'null' || this.listaLeads[k].ValorLead == null) {
+               // tslint:disable-next-line: no-unused-expression
+               this.listaLeads[k].ValorLead = 0;
+            }
+             this.valorTotal = this.valorTotal + parseInt(this.listaLeads[k].ValorLead);
+         }
           this.ultimoLead = this.listaLeads[0];
           this.leads = this.leads.concat(this.stylizeLeads(this.listaLeads));
           this.leadsfiltrados = this.leads;
@@ -264,32 +316,16 @@ export class AgendaPage implements OnInit {
         leadsArray[k].clasificaLead == null
       ) {
         leadsArray[k].clasificaLead = 'W';
-        this.contadorSin = this.contadorSin + 1;
-        // tslint:disable-next-line: radix
-        this.valorSin = this.valorSin + parseInt(leadsArray[k].ValorLead);
       } else if (leadsArray[k].clasificaLead === 'Descartado' || leadsArray[k].clasificaLead.toLowerCase() == 'sin contacto') {
         leadsArray[k].clasificaLead = 'D';
-        this.contadorDescartado = this.contadorDescartado + 1;
-        this.valorDescartado = this.valorDescartado + parseInt(leadsArray[k].ValorLead);
       } else if (leadsArray[k].clasificaLead === 'Seguimiento') {
         leadsArray[k].clasificaLead = 'S';
-        this.contadorSeguimiento = this.contadorSeguimiento + 1;
-        this.valorSeguimiento = this.valorSeguimiento + parseInt(leadsArray[k].ValorLead);
       } else if (leadsArray[k].clasificaLead === 'Negociacion' || leadsArray[k].clasificaLead == 'En proceso de venta') {
         leadsArray[k].clasificaLead = 'N';
-        this.contadorNegociacion = this.contadorNegociacion + 1;
-        this.valorNegociacion = this.valorNegociacion + parseInt(leadsArray[k].ValorLead);
       } else if (leadsArray[k].clasificaLead === 'Vendido') {
         leadsArray[k].clasificaLead = 'V';
-        this.contadorVendido = this.contadorVendido + 1;
-        this.valorVendido = this.valorVendido + parseInt(leadsArray[k].ValorLead);
       }
     }
-    this.filterLeadsEstatus(leadsArray);
-    this.filterLeadsDescartado(leadsArray);
-    this.filterLeadsSeguimiento(leadsArray);
-    this.filterLeadsNegociacion(leadsArray);
-    this.filterLeadsVendido(leadsArray);
     return leadsArray;
   }
 
@@ -621,66 +657,6 @@ export class AgendaPage implements OnInit {
         // console.log("error");
       }
     );
-  }
-
-  public filterLeadsEstatus(leadsArray) {
-    this.leadsEstatus = leadsArray.filter(function(data) {
-      return data.clasificaLead == 'W';
-    });
-  }
-
-  public filterLeadsDescartado(leadsArray) {
-    this.leadsDescartados = leadsArray.filter(function(data) {
-      return data.clasificaLead == 'D';
-    });
-  }
-
-  public filterLeadsSeguimiento(leadsArray) {
-    console.log(leadsArray,'leads');
-    this.leadsSeguimiento = leadsArray.filter(function(data) {
-      return data.clasificaLead == 'S';
-    });
-  }
-
-  public filterLeadsNegociacion(leadsArray) {
-    this.leadsNegociacion = leadsArray.filter(function(data) {
-      return data.clasificaLead == 'N';
-    });
-  }
-
-  public filterLeadsVendido(leadsArray) {
-    this.leadsVendidos = leadsArray.filter(function(data) {
-      return data.clasificaLead == 'V';
-    });
-  }
-
-  public eraseFilters() {
-    this.filtro = 'actividad';
-    this.tipo = 'Todos';
-    this.dias = 'Total';
-    this.mayor = '';
-    this.menor = '';
-  }
-
-  public showFilters() {
-    console.log(this.filtro,
-    this.dias,
-    this.tipo,
-    this.mayor,
-    this.menor);
-  }
-
-  public changeFilter(valor) {
-    this.filtro = valor;
-    this.dias = 'Total';
-  }
-
-  public advancedFilters() {
-    if(this.filtros == false) {
-      this.filtros = true;
-    } else {
-      this.filtros = false;
-    }
   }
 
   public showConfirm(lead) {
