@@ -378,9 +378,11 @@ export class BriefPage implements OnInit, AfterContentChecked {
 
     const url = 'https://www.koomkin.com.mx/api/app/updateBriefInformation2/';
 
+    console.log(body.toString());
     return new Promise((resolve, reject) => {
       this.http.post(url, body.toString(), options).subscribe(
         data => {
+          console.log(data);
           this.datosCampania = data;
           this.idCampania = this.datosCampania[0].IDCampania;
           if (this.cobertura_empresa == 'Local' && this.cobertura_empresa !== 'Nacional') {

@@ -1764,19 +1764,19 @@ app.post('/registerReason/', function (req, res) {
 
 app.post('/updateBriefInformation2/', function(req, res) {
 
-    let usuario = parseInt(req.params.usuario, 10);
-    let idProducto = parseInt(req.params.idProducto, 10);
-    let new_Producto = req.params.new_Producto;
-    let new_TipoEmpresa = parseInt(req.params.new_TipoEmpresa,10);
-    let new_CodigoPostal = parseInt(req.params.new_CodigoPostal,10);
-    let new_IDMembresia = parseInt(req.params.new_IDMembresia,10);
-    let new_PorqueEresMejor = req.params.new_PorqueEresMejor;
-    let new_ClientesTarget = req.params.new_ClientesTarget;
-    let new_Correo1 = req.params.new_Correo1;
-    let new_Correo2 = req.params.new_Correo2;
-    let new_Correo3 = req.params.new_Correo3;
-    let new_IdSubSector = parseInt(req.params.new_IdSubSector,10);
-    let idEstado = parseInt(req.params.idEstado,10);
+    let usuario = parseInt(req.body.usuario, 10);
+    let idProducto = parseInt(req.body.idProducto, 10);
+    let new_Producto = req.body.new_Producto;
+    let new_TipoEmpresa = parseInt(req.body.new_TipoEmpresa,10);
+    let new_CodigoPostal = parseInt(req.body.new_CodigoPostal,10);
+    let new_IDMembresia = parseInt(req.body.new_IDMembresia,10);
+    let new_PorqueEresMejor = req.body.new_PorqueEresMejor;
+    let new_ClientesTarget = req.body.new_ClientesTarget;
+    let new_Correo1 = req.body.new_Correo1;
+    let new_Correo2 = req.body.new_Correo2;
+    let new_Correo3 = req.body.new_Correo3;
+    let new_IdSubSector = parseInt(req.body.new_IdSubSector,10);
+    let idEstado = parseInt(req.body.idEstado,10);
 
     if(!new_IDMembresia){
         new_IDMembresia = 'NULL';
