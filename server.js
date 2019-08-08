@@ -1760,6 +1760,59 @@ app.post('/registerReason/', function (req, res) {
         });
 });
 
+//updateBriefInformation
+
+app.post('/updateBriefInformation2/', function(req, res) {
+
+    let usuario = parseInt(req.params.usuario, 10);
+    let idProducto = parseInt(req.params.idProducto, 10);
+    let new_Producto = req.params.new_Producto;
+    let new_TipoEmpresa = parseInt(req.params.new_TipoEmpresa,10);
+    let new_CodigoPostal = parseInt(req.params.new_CodigoPostal,10);
+    let new_IDMembresia = parseInt(req.params.new_IDMembresia,10);
+    let new_PorqueEresMejor = req.params.new_PorqueEresMejor;
+    let new_ClientesTarget = req.params.new_ClientesTarget;
+    let new_Correo1 = req.params.new_Correo1;
+    let new_Correo2 = req.params.new_Correo2;
+    let new_Correo3 = req.params.new_Correo3;
+    let new_IdSubSector = parseInt(req.params.new_IdSubSector,10);
+    let idEstado = parseInt(req.params.idEstado,10);
+
+    if(!new_IDMembresia){
+        new_IDMembresia = 'NULL';
+    }
+
+    if(!new_Correo1){
+        new_Correo1 = 'NULL';
+    }
+
+    if(!new_Correo2){
+        new_Correo2 = 'NULL';
+    }
+
+    if(!new_Correo3){
+        new_Correo3 = 'NULL';
+    }
+
+    if(!new_IdSubSector){
+        new_IdSubSector = 'NULL';
+    }
+
+    if(!idEstado){
+        idEstado = 'NULL';
+    }
+    
+    console.log(usuario,idProducto,new_Producto,new_TipoEmpresa,new_CodigoPostal,new_IDMembresia,new_PorqueEresMejor,new_ClientesTarget,new_Correo1,new_Correo2,new_Correo3,new_IdSubSector,idEstado);
+
+    db.executeUpdateBriefInformation(usuario,idProducto,new_Producto,new_TipoEmpresa,new_CodigoPostal,new_IDMembresia,new_PorqueEresMejor,new_ClientesTarget,new_Correo1,new_Correo2,new_Correo3,new_IdSubSector,idEstado) 
+        .then(rows => {
+            res.json(rows).status(200).send();
+        })
+        .catch(err => {
+            res.status(500).json({ error: err }).send();
+        });
+});
+
 //Genera un comentario por lead
 app.post('/registerComment/', function (req, res) {
 
