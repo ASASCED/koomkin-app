@@ -339,14 +339,12 @@ export class BriefPage implements OnInit, AfterContentChecked {
     }
 
     if (this.productoInicial !== this.producto) {
-      console.log('entro if');
       this.productoInicial = this.producto;
       this.createTicket();
     }
 
     this.getNewCodigoPostal(this.cp)
       .then(nuevo_estado => {
-        console.log('entro');
         this.updateBriefInformation(nuevo_estado)
       })
       .catch();
@@ -382,7 +380,6 @@ export class BriefPage implements OnInit, AfterContentChecked {
     return new Promise((resolve, reject) => {
       this.http.post(url, body.toString(), options).subscribe(
         data => {
-          console.log(data);
           this.datosCampania = data;
           this.idCampania = this.datosCampania[0].IDCampania;
           if (this.cobertura_empresa == 'Local' && this.cobertura_empresa !== 'Nacional') {
