@@ -56,6 +56,7 @@ export class CrmPage implements OnInit {
   public sigTresDias;
   public sigSieteDias;
   public sigCatorceDias;
+  public sigMeses;
   public busquedaSin = 'W';
   public busquedaDescartado = 'D';
   public busquedaSeguimiento = 'S';
@@ -121,6 +122,7 @@ export class CrmPage implements OnInit {
     this.sigTresDias = new Date();
     this.sigSieteDias = new Date();
     this.sigCatorceDias = new Date();
+    this.sigMeses = new Date();
 
     this.hoy = f.getFullYear() + '-' + ('0' + (f.getMonth() + 1)).slice(-2) + '-' + f.getDate();
 
@@ -148,6 +150,10 @@ export class CrmPage implements OnInit {
     // tslint:disable-next-line: max-line-length
     this.sigCatorceDias = this.sigCatorceDias.getFullYear() + '-' + ('0' + (this.sigCatorceDias.getMonth() + 1)).slice(-2) + '-' + ('0' + this.sigCatorceDias.getDate()).slice(-2);
 
+    this.sigMeses.setDate(this.sigMeses.getDate() + 120);
+    // tslint:disable-next-line: max-line-length
+    this.sigMeses = this.sigMeses.getFullYear() + '-' + ('0' + (this.sigMeses.getMonth() + 1)).slice(-2) + '-' + ('0' + this.sigMeses.getDate()).slice(-2);
+
     this.fechaFin = this.hoy;
 
     this.showBanner();
@@ -168,6 +174,7 @@ export class CrmPage implements OnInit {
       )
     };
 
+    console.log(cuerpo);
     const url = 'https://www.koomkin.com.mx/api/leads/getByUser';
     return new Promise((resolve, reject) => {
       this.http.post(url, cuerpo, options).subscribe(
@@ -210,7 +217,6 @@ export class CrmPage implements OnInit {
       this.leads_pagination_min = this.leads_pagination_max + 1;
       this.leads_pagination_max += 30;
     }
-
     switch (this.filtro) {
       case 'actividad':
         switch (this.dias) {
@@ -218,8 +224,8 @@ export class CrmPage implements OnInit {
             switch (this.tipo) {
               case 'Todos':
                 if (this.fechaInic && this.fechaFin) {
-                  if (this.mayor > 0 && this.menor > 0) {
-                    if (this.mayor > this.menor) {
+                  if (parseInt(this.mayor) > 0 && parseInt(this.menor) > 0) {
+                    if (parseInt(this.mayor) > parseInt(this.menor)) {
                       // tslint:disable-next-line: max-line-length
                       this.url = `{"user_id":${this.id},"filters":[{"attr":"fechaenvio","op":">=","value":"${this.fechaInic} 00:00:00"},{"attr":"fechaenvio","op":"<=","value":"${this.fechaFin} 23:59:59"},{"attr":"ValorLead","op":">=","value":"${this.menor}"}, {"attr":"ValorLead","op":"<=","value":${this.mayor}}],"ordering":[{"attr":"ultimomensaje","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                       return this.getLeads();
@@ -229,11 +235,11 @@ export class CrmPage implements OnInit {
                       return this.getLeads();
                     }
                     // tslint:disable-next-line: max-line-length
-                  } else if (this.menor > 0) {
+                  } else if (parseInt(this.menor) > 0) {
                     // tslint:disable-next-line: max-line-length
                     this.url = `{"user_id":${this.id},"filters":[{"attr":"fechaenvio","op":">=","value":"${this.fechaInic} 00:00:00"},{"attr":"fechaenvio","op":"<=","value":"${this.fechaFin} 23:59:59"},{"attr":"ValorLead","op":"<=","value":"${this.menor}"}],"ordering":[{"attr":"ultimomensaje","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                     return this.getLeads();
-                  } else if (this.mayor > 0) {
+                  } else if (parseInt(this.mayor) > 0) {
                     // tslint:disable-next-line: max-line-length
                     this.url = `{"user_id":${this.id},"filters":[{"attr":"fechaenvio","op":">=","value":"${this.fechaInic} 00:00:00"},{"attr":"fechaenvio","op":"<=","value":"${this.fechaFin} 23:59:59"},{"attr":"ValorLead","op":">=","value":${this.mayor}}],"ordering":[{"attr":"ultimomensaje","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                     return this.getLeads();
@@ -243,8 +249,8 @@ export class CrmPage implements OnInit {
                     return this.getLeads();
                   }
                 } else {
-                  if (this.mayor > 0 && this.menor > 0) {
-                    if (this.mayor > this.menor) {
+                  if (parseInt(this.mayor) > 0 && parseInt(this.menor) > 0) {
+                    if (parseInt(this.mayor) > parseInt(this.menor)) {
                       // tslint:disable-next-line: max-line-length
                       this.url = `{"user_id":${this.id},"filters":[{"attr":"ValorLead","op":">=","value":"${this.menor}"}, {"attr":"ValorLead","op":"<=","value":${this.mayor}}],"ordering":[{"attr":"ultimomensaje","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                       return this.getLeads();
@@ -254,11 +260,11 @@ export class CrmPage implements OnInit {
                       return this.getLeads();
                     }
                     // tslint:disable-next-line: max-line-length
-                  } else if (this.menor > 0) {
+                  } else if (parseInt(this.menor) > 0) {
                     // tslint:disable-next-line: max-line-length
                     this.url = `{"user_id":${this.id},"filters":[{"attr":"ValorLead","op":"<=","value":"${this.menor}"}],"ordering":[{"attr":"ultimomensaje","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                     return this.getLeads();
-                  } else if (this.mayor > 0) {
+                  } else if (parseInt(this.mayor) > 0) {
                     // tslint:disable-next-line: max-line-length
                     this.url = `{"user_id":${this.id},"filters":[{"attr":"ValorLead","op":">=","value":${this.mayor}}],"ordering":[{"attr":"ultimomensaje","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                     return this.getLeads();
@@ -271,8 +277,8 @@ export class CrmPage implements OnInit {
 
               case 'Koomkin':
                 if (this.fechaInic && this.fechaFin) {
-                  if (this.mayor > 0 && this.menor > 0) {
-                    if (this.mayor > this.menor) {
+                  if (parseInt(this.mayor) > 0 && parseInt(this.menor) > 0) {
+                    if (parseInt(this.mayor) > parseInt(this.menor)) {
                       // tslint:disable-next-line: max-line-length
                       this.url = `{"user_id":${this.id},"filters":[{"attr":"fechaenvio","op":">=","value":"${this.fechaInic} 00:00:00"},{"attr":"fechaenvio","op":"<=","value":"${this.fechaFin} 23:59:59"},{"attr":"ValorLead","op":">=","value":"${this.menor}"}, {"attr":"ValorLead","op":"<=","value":${this.mayor}}, {"attr":"Canal","op":"not in","value":["Reporte", "App"]}],"ordering":[{"attr":"ultimomensaje","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                       return this.getLeads();
@@ -282,11 +288,11 @@ export class CrmPage implements OnInit {
                       return this.getLeads();
                     }
                     // tslint:disable-next-line: max-line-length
-                  } else if (this.menor > 0) {
+                  } else if (parseInt(this.menor) > 0) {
                     // tslint:disable-next-line: max-line-length
                     this.url = `{"user_id":${this.id},"filters":[{"attr":"fechaenvio","op":">=","value":"${this.fechaInic} 00:00:00"},{"attr":"fechaenvio","op":"<=","value":"${this.fechaFin} 23:59:59"}, {"attr":"ValorLead","op":"<=","value":"${this.menor}"}, {"attr":"Canal","op":"not in","value":["Reporte", "App"]}],"ordering":[{"attr":"ultimomensaje","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                     return this.getLeads();
-                  } else if (this.mayor > 0) {
+                  } else if (parseInt(this.mayor) > 0) {
                     // tslint:disable-next-line: max-line-length
                     this.url = `{"user_id":${this.id},"filters":[{"attr":"fechaenvio","op":">=","value":"${this.fechaInic} 00:00:00"},{"attr":"fechaenvio","op":"<=","value":"${this.fechaFin} 23:59:59"}, {"attr":"ValorLead","op":">=","value":${this.mayor}}, {"attr":"Canal","op":"not in","value":["Reporte", "App"]}],"ordering":[{"attr":"ultimomensaje","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                     return this.getLeads();
@@ -296,8 +302,8 @@ export class CrmPage implements OnInit {
                     return this.getLeads();
                   }
                 } else {
-                  if (this.mayor > 0 && this.menor > 0) {
-                    if (this.mayor > this.menor) {
+                  if (parseInt(this.mayor) > 0 && parseInt(this.menor) > 0) {
+                    if (parseInt(this.mayor) > parseInt(this.menor)) {
                       // tslint:disable-next-line: max-line-length
                       this.url = `{"user_id":${this.id},"filters":[{"attr":"ValorLead","op":">=","value":"${this.menor}"}, {"attr":"ValorLead","op":"<=","value":${this.mayor}}, {"attr":"Canal","op":"not in","value":["Reporte", "App"]}],"ordering":[{"attr":"ultimomensaje","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                       return this.getLeads();
@@ -307,11 +313,11 @@ export class CrmPage implements OnInit {
                       return this.getLeads();
                     }
                     // tslint:disable-next-line: max-line-length
-                  } else if (this.menor > 0) {
+                  } else if (parseInt(this.menor) > 0) {
                     // tslint:disable-next-line: max-line-length
                     this.url = `{"user_id":${this.id},"filters":[ {"attr":"ValorLead","op":"<=","value":"${this.menor}"}, {"attr":"Canal","op":"not in","value":["Reporte", "App"]}],"ordering":[{"attr":"ultimomensaje","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                     return this.getLeads();
-                  } else if (this.mayor > 0) {
+                  } else if (parseInt(this.mayor) > 0) {
                     // tslint:disable-next-line: max-line-length
                     this.url = `{"user_id":${this.id},"filters":[ {"attr":"ValorLead","op":">=","value":${this.mayor}}, {"attr":"Canal","op":"not in","value":["Reporte", "App"]}],"ordering":[{"attr":"ultimomensaje","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                     return this.getLeads();
@@ -324,8 +330,8 @@ export class CrmPage implements OnInit {
 
               case 'Externos':
                 if (this.fechaInic && this.fechaFin) {
-                  if (this.mayor > 0 && this.menor > 0) {
-                    if (this.mayor > this.menor) {
+                  if (parseInt(this.mayor) > 0 && parseInt(this.menor) > 0) {
+                    if (parseInt(this.mayor) > parseInt(this.menor)) {
                       // tslint:disable-next-line: max-line-length
                       this.url = `{"user_id":${this.id},"filters":[{"attr":"fechaenvio","op":">=","value":"${this.fechaInic} 00:00:00"},{"attr":"fechaenvio","op":"<=","value":"${this.fechaFin} 23:59:59"},{"attr":"ValorLead","op":">=","value":"${this.menor}"}, {"attr":"ValorLead","op":"<=","value":${this.mayor}}, {"attr":"Canal","op":"in","value":["Reporte", "App"]}],"ordering":[{"attr":"ultimomensaje","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                       return this.getLeads();
@@ -335,11 +341,11 @@ export class CrmPage implements OnInit {
                       return this.getLeads();
                     }
                     // tslint:disable-next-line: max-line-length
-                  } else if (this.menor > 0) {
+                  } else if (parseInt(this.menor) > 0) {
                     // tslint:disable-next-line: max-line-length
                     this.url = `{"user_id":${this.id},"filters":[{"attr":"fechaenvio","op":">=","value":"${this.fechaInic} 00:00:00"},{"attr":"fechaenvio","op":"<=","value":"${this.fechaFin} 23:59:59"},{"attr":"ValorLead","op":"<=","value":"${this.menor}"}, {"attr":"Canal","op":"in","value":["Reporte", "App"]}],"ordering":[{"attr":"ultimomensaje","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                     return this.getLeads();
-                  } else if (this.mayor > 0) {
+                  } else if (parseInt(this.mayor) > 0) {
                     // tslint:disable-next-line: max-line-length
                     this.url = `{"user_id":${this.id},"filters":[{"attr":"fechaenvio","op":">=","value":"${this.fechaInic} 00:00:00"},{"attr":"fechaenvio","op":"<=","value":"${this.fechaFin} 23:59:59"},{"attr":"ValorLead","op":">=","value":${this.mayor}}, {"attr":"Canal","op":"in","value":["Reporte", "App"]}],"ordering":[{"attr":"ultimomensaje","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                     return this.getLeads();
@@ -349,8 +355,8 @@ export class CrmPage implements OnInit {
                     return this.getLeads();
                   }
                 } else {
-                  if (this.mayor > 0 && this.menor > 0) {
-                    if (this.mayor > this.menor) {
+                  if (parseInt(this.mayor) > 0 && parseInt(this.menor) > 0) {
+                    if (parseInt(this.mayor) > parseInt(this.menor)) {
                       // tslint:disable-next-line: max-line-length
                       this.url = `{"user_id":${this.id},"filters":[{"attr":"ValorLead","op":">=","value":"${this.menor}"}, {"attr":"ValorLead","op":"<=","value":${this.mayor}}, {"attr":"Canal","op":"in","value":["Reporte", "App"]}],"ordering":[{"attr":"ultimomensaje","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                       return this.getLeads();
@@ -360,11 +366,11 @@ export class CrmPage implements OnInit {
                       return this.getLeads();
                     }
                     // tslint:disable-next-line: max-line-length
-                  } else if (this.menor > 0) {
+                  } else if (parseInt(this.menor) > 0) {
                     // tslint:disable-next-line: max-line-length
                     this.url = `{"user_id":${this.id},"filters":[{"attr":"ValorLead","op":"<=","value":"${this.menor}"}, {"attr":"Canal","op":"in","value":["Reporte", "App"]}],"ordering":[{"attr":"ultimomensaje","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                     return this.getLeads();
-                  } else if (this.mayor > 0) {
+                  } else if (parseInt(this.mayor) > 0) {
                     // tslint:disable-next-line: max-line-length
                     this.url = `{"user_id":${this.id},"filters":[{"attr":"ValorLead","op":">=","value":${this.mayor}}, {"attr":"Canal","op":"in","value":["Reporte", "App"]}],"ordering":[{"attr":"ultimomensaje","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                     return this.getLeads();
@@ -381,8 +387,8 @@ export class CrmPage implements OnInit {
           case 'Últ. 3 días':
             switch (this.tipo) {
               case 'Todos':
-                if (this.mayor > 0 && this.menor > 0) {
-                  if (this.mayor > this.menor) {
+                if (parseInt(this.mayor) > 0 && parseInt(this.menor) > 0) {
+                  if (parseInt(this.mayor) > parseInt(this.menor)) {
                     // tslint:disable-next-line: max-line-length
                     this.url = `{"user_id":${this.id},"filters":[{"attr":"ValorLead","op":">=","value":"${this.menor}"}, {"attr":"ValorLead","op":"<=","value":${this.mayor}},{"attr":"fechaenvio","op":">=","value":"${this.tresDias} 00:00:00"},{"attr":"fechaenvio","op":"<=","value":"${this.hoy} 23:59:59"}],"ordering":[{"attr":"ultimomensaje","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                     return this.getLeads();
@@ -392,11 +398,11 @@ export class CrmPage implements OnInit {
                     return this.getLeads();
                   }
                   // tslint:disable-next-line: max-line-length
-                } else if (this.menor > 0) {
+                } else if (parseInt(this.menor) > 0) {
                   // tslint:disable-next-line: max-line-length
                   this.url = `{"user_id":${this.id},"filters":[{"attr":"ValorLead","op":"<=","value":"${this.menor}"},{"attr":"fechaenvio","op":">=","value":"${this.tresDias} 00:00:00"},{"attr":"fechaenvio","op":"<=","value":"${this.hoy} 23:59:59"}],"ordering":[{"attr":"ultimomensaje","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                   return this.getLeads();
-                } else if (this.mayor > 0) {
+                } else if (parseInt(this.mayor) > 0) {
                   // tslint:disable-next-line: max-line-length
                   this.url = `{"user_id":${this.id},"filters":[{"attr":"ValorLead","op":">=","value":${this.mayor}},{"attr":"fechaenvio","op":">=","value":"${this.tresDias} 00:00:00"},{"attr":"fechaenvio","op":"<=","value":"${this.hoy} 23:59:59"}],"ordering":[{"attr":"ultimomensaje","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                   return this.getLeads();
@@ -407,8 +413,8 @@ export class CrmPage implements OnInit {
                 }
 
               case 'Koomkin':
-                if (this.mayor > 0 && this.menor > 0) {
-                  if (this.mayor > this.menor) {
+                if (parseInt(this.mayor) > 0 && parseInt(this.menor) > 0) {
+                  if (parseInt(this.mayor) > parseInt(this.menor)) {
                     // tslint:disable-next-line: max-line-length
                     this.url = `{"user_id":${this.id},"filters":[{"attr":"ValorLead","op":">=","value":"${this.menor}"}, {"attr":"ValorLead","op":"<=","value":${this.mayor}},{"attr":"fechaenvio","op":">=","value":"${this.tresDias} 00:00:00"},{"attr":"fechaenvio","op":"<=","value":"${this.hoy} 23:59:59"},{"attr":"Canal","op":"not in","value":["Reporte", "App"]}],"ordering":[{"attr":"ultimomensaje","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                     return this.getLeads();
@@ -418,11 +424,11 @@ export class CrmPage implements OnInit {
                     return this.getLeads();
                   }
                   // tslint:disable-next-line: max-line-length
-                } else if (this.menor > 0) {
+                } else if (parseInt(this.menor) > 0) {
                   // tslint:disable-next-line: max-line-length
                   this.url = `{"user_id":${this.id},"filters":[{"attr":"ValorLead","op":"<=","value":"${this.menor}"},{"attr":"fechaenvio","op":">=","value":"${this.tresDias} 00:00:00"},{"attr":"fechaenvio","op":"<=","value":"${this.hoy} 23:59:59"},{"attr":"Canal","op":"not in","value":["Reporte", "App"]}],"ordering":[{"attr":"ultimomensaje","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                   return this.getLeads();
-                } else if (this.mayor > 0) {
+                } else if (parseInt(this.mayor) > 0) {
                   // tslint:disable-next-line: max-line-length
                   this.url = `{"user_id":${this.id},"filters":[{"attr":"ValorLead","op":">=","value":${this.mayor}},{"attr":"fechaenvio","op":">=","value":"${this.tresDias} 00:00:00"},{"attr":"fechaenvio","op":"<=","value":"${this.hoy} 23:59:59"},{"attr":"Canal","op":"not in","value":["Reporte", "App"]}],"ordering":[{"attr":"ultimomensaje","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                   return this.getLeads();
@@ -434,8 +440,8 @@ export class CrmPage implements OnInit {
 
 
               case 'Externos':
-                if (this.mayor > 0 && this.menor > 0) {
-                  if (this.mayor > this.menor) {
+                if (parseInt(this.mayor) > 0 && parseInt(this.menor) > 0) {
+                  if (parseInt(this.mayor) > parseInt(this.menor)) {
                     // tslint:disable-next-line: max-line-length
                     this.url = `{"user_id":${this.id},"filters":[{"attr":"ValorLead","op":">=","value":"${this.menor}"}, {"attr":"ValorLead","op":"<=","value":${this.mayor}},{"attr":"fechaenvio","op":">=","value":"${this.tresDias} 00:00:00"},{"attr":"fechaenvio","op":"<=","value":"${this.hoy} 23:59:59"},{"attr":"Canal","op":"in","value":["Reporte", "App"]}],"ordering":[{"attr":"ultimomensaje","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                     return this.getLeads();
@@ -445,11 +451,11 @@ export class CrmPage implements OnInit {
                     return this.getLeads();
                   }
                   // tslint:disable-next-line: max-line-length
-                } else if (this.menor > 0) {
+                } else if (parseInt(this.menor) > 0) {
                   // tslint:disable-next-line: max-line-length
                   this.url = `{"user_id":${this.id},"filters":[{"attr":"ValorLead","op":"<=","value":"${this.menor}"},{"attr":"fechaenvio","op":">=","value":"${this.tresDias} 00:00:00"},{"attr":"fechaenvio","op":"<=","value":"${this.hoy} 23:59:59"},{"attr":"Canal","op":"in","value":["Reporte", "App"]}],"ordering":[{"attr":"ultimomensaje","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                   return this.getLeads();
-                } else if (this.mayor > 0) {
+                } else if (parseInt(this.mayor) > 0) {
                   // tslint:disable-next-line: max-line-length
                   this.url = `{"user_id":${this.id},"filters":[{"attr":"ValorLead","op":">=","value":${this.mayor}},{"attr":"fechaenvio","op":">=","value":"${this.tresDias} 00:00:00"},{"attr":"fechaenvio","op":"<=","value":"${this.hoy} 23:59:59"},{"attr":"Canal","op":"in","value":["Reporte", "App"]}],"ordering":[{"attr":"ultimomensaje","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                   return this.getLeads();
@@ -466,8 +472,8 @@ export class CrmPage implements OnInit {
           case 'Últ. 7 días':
             switch (this.tipo) {
               case 'Todos':
-                if (this.mayor > 0 && this.menor > 0) {
-                  if (this.mayor > this.menor) {
+                if (parseInt(this.mayor) > 0 && parseInt(this.menor) > 0) {
+                  if (parseInt(this.mayor) > parseInt(this.menor)) {
                     // tslint:disable-next-line: max-line-length
                     this.url = `{"user_id":${this.id},"filters":[{"attr":"ValorLead","op":">=","value":"${this.menor}"}, {"attr":"ValorLead","op":"<=","value":${this.mayor}},{"attr":"fechaenvio","op":">=","value":"${this.sieteDias} 00:00:00"},{"attr":"fechaenvio","op":"<=","value":"${this.hoy} 23:59:59"}],"ordering":[{"attr":"ultimomensaje","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                     return this.getLeads();
@@ -477,11 +483,11 @@ export class CrmPage implements OnInit {
                     return this.getLeads();
                   }
                   // tslint:disable-next-line: max-line-length
-                } else if (this.menor > 0) {
+                } else if (parseInt(this.menor) > 0) {
                   // tslint:disable-next-line: max-line-length
                   this.url = `{"user_id":${this.id},"filters":[{"attr":"ValorLead","op":"<=","value":"${this.menor}"},{"attr":"fechaenvio","op":">=","value":"${this.sieteDias} 00:00:00"},{"attr":"fechaenvio","op":"<=","value":"${this.hoy} 23:59:59"}],"ordering":[{"attr":"ultimomensaje","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                   return this.getLeads();
-                } else if (this.mayor > 0) {
+                } else if (parseInt(this.mayor) > 0) {
                   // tslint:disable-next-line: max-line-length
                   this.url = `{"user_id":${this.id},"filters":[{"attr":"ValorLead","op":">=","value":${this.mayor}},{"attr":"fechaenvio","op":">=","value":"${this.sieteDias} 00:00:00"},{"attr":"fechaenvio","op":"<=","value":"${this.hoy} 23:59:59"}],"ordering":[{"attr":"ultimomensaje","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                   return this.getLeads();
@@ -492,8 +498,8 @@ export class CrmPage implements OnInit {
                 }
 
               case 'Koomkin':
-                if (this.mayor > 0 && this.menor > 0) {
-                  if (this.mayor > this.menor) {
+                if (parseInt(this.mayor) > 0 && parseInt(this.menor) > 0) {
+                  if (parseInt(this.mayor) > parseInt(this.menor)) {
                     // tslint:disable-next-line: max-line-length
                     this.url = `{"user_id":${this.id},"filters":[{"attr":"ValorLead","op":">=","value":"${this.menor}"}, {"attr":"ValorLead","op":"<=","value":${this.mayor}},{"attr":"fechaenvio","op":">=","value":"${this.sieteDias} 00:00:00"},{"attr":"fechaenvio","op":"<=","value":"${this.hoy} 23:59:59"},{"attr":"Canal","op":"not in","value":["Reporte", "App"]}],"ordering":[{"attr":"ultimomensaje","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                     return this.getLeads();
@@ -503,11 +509,11 @@ export class CrmPage implements OnInit {
                     return this.getLeads();
                   }
                   // tslint:disable-next-line: max-line-length
-                } else if (this.menor > 0) {
+                } else if (parseInt(this.menor) > 0) {
                   // tslint:disable-next-line: max-line-length
                   this.url = `{"user_id":${this.id},"filters":[{"attr":"ValorLead","op":"<=","value":"${this.menor}"},{"attr":"fechaenvio","op":">=","value":"${this.sieteDias} 00:00:00"},{"attr":"fechaenvio","op":"<=","value":"${this.hoy} 23:59:59"},{"attr":"Canal","op":"not in","value":["Reporte", "App"]}],"ordering":[{"attr":"ultimomensaje","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                   return this.getLeads();
-                } else if (this.mayor > 0) {
+                } else if (parseInt(this.mayor) > 0) {
                   // tslint:disable-next-line: max-line-length
                   this.url = `{"user_id":${this.id},"filters":[{"attr":"ValorLead","op":">=","value":${this.mayor}},{"attr":"fechaenvio","op":">=","value":"${this.sieteDias} 00:00:00"},{"attr":"fechaenvio","op":"<=","value":"${this.hoy} 23:59:59"},{"attr":"Canal","op":"not in","value":["Reporte", "App"]}],"ordering":[{"attr":"ultimomensaje","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                   return this.getLeads();
@@ -518,8 +524,8 @@ export class CrmPage implements OnInit {
                 }
 
               case 'Externos':
-                if (this.mayor > 0 && this.menor > 0) {
-                  if (this.mayor > this.menor) {
+                if (parseInt(this.mayor) > 0 && parseInt(this.menor) > 0) {
+                  if (parseInt(this.mayor) > parseInt(this.menor)) {
                     // tslint:disable-next-line: max-line-length
                     this.url = `{"user_id":${this.id},"filters":[{"attr":"ValorLead","op":">=","value":"${this.menor}"}, {"attr":"ValorLead","op":"<=","value":${this.mayor}},{"attr":"fechaenvio","op":">=","value":"${this.sieteDias} 00:00:00"},{"attr":"fechaenvio","op":"<=","value":"${this.hoy} 23:59:59"},{"attr":"Canal","op":"in","value":["Reporte", "App"]}],"ordering":[{"attr":"ultimomensaje","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                     return this.getLeads();
@@ -529,11 +535,11 @@ export class CrmPage implements OnInit {
                     return this.getLeads();
                   }
                   // tslint:disable-next-line: max-line-length
-                } else if (this.menor > 0) {
+                } else if (parseInt(this.menor) > 0) {
                   // tslint:disable-next-line: max-line-length
                   this.url = `{"user_id":${this.id},"filters":[{"attr":"ValorLead","op":"<=","value":"${this.menor}"},{"attr":"fechaenvio","op":">=","value":"${this.sieteDias} 00:00:00"},{"attr":"fechaenvio","op":"<=","value":"${this.hoy} 23:59:59"},{"attr":"Canal","op":"in","value":["Reporte", "App"]}],"ordering":[{"attr":"ultimomensaje","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                   return this.getLeads();
-                } else if (this.mayor > 0) {
+                } else if (parseInt(this.mayor) > 0) {
                   // tslint:disable-next-line: max-line-length
                   this.url = `{"user_id":${this.id},"filters":[{"attr":"ValorLead","op":">=","value":${this.mayor}},{"attr":"fechaenvio","op":">=","value":"${this.sieteDias} 00:00:00"},{"attr":"fechaenvio","op":"<=","value":"${this.hoy} 23:59:59"},{"attr":"Canal","op":"in","value":["Reporte", "App"]}],"ordering":[{"attr":"ultimomensaje","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                   return this.getLeads();
@@ -550,8 +556,8 @@ export class CrmPage implements OnInit {
           case 'Últ. 14 días':
             switch (this.tipo) {
               case 'Todos':
-                if (this.mayor > 0 && this.menor > 0) {
-                  if (this.mayor > this.menor) {
+                if (parseInt(this.mayor) > 0 && parseInt(this.menor) > 0) {
+                  if (parseInt(this.mayor) > parseInt(this.menor)) {
                     // tslint:disable-next-line: max-line-length
                     this.url = `{"user_id":${this.id},"filters":[{"attr":"ValorLead","op":">=","value":"${this.menor}"}, {"attr":"ValorLead","op":"<=","value":${this.mayor}},{"attr":"fechaenvio","op":">=","value":"${this.catorceDias} 00:00:00"},{"attr":"fechaenvio","op":"<=","value":"${this.hoy} 23:59:59"}],"ordering":[{"attr":"ultimomensaje","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                     return this.getLeads();
@@ -561,11 +567,11 @@ export class CrmPage implements OnInit {
                     return this.getLeads();
                   }
                   // tslint:disable-next-line: max-line-length
-                } else if (this.menor > 0) {
+                } else if (parseInt(this.menor) > 0) {
                   // tslint:disable-next-line: max-line-length
                   this.url = `{"user_id":${this.id},"filters":[{"attr":"ValorLead","op":"<=","value":"${this.menor}"},{"attr":"fechaenvio","op":">=","value":"${this.catorceDias} 00:00:00"},{"attr":"fechaenvio","op":"<=","value":"${this.hoy} 23:59:59"}],"ordering":[{"attr":"ultimomensaje","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                   return this.getLeads();
-                } else if (this.mayor > 0) {
+                } else if (parseInt(this.mayor) > 0) {
                   // tslint:disable-next-line: max-line-length
                   this.url = `{"user_id":${this.id},"filters":[{"attr":"ValorLead","op":">=","value":${this.mayor}},{"attr":"fechaenvio","op":">=","value":"${this.catorceDias} 00:00:00"},{"attr":"fechaenvio","op":"<=","value":"${this.hoy} 23:59:59"}],"ordering":[{"attr":"ultimomensaje","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                   return this.getLeads();
@@ -576,8 +582,8 @@ export class CrmPage implements OnInit {
                 }
 
               case 'Koomkin':
-                if (this.mayor > 0 && this.menor > 0) {
-                  if (this.mayor > this.menor) {
+                if (parseInt(this.mayor) > 0 && parseInt(this.menor) > 0) {
+                  if (parseInt(this.mayor) > parseInt(this.menor)) {
                     // tslint:disable-next-line: max-line-length
                     this.url = `{"user_id":${this.id},"filters":[{"attr":"ValorLead","op":">=","value":"${this.menor}"}, {"attr":"ValorLead","op":"<=","value":${this.mayor}},{"attr":"fechaenvio","op":">=","value":"${this.catorceDias} 00:00:00"},{"attr":"fechaenvio","op":"<=","value":"${this.hoy} 23:59:59"},{"attr":"Canal","op":"not in","value":["Reporte", "App"]}],"ordering":[{"attr":"ultimomensaje","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                     return this.getLeads();
@@ -587,11 +593,11 @@ export class CrmPage implements OnInit {
                     return this.getLeads();
                   }
                   // tslint:disable-next-line: max-line-length
-                } else if (this.menor > 0) {
+                } else if (parseInt(this.menor) > 0) {
                   // tslint:disable-next-line: max-line-length
                   this.url = `{"user_id":${this.id},"filters":[{"attr":"ValorLead","op":"<=","value":"${this.menor}"},{"attr":"fechaenvio","op":">=","value":"${this.catorceDias} 00:00:00"},{"attr":"fechaenvio","op":"<=","value":"${this.hoy} 23:59:59"},{"attr":"Canal","op":"not in","value":["Reporte", "App"]}],"ordering":[{"attr":"ultimomensaje","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                   return this.getLeads();
-                } else if (this.mayor > 0) {
+                } else if (parseInt(this.mayor) > 0) {
                   // tslint:disable-next-line: max-line-length
                   this.url = `{"user_id":${this.id},"filters":[{"attr":"ValorLead","op":">=","value":${this.mayor}},{"attr":"fechaenvio","op":">=","value":"${this.catorceDias} 00:00:00"},{"attr":"fechaenvio","op":"<=","value":"${this.hoy} 23:59:59"},{"attr":"Canal","op":"not in","value":["Reporte", "App"]}],"ordering":[{"attr":"ultimomensaje","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                   return this.getLeads();
@@ -602,8 +608,8 @@ export class CrmPage implements OnInit {
                 }
 
               case 'Externos':
-                if (this.mayor > 0 && this.menor > 0) {
-                  if (this.mayor > this.menor) {
+                if (parseInt(this.mayor) > 0 && parseInt(this.menor) > 0) {
+                  if (parseInt(this.mayor) > parseInt(this.menor)) {
                     // tslint:disable-next-line: max-line-length
                     this.url = `{"user_id":${this.id},"filters":[{"attr":"ValorLead","op":">=","value":"${this.menor}"}, {"attr":"ValorLead","op":"<=","value":${this.mayor}},{"attr":"fechaenvio","op":">=","value":"${this.catorceDias} 00:00:00"},{"attr":"fechaenvio","op":"<=","value":"${this.hoy} 23:59:59"},{"attr":"Canal","op":"in","value":["Reporte", "App"]}],"ordering":[{"attr":"ultimomensaje","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                     return this.getLeads();
@@ -612,11 +618,11 @@ export class CrmPage implements OnInit {
                     this.url = `{"user_id":${this.id},"filters":[{"attr":"ValorLead","op":">=","value":${this.mayor}}, {"attr":"ValorLead","op":"<=","value":"${this.menor}"},{"attr":"fechaenvio","op":">=","value":"${this.catorceDias} 00:00:00"},{"attr":"fechaenvio","op":"<=","value":"${this.hoy} 23:59:59"},{"attr":"Canal","op":"in","value":["Reporte", "App"]}],"ordering":[{"attr":"ultimomensaje","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                     return this.getLeads();
                   }
-                } else if (this.menor > 0) {
+                } else if (parseInt(this.menor) > 0) {
                   // tslint:disable-next-line: max-line-length
                   this.url = `{"user_id":${this.id},"filters":[{"attr":"ValorLead","op":"<=","value":"${this.menor}"},{"attr":"fechaenvio","op":">=","value":"${this.catorceDias} 00:00:00"},{"attr":"fechaenvio","op":"<=","value":"${this.hoy} 23:59:59"},{"attr":"Canal","op":"in","value":["Reporte", "App"]}],"ordering":[{"attr":"ultimomensaje","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                   return this.getLeads();
-                } else if (this.mayor > 0) {
+                } else if (parseInt(this.mayor) > 0) {
                   // tslint:disable-next-line: max-line-length
                   this.url = `{"user_id":${this.id},"filters":[{"attr":"ValorLead","op":">=","value":${this.mayor}},{"attr":"fechaenvio","op":">=","value":"${this.catorceDias} 00:00:00"},{"attr":"fechaenvio","op":"<=","value":"${this.hoy} 23:59:59"},{"attr":"Canal","op":"in","value":["Reporte", "App"]}],"ordering":[{"attr":"ultimomensaje","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                   return this.getLeads();
@@ -640,8 +646,8 @@ export class CrmPage implements OnInit {
             switch (this.tipo) {
               case 'Todos':
               if (this.fechaInic && this.fechaFin) {
-                if (this.mayor > 0 && this.menor > 0) {
-                  if (this.mayor > this.menor) {
+                if (parseInt(this.mayor) > 0 && parseInt(this.menor) > 0) {
+                  if (parseInt(this.mayor) > parseInt(this.menor)) {
                     // tslint:disable-next-line: max-line-length
                     this.url = `{"user_id":${this.id},"filters":[{"attr":"fechaenvio","op":">=","value":"${this.fechaInic} 00:00:00"},{"attr":"fechaenvio","op":"<=","value":"${this.fechaFin} 23:59:59"},{"attr":"ValorLead","op":">=","value":"${this.menor}"}, {"attr":"ValorLead","op":"<=","value":${this.mayor}}],"ordering":[{"attr":"fechaenvio","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                     return this.getLeads();
@@ -651,11 +657,11 @@ export class CrmPage implements OnInit {
                     return this.getLeads();
                   }
                   // tslint:disable-next-line: max-line-length
-                } else if (this.menor > 0) {
+                } else if (parseInt(this.menor) > 0) {
                   // tslint:disable-next-line: max-line-length
                   this.url = `{"user_id":${this.id},"filters":[{"attr":"fechaenvio","op":">=","value":"${this.fechaInic} 00:00:00"},{"attr":"fechaenvio","op":"<=","value":"${this.fechaFin} 23:59:59"},{"attr":"ValorLead","op":"<=","value":"${this.menor}"}],"ordering":[{"attr":"fechaenvio","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                   return this.getLeads();
-                } else if (this.mayor > 0) {
+                } else if (parseInt(this.mayor) > 0) {
                   // tslint:disable-next-line: max-line-length
                   this.url = `{"user_id":${this.id},"filters":[{"attr":"fechaenvio","op":">=","value":"${this.fechaInic} 00:00:00"},{"attr":"fechaenvio","op":"<=","value":"${this.fechaFin} 23:59:59"},{"attr":"ValorLead","op":">=","value":${this.mayor}}],"ordering":[{"attr":"fechaenvio","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                   return this.getLeads();
@@ -665,8 +671,8 @@ export class CrmPage implements OnInit {
                   return this.getLeads();
                 }
               } else {
-                if (this.mayor > 0 && this.menor > 0) {
-                  if (this.mayor > this.menor) {
+                if (parseInt(this.mayor) > 0 && parseInt(this.menor) > 0) {
+                  if (parseInt(this.mayor) > parseInt(this.menor)) {
                     // tslint:disable-next-line: max-line-length
                     this.url = `{"user_id":${this.id},"filters":[{"attr":"ValorLead","op":">=","value":"${this.menor}"}, {"attr":"ValorLead","op":"<=","value":${this.mayor}}],"ordering":[{"attr":"fechaenvio","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                     return this.getLeads();
@@ -676,11 +682,11 @@ export class CrmPage implements OnInit {
                     return this.getLeads();
                   }
                   // tslint:disable-next-line: max-line-length
-                } else if (this.menor > 0) {
+                } else if (parseInt(this.menor) > 0) {
                   // tslint:disable-next-line: max-line-length
                   this.url = `{"user_id":${this.id},"filters":[{"attr":"ValorLead","op":"<=","value":"${this.menor}"}],"ordering":[{"attr":"fechaenvio","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                   return this.getLeads();
-                } else if (this.mayor > 0) {
+                } else if (parseInt(this.mayor) > 0) {
                   // tslint:disable-next-line: max-line-length
                   this.url = `{"user_id":${this.id},"filters":[{"attr":"ValorLead","op":">=","value":${this.mayor}}],"ordering":[{"attr":"fechaenvio","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                   return this.getLeads();
@@ -693,8 +699,8 @@ export class CrmPage implements OnInit {
 
             case 'Koomkin':
               if (this.fechaInic && this.fechaFin) {
-                if (this.mayor > 0 && this.menor > 0) {
-                  if (this.mayor > this.menor) {
+                if (parseInt(this.mayor) > 0 && parseInt(this.menor) > 0) {
+                  if (parseInt(this.mayor) > parseInt(this.menor)) {
                     // tslint:disable-next-line: max-line-length
                     this.url = `{"user_id":${this.id},"filters":[{"attr":"fechaenvio","op":">=","value":"${this.fechaInic} 00:00:00"},{"attr":"fechaenvio","op":"<=","value":"${this.fechaFin} 23:59:59"},{"attr":"ValorLead","op":">=","value":"${this.menor}"}, {"attr":"ValorLead","op":"<=","value":${this.mayor}}, {"attr":"Canal","op":"not in","value":["Reporte", "App"]}],"ordering":[{"attr":"fechaenvio","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                     return this.getLeads();
@@ -704,11 +710,11 @@ export class CrmPage implements OnInit {
                     return this.getLeads();
                   }
                   // tslint:disable-next-line: max-line-length
-                } else if (this.menor > 0) {
+                } else if (parseInt(this.menor) > 0) {
                   // tslint:disable-next-line: max-line-length
                   this.url = `{"user_id":${this.id},"filters":[{"attr":"fechaenvio","op":">=","value":"${this.fechaInic} 00:00:00"},{"attr":"fechaenvio","op":"<=","value":"${this.fechaFin} 23:59:59"}, {"attr":"ValorLead","op":"<=","value":"${this.menor}"}, {"attr":"Canal","op":"not in","value":["Reporte", "App"]}],"ordering":[{"attr":"fechaenvio","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                   return this.getLeads();
-                } else if (this.mayor > 0) {
+                } else if (parseInt(this.mayor) > 0) {
                   // tslint:disable-next-line: max-line-length
                   this.url = `{"user_id":${this.id},"filters":[{"attr":"fechaenvio","op":">=","value":"${this.fechaInic} 00:00:00"},{"attr":"fechaenvio","op":"<=","value":"${this.fechaFin} 23:59:59"}, {"attr":"ValorLead","op":">=","value":${this.mayor}}, {"attr":"Canal","op":"not in","value":["Reporte", "App"]}],"ordering":[{"attr":"fechaenvio","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                   return this.getLeads();
@@ -718,8 +724,8 @@ export class CrmPage implements OnInit {
                   return this.getLeads();
                 }
               } else {
-                if (this.mayor > 0 && this.menor > 0) {
-                  if (this.mayor > this.menor) {
+                if (parseInt(this.mayor) > 0 && parseInt(this.menor) > 0) {
+                  if (parseInt(this.mayor) > parseInt(this.menor)) {
                     // tslint:disable-next-line: max-line-length
                     this.url = `{"user_id":${this.id},"filters":[{"attr":"ValorLead","op":">=","value":"${this.menor}"}, {"attr":"ValorLead","op":"<=","value":${this.mayor}}, {"attr":"Canal","op":"not in","value":["Reporte", "App"]}],"ordering":[{"attr":"fechaenvio","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                     return this.getLeads();
@@ -729,11 +735,11 @@ export class CrmPage implements OnInit {
                     return this.getLeads();
                   }
                   // tslint:disable-next-line: max-line-length
-                } else if (this.menor > 0) {
+                } else if (parseInt(this.menor) > 0) {
                   // tslint:disable-next-line: max-line-length
                   this.url = `{"user_id":${this.id},"filters":[ {"attr":"ValorLead","op":"<=","value":"${this.menor}"}, {"attr":"Canal","op":"not in","value":["Reporte", "App"]}],"ordering":[{"attr":"fechaenvio","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                   return this.getLeads();
-                } else if (this.mayor > 0) {
+                } else if (parseInt(this.mayor) > 0) {
                   // tslint:disable-next-line: max-line-length
                   this.url = `{"user_id":${this.id},"filters":[ {"attr":"ValorLead","op":">=","value":${this.mayor}}, {"attr":"Canal","op":"not in","value":["Reporte", "App"]}],"ordering":[{"attr":"fechaenvio","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                   return this.getLeads();
@@ -746,8 +752,8 @@ export class CrmPage implements OnInit {
 
             case 'Externos':
               if (this.fechaInic && this.fechaFin) {
-                if (this.mayor > 0 && this.menor > 0) {
-                  if (this.mayor > this.menor) {
+                if (parseInt(this.mayor) > 0 && parseInt(this.menor) > 0) {
+                  if (parseInt(this.mayor) > parseInt(this.menor)) {
                     // tslint:disable-next-line: max-line-length
                     this.url = `{"user_id":${this.id},"filters":[{"attr":"fechaenvio","op":">=","value":"${this.fechaInic} 00:00:00"},{"attr":"fechaenvio","op":"<=","value":"${this.fechaFin} 23:59:59"},{"attr":"ValorLead","op":">=","value":"${this.menor}"}, {"attr":"ValorLead","op":"<=","value":${this.mayor}}, {"attr":"Canal","op":"in","value":["Reporte", "App"]}],"ordering":[{"attr":"fechaenvio","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                     return this.getLeads();
@@ -757,11 +763,11 @@ export class CrmPage implements OnInit {
                     return this.getLeads();
                   }
                   // tslint:disable-next-line: max-line-length
-                } else if (this.menor > 0) {
+                } else if (parseInt(this.menor) > 0) {
                   // tslint:disable-next-line: max-line-length
                   this.url = `{"user_id":${this.id},"filters":[{"attr":"fechaenvio","op":">=","value":"${this.fechaInic} 00:00:00"},{"attr":"fechaenvio","op":"<=","value":"${this.fechaFin} 23:59:59"},{"attr":"ValorLead","op":"<=","value":"${this.menor}"}, {"attr":"Canal","op":"in","value":["Reporte", "App"]}],"ordering":[{"attr":"fechaenvio","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                   return this.getLeads();
-                } else if (this.mayor > 0) {
+                } else if (parseInt(this.mayor) > 0) {
                   // tslint:disable-next-line: max-line-length
                   this.url = `{"user_id":${this.id},"filters":[{"attr":"fechaenvio","op":">=","value":"${this.fechaInic} 00:00:00"},{"attr":"fechaenvio","op":"<=","value":"${this.fechaFin} 23:59:59"},{"attr":"ValorLead","op":">=","value":${this.mayor}}, {"attr":"Canal","op":"in","value":["Reporte", "App"]}],"ordering":[{"attr":"fechaenvio","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                   return this.getLeads();
@@ -771,8 +777,8 @@ export class CrmPage implements OnInit {
                   return this.getLeads();
                 }
               } else {
-                if (this.mayor > 0 && this.menor > 0) {
-                  if (this.mayor > this.menor) {
+                if (parseInt(this.mayor) > 0 && parseInt(this.menor) > 0) {
+                  if (parseInt(this.mayor) > parseInt(this.menor)) {
                     // tslint:disable-next-line: max-line-length
                     this.url = `{"user_id":${this.id},"filters":[{"attr":"ValorLead","op":">=","value":"${this.menor}"}, {"attr":"ValorLead","op":"<=","value":${this.mayor}}, {"attr":"Canal","op":"in","value":["Reporte", "App"]}],"ordering":[{"attr":"fechaenvio","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                     return this.getLeads();
@@ -782,11 +788,11 @@ export class CrmPage implements OnInit {
                     return this.getLeads();
                   }
                   // tslint:disable-next-line: max-line-length
-                } else if (this.menor > 0) {
+                } else if (parseInt(this.menor) > 0) {
                   // tslint:disable-next-line: max-line-length
                   this.url = `{"user_id":${this.id},"filters":[{"attr":"ValorLead","op":"<=","value":"${this.menor}"}, {"attr":"Canal","op":"in","value":["Reporte", "App"]}],"ordering":[{"attr":"fechaenvio","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                   return this.getLeads();
-                } else if (this.mayor > 0) {
+                } else if (parseInt(this.mayor) > 0) {
                   // tslint:disable-next-line: max-line-length
                   this.url = `{"user_id":${this.id},"filters":[{"attr":"ValorLead","op":">=","value":${this.mayor}}, {"attr":"Canal","op":"in","value":["Reporte", "App"]}],"ordering":[{"attr":"fechaenvio","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                   return this.getLeads();
@@ -803,8 +809,8 @@ export class CrmPage implements OnInit {
           case 'Últ. 3 días':
             switch (this.tipo) {
               case 'Todos':
-                if (this.mayor > 0 && this.menor > 0) {
-                  if (this.mayor > this.menor) {
+                if (parseInt(this.mayor) > 0 && parseInt(this.menor) > 0) {
+                  if (parseInt(this.mayor) > parseInt(this.menor)) {
                     // tslint:disable-next-line: max-line-length
                     this.url = `{"user_id":${this.id},"filters":[{"attr":"ValorLead","op":">=","value":"${this.menor}"}, {"attr":"ValorLead","op":"<=","value":${this.mayor}},{"attr":"fechaenvio","op":">=","value":"${this.tresDias} 00:00:00"},{"attr":"fechaenvio","op":"<=","value":"${this.hoy} 23:59:59"}],"ordering":[{"attr":"fechaenvio","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                     return this.getLeads();
@@ -814,11 +820,11 @@ export class CrmPage implements OnInit {
                     return this.getLeads();
                   }
                   // tslint:disable-next-line: max-line-length
-                } else if (this.menor > 0) {
+                } else if (parseInt(this.menor) > 0) {
                   // tslint:disable-next-line: max-line-length
                   this.url = `{"user_id":${this.id},"filters":[{"attr":"ValorLead","op":"<=","value":"${this.menor}"},{"attr":"fechaenvio","op":">=","value":"${this.tresDias} 00:00:00"},{"attr":"fechaenvio","op":"<=","value":"${this.hoy} 23:59:59"}],"ordering":[{"attr":"fechaenvio","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                   return this.getLeads();
-                } else if (this.mayor > 0) {
+                } else if (parseInt(this.mayor) > 0) {
                   // tslint:disable-next-line: max-line-length
                   this.url = `{"user_id":${this.id},"filters":[{"attr":"ValorLead","op":">=","value":${this.mayor}},{"attr":"fechaenvio","op":">=","value":"${this.tresDias} 00:00:00"},{"attr":"fechaenvio","op":"<=","value":"${this.hoy} 23:59:59"}],"ordering":[{"attr":"fechaenvio","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                   return this.getLeads();
@@ -829,8 +835,8 @@ export class CrmPage implements OnInit {
                 }
 
               case 'Koomkin':
-                if (this.mayor > 0 && this.menor > 0) {
-                  if (this.mayor > this.menor) {
+                if (parseInt(this.mayor) > 0 && parseInt(this.menor) > 0) {
+                  if (parseInt(this.mayor) > parseInt(this.menor)) {
                     // tslint:disable-next-line: max-line-length
                     this.url = `{"user_id":${this.id},"filters":[{"attr":"ValorLead","op":">=","value":"${this.menor}"}, {"attr":"ValorLead","op":"<=","value":${this.mayor}},{"attr":"fechaenvio","op":">=","value":"${this.tresDias} 00:00:00"},{"attr":"fechaenvio","op":"<=","value":"${this.hoy} 23:59:59"},{"attr":"Canal","op":"not in","value":["Reporte", "App"]}],"ordering":[{"attr":"fechaenvio","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                     return this.getLeads();
@@ -840,11 +846,11 @@ export class CrmPage implements OnInit {
                     return this.getLeads();
                   }
                   // tslint:disable-next-line: max-line-length
-                } else if (this.menor > 0) {
+                } else if (parseInt(this.menor) > 0) {
                   // tslint:disable-next-line: max-line-length
                   this.url = `{"user_id":${this.id},"filters":[{"attr":"ValorLead","op":"<=","value":"${this.menor}"},{"attr":"fechaenvio","op":">=","value":"${this.tresDias} 00:00:00"},{"attr":"fechaenvio","op":"<=","value":"${this.hoy} 23:59:59"},{"attr":"Canal","op":"not in","value":["Reporte", "App"]}],"ordering":[{"attr":"fechaenvio","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                   return this.getLeads();
-                } else if (this.mayor > 0) {
+                } else if (parseInt(this.mayor) > 0) {
                   // tslint:disable-next-line: max-line-length
                   this.url = `{"user_id":${this.id},"filters":[{"attr":"ValorLead","op":">=","value":${this.mayor}},{"attr":"fechaenvio","op":">=","value":"${this.tresDias} 00:00:00"},{"attr":"fechaenvio","op":"<=","value":"${this.hoy} 23:59:59"},{"attr":"Canal","op":"not in","value":["Reporte", "App"]}],"ordering":[{"attr":"fechaenvio","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                   return this.getLeads();
@@ -855,8 +861,8 @@ export class CrmPage implements OnInit {
                 }
 
               case 'Externos':
-                if (this.mayor > 0 && this.menor > 0) {
-                  if (this.mayor > this.menor) {
+                if (parseInt(this.mayor) > 0 && parseInt(this.menor) > 0) {
+                  if (parseInt(this.mayor) > parseInt(this.menor)) {
                     // tslint:disable-next-line: max-line-length
                     this.url = `{"user_id":${this.id},"filters":[{"attr":"ValorLead","op":">=","value":"${this.menor}"}, {"attr":"ValorLead","op":"<=","value":${this.mayor}},{"attr":"fechaenvio","op":">=","value":"${this.tresDias} 00:00:00"},{"attr":"fechaenvio","op":"<=","value":"${this.hoy} 23:59:59"},{"attr":"Canal","op":"in","value":["Reporte", "App"]}],"ordering":[{"attr":"fechaenvio","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                     return this.getLeads();
@@ -866,11 +872,11 @@ export class CrmPage implements OnInit {
                     return this.getLeads();
                   }
                   // tslint:disable-next-line: max-line-length
-                } else if (this.menor > 0) {
+                } else if (parseInt(this.menor) > 0) {
                   // tslint:disable-next-line: max-line-length
                   this.url = `{"user_id":${this.id},"filters":[{"attr":"ValorLead","op":"<=","value":"${this.menor}"},{"attr":"fechaenvio","op":">=","value":"${this.tresDias} 00:00:00"},{"attr":"fechaenvio","op":"<=","value":"${this.hoy} 23:59:59"},{"attr":"Canal","op":"in","value":["Reporte", "App"]}],"ordering":[{"attr":"fechaenvio","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                   return this.getLeads();
-                } else if (this.mayor > 0) {
+                } else if (parseInt(this.mayor) > 0) {
                   // tslint:disable-next-line: max-line-length
                   this.url = `{"user_id":${this.id},"filters":[{"attr":"ValorLead","op":">=","value":${this.mayor}},{"attr":"fechaenvio","op":">=","value":"${this.tresDias} 00:00:00"},{"attr":"fechaenvio","op":"<=","value":"${this.hoy} 23:59:59"},{"attr":"Canal","op":"in","value":["Reporte", "App"]}],"ordering":[{"attr":"fechaenvio","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                   return this.getLeads();
@@ -887,8 +893,8 @@ export class CrmPage implements OnInit {
           case 'Últ. 7 días':
             switch (this.tipo) {
               case 'Todos':
-                if (this.mayor > 0 && this.menor > 0) {
-                  if (this.mayor > this.menor) {
+                if (parseInt(this.mayor) > 0 && parseInt(this.menor) > 0) {
+                  if (parseInt(this.mayor) > parseInt(this.menor)) {
                     // tslint:disable-next-line: max-line-length
                     this.url = `{"user_id":${this.id},"filters":[{"attr":"ValorLead","op":">=","value":"${this.menor}"}, {"attr":"ValorLead","op":"<=","value":${this.mayor}},{"attr":"fechaenvio","op":">=","value":"${this.sieteDias} 00:00:00"},{"attr":"fechaenvio","op":"<=","value":"${this.hoy} 23:59:59"}],"ordering":[{"attr":"fechaenvio","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                     return this.getLeads();
@@ -898,11 +904,11 @@ export class CrmPage implements OnInit {
                     return this.getLeads();
                   }
                   // tslint:disable-next-line: max-line-length
-                } else if (this.menor > 0) {
+                } else if (parseInt(this.menor) > 0) {
                   // tslint:disable-next-line: max-line-length
                   this.url = `{"user_id":${this.id},"filters":[{"attr":"ValorLead","op":"<=","value":"${this.menor}"},{"attr":"fechaenvio","op":">=","value":"${this.sieteDias} 00:00:00"},{"attr":"fechaenvio","op":"<=","value":"${this.hoy} 23:59:59"}],"ordering":[{"attr":"fechaenvio","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                   return this.getLeads();
-                } else if (this.mayor > 0) {
+                } else if (parseInt(this.mayor) > 0) {
                   // tslint:disable-next-line: max-line-length
                   this.url = `{"user_id":${this.id},"filters":[{"attr":"ValorLead","op":">=","value":${this.mayor}},{"attr":"fechaenvio","op":">=","value":"${this.sieteDias} 00:00:00"},{"attr":"fechaenvio","op":"<=","value":"${this.hoy} 23:59:59"}],"ordering":[{"attr":"fechaenvio","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                   return this.getLeads();
@@ -913,8 +919,8 @@ export class CrmPage implements OnInit {
                 }
 
               case 'Koomkin':
-                if (this.mayor > 0 && this.menor > 0) {
-                  if (this.mayor > this.menor) {
+                if (parseInt(this.mayor) > 0 && parseInt(this.menor) > 0) {
+                  if (parseInt(this.mayor) > parseInt(this.menor)) {
                     // tslint:disable-next-line: max-line-length
                     this.url = `{"user_id":${this.id},"filters":[{"attr":"ValorLead","op":">=","value":"${this.menor}"}, {"attr":"ValorLead","op":"<=","value":${this.mayor}},{"attr":"fechaenvio","op":">=","value":"${this.sieteDias} 00:00:00"},{"attr":"fechaenvio","op":"<=","value":"${this.hoy} 23:59:59"},{"attr":"Canal","op":"not in","value":["Reporte", "App"]}],"ordering":[{"attr":"fechaenvio","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                     return this.getLeads();
@@ -924,11 +930,11 @@ export class CrmPage implements OnInit {
                     return this.getLeads();
                   }
                   // tslint:disable-next-line: max-line-length
-                } else if (this.menor > 0) {
+                } else if (parseInt(this.menor) > 0) {
                   // tslint:disable-next-line: max-line-length
                   this.url = `{"user_id":${this.id},"filters":[{"attr":"ValorLead","op":"<=","value":"${this.menor}"},{"attr":"fechaenvio","op":">=","value":"${this.sieteDias} 00:00:00"},{"attr":"fechaenvio","op":"<=","value":"${this.hoy} 23:59:59"},{"attr":"Canal","op":"not in","value":["Reporte", "App"]}],"ordering":[{"attr":"fechaenvio","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                   return this.getLeads();
-                } else if (this.mayor > 0) {
+                } else if (parseInt(this.mayor) > 0) {
                   // tslint:disable-next-line: max-line-length
                   this.url = `{"user_id":${this.id},"filters":[{"attr":"ValorLead","op":">=","value":${this.mayor}},{"attr":"fechaenvio","op":">=","value":"${this.sieteDias} 00:00:00"},{"attr":"fechaenvio","op":"<=","value":"${this.hoy} 23:59:59"},{"attr":"Canal","op":"not in","value":["Reporte", "App"]}],"ordering":[{"attr":"fechaenvio","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                   return this.getLeads();
@@ -939,8 +945,8 @@ export class CrmPage implements OnInit {
                 }
 
               case 'Externos':
-                if (this.mayor > 0 && this.menor > 0) {
-                  if (this.mayor > this.menor) {
+                if (parseInt(this.mayor) > 0 && parseInt(this.menor) > 0) {
+                  if (parseInt(this.mayor) > parseInt(this.menor)) {
                     // tslint:disable-next-line: max-line-length
                     this.url = `{"user_id":${this.id},"filters":[{"attr":"ValorLead","op":">=","value":"${this.menor}"}, {"attr":"ValorLead","op":"<=","value":${this.mayor}},{"attr":"fechaenvio","op":">=","value":"${this.sieteDias} 00:00:00"},{"attr":"fechaenvio","op":"<=","value":"${this.hoy} 23:59:59"},{"attr":"Canal","op":"in","value":["Reporte", "App"]}],"ordering":[{"attr":"fechaenvio","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                     return this.getLeads();
@@ -950,11 +956,11 @@ export class CrmPage implements OnInit {
                     return this.getLeads();
                   }
                   // tslint:disable-next-line: max-line-length
-                } else if (this.menor > 0) {
+                } else if (parseInt(this.menor) > 0) {
                   // tslint:disable-next-line: max-line-length
                   this.url = `{"user_id":${this.id},"filters":[{"attr":"ValorLead","op":"<=","value":"${this.menor}"},{"attr":"fechaenvio","op":">=","value":"${this.sieteDias} 00:00:00"},{"attr":"fechaenvio","op":"<=","value":"${this.hoy} 23:59:59"},{"attr":"Canal","op":"in","value":["Reporte", "App"]}],"ordering":[{"attr":"fechaenvio","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                   return this.getLeads();
-                } else if (this.mayor > 0) {
+                } else if (parseInt(this.mayor) > 0) {
                   // tslint:disable-next-line: max-line-length
                   this.url = `{"user_id":${this.id},"filters":[{"attr":"ValorLead","op":">=","value":${this.mayor}},{"attr":"fechaenvio","op":">=","value":"${this.sieteDias} 00:00:00"},{"attr":"fechaenvio","op":"<=","value":"${this.hoy} 23:59:59"},{"attr":"Canal","op":"in","value":["Reporte", "App"]}],"ordering":[{"attr":"fechaenvio","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                   return this.getLeads();
@@ -971,8 +977,8 @@ export class CrmPage implements OnInit {
           case 'Últ. 14 días':
             switch (this.tipo) {
               case 'Todos':
-                if (this.mayor > 0 && this.menor > 0) {
-                  if (this.mayor > this.menor) {
+                if (parseInt(this.mayor) > 0 && parseInt(this.menor) > 0) {
+                  if (parseInt(this.mayor) > parseInt(this.menor)) {
                     // tslint:disable-next-line: max-line-length
                     this.url = `{"user_id":${this.id},"filters":[{"attr":"ValorLead","op":">=","value":"${this.menor}"}, {"attr":"ValorLead","op":"<=","value":${this.mayor}},{"attr":"fechaenvio","op":">=","value":"${this.catorceDias} 00:00:00"},{"attr":"fechaenvio","op":"<=","value":"${this.hoy} 23:59:59"}],"ordering":[{"attr":"fechaenvio","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                     return this.getLeads();
@@ -982,11 +988,11 @@ export class CrmPage implements OnInit {
                     return this.getLeads();
                   }
                   // tslint:disable-next-line: max-line-length
-                } else if (this.menor > 0) {
+                } else if (parseInt(this.menor) > 0) {
                   // tslint:disable-next-line: max-line-length
                   this.url = `{"user_id":${this.id},"filters":[{"attr":"ValorLead","op":"<=","value":"${this.menor}"},{"attr":"fechaenvio","op":">=","value":"${this.catorceDias} 00:00:00"},{"attr":"fechaenvio","op":"<=","value":"${this.hoy} 23:59:59"}],"ordering":[{"attr":"fechaenvio","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                   return this.getLeads();
-                } else if (this.mayor > 0) {
+                } else if (parseInt(this.mayor) > 0) {
                   // tslint:disable-next-line: max-line-length
                   this.url = `{"user_id":${this.id},"filters":[{"attr":"ValorLead","op":">=","value":${this.mayor}},{"attr":"fechaenvio","op":">=","value":"${this.catorceDias} 00:00:00"},{"attr":"fechaenvio","op":"<=","value":"${this.hoy} 23:59:59"}],"ordering":[{"attr":"fechaenvio","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                   return this.getLeads();
@@ -997,8 +1003,8 @@ export class CrmPage implements OnInit {
                 }
 
               case 'Koomkin':
-                if (this.mayor > 0 && this.menor > 0) {
-                  if (this.mayor > this.menor) {
+                if (parseInt(this.mayor) > 0 && parseInt(this.menor) > 0) {
+                  if (parseInt(this.mayor) > parseInt(this.menor)) {
                     // tslint:disable-next-line: max-line-length
                     this.url = `{"user_id":${this.id},"filters":[{"attr":"ValorLead","op":">=","value":"${this.menor}"}, {"attr":"ValorLead","op":"<=","value":${this.mayor}},{"attr":"fechaenvio","op":">=","value":"${this.catorceDias} 00:00:00"},{"attr":"fechaenvio","op":"<=","value":"${this.hoy} 23:59:59"},{"attr":"Canal","op":"not in","value":["Reporte", "App"]}],"ordering":[{"attr":"fechaenvio","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                     return this.getLeads();
@@ -1008,11 +1014,11 @@ export class CrmPage implements OnInit {
                     return this.getLeads();
                   }
                   // tslint:disable-next-line: max-line-length
-                } else if (this.menor > 0) {
+                } else if (parseInt(this.menor) > 0) {
                   // tslint:disable-next-line: max-line-length
                   this.url = `{"user_id":${this.id},"filters":[{"attr":"ValorLead","op":"<=","value":"${this.menor}"},{"attr":"fechaenvio","op":">=","value":"${this.catorceDias} 00:00:00"},{"attr":"fechaenvio","op":"<=","value":"${this.hoy} 23:59:59"},{"attr":"Canal","op":"not in","value":["Reporte", "App"]}],"ordering":[{"attr":"fechaenvio","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                   return this.getLeads();
-                } else if (this.mayor > 0) {
+                } else if (parseInt(this.mayor) > 0) {
                   // tslint:disable-next-line: max-line-length
                   this.url = `{"user_id":${this.id},"filters":[{"attr":"ValorLead","op":">=","value":${this.mayor}},{"attr":"fechaenvio","op":">=","value":"${this.catorceDias} 00:00:00"},{"attr":"fechaenvio","op":"<=","value":"${this.hoy} 23:59:59"},{"attr":"Canal","op":"not in","value":["Reporte", "App"]}],"ordering":[{"attr":"fechaenvio","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                   return this.getLeads();
@@ -1023,8 +1029,8 @@ export class CrmPage implements OnInit {
                 }
 
               case 'Externos':
-                if (this.mayor > 0 && this.menor > 0) {
-                  if (this.mayor > this.menor) {
+                if (parseInt(this.mayor) > 0 && parseInt(this.menor) > 0) {
+                  if (parseInt(this.mayor) > parseInt(this.menor)) {
                     // tslint:disable-next-line: max-line-length
                     this.url = `{"user_id":${this.id},"filters":[{"attr":"ValorLead","op":">=","value":"${this.menor}"}, {"attr":"ValorLead","op":"<=","value":${this.mayor}},{"attr":"fechaenvio","op":">=","value":"${this.catorceDias} 00:00:00"},{"attr":"fechaenvio","op":"<=","value":"${this.hoy} 23:59:59"},{"attr":"Canal","op":"in","value":["Reporte", "App"]}],"ordering":[{"attr":"fechaenvio","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                     return this.getLeads();
@@ -1034,11 +1040,11 @@ export class CrmPage implements OnInit {
                     return this.getLeads();
                   }
                   // tslint:disable-next-line: max-line-length
-                } else if (this.menor > 0) {
+                } else if (parseInt(this.menor) > 0) {
                   // tslint:disable-next-line: max-line-length
                   this.url = `{"user_id":${this.id},"filters":[{"attr":"ValorLead","op":"<=","value":"${this.menor}"},{"attr":"fechaenvio","op":">=","value":"${this.catorceDias} 00:00:00"},{"attr":"fechaenvio","op":"<=","value":"${this.hoy} 23:59:59"},{"attr":"Canal","op":"in","value":["Reporte", "App"]}],"ordering":[{"attr":"fechaenvio","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                   return this.getLeads();
-                } else if (this.mayor > 0) {
+                } else if (parseInt(this.mayor) > 0) {
                   // tslint:disable-next-line: max-line-length
                   this.url = `{"user_id":${this.id},"filters":[{"attr":"ValorLead","op":">=","value":${this.mayor}},{"attr":"fechaenvio","op":">=","value":"${this.catorceDias} 00:00:00"},{"attr":"fechaenvio","op":"<=","value":"${this.hoy} 23:59:59"},{"attr":"Canal","op":"in","value":["Reporte", "App"]}],"ordering":[{"attr":"fechaenvio","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                   return this.getLeads();
@@ -1060,8 +1066,8 @@ export class CrmPage implements OnInit {
             switch (this.tipo) {
               case 'Todos':
               if (this.fechaInic && this.fechaFin) {
-                if (this.mayor > 0 && this.menor > 0) {
-                  if (this.mayor > this.menor) {
+                if (parseInt(this.mayor) > 0 && parseInt(this.menor) > 0) {
+                  if (parseInt(this.mayor) > parseInt(this.menor)) {
                     // tslint:disable-next-line: max-line-length
                     this.url = `{"user_id":${this.id},"filters":[{"attr":"scheduledAt","op":">=","value":"${this.fechaInic} 00:00:00"},{"attr":"scheduledAt","op":"<=","value":"${this.fechaFin} 23:59:59"},{"attr":"ValorLead","op":">=","value":"${this.menor}"}, {"attr":"ValorLead","op":"<=","value":${this.mayor}}],"ordering":[{"attr":"scheduledAt","asc":d}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                     return this.getLeads();
@@ -1071,11 +1077,11 @@ export class CrmPage implements OnInit {
                     return this.getLeads();
                   }
                   // tslint:disable-next-line: max-line-length
-                } else if (this.menor > 0) {
+                } else if (parseInt(this.menor) > 0) {
                   // tslint:disable-next-line: max-line-length
                   this.url = `{"user_id":${this.id},"filters":[{"attr":"scheduledAt","op":">=","value":"${this.fechaInic} 00:00:00"},{"attr":"scheduledAt","op":"<=","value":"${this.fechaFin} 23:59:59"},{"attr":"ValorLead","op":"<=","value":"${this.menor}"}],"ordering":[{"attr":"scheduledAt","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                   return this.getLeads();
-                } else if (this.mayor > 0) {
+                } else if (parseInt(this.mayor) > 0) {
                   // tslint:disable-next-line: max-line-length
                   this.url = `{"user_id":${this.id},"filters":[{"attr":"scheduledAt","op":">=","value":"${this.fechaInic} 00:00:00"},{"attr":"scheduledAt","op":"<=","value":"${this.fechaFin} 23:59:59"},{"attr":"ValorLead","op":">=","value":${this.mayor}}],"ordering":[{"attr":"scheduledAt","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                   return this.getLeads();
@@ -1085,36 +1091,36 @@ export class CrmPage implements OnInit {
                   return this.getLeads();
                 }
               } else {
-                if (this.mayor > 0 && this.menor > 0) {
-                  if (this.mayor > this.menor) {
+                if (parseInt(this.mayor) > 0 && parseInt(this.menor) > 0) {
+                  if (parseInt(this.mayor) > parseInt(this.menor)) {
                     // tslint:disable-next-line: max-line-length
-                    this.url = `{"user_id":${this.id},"filters":[{"attr":"ValorLead","op":">=","value":"${this.menor}"}, {"attr":"ValorLead","op":"<=","value":${this.mayor}}],"ordering":[{"attr":"scheduledAt","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
+                    this.url = `{"user_id":${this.id},"filters":[{"attr":"ValorLead","op":">=","value":"${this.menor}"}, {"attr":"ValorLead","op":"<=","value":${this.mayor}},{"attr":"scheduledAt","op":">=","value":"${this.hoy} 00:00:00"},{"attr":"scheduledAt","op":"<=","value":"${this.sigMeses} 23:59:59"}],"ordering":[{"attr":"scheduledAt","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                     return this.getLeads();
                   } else {
                     // tslint:disable-next-line: max-line-length
-                    this.url = `{"user_id":${this.id},"filters":[{"attr":"ValorLead","op":">=","value":${this.mayor}}, {"attr":"ValorLead","op":"<=","value":"${this.menor}"}],"ordering":[{"attr":"scheduledAt","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
+                    this.url = `{"user_id":${this.id},"filters":[{"attr":"ValorLead","op":">=","value":${this.mayor}}, {"attr":"ValorLead","op":"<=","value":"${this.menor}"},{"attr":"scheduledAt","op":">=","value":"${this.hoy} 00:00:00"},{"attr":"scheduledAt","op":"<=","value":"${this.sigMeses} 23:59:59"}],"ordering":[{"attr":"scheduledAt","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                     return this.getLeads();
                   }
                   // tslint:disable-next-line: max-line-length
-                } else if (this.menor > 0) {
+                } else if (parseInt(this.menor) > 0) {
                   // tslint:disable-next-line: max-line-length
-                  this.url = `{"user_id":${this.id},"filters":[{"attr":"ValorLead","op":"<=","value":"${this.menor}"}],"ordering":[{"attr":"scheduledAt","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
+                  this.url = `{"user_id":${this.id},"filters":[{"attr":"ValorLead","op":"<=","value":"${this.menor}"}],"ordering":[{"attr":"scheduledAt","asc":false},{"attr":"scheduledAt","op":">=","value":"${this.hoy} 00:00:00"},{"attr":"scheduledAt","op":"<=","value":"${this.sigMeses} 23:59:59"}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                   return this.getLeads();
-                } else if (this.mayor > 0) {
+                } else if (parseInt(this.mayor) > 0) {
                   // tslint:disable-next-line: max-line-length
-                  this.url = `{"user_id":${this.id},"filters":[{"attr":"ValorLead","op":">=","value":${this.mayor}}],"ordering":[{"attr":"scheduledAt","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
+                  this.url = `{"user_id":${this.id},"filters":[{"attr":"ValorLead","op":">=","value":${this.mayor}}],"ordering":[{"attr":"scheduledAt","asc":false},{"attr":"scheduledAt","op":">=","value":"${this.hoy} 00:00:00"},{"attr":"scheduledAt","op":"<=","value":"${this.sigMeses} 23:59:59"}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                   return this.getLeads();
                 } else {
                   // tslint:disable-next-line: max-line-length
-                  this.url = `{"user_id":${this.id},"filters":[],"ordering":[{"attr":"scheduledAt","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
+                  this.url = `{"user_id":${this.id},"filters":[{"attr":"scheduledAt","op":">=","value":"${this.hoy} 00:00:00"},{"attr":"scheduledAt","op":"<=","value":"${this.sigMeses} 23:59:59"}],"ordering":[{"attr":"scheduledAt","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                   return this.getLeads();
                 }
               }
 
               case 'Koomkin':
                 if (this.fechaInic && this.fechaFin) {
-                if (this.mayor > 0 && this.menor > 0) {
-                  if (this.mayor > this.menor) {
+                if (parseInt(this.mayor) > 0 && parseInt(this.menor) > 0) {
+                  if (parseInt(this.mayor) > parseInt(this.menor)) {
                     // tslint:disable-next-line: max-line-length
                     this.url = `{"user_id":${this.id},"filters":[{"attr":"scheduledAt","op":">=","value":"${this.fechaInic} 00:00:00"},{"attr":"scheduledAt","op":"<=","value":"${this.fechaFin} 23:59:59"},{"attr":"ValorLead","op":">=","value":"${this.menor}"}, {"attr":"ValorLead","op":"<=","value":${this.mayor}}, {"attr":"Canal","op":"not in","value":["Reporte", "App"]}],"ordering":[{"attr":"scheduledAt","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                     return this.getLeads();
@@ -1124,11 +1130,11 @@ export class CrmPage implements OnInit {
                     return this.getLeads();
                   }
                   // tslint:disable-next-line: max-line-length
-                } else if (this.menor > 0) {
+                } else if (parseInt(this.menor) > 0) {
                   // tslint:disable-next-line: max-line-length
                   this.url = `{"user_id":${this.id},"filters":[{"attr":"scheduledAt","op":">=","value":"${this.fechaInic} 00:00:00"},{"attr":"scheduledAt","op":"<=","value":"${this.fechaFin} 23:59:59"}, {"attr":"ValorLead","op":"<=","value":"${this.menor}"}, {"attr":"Canal","op":"not in","value":["Reporte", "App"]}],"ordering":[{"attr":"scheduledAt","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                   return this.getLeads();
-                } else if (this.mayor > 0) {
+                } else if (parseInt(this.mayor) > 0) {
                   // tslint:disable-next-line: max-line-length
                   this.url = `{"user_id":${this.id},"filters":[{"attr":"scheduledAt","op":">=","value":"${this.fechaInic} 00:00:00"},{"attr":"scheduledAt","op":"<=","value":"${this.fechaFin} 23:59:59"}, {"attr":"ValorLead","op":">=","value":${this.mayor}}, {"attr":"Canal","op":"not in","value":["Reporte", "App"]}],"ordering":[{"attr":"scheduledAt","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                   return this.getLeads();
@@ -1138,28 +1144,28 @@ export class CrmPage implements OnInit {
                   return this.getLeads();
                 }
               } else {
-                if (this.mayor > 0 && this.menor > 0) {
-                  if (this.mayor > this.menor) {
+                if (parseInt(this.mayor) > 0 && parseInt(this.menor) > 0) {
+                  if (parseInt(this.mayor) > parseInt(this.menor)) {
                     // tslint:disable-next-line: max-line-length
-                    this.url = `{"user_id":${this.id},"filters":[{"attr":"ValorLead","op":">=","value":"${this.menor}"}, {"attr":"ValorLead","op":"<=","value":${this.mayor}}, {"attr":"Canal","op":"not in","value":["Reporte", "App"]}],"ordering":[{"attr":"scheduledAt","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
+                    this.url = `{"user_id":${this.id},"filters":[{"attr":"scheduledAt","op":">=","value":"${this.hoy} 00:00:00"},{"attr":"scheduledAt","op":"<=","value":"${this.sigMeses} 23:59:59"},{"attr":"ValorLead","op":">=","value":"${this.menor}"}, {"attr":"ValorLead","op":"<=","value":${this.mayor}}, {"attr":"Canal","op":"not in","value":["Reporte", "App"]}],"ordering":[{"attr":"scheduledAt","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                     return this.getLeads();
                   } else {
                     // tslint:disable-next-line: max-line-length
-                    this.url = `{"user_id":${this.id},"filters":[{"attr":"ValorLead","op":">=","value":${this.mayor}}, {"attr":"ValorLead","op":"<=","value":"${this.menor}"}, {"attr":"Canal","op":"not in","value":["Reporte", "App"]}],"ordering":[{"attr":"scheduledAt","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
+                    this.url = `{"user_id":${this.id},"filters":[{"attr":"scheduledAt","op":">=","value":"${this.hoy} 00:00:00"},{"attr":"scheduledAt","op":"<=","value":"${this.sigMeses} 23:59:59"},{"attr":"ValorLead","op":">=","value":${this.mayor}}, {"attr":"ValorLead","op":"<=","value":"${this.menor}"}, {"attr":"Canal","op":"not in","value":["Reporte", "App"]}],"ordering":[{"attr":"scheduledAt","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                     return this.getLeads();
                   }
                   // tslint:disable-next-line: max-line-length
-                } else if (this.menor > 0) {
+                } else if (parseInt(this.menor) > 0) {
                   // tslint:disable-next-line: max-line-length
-                  this.url = `{"user_id":${this.id},"filters":[ {"attr":"ValorLead","op":"<=","value":"${this.menor}"}, {"attr":"Canal","op":"not in","value":["Reporte", "App"]}],"ordering":[{"attr":"scheduledAt","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
+                  this.url = `{"user_id":${this.id},"filters":[{"attr":"scheduledAt","op":">=","value":"${this.hoy} 00:00:00"},{"attr":"scheduledAt","op":"<=","value":"${this.sigMeses} 23:59:59"}, {"attr":"ValorLead","op":"<=","value":"${this.menor}"}, {"attr":"Canal","op":"not in","value":["Reporte", "App"]}],"ordering":[{"attr":"scheduledAt","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                   return this.getLeads();
-                } else if (this.mayor > 0) {
+                } else if (parseInt(this.mayor) > 0) {
                   // tslint:disable-next-line: max-line-length
-                  this.url = `{"user_id":${this.id},"filters":[ {"attr":"ValorLead","op":">=","value":${this.mayor}}, {"attr":"Canal","op":"not in","value":["Reporte", "App"]}],"ordering":[{"attr":"scheduledAt","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
+                  this.url = `{"user_id":${this.id},"filters":[{"attr":"scheduledAt","op":">=","value":"${this.hoy} 00:00:00"},{"attr":"scheduledAt","op":"<=","value":"${this.sigMeses} 23:59:59"}, {"attr":"ValorLead","op":">=","value":${this.mayor}}, {"attr":"Canal","op":"not in","value":["Reporte", "App"]}],"ordering":[{"attr":"scheduledAt","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                   return this.getLeads();
                 } else {
                   // tslint:disable-next-line: max-line-length
-                  this.url = `{"user_id":${this.id},"filters":[ {"attr":"Canal","op":"not in","value":["Reporte", "App"]}],"ordering":[{"attr":"scheduledAt","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
+                  this.url = `{"user_id":${this.id},"filters":[{"attr":"scheduledAt","op":">=","value":"${this.hoy} 00:00:00"},{"attr":"scheduledAt","op":"<=","value":"${this.sigMeses} 23:59:59"}, {"attr":"Canal","op":"not in","value":["Reporte", "App"]}],"ordering":[{"attr":"scheduledAt","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                   return this.getLeads();
                 }
               } 
@@ -1167,8 +1173,8 @@ export class CrmPage implements OnInit {
               case 'Externos':
                   if (this.fechaInic && this.fechaFin) {
 
-                if (this.mayor > 0 && this.menor > 0) {
-                  if (this.mayor > this.menor) {
+                if (parseInt(this.mayor) > 0 && parseInt(this.menor) > 0) {
+                  if (parseInt(this.mayor) > parseInt(this.menor)) {
                     // tslint:disable-next-line: max-line-length
                     this.url = `{"user_id":${this.id},"filters":[{"attr":"scheduledAt","op":">=","value":"${this.fechaInic} 00:00:00"},{"attr":"scheduledAt","op":"<=","value":"${this.fechaFin} 23:59:59"},{"attr":"ValorLead","op":">=","value":"${this.menor}"}, {"attr":"ValorLead","op":"<=","value":${this.mayor}}, {"attr":"Canal","op":"in","value":["Reporte", "App"]}],"ordering":[{"attr":"scheduledAt","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                     return this.getLeads();
@@ -1178,11 +1184,11 @@ export class CrmPage implements OnInit {
                     return this.getLeads();
                   }
                   // tslint:disable-next-line: max-line-length
-                } else if (this.menor > 0) {
+                } else if (parseInt(this.menor) > 0) {
                   // tslint:disable-next-line: max-line-length
                   this.url = `{"user_id":${this.id},"filters":[{"attr":"scheduledAt","op":">=","value":"${this.fechaInic} 00:00:00"},{"attr":"scheduledAt","op":"<=","value":"${this.fechaFin} 23:59:59"},{"attr":"ValorLead","op":"<=","value":"${this.menor}"}, {"attr":"Canal","op":"in","value":["Reporte", "App"]}],"ordering":[{"attr":"scheduledAt","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                   return this.getLeads();
-                } else if (this.mayor > 0) {
+                } else if (parseInt(this.mayor) > 0) {
                   // tslint:disable-next-line: max-line-length
                   this.url = `{"user_id":${this.id},"filters":[{"attr":"scheduledAt","op":">=","value":"${this.fechaInic} 00:00:00"},{"attr":"scheduledAt","op":"<=","value":"${this.fechaFin} 23:59:59"},{"attr":"ValorLead","op":">=","value":${this.mayor}}, {"attr":"Canal","op":"in","value":["Reporte", "App"]}],"ordering":[{"attr":"scheduledAt","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                   return this.getLeads();
@@ -1192,28 +1198,28 @@ export class CrmPage implements OnInit {
                   return this.getLeads();
                 }
               } else {
-                if (this.mayor > 0 && this.menor > 0) {
-                  if (this.mayor > this.menor) {
+                if (parseInt(this.mayor) > 0 && parseInt(this.menor) > 0) {
+                  if (parseInt(this.mayor) > parseInt(this.menor)) {
                     // tslint:disable-next-line: max-line-length
-                    this.url = `{"user_id":${this.id},"filters":[{"attr":"ValorLead","op":">=","value":"${this.menor}"}, {"attr":"ValorLead","op":"<=","value":${this.mayor}}, {"attr":"Canal","op":"in","value":["Reporte", "App"]}],"ordering":[{"attr":"scheduledAt","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
+                    this.url = `{"user_id":${this.id},"filters":[{"attr":"scheduledAt","op":">=","value":"${this.hoy} 00:00:00"},{"attr":"scheduledAt","op":"<=","value":"${this.sigMeses} 23:59:59"},{"attr":"ValorLead","op":">=","value":"${this.menor}"}, {"attr":"ValorLead","op":"<=","value":${this.mayor}}, {"attr":"Canal","op":"in","value":["Reporte", "App"]}],"ordering":[{"attr":"scheduledAt","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                     return this.getLeads();
                   } else {
                     // tslint:disable-next-line: max-line-length
-                    this.url = `{"user_id":${this.id},"filters":[{"attr":"ValorLead","op":">=","value":${this.mayor}}, {"attr":"ValorLead","op":"<=","value":"${this.menor}"}, {"attr":"Canal","op":"in","value":["Reporte", "App"]}],"ordering":[{"attr":"scheduledAt","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
+                    this.url = `{"user_id":${this.id},"filters":[{"attr":"scheduledAt","op":">=","value":"${this.hoy} 00:00:00"},{"attr":"scheduledAt","op":"<=","value":"${this.sigMeses} 23:59:59"},{"attr":"ValorLead","op":">=","value":${this.mayor}}, {"attr":"ValorLead","op":"<=","value":"${this.menor}"}, {"attr":"Canal","op":"in","value":["Reporte", "App"]}],"ordering":[{"attr":"scheduledAt","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                     return this.getLeads();
                   }
                   // tslint:disable-next-line: max-line-length
-                } else if (this.menor > 0) {
+                } else if (parseInt(this.menor) > 0) {
                   // tslint:disable-next-line: max-line-length
-                  this.url = `{"user_id":${this.id},"filters":[{"attr":"ValorLead","op":"<=","value":"${this.menor}"}, {"attr":"Canal","op":"in","value":["Reporte", "App"]}],"ordering":[{"attr":"scheduledAt","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
+                  this.url = `{"user_id":${this.id},"filters":[{"attr":"scheduledAt","op":">=","value":"${this.hoy} 00:00:00"},{"attr":"scheduledAt","op":"<=","value":"${this.sigMeses} 23:59:59"},{"attr":"ValorLead","op":"<=","value":"${this.menor}"}, {"attr":"Canal","op":"in","value":["Reporte", "App"]}],"ordering":[{"attr":"scheduledAt","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                   return this.getLeads();
-                } else if (this.mayor > 0) {
+                } else if (parseInt(this.mayor) > 0) {
                   // tslint:disable-next-line: max-line-length
-                  this.url = `{"user_id":${this.id},"filters":[{"attr":"ValorLead","op":">=","value":${this.mayor}}, {"attr":"Canal","op":"in","value":["Reporte", "App"]}],"ordering":[{"attr":"scheduledAt","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
+                  this.url = `{"user_id":${this.id},"filters":[{"attr":"scheduledAt","op":">=","value":"${this.hoy} 00:00:00"},{"attr":"scheduledAt","op":"<=","value":"${this.sigMeses} 23:59:59"},{"attr":"ValorLead","op":">=","value":${this.mayor}}, {"attr":"Canal","op":"in","value":["Reporte", "App"]}],"ordering":[{"attr":"scheduledAt","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                   return this.getLeads();
                 } else {
                   // tslint:disable-next-line: max-line-length
-                  this.url = `{"user_id":${this.id},"filters":[ {"attr":"Canal","op":"in","value":["Reporte", "App"]}],"ordering":[{"attr":"scheduledAt","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
+                  this.url = `{"user_id":${this.id},"filters":[{"attr":"scheduledAt","op":">=","value":"${this.hoy} 00:00:00"},{"attr":"scheduledAt","op":"<=","value":"${this.sigMeses} 23:59:59"}, {"attr":"Canal","op":"in","value":["Reporte", "App"]}],"ordering":[{"attr":"scheduledAt","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                   return this.getLeads();
                 }
               }
@@ -1224,8 +1230,8 @@ export class CrmPage implements OnInit {
           case 'Sig. 3 días':
             switch (this.tipo) {
               case 'Todos':
-                if (this.mayor > 0 && this.menor > 0) {
-                  if (this.mayor > this.menor) {
+                if (parseInt(this.mayor) > 0 && parseInt(this.menor) > 0) {
+                  if (parseInt(this.mayor) > parseInt(this.menor)) {
                     // tslint:disable-next-line: max-line-length
                     this.url = `{"user_id":${this.id},"filters":[{"attr":"ValorLead","op":">=","value":"${this.menor}"}, {"attr":"ValorLead","op":"<=","value":${this.mayor}},{"attr":"scheduledAt","op":">=","value":"${this.hoy} 00:00:00"},{"attr":"scheduledAt","op":"<=","value":"${this.sigTresDias} 23:59:59"}],"ordering":[{"attr":"scheduledAt","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                     return this.getLeads();
@@ -1235,11 +1241,11 @@ export class CrmPage implements OnInit {
                     return this.getLeads();
                   }
                   // tslint:disable-next-line: max-line-length
-                } else if (this.menor > 0) {
+                } else if (parseInt(this.menor) > 0) {
                   // tslint:disable-next-line: max-line-length
                   this.url = `{"user_id":${this.id},"filters":[{"attr":"ValorLead","op":"<=","value":"${this.menor}"},{"attr":"scheduledAt","op":">=","value":"${this.hoy} 00:00:00"},{"attr":"scheduledAt","op":"<=","value":"${this.sigTresDias} 23:59:59"}],"ordering":[{"attr":"scheduledAt","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                   return this.getLeads();
-                } else if (this.mayor > 0) {
+                } else if (parseInt(this.mayor) > 0) {
                   // tslint:disable-next-line: max-line-length
                   this.url = `{"user_id":${this.id},"filters":[{"attr":"ValorLead","op":">=","value":${this.mayor}},{"attr":"scheduledAt","op":">=","value":"${this.hoy} 00:00:00"},{"attr":"scheduledAt","op":"<=","value":"${this.sigTresDias} 23:59:59"}],"ordering":[{"attr":"scheduledAt","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                   return this.getLeads();
@@ -1250,8 +1256,8 @@ export class CrmPage implements OnInit {
                 }
 
               case 'Koomkin':
-                if (this.mayor > 0 && this.menor > 0) {
-                  if (this.mayor > this.menor) {
+                if (parseInt(this.mayor) > 0 && parseInt(this.menor) > 0) {
+                  if (parseInt(this.mayor) > parseInt(this.menor)) {
                     // tslint:disable-next-line: max-line-length
                     this.url = `{"user_id":${this.id},"filters":[{"attr":"ValorLead","op":">=","value":"${this.menor}"}, {"attr":"ValorLead","op":"<=","value":${this.mayor}},{"attr":"scheduledAt","op":">=","value":"${this.hoy} 00:00:00"},{"attr":"scheduledAt","op":"<=","value":"${this.sigTresDias} 23:59:59"},{"attr":"Canal","op":"not in","value":["Reporte", "App"]}],"ordering":[{"attr":"scheduledAt","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                     return this.getLeads();
@@ -1261,11 +1267,11 @@ export class CrmPage implements OnInit {
                     return this.getLeads();
                   }
                   // tslint:disable-next-line: max-line-length
-                } else if (this.menor > 0) {
+                } else if (parseInt(this.menor) > 0) {
                   // tslint:disable-next-line: max-line-length
                   this.url = `{"user_id":${this.id},"filters":[{"attr":"ValorLead","op":"<=","value":"${this.menor}"},{"attr":"scheduledAt","op":">=","value":"${this.hoy} 00:00:00"},{"attr":"scheduledAt","op":"<=","value":"${this.sigTresDias} 23:59:59"},{"attr":"Canal","op":"not in","value":["Reporte", "App"]}],"ordering":[{"attr":"scheduledAt","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                   return this.getLeads();
-                } else if (this.mayor > 0) {
+                } else if (parseInt(this.mayor) > 0) {
                   // tslint:disable-next-line: max-line-length
                   this.url = `{"user_id":${this.id},"filters":[{"attr":"ValorLead","op":">=","value":${this.mayor}},{"attr":"scheduledAt","op":">=","value":"${this.hoy} 00:00:00"},{"attr":"scheduledAt","op":"<=","value":"${this.sigTresDias} 23:59:59"},{"attr":"Canal","op":"not in","value":["Reporte", "App"]}],"ordering":[{"attr":"scheduledAt","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                   return this.getLeads();
@@ -1276,8 +1282,8 @@ export class CrmPage implements OnInit {
                 }
 
               case 'Externos':
-                if (this.mayor > 0 && this.menor > 0) {
-                  if (this.mayor > this.menor) {
+                if (parseInt(this.mayor) > 0 && parseInt(this.menor) > 0) {
+                  if (parseInt(this.mayor) > parseInt(this.menor)) {
                     // tslint:disable-next-line: max-line-length
                     this.url = `{"user_id":${this.id},"filters":[{"attr":"ValorLead","op":">=","value":"${this.menor}"}, {"attr":"ValorLead","op":"<=","value":${this.mayor}},{"attr":"scheduledAt","op":">=","value":"${this.hoy} 00:00:00"},{"attr":"scheduledAt","op":"<=","value":"${this.sigTresDias} 23:59:59"},{"attr":"Canal","op":"in","value":["Reporte", "App"]}],"ordering":[{"attr":"scheduledAt","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                     return this.getLeads();
@@ -1287,11 +1293,11 @@ export class CrmPage implements OnInit {
                     return this.getLeads();
                   }
                   // tslint:disable-next-line: max-line-length
-                } else if (this.menor > 0) {
+                } else if (parseInt(this.menor) > 0) {
                   // tslint:disable-next-line: max-line-length
                   this.url = `{"user_id":${this.id},"filters":[{"attr":"ValorLead","op":"<=","value":"${this.menor}"},{"attr":"scheduledAt","op":">=","value":"${this.hoy} 00:00:00"},{"attr":"scheduledAt","op":"<=","value":"${this.sigTresDias} 23:59:59"},{"attr":"Canal","op":"in","value":["Reporte", "App"]}],"ordering":[{"attr":"scheduledAt","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                   return this.getLeads();
-                } else if (this.mayor > 0) {
+                } else if (parseInt(this.mayor) > 0) {
                   // tslint:disable-next-line: max-line-length
                   this.url = `{"user_id":${this.id},"filters":[{"attr":"ValorLead","op":">=","value":${this.mayor}},{"attr":"scheduledAt","op":">=","value":"${this.hoy} 00:00:00"},{"attr":"scheduledAt","op":"<=","value":"${this.sigTresDias} 23:59:59"},{"attr":"Canal","op":"in","value":["Reporte", "App"]}],"ordering":[{"attr":"scheduledAt","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                   return this.getLeads();
@@ -1308,8 +1314,8 @@ export class CrmPage implements OnInit {
           case 'Sig. 7 días':
             switch (this.tipo) {
               case 'Todos':
-                if (this.mayor > 0 && this.menor > 0) {
-                  if (this.mayor > this.menor) {
+                if (parseInt(this.mayor) > 0 && parseInt(this.menor) > 0) {
+                  if (parseInt(this.mayor) > parseInt(this.menor)) {
                     // tslint:disable-next-line: max-line-length
                     this.url = `{"user_id":${this.id},"filters":[{"attr":"ValorLead","op":">=","value":"${this.menor}"}, {"attr":"ValorLead","op":"<=","value":${this.mayor}},{"attr":"scheduledAt","op":">=","value":"${this.hoy} 00:00:00"},{"attr":"scheduledAt","op":"<=","value":"${this.sigSieteDias} 23:59:59"}],"ordering":[{"attr":"scheduledAt","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                     return this.getLeads();
@@ -1319,11 +1325,11 @@ export class CrmPage implements OnInit {
                     return this.getLeads();
                   }
                   // tslint:disable-next-line: max-line-length
-                } else if (this.menor > 0) {
+                } else if (parseInt(this.menor) > 0) {
                   // tslint:disable-next-line: max-line-length
                   this.url = `{"user_id":${this.id},"filters":[{"attr":"ValorLead","op":"<=","value":"${this.menor}"},{"attr":"scheduledAt","op":">=","value":"${this.hoy} 00:00:00"},{"attr":"scheduledAt","op":"<=","value":"${this.sigSieteDias} 23:59:59"}],"ordering":[{"attr":"scheduledAt","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                   return this.getLeads();
-                } else if (this.mayor > 0) {
+                } else if (parseInt(this.mayor) > 0) {
                   // tslint:disable-next-line: max-line-length
                   this.url = `{"user_id":${this.id},"filters":[{"attr":"ValorLead","op":">=","value":${this.mayor}},{"attr":"scheduledAt","op":">=","value":"${this.hoy} 00:00:00"},{"attr":"scheduledAt","op":"<=","value":"${this.sigSieteDias} 23:59:59"}],"ordering":[{"attr":"scheduledAt","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                   return this.getLeads();
@@ -1334,8 +1340,8 @@ export class CrmPage implements OnInit {
                 }
 
               case 'Koomkin':
-                if (this.mayor > 0 && this.menor > 0) {
-                  if (this.mayor > this.menor) {
+                if (parseInt(this.mayor) > 0 && parseInt(this.menor) > 0) {
+                  if (parseInt(this.mayor) > parseInt(this.menor)) {
                     // tslint:disable-next-line: max-line-length
                     this.url = `{"user_id":${this.id},"filters":[{"attr":"ValorLead","op":">=","value":"${this.menor}"}, {"attr":"ValorLead","op":"<=","value":${this.mayor}},{"attr":"scheduledAt","op":">=","value":"${this.hoy} 00:00:00"},{"attr":"scheduledAt","op":"<=","value":"${this.sigSieteDias} 23:59:59"},{"attr":"Canal","op":"not in","value":["Reporte", "App"]}],"ordering":[{"attr":"scheduledAt","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                     return this.getLeads();
@@ -1345,11 +1351,11 @@ export class CrmPage implements OnInit {
                     return this.getLeads();
                   }
                   // tslint:disable-next-line: max-line-length
-                } else if (this.menor > 0) {
+                } else if (parseInt(this.menor) > 0) {
                   // tslint:disable-next-line: max-line-length
                   this.url = `{"user_id":${this.id},"filters":[{"attr":"ValorLead","op":"<=","value":"${this.menor}"},{"attr":"scheduledAt","op":">=","value":"${this.hoy} 00:00:00"},{"attr":"scheduledAt","op":"<=","value":"${this.sigSieteDias} 23:59:59"},{"attr":"Canal","op":"not in","value":["Reporte", "App"]}],"ordering":[{"attr":"scheduledAt","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                   return this.getLeads();
-                } else if (this.mayor > 0) {
+                } else if (parseInt(this.mayor) > 0) {
                   // tslint:disable-next-line: max-line-length
                   this.url = `{"user_id":${this.id},"filters":[{"attr":"ValorLead","op":">=","value":${this.mayor}},{"attr":"scheduledAt","op":">=","value":"${this.hoy} 00:00:00"},{"attr":"scheduledAt","op":"<=","value":"${this.sigSieteDias} 23:59:59"},{"attr":"Canal","op":"not in","value":["Reporte", "App"]}],"ordering":[{"attr":"scheduledAt","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                   return this.getLeads();
@@ -1360,8 +1366,8 @@ export class CrmPage implements OnInit {
                 }
 
               case 'Externos':
-                if (this.mayor > 0 && this.menor > 0) {
-                  if (this.mayor > this.menor) {
+                if (parseInt(this.mayor) > 0 && parseInt(this.menor) > 0) {
+                  if (parseInt(this.mayor) > parseInt(this.menor)) {
                     // tslint:disable-next-line: max-line-length
                     this.url = `{"user_id":${this.id},"filters":[{"attr":"ValorLead","op":">=","value":"${this.menor}"}, {"attr":"ValorLead","op":"<=","value":${this.mayor}},{"attr":"scheduledAt","op":">=","value":"${this.hoy} 00:00:00"},{"attr":"scheduledAt","op":"<=","value":"${this.sigSieteDias} 23:59:59"},{"attr":"Canal","op":"in","value":["Reporte", "App"]}],"ordering":[{"attr":"scheduledAt","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                     return this.getLeads();
@@ -1371,11 +1377,11 @@ export class CrmPage implements OnInit {
                     return this.getLeads();
                   }
                   // tslint:disable-next-line: max-line-length
-                } else if (this.menor > 0) {
+                } else if (parseInt(this.menor) > 0) {
                   // tslint:disable-next-line: max-line-length
                   this.url = `{"user_id":${this.id},"filters":[{"attr":"ValorLead","op":"<=","value":"${this.menor}"},{"attr":"scheduledAt","op":">=","value":"${this.hoy} 00:00:00"},{"attr":"scheduledAt","op":"<=","value":"${this.sigSieteDias} 23:59:59"},{"attr":"Canal","op":"in","value":["Reporte", "App"]}],"ordering":[{"attr":"scheduledAt","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                   return this.getLeads();
-                } else if (this.mayor > 0) {
+                } else if (parseInt(this.mayor) > 0) {
                   // tslint:disable-next-line: max-line-length
                   this.url = `{"user_id":${this.id},"filters":[{"attr":"ValorLead","op":">=","value":${this.mayor}},{"attr":"scheduledAt","op":">=","value":"${this.hoy} 00:00:00"},{"attr":"scheduledAt","op":"<=","value":"${this.sigSieteDias} 23:59:59"},{"attr":"Canal","op":"in","value":["Reporte", "App"]}],"ordering":[{"attr":"scheduledAt","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                   return this.getLeads();
@@ -1392,8 +1398,8 @@ export class CrmPage implements OnInit {
           case 'Sig. 14 días':
             switch (this.tipo) {
               case 'Todos':
-                if (this.mayor > 0 && this.menor > 0) {
-                  if (this.mayor > this.menor) {
+                if (parseInt(this.mayor) > 0 && parseInt(this.menor) > 0) {
+                  if (parseInt(this.mayor) > parseInt(this.menor)) {
                     // tslint:disable-next-line: max-line-length
                     this.url = `{"user_id":${this.id},"filters":[{"attr":"ValorLead","op":">=","value":"${this.menor}"}, {"attr":"ValorLead","op":"<=","value":${this.mayor}},{"attr":"scheduledAt","op":">=","value":"${this.hoy} 00:00:00"},{"attr":"scheduledAt","op":"<=","value":"${this.sigCatorceDias} 23:59:59"}],"ordering":[{"attr":"scheduledAt","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                     return this.getLeads();
@@ -1403,11 +1409,11 @@ export class CrmPage implements OnInit {
                     return this.getLeads();
                   }
                   // tslint:disable-next-line: max-line-length
-                } else if (this.menor > 0) {
+                } else if (parseInt(this.menor) > 0) {
                   // tslint:disable-next-line: max-line-length
                   this.url = `{"user_id":${this.id},"filters":[{"attr":"ValorLead","op":"<=","value":"${this.menor}"},{"attr":"scheduledAt","op":">=","value":"${this.hoy} 00:00:00"},{"attr":"scheduledAt","op":"<=","value":"${this.sigCatorceDias} 23:59:59"}],"ordering":[{"attr":"scheduledAt","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                   return this.getLeads();
-                } else if (this.mayor > 0) {
+                } else if (parseInt(this.mayor) > 0) {
                   // tslint:disable-next-line: max-line-length
                   this.url = `{"user_id":${this.id},"filters":[{"attr":"ValorLead","op":">=","value":${this.mayor}},{"attr":"scheduledAt","op":">=","value":"${this.hoy} 00:00:00"},{"attr":"scheduledAt","op":"<=","value":"${this.sigCatorceDias} 23:59:59"}],"ordering":[{"attr":"scheduledAt","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                   return this.getLeads();
@@ -1418,8 +1424,8 @@ export class CrmPage implements OnInit {
                 }
 
               case 'Koomkin':
-                if (this.mayor > 0 && this.menor > 0) {
-                  if (this.mayor > this.menor) {
+                if (parseInt(this.mayor) > 0 && parseInt(this.menor) > 0) {
+                  if (parseInt(this.mayor) > parseInt(this.menor)) {
                     // tslint:disable-next-line: max-line-length
                     this.url = `{"user_id":${this.id},"filters":[{"attr":"ValorLead","op":">=","value":"${this.menor}"}, {"attr":"ValorLead","op":"<=","value":${this.mayor}},{"attr":"scheduledAt","op":">=","value":"${this.hoy} 00:00:00"},{"attr":"scheduledAt","op":"<=","value":"${this.sigCatorceDias} 23:59:59"},{"attr":"Canal","op":"not in","value":["Reporte", "App"]}],"ordering":[{"attr":"scheduledAt","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                     return this.getLeads();
@@ -1429,11 +1435,11 @@ export class CrmPage implements OnInit {
                     return this.getLeads();
                   }
                   // tslint:disable-next-line: max-line-length
-                } else if (this.menor > 0) {
+                } else if (parseInt(this.menor) > 0) {
                   // tslint:disable-next-line: max-line-length
                   this.url = `{"user_id":${this.id},"filters":[{"attr":"ValorLead","op":"<=","value":"${this.menor}"},{"attr":"scheduledAt","op":">=","value":"${this.hoy} 00:00:00"},{"attr":"scheduledAt","op":"<=","value":"${this.sigCatorceDias} 23:59:59"},{"attr":"Canal","op":"not in","value":["Reporte", "App"]}],"ordering":[{"attr":"scheduledAt","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                   return this.getLeads();
-                } else if (this.mayor > 0) {
+                } else if (parseInt(this.mayor) > 0) {
                   // tslint:disable-next-line: max-line-length
                   this.url = `{"user_id":${this.id},"filters":[{"attr":"ValorLead","op":">=","value":${this.mayor}},{"attr":"scheduledAt","op":">=","value":"${this.hoy} 00:00:00"},{"attr":"scheduledAt","op":"<=","value":"${this.sigCatorceDias} 23:59:59"},{"attr":"Canal","op":"not in","value":["Reporte", "App"]}],"ordering":[{"attr":"scheduledAt","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                   return this.getLeads();
@@ -1444,8 +1450,8 @@ export class CrmPage implements OnInit {
                 }
 
               case 'Externos':
-                if (this.mayor > 0 && this.menor > 0) {
-                  if (this.mayor > this.menor) {
+                if (parseInt(this.mayor) > 0 && parseInt(this.menor) > 0) {
+                  if (parseInt(this.mayor) > parseInt(this.menor)) {
                     // tslint:disable-next-line: max-line-length
                     this.url = `{"user_id":${this.id},"filters":[{"attr":"ValorLead","op":">=","value":"${this.menor}"}, {"attr":"ValorLead","op":"<=","value":${this.mayor}},{"attr":"scheduledAt","op":">=","value":"${this.hoy} 00:00:00"},{"attr":"scheduledAt","op":"<=","value":"${this.sigCatorceDias} 23:59:59"},{"attr":"Canal","op":"in","value":["Reporte", "App"]}],"ordering":[{"attr":"scheduledAt","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                     return this.getLeads();
@@ -1455,11 +1461,11 @@ export class CrmPage implements OnInit {
                     return this.getLeads();
                   }
                   // tslint:disable-next-line: max-line-length
-                } else if (this.menor > 0) {
+                } else if (parseInt(this.menor) > 0) {
                   // tslint:disable-next-line: max-line-length
                   this.url = `{"user_id":${this.id},"filters":[{"attr":"ValorLead","op":"<=","value":"${this.menor}"},{"attr":"scheduledAt","op":">=","value":"${this.hoy} 00:00:00"},{"attr":"scheduledAt","op":"<=","value":"${this.sigCatorceDias} 23:59:59"},{"attr":"Canal","op":"in","value":["Reporte", "App"]}],"ordering":[{"attr":"scheduledAt","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                   return this.getLeads();
-                } else if (this.mayor > 0) {
+                } else if (parseInt(this.mayor) > 0) {
                   // tslint:disable-next-line: max-line-length
                   this.url = `{"user_id":${this.id},"filters":[{"attr":"ValorLead","op":">=","value":${this.mayor}},{"attr":"scheduledAt","op":">=","value":"${this.hoy} 00:00:00"},{"attr":"scheduledAt","op":"<=","value":"${this.sigCatorceDias} 23:59:59"},{"attr":"Canal","op":"in","value":["Reporte", "App"]}],"ordering":[{"attr":"scheduledAt","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                   return this.getLeads();
@@ -1946,7 +1952,6 @@ export class CrmPage implements OnInit {
   }
 
   public filterLeadsSeguimiento(leadsArray) {
-    console.log(leadsArray,'leads');
     this.leadsSeguimiento = leadsArray.filter(function(data) {
       return data.clasificaLead == 'S';
     });
