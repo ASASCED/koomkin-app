@@ -124,7 +124,7 @@ export class CrmPage implements OnInit {
     this.sigCatorceDias = new Date();
     this.sigMeses = new Date();
 
-    this.hoy = f.getFullYear() + '-' + ('0' + (f.getMonth() + 1)).slice(-2) + '-' + f.getDate();
+    this.hoy = f.getFullYear() + '-' + ('0' + (f.getMonth() + 1)).slice(-2) + '-' + ('0' + f.getDate()).slice(-2);
 
     this.tresDias.setDate(this.sigTresDias.getDate() - 3);
     // tslint:disable-next-line: max-line-length

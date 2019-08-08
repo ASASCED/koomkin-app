@@ -71,9 +71,9 @@
                             <ion-label class="filtrar">Filtrar por:</ion-label>
                             <ion-select [(ngModel)]="dias" interface="action-sheet">
                                 <ion-option value="Total" selected>Total</ion-option>
-                                <ion-option value={{tresDias}}>Últ. 3 días</ion-option>
-                                <ion-option value={{sieteDias}}>Últ. 7 días</ion-option>
-                                <ion-option value={{catorceDias}}>Últ. 14 días</ion-option>
+                                <ion-option value="Últ. 3 días">Últ. 3 días</ion-option>
+                                <ion-option value="Últ. 7 días">Últ. 7 días</ion-option>
+                                <ion-option value="Últ. 14 días">Últ. 14 días</ion-option>
                             </ion-select>
                         </ion-item>
                     </ion-col>
@@ -83,9 +83,9 @@
                             <ion-label class="filtrar">Filtrar por:</ion-label>
                             <ion-select [(ngModel)]="dias" interface="action-sheet">
                                 <ion-option value="Total" selected>Total</ion-option>
-                                <ion-option value={{sigTresDias}}>Sig. 3 días</ion-option>
-                                <ion-option value={{sigSieteDias}}>Sig. 7 días</ion-option>
-                                <ion-option value={{sigCatorceDias}}>Sig. 14 días</ion-option>
+                                <ion-option value="Sig. 3 días">Sig. 3 días</ion-option>
+                                <ion-option value="Sig. 7 días">Sig. 7 días</ion-option>
+                                <ion-option value="Sig. 14 días">Sig. 14 días</ion-option>
                             </ion-select>
                         </ion-item>
                     </ion-col>
@@ -104,13 +104,13 @@
                 </ion-row>
                 <ion-row align-items-center *ngIf="filtros == true">
                     <ion-col col-5 class="centrar">
-                        <input type="date" class="input-date" placeholder="Fecha">
+                        <input type="date" class="input-date" placeholder="Fecha" [(ngModel)]="fechaInic" value="{{fechaInic}}" min="2017-12-12" max="2020-12-12">
                     </ion-col>
                     <ion-col col-2 class="centrar">
                         <p class="filtrar">A</p>
                     </ion-col>
                     <ion-col col-5 class="centrar">
-                        <input type="date" class="input-date" placeholder="Fecha">
+                        <input type="date" class="input-date" placeholder="Fecha" [(ngModel)]="fechaFin" value="{{fechaFin}}" min="{{fechaInic}}" max="2020-12-12">
                     </ion-col>
                 </ion-row>
                 <ion-row align-items-center *ngIf="filtros == true">
