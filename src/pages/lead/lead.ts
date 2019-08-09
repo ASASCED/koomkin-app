@@ -441,8 +441,6 @@ export class LeadPage implements OnInit {
         this.show = true;
         this.comentario = this.leadActual.comentario[0].Comentario;
         this.fechaComentario = moment(this.leadActual.comentario[0].FechaRegistro);
-        this.fechaComentario = moment(this.fechaComentario).add(5, 'hours').format('YYYY-MM-DD hh:mm');
-
         this.idComentario = this.leadActual.comentario[0].IdComentario;
         if(this.leadActual.comentario[0].ClasificaLead !== 'null' && this.leadActual.comentario[0].ClasificaLead !== null ) {
           this.clasificaComentario = this.leadActual.comentario[0].ClasificaLead;
