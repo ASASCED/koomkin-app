@@ -249,8 +249,8 @@
                                     style="vertical-align: middle;width: 80% !important;display: inline-block;" />
                             </ion-col>
                             <ion-col col-10 class="text">
-                                <span *ngIf="reagenda != 'Sin agenda'">{{reagenda | date: 'dd-MM-yyyy'}}</span>
-                                <span *ngIf="reagenda == 'Sin agenda'">{{reagenda}}</span>
+                                <span class="comunicacion" *ngIf="leadActual.scheduledAt != 'Sin agenda'">{{leadActual.scheduledAt | date: 'dd-MM-yyyy'}}</span>
+                                <span class="comunicacion" *ngIf="leadActual.scheduledAt == 'Sin agenda'">{{leadActual.scheduledAt}}</span>
                             </ion-col>
                         </ion-row>
 
@@ -260,8 +260,8 @@
                                     style="vertical-align: middle;width: 80% !important;display: inline-block;" />
                             </ion-col>
                             <ion-col col-10 class="text">
-                                <span *ngIf="reagenda != 'Sin agenda'">{{reagenda | date: 'HH:mm'}}</span>
-                                <span *ngIf="reagenda == 'Sin agenda'">{{reagenda}}</span>
+                                <span class="comunicacion" *ngIf="leadActual.scheduledAt != 'Sin agenda'">{{leadActual.scheduledAt | date: 'HH:mm'}}</span>
+                                <span class="comunicacion" *ngIf="leadActual.scheduledAt == 'Sin agenda'">{{leadActual.scheduledAt}}</span>
                             </ion-col>
                         </ion-row>
 
@@ -291,8 +291,8 @@
                     <ion-row
                         style="display: flex !important; align-content: center !important; align-items: center !important;margin-top: 1%;">
                         <ion-col col-10>
-                            <p style="color:gray;margin-left: 5px;font-size: small;">
-                                {{fechaComentario | date: 'dd-MMMM-yyyy HH:mm'}}
+                            <p style="color:gray;margin-left: 5px;font-size: small;text-transform: capitalize;">
+                                {{fechaComentario | dateFormat}}
                             </p>
                         </ion-col>
                         <ion-col col-1 style="text-align: center">
@@ -334,8 +334,8 @@
                 <ion-row
                     style="display: flex !important; align-content: center !important; align-items: center !important;margin-top: 1%;">
                     <ion-col col-10>
-                        <p style="color:gray;margin-left: 5px;font-size: small;">
-                            {{registro.FechaRegistro | date: 'dd-MMMM-yyyy HH:mm'}}
+                        <p style="color:gray;margin-left: 5px;font-size: small;text-transform: capitalize;">
+                            {{registro.FechaRegistro | dateFormat}}
                         </p>
                     </ion-col>
                     <ion-col col-1 style="text-align: center">

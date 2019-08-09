@@ -118,5 +118,5 @@
     <plugin name="cordova-clipboard" spec="1.2.1" />
     <plugin name="onesignal-cordova-plugin" spec="^2.4.6" />
     <plugin name="cordova-plugin-splashscreen" spec="^5.0.2" />
-    <engine name="android" spec="^8.0.0" />
+    <engine name="android" spec="8.0.0" />
 </widget>

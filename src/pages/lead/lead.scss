@@ -83,6 +83,7 @@ page-lead {
   }
 
   .text {
+    font-size: 4vw;
     display: flex;
     vertical-align: middle;
     align-items: center;
@@ -353,6 +354,13 @@ hr {
 .valor {
   margin: 2%;
   color: #1f639e;
+  text-align: center;
+  font-size: 3.8vw;
+}
+
+.comunicacion {
+  margin: 2%;
+  color: #818181;
   text-align: center;
   font-size: 3.8vw;
 }

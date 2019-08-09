@@ -16,6 +16,7 @@ import { Transfer, TransferObject } from '@ionic-native/transfer';
 import * as distanceinWordsStrict from 'date-fns/distance_in_words_strict';
 import * as esLocale from 'date-fns/locale/es';
 import swal from 'sweetalert2';
+import * as moment from 'moment';
 
 declare var cordova: any;
 
@@ -439,7 +440,9 @@ export class LeadPage implements OnInit {
       if(this.leadActual.comentario[0].IdComentario) {
         this.show = true;
         this.comentario = this.leadActual.comentario[0].Comentario;
-        this.fechaComentario = this.leadActual.comentario[0].FechaRegistro;
+        this.fechaComentario = moment(this.leadActual.comentario[0].FechaRegistro);
+        this.fechaComentario = moment(this.fechaComentario).add(5, 'hours').format('YYYY-MM-DD hh:mm');
+
         this.idComentario = this.leadActual.comentario[0].IdComentario;
         if(this.leadActual.comentario[0].ClasificaLead !== 'null' && this.leadActual.comentario[0].ClasificaLead !== null ) {
           this.clasificaComentario = this.leadActual.comentario[0].ClasificaLead;

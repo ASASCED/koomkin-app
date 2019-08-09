@@ -50,9 +50,10 @@
         "body-parser": "~1.18.2",
         "connect-ensure-login": "^0.1.1",
         "cookie-parser": "~1.4.3",
-        "cordova-android": "^8.0.0",
+        "cordova-android": "8.0.0",
         "cordova-android-support-gradle-release": "^2.0.1",
         "cordova-clipboard": "^1.2.1",
+        "cordova-custom-config": "^5.1.0",
         "cordova-ios": "4.5.5",
         "cordova-plugin-add-swift-support": "^1.7.2",
         "cordova-plugin-advanced-http": "^2.0.2",
@@ -89,8 +90,11 @@
         "ionic-tooltips": "^3.1.0",
         "ionicons": "3.0.0",
         "jade": "~1.11.0",
+        "moment": "^2.24.0",
         "morgan": "~1.9.0",
         "ng2-google-charts": "^3.3.0",
+        "ngx-toastr": "^10.0.4",
+        "node-sass": "^4.12.0",
         "npm": "^6.5.0",
         "onesignal-cordova-plugin": "^2.4.6",
         "platform": "1.3.5",
@@ -142,7 +146,8 @@
             "cordova-plugin-inappbrowser": {},
             "cordova-plugin-market": {},
             "cordova-plugin-advanced-http": {},
-            "cordova-clipboard": {}
+            "cordova-clipboard": {},
+            "cordova-custom-config": {}
         },
         "platforms": [
             "android"
