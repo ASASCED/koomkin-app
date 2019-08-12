@@ -169,6 +169,7 @@ export class AgregarLeadPage implements OnInit {
   }
 
   public validarCampos() {
+    
     const today: any = new Date();
     let dd: any = today.getDate();
     let mm: any = today.getMonth() + 1; 
@@ -188,6 +189,7 @@ export class AgregarLeadPage implements OnInit {
     this.email = this.registerForm.get('email').value;
     this.phone_number = this.registerForm.get('phone_number').value,
     this.state = this.registerForm.get('state').value;
+    
     if (this.company.length == 0) {
       this.company = 'Particular';
     }
@@ -202,7 +204,10 @@ export class AgregarLeadPage implements OnInit {
         this.region_id = element['IDESTADO'];
       }
     });
+
     this.date = this.registerForm.get('date').value;
+    this.hour = this.registerForm.get('hour').value;
+
     if (this.date.length > 0 && this.hour.length > 0) {
       this.dateComplete = this.date.replace (/-/g, '') + ' ' + this.hour;
     } else if (this.date.length > 0 && this.hour.length == 0) {
@@ -212,7 +217,6 @@ export class AgregarLeadPage implements OnInit {
     } else {
       this.dateComplete = yyyy + '' + mm + '' + dd  + ' ' + n;
     }
-    console.log(this.dateComplete);
     this.validar_email(this.email);
   }
 

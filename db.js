@@ -1653,7 +1653,7 @@ db.executeUpdateValor = function (claveLead,valorLead) {
 
 db.executeInsertComment = function (idUsuario,claveLead,comentario,clasificaLead) {
 
-    const requestStr = `insert into LeadComentario (IdUsuario,ClaveLead,Comentario,FechaRegistro,ClasificaLead) values (${idUsuario},${claveLead},'${comentario}',getdate(),'${clasificaLead}')`;
+    const requestStr = `insert into LeadComentario (IdUsuario,ClaveLead,Comentario,FechaRegistro,ClasificaLead) values (${idUsuario},'${claveLead}','${comentario}',getdate(),'${clasificaLead}')`;
         
     console.log(requestStr);
 

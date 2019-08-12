@@ -38,11 +38,10 @@ export class ModalComentariosPage implements OnInit {
     this.clasificaLead = navParams.get("clasificaLead");
     this.idComentario = navParams.get("idComentario");
     this.comentario = navParams.get("comentario");
-    console.log(this.idComentario, this.comentario);
+    // console.log(this.idComentario, this.comentario);
     this.id = this.leadActual.ID;
-    this.clave = this.leadActual.clave;
+    this.clave = this.leadActual.uuid;
     this.uuid = this.leadActual.uuid;
-
 
     if (this.leadActual.ValorLead != 'null' && this.leadActual.ValorLead != null && this.leadActual.ValorLead != undefined) {
       this.valorLead = this.leadActual.ValorLead;
