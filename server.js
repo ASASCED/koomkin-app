@@ -1817,7 +1817,7 @@ app.post('/updateBriefInformation2/', function(req, res) {
 app.post('/registerComment/', function (req, res) {
 
     const idUsuario = parseInt(req.body.idUsuario, 10);
-    const claveLead = parseInt(req.body.claveLead, 10);
+    const claveLead = req.body.claveLead;
     const comentario = req.body.comentario;
     const clasificaLead = req.body.clasificaLead;
 
