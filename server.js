@@ -1486,7 +1486,7 @@ app.get('/getCancelUpdateMembership/:RecurringPaymentID', function (req, res) {
 
 app.get('/getLastComment/:claveLead', function (req, res) {
 
-    const claveLead = parseInt(req.params.claveLead, 10);
+    const claveLead = req.params.claveLead;
 
     db.executeGetLastComment(claveLead)
          .then(rows => {
@@ -1499,7 +1499,7 @@ app.get('/getLastComment/:claveLead', function (req, res) {
 
 app.get('/getComments/:claveLead', function (req, res) {
 
-    const claveLead = parseInt(req.params.claveLead, 10);
+    const claveLead = req.params.claveLead;
 
     db.executeGetComments(claveLead)
          .then(rows => {
