@@ -1600,7 +1600,7 @@ db.executeInsertReason = function (razonDescarto,claveLead) {
 
 db.executeGetLastComment = function (claveLead) {
 
-    const requestStr = `select top 1 * from LeadComentario where ClaveLead = ${claveLead} order by FechaRegistro desc`;
+    const requestStr = `select top 1 * from LeadComentario where ClaveLead = '${claveLead}' order by FechaRegistro desc`;
         
     return new Promise((resolve, reject) => {
         tp.sql(requestStr)
@@ -1617,7 +1617,7 @@ db.executeGetLastComment = function (claveLead) {
 
 db.executeGetComments = function (claveLead) {
 
-    const requestStr = `select * from LeadComentario where ClaveLead = ${claveLead} order by FechaRegistro desc`;
+    const requestStr = `select * from LeadComentario where ClaveLead = '${claveLead}' order by FechaRegistro desc`;
         
     return new Promise((resolve, reject) => {
         tp.sql(requestStr)
