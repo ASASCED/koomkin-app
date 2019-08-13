@@ -1581,7 +1581,7 @@ db.executeGetScheduled = function (claveLead) {
 
 db.executeInsertReason = function (razonDescarto,claveLead) {
 
-    const requestStr = `UPDATE TACotizacion SET RazonDescartado = '${razonDescarto}' WHERE Clave = ${claveLead};`;
+    const requestStr = `UPDATE TACotizacion SET RazonDescartado = '${razonDescarto}' WHERE uuid = '${claveLead}';`;
         
     console.log(requestStr);
 

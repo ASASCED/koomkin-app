@@ -181,10 +181,11 @@ export class ModalComentariosPage implements OnInit {
         'Content-Type',
         'application/x-www-form-urlencoded'
       )
-    };
+    };    
 
     const url = 'https://www.koomkin.com.mx/api/app/registerReason/';
 
+    console.log(url, body.toString())
     return new Promise((resolve, reject) => {
       this.http.post(url, body.toString(), options).subscribe(
         data => {
