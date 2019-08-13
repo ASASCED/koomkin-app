@@ -41,6 +41,8 @@
           </ion-col>
         </ion-row>
       </ion-grid>
+      <p class="titulo-agregar">Comentario</p>
+      <input type="text" class="input-agregar" style="width: 95%" formControlName="comment">
       <br>
       <br>
       <button ng class="guardar-agregar" [disabled]="!registerForm.valid || disableButton" (click)="validarCampos()">Agregar</button>

@@ -159,7 +159,9 @@ export class AgendaPage implements OnInit {
 
     console.log(cuerpo);
     
-    const url = 'https://www.koomkin.com.mx/api/leads/getByUser';
+    // const url = 'https://www.koomkin.com.mx/api/leads/getByUser';
+    const url = 'http://192.168.0.119:5001/getByUser';
+
     return new Promise((resolve, reject) => {
       this.http.post(url, cuerpo, options).subscribe(
         data => {

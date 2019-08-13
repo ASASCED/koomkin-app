@@ -1833,7 +1833,7 @@ app.post('/registerComment/', function (req, res) {
 //Genera un comentario por lead
 app.post('/registerCost/', function (req, res) {
 
-    const claveLead = parseInt(req.body.claveLead, 10);
+    const claveLead = req.body.claveLead;
     let valorLead = req.body.valorLead;
 
     if(!valorLead){

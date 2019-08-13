@@ -1634,7 +1634,7 @@ db.executeGetComments = function (claveLead) {
 
 db.executeUpdateValor = function (claveLead,valorLead) {
 
-    const requestStr = `UPDATE TACotizacion SET ValorLead = ${valorLead} WHERE Clave = ${claveLead};`;
+    const requestStr = `UPDATE TACotizacion SET ValorLead = ${valorLead} WHERE uuid = '${claveLead}';`;
         
     console.log(requestStr);
 

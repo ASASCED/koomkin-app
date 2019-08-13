@@ -120,6 +120,8 @@ export class ModalComentariosPage implements OnInit {
       )
     };
 
+    console.log(body.toString());
+
     const url = 'https://www.koomkin.com.mx/api/app/registerCost/';
 
     return new Promise((resolve, reject) => {

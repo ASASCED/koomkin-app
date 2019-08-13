@@ -841,8 +841,7 @@ export class LeadPage implements OnInit {
                     }
                     this.generoM = data[0].Gender;
                     if (this.generoM == "null" || this.generoM == null || this.generoM == undefined || this.generoM == "None") {
-                      this.generoM = " sssss" +
-                        "";
+                      this.generoM = "0" +  "";
                     }
 
                     if (data[0].Date) {
@@ -1329,7 +1328,7 @@ export class LeadPage implements OnInit {
   }
 
   getComentarios() {
-    this.provedor.getComments(this.leadActual.clave).then(
+    this.provedor.getComments(this.leadActual.uuid).then(
       data => {
         let comentarios = data;
         this.comentarios = comentarios;

@@ -153,7 +153,7 @@ export class LeadsPage implements OnInit {
         })
         .catch();
 
-        this.getUltimoComentario(leadsArray[k].clave)
+        this.getUltimoComentario(leadsArray[k].uuid)
         .then(comentario => {
           leadsArray[k].comentario = comentario;
           

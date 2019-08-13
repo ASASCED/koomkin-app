@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController, App } from 'ionic-angular';
 import { RestProvider } from "../../providers/rest/rest";
-import { HttpClient,HttpHeaders } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { AuthServiceProvider } from "../../providers/auth-service/auth-service";
 import { Validators, FormBuilder } from '@angular/forms';
 import Swal from 'sweetalert2';
@@ -23,7 +23,7 @@ export class AgregarLeadPage implements OnInit {
   public user_id;
   public name_sender;
   public email;
-  public company:any ;
+  public company: any;
   public phone_number;
   public phone_type = 'C';
   public country_id = 156;
@@ -38,6 +38,7 @@ export class AgregarLeadPage implements OnInit {
   public hour;
   public dateComplete;
   public disableButton = false;
+  public comment;
 
   erroresForm = {
     'name_sender': '',
@@ -59,7 +60,7 @@ export class AgregarLeadPage implements OnInit {
   }
 
   constructor(
-    public navCtrl: NavController, 
+    public navCtrl: NavController,
     public navParams: NavParams,
     public http: HttpClient,
     public restService: RestProvider,
@@ -75,7 +76,7 @@ export class AgregarLeadPage implements OnInit {
   onValueChanged(data?: any) {
     if (!this.registerForm) { return; }
     const form = this.registerForm;
-      for (const field in this.erroresForm) {
+    for (const field in this.erroresForm) {
       this.erroresForm[field] = '';
       const control = form.get(field);
       if (control && control.dirty && !control.valid) {
@@ -96,15 +97,16 @@ export class AgregarLeadPage implements OnInit {
       'phone_number': ['', [Validators.required]],
       'state': [''],
       'date': [''],
-      'hour': ['']
+      'hour': [''],
+      'comment': ['']
     });
     this.registerForm.valueChanges
-    .subscribe(data => this.onValueChanged(data))
+      .subscribe(data => this.onValueChanged(data))
     this.onValueChanged();
     this.getInsertClickPagina();
   }
 
-  public registerLead(name_sender, email, company, phone_number, region_id ) {
+  public registerLead(name_sender, email, company, phone_number, region_id) {
     this.disableButton = true;
 
     let loading = this.loadingCtrl.create({
@@ -112,10 +114,14 @@ export class AgregarLeadPage implements OnInit {
     });
 
     this.lead_uuid = uuid.v4();
-    
+
     if (name_sender != '' && email != '' && phone_number != '' && name_sender != null && email != null && phone_number != null && region_id !== null) {
-    
-        const cuerpo = `{
+
+      if (this.comment) {
+        this.registerComentario(this.lead_uuid, this.comment, '');
+      }
+
+      const cuerpo = `{
           "user_id": ${this.id},
           "name_sender": "${name_sender}",
           "email": "${email}",
@@ -131,71 +137,105 @@ export class AgregarLeadPage implements OnInit {
           "postal_code": ${this.postal_code},
           "lead_uuid": "${this.lead_uuid}",
           "registered_at": "${this.dateComplete}"
-        }`; 
+        }`;
 
-        const options = {
-          headers: new HttpHeaders().set(
-            'Content-Type',
-            'application/json'
-          )
-        }; 
+      const options = {
+        headers: new HttpHeaders().set(
+          'Content-Type',
+          'application/json'
+        )
+      };
 
-        console.log(cuerpo);
-      
-        return new Promise((resolve, reject) => {
-          const url = 'https://www.koomkin.com.mx/api/leads/register';
-          this.http.post(url, cuerpo, options).subscribe(
-            data => {
-              console.log(data);
+      console.log(cuerpo);
+
+      return new Promise((resolve, reject) => {
+       
+        // const url = 'https://www.koomkin.com.mx/api/leads/register';
+        const url = 'http://192.168.0.119:5001/register';
+
+        this.http.post(url, cuerpo, options).subscribe(
+          data => {
+            console.log(data);
+            loading.dismiss();
+            this.showSuccessLead();
+            this.app.getRootNav().setRoot('InicioPage');
+            resolve();
+          },
+          err => {
+            console.log(err);
+            if (err.statusText === 'OK') {
               loading.dismiss();
               this.showSuccessLead();
-              this.app.getRootNav().setRoot('InicioPage'); 
-              resolve();
-            },
-            err => {
-                console.log(err);
-                if (err.statusText === 'OK') {
-                  loading.dismiss();
-                  this.showSuccessLead();
-                  this.app.getRootNav().setRoot('InicioPage'); 
-                } else { 
-                  loading.dismiss();
-                  this.showSuccessError();
-                }
+              this.app.getRootNav().setRoot('InicioPage');
+            } else {
+              loading.dismiss();
+              this.showSuccessError();
             }
-          );
-        }); 
-      } 
+          }
+        );
+      });
+    }
+  }
+
+  public registerComentario(clave, comentario, clasificaLead) {
+
+    if (comentario != null && comentario != 'null' && comentario != undefined) {
+      const body = new URLSearchParams();
+      body.set('idUsuario', this.id);
+      body.set('claveLead', clave);
+      body.set('comentario', comentario);
+      body.set('clasificaLead', clasificaLead);
+
+      const options = {
+        headers: new HttpHeaders().set(
+          'Content-Type',
+          'application/x-www-form-urlencoded'
+        )
+      };
+
+      const url = 'https://www.koomkin.com.mx/api/reporte/registerComment/';
+
+      return new Promise((resolve, reject) => {
+        this.http.post(url, body.toString(), options).subscribe(
+          data => {
+            console.log(data);
+          },
+          err => {
+            return reject(err);
+          }
+        );
+      });
+    }
   }
 
   public validarCampos() {
-    
+
     const today: any = new Date();
     let dd: any = today.getDate();
-    let mm: any = today.getMonth() + 1; 
+    let mm: any = today.getMonth() + 1;
     const yyyy: any = today.getFullYear();
     const d = new Date();
     const n = d.toLocaleTimeString();
     if (dd < 10) {
       dd = '0' + dd;
-    } 
+    }
 
-    if ( mm < 10) {
+    if (mm < 10) {
       mm = '0' + mm;
-    } 
+    }
 
     this.name_sender = this.registerForm.get('name_sender').value;
     this.company = this.registerForm.get('company').value;
     this.email = this.registerForm.get('email').value;
     this.phone_number = this.registerForm.get('phone_number').value,
-    this.state = this.registerForm.get('state').value;
-    
+      this.state = this.registerForm.get('state').value;
+
     if (this.company.length == 0) {
       this.company = 'Particular';
     }
     if (this.state == 'Nuevo León') {
       this.state = 'Nuevo Leon';
-    } 
+    }
     if (this.state.length == 0) {
       this.state = 'Mexico';
     }
@@ -209,14 +249,17 @@ export class AgregarLeadPage implements OnInit {
     this.hour = this.registerForm.get('hour').value;
 
     if (this.date.length > 0 && this.hour.length > 0) {
-      this.dateComplete = this.date.replace (/-/g, '') + ' ' + this.hour;
+      this.dateComplete = this.date.replace(/-/g, '') + ' ' + this.hour;
     } else if (this.date.length > 0 && this.hour.length == 0) {
-      this.dateComplete = this.date.replace (/-/g, '') + ' ' + n;
+      this.dateComplete = this.date.replace(/-/g, '') + ' ' + n;
     } else if (this.date.length == 0 && this.hour.length > 0) {
-      this.dateComplete = yyyy + '' + mm + '' + dd  + ' ' + this.hour;
+      this.dateComplete = yyyy + '' + mm + '' + dd + ' ' + this.hour;
     } else {
-      this.dateComplete = yyyy + '' + mm + '' + dd  + ' ' + n;
+      this.dateComplete = yyyy + '' + mm + '' + dd + ' ' + n;
     }
+
+    this.comment = this.registerForm.get('comment').value;
+
     this.validar_email(this.email);
   }
 
@@ -226,7 +269,7 @@ export class AgregarLeadPage implements OnInit {
       this.email = data;
       this.registerLead(this.name_sender, this.email, this.company, this.phone_number, this.region_id);
     } else {
-      Swal('No se ha agregado el lead por que el correo no es válido','', 'error');
+      Swal('No se ha agregado el lead por que el correo no es válido', '', 'error');
     }
   }
 
