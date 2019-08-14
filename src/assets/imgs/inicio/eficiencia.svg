@@ -7,7 +7,7 @@
 
       .cls-2 {
         fill: none;
-        stroke: #288AC1;
+        stroke: #005999;
         stroke-width: 3px;
       }
     </style>

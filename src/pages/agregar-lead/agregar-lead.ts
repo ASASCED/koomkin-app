@@ -150,8 +150,8 @@ export class AgregarLeadPage implements OnInit {
 
       return new Promise((resolve, reject) => {
        
-        // const url = 'https://www.koomkin.com.mx/api/leads/register';
-        const url = 'http://192.168.0.119:5001/register';
+        const url = 'https://www.koomkin.com.mx/api/leads/register';
+        // const url = 'http://192.168.0.119:5001/register';
 
         this.http.post(url, cuerpo, options).subscribe(
           data => {

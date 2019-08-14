@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angul
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { RestProvider } from '../../providers/rest/rest';
 import swal from 'sweetalert2';
+import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
 
 @IonicPage()
 @Component({
@@ -31,18 +32,20 @@ export class ModalComentariosPage implements OnInit {
     public navParams: NavParams,
     public viewCtrl: ViewController,
     public http: HttpClient,
-    public provedor: RestProvider
+    public provedor: RestProvider,
+    public authService: AuthServiceProvider
   ) {
     this.tipo = navParams.get("tipo");
     this.leadActual = navParams.get("leadActual");
     this.clasificaLead = navParams.get("clasificaLead");
     this.idComentario = navParams.get("idComentario");
     this.comentario = navParams.get("comentario");
-    // console.log(this.idComentario, this.comentario);
-    this.id = this.leadActual.ID;
+    
+    this.id = this.authService.id;
+
     this.clave = this.leadActual.uuid;
     this.uuid = this.leadActual.uuid;
-
+    console.log(this.id , this.clave, this.uuid);
     if (this.leadActual.ValorLead != 'null' && this.leadActual.ValorLead != null && this.leadActual.ValorLead != undefined) {
       this.valorLead = this.leadActual.ValorLead;
     }
@@ -86,6 +89,8 @@ export class ModalComentariosPage implements OnInit {
           'application/x-www-form-urlencoded'
         )
       };
+
+      console.log(body.toString());
 
       const url = 'https://www.koomkin.com.mx/api/app/registerComment/';
 

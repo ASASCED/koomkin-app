@@ -1,4 +1,17 @@
 page-agenda {
+  
+  .input-date {
+    height: 30px;
+    width: 90%;
+    color: #707070;
+    border: none;
+    border-bottom: 1px #cecece solid;
+    font-weight: bold;
+    border-radius: 0px;
+    box-shadow: none;
+    font-size: 3.5vw;
+  }
+
   ion-col {
     display: flex;
   }

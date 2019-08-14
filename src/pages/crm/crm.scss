@@ -1,10 +1,11 @@
 page-crm {
+  
   .row {
     margin-bottom: 2%;
   }
 
   .select-md {
-    padding: 0px 11px 0px 16px;
+    padding: 0px 9px 0px 9px;
   }
 
   .item-block {
@@ -105,6 +106,7 @@ page-crm {
   .carta {
     width: 60% !important;
     margin-left: 20% !important;
+    margin-top: 5%;
   }
 
   .totop {
@@ -205,7 +207,7 @@ page-crm {
   }
 
   .filtrar {
-    font-size: 4vw;
+    font-size: 3.5vw;
     margin-left: 0.5em;
     color: #288ac1 !important;
     font-weight: bold;
@@ -213,6 +215,7 @@ page-crm {
 
   .select-text {
     color: #707070 !important;
+    font-size: 3.5vw !important;
     font-weight: bold;
     overflow: hidden;
     -webkit-box-flex: 1;
@@ -223,6 +226,8 @@ page-crm {
     font-size: inherit;
     text-overflow: ellipsis;
     white-space: nowrap;
+    margin-top: 3%;
+
 }
 
   .input-date {
@@ -234,7 +239,7 @@ page-crm {
     font-weight: bold;
     border-radius: 0px;
     box-shadow: none;
-    font-size: 4vw;
+    font-size: 3.5vw;
   }
 
   .ver {
@@ -353,7 +358,7 @@ ion-select {
 }
 
 .rate-fecha {
-  font-size: 4vw;
+  font-size: 3.5vw;
   color: dimgray;
   text-align: left;
   display: inline-block;
@@ -373,7 +378,7 @@ ion-select {
 }
 
 .inf-mensaje {
-  font-size: 4vw;
+  font-size: 3.5vw;
   color: lightslategray;
   margin-top: 5px;
   text-align: justify;

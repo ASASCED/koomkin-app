@@ -12,7 +12,7 @@ import { HttpHeaders } from '@angular/common/http';
   templateUrl: "crm.html"
 })
 export class CrmPage implements OnInit {
-  
+
   @ViewChild(Content)
   content: Content;
   leads: any = [];
@@ -81,7 +81,7 @@ export class CrmPage implements OnInit {
   public filtros = false;
   apiUrl = "https://www.koomkin.com.mx/api/app";
   public estatus: string = "Lead";
-  public listaEstatus: Array<string> = ['Lead', 'Descartado', 'Seguimiento', 'Negociacion','Vendido'];
+  public listaEstatus: Array<string> = ['Lead', 'Descartado', 'Seguimiento', 'Negociacion', 'Vendido'];
   public filtro: any = 'actividad';
   public tipo = 'Todos';
   public dias = 'Total';
@@ -165,6 +165,12 @@ export class CrmPage implements OnInit {
   }
 
   public getLeads() {
+    let loading = this.loadingCtrl.create({
+      content: 'Cargando Leads...'
+    });
+
+    loading.present();
+
     const cuerpo = this.url;
 
     const options = {
@@ -175,8 +181,9 @@ export class CrmPage implements OnInit {
     };
 
     console.log(cuerpo);
-    // const url = 'https://www.koomkin.com.mx/api/leads/getByUser';
-    const url = 'http://192.168.0.119:5001/getByUser';
+    const url = 'https://www.koomkin.com.mx/api/leads/getByUser';
+    // const url = 'http://192.168.0.119:5001/getByUser';
+
 
     return new Promise((resolve, reject) => {
       this.http.post(url, cuerpo, options).subscribe(
@@ -189,14 +196,17 @@ export class CrmPage implements OnInit {
           this.ultimoLead = this.listaLeads[0];
           this.leads = this.leads.concat(this.stylizeLeads(this.listaLeads));
           this.leadsfiltrados = this.leads;
+          loading.dismiss();
           return resolve(this.leadsfiltrados);
         },
         err => {
+          loading.dismiss();
           console.log(err);
           return reject(err);
         }
       );
     });
+
   }
 
   verFiltros(mas?) {
@@ -647,166 +657,166 @@ export class CrmPage implements OnInit {
           case 'Total':
             switch (this.tipo) {
               case 'Todos':
-              if (this.fechaInic && this.fechaFin) {
-                if (parseInt(this.mayor) > 0 && parseInt(this.menor) > 0) {
-                  if (parseInt(this.mayor) > parseInt(this.menor)) {
+                if (this.fechaInic && this.fechaFin) {
+                  if (parseInt(this.mayor) > 0 && parseInt(this.menor) > 0) {
+                    if (parseInt(this.mayor) > parseInt(this.menor)) {
+                      // tslint:disable-next-line: max-line-length
+                      this.url = `{"user_id":${this.id},"filters":[{"attr":"fechaenvio","op":">=","value":"${this.fechaInic} 00:00:00"},{"attr":"fechaenvio","op":"<=","value":"${this.fechaFin} 23:59:59"},{"attr":"ValorLead","op":">=","value":"${this.menor}"}, {"attr":"ValorLead","op":"<=","value":${this.mayor}}],"ordering":[{"attr":"fechaenvio","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
+                      return this.getLeads();
+                    } else {
+                      // tslint:disable-next-line: max-line-length
+                      this.url = `{"user_id":${this.id},"filters":[{"attr":"fechaenvio","op":">=","value":"${this.fechaInic} 00:00:00"},{"attr":"fechaenvio","op":"<=","value":"${this.fechaFin} 23:59:59"},{"attr":"ValorLead","op":">=","value":${this.mayor}}, {"attr":"ValorLead","op":"<=","value":"${this.menor}"}],"ordering":[{"attr":"fechaenvio","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
+                      return this.getLeads();
+                    }
                     // tslint:disable-next-line: max-line-length
-                    this.url = `{"user_id":${this.id},"filters":[{"attr":"fechaenvio","op":">=","value":"${this.fechaInic} 00:00:00"},{"attr":"fechaenvio","op":"<=","value":"${this.fechaFin} 23:59:59"},{"attr":"ValorLead","op":">=","value":"${this.menor}"}, {"attr":"ValorLead","op":"<=","value":${this.mayor}}],"ordering":[{"attr":"fechaenvio","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
+                  } else if (parseInt(this.menor) > 0) {
+                    // tslint:disable-next-line: max-line-length
+                    this.url = `{"user_id":${this.id},"filters":[{"attr":"fechaenvio","op":">=","value":"${this.fechaInic} 00:00:00"},{"attr":"fechaenvio","op":"<=","value":"${this.fechaFin} 23:59:59"},{"attr":"ValorLead","op":"<=","value":"${this.menor}"}],"ordering":[{"attr":"fechaenvio","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
+                    return this.getLeads();
+                  } else if (parseInt(this.mayor) > 0) {
+                    // tslint:disable-next-line: max-line-length
+                    this.url = `{"user_id":${this.id},"filters":[{"attr":"fechaenvio","op":">=","value":"${this.fechaInic} 00:00:00"},{"attr":"fechaenvio","op":"<=","value":"${this.fechaFin} 23:59:59"},{"attr":"ValorLead","op":">=","value":${this.mayor}}],"ordering":[{"attr":"fechaenvio","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                     return this.getLeads();
                   } else {
-                    // tslint:disable-next-line: max-line-length
-                    this.url = `{"user_id":${this.id},"filters":[{"attr":"fechaenvio","op":">=","value":"${this.fechaInic} 00:00:00"},{"attr":"fechaenvio","op":"<=","value":"${this.fechaFin} 23:59:59"},{"attr":"ValorLead","op":">=","value":${this.mayor}}, {"attr":"ValorLead","op":"<=","value":"${this.menor}"}],"ordering":[{"attr":"fechaenvio","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
+                    // tslint:disable-next-line: max-sline-length
+                    this.url = `{"user_id":${this.id},"filters":[{"attr":"fechaenvio","op":">=","value":"${this.fechaInic} 00:00:00"},{"attr":"fechaenvio","op":"<=","value":"${this.fechaFin} 23:59:59"}],"ordering":[{"attr":"fechaenvio","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                     return this.getLeads();
                   }
-                  // tslint:disable-next-line: max-line-length
-                } else if (parseInt(this.menor) > 0) {
-                  // tslint:disable-next-line: max-line-length
-                  this.url = `{"user_id":${this.id},"filters":[{"attr":"fechaenvio","op":">=","value":"${this.fechaInic} 00:00:00"},{"attr":"fechaenvio","op":"<=","value":"${this.fechaFin} 23:59:59"},{"attr":"ValorLead","op":"<=","value":"${this.menor}"}],"ordering":[{"attr":"fechaenvio","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
-                  return this.getLeads();
-                } else if (parseInt(this.mayor) > 0) {
-                  // tslint:disable-next-line: max-line-length
-                  this.url = `{"user_id":${this.id},"filters":[{"attr":"fechaenvio","op":">=","value":"${this.fechaInic} 00:00:00"},{"attr":"fechaenvio","op":"<=","value":"${this.fechaFin} 23:59:59"},{"attr":"ValorLead","op":">=","value":${this.mayor}}],"ordering":[{"attr":"fechaenvio","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
-                  return this.getLeads();
                 } else {
-                  // tslint:disable-next-line: max-sline-length
-                  this.url = `{"user_id":${this.id},"filters":[{"attr":"fechaenvio","op":">=","value":"${this.fechaInic} 00:00:00"},{"attr":"fechaenvio","op":"<=","value":"${this.fechaFin} 23:59:59"}],"ordering":[{"attr":"fechaenvio","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
-                  return this.getLeads();
-                }
-              } else {
-                if (parseInt(this.mayor) > 0 && parseInt(this.menor) > 0) {
-                  if (parseInt(this.mayor) > parseInt(this.menor)) {
+                  if (parseInt(this.mayor) > 0 && parseInt(this.menor) > 0) {
+                    if (parseInt(this.mayor) > parseInt(this.menor)) {
+                      // tslint:disable-next-line: max-line-length
+                      this.url = `{"user_id":${this.id},"filters":[{"attr":"ValorLead","op":">=","value":"${this.menor}"}, {"attr":"ValorLead","op":"<=","value":${this.mayor}}],"ordering":[{"attr":"fechaenvio","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
+                      return this.getLeads();
+                    } else {
+                      // tslint:disable-next-line: max-line-length
+                      this.url = `{"user_id":${this.id},"filters":[{"attr":"ValorLead","op":">=","value":${this.mayor}}, {"attr":"ValorLead","op":"<=","value":"${this.menor}"}],"ordering":[{"attr":"fechaenvio","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
+                      return this.getLeads();
+                    }
                     // tslint:disable-next-line: max-line-length
-                    this.url = `{"user_id":${this.id},"filters":[{"attr":"ValorLead","op":">=","value":"${this.menor}"}, {"attr":"ValorLead","op":"<=","value":${this.mayor}}],"ordering":[{"attr":"fechaenvio","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
+                  } else if (parseInt(this.menor) > 0) {
+                    // tslint:disable-next-line: max-line-length
+                    this.url = `{"user_id":${this.id},"filters":[{"attr":"ValorLead","op":"<=","value":"${this.menor}"}],"ordering":[{"attr":"fechaenvio","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
+                    return this.getLeads();
+                  } else if (parseInt(this.mayor) > 0) {
+                    // tslint:disable-next-line: max-line-length
+                    this.url = `{"user_id":${this.id},"filters":[{"attr":"ValorLead","op":">=","value":${this.mayor}}],"ordering":[{"attr":"fechaenvio","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                     return this.getLeads();
                   } else {
-                    // tslint:disable-next-line: max-line-length
-                    this.url = `{"user_id":${this.id},"filters":[{"attr":"ValorLead","op":">=","value":${this.mayor}}, {"attr":"ValorLead","op":"<=","value":"${this.menor}"}],"ordering":[{"attr":"fechaenvio","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
+                    // tslint:disable-next-line: max-sline-length
+                    this.url = `{"user_id":${this.id},"filters":[],"ordering":[{"attr":"fechaenvio","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                     return this.getLeads();
                   }
-                  // tslint:disable-next-line: max-line-length
-                } else if (parseInt(this.menor) > 0) {
-                  // tslint:disable-next-line: max-line-length
-                  this.url = `{"user_id":${this.id},"filters":[{"attr":"ValorLead","op":"<=","value":"${this.menor}"}],"ordering":[{"attr":"fechaenvio","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
-                  return this.getLeads();
-                } else if (parseInt(this.mayor) > 0) {
-                  // tslint:disable-next-line: max-line-length
-                  this.url = `{"user_id":${this.id},"filters":[{"attr":"ValorLead","op":">=","value":${this.mayor}}],"ordering":[{"attr":"fechaenvio","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
-                  return this.getLeads();
-                } else {
-                  // tslint:disable-next-line: max-sline-length
-                  this.url = `{"user_id":${this.id},"filters":[],"ordering":[{"attr":"fechaenvio","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
-                  return this.getLeads();
                 }
-              }
 
-            case 'Koomkin':
-              if (this.fechaInic && this.fechaFin) {
-                if (parseInt(this.mayor) > 0 && parseInt(this.menor) > 0) {
-                  if (parseInt(this.mayor) > parseInt(this.menor)) {
+              case 'Koomkin':
+                if (this.fechaInic && this.fechaFin) {
+                  if (parseInt(this.mayor) > 0 && parseInt(this.menor) > 0) {
+                    if (parseInt(this.mayor) > parseInt(this.menor)) {
+                      // tslint:disable-next-line: max-line-length
+                      this.url = `{"user_id":${this.id},"filters":[{"attr":"fechaenvio","op":">=","value":"${this.fechaInic} 00:00:00"},{"attr":"fechaenvio","op":"<=","value":"${this.fechaFin} 23:59:59"},{"attr":"ValorLead","op":">=","value":"${this.menor}"}, {"attr":"ValorLead","op":"<=","value":${this.mayor}}, {"attr":"Canal","op":"not in","value":["Reporte", "App"]}],"ordering":[{"attr":"fechaenvio","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
+                      return this.getLeads();
+                    } else {
+                      // tslint:disable-next-line: max-line-length
+                      this.url = `{"user_id":${this.id},"filters":[{"attr":"fechaenvio","op":">=","value":"${this.fechaInic} 00:00:00"},{"attr":"fechaenvio","op":"<=","value":"${this.fechaFin} 23:59:59"},{"attr":"ValorLead","op":">=","value":${this.mayor}}, {"attr":"ValorLead","op":"<=","value":"${this.menor}"}, {"attr":"Canal","op":"not in","value":["Reporte", "App"]}],"ordering":[{"attr":"fechaenvio","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
+                      return this.getLeads();
+                    }
                     // tslint:disable-next-line: max-line-length
-                    this.url = `{"user_id":${this.id},"filters":[{"attr":"fechaenvio","op":">=","value":"${this.fechaInic} 00:00:00"},{"attr":"fechaenvio","op":"<=","value":"${this.fechaFin} 23:59:59"},{"attr":"ValorLead","op":">=","value":"${this.menor}"}, {"attr":"ValorLead","op":"<=","value":${this.mayor}}, {"attr":"Canal","op":"not in","value":["Reporte", "App"]}],"ordering":[{"attr":"fechaenvio","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
+                  } else if (parseInt(this.menor) > 0) {
+                    // tslint:disable-next-line: max-line-length
+                    this.url = `{"user_id":${this.id},"filters":[{"attr":"fechaenvio","op":">=","value":"${this.fechaInic} 00:00:00"},{"attr":"fechaenvio","op":"<=","value":"${this.fechaFin} 23:59:59"}, {"attr":"ValorLead","op":"<=","value":"${this.menor}"}, {"attr":"Canal","op":"not in","value":["Reporte", "App"]}],"ordering":[{"attr":"fechaenvio","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
+                    return this.getLeads();
+                  } else if (parseInt(this.mayor) > 0) {
+                    // tslint:disable-next-line: max-line-length
+                    this.url = `{"user_id":${this.id},"filters":[{"attr":"fechaenvio","op":">=","value":"${this.fechaInic} 00:00:00"},{"attr":"fechaenvio","op":"<=","value":"${this.fechaFin} 23:59:59"}, {"attr":"ValorLead","op":">=","value":${this.mayor}}, {"attr":"Canal","op":"not in","value":["Reporte", "App"]}],"ordering":[{"attr":"fechaenvio","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                     return this.getLeads();
                   } else {
                     // tslint:disable-next-line: max-line-length
-                    this.url = `{"user_id":${this.id},"filters":[{"attr":"fechaenvio","op":">=","value":"${this.fechaInic} 00:00:00"},{"attr":"fechaenvio","op":"<=","value":"${this.fechaFin} 23:59:59"},{"attr":"ValorLead","op":">=","value":${this.mayor}}, {"attr":"ValorLead","op":"<=","value":"${this.menor}"}, {"attr":"Canal","op":"not in","value":["Reporte", "App"]}],"ordering":[{"attr":"fechaenvio","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
+                    this.url = `{"user_id":${this.id},"filters":[{"attr":"fechaenvio","op":">=","value":"${this.fechaInic} 00:00:00"},{"attr":"fechaenvio","op":"<=","value":"${this.fechaFin} 23:59:59"}, {"attr":"Canal","op":"not in","value":["Reporte", "App"]}],"ordering":[{"attr":"fechaenvio","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                     return this.getLeads();
                   }
-                  // tslint:disable-next-line: max-line-length
-                } else if (parseInt(this.menor) > 0) {
-                  // tslint:disable-next-line: max-line-length
-                  this.url = `{"user_id":${this.id},"filters":[{"attr":"fechaenvio","op":">=","value":"${this.fechaInic} 00:00:00"},{"attr":"fechaenvio","op":"<=","value":"${this.fechaFin} 23:59:59"}, {"attr":"ValorLead","op":"<=","value":"${this.menor}"}, {"attr":"Canal","op":"not in","value":["Reporte", "App"]}],"ordering":[{"attr":"fechaenvio","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
-                  return this.getLeads();
-                } else if (parseInt(this.mayor) > 0) {
-                  // tslint:disable-next-line: max-line-length
-                  this.url = `{"user_id":${this.id},"filters":[{"attr":"fechaenvio","op":">=","value":"${this.fechaInic} 00:00:00"},{"attr":"fechaenvio","op":"<=","value":"${this.fechaFin} 23:59:59"}, {"attr":"ValorLead","op":">=","value":${this.mayor}}, {"attr":"Canal","op":"not in","value":["Reporte", "App"]}],"ordering":[{"attr":"fechaenvio","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
-                  return this.getLeads();
                 } else {
-                  // tslint:disable-next-line: max-line-length
-                  this.url = `{"user_id":${this.id},"filters":[{"attr":"fechaenvio","op":">=","value":"${this.fechaInic} 00:00:00"},{"attr":"fechaenvio","op":"<=","value":"${this.fechaFin} 23:59:59"}, {"attr":"Canal","op":"not in","value":["Reporte", "App"]}],"ordering":[{"attr":"fechaenvio","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
-                  return this.getLeads();
-                }
-              } else {
-                if (parseInt(this.mayor) > 0 && parseInt(this.menor) > 0) {
-                  if (parseInt(this.mayor) > parseInt(this.menor)) {
+                  if (parseInt(this.mayor) > 0 && parseInt(this.menor) > 0) {
+                    if (parseInt(this.mayor) > parseInt(this.menor)) {
+                      // tslint:disable-next-line: max-line-length
+                      this.url = `{"user_id":${this.id},"filters":[{"attr":"ValorLead","op":">=","value":"${this.menor}"}, {"attr":"ValorLead","op":"<=","value":${this.mayor}}, {"attr":"Canal","op":"not in","value":["Reporte", "App"]}],"ordering":[{"attr":"fechaenvio","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
+                      return this.getLeads();
+                    } else {
+                      // tslint:disable-next-line: max-line-length
+                      this.url = `{"user_id":${this.id},"filters":[{"attr":"ValorLead","op":">=","value":${this.mayor}}, {"attr":"ValorLead","op":"<=","value":"${this.menor}"}, {"attr":"Canal","op":"not in","value":["Reporte", "App"]}],"ordering":[{"attr":"fechaenvio","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
+                      return this.getLeads();
+                    }
                     // tslint:disable-next-line: max-line-length
-                    this.url = `{"user_id":${this.id},"filters":[{"attr":"ValorLead","op":">=","value":"${this.menor}"}, {"attr":"ValorLead","op":"<=","value":${this.mayor}}, {"attr":"Canal","op":"not in","value":["Reporte", "App"]}],"ordering":[{"attr":"fechaenvio","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
+                  } else if (parseInt(this.menor) > 0) {
+                    // tslint:disable-next-line: max-line-length
+                    this.url = `{"user_id":${this.id},"filters":[ {"attr":"ValorLead","op":"<=","value":"${this.menor}"}, {"attr":"Canal","op":"not in","value":["Reporte", "App"]}],"ordering":[{"attr":"fechaenvio","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
+                    return this.getLeads();
+                  } else if (parseInt(this.mayor) > 0) {
+                    // tslint:disable-next-line: max-line-length
+                    this.url = `{"user_id":${this.id},"filters":[ {"attr":"ValorLead","op":">=","value":${this.mayor}}, {"attr":"Canal","op":"not in","value":["Reporte", "App"]}],"ordering":[{"attr":"fechaenvio","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                     return this.getLeads();
                   } else {
                     // tslint:disable-next-line: max-line-length
-                    this.url = `{"user_id":${this.id},"filters":[{"attr":"ValorLead","op":">=","value":${this.mayor}}, {"attr":"ValorLead","op":"<=","value":"${this.menor}"}, {"attr":"Canal","op":"not in","value":["Reporte", "App"]}],"ordering":[{"attr":"fechaenvio","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
+                    this.url = `{"user_id":${this.id},"filters":[ {"attr":"Canal","op":"not in","value":["Reporte", "App"]}],"ordering":[{"attr":"fechaenvio","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                     return this.getLeads();
                   }
-                  // tslint:disable-next-line: max-line-length
-                } else if (parseInt(this.menor) > 0) {
-                  // tslint:disable-next-line: max-line-length
-                  this.url = `{"user_id":${this.id},"filters":[ {"attr":"ValorLead","op":"<=","value":"${this.menor}"}, {"attr":"Canal","op":"not in","value":["Reporte", "App"]}],"ordering":[{"attr":"fechaenvio","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
-                  return this.getLeads();
-                } else if (parseInt(this.mayor) > 0) {
-                  // tslint:disable-next-line: max-line-length
-                  this.url = `{"user_id":${this.id},"filters":[ {"attr":"ValorLead","op":">=","value":${this.mayor}}, {"attr":"Canal","op":"not in","value":["Reporte", "App"]}],"ordering":[{"attr":"fechaenvio","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
-                  return this.getLeads();
-                } else {
-                  // tslint:disable-next-line: max-line-length
-                  this.url = `{"user_id":${this.id},"filters":[ {"attr":"Canal","op":"not in","value":["Reporte", "App"]}],"ordering":[{"attr":"fechaenvio","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
-                  return this.getLeads();
                 }
-              }
 
-            case 'Externos':
-              if (this.fechaInic && this.fechaFin) {
-                if (parseInt(this.mayor) > 0 && parseInt(this.menor) > 0) {
-                  if (parseInt(this.mayor) > parseInt(this.menor)) {
+              case 'Externos':
+                if (this.fechaInic && this.fechaFin) {
+                  if (parseInt(this.mayor) > 0 && parseInt(this.menor) > 0) {
+                    if (parseInt(this.mayor) > parseInt(this.menor)) {
+                      // tslint:disable-next-line: max-line-length
+                      this.url = `{"user_id":${this.id},"filters":[{"attr":"fechaenvio","op":">=","value":"${this.fechaInic} 00:00:00"},{"attr":"fechaenvio","op":"<=","value":"${this.fechaFin} 23:59:59"},{"attr":"ValorLead","op":">=","value":"${this.menor}"}, {"attr":"ValorLead","op":"<=","value":${this.mayor}}, {"attr":"Canal","op":"in","value":["Reporte", "App"]}],"ordering":[{"attr":"fechaenvio","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
+                      return this.getLeads();
+                    } else {
+                      // tslint:disable-next-line: max-line-length
+                      this.url = `{"user_id":${this.id},"filters":[{"attr":"fechaenvio","op":">=","value":"${this.fechaInic} 00:00:00"},{"attr":"fechaenvio","op":"<=","value":"${this.fechaFin} 23:59:59"},{"attr":"ValorLead","op":">=","value":${this.mayor}}, {"attr":"ValorLead","op":"<=","value":"${this.menor}"}, {"attr":"Canal","op":"in","value":["Reporte", "App"]}],"ordering":[{"attr":"fechaenvio","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
+                      return this.getLeads();
+                    }
                     // tslint:disable-next-line: max-line-length
-                    this.url = `{"user_id":${this.id},"filters":[{"attr":"fechaenvio","op":">=","value":"${this.fechaInic} 00:00:00"},{"attr":"fechaenvio","op":"<=","value":"${this.fechaFin} 23:59:59"},{"attr":"ValorLead","op":">=","value":"${this.menor}"}, {"attr":"ValorLead","op":"<=","value":${this.mayor}}, {"attr":"Canal","op":"in","value":["Reporte", "App"]}],"ordering":[{"attr":"fechaenvio","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
+                  } else if (parseInt(this.menor) > 0) {
+                    // tslint:disable-next-line: max-line-length
+                    this.url = `{"user_id":${this.id},"filters":[{"attr":"fechaenvio","op":">=","value":"${this.fechaInic} 00:00:00"},{"attr":"fechaenvio","op":"<=","value":"${this.fechaFin} 23:59:59"},{"attr":"ValorLead","op":"<=","value":"${this.menor}"}, {"attr":"Canal","op":"in","value":["Reporte", "App"]}],"ordering":[{"attr":"fechaenvio","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
+                    return this.getLeads();
+                  } else if (parseInt(this.mayor) > 0) {
+                    // tslint:disable-next-line: max-line-length
+                    this.url = `{"user_id":${this.id},"filters":[{"attr":"fechaenvio","op":">=","value":"${this.fechaInic} 00:00:00"},{"attr":"fechaenvio","op":"<=","value":"${this.fechaFin} 23:59:59"},{"attr":"ValorLead","op":">=","value":${this.mayor}}, {"attr":"Canal","op":"in","value":["Reporte", "App"]}],"ordering":[{"attr":"fechaenvio","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                     return this.getLeads();
                   } else {
                     // tslint:disable-next-line: max-line-length
-                    this.url = `{"user_id":${this.id},"filters":[{"attr":"fechaenvio","op":">=","value":"${this.fechaInic} 00:00:00"},{"attr":"fechaenvio","op":"<=","value":"${this.fechaFin} 23:59:59"},{"attr":"ValorLead","op":">=","value":${this.mayor}}, {"attr":"ValorLead","op":"<=","value":"${this.menor}"}, {"attr":"Canal","op":"in","value":["Reporte", "App"]}],"ordering":[{"attr":"fechaenvio","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
+                    this.url = `{"user_id":${this.id},"filters":[ {"attr":"fechaenvio","op":">=","value":"${this.fechaInic} 00:00:00"},{"attr":"fechaenvio","op":"<=","value":"${this.fechaFin} 23:59:59"},{"attr":"Canal","op":"in","value":["Reporte", "App"]}],"ordering":[{"attr":"fechaenvio","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                     return this.getLeads();
                   }
-                  // tslint:disable-next-line: max-line-length
-                } else if (parseInt(this.menor) > 0) {
-                  // tslint:disable-next-line: max-line-length
-                  this.url = `{"user_id":${this.id},"filters":[{"attr":"fechaenvio","op":">=","value":"${this.fechaInic} 00:00:00"},{"attr":"fechaenvio","op":"<=","value":"${this.fechaFin} 23:59:59"},{"attr":"ValorLead","op":"<=","value":"${this.menor}"}, {"attr":"Canal","op":"in","value":["Reporte", "App"]}],"ordering":[{"attr":"fechaenvio","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
-                  return this.getLeads();
-                } else if (parseInt(this.mayor) > 0) {
-                  // tslint:disable-next-line: max-line-length
-                  this.url = `{"user_id":${this.id},"filters":[{"attr":"fechaenvio","op":">=","value":"${this.fechaInic} 00:00:00"},{"attr":"fechaenvio","op":"<=","value":"${this.fechaFin} 23:59:59"},{"attr":"ValorLead","op":">=","value":${this.mayor}}, {"attr":"Canal","op":"in","value":["Reporte", "App"]}],"ordering":[{"attr":"fechaenvio","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
-                  return this.getLeads();
                 } else {
-                  // tslint:disable-next-line: max-line-length
-                  this.url = `{"user_id":${this.id},"filters":[ {"attr":"fechaenvio","op":">=","value":"${this.fechaInic} 00:00:00"},{"attr":"fechaenvio","op":"<=","value":"${this.fechaFin} 23:59:59"},{"attr":"Canal","op":"in","value":["Reporte", "App"]}],"ordering":[{"attr":"fechaenvio","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
-                  return this.getLeads();
-                }
-              } else {
-                if (parseInt(this.mayor) > 0 && parseInt(this.menor) > 0) {
-                  if (parseInt(this.mayor) > parseInt(this.menor)) {
+                  if (parseInt(this.mayor) > 0 && parseInt(this.menor) > 0) {
+                    if (parseInt(this.mayor) > parseInt(this.menor)) {
+                      // tslint:disable-next-line: max-line-length
+                      this.url = `{"user_id":${this.id},"filters":[{"attr":"ValorLead","op":">=","value":"${this.menor}"}, {"attr":"ValorLead","op":"<=","value":${this.mayor}}, {"attr":"Canal","op":"in","value":["Reporte", "App"]}],"ordering":[{"attr":"fechaenvio","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
+                      return this.getLeads();
+                    } else {
+                      // tslint:disable-next-line: max-line-length
+                      this.url = `{"user_id":${this.id},"filters":[{"attr":"ValorLead","op":">=","value":${this.mayor}}, {"attr":"ValorLead","op":"<=","value":"${this.menor}"}, {"attr":"Canal","op":"in","value":["Reporte", "App"]}],"ordering":[{"attr":"fechaenvio","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
+                      return this.getLeads();
+                    }
                     // tslint:disable-next-line: max-line-length
-                    this.url = `{"user_id":${this.id},"filters":[{"attr":"ValorLead","op":">=","value":"${this.menor}"}, {"attr":"ValorLead","op":"<=","value":${this.mayor}}, {"attr":"Canal","op":"in","value":["Reporte", "App"]}],"ordering":[{"attr":"fechaenvio","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
+                  } else if (parseInt(this.menor) > 0) {
+                    // tslint:disable-next-line: max-line-length
+                    this.url = `{"user_id":${this.id},"filters":[{"attr":"ValorLead","op":"<=","value":"${this.menor}"}, {"attr":"Canal","op":"in","value":["Reporte", "App"]}],"ordering":[{"attr":"fechaenvio","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
+                    return this.getLeads();
+                  } else if (parseInt(this.mayor) > 0) {
+                    // tslint:disable-next-line: max-line-length
+                    this.url = `{"user_id":${this.id},"filters":[{"attr":"ValorLead","op":">=","value":${this.mayor}}, {"attr":"Canal","op":"in","value":["Reporte", "App"]}],"ordering":[{"attr":"fechaenvio","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                     return this.getLeads();
                   } else {
                     // tslint:disable-next-line: max-line-length
-                    this.url = `{"user_id":${this.id},"filters":[{"attr":"ValorLead","op":">=","value":${this.mayor}}, {"attr":"ValorLead","op":"<=","value":"${this.menor}"}, {"attr":"Canal","op":"in","value":["Reporte", "App"]}],"ordering":[{"attr":"fechaenvio","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
+                    this.url = `{"user_id":${this.id},"filters":[ {"attr":"Canal","op":"in","value":["Reporte", "App"]}],"ordering":[{"attr":"fechaenvio","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                     return this.getLeads();
                   }
-                  // tslint:disable-next-line: max-line-length
-                } else if (parseInt(this.menor) > 0) {
-                  // tslint:disable-next-line: max-line-length
-                  this.url = `{"user_id":${this.id},"filters":[{"attr":"ValorLead","op":"<=","value":"${this.menor}"}, {"attr":"Canal","op":"in","value":["Reporte", "App"]}],"ordering":[{"attr":"fechaenvio","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
-                  return this.getLeads();
-                } else if (parseInt(this.mayor) > 0) {
-                  // tslint:disable-next-line: max-line-length
-                  this.url = `{"user_id":${this.id},"filters":[{"attr":"ValorLead","op":">=","value":${this.mayor}}, {"attr":"Canal","op":"in","value":["Reporte", "App"]}],"ordering":[{"attr":"fechaenvio","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
-                  return this.getLeads();
-                } else {
-                  // tslint:disable-next-line: max-line-length
-                  this.url = `{"user_id":${this.id},"filters":[ {"attr":"Canal","op":"in","value":["Reporte", "App"]}],"ordering":[{"attr":"fechaenvio","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
-                  return this.getLeads();
                 }
-              }
-            default:
-          }
-          return;
+              default:
+            }
+            return;
 
           case 'Últ. 3 días':
             switch (this.tipo) {
@@ -1067,164 +1077,164 @@ export class CrmPage implements OnInit {
           case 'Total':
             switch (this.tipo) {
               case 'Todos':
-              if (this.fechaInic && this.fechaFin) {
-                if (parseInt(this.mayor) > 0 && parseInt(this.menor) > 0) {
-                  if (parseInt(this.mayor) > parseInt(this.menor)) {
+                if (this.fechaInic && this.fechaFin) {
+                  if (parseInt(this.mayor) > 0 && parseInt(this.menor) > 0) {
+                    if (parseInt(this.mayor) > parseInt(this.menor)) {
+                      // tslint:disable-next-line: max-line-length
+                      this.url = `{"user_id":${this.id},"filters":[{"attr":"scheduledAt","op":">=","value":"${this.fechaInic} 00:00:00"},{"attr":"scheduledAt","op":"<=","value":"${this.fechaFin} 23:59:59"},{"attr":"ValorLead","op":">=","value":"${this.menor}"}, {"attr":"ValorLead","op":"<=","value":${this.mayor}}],"ordering":[{"attr":"scheduledAt","asc":d}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
+                      return this.getLeads();
+                    } else {
+                      // tslint:disable-next-line: max-line-length
+                      this.url = `{"user_id":${this.id},"filters":[{"attr":"scheduledAt","op":">=","value":"${this.fechaInic} 00:00:00"},{"attr":"scheduledAt","op":"<=","value":"${this.fechaFin} 23:59:59"},{"attr":"ValorLead","op":">=","value":${this.mayor}}, {"attr":"ValorLead","op":"<=","value":"${this.menor}"}],"ordering":[{"attr":"scheduledAt","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
+                      return this.getLeads();
+                    }
                     // tslint:disable-next-line: max-line-length
-                    this.url = `{"user_id":${this.id},"filters":[{"attr":"scheduledAt","op":">=","value":"${this.fechaInic} 00:00:00"},{"attr":"scheduledAt","op":"<=","value":"${this.fechaFin} 23:59:59"},{"attr":"ValorLead","op":">=","value":"${this.menor}"}, {"attr":"ValorLead","op":"<=","value":${this.mayor}}],"ordering":[{"attr":"scheduledAt","asc":d}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
+                  } else if (parseInt(this.menor) > 0) {
+                    // tslint:disable-next-line: max-line-length
+                    this.url = `{"user_id":${this.id},"filters":[{"attr":"scheduledAt","op":">=","value":"${this.fechaInic} 00:00:00"},{"attr":"scheduledAt","op":"<=","value":"${this.fechaFin} 23:59:59"},{"attr":"ValorLead","op":"<=","value":"${this.menor}"}],"ordering":[{"attr":"scheduledAt","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
+                    return this.getLeads();
+                  } else if (parseInt(this.mayor) > 0) {
+                    // tslint:disable-next-line: max-line-length
+                    this.url = `{"user_id":${this.id},"filters":[{"attr":"scheduledAt","op":">=","value":"${this.fechaInic} 00:00:00"},{"attr":"scheduledAt","op":"<=","value":"${this.fechaFin} 23:59:59"},{"attr":"ValorLead","op":">=","value":${this.mayor}}],"ordering":[{"attr":"scheduledAt","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                     return this.getLeads();
                   } else {
                     // tslint:disable-next-line: max-line-length
-                    this.url = `{"user_id":${this.id},"filters":[{"attr":"scheduledAt","op":">=","value":"${this.fechaInic} 00:00:00"},{"attr":"scheduledAt","op":"<=","value":"${this.fechaFin} 23:59:59"},{"attr":"ValorLead","op":">=","value":${this.mayor}}, {"attr":"ValorLead","op":"<=","value":"${this.menor}"}],"ordering":[{"attr":"scheduledAt","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
+                    this.url = `{"user_id":${this.id},"filters":[{"attr":"scheduledAt","op":">=","value":"${this.fechaInic} 00:00:00"},{"attr":"scheduledAt","op":"<=","value":"${this.fechaFin} 23:59:59"}],"ordering":[{"attr":"scheduledAt","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                     return this.getLeads();
                   }
-                  // tslint:disable-next-line: max-line-length
-                } else if (parseInt(this.menor) > 0) {
-                  // tslint:disable-next-line: max-line-length
-                  this.url = `{"user_id":${this.id},"filters":[{"attr":"scheduledAt","op":">=","value":"${this.fechaInic} 00:00:00"},{"attr":"scheduledAt","op":"<=","value":"${this.fechaFin} 23:59:59"},{"attr":"ValorLead","op":"<=","value":"${this.menor}"}],"ordering":[{"attr":"scheduledAt","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
-                  return this.getLeads();
-                } else if (parseInt(this.mayor) > 0) {
-                  // tslint:disable-next-line: max-line-length
-                  this.url = `{"user_id":${this.id},"filters":[{"attr":"scheduledAt","op":">=","value":"${this.fechaInic} 00:00:00"},{"attr":"scheduledAt","op":"<=","value":"${this.fechaFin} 23:59:59"},{"attr":"ValorLead","op":">=","value":${this.mayor}}],"ordering":[{"attr":"scheduledAt","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
-                  return this.getLeads();
                 } else {
-                  // tslint:disable-next-line: max-line-length
-                  this.url = `{"user_id":${this.id},"filters":[{"attr":"scheduledAt","op":">=","value":"${this.fechaInic} 00:00:00"},{"attr":"scheduledAt","op":"<=","value":"${this.fechaFin} 23:59:59"}],"ordering":[{"attr":"scheduledAt","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
-                  return this.getLeads();
-                }
-              } else {
-                if (parseInt(this.mayor) > 0 && parseInt(this.menor) > 0) {
-                  if (parseInt(this.mayor) > parseInt(this.menor)) {
+                  if (parseInt(this.mayor) > 0 && parseInt(this.menor) > 0) {
+                    if (parseInt(this.mayor) > parseInt(this.menor)) {
+                      // tslint:disable-next-line: max-line-length
+                      this.url = `{"user_id":${this.id},"filters":[{"attr":"ValorLead","op":">=","value":"${this.menor}"}, {"attr":"ValorLead","op":"<=","value":${this.mayor}},{"attr":"scheduledAt","op":">=","value":"${this.hoy} 00:00:00"},{"attr":"scheduledAt","op":"<=","value":"${this.sigMeses} 23:59:59"}],"ordering":[{"attr":"scheduledAt","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
+                      return this.getLeads();
+                    } else {
+                      // tslint:disable-next-line: max-line-length
+                      this.url = `{"user_id":${this.id},"filters":[{"attr":"ValorLead","op":">=","value":${this.mayor}}, {"attr":"ValorLead","op":"<=","value":"${this.menor}"},{"attr":"scheduledAt","op":">=","value":"${this.hoy} 00:00:00"},{"attr":"scheduledAt","op":"<=","value":"${this.sigMeses} 23:59:59"}],"ordering":[{"attr":"scheduledAt","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
+                      return this.getLeads();
+                    }
                     // tslint:disable-next-line: max-line-length
-                    this.url = `{"user_id":${this.id},"filters":[{"attr":"ValorLead","op":">=","value":"${this.menor}"}, {"attr":"ValorLead","op":"<=","value":${this.mayor}},{"attr":"scheduledAt","op":">=","value":"${this.hoy} 00:00:00"},{"attr":"scheduledAt","op":"<=","value":"${this.sigMeses} 23:59:59"}],"ordering":[{"attr":"scheduledAt","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
+                  } else if (parseInt(this.menor) > 0) {
+                    // tslint:disable-next-line: max-line-length
+                    this.url = `{"user_id":${this.id},"filters":[{"attr":"ValorLead","op":"<=","value":"${this.menor}"}],"ordering":[{"attr":"scheduledAt","asc":false},{"attr":"scheduledAt","op":">=","value":"${this.hoy} 00:00:00"},{"attr":"scheduledAt","op":"<=","value":"${this.sigMeses} 23:59:59"}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
+                    return this.getLeads();
+                  } else if (parseInt(this.mayor) > 0) {
+                    // tslint:disable-next-line: max-line-length
+                    this.url = `{"user_id":${this.id},"filters":[{"attr":"ValorLead","op":">=","value":${this.mayor}}],"ordering":[{"attr":"scheduledAt","asc":false},{"attr":"scheduledAt","op":">=","value":"${this.hoy} 00:00:00"},{"attr":"scheduledAt","op":"<=","value":"${this.sigMeses} 23:59:59"}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                     return this.getLeads();
                   } else {
                     // tslint:disable-next-line: max-line-length
-                    this.url = `{"user_id":${this.id},"filters":[{"attr":"ValorLead","op":">=","value":${this.mayor}}, {"attr":"ValorLead","op":"<=","value":"${this.menor}"},{"attr":"scheduledAt","op":">=","value":"${this.hoy} 00:00:00"},{"attr":"scheduledAt","op":"<=","value":"${this.sigMeses} 23:59:59"}],"ordering":[{"attr":"scheduledAt","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
+                    this.url = `{"user_id":${this.id},"filters":[{"attr":"scheduledAt","op":">=","value":"${this.hoy} 00:00:00"},{"attr":"scheduledAt","op":"<=","value":"${this.sigMeses} 23:59:59"}],"ordering":[{"attr":"scheduledAt","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                     return this.getLeads();
                   }
-                  // tslint:disable-next-line: max-line-length
-                } else if (parseInt(this.menor) > 0) {
-                  // tslint:disable-next-line: max-line-length
-                  this.url = `{"user_id":${this.id},"filters":[{"attr":"ValorLead","op":"<=","value":"${this.menor}"}],"ordering":[{"attr":"scheduledAt","asc":false},{"attr":"scheduledAt","op":">=","value":"${this.hoy} 00:00:00"},{"attr":"scheduledAt","op":"<=","value":"${this.sigMeses} 23:59:59"}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
-                  return this.getLeads();
-                } else if (parseInt(this.mayor) > 0) {
-                  // tslint:disable-next-line: max-line-length
-                  this.url = `{"user_id":${this.id},"filters":[{"attr":"ValorLead","op":">=","value":${this.mayor}}],"ordering":[{"attr":"scheduledAt","asc":false},{"attr":"scheduledAt","op":">=","value":"${this.hoy} 00:00:00"},{"attr":"scheduledAt","op":"<=","value":"${this.sigMeses} 23:59:59"}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
-                  return this.getLeads();
-                } else {
-                  // tslint:disable-next-line: max-line-length
-                  this.url = `{"user_id":${this.id},"filters":[{"attr":"scheduledAt","op":">=","value":"${this.hoy} 00:00:00"},{"attr":"scheduledAt","op":"<=","value":"${this.sigMeses} 23:59:59"}],"ordering":[{"attr":"scheduledAt","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
-                  return this.getLeads();
                 }
-              }
 
               case 'Koomkin':
                 if (this.fechaInic && this.fechaFin) {
-                if (parseInt(this.mayor) > 0 && parseInt(this.menor) > 0) {
-                  if (parseInt(this.mayor) > parseInt(this.menor)) {
+                  if (parseInt(this.mayor) > 0 && parseInt(this.menor) > 0) {
+                    if (parseInt(this.mayor) > parseInt(this.menor)) {
+                      // tslint:disable-next-line: max-line-length
+                      this.url = `{"user_id":${this.id},"filters":[{"attr":"scheduledAt","op":">=","value":"${this.fechaInic} 00:00:00"},{"attr":"scheduledAt","op":"<=","value":"${this.fechaFin} 23:59:59"},{"attr":"ValorLead","op":">=","value":"${this.menor}"}, {"attr":"ValorLead","op":"<=","value":${this.mayor}}, {"attr":"Canal","op":"not in","value":["Reporte", "App"]}],"ordering":[{"attr":"scheduledAt","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
+                      return this.getLeads();
+                    } else {
+                      // tslint:disable-next-line: max-line-length
+                      this.url = `{"user_id":${this.id},"filters":[{"attr":"scheduledAt","op":">=","value":"${this.fechaInic} 00:00:00"},{"attr":"scheduledAt","op":"<=","value":"${this.fechaFin} 23:59:59"},{"attr":"ValorLead","op":">=","value":${this.mayor}}, {"attr":"ValorLead","op":"<=","value":"${this.menor}"}, {"attr":"Canal","op":"not in","value":["Reporte", "App"]}],"ordering":[{"attr":"scheduledAt","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
+                      return this.getLeads();
+                    }
                     // tslint:disable-next-line: max-line-length
-                    this.url = `{"user_id":${this.id},"filters":[{"attr":"scheduledAt","op":">=","value":"${this.fechaInic} 00:00:00"},{"attr":"scheduledAt","op":"<=","value":"${this.fechaFin} 23:59:59"},{"attr":"ValorLead","op":">=","value":"${this.menor}"}, {"attr":"ValorLead","op":"<=","value":${this.mayor}}, {"attr":"Canal","op":"not in","value":["Reporte", "App"]}],"ordering":[{"attr":"scheduledAt","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
+                  } else if (parseInt(this.menor) > 0) {
+                    // tslint:disable-next-line: max-line-length
+                    this.url = `{"user_id":${this.id},"filters":[{"attr":"scheduledAt","op":">=","value":"${this.fechaInic} 00:00:00"},{"attr":"scheduledAt","op":"<=","value":"${this.fechaFin} 23:59:59"}, {"attr":"ValorLead","op":"<=","value":"${this.menor}"}, {"attr":"Canal","op":"not in","value":["Reporte", "App"]}],"ordering":[{"attr":"scheduledAt","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
+                    return this.getLeads();
+                  } else if (parseInt(this.mayor) > 0) {
+                    // tslint:disable-next-line: max-line-length
+                    this.url = `{"user_id":${this.id},"filters":[{"attr":"scheduledAt","op":">=","value":"${this.fechaInic} 00:00:00"},{"attr":"scheduledAt","op":"<=","value":"${this.fechaFin} 23:59:59"}, {"attr":"ValorLead","op":">=","value":${this.mayor}}, {"attr":"Canal","op":"not in","value":["Reporte", "App"]}],"ordering":[{"attr":"scheduledAt","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                     return this.getLeads();
                   } else {
                     // tslint:disable-next-line: max-line-length
-                    this.url = `{"user_id":${this.id},"filters":[{"attr":"scheduledAt","op":">=","value":"${this.fechaInic} 00:00:00"},{"attr":"scheduledAt","op":"<=","value":"${this.fechaFin} 23:59:59"},{"attr":"ValorLead","op":">=","value":${this.mayor}}, {"attr":"ValorLead","op":"<=","value":"${this.menor}"}, {"attr":"Canal","op":"not in","value":["Reporte", "App"]}],"ordering":[{"attr":"scheduledAt","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
+                    this.url = `{"user_id":${this.id},"filters":[{"attr":"scheduledAt","op":">=","value":"${this.fechaInic} 00:00:00"},{"attr":"scheduledAt","op":"<=","value":"${this.fechaFin} 23:59:59"}, {"attr":"Canal","op":"not in","value":["Reporte", "App"]}],"ordering":[{"attr":"scheduledAt","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                     return this.getLeads();
                   }
-                  // tslint:disable-next-line: max-line-length
-                } else if (parseInt(this.menor) > 0) {
-                  // tslint:disable-next-line: max-line-length
-                  this.url = `{"user_id":${this.id},"filters":[{"attr":"scheduledAt","op":">=","value":"${this.fechaInic} 00:00:00"},{"attr":"scheduledAt","op":"<=","value":"${this.fechaFin} 23:59:59"}, {"attr":"ValorLead","op":"<=","value":"${this.menor}"}, {"attr":"Canal","op":"not in","value":["Reporte", "App"]}],"ordering":[{"attr":"scheduledAt","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
-                  return this.getLeads();
-                } else if (parseInt(this.mayor) > 0) {
-                  // tslint:disable-next-line: max-line-length
-                  this.url = `{"user_id":${this.id},"filters":[{"attr":"scheduledAt","op":">=","value":"${this.fechaInic} 00:00:00"},{"attr":"scheduledAt","op":"<=","value":"${this.fechaFin} 23:59:59"}, {"attr":"ValorLead","op":">=","value":${this.mayor}}, {"attr":"Canal","op":"not in","value":["Reporte", "App"]}],"ordering":[{"attr":"scheduledAt","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
-                  return this.getLeads();
                 } else {
-                  // tslint:disable-next-line: max-line-length
-                  this.url = `{"user_id":${this.id},"filters":[{"attr":"scheduledAt","op":">=","value":"${this.fechaInic} 00:00:00"},{"attr":"scheduledAt","op":"<=","value":"${this.fechaFin} 23:59:59"}, {"attr":"Canal","op":"not in","value":["Reporte", "App"]}],"ordering":[{"attr":"scheduledAt","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
-                  return this.getLeads();
-                }
-              } else {
-                if (parseInt(this.mayor) > 0 && parseInt(this.menor) > 0) {
-                  if (parseInt(this.mayor) > parseInt(this.menor)) {
+                  if (parseInt(this.mayor) > 0 && parseInt(this.menor) > 0) {
+                    if (parseInt(this.mayor) > parseInt(this.menor)) {
+                      // tslint:disable-next-line: max-line-length
+                      this.url = `{"user_id":${this.id},"filters":[{"attr":"scheduledAt","op":">=","value":"${this.hoy} 00:00:00"},{"attr":"scheduledAt","op":"<=","value":"${this.sigMeses} 23:59:59"},{"attr":"ValorLead","op":">=","value":"${this.menor}"}, {"attr":"ValorLead","op":"<=","value":${this.mayor}}, {"attr":"Canal","op":"not in","value":["Reporte", "App"]}],"ordering":[{"attr":"scheduledAt","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
+                      return this.getLeads();
+                    } else {
+                      // tslint:disable-next-line: max-line-length
+                      this.url = `{"user_id":${this.id},"filters":[{"attr":"scheduledAt","op":">=","value":"${this.hoy} 00:00:00"},{"attr":"scheduledAt","op":"<=","value":"${this.sigMeses} 23:59:59"},{"attr":"ValorLead","op":">=","value":${this.mayor}}, {"attr":"ValorLead","op":"<=","value":"${this.menor}"}, {"attr":"Canal","op":"not in","value":["Reporte", "App"]}],"ordering":[{"attr":"scheduledAt","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
+                      return this.getLeads();
+                    }
                     // tslint:disable-next-line: max-line-length
-                    this.url = `{"user_id":${this.id},"filters":[{"attr":"scheduledAt","op":">=","value":"${this.hoy} 00:00:00"},{"attr":"scheduledAt","op":"<=","value":"${this.sigMeses} 23:59:59"},{"attr":"ValorLead","op":">=","value":"${this.menor}"}, {"attr":"ValorLead","op":"<=","value":${this.mayor}}, {"attr":"Canal","op":"not in","value":["Reporte", "App"]}],"ordering":[{"attr":"scheduledAt","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
+                  } else if (parseInt(this.menor) > 0) {
+                    // tslint:disable-next-line: max-line-length
+                    this.url = `{"user_id":${this.id},"filters":[{"attr":"scheduledAt","op":">=","value":"${this.hoy} 00:00:00"},{"attr":"scheduledAt","op":"<=","value":"${this.sigMeses} 23:59:59"}, {"attr":"ValorLead","op":"<=","value":"${this.menor}"}, {"attr":"Canal","op":"not in","value":["Reporte", "App"]}],"ordering":[{"attr":"scheduledAt","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
+                    return this.getLeads();
+                  } else if (parseInt(this.mayor) > 0) {
+                    // tslint:disable-next-line: max-line-length
+                    this.url = `{"user_id":${this.id},"filters":[{"attr":"scheduledAt","op":">=","value":"${this.hoy} 00:00:00"},{"attr":"scheduledAt","op":"<=","value":"${this.sigMeses} 23:59:59"}, {"attr":"ValorLead","op":">=","value":${this.mayor}}, {"attr":"Canal","op":"not in","value":["Reporte", "App"]}],"ordering":[{"attr":"scheduledAt","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                     return this.getLeads();
                   } else {
                     // tslint:disable-next-line: max-line-length
-                    this.url = `{"user_id":${this.id},"filters":[{"attr":"scheduledAt","op":">=","value":"${this.hoy} 00:00:00"},{"attr":"scheduledAt","op":"<=","value":"${this.sigMeses} 23:59:59"},{"attr":"ValorLead","op":">=","value":${this.mayor}}, {"attr":"ValorLead","op":"<=","value":"${this.menor}"}, {"attr":"Canal","op":"not in","value":["Reporte", "App"]}],"ordering":[{"attr":"scheduledAt","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
+                    this.url = `{"user_id":${this.id},"filters":[{"attr":"scheduledAt","op":">=","value":"${this.hoy} 00:00:00"},{"attr":"scheduledAt","op":"<=","value":"${this.sigMeses} 23:59:59"}, {"attr":"Canal","op":"not in","value":["Reporte", "App"]}],"ordering":[{"attr":"scheduledAt","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                     return this.getLeads();
                   }
-                  // tslint:disable-next-line: max-line-length
-                } else if (parseInt(this.menor) > 0) {
-                  // tslint:disable-next-line: max-line-length
-                  this.url = `{"user_id":${this.id},"filters":[{"attr":"scheduledAt","op":">=","value":"${this.hoy} 00:00:00"},{"attr":"scheduledAt","op":"<=","value":"${this.sigMeses} 23:59:59"}, {"attr":"ValorLead","op":"<=","value":"${this.menor}"}, {"attr":"Canal","op":"not in","value":["Reporte", "App"]}],"ordering":[{"attr":"scheduledAt","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
-                  return this.getLeads();
-                } else if (parseInt(this.mayor) > 0) {
-                  // tslint:disable-next-line: max-line-length
-                  this.url = `{"user_id":${this.id},"filters":[{"attr":"scheduledAt","op":">=","value":"${this.hoy} 00:00:00"},{"attr":"scheduledAt","op":"<=","value":"${this.sigMeses} 23:59:59"}, {"attr":"ValorLead","op":">=","value":${this.mayor}}, {"attr":"Canal","op":"not in","value":["Reporte", "App"]}],"ordering":[{"attr":"scheduledAt","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
-                  return this.getLeads();
-                } else {
-                  // tslint:disable-next-line: max-line-length
-                  this.url = `{"user_id":${this.id},"filters":[{"attr":"scheduledAt","op":">=","value":"${this.hoy} 00:00:00"},{"attr":"scheduledAt","op":"<=","value":"${this.sigMeses} 23:59:59"}, {"attr":"Canal","op":"not in","value":["Reporte", "App"]}],"ordering":[{"attr":"scheduledAt","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
-                  return this.getLeads();
                 }
-              } 
 
               case 'Externos':
-                  if (this.fechaInic && this.fechaFin) {
+                if (this.fechaInic && this.fechaFin) {
 
-                if (parseInt(this.mayor) > 0 && parseInt(this.menor) > 0) {
-                  if (parseInt(this.mayor) > parseInt(this.menor)) {
+                  if (parseInt(this.mayor) > 0 && parseInt(this.menor) > 0) {
+                    if (parseInt(this.mayor) > parseInt(this.menor)) {
+                      // tslint:disable-next-line: max-line-length
+                      this.url = `{"user_id":${this.id},"filters":[{"attr":"scheduledAt","op":">=","value":"${this.fechaInic} 00:00:00"},{"attr":"scheduledAt","op":"<=","value":"${this.fechaFin} 23:59:59"},{"attr":"ValorLead","op":">=","value":"${this.menor}"}, {"attr":"ValorLead","op":"<=","value":${this.mayor}}, {"attr":"Canal","op":"in","value":["Reporte", "App"]}],"ordering":[{"attr":"scheduledAt","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
+                      return this.getLeads();
+                    } else {
+                      // tslint:disable-next-line: max-line-length
+                      this.url = `{"user_id":${this.id},"filters":[{"attr":"scheduledAt","op":">=","value":"${this.fechaInic} 00:00:00"},{"attr":"scheduledAt","op":"<=","value":"${this.fechaFin} 23:59:59"},{"attr":"ValorLead","op":">=","value":${this.mayor}}, {"attr":"ValorLead","op":"<=","value":"${this.menor}"}, {"attr":"Canal","op":"in","value":["Reporte", "App"]}],"ordering":[{"attr":"scheduledAt","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
+                      return this.getLeads();
+                    }
                     // tslint:disable-next-line: max-line-length
-                    this.url = `{"user_id":${this.id},"filters":[{"attr":"scheduledAt","op":">=","value":"${this.fechaInic} 00:00:00"},{"attr":"scheduledAt","op":"<=","value":"${this.fechaFin} 23:59:59"},{"attr":"ValorLead","op":">=","value":"${this.menor}"}, {"attr":"ValorLead","op":"<=","value":${this.mayor}}, {"attr":"Canal","op":"in","value":["Reporte", "App"]}],"ordering":[{"attr":"scheduledAt","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
+                  } else if (parseInt(this.menor) > 0) {
+                    // tslint:disable-next-line: max-line-length
+                    this.url = `{"user_id":${this.id},"filters":[{"attr":"scheduledAt","op":">=","value":"${this.fechaInic} 00:00:00"},{"attr":"scheduledAt","op":"<=","value":"${this.fechaFin} 23:59:59"},{"attr":"ValorLead","op":"<=","value":"${this.menor}"}, {"attr":"Canal","op":"in","value":["Reporte", "App"]}],"ordering":[{"attr":"scheduledAt","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
+                    return this.getLeads();
+                  } else if (parseInt(this.mayor) > 0) {
+                    // tslint:disable-next-line: max-line-length
+                    this.url = `{"user_id":${this.id},"filters":[{"attr":"scheduledAt","op":">=","value":"${this.fechaInic} 00:00:00"},{"attr":"scheduledAt","op":"<=","value":"${this.fechaFin} 23:59:59"},{"attr":"ValorLead","op":">=","value":${this.mayor}}, {"attr":"Canal","op":"in","value":["Reporte", "App"]}],"ordering":[{"attr":"scheduledAt","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                     return this.getLeads();
                   } else {
                     // tslint:disable-next-line: max-line-length
-                    this.url = `{"user_id":${this.id},"filters":[{"attr":"scheduledAt","op":">=","value":"${this.fechaInic} 00:00:00"},{"attr":"scheduledAt","op":"<=","value":"${this.fechaFin} 23:59:59"},{"attr":"ValorLead","op":">=","value":${this.mayor}}, {"attr":"ValorLead","op":"<=","value":"${this.menor}"}, {"attr":"Canal","op":"in","value":["Reporte", "App"]}],"ordering":[{"attr":"scheduledAt","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
+                    this.url = `{"user_id":${this.id},"filters":[{"attr":"scheduledAt","op":">=","value":"${this.fechaInic} 00:00:00"},{"attr":"scheduledAt","op":"<=","value":"${this.fechaFin} 23:59:59"}, {"attr":"Canal","op":"in","value":["Reporte", "App"]}],"ordering":[{"attr":"scheduledAt","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                     return this.getLeads();
                   }
-                  // tslint:disable-next-line: max-line-length
-                } else if (parseInt(this.menor) > 0) {
-                  // tslint:disable-next-line: max-line-length
-                  this.url = `{"user_id":${this.id},"filters":[{"attr":"scheduledAt","op":">=","value":"${this.fechaInic} 00:00:00"},{"attr":"scheduledAt","op":"<=","value":"${this.fechaFin} 23:59:59"},{"attr":"ValorLead","op":"<=","value":"${this.menor}"}, {"attr":"Canal","op":"in","value":["Reporte", "App"]}],"ordering":[{"attr":"scheduledAt","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
-                  return this.getLeads();
-                } else if (parseInt(this.mayor) > 0) {
-                  // tslint:disable-next-line: max-line-length
-                  this.url = `{"user_id":${this.id},"filters":[{"attr":"scheduledAt","op":">=","value":"${this.fechaInic} 00:00:00"},{"attr":"scheduledAt","op":"<=","value":"${this.fechaFin} 23:59:59"},{"attr":"ValorLead","op":">=","value":${this.mayor}}, {"attr":"Canal","op":"in","value":["Reporte", "App"]}],"ordering":[{"attr":"scheduledAt","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
-                  return this.getLeads();
                 } else {
-                  // tslint:disable-next-line: max-line-length
-                  this.url = `{"user_id":${this.id},"filters":[{"attr":"scheduledAt","op":">=","value":"${this.fechaInic} 00:00:00"},{"attr":"scheduledAt","op":"<=","value":"${this.fechaFin} 23:59:59"}, {"attr":"Canal","op":"in","value":["Reporte", "App"]}],"ordering":[{"attr":"scheduledAt","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
-                  return this.getLeads();
-                }
-              } else {
-                if (parseInt(this.mayor) > 0 && parseInt(this.menor) > 0) {
-                  if (parseInt(this.mayor) > parseInt(this.menor)) {
+                  if (parseInt(this.mayor) > 0 && parseInt(this.menor) > 0) {
+                    if (parseInt(this.mayor) > parseInt(this.menor)) {
+                      // tslint:disable-next-line: max-line-length
+                      this.url = `{"user_id":${this.id},"filters":[{"attr":"scheduledAt","op":">=","value":"${this.hoy} 00:00:00"},{"attr":"scheduledAt","op":"<=","value":"${this.sigMeses} 23:59:59"},{"attr":"ValorLead","op":">=","value":"${this.menor}"}, {"attr":"ValorLead","op":"<=","value":${this.mayor}}, {"attr":"Canal","op":"in","value":["Reporte", "App"]}],"ordering":[{"attr":"scheduledAt","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
+                      return this.getLeads();
+                    } else {
+                      // tslint:disable-next-line: max-line-length
+                      this.url = `{"user_id":${this.id},"filters":[{"attr":"scheduledAt","op":">=","value":"${this.hoy} 00:00:00"},{"attr":"scheduledAt","op":"<=","value":"${this.sigMeses} 23:59:59"},{"attr":"ValorLead","op":">=","value":${this.mayor}}, {"attr":"ValorLead","op":"<=","value":"${this.menor}"}, {"attr":"Canal","op":"in","value":["Reporte", "App"]}],"ordering":[{"attr":"scheduledAt","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
+                      return this.getLeads();
+                    }
                     // tslint:disable-next-line: max-line-length
-                    this.url = `{"user_id":${this.id},"filters":[{"attr":"scheduledAt","op":">=","value":"${this.hoy} 00:00:00"},{"attr":"scheduledAt","op":"<=","value":"${this.sigMeses} 23:59:59"},{"attr":"ValorLead","op":">=","value":"${this.menor}"}, {"attr":"ValorLead","op":"<=","value":${this.mayor}}, {"attr":"Canal","op":"in","value":["Reporte", "App"]}],"ordering":[{"attr":"scheduledAt","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
+                  } else if (parseInt(this.menor) > 0) {
+                    // tslint:disable-next-line: max-line-length
+                    this.url = `{"user_id":${this.id},"filters":[{"attr":"scheduledAt","op":">=","value":"${this.hoy} 00:00:00"},{"attr":"scheduledAt","op":"<=","value":"${this.sigMeses} 23:59:59"},{"attr":"ValorLead","op":"<=","value":"${this.menor}"}, {"attr":"Canal","op":"in","value":["Reporte", "App"]}],"ordering":[{"attr":"scheduledAt","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
+                    return this.getLeads();
+                  } else if (parseInt(this.mayor) > 0) {
+                    // tslint:disable-next-line: max-line-length
+                    this.url = `{"user_id":${this.id},"filters":[{"attr":"scheduledAt","op":">=","value":"${this.hoy} 00:00:00"},{"attr":"scheduledAt","op":"<=","value":"${this.sigMeses} 23:59:59"},{"attr":"ValorLead","op":">=","value":${this.mayor}}, {"attr":"Canal","op":"in","value":["Reporte", "App"]}],"ordering":[{"attr":"scheduledAt","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                     return this.getLeads();
                   } else {
                     // tslint:disable-next-line: max-line-length
-                    this.url = `{"user_id":${this.id},"filters":[{"attr":"scheduledAt","op":">=","value":"${this.hoy} 00:00:00"},{"attr":"scheduledAt","op":"<=","value":"${this.sigMeses} 23:59:59"},{"attr":"ValorLead","op":">=","value":${this.mayor}}, {"attr":"ValorLead","op":"<=","value":"${this.menor}"}, {"attr":"Canal","op":"in","value":["Reporte", "App"]}],"ordering":[{"attr":"scheduledAt","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
+                    this.url = `{"user_id":${this.id},"filters":[{"attr":"scheduledAt","op":">=","value":"${this.hoy} 00:00:00"},{"attr":"scheduledAt","op":"<=","value":"${this.sigMeses} 23:59:59"}, {"attr":"Canal","op":"in","value":["Reporte", "App"]}],"ordering":[{"attr":"scheduledAt","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
                     return this.getLeads();
                   }
-                  // tslint:disable-next-line: max-line-length
-                } else if (parseInt(this.menor) > 0) {
-                  // tslint:disable-next-line: max-line-length
-                  this.url = `{"user_id":${this.id},"filters":[{"attr":"scheduledAt","op":">=","value":"${this.hoy} 00:00:00"},{"attr":"scheduledAt","op":"<=","value":"${this.sigMeses} 23:59:59"},{"attr":"ValorLead","op":"<=","value":"${this.menor}"}, {"attr":"Canal","op":"in","value":["Reporte", "App"]}],"ordering":[{"attr":"scheduledAt","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
-                  return this.getLeads();
-                } else if (parseInt(this.mayor) > 0) {
-                  // tslint:disable-next-line: max-line-length
-                  this.url = `{"user_id":${this.id},"filters":[{"attr":"scheduledAt","op":">=","value":"${this.hoy} 00:00:00"},{"attr":"scheduledAt","op":"<=","value":"${this.sigMeses} 23:59:59"},{"attr":"ValorLead","op":">=","value":${this.mayor}}, {"attr":"Canal","op":"in","value":["Reporte", "App"]}],"ordering":[{"attr":"scheduledAt","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
-                  return this.getLeads();
-                } else {
-                  // tslint:disable-next-line: max-line-length
-                  this.url = `{"user_id":${this.id},"filters":[{"attr":"scheduledAt","op":">=","value":"${this.hoy} 00:00:00"},{"attr":"scheduledAt","op":"<=","value":"${this.sigMeses} 23:59:59"}, {"attr":"Canal","op":"in","value":["Reporte", "App"]}],"ordering":[{"attr":"scheduledAt","asc":false}],"paging":{"from":${this.leads_pagination_min},"to":${this.leads_pagination_max}}}`;
-                  return this.getLeads();
                 }
-              }
               default:
             }
             return;
@@ -1559,7 +1569,7 @@ export class CrmPage implements OnInit {
         })
         .catch();
       //  console.log(leadsArray[k].url);
-      this.getUltimoComentario(leadsArray[k].clave)
+      this.getUltimoComentario(leadsArray[k].uuid)
         .then(comentario => {
           leadsArray[k].comentario = comentario;
         })
@@ -1942,31 +1952,31 @@ export class CrmPage implements OnInit {
   }
 
   public filterLeadsEstatus(leadsArray) {
-    this.leadsEstatus = leadsArray.filter(function(data) {
+    this.leadsEstatus = leadsArray.filter(function (data) {
       return data.clasificaLead == 'W';
     });
   }
 
   public filterLeadsDescartado(leadsArray) {
-    this.leadsDescartados = leadsArray.filter(function(data) {
+    this.leadsDescartados = leadsArray.filter(function (data) {
       return data.clasificaLead == 'D';
     });
   }
 
   public filterLeadsSeguimiento(leadsArray) {
-    this.leadsSeguimiento = leadsArray.filter(function(data) {
+    this.leadsSeguimiento = leadsArray.filter(function (data) {
       return data.clasificaLead == 'S';
     });
   }
 
   public filterLeadsNegociacion(leadsArray) {
-    this.leadsNegociacion = leadsArray.filter(function(data) {
+    this.leadsNegociacion = leadsArray.filter(function (data) {
       return data.clasificaLead == 'N';
     });
   }
 
   public filterLeadsVendido(leadsArray) {
-    this.leadsVendidos = leadsArray.filter(function(data) {
+    this.leadsVendidos = leadsArray.filter(function (data) {
       return data.clasificaLead == 'V';
     });
   }
@@ -1981,10 +1991,10 @@ export class CrmPage implements OnInit {
 
   public showFilters() {
     console.log(this.filtro,
-    this.dias,
-    this.tipo,
-    this.mayor,
-    this.menor);
+      this.dias,
+      this.tipo,
+      this.mayor,
+      this.menor);
   }
 
   public changeFilter(valor) {
@@ -1993,7 +2003,7 @@ export class CrmPage implements OnInit {
   }
 
   public advancedFilters() {
-    if(this.filtros == false) {
+    if (this.filtros == false) {
       this.filtros = true;
     } else {
       this.filtros = false;
@@ -2043,7 +2053,7 @@ export class CrmPage implements OnInit {
     const url = 'https://koomkin.com.mx/calltracker/calling/';
 
     return new Promise(resolve => {
-      this.http.post(url,body.toString(), options).subscribe(data => {
+      this.http.post(url, body.toString(), options).subscribe(data => {
         console.log(data);
         resolve(data);
       }, err => {
@@ -2070,36 +2080,36 @@ export class CrmPage implements OnInit {
 
   getUltimoComentario(clave) {
     return new Promise(resolve => {
-    this.provedor.getLastComment(clave).then(
-      data => {
-        let comentario = data;
-        this.comentario = comentario;
-        resolve(this.comentario);
-      },
-      err => {
-        // console.log('error');
-      }
-    )
+      this.provedor.getLastComment(clave).then(
+        data => {
+          let comentario = data;
+          this.comentario = comentario;
+          resolve(this.comentario);
+        },
+        err => {
+          // console.log('error');
+        }
+      )
     });
   }
 
   getScheduled(clave) {
     return new Promise(resolve => {
-    this.provedor.getScheduled(clave).then(
-      data => {
-        let scheduledAt = data;
-        if(scheduledAt[0]) {
-          this.scheduledAt = scheduledAt[0].scheduledAt;
-          console.log(this.scheduledAt);
-        } else {
-          this.scheduledAt = 'Sin agenda';
+      this.provedor.getScheduled(clave).then(
+        data => {
+          let scheduledAt = data;
+          if (scheduledAt[0]) {
+            this.scheduledAt = scheduledAt[0].scheduledAt;
+            console.log(this.scheduledAt);
+          } else {
+            this.scheduledAt = 'Sin agenda';
+          }
+          resolve(this.scheduledAt);
+        },
+        err => {
+          // console.log('error');
         }
-        resolve(this.scheduledAt);
-      },
-      err => {
-        // console.log('error');
-      }
-    )
+      )
     });
   }
 
@@ -2182,20 +2192,20 @@ export class CrmPage implements OnInit {
       const urlBanner = "https://www.koomkin.com.mx/api/app/clickBanner/" + this.id + '/App/' + this.tipoBanner;
       this.http.get(urlBanner).subscribe(
         data => {
-         // // console.log('registro',data);
+          // // console.log('registro',data);
           resolve();
         },
         err => {
-         // // console.log(err);
+          // // console.log(err);
           reject(err);
         }
       );
     });
   }
 
-  agregarHoras(time){
+  agregarHoras(time) {
     let date = new Date(time);
-    date.setTime(date.getTime() + (5*60*60*1000));
+    date.setTime(date.getTime() + (5 * 60 * 60 * 1000));
     return date.toISOString();
   }
 

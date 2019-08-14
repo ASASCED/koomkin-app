@@ -110,6 +110,7 @@ export class AgendaPage implements OnInit {
   public leadsVendidos: any = [];
   public id;
   public empresa;
+  public dia;
 
   constructor(
     public navCtrl: NavController,
@@ -128,6 +129,7 @@ export class AgendaPage implements OnInit {
 
   ngOnInit() {
     let f = new Date();
+    this.dia = f.getFullYear() + '-' + ('0' + (f.getMonth() + 1)).slice(-2) + '-' + ('0' + f.getDate()).slice(-2);
     this.manana = new Date();
     this.treintaDias = new Date();
     this.hoy = f.getFullYear() + '-' + ('0' + (f.getMonth() + 1)).slice(-2) + '-' + ('0' + f.getDate()).slice(-2);
@@ -146,8 +148,28 @@ export class AgendaPage implements OnInit {
     this.getLeads();
   }
 
+  public traeleads() {
+    this.hoy = new Date(this.fechaInic);
+    this.hoy.setDate(this.hoy.getDate() + 1);
+    this.hoy = this.hoy.getFullYear() + '-' + ('0' + (this.hoy.getMonth() + 1)).slice(-2) + '-' + ('0' + this.hoy.getDate()).slice(-2);
+    this.manana = new Date(this.fechaInic);
+    this.manana.setDate(this.manana.getDate() + 2);
+    // tslint:disable-next-line: max-line-length
+    this.manana = this.manana.getFullYear() + '-' + ('0' + (this.manana.getMonth() + 1)).slice(-2) + '-' + ('0' + this.manana.getDate()).slice(-2);
+    this.treintaDias = new Date(this.fechaInic);
+    this.treintaDias.setDate(this.treintaDias.getDate() + 31);
+    // tslint:disable-next-line: max-line-length
+    this.treintaDias = this.treintaDias.getFullYear() + '-' + ('0' + (this.treintaDias.getMonth() + 1)).slice(-2) + '-' + ('0' + this.treintaDias.getDate()).slice(-2);
+    this.getLeads();
+  }
+
 
   public getLeads() {
+    let loading = this.loadingCtrl.create({
+      content: 'Cargando Leads...'
+    });
+
+    loading.present();
     const cuerpo = `{"user_id":${this.id},"filters":[{"attr":"scheduledAt","op":">=","value":"${this.hoy} 00:00:00"},{"attr":"scheduledAt","op":"<=","value":"${this.treintaDias} 23:59:59"}],"ordering":[{"attr":"scheduledAt","asc":true}],"paging":{"from":1,"to":100}}`;
 
     const options = {
@@ -157,10 +179,10 @@ export class AgendaPage implements OnInit {
       )
     };
 
-    console.log(cuerpo);
+    // console.log(cuerpo);
     
-    // const url = 'https://www.koomkin.com.mx/api/leads/getByUser';
-    const url = 'http://192.168.0.119:5001/getByUser';
+    const url = 'https://www.koomkin.com.mx/api/leads/getByUser';
+   // const url = 'http://192.168.0.119:5001/getByUser';
 
     return new Promise((resolve, reject) => {
       this.http.post(url, cuerpo, options).subscribe(
@@ -212,9 +234,11 @@ export class AgendaPage implements OnInit {
           this.ultimoLead = this.listaLeads[0];
           this.leads = this.leads.concat(this.stylizeLeads(this.listaLeads));
           this.leadsfiltrados = this.leads;
+          loading.dismiss();
           return resolve(this.leadsfiltrados);
         },
         err => {
+          loading.dismiss();
           console.log(err);
           return reject(err);
         }
@@ -295,7 +319,7 @@ export class AgendaPage implements OnInit {
         })
         .catch();
       //  console.log(leadsArray[k].url);
-      this.getUltimoComentario(leadsArray[k].clave)
+      this.getUltimoComentario(leadsArray[k].uuid)
         .then(comentario => {
           leadsArray[k].comentario = comentario;
         })
