@@ -63,7 +63,10 @@
                                     src="assets/imgs/urgencia/{{leadActual.urgencia}}.svg"
                                     style="vertical-align: middle;width: 9% !important;display: inline-block;margin-left: 2%;" />
                                 <img *ngIf="leadActual.urgencia === 'Sí'" src="assets/imgs/urgencia/Si.svg"
-                                    style="vertical-align: middle;width: 9% !important;display: inline-block;margin-left: 2%;" />
+                                    style="vertical-align: middle;width: 9% !important;display: inline-block;margin-left: 2%;" />&nbsp;<img *ngIf="leadActual.Canal != 'Reporte' && leadActual.Canal != 'App'"
+                                    src="assets/imgs/leads/ic_koomkinlead.svg" style="vertical-align: middle;width: 8% !important;display: inline-block;margin-left: 2%;" />
+                                    <img *ngIf="leadActual.Canal == 'Reporte' || leadActual.Canal == 'App'"
+                                    src="assets/imgs/leads/ic_leadsExternos.svg" style="vertical-align: middle;width: 9% !important;display: inline-block;margin-left: 2%;" />
                             </ion-col>
                             <ion-col col-1 style="text-align: right;" *ngIf="leadActual.url !== 'sinaudio'">
                                 <img src="assets/imgs/leads/audio.svg"

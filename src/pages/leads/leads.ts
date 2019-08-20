@@ -109,7 +109,7 @@ export class LeadsPage implements OnInit {
       leadsArray[k].status = "exitosa";
       this.callMissed(leadsArray[k].uuid).then(status => {
         leadsArray[k].status = status;
-      });
+      }); 
 
       leadsArray[k].url = "sinaudio";
 
@@ -243,7 +243,7 @@ export class LeadsPage implements OnInit {
   verLead(lead) {
     let acceso = "App";
     this.navCtrl.push('LeadPage', lead);
-    this.getInsertClickLead(lead.clave, lead.ID, acceso);
+    this.getInsertClickLead(this.id, lead.clave, acceso);
   }
 
   agregarLead() {
@@ -251,7 +251,7 @@ export class LeadsPage implements OnInit {
   }
 
   public changeLeido(lead) {
-    const url = this.apiUrl + "/leerLead/" + lead.clave + "/" + lead.ID;
+    const url = this.apiUrl + "/leerLead/" + lead.clave + "/" + this.id;
     this.http.get(url).subscribe(
       data => {
         this.noleidos = data[0].NoLeidos;

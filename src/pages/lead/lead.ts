@@ -110,7 +110,7 @@ export class LeadPage implements OnInit {
   public personasinmobiliaria;
   public horaCitainmobiliaria;
   public fechaCitainmobiliaria;
-  
+
   //
   public fechaCita;
   public horaCita;
@@ -120,7 +120,7 @@ export class LeadPage implements OnInit {
   public unidades;
   public datosenvio;
   public clientUUID = this.authService.getClientUUID();
-  
+
   //Estatus llamadas
   llamadas: any = [];
   public llamada;
@@ -136,9 +136,9 @@ export class LeadPage implements OnInit {
   isAndroid: boolean = false;
   public tc: any;
   public loadingMessages: boolean;
-  public intentosExitoso:any = '-';
-  public attentionSpeed:any = '-';
-  public contacto:any = '-';
+  public intentosExitoso: any = '-';
+  public attentionSpeed: any = '-';
+  public contacto: any = '-';
   public razones;
   public razonDescarto;
   public garantia = 'No';
@@ -400,7 +400,7 @@ export class LeadPage implements OnInit {
   ) {
     var f = new Date();
     this.fecha = f.getDate() + '/' + (f.getMonth() + 1) + '/' + f.getFullYear();
-    let fecha2 = f.getFullYear() + '-' +  ('0' + (f.getMonth()+1)).slice(-2) + '-' + f.getDate();
+    let fecha2 = f.getFullYear() + '-' + ('0' + (f.getMonth() + 1)).slice(-2) + '-' + ('0' + f.getDate()).slice(-2) + ' ' + ('0' + f.getHours()).slice(-2) + ':' + ('0' + f.getMinutes()).slice(-2);
     this.garantia = 'No';
     this.contacto = 'No';
     this.intentosExitoso = '-';
@@ -411,7 +411,7 @@ export class LeadPage implements OnInit {
     if (this.leadActual.RazonDescartado != 'null' && this.leadActual.RazonDescartado != null && this.leadActual.RazonDescartado != undefined) {
       this.razonDescarto = this.leadActual.RazonDescartado;
     }
-    if(this.leadActual.MENSAJE) {
+    if (this.leadActual.MENSAJE) {
       this.mensajeLead = this.leadActual.MENSAJE;
     } else if (this.leadActual.MensajeCorreo) {
       this.mensajeLead = this.leadActual.MensajeCorreo;
@@ -420,35 +420,37 @@ export class LeadPage implements OnInit {
     this.intentosExitoso = this.leadActual.IntentosAntesExitoso;
 
     this.reagenda = this.leadActual.reagenda;
-    if(this.intentosExitoso == null || this.intentosExitoso == 'null' ) {
+    if (this.intentosExitoso == null || this.intentosExitoso == 'null') {
       this.intentosExitoso = '-';
     }
 
     this.fechaExitoso = this.leadActual.FechaExitoso;
 
-    if( this.fechaExitoso != null && this.fechaExitoso != 'null') {
-
+    if (this.fechaExitoso != null && this.fechaExitoso != 'null') {
+      this.fechaExitoso = new Date(this.fechaExitoso);
+      this.fechaExitoso.setHours(this.fechaExitoso.getHours() + 5);
+      // tslint:disable-next-line: max-line-length
+      this.fechaExitoso = this.fechaExitoso.getFullYear() + '-' + ('0' + (this.fechaExitoso.getMonth() + 1)).slice(-2) + '-' + ('0' + this.fechaExitoso.getDate()).slice(-2) + ' ' + ('0' + this.fechaExitoso.getHours()).slice(-2) + ':' + ('0' + this.fechaExitoso.getMinutes()).slice(-2);
       this.diasContacto = distanceinWordsStrict(
-        new Date(this.fechaExitoso.substring(0,10)),
+        new Date(this.fechaExitoso),
         new Date(fecha2),
         { locale: esLocale, addSuffix: false }
       );
-
     }
 
-    if(this.leadActual.comentario.length > 0) {
-      if(this.leadActual.comentario[0].IdComentario) {
+    if (this.leadActual.comentario.length > 0) {
+      if (this.leadActual.comentario[0].IdComentario) {
         this.show = true;
         this.comentario = this.leadActual.comentario[0].Comentario;
         this.fechaComentario = moment(this.leadActual.comentario[0].FechaRegistro);
         this.idComentario = this.leadActual.comentario[0].IdComentario;
-        if(this.leadActual.comentario[0].ClasificaLead !== 'null' && this.leadActual.comentario[0].ClasificaLead !== null ) {
+        if (this.leadActual.comentario[0].ClasificaLead !== 'null' && this.leadActual.comentario[0].ClasificaLead !== null) {
           this.clasificaComentario = this.leadActual.comentario[0].ClasificaLead;
         }
-      } 
+      }
     }
 
-    if (this.leadActual.fechaContacto && this.leadActual.fechaContacto !== 'null' ) {
+    if (this.leadActual.fechaContacto && this.leadActual.fechaContacto !== 'null') {
       this.leadActual.fechaContacto = this.leadActual.fechaContacto
         .substring(0, 16)
         .replace(/^(\d{4})-(\d{2})-(\d{2})T(\d{5})$/g, '$3/$2/$1$4');
@@ -476,15 +478,21 @@ export class LeadPage implements OnInit {
         this.contacto = 'No';
       }
 
+
       this.fechaExitoso = this.leadActual.FechaExitoso;
 
       if (this.fechaExitoso != null && this.fechaExitoso != 'null') {
+        this.fechaExitoso = new Date(this.fechaExitoso);
+        this.fechaExitoso.setHours(this.fechaExitoso.getHours() + 5);
+        // tslint:disable-next-line: max-line-length
+        this.fechaExitoso = this.fechaExitoso.getFullYear() + '-' + ('0' + (this.fechaExitoso.getMonth() + 1)).slice(-2) + '-' + ('0' + this.fechaExitoso.getDate()).slice(-2) + ' ' + ('0' + this.fechaExitoso.getHours()).slice(-2) + ':' + ('0' + this.fechaExitoso.getMinutes()).slice(-2);
         this.diasContacto = distanceinWordsStrict(
-          new Date(this.fechaExitoso.substring(0, 10)),
+          new Date(this.fechaExitoso),
           new Date(fecha2),
           { locale: esLocale, addSuffix: false }
         );
       }
+
     } else {
       this.attentionSpeed = '-';
       this.garantia = 'No';
@@ -642,7 +650,7 @@ export class LeadPage implements OnInit {
           }
 
           this.llamadas[k].horallamada = this.llamadas[k].FechaLlamada
-          if(this.llamadas[k].horallamada != 'null' && this.llamadas[k].horallamada != null){
+          if (this.llamadas[k].horallamada != 'null' && this.llamadas[k].horallamada != null) {
             this.llamadas[k].horallamada = this.llamadas[k].FechaLlamada.substring(11, 16);
             this.llamadas[k].FechaLlamada = this.llamadas[k].FechaLlamada.substring(0, 10).replace(/^(\d{4})-(\d{2})-(\d{2})$/g, '$3/$2/$1');
           }
@@ -841,7 +849,7 @@ export class LeadPage implements OnInit {
                     }
                     this.generoM = data[0].Gender;
                     if (this.generoM == "null" || this.generoM == null || this.generoM == undefined || this.generoM == "None") {
-                      this.generoM = "0" +  "";
+                      this.generoM = "0" + "";
                     }
 
                     if (data[0].Date) {
@@ -1166,9 +1174,9 @@ export class LeadPage implements OnInit {
       .subscribe(data => {
         this.calificacion = data[0].calificaLead;
       },
-      err => {
+        err => {
           // console.log("Error occured");
-      });
+        });
   }
 
   public changeLikeChat(classification: string, lead) {
@@ -1200,9 +1208,9 @@ export class LeadPage implements OnInit {
       .subscribe(data => {
         this.calificacion = data[0].calificaLead;
       },
-      err => {
+        err => {
           // console.log("Error occured");
-      });
+        });
   }
 
   public changeLikeToggle() {
@@ -1382,10 +1390,10 @@ export class LeadPage implements OnInit {
     });
   }
 
-  openModal(tipo,clasificaLead,idComentario,comentario) {
+  openModal(tipo, clasificaLead, idComentario, comentario) {
     const myModal = this.modal.create(
       "ModalComentariosPage",
-      { tipo: tipo, leadActual: this.leadActual, clasificaLead: clasificaLead, idComentario: idComentario, comentario: comentario},
+      { tipo: tipo, leadActual: this.leadActual, clasificaLead: clasificaLead, idComentario: idComentario, comentario: comentario },
       { enableBackdropDismiss: false, cssClass: "Modal-comentario" }
     );
     myModal.present();
