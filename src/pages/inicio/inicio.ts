@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IonicPage, MenuController, NavController, NavParams } from "ionic-angular";
+import { IonicPage, MenuController, NavController, NavParams, ModalController } from "ionic-angular";
 import { HttpClient } from '@angular/common/http';
 import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
 import { ToastController } from 'ionic-angular';
@@ -41,6 +41,7 @@ export class InicioPage implements OnInit {
   public recurrente;
 
   constructor(
+    private modal: ModalController,
     public navCtrl: NavController,
     public navParams: NavParams,
     private menuCtrl: MenuController,
@@ -55,6 +56,7 @@ export class InicioPage implements OnInit {
 
   ngOnInit() {
     this.showBanner();
+    this.openModal();
   }
 
   pagina(pagina: any) {
@@ -139,5 +141,14 @@ export class InicioPage implements OnInit {
       dismissOnPageChange: true
     });
     toast.present();
+  }
+
+  openModal() {
+    const myModal = this.modal.create(
+      "ModalUpgradePage",
+      { enableBackdropDismiss: true, cssClass: "Modal-comentario" }
+    );
+    myModal.present();
+    myModal.onDidDismiss(() => { });
   }
 }

@@ -376,7 +376,6 @@ export class BriefPage implements OnInit, AfterContentChecked {
 
     const url = 'https://www.koomkin.com.mx/api/app/updateBriefInformation2/';
 
-    console.log(body.toString());
     return new Promise((resolve, reject) => {
       this.http.post(url, body.toString(), options).subscribe(
         data => {
