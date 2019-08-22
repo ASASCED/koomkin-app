@@ -70,8 +70,6 @@ export class InicioPage implements OnInit {
       let datos;
       this.http.get(urlBanner).subscribe(
         data => {
-          console.log(data);
-
           if (data == null) {
             this.mostrar = 0;
             this.tipoBanner = 0;
