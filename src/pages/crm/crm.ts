@@ -35,18 +35,7 @@ export class CrmPage implements OnInit {
   public llamada;
   public status;
   public datosenvio;
-  public title;
-  public subtitle;
-  public img;
-  public idReportBanner;
   public scheduledAt: any;
-  public uuidPass;
-  public mostrar;
-  public notification;
-  public tipoBanner;
-  public fondo;
-  public description;
-  public habilitado;
   public fechaInic;
   public fechaFin;
   public hoy;
@@ -156,7 +145,6 @@ export class CrmPage implements OnInit {
 
     this.fechaFin = this.hoy;
 
-    this.showBanner();
     this.getInsertClickPagina();
   }
 
@@ -180,7 +168,6 @@ export class CrmPage implements OnInit {
       )
     };
 
-    console.log(cuerpo);
     const url = 'https://www.koomkin.com.mx/api/leads/getByUser';
     // const url = 'http://192.168.0.119:5001/getByUser';
 
@@ -2143,70 +2130,6 @@ export class CrmPage implements OnInit {
 
   scrollToTop() {
     this.content.scrollToTop();
-  }
-
-  public getBanner() {
-    return new Promise((resolve, reject) => {
-      const urlBanner = "https://www.koomkin.com.mx/api/app/getBanner/" + this.id;
-      let datos;
-      this.http.get(urlBanner).subscribe(
-        data => {
-          if (data == null) {
-            this.mostrar = 0;
-          } else if (data[0]) {
-            datos = data;
-            this.title = datos[0].titulo;
-            this.subtitle = datos[0].subtitulo;
-            this.fondo = datos[0].fondo;
-            this.tipoBanner = datos[0].tipoBanner;
-            this.img = datos[0].descripcionBanner;
-            this.idReportBanner = datos[0].idReporteBanner;
-            this.uuidPass = datos[0].uuidPase;
-            this.description = datos[0].descripcionBanner;
-            this.habilitado = datos[0].habilitado;
-            this.notification = JSON.parse(datos[0].dataPage);
-            // console.log(this.description);
-            resolve();
-          }
-        },
-        err => {
-          // console.log(err);
-          reject(err);
-        }
-      );
-    });
-  }
-
-  public showBanner() {
-    this.getBanner()
-      .then(() => {
-        this.mostrar = 1;
-      })
-      .catch(err => {
-        // console.log(err);
-      });
-  }
-
-  public clickBanner() {
-    return new Promise((resolve, reject) => {
-      const urlBanner = "https://www.koomkin.com.mx/api/app/clickBanner/" + this.id + '/App/' + this.tipoBanner;
-      this.http.get(urlBanner).subscribe(
-        data => {
-          // // console.log('registro',data);
-          resolve();
-        },
-        err => {
-          // // console.log(err);
-          reject(err);
-        }
-      );
-    });
-  }
-
-  agregarHoras(time) {
-    let date = new Date(time);
-    date.setTime(date.getTime() + (5 * 60 * 60 * 1000));
-    return date.toISOString();
   }
 
   onTabChanged(tabName) {

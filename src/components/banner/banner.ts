@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from "@angular/core";
 import { NavController, NavParams, Platform, LoadingController } from 'ionic-angular';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Market } from '@ionic-native/market';
 import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
 
@@ -9,6 +8,7 @@ import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
   templateUrl: "banner.html"
 })
 export class BannerComponent implements OnInit {
+
   @Input() title: string;
   @Input() subtitle: string;
   @Input() img: string;
@@ -41,6 +41,7 @@ export class BannerComponent implements OnInit {
     this.idReporteBanner = this.idReportBanner;
     this.uuidPase = this.uuidPass;
     this.tipo = this.tipoBanner;
+    console.log(this.tipo, this.description);
   }
 
   mostrar_modal() {
@@ -49,6 +50,10 @@ export class BannerComponent implements OnInit {
 
   mostrar_encuesta() {
     this.navCtrl.setRoot('ModalSurveyPage', { notificacion: this.notificacion, idReporteBanner: this.idReporteBanner,tipo: this.tipo, uuidPase:this.uuidPase });
+  }
+
+  mostrar_comunicado() {
+    this.navCtrl.setRoot('ModalReleasePage', { notificacion: this.notificacion, idReporteBanner: this.idReporteBanner,tipo: this.tipo, uuidPase:this.uuidPase });
   }
 
   goStore(){

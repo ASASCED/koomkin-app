@@ -24,7 +24,7 @@ export class ModalUpgradePage {
 
   public idRecurrente;
   public uuidRecurrente;
-  public selectedAmount = 500;
+  public selectedAmount = 250;
   public recurrente;
   public id;
   public notificacion;
@@ -57,7 +57,6 @@ export class ModalUpgradePage {
   closeModal() {
     this.viewCtrl.dismiss();
   }
-
 
   public btnUpgradeMembership() {
 

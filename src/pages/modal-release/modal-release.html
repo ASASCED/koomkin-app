@@ -1,0 +1,14 @@
+<ion-header>
+    <ion-navbar color="azul">
+        <ion-buttons *ngIf="tipoBanner == 14">
+            <button class="regre" (click)="irInicio()">
+                <ion-icon class="regre" name="ios-arrow-back" style="font-size: 1.8em;"></ion-icon>
+                Regresar
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+<ion-content>
+  <img src="https://firebasestorage.googleapis.com/v0/b/chatcintanegra.appspot.com/o/CRM_app2.svg?alt=media&token=64a80adb-af9e-49f8-9f6e-12175e13cb9e" width="100%">
+  <button class="renovacion-positivo" (click)="registrarInteres(1);goStore()">Actualizar</button>
+</ion-content>
