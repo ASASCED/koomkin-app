@@ -2,51 +2,57 @@
   <ion-grid>
     <ion-row>
       <ion-col col-12>
-        <img src="assets/imgs/upgrade/2x1.svg" width="100%" />
+        <img *ngIf="tipo == 16" src="assets/imgs/upgrade/2x1.svg" width="100%" />
+        <img *ngIf="tipo == 17" src="assets/imgs/upgrade/upgrade.svg" width="100%" />
       </ion-col>
     </ion-row>
     <ion-row>
-        <ion-col col-1>
-          </ion-col>
+      <ion-col col-1>
+      </ion-col>
       <ion-col col-10>
         <div class="cuadro">
-          ¡Te regalamos<br> <span class="naranja">$250</span> pesos!
+          ¡Te regalamos<br> <span class="naranja">${{selectedAmount}}</span> pesos!
         </div>
       </ion-col>
       <ion-col col-1>
-        </ion-col>
+      </ion-col>
     </ion-row>
     <ion-row>
-        <ion-col col-1>
-          </ion-col>
+      <ion-col col-1>
+      </ion-col>
       <ion-col col-10>
-        <div class="promocion">
-          ¡Invierte <span class="naranja">$250</span> pesos y te regalamos <b>la misma cantidad!</b>
+        <div class="promocion" *ngIf="tipo == 16">
+          ¡Invierte <span class="naranja">${{selectedAmount}}</span> pesos y te regalamos <b>la misma cantidad!</b>
+        </div>
+        <div class="promocion" *ngIf="tipo == 17">
+          ¡Te regalamos los primeros<span class="naranja">${{selectedAmount}}</span> pesos si <b>incrementas tu
+            membresía!</b>
         </div>
       </ion-col>
       <ion-col col-1>
-        </ion-col>
+      </ion-col>
     </ion-row>
     <ion-row>
       <ion-col col-1>
       </ion-col>
       <ion-col col-10>
-        <img src="assets/imgs/upgrade/aumenta.svg" width="100%" />
+        <img src="assets/imgs/upgrade/{{banner}}.svg" width="100%" /> 
       </ion-col>
       <ion-col col-1>
       </ion-col>
     </ion-row>
     <ion-row>
-        <ion-col col-1>
-          </ion-col>
-      <ion-col col-5>
-        <button ion-button class="btn-cancelar-comentario" (click)="closeModal()">Más tarde</button>
+      <ion-col col-1>
       </ion-col>
       <ion-col col-5>
-        <button ion-button class="btn-guardar-comentario" (click)="closeModal();">Aceptar</button>
+        <button ion-button class="btn-cancelar-comentario" (click)="closeModal();registrarInteres(0);">Más
+          tarde</button>
+      </ion-col>
+      <ion-col col-5>
+        <button ion-button class="btn-guardar-comentario" (click)="closeModal();registrarInteres(0);">Aceptar</button>
       </ion-col>
       <ion-col col-1>
-        </ion-col>
+      </ion-col>
       <ion-col col-2>
       </ion-col>
     </ion-row>

@@ -31,6 +31,10 @@ export class ModalUpgradePage {
   public idReporteBanner;
   public uuidPase;
   public tipo;
+  public banner1 = ["meme1", "grafica"];
+  public banner2 = ["meme2", "flecha"];
+  public upgrade = ["upgrade", "upgrade2"];
+  public banner;
 
   constructor(
     public navCtrl: NavController,
@@ -52,6 +56,14 @@ export class ModalUpgradePage {
     this.idReporteBanner = this.idReportBanner;
     this.uuidPase = this.uuidPass;
     this.tipo = this.tipoBanner;
+    this.tipo = 16;
+    if(this.tipo == 16) {
+      this.getRandomImage(this.banner1);
+      this.selectedAmount = 250;
+    } else if(this.tipo == 17) {
+      this.getRandomImage(this.banner2);
+      this.selectedAmount = 350;
+    }
   }
 
   closeModal() {
@@ -82,7 +94,6 @@ export class ModalUpgradePage {
     this.provedor.getUpdateMembership(this.idRecurrente, this.uuidRecurrente, this.selectedAmount)
       .then(
         (data) => {
-          console.log(data);
           let upsell_id = data[0].ID;
           this.immediateUpsell(upsell_id);
         },
@@ -113,8 +124,6 @@ export class ModalUpgradePage {
       const url = 'https://www.koomkin.com.mx/api/openPay/immediateUpsell';
       this.http.post(url, cuerpo, options).subscribe(
         data => {
-          console.log(data);
-          console.log(data['result']);
           if (data['result'] == 'OK') {
             loading.dismiss();
             this.showSuccessUpgrade();
@@ -186,5 +195,10 @@ export class ModalUpgradePage {
       confirmButtonText: 'OK',
       reverseButtons: true
     });
+  }
+
+  public getRandomImage(imgAr) {
+    let num = Math.floor(Math.random() * imgAr.length);
+    this.banner = imgAr[num];
   }
 }

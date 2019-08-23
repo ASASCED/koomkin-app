@@ -55,8 +55,7 @@ export class InicioPage implements OnInit {
   }
 
   ngOnInit() {
-    this.showBanner();
-    this.openModal();
+    this.showBanner()
   }
 
   pagina(pagina: any) {
@@ -81,6 +80,9 @@ export class InicioPage implements OnInit {
               this.subtitle = datos[0].subtitulo;
               this.fondo = datos[0].fondo;
               this.tipoBanner = datos[0].tipoBanner;
+              if(this.tipoBanner == 16 || this.tipoBanner == 17){
+                this.openModal();
+              }
               this.img = datos[0].descripcionBanner;
               this.idReportBanner = datos[0].idReporteBanner;
               this.uuidPass = datos[0].uuidPase;
