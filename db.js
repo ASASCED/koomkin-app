@@ -650,7 +650,7 @@ const requestStr = `select * from EficienciaRanking`;
     });
 };
 
-db.executeInteresBanner = function (interes,idReporteBanner,uuidPase) {
+db.executeInteresBanner = function (interes,idReporteBanner) {
 
     var requestStr = '';
 
@@ -659,8 +659,6 @@ db.executeInteresBanner = function (interes,idReporteBanner,uuidPase) {
     } else if(interes==='0') {
         requestStr = `UPDATE dbo.Tbl_ReporteBanner SET interesado = 0, fechaClickInteresBanner = GETDATE() WHERE idReporteBanner = '${idReporteBanner}' and interesado IS NULL;`;
     }
-
-    console.log(requestStr);
 
     return new Promise((resolve, reject) => {
         tp.sql(requestStr)
@@ -676,7 +674,7 @@ db.executeInteresBanner = function (interes,idReporteBanner,uuidPase) {
 };
 
 
-db.executeInteresBannerReporte = function (interes,idReporteBanner,uuidPase) {
+db.executeInteresBannerReporte = function (interes,idReporteBanner) {
 
     var requestStr = '';
 
@@ -685,8 +683,6 @@ db.executeInteresBannerReporte = function (interes,idReporteBanner,uuidPase) {
     } else if(interes==='0') {
         requestStr = `UPDATE dbo.Tbl_ReporteBanner SET interesado = 0, fechaClickInteresBanner = GETDATE() WHERE idReporteBanner = '${idReporteBanner}' and interesado IS NULL;`;
     }
-
-    console.log(requestStr);
 
     return new Promise((resolve, reject) => {
         tp.sql(requestStr)
@@ -1238,7 +1234,7 @@ db.executeGetByClave = function (command, clave) {
               .execute()
   };
 
-//getDataComplement
+//executeGetLeadsAgregados
 db.executeGetLeadsAgregados = function (idUsuario) {
 
     const requestStr = `SELECT COUNT(Canal) as LeadsAgregados FROM TACotizacion WHERE IdUsuarioRecibio = ${idUsuario} and Canal = 'Reporte' or Canal = 'App';`;
@@ -1257,6 +1253,68 @@ db.executeGetLeadsAgregados = function (idUsuario) {
             });
     });
 };
+
+//executeRegistrarLeadAgregado
+db.executeRegistrarLeadAgregado = function (idUsuario, lead_uuid, tipo, acceso, pagina) {
+
+    const requestStr = `insert into ClickAgregarLead (IdUsuario, UuidLead, FechaRegistro, TipoRegistro, Canal, Pagina) values (${idUsuario}, '${lead_uuid}', GETDATE(), '${tipo}', '${acceso}', '${pagina}');`;
+
+    console.log(requestStr);
+    
+    return new Promise((resolve, reject) => {
+        tp.sql(requestStr)
+            .execute()
+            .then(results => {
+                resolve(results);
+            })
+            .catch(err => {
+                console.log(err);
+                reject(err);
+            });
+    });
+};
+
+//executeRegistrarLeadAgregado
+db.executeRegistrarProducto = function (idUsuario, producto, acceso) {
+
+    const requestStr = `insert into ProductoPrincipal (IdUsuario, Producto, FechaRegistro, Canal) values (${idUsuario}, '${producto}', GETDATE(), '${acceso}');`;
+
+    console.log(requestStr);
+    
+    return new Promise((resolve, reject) => {
+        tp.sql(requestStr)
+            .execute()
+            .then(results => {
+                resolve(results);
+            })
+            .catch(err => {
+                console.log(err);
+                reject(err);
+            });
+    });
+};
+
+
+//executeRegistrarLeadAgregado
+db.executeRegistrarAgenda = function (idUsuario, lead_uuid, acceso, pagina, clasificaLead) {
+
+    const requestStr = `insert into ClickAgendar (IdUsuario, UuidLead, FechaRegistro, Canal, Pagina, ClasificaLead) values (${idUsuario}, '${lead_uuid}', GETDATE(), '${acceso}', '${pagina}', '${clasificaLead}' );`;
+
+    console.log(requestStr);
+    
+    return new Promise((resolve, reject) => {
+        tp.sql(requestStr)
+            .execute()
+            .then(results => {
+                resolve(results);
+            })
+            .catch(err => {
+                console.log(err);
+                reject(err);
+            });
+    });
+};
+
 
 db.updateBriefDatos = function (idUsuario, nombre, aPaterno, aMaterno, fechaNac, idPuesto, cpDomicilio, aniosEmpresa, educacion) {
 

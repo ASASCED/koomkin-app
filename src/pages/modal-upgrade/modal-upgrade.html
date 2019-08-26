@@ -10,7 +10,7 @@
       <ion-col col-1>
       </ion-col>
       <ion-col col-10>
-        <div class="cuadro">
+        <div class="cuadro-membresia">
           ¡Te regalamos<br> <span class="naranja">${{selectedAmount}}</span> pesos!
         </div>
       </ion-col>
@@ -25,8 +25,7 @@
           ¡Invierte <span class="naranja">${{selectedAmount}}</span> pesos y te regalamos <b>la misma cantidad!</b>
         </div>
         <div class="promocion" *ngIf="tipo == 17">
-          ¡Te regalamos los primeros<span class="naranja">${{selectedAmount}}</span> pesos si <b>incrementas tu
-            membresía!</b>
+          ¡Te regalamos los primeros <span class="naranja">${{selectedAmount}}</span> pesos si <b>incrementas tu membresía!</b>
         </div>
       </ion-col>
       <ion-col col-1>
@@ -36,7 +35,7 @@
       <ion-col col-1>
       </ion-col>
       <ion-col col-10>
-        <img src="assets/imgs/upgrade/{{banner}}.svg" width="100%" /> 
+        <img [ngClass]="{ flecha: banner == 'flecha', otro: banner !== 'flecha' }" src="assets/imgs/upgrade/{{banner}}.svg"/> 
       </ion-col>
       <ion-col col-1>
       </ion-col>
@@ -48,7 +47,7 @@
         <button ion-button class="btn-cancelar-comentario" (click)="closeModal();registrarInteres(0);">Después</button>
       </ion-col>
       <ion-col col-5>
-        <button ion-button class="btn-guardar-comentario" (click)="closeModal();registrarInteres(0);">Aceptar</button>
+        <button ion-button class="btn-guardar-comentario" (click)="btnUpgradeMembership();registrarInteres(0);">Aceptar</button>
       </ion-col>
       <ion-col col-1>
       </ion-col>

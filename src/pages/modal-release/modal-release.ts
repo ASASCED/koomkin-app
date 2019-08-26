@@ -72,7 +72,7 @@ export class ModalReleasePage {
   public registrarInteres(interes: number) {
     return new Promise((resolve, reject) => {
       const urlBanner =
-        "https://www.koomkin.com.mx/api/app/registrarInteresBanner/" + interes + "/" + this.idReporteBanner + "/" + this.uuidPase;
+        "https://www.koomkin.com.mx/api/app/registrarInteresBanner/" + interes + "/" + this.idReporteBanner;
       this.http.get(urlBanner).subscribe(
         data => {
           resolve();

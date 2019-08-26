@@ -73,30 +73,30 @@ app.get('/getUrlAudio/:id', function (req, res) {
 });
 
 app.get('/getRecurrementPayment/:id', function (req, res) {
-    
+
     const id = req.params.id;
 
     db.executePostRecurringPayment(id)
-         .then(rows => {
+        .then(rows => {
             res.json(rows).status(200).send();
         })
         .catch(err => {
             res.status(500).json({ error: err }).send();
         });
-    });
+});
 
 app.get('/getInfoPago/:uuid', function (req, res) {
-    
+
     const uuid = req.params.uuid;
 
     db.executeGetInfoPago(uuid)
-         .then(rows => {
+        .then(rows => {
             res.json(rows).status(200).send();
         })
         .catch(err => {
             res.status(500).json({ error: err }).send();
         });
-    });
+});
 
 app.get('/getLeadCalls/:id', function (req, res) {
 
@@ -170,9 +170,9 @@ app.get('/getTicket/:id/:fecha/:descripcion', function (req, res) {
     const descripcion = req.params.descripcion;
     const correoExterno = 0;
     const command = 'spI_hp_CrearTicket_Bis';
-    
 
-    db.executeGenerateTicket(command,id,agente,fecha,canal,satisfaccion,descripcion,correoExterno)
+
+    db.executeGenerateTicket(command, id, agente, fecha, canal, satisfaccion, descripcion, correoExterno)
         .then(rows => {
             res.json(rows).status(200).send();
         })
@@ -191,10 +191,10 @@ app.get('/datosFiscales', function (req, res) {
             res.json(rows);
             res.status(200);
         }, (err) => {
-            res.status(500).json({error: err}).send();
+            res.status(500).json({ error: err }).send();
         })
         .catch(err => {
-            res.status(500).json({error: err}).send();
+            res.status(500).json({ error: err }).send();
         });
 });
 
@@ -208,18 +208,18 @@ app.get('/datosPagos', function (req, res) {
             res.json(rows);
             res.status(200);
         }, (err) => {
-            res.status(500).json({error: err}).send();
+            res.status(500).json({ error: err }).send();
         })
         .catch(err => {
-            res.status(500).json({error: err}).send();
+            res.status(500).json({ error: err }).send();
         });
 });
 
 app.get('/getObtieneContactoCte/:id', function (req, res) {
-    
+
     const id = parseInt(req.params.id, 10);
     const command = 'SP_ObtieneContactoSexCte';
-    
+
     db.executeGetById(id, command, function (err, rows) {
         if (err) {
             res.status(500).json({ error: err }).send();
@@ -230,7 +230,7 @@ app.get('/getObtieneContactoCte/:id', function (req, res) {
 });
 
 app.get('/getLead30Dias/:id', function (req, res) {
-    
+
     const id = parseInt(req.params.id, 10);
     const command = 'SP_GetLead30Dias';
 
@@ -244,7 +244,7 @@ app.get('/getLead30Dias/:id', function (req, res) {
 });
 
 app.get('/getLike90Dias/:id', function (req, res) {
-    
+
     const id = parseInt(req.params.id, 10);
     const command = 'SP_GetLike90Dias';
 
@@ -258,7 +258,7 @@ app.get('/getLike90Dias/:id', function (req, res) {
 });
 
 app.get('/getLead12Meses/:id', function (req, res) {
-    
+
     const id = parseInt(req.params.id, 10);
     const command = 'SP_GetLead12Meses';
 
@@ -272,10 +272,10 @@ app.get('/getLead12Meses/:id', function (req, res) {
 });
 
 app.get('/getLeadLastMonth/:id', function (req, res) {
-    
+
     const id = parseInt(req.params.id, 10);
     const command = 'SP_GetLeadLastMonth';
-    
+
     db.executeGetById(id, command, function (err, rows) {
         if (err) {
             res.status(500).json({ error: err }).send();
@@ -300,7 +300,7 @@ app.get('/getLike30Dias/:id', function (req, res) {
 });
 
 app.get('/getLeadsMapa/:id', function (req, res) {
-    
+
     const id = parseInt(req.params.id, 10);
     const command = 'SP_GetLeadsMapa';
 
@@ -314,7 +314,7 @@ app.get('/getLeadsMapa/:id', function (req, res) {
 });
 
 app.get('/getLeadCountMonth/:id', function (req, res) {
-    
+
     const id = parseInt(req.params.id, 10);
     const command = 'SP_GetLeadCountMonth';
 
@@ -342,10 +342,10 @@ app.get('/getCostoCampania/:id', function (req, res) {
 });
 
 app.get('/getLeadById/:id', function (req, res) {
-    
+
     const id = parseInt(req.params.id, 10);
     const command = 'SP_GetLeadById';
-    
+
     db.executeGetById(id, command, function (err, rows) {
         if (err) {
             res.status(500).json({ error: err }).send();
@@ -357,7 +357,7 @@ app.get('/getLeadById/:id', function (req, res) {
 
 
 app.get('/getObtieneContactoSexCte/:id', function (req, res) {
-    
+
     const id = parseInt(req.params.id, 10);
     const command = 'SP_ObtieneContactoSexCte';
 
@@ -371,10 +371,10 @@ app.get('/getObtieneContactoSexCte/:id', function (req, res) {
 });
 
 app.get('/getReporteWeb', function (req, res) {
-    
+
     const id = parseInt(req.query.param1, 10);
     const command = 'SP_GetReporteWeb';
-    
+
     db.executeGetById(id, command, function (err, rows) {
         if (err) {
             res.status(500).json({ error: err }).send();
@@ -385,7 +385,7 @@ app.get('/getReporteWeb', function (req, res) {
 });
 
 app.get('/getUserById/:id', function (req, res) {
-    
+
     const id = parseInt(req.params.id, 10);
     const command = 'SP_GetUsuarioById';
 
@@ -399,7 +399,7 @@ app.get('/getUserById/:id', function (req, res) {
 });
 
 app.get('/getUserByEmail/:email', function (req, res) {
-    
+
     const email = "'" + req.params.email + "'";
     const command = 'SP_GetUsuarioByEmail';
     dogstatsd.increment('login.reporte')
@@ -418,12 +418,12 @@ app.get('/getLeadsAgregados/:id', function (req, res) {
     const id = parseInt(req.params.id, 10);
 
     db.executeGetLeadsAgregados(id)
-    .then(rows => {
-        res.json(rows).status(200)
-    })
-    .catch(err => {
-        res.status(500).json({ error: err }).send();
-    });
+        .then(rows => {
+            res.json(rows).status(200)
+        })
+        .catch(err => {
+            res.status(500).json({ error: err }).send();
+        });
 });
 
 app.get('/getLeadsReport/:id/:finicio/:ffin/:filtro', function (req, res) {
@@ -586,55 +586,55 @@ app.get('/leerLead/:leadId/:userId', function (req, res) {
 });
 
 app.get('/getIntentoSesion/:email/:password', function (req, res) {
-    
+
     const email = req.params.email;
     const password = req.params.password;
-    console.log(email,password);
+    console.log(email, password);
 
     db.searchDemoUsers(email)
-      .then(data=>{
-        if(data['length']>0){
-          fb.getBriefByEmail(email).then(querySnapshot => {
-            querySnapshot.forEach(doc => {
-              const fireBaseId = doc.data()['id'];
-              if(fireBaseId){
-                const supposedPassword = 'Koomkin'+data[0]['DemoUserID'];
-                var logIn;
-                console.log(password);
-                console.log(supposedPassword)
-                if(password.startsWith(supposedPassword)){
-                  logIn = true;
-                  fb.updateBriefById(fireBaseId,logIn)
-                    .then((data)=>{
-                      console.log(data);
-                    })
-                    .catch((reason)=>{console.log(reason)});
-                }
-              }
-            }).catch(reason => {console.log(reason)});
-          }).catch(reason => {console.log(reason)});
+        .then(data => {
+            if (data['length'] > 0) {
+                fb.getBriefByEmail(email).then(querySnapshot => {
+                    querySnapshot.forEach(doc => {
+                        const fireBaseId = doc.data()['id'];
+                        if (fireBaseId) {
+                            const supposedPassword = 'Koomkin' + data[0]['DemoUserID'];
+                            var logIn;
+                            console.log(password);
+                            console.log(supposedPassword)
+                            if (password.startsWith(supposedPassword)) {
+                                logIn = true;
+                                fb.updateBriefById(fireBaseId, logIn)
+                                    .then((data) => {
+                                        console.log(data);
+                                    })
+                                    .catch((reason) => { console.log(reason) });
+                            }
+                        }
+                    }).catch(reason => { console.log(reason) });
+                }).catch(reason => { console.log(reason) });
 
-        }else{
-          console.log('DEMO USER NOT FOUND');
-        }
-      }).catch(reason => {console.log(reason)})
-      .catch(reason => {
-        console.log(reason);
-      });
+            } else {
+                console.log('DEMO USER NOT FOUND');
+            }
+        }).catch(reason => { console.log(reason) })
+        .catch(reason => {
+            console.log(reason);
+        });
 
-  const command = 'SP_IntentoSesion';
-  db.executeModifyRegister(command, email, password)
-      .then(rows => {
-          res.json(rows).status(200).send();
-      })
-      .catch(err => {
-          res.status(500).json({ error: err }).send();
-      });
+    const command = 'SP_IntentoSesion';
+    db.executeModifyRegister(command, email, password)
+        .then(rows => {
+            res.json(rows).status(200).send();
+        })
+        .catch(err => {
+            res.status(500).json({ error: err }).send();
+        });
 
 });
 
 app.get('/getAccesoReporte/:id/:acceso/:dispositivo/:sistema/:idioma', function (req, res) {
-    
+
     const id = req.params.id;
     const acceso = req.params.acceso;
     const dispositivo = req.params.dispositivo;
@@ -652,7 +652,7 @@ app.get('/getAccesoReporte/:id/:acceso/:dispositivo/:sistema/:idioma', function 
 });
 
 app.get('/getLoginReporte/:id/:acceso/:dispositivo/:sistema', function (req, res) {
-    
+
     const id = req.params.id;
     const acceso = req.params.acceso;
     const dispositivo = req.params.dispositivo;
@@ -669,7 +669,7 @@ app.get('/getLoginReporte/:id/:acceso/:dispositivo/:sistema', function (req, res
 });
 
 app.get('/getInsertClickPagina/:usuario/:pagina/:acceso', function (req, res) {
-    
+
     const usuario = req.params.usuario;
     const pagina = req.params.pagina;
     const acceso = req.params.acceso;
@@ -685,7 +685,7 @@ app.get('/getInsertClickPagina/:usuario/:pagina/:acceso', function (req, res) {
 });
 
 app.get('/getInsertClickFiltro/:usuario/:pagina/:acceso', function (req, res) {
-    
+
     const usuario = req.params.usuario;
     const pagina = req.params.pagina;
     const acceso = req.params.acceso;
@@ -715,7 +715,7 @@ app.get('/getLeadComplement/:clave', function (req, res) {
 });
 
 app.get('/getInsertClickLead/:usuario/:id/:acceso', function (req, res) {
-    
+
     const usuario = req.params.usuario;
     const id = req.params.id;
     const acceso = req.params.acceso;
@@ -731,7 +731,7 @@ app.get('/getInsertClickLead/:usuario/:id/:acceso', function (req, res) {
 });
 
 app.get('/getInsertClickLlamar/:usuario/:id/:acceso/:dispositivo', function (req, res) {
-    
+
     const usuario = req.params.usuario;
     const id = req.params.id;
     const acceso = req.params.acceso;
@@ -748,7 +748,7 @@ app.get('/getInsertClickLlamar/:usuario/:id/:acceso/:dispositivo', function (req
 });
 
 app.get('/getInsertClickChat/:usuario/:id/:acceso/:dispositivo/:metodo', function (req, res) {
-    
+
     const usuario = req.params.usuario;
     const id = req.params.id;
     const acceso = req.params.acceso;
@@ -767,49 +767,49 @@ app.get('/getInsertClickChat/:usuario/:id/:acceso/:dispositivo/:metodo', functio
 
 //updateBriefInformation
 
-app.get('/updateBriefInformation/:usuario/:idProducto/:new_Producto/:new_TipoEmpresa/:new_CodigoPostal/:new_IDMembresia/:new_PorqueEresMejor/:new_ClientesTarget/:new_Correo1?/:new_Correo2?/:new_Correo3?/:new_IdSubSector?/:idEstado?', function(req, res) {
+app.get('/updateBriefInformation/:usuario/:idProducto/:new_Producto/:new_TipoEmpresa/:new_CodigoPostal/:new_IDMembresia/:new_PorqueEresMejor/:new_ClientesTarget/:new_Correo1?/:new_Correo2?/:new_Correo3?/:new_IdSubSector?/:idEstado?', function (req, res) {
 
     const usuario = parseInt(req.params.usuario, 10);
     const idProducto = parseInt(req.params.idProducto, 10);
     const new_Producto = req.params.new_Producto;
-    const new_TipoEmpresa = parseInt(req.params.new_TipoEmpresa,10);
-    const new_CodigoPostal = parseInt(req.params.new_CodigoPostal,10);
-    let new_IDMembresia = parseInt(req.params.new_IDMembresia,10);
+    const new_TipoEmpresa = parseInt(req.params.new_TipoEmpresa, 10);
+    const new_CodigoPostal = parseInt(req.params.new_CodigoPostal, 10);
+    let new_IDMembresia = parseInt(req.params.new_IDMembresia, 10);
     const new_PorqueEresMejor = req.params.new_PorqueEresMejor;
     const new_ClientesTarget = req.params.new_ClientesTarget;
     let new_Correo1 = req.params.new_Correo1;
     let new_Correo2 = req.params.new_Correo2;
     let new_Correo3 = req.params.new_Correo3;
-    let new_IdSubSector = parseInt(req.params.new_IdSubSector,10);
-    let idEstado = parseInt(req.params.idEstado,10);
+    let new_IdSubSector = parseInt(req.params.new_IdSubSector, 10);
+    let idEstado = parseInt(req.params.idEstado, 10);
 
-    if(!new_IDMembresia){
+    if (!new_IDMembresia) {
         new_IDMembresia = 'NULL';
     }
 
-    if(!new_Correo1){
+    if (!new_Correo1) {
         new_Correo1 = 'NULL';
     }
 
-    if(!new_Correo2){
+    if (!new_Correo2) {
         new_Correo2 = 'NULL';
     }
 
-    if(!new_Correo3){
+    if (!new_Correo3) {
         new_Correo3 = 'NULL';
     }
 
-    if(!new_IdSubSector){
+    if (!new_IdSubSector) {
         new_IdSubSector = 'NULL';
     }
 
-    if(!idEstado){
+    if (!idEstado) {
         idEstado = 'NULL';
     }
-    
-    console.log(usuario,idProducto,new_Producto,new_TipoEmpresa,new_CodigoPostal,new_IDMembresia,new_PorqueEresMejor,new_ClientesTarget,new_Correo1,new_Correo2,new_Correo3,new_IdSubSector,idEstado);
 
-    db.executeUpdateBriefInformation(usuario,idProducto,new_Producto,new_TipoEmpresa,new_CodigoPostal,new_IDMembresia,new_PorqueEresMejor,new_ClientesTarget,new_Correo1,new_Correo2,new_Correo3,new_IdSubSector,idEstado) 
+    console.log(usuario, idProducto, new_Producto, new_TipoEmpresa, new_CodigoPostal, new_IDMembresia, new_PorqueEresMejor, new_ClientesTarget, new_Correo1, new_Correo2, new_Correo3, new_IdSubSector, idEstado);
+
+    db.executeUpdateBriefInformation(usuario, idProducto, new_Producto, new_TipoEmpresa, new_CodigoPostal, new_IDMembresia, new_PorqueEresMejor, new_ClientesTarget, new_Correo1, new_Correo2, new_Correo3, new_IdSubSector, idEstado)
         .then(rows => {
             res.json(rows).status(200).send();
         })
@@ -820,7 +820,7 @@ app.get('/updateBriefInformation/:usuario/:idProducto/:new_Producto/:new_TipoEmp
 
 //updateBriefInformation datos
 
-app.get('/updateBriefDatos/:usuario/:nombre?/:aPaterno?/:aMaterno?/:fechaNac?/:idPuesto?/:cpDomicilio?/:aniosEmpresa?/:educacion?', function(req, res) {
+app.get('/updateBriefDatos/:usuario/:nombre?/:aPaterno?/:aMaterno?/:fechaNac?/:idPuesto?/:cpDomicilio?/:aniosEmpresa?/:educacion?', function (req, res) {
 
     const usuario = parseInt(req.params.usuario, 10);
     let nombre = req.params.nombre;
@@ -832,39 +832,39 @@ app.get('/updateBriefDatos/:usuario/:nombre?/:aPaterno?/:aMaterno?/:fechaNac?/:i
     let aniosEmpresa = parseInt(req.params.aniosEmpresa, 10);
     let educacion = req.params.educacion;
 
-    if(!nombre){
+    if (!nombre) {
         nombre = 'NULL';
     }
 
-    if(!aPaterno){
+    if (!aPaterno) {
         aPaterno = 'NULL';
     }
 
-    if(!aMaterno){
+    if (!aMaterno) {
         aMaterno = 'NULL';
     }
 
-    if(!fechaNac){
+    if (!fechaNac) {
         fechaNac = 'NULL';
     }
 
-    if(!idPuesto){
+    if (!idPuesto) {
         idPuesto = 'NULL';
     }
 
-    if(!cpDomicilio){
+    if (!cpDomicilio) {
         cpDomicilio = 'NULL';
     }
 
-    if(!aniosEmpresa){
+    if (!aniosEmpresa) {
         aniosEmpresa = 'NULL';
     }
 
-    if(!educacion){
+    if (!educacion) {
         educacion = 'NULL';
     }
 
-    db.updateBriefDatos(usuario,nombre,aPaterno,aMaterno,fechaNac,idPuesto,cpDomicilio,aniosEmpresa,educacion) 
+    db.updateBriefDatos(usuario, nombre, aPaterno, aMaterno, fechaNac, idPuesto, cpDomicilio, aniosEmpresa, educacion)
         .then(rows => {
             res.json(rows).status(200).send();
         })
@@ -875,7 +875,7 @@ app.get('/updateBriefDatos/:usuario/:nombre?/:aPaterno?/:aMaterno?/:fechaNac?/:i
 
 //updateBriefInformation Empresa
 
-app.get('/updateBriefEmpresa/:usuario/:nombreEmpresa?/:rfcEmpresa?/:numeroEmpleados?/:numeroSocios?/:empresaFamiliar?/:regimenFiscal?/:rangoVentasAnuales?/:ventajaCompetitiva?/:idCampania', function(req, res) {
+app.get('/updateBriefEmpresa/:usuario/:nombreEmpresa?/:rfcEmpresa?/:numeroEmpleados?/:numeroSocios?/:empresaFamiliar?/:regimenFiscal?/:rangoVentasAnuales?/:ventajaCompetitiva?/:idCampania', function (req, res) {
 
     const usuario = parseInt(req.params.usuario, 10);
     let nombreEmpresa = req.params.nombreEmpresa;
@@ -888,39 +888,39 @@ app.get('/updateBriefEmpresa/:usuario/:nombreEmpresa?/:rfcEmpresa?/:numeroEmplea
     let ventajaCompetitiva = req.params.ventajaCompetitiva;
     const idCampania = parseInt(req.params.idCampania, 10);
 
-    if(!nombreEmpresa){
+    if (!nombreEmpresa) {
         nombreEmpresa = 'NULL';
     }
 
-    if(!rfcEmpresa){
+    if (!rfcEmpresa) {
         rfcEmpresa = 'NULL';
     }
 
-    if(!numeroEmpleados){
+    if (!numeroEmpleados) {
         numeroEmpleados = 'NULL';
     }
 
-    if(!numeroSocios){
+    if (!numeroSocios) {
         numeroSocios = 'NULL';
     }
 
-    if(!empresaFamiliar){
+    if (!empresaFamiliar) {
         empresaFamiliar = 'NULL';
     }
 
-    if(!regimenFiscal){
+    if (!regimenFiscal) {
         regimenFiscal = 'NULL';
     }
 
-    if(!ventajaCompetitiva){
+    if (!ventajaCompetitiva) {
         ventajaCompetitiva = 'NULL';
     }
 
-    if(!ventajaCompetitiva){
+    if (!ventajaCompetitiva) {
         ventajaCompetitiva = 'NULL';
     }
 
-    db.updateBriefEmpresa(usuario,nombreEmpresa,rfcEmpresa,numeroEmpleados,numeroSocios,empresaFamiliar,regimenFiscal,rangoVentasAnuales,ventajaCompetitiva,idCampania) 
+    db.updateBriefEmpresa(usuario, nombreEmpresa, rfcEmpresa, numeroEmpleados, numeroSocios, empresaFamiliar, regimenFiscal, rangoVentasAnuales, ventajaCompetitiva, idCampania)
         .then(rows => {
             res.json(rows).status(200).send();
         })
@@ -931,7 +931,7 @@ app.get('/updateBriefEmpresa/:usuario/:nombreEmpresa?/:rfcEmpresa?/:numeroEmplea
 
 //updateBriefInformation Cliente Objetivo Particulares
 
-app.get('/updateBriefClienteParticular/:clientesTargetIngresosAnuales?/:clientesTargetEdad?/:clientesTargetGenero?/:clientesTargetIntereses?/:idCampania', function(req, res) {
+app.get('/updateBriefClienteParticular/:clientesTargetIngresosAnuales?/:clientesTargetEdad?/:clientesTargetGenero?/:clientesTargetIntereses?/:idCampania', function (req, res) {
 
     let clientesTargetIngresosAnuales = req.params.clientesTargetIngresosAnuales;
     let clientesTargetEdad = req.params.clientesTargetEdad;
@@ -939,26 +939,26 @@ app.get('/updateBriefClienteParticular/:clientesTargetIngresosAnuales?/:clientes
     let clientesTargetIntereses = req.params.clientesTargetIntereses;
     const idCampania = parseInt(req.params.idCampania, 10);
 
-    console.log(clientesTargetIngresosAnuales,clientesTargetEdad,clientesTargetGenero,clientesTargetIntereses)
+    console.log(clientesTargetIngresosAnuales, clientesTargetEdad, clientesTargetGenero, clientesTargetIntereses)
 
-    if(!clientesTargetIngresosAnuales || clientesTargetIngresosAnuales == 'NULL'){
+    if (!clientesTargetIngresosAnuales || clientesTargetIngresosAnuales == 'NULL') {
         clientesTargetIngresosAnuales = null;
     }
 
-    if(!clientesTargetEdad || clientesTargetEdad == 'NULL'){
+    if (!clientesTargetEdad || clientesTargetEdad == 'NULL') {
         clientesTargetEdad = null;
     }
 
-    if(!clientesTargetGenero || clientesTargetGenero == 'NULL'){
+    if (!clientesTargetGenero || clientesTargetGenero == 'NULL') {
         clientesTargetGenero = 'A';
     }
 
-    if(!clientesTargetIntereses || clientesTargetIntereses == 'NULL'){
+    if (!clientesTargetIntereses || clientesTargetIntereses == 'NULL') {
         clientesTargetIntereses = null;
     }
-    console.log(clientesTargetIngresosAnuales,clientesTargetEdad,clientesTargetGenero,clientesTargetIntereses)
+    console.log(clientesTargetIngresosAnuales, clientesTargetEdad, clientesTargetGenero, clientesTargetIntereses)
 
-    db.updateBriefClienteParticular(clientesTargetIngresosAnuales,clientesTargetEdad,clientesTargetGenero,clientesTargetIntereses,idCampania) 
+    db.updateBriefClienteParticular(clientesTargetIngresosAnuales, clientesTargetEdad, clientesTargetGenero, clientesTargetIntereses, idCampania)
         .then(rows => {
             res.json(rows).status(200).send();
         })
@@ -969,31 +969,31 @@ app.get('/updateBriefClienteParticular/:clientesTargetIngresosAnuales?/:clientes
 
 //updateBriefInformation Cliente Objetivo Empresas
 
-app.get('/updateBriefClienteEmpresas/:clientesTargetSector?/:clientesTargetCategoria?/:clientesTargetSectores?/:clientesTargetIntereses?/:idCampania', function(req, res) {
+app.get('/updateBriefClienteEmpresas/:clientesTargetSector?/:clientesTargetCategoria?/:clientesTargetSectores?/:clientesTargetIntereses?/:idCampania', function (req, res) {
 
     let clientesTargetSector = req.params.clientesTargetSector;
     let clientesTargetCategoria = req.params.clientesTargetCategoria;
     let clientesTargetSectores = req.params.clientesTargetSectores;
     let clientesTargetIntereses = req.params.clientesTargetIntereses;
     const idCampania = parseInt(req.params.idCampania, 10);
-    
-    if(!clientesTargetSector){
+
+    if (!clientesTargetSector) {
         clientesTargetSector = 'NULL';
     }
 
-    if(!clientesTargetCategoria){
+    if (!clientesTargetCategoria) {
         clientesTargetCategoria = 'NULL';
     }
 
-    if(!clientesTargetSectores){
+    if (!clientesTargetSectores) {
         clientesTargetSectores = 'NULL';
     }
 
-    if(!clientesTargetIntereses){
+    if (!clientesTargetIntereses) {
         clientesTargetIntereses = 'NULL';
     }
 
-    db.updateBriefClienteEmpresas(clientesTargetSector,clientesTargetCategoria,clientesTargetSectores,clientesTargetIntereses,idCampania) 
+    db.updateBriefClienteEmpresas(clientesTargetSector, clientesTargetCategoria, clientesTargetSectores, clientesTargetIntereses, idCampania)
         .then(rows => {
             res.json(rows).status(200).send();
         })
@@ -1004,17 +1004,17 @@ app.get('/updateBriefClienteEmpresas/:clientesTargetSector?/:clientesTargetCateg
 
 //por estado
 
-app.get('/updateCobertura/:idCampania/:idEstado?/:idUsuario', function(req, res) {
+app.get('/updateCobertura/:idCampania/:idEstado?/:idUsuario', function (req, res) {
 
     const idCampania = parseInt(req.params.idCampania, 10);
     const idEstado = parseInt(req.params.idEstado, 10);
     const idUsuario = parseInt(req.params.idUsuario, 10);
 
-    if(!idEstado){
+    if (!idEstado) {
         idEstado = 'NULL';
     }
 
-    db.updateCobertura(idCampania,idEstado,idUsuario) 
+    db.updateCobertura(idCampania, idEstado, idUsuario)
         .then(rows => {
             res.json(rows).status(200).send();
         })
@@ -1025,13 +1025,13 @@ app.get('/updateCobertura/:idCampania/:idEstado?/:idUsuario', function(req, res)
 
 //por region
 
-app.get('/updateCoberturaRegion/:idCampania/:idEstado/:idUsuario', function(req, res) {
+app.get('/updateCoberturaRegion/:idCampania/:idEstado/:idUsuario', function (req, res) {
 
     const idCampania = parseInt(req.params.idCampania, 10);
     const idEstado = parseInt(req.params.idEstado, 10);
     const idUsuario = parseInt(req.params.idUsuario, 10);
 
-    db.updateCoberturaRegion(idCampania,idEstado,idUsuario) 
+    db.updateCoberturaRegion(idCampania, idEstado, idUsuario)
         .then(rows => {
             res.json(rows).status(200).send();
         })
@@ -1042,12 +1042,12 @@ app.get('/updateCoberturaRegion/:idCampania/:idEstado/:idUsuario', function(req,
 
 //updateBriefInformation Cliente Objetivo Particulares
 
-app.get('/updateCoberturaNacional/:idCampania/:idUsuario', function(req, res) {
+app.get('/updateCoberturaNacional/:idCampania/:idUsuario', function (req, res) {
 
     const idCampania = parseInt(req.params.idCampania, 10);
     const idUsuario = parseInt(req.params.idUsuario, 10);
 
-    db.updateCoberturaNacional(idCampania,idUsuario) 
+    db.updateCoberturaNacional(idCampania, idUsuario)
         .then(rows => {
             res.json(rows).status(200).send();
         })
@@ -1058,11 +1058,11 @@ app.get('/updateCoberturaNacional/:idCampania/:idUsuario', function(req, res) {
 
 //SP_GetBriefById
 
-app.get('/getBriefInformation/:usuario', function(req, res) {
+app.get('/getBriefInformation/:usuario', function (req, res) {
 
     const usuario = parseInt(req.params.usuario, 10);
 
-    db.executeGetBriefInformation(usuario) 
+    db.executeGetBriefInformation(usuario)
         .then(rows => {
             res.json(rows).status(200).send();
         })
@@ -1073,11 +1073,11 @@ app.get('/getBriefInformation/:usuario', function(req, res) {
 
 //SP_GetInicioCampaña
 
-app.get('/getInicioCampana/:usuario', function(req, res) {
+app.get('/getInicioCampana/:usuario', function (req, res) {
 
     const usuario = parseInt(req.params.usuario, 10);
 
-    db.executeGetInicioCampana(usuario) 
+    db.executeGetInicioCampana(usuario)
         .then(rows => {
             res.json(rows).status(200).send();
         })
@@ -1088,11 +1088,11 @@ app.get('/getInicioCampana/:usuario', function(req, res) {
 
 //SP_GetLastCampania
 
-app.get('/getLastCampania/:usuario', function(req, res) {
+app.get('/getLastCampania/:usuario', function (req, res) {
 
     const usuario = parseInt(req.params.usuario, 10);
 
-    db.executeGetLastCampania(usuario) 
+    db.executeGetLastCampania(usuario)
         .then(rows => {
             res.json(rows).status(200).send();
         })
@@ -1103,11 +1103,11 @@ app.get('/getLastCampania/:usuario', function(req, res) {
 
 //getCodigoPostal
 
-app.get('/getCodigoPostal/:codigo', function(req, res) {
+app.get('/getCodigoPostal/:codigo', function (req, res) {
 
     const codigo = parseInt(req.params.codigo, 10);
 
-    db.executeGetCodigoPostal(codigo) 
+    db.executeGetCodigoPostal(codigo)
         .then(rows => {
             res.json(rows).status(200).send();
         })
@@ -1118,25 +1118,25 @@ app.get('/getCodigoPostal/:codigo', function(req, res) {
 
 //getCobertura
 
-app.get('/getCobertura/:usuario/:campania', function(req, res) {
+app.get('/getCobertura/:usuario/:campania', function (req, res) {
 
     const usuario = parseInt(req.params.usuario, 10);
     const campania = parseInt(req.params.campania, 10);
 
-    db.executeGetCobertura(usuario,campania) 
+    db.executeGetCobertura(usuario, campania)
         .then(rows => {
             res.json(rows).status(200).send();
         })
         .catch(err => {
             res.status(500).json({ error: err }).send();
         });
-}); 
+});
 
 //getEstados 
 
-app.get('/getEstados', function(req, res) {
+app.get('/getEstados', function (req, res) {
 
-    db.executeGetEstados() 
+    db.executeGetEstados()
         .then(rows => {
             res.json(rows).status(200).send();
         })
@@ -1147,9 +1147,9 @@ app.get('/getEstados', function(req, res) {
 
 //get tipo Empresas 
 
-app.get('/getEmpresas', function(req, res) {
+app.get('/getEmpresas', function (req, res) {
 
-    db.executeGetEmpresas() 
+    db.executeGetEmpresas()
         .then(rows => {
             res.json(rows).status(200).send();
         })
@@ -1163,14 +1163,14 @@ app.get('/getBanner/:idUsuario', function (req, res) {
     const id = parseInt(req.params.idUsuario, 10);
     const command = 'SP_GetBanner';
 
-    db.executeGetBanner(command,id)
-         .then(rows => {
+    db.executeGetBanner(command, id)
+        .then(rows => {
             res.json(rows).status(200).send();
         })
         .catch(err => {
             res.status(500).json({ error: err }).send();
         });
-    });
+});
 
 
 app.get('/registrarEntradaBanner/:idReporteBanner/:canal?', function (req, res) {
@@ -1178,92 +1178,92 @@ app.get('/registrarEntradaBanner/:idReporteBanner/:canal?', function (req, res) 
     const id = parseInt(req.params.idReporteBanner, 10);
     var canal = req.params.canal;
 
-    if(!canal){
+    if (!canal) {
         canal = 'App'
     }
 
-    db.executeFechaEntradaBanner(id,canal)
-         .then(rows => {
+    db.executeFechaEntradaBanner(id, canal)
+        .then(rows => {
             res.json(rows).status(200).send();
         })
         .catch(err => {
             res.status(500).json({ error: err }).send();
         });
-    });
+});
 
 app.get('/getEficiency/:idUsuario', function (req, res) {
 
     const id = parseInt(req.params.idUsuario, 10);
 
     db.executeGetEficiency(id)
-         .then(rows => {
+        .then(rows => {
             res.json(rows).status(200).send();
         })
         .catch(err => {
             res.status(500).json({ error: err }).send();
         });
-    });
+});
 
 app.get('/getEficiencyType/:cuartaPantalla', function (req, res) {
 
     const idTipo = parseInt(req.params.cuartaPantalla, 10);
 
     db.executeGetEficiencyType(idTipo)
-         .then(rows => {
+        .then(rows => {
             res.json(rows).status(200).send();
         })
         .catch(err => {
             res.status(500).json({ error: err }).send();
         });
-    });
+});
 
 app.get('/getEficiencyRanking', function (req, res) {
 
     db.executeGetEficiencyRanking()
-         .then(rows => {
+        .then(rows => {
             res.json(rows).status(200).send();
         })
         .catch(err => {
             res.status(500).json({ error: err }).send();
         });
-    });
+});
 
 app.get('/getWordsType/:cuartaPantalla', function (req, res) {
 
     const idTipo = parseInt(req.params.cuartaPantalla, 10);
 
     db.executeGetWordsType(idTipo)
-         .then(rows => {
+        .then(rows => {
             res.json(rows).status(200).send();
         })
         .catch(err => {
             res.status(500).json({ error: err }).send();
         });
-    });
+});
 
 app.get('/getWords/:idUsuario', function (req, res) {
 
     const id = parseInt(req.params.idUsuario, 10);
 
     db.executeGetWords(id)
-         .then(rows => {
+        .then(rows => {
             res.json(rows).status(200).send();
         })
         .catch(err => {
             res.status(500).json({ error: err }).send();
         });
-    });
+});
 
 app.get('/getTopTen', function (req, res) {
 
     db.executeGetTopTen()
-         .then(rows => {
+        .then(rows => {
             res.json(rows).status(200).send();
         })
         .catch(err => {
             res.status(500).json({ error: err }).send();
         });
-    });
+});
 
 app.get('/getAnswer/:idUsuario/:idPregunta/:respuesta/:comentario/:canal', function (req, res) {
 
@@ -1273,29 +1273,29 @@ app.get('/getAnswer/:idUsuario/:idPregunta/:respuesta/:comentario/:canal', funct
     const comentario = req.params.comentario;
     const canal = req.params.canal;
 
-    db.executePutAnswer(idUsuario,idPregunta,respuesta,comentario,canal)
-         .then(rows => {
+    db.executePutAnswer(idUsuario, idPregunta, respuesta, comentario, canal)
+        .then(rows => {
             res.json(rows).status(200).send();
         })
         .catch(err => {
             res.status(500).json({ error: err }).send();
         });
-    });
+});
 
-app.get('/getTips/:idtip1/:idtip2/:idtip3' , function (req, res) {
+app.get('/getTips/:idtip1/:idtip2/:idtip3', function (req, res) {
 
     const tip1 = parseInt(req.params.idtip1, 10);
     const tip2 = parseInt(req.params.idtip2, 10);
     const tip3 = parseInt(req.params.idtip3, 10);
 
-    db.executeGetTips(tip1,tip2,tip3)
-         .then(rows => {
+    db.executeGetTips(tip1, tip2, tip3)
+        .then(rows => {
             res.json(rows).status(200).send();
         })
         .catch(err => {
             res.status(500).json({ error: err }).send();
         });
-    });
+});
 
 //update banner habilitado
 
@@ -1304,86 +1304,85 @@ app.get('/getUpdateBanner/:id', function (req, res) {
     const id = parseInt(req.params.id, 10);
 
     db.executeUpdateHabilitado(id).then(rows => {
-            res.json(rows).status(200).send();
-        })
+        res.json(rows).status(200).send();
+    })
         .catch(err => {
             res.status(500).json({ error: err }).send();
         });
-    });
+});
 
-app.get('/registrarInteresBanner/:interes/:idReporteBanner/:uuidPase/:canal?', function (req, res) {
-    
+app.get('/registrarInteresBanner/:interes/:idReporteBanner', function (req, res) {
+
     const interes = req.params.interes;
     const idReporteBanner = req.params.idReporteBanner;
-    const uuidPase = req.params.uuidPase;
 
-    db.executeInteresBanner(interes,idReporteBanner,uuidPase)
-         .then(rows => {
+    db.executeInteresBanner(interes, idReporteBanner)
+        .then(rows => {
             res.json(rows).status(200).send();
         })
         .catch(err => {
             res.status(500).json({ error: err }).send();
         });
-    });
+});
 
 
 app.get('/cambiarMensaje/:usuario/:acceso/:mensaje', function (req, res) {
-    
+
     const command = 'SP_InsertCambiarMensaje';
     const usuario = parseInt(req.params.usuario, 10);
     const acceso = req.params.acceso;
     const mensaje = req.params.mensaje;
 
-    db.executeCambiarMensaje(command,usuario,acceso,mensaje)
-         .then(rows => {
+    db.executeCambiarMensaje(command, usuario, acceso, mensaje)
+        .then(rows => {
             res.json(rows).status(200).send();
         })
         .catch(err => {
             res.status(500).json({ error: err }).send();
         });
-    });
+});
 
 
 app.get('/clickBanner/:usuario/:acceso/:tipobanner', function (req, res) {
-    
+
     const command = 'SP_InsertClickBanner';
     const usuario = parseInt(req.params.usuario, 10);
     const acceso = req.params.acceso;
     const tipobanner = parseInt(req.params.tipobanner, 10);
 
-    db.executeClickBanner(command,usuario,acceso,tipobanner)
-         .then(rows => {
+    db.executeClickBanner(command, usuario, acceso, tipobanner)
+        .then(rows => {
             res.json(rows).status(200).send();
         })
         .catch(err => {
             res.status(500).json({ error: err }).send();
         });
-    });
+});
 
 app.get('/clickTip/:usuario/:tipid/:acceso', function (req, res) {
-    
+
     const command = 'SP_InsertClickTip';
     const usuario = parseInt(req.params.usuario, 10);
     const tipid = parseInt(req.params.tipid, 10);
     const acceso = req.params.acceso;
 
-    db.executeClickTip(command,usuario,tipid,acceso)
-         .then(rows => {
+    db.executeClickTip(command, usuario, tipid, acceso)
+        .then(rows => {
             res.json(rows).status(200).send();
         })
         .catch(err => {
             res.status(500).json({ error: err }).send();
         });
-    });
+});
 
 app.get('/clickCancelarMembresia/:usuario/:acceso', function (req, res) {
-    
+
     const command = 'SP_InsertClickCancelarMembresia';
     const usuario = parseInt(req.params.usuario, 10);
     const acceso = req.params.acceso;
 
-    db.executeClickCancelar(command,usuario,acceso)
-         .then(rows => {
+    db.executeClickCancelar(command, usuario, acceso)
+        .then(rows => {
             res.json(rows).status(200).send();
         })
         .catch(err => {
@@ -1392,31 +1391,31 @@ app.get('/clickCancelarMembresia/:usuario/:acceso', function (req, res) {
 });
 
 app.get('/clickTooltip/:usuario/:tooltipname/:acceso', function (req, res) {
-    
+
     const command = 'SP_InsertClickTooltip';
     const usuario = parseInt(req.params.usuario, 10);
     const tooltipname = req.params.tooltipname;
     const acceso = req.params.acceso;
 
-    db.executeClickTooltip(command,usuario,tooltipname,acceso)
-         .then(rows => {
+    db.executeClickTooltip(command, usuario, tooltipname, acceso)
+        .then(rows => {
             res.json(rows).status(200).send();
         })
         .catch(err => {
             res.status(500).json({ error: err }).send();
         });
-    });
+});
 
 //SP_InsertClickCambioInformacion
 
-app.get('/clickCambioInformacion/:usuario/:tipo/:acceso', function(req, res) {
+app.get('/clickCambioInformacion/:usuario/:tipo/:acceso', function (req, res) {
 
     const command = 'SP_InsertClickCambioInformacion';
     const usuario = parseInt(req.params.usuario, 10);
     const tipo = req.params.tipo;
     const acceso = req.params.acceso;
 
-    db.executeInsertaRegistro(command, usuario, tipo, acceso) 
+    db.executeInsertaRegistro(command, usuario, tipo, acceso)
         .then(rows => {
             res.json(rows).status(200).send();
         })
@@ -1445,10 +1444,10 @@ app.get('/getInsertUpgradeMembresia/:usuario/:id/:acceso', function (req, res) {
 app.get('/getLastUpdateMembership/:RecurringPaymentID/:RecurringPaymentUUID', function (req, res) {
 
     const RecurringPaymentID = parseInt(req.params.RecurringPaymentID, 10);
-    const RecurringPaymentUUID = req.params.RecurringPaymentUUID; 
+    const RecurringPaymentUUID = req.params.RecurringPaymentUUID;
 
     db.executeLastUpdateMembership(RecurringPaymentID, RecurringPaymentUUID)
-         .then(rows => {
+        .then(rows => {
             res.json(rows).status(200).send();
         })
         .catch(err => {
@@ -1459,11 +1458,11 @@ app.get('/getLastUpdateMembership/:RecurringPaymentID/:RecurringPaymentUUID', fu
 app.get('/getUpdateMembership/:RecurringPaymentID/:RecurringPaymentUUID/:amount', function (req, res) {
 
     const RecurringPaymentID = parseInt(req.params.RecurringPaymentID, 10);
-    const RecurringPaymentUUID = req.params.RecurringPaymentUUID; 
+    const RecurringPaymentUUID = req.params.RecurringPaymentUUID;
     const amount = req.params.amount;
 
     db.executeUpdateMembership(RecurringPaymentID, RecurringPaymentUUID, amount)
-         .then(rows => {
+        .then(rows => {
             res.json(rows).status(200).send();
         })
         .catch(err => {
@@ -1476,7 +1475,7 @@ app.get('/getCancelUpdateMembership/:RecurringPaymentID', function (req, res) {
     const RecurringPaymentID = parseInt(req.params.RecurringPaymentID, 10);
 
     db.executeCancelUpdateMembership(RecurringPaymentID)
-         .then(rows => {
+        .then(rows => {
             res.json(rows).status(200).send();
         })
         .catch(err => {
@@ -1489,7 +1488,7 @@ app.get('/getLastComment/:claveLead', function (req, res) {
     const claveLead = req.params.claveLead;
 
     db.executeGetLastComment(claveLead)
-         .then(rows => {
+        .then(rows => {
             res.json(rows).status(200).send();
         })
         .catch(err => {
@@ -1502,7 +1501,7 @@ app.get('/getComments/:claveLead', function (req, res) {
     const claveLead = req.params.claveLead;
 
     db.executeGetComments(claveLead)
-         .then(rows => {
+        .then(rows => {
             res.json(rows).status(200).send();
         })
         .catch(err => {
@@ -1515,7 +1514,7 @@ app.get('/getScheduled/:claveLead', function (req, res) {
     const claveLead = parseInt(req.params.claveLead, 10);
 
     db.executeGetScheduled(claveLead)
-         .then(rows => {
+        .then(rows => {
             res.json(rows).status(200).send();
         })
         .catch(err => {
@@ -1527,7 +1526,7 @@ app.get('/getScheduled/:claveLead', function (req, res) {
 app.get('/getReasons', function (req, res) {
 
     db.executeGetReasons()
-         .then(rows => {
+        .then(rows => {
             res.json(rows).status(200).send();
         })
         .catch(err => {
@@ -1636,7 +1635,7 @@ app.post('/getRequirementTicket/', function (req, res) {
     const bandera = 1;
     const command = 'spI_hp_CrearRequerimiento_Bis';
 
-    db.executeGetTicket(command,ticket,requerimiento,area,estatus,agente,comentario,satisfaccion,bandera)
+    db.executeGetTicket(command, ticket, requerimiento, area, estatus, agente, comentario, satisfaccion, bandera)
         .then(rows => {
             res.json(rows).status(200).send();
         })
@@ -1658,7 +1657,7 @@ app.post('/getRequirementTicketOptimizacion/', function (req, res) {
     const bandera = 0;
     const command = 'spI_hp_CrearRequerimiento_Bis';
 
-    db.executeGetTicket(command,ticket,requerimiento,area,estatus,agente,comentario,satisfaccion,bandera)
+    db.executeGetTicket(command, ticket, requerimiento, area, estatus, agente, comentario, satisfaccion, bandera)
         .then(rows => {
             res.json(rows).status(200).send();
         })
@@ -1674,7 +1673,7 @@ app.post('/updateAgendaOptimizaciones/', function (req, res) {
     const idTicket = parseInt(req.body.idTicket, 10);
     const estatusOptimizacion = req.body.estatusOptimizacion;
 
-    db.executeUpdateAgenda(idUsuario,idTicket,estatusOptimizacion)
+    db.executeUpdateAgenda(idUsuario, idTicket, estatusOptimizacion)
         .then(rows => {
             res.json(rows).status(200).send();
         })
@@ -1727,19 +1726,19 @@ app.post('/registerDeviceId/:idUsuario/:idDevice/:platform', function (req, res)
 });
 
 app.post('/passLogin', (req, res) => {
-    
+
     const body = req.body;
     const id = parseInt(body.id);
     const command = 'SP_GetUsuarioById';
 
     if (body.key === KOOMKIN_KEY) {
-      db.executeSPById(command, id)
-        .then(rows => {
-          res.json(rows);
-          res.status(200);
-        }).catch(err => {
-          res.status(500).json({ error: err }).send();
-        });
+        db.executeSPById(command, id)
+            .then(rows => {
+                res.json(rows);
+                res.status(200);
+            }).catch(err => {
+                res.status(500).json({ error: err }).send();
+            });
     } else {
         res.status(401).send();
     }
@@ -1751,7 +1750,7 @@ app.post('/registerReason/', function (req, res) {
     let claveLead = req.body.claveLead;
     let razonDescarto = req.body.razonDescarto;
 
-    db.executeInsertReason(razonDescarto,claveLead)
+    db.executeInsertReason(razonDescarto, claveLead)
         .then(rows => {
             res.json(rows).status(200).send();
         })
@@ -1762,49 +1761,49 @@ app.post('/registerReason/', function (req, res) {
 
 //updateBriefInformation
 
-app.post('/updateBriefInformation2/', function(req, res) {
+app.post('/updateBriefInformation2/', function (req, res) {
 
     let usuario = parseInt(req.body.usuario, 10);
     let idProducto = parseInt(req.body.idProducto, 10);
     let new_Producto = req.body.new_Producto;
-    let new_TipoEmpresa = parseInt(req.body.new_TipoEmpresa,10);
-    let new_CodigoPostal = parseInt(req.body.new_CodigoPostal,10);
-    let new_IDMembresia = parseInt(req.body.new_IDMembresia,10);
+    let new_TipoEmpresa = parseInt(req.body.new_TipoEmpresa, 10);
+    let new_CodigoPostal = parseInt(req.body.new_CodigoPostal, 10);
+    let new_IDMembresia = parseInt(req.body.new_IDMembresia, 10);
     let new_PorqueEresMejor = req.body.new_PorqueEresMejor;
     let new_ClientesTarget = req.body.new_ClientesTarget;
     let new_Correo1 = req.body.new_Correo1;
     let new_Correo2 = req.body.new_Correo2;
     let new_Correo3 = req.body.new_Correo3;
-    let new_IdSubSector = parseInt(req.body.new_IdSubSector,10);
-    let idEstado = parseInt(req.body.idEstado,10);
+    let new_IdSubSector = parseInt(req.body.new_IdSubSector, 10);
+    let idEstado = parseInt(req.body.idEstado, 10);
 
-    if(!new_IDMembresia){
+    if (!new_IDMembresia) {
         new_IDMembresia = 'NULL';
     }
 
-    if(!new_Correo1){
+    if (!new_Correo1) {
         new_Correo1 = 'NULL';
     }
 
-    if(!new_Correo2){
+    if (!new_Correo2) {
         new_Correo2 = 'NULL';
     }
 
-    if(!new_Correo3){
+    if (!new_Correo3) {
         new_Correo3 = 'NULL';
     }
 
-    if(!new_IdSubSector){
+    if (!new_IdSubSector) {
         new_IdSubSector = 'NULL';
     }
 
-    if(!idEstado){
+    if (!idEstado) {
         idEstado = 'NULL';
     }
-    
-    console.log(usuario,idProducto,new_Producto,new_TipoEmpresa,new_CodigoPostal,new_IDMembresia,new_PorqueEresMejor,new_ClientesTarget,new_Correo1,new_Correo2,new_Correo3,new_IdSubSector,idEstado);
 
-    db.executeUpdateBriefInformation(usuario,idProducto,new_Producto,new_TipoEmpresa,new_CodigoPostal,new_IDMembresia,new_PorqueEresMejor,new_ClientesTarget,new_Correo1,new_Correo2,new_Correo3,new_IdSubSector,idEstado) 
+    console.log(usuario, idProducto, new_Producto, new_TipoEmpresa, new_CodigoPostal, new_IDMembresia, new_PorqueEresMejor, new_ClientesTarget, new_Correo1, new_Correo2, new_Correo3, new_IdSubSector, idEstado);
+
+    db.executeUpdateBriefInformation(usuario, idProducto, new_Producto, new_TipoEmpresa, new_CodigoPostal, new_IDMembresia, new_PorqueEresMejor, new_ClientesTarget, new_Correo1, new_Correo2, new_Correo3, new_IdSubSector, idEstado)
         .then(rows => {
             res.json(rows).status(200).send();
         })
@@ -1821,7 +1820,59 @@ app.post('/registerComment/', function (req, res) {
     const comentario = req.body.comentario;
     const clasificaLead = req.body.clasificaLead;
 
-    db.executeInsertComment(idUsuario,claveLead,comentario,clasificaLead)
+    db.executeInsertComment(idUsuario, claveLead, comentario, clasificaLead)
+        .then(rows => {
+            res.json(rows).status(200).send();
+        })
+        .catch(err => {
+            res.status(500).json({ error: err }).send();
+        });
+});
+
+//Genera registro en bitacora de agregar lead
+app.post('/registerLeadAdd/', function (req, res) {
+
+    const idUsuario = parseInt(req.body.idUsuario, 10);
+    const lead_uuid = req.body.lead_uuid;
+    const tipo = req.body.tipo;
+    const acceso = req.body.acceso;
+    const pagina = req.body.pagina;
+
+    db.executeRegistrarLeadAgregado(idUsuario, lead_uuid, tipo, acceso, pagina)
+        .then(rows => {
+            res.json(rows).status(200).send();
+        })
+        .catch(err => {
+            res.status(500).json({ error: err }).send();
+        });
+});
+
+//Genera registro en bitacora del producto
+app.post('/registerProduct/', function (req, res) {
+
+    const idUsuario = parseInt(req.body.idUsuario, 10);
+    const producto = req.body.producto;
+    const acceso = req.body.acceso;
+
+    db.executeRegistrarProducto(idUsuario, producto, acceso)
+        .then(rows => {
+            res.json(rows).status(200).send();
+        })
+        .catch(err => {
+            res.status(500).json({ error: err }).send();
+        });
+});
+
+//Genera registro en bitacora de reagendas
+app.post('/registerScheduled/', function (req, res) {
+
+    const idUsuario = parseInt(req.body.idUsuario, 10);
+    const lead_uuid = req.body.lead_uuid;
+    const acceso = req.body.acceso;
+    const pagina = req.body.pagina;
+    const clasificaLead = req.body.clasificaLead;
+
+    db.executeRegistrarAgenda(idUsuario, lead_uuid, acceso, pagina, clasificaLead)
         .then(rows => {
             res.json(rows).status(200).send();
         })
@@ -1836,11 +1887,11 @@ app.post('/registerCost/', function (req, res) {
     const claveLead = req.body.claveLead;
     let valorLead = req.body.valorLead;
 
-    if(!valorLead){
+    if (!valorLead) {
         valorLead = 'NULL';
     }
 
-    db.executeUpdateValor(claveLead,valorLead)
+    db.executeUpdateValor(claveLead, valorLead)
         .then(rows => {
             res.json(rows).status(200).send();
         })
@@ -1855,7 +1906,7 @@ app.post('/editComment/', function (req, res) {
     const idComentario = parseInt(req.body.idComentario, 10);
     const comentario = req.body.comentario;
 
-    db.executeEditComment(idComentario,comentario)
+    db.executeEditComment(idComentario, comentario)
         .then(rows => {
             res.json(rows).status(200).send();
         })

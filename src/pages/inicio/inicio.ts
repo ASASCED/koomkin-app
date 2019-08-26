@@ -79,10 +79,6 @@ export class InicioPage implements OnInit {
               this.title = datos[0].titulo;
               this.subtitle = datos[0].subtitulo;
               this.fondo = datos[0].fondo;
-              this.tipoBanner = datos[0].tipoBanner;
-              if(this.tipoBanner == 16 || this.tipoBanner == 17){
-                this.openModal();
-              }
               this.img = datos[0].descripcionBanner;
               this.idReportBanner = datos[0].idReporteBanner;
               this.uuidPass = datos[0].uuidPase;
@@ -92,6 +88,10 @@ export class InicioPage implements OnInit {
                 this.habilitado = 0;
               }
               this.notification = JSON.parse(datos[0].dataPage);
+              this.tipoBanner = datos[0].tipoBanner;
+              if(this.tipoBanner == 16 || this.tipoBanner == 17){
+                this.openModal();
+              }
             } else if(datos.length == 0) {
               this.tipoBanner = 0;
               this.habilitado = 0;
@@ -146,6 +146,7 @@ export class InicioPage implements OnInit {
   openModal() {
     const myModal = this.modal.create(
       "ModalUpgradePage",
+      { notification: this.notification, idReportBanner: this.idReportBanner, tipoBanner: this.tipoBanner, uuidPass:this.uuidPass }, 
       { enableBackdropDismiss: true, cssClass: "Modal-comentario" }
     );
     myModal.present();

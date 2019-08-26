@@ -12,14 +12,9 @@ import swal from 'sweetalert2';
 })
 export class ModalUpgradePage {
 
-  @Input() title: string;
-  @Input() subtitle: string;
-  @Input() img: string;
   @Input() notification: string;
   @Input() uuidPass: string;
   @Input() idReportBanner: string;
-  @Input() fondo: string;
-  @Input() description: string;
   @Input() tipoBanner;
 
   public idRecurrente;
@@ -49,14 +44,13 @@ export class ModalUpgradePage {
     this.recurrente = this.authService.recurrente;
     this.idRecurrente = this.authService.idRecurrente;
     this.uuidRecurrente = this.authService.uuidRecurrente;
+    this.tipo = navParams.get("tipoBanner");
+    this.notificacion = navParams.get("notification");
+    this.idReporteBanner = navParams.get("idReportBanner");
+    this.uuidPase = navParams.get("uuidPass");
   }
 
   ngOnInit() {
-    this.notificacion = this.notification;
-    this.idReporteBanner = this.idReportBanner;
-    this.uuidPase = this.uuidPass;
-    this.tipo = this.tipoBanner;
-    this.tipo = 16;
     if(this.tipo == 16) {
       this.getRandomImage(this.banner1);
       this.selectedAmount = 250;
@@ -145,7 +139,7 @@ export class ModalUpgradePage {
   }
 
   public getInsertUpgradeMembresia() {
-    let acceso = 'banner';
+    let acceso = 'popup';
 
     this.provedor.getInsertUpgradeMembresia(this.id, this.idRecurrente, acceso)
       .then(
@@ -159,9 +153,9 @@ export class ModalUpgradePage {
   }
 
   public registrarInteres(interes: number) {
+    console.log(interes + "/" + this.idReporteBanner + "/" + this.uuidPase);
     return new Promise((resolve, reject) => {
-      const urlBanner =
-        "https://www.koomkin.com.mx/api/app/registrarInteresBanner/" + interes + "/" + this.idReporteBanner + "/" + this.uuidPase;
+      const urlBanner = "https://www.koomkin.com.mx/api/app/registrarInteresBanner/" + interes + "/" + this.idReporteBanner;
       this.http.get(urlBanner).subscribe(
         data => {
           resolve();

@@ -1,4 +1,15 @@
 page-modal-upgrade {
+
+  .flecha {
+    width: 50%;
+    margin-left: 25%;
+  }
+
+  .otro {
+    width: 90%;
+    margin-left: 5%;
+  }
+  
   @media (min-width: 300px) and (min-height: 1050000px) {
     ion-backdrop {
       visibility: visible;
@@ -180,7 +191,7 @@ page-modal-upgrade {
   background-color: #fafafa;
 }
 
-.cuadro {
+.cuadro-membresia {
   font-size: 6vw;
   padding: 4%;
   color: #005189;

@@ -9,12 +9,12 @@
 
 <ion-content>
 
-    <banner *ngIf="tipoBanner >= 1 && tipoBanner <= 9 || tipoBanner >= 10 && tipoBanner <= 12 && habilitado == 1 || tipoBanner >= 14 && tipoBanner <= 17"
+    <banner *ngIf="tipoBanner >= 1 && tipoBanner <= 9 || tipoBanner >= 10 && tipoBanner <= 12 && habilitado == 1 || tipoBanner >= 14 && tipoBanner <= 15"
         [title]='title' [subtitle]='subtitle' [img]='img' [fondo]='fondo' [notification]='notification'
         [idReportBanner]='idReportBanner' [uuidPass]='uuidPass' [tipoBanner]='tipoBanner' [description]='description'
         (click)="clickBanner();"></banner>
     <ion-grid padding
-        *ngIf="tipoBanner == 0 || tipoBanner >= 3 && tipoBanner <= 9  || tipoBanner == 10  && habilitado == 1 ||  tipoBanner == 12 && habilitado == 1 || tipoBanner >= 10 && tipoBanner <= 12 && habilitado == 0 || tipoBanner >= 14 && tipoBanner <= 17">
+        *ngIf="tipoBanner == 0 || tipoBanner >= 3 && tipoBanner <= 9  || tipoBanner == 10  && habilitado == 1 ||  tipoBanner == 12 && habilitado == 1 || tipoBanner >= 10 && tipoBanner <= 12 && habilitado == 0 || tipoBanner >= 14 && tipoBanner <= 20">
         <ion-row class="grande tres" (click)="pagina(leads)">
             <ion-col col-3>
                 <img src="assets/imgs/inicio/leads.svg" width="100%" />
