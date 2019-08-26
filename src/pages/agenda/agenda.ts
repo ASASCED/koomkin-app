@@ -646,7 +646,7 @@ export class AgendaPage implements OnInit {
 
   public getInsertClickPagina() {
     const usuario = this.id;
-    const pagina = "crm";
+    const pagina = "agenda";
     const acceso = "App";
     this.provedor.getInsertClickPagina(usuario, pagina, acceso).then(
       data => {
