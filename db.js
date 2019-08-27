@@ -1296,9 +1296,9 @@ db.executeRegistrarProducto = function (idUsuario, producto, acceso) {
 
 
 //executeRegistrarLeadAgregado
-db.executeRegistrarAgenda = function (idUsuario, lead_uuid, acceso, clasificaLead) {
+db.executeRegistrarAgenda = function (idUsuario, claveLead, acceso, clasificaLead) {
 
-    const requestStr = `insert into ClickAgendar (IdUsuario, UuidLead, FechaRegistro, Canal, ClasificaLead) values (${idUsuario}, '${lead_uuid}', GETDATE(), '${acceso}', '${clasificaLead}' );`;
+    const requestStr = `insert into ClickAgendar (IdUsuario, claveLead, FechaRegistro, Canal, ClasificaLead) values (${idUsuario}, '${claveLead}', GETDATE(), '${acceso}', '${clasificaLead}' );`;
 
     console.log(requestStr);
     
