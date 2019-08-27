@@ -1869,10 +1869,9 @@ app.post('/registerScheduled/', function (req, res) {
     const idUsuario = parseInt(req.body.idUsuario, 10);
     const lead_uuid = req.body.lead_uuid;
     const acceso = req.body.acceso;
-    const pagina = req.body.pagina;
     const clasificaLead = req.body.clasificaLead;
 
-    db.executeRegistrarAgenda(idUsuario, lead_uuid, acceso, pagina, clasificaLead)
+    db.executeRegistrarAgenda(idUsuario, lead_uuid, acceso, clasificaLead)
         .then(rows => {
             res.json(rows).status(200).send();
         })
