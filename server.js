@@ -1884,12 +1884,13 @@ app.post('/registerScheduled/', function (req, res) {
 app.post('/registerCost/', function (req, res) {
 
     const claveLead = req.body.claveLead;
-    let valorLead = req.body.valorLead;
+    let valorLead = parseInt(req.body.valorLead, 10);
 
     if (!valorLead) {
         valorLead = 'NULL';
     }
 
+    console.log(claveLead, valorLead);
     db.executeUpdateValor(claveLead, valorLead)
         .then(rows => {
             res.json(rows).status(200).send();
