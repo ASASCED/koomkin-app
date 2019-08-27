@@ -247,7 +247,7 @@ export class LeadsPage implements OnInit {
   }
 
   agregarLead() {
-    this.navCtrl.push('AgregarLeadPage');
+    this.navCtrl.push('AgregarLeadPage','leads');
   }
 
   public changeLeido(lead) {

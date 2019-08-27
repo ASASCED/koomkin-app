@@ -340,6 +340,7 @@ export class BriefPage implements OnInit, AfterContentChecked {
 
     if (this.productoInicial !== this.producto) {
       this.productoInicial = this.producto;
+      this.registerProduct(this.productoInicial);
       this.createTicket();
     }
 
@@ -348,6 +349,37 @@ export class BriefPage implements OnInit, AfterContentChecked {
         this.updateBriefInformation(nuevo_estado)
       })
       .catch();
+  }
+
+  public registerProduct(producto) {
+
+    const acceso = 'App';
+
+    const body = new URLSearchParams();
+    body.set('idUsuario', this.id);
+    body.set('producto', producto);
+    body.set('acceso', acceso);
+
+    const options = {
+      headers: new HttpHeaders().set(
+        'Content-Type',
+        'application/x-www-form-urlencoded'
+      )
+    };
+
+    // console.log(body.toString());
+    const url = 'https://www.koomkin.com.mx/api/reporte/registerProduct/';
+
+    return new Promise((resolve, reject) => {
+      this.http.post(url, body.toString(), options).subscribe(
+        data => {
+          // console.log(data);
+        },
+        err => {
+          return reject(err);
+        }
+      );
+    });
   }
 
   updateBriefInformation(nuevo_estado) {

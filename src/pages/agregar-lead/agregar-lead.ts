@@ -39,6 +39,7 @@ export class AgregarLeadPage implements OnInit {
   public dateComplete;
   public disableButton = false;
   public comment;
+  public pagina;
 
   erroresForm = {
     'name_sender': '',
@@ -71,6 +72,8 @@ export class AgregarLeadPage implements OnInit {
   ) {
     this.empresa = this.authService.empresa;
     this.id = this.authService.id;
+    this.pagina = navParams.data;
+    console.log(this.pagina);
   }
 
   onValueChanged(data?: any) {
@@ -146,8 +149,6 @@ export class AgregarLeadPage implements OnInit {
         )
       };
 
-      console.log(cuerpo);
-
       return new Promise((resolve, reject) => {
        
         const url = 'https://www.koomkin.com.mx/api/leads/register';
@@ -155,15 +156,15 @@ export class AgregarLeadPage implements OnInit {
 
         this.http.post(url, cuerpo, options).subscribe(
           data => {
-            console.log(data);
             loading.dismiss();
+            this.registerAddLead(this.lead_uuid, 'Unico');
             this.showSuccessLead();
             this.app.getRootNav().setRoot('InicioPage');
             resolve();
           },
           err => {
-            console.log(err);
             if (err.statusText === 'OK') {
+              this.registerAddLead(this.lead_uuid, 'Unico');
               loading.dismiss();
               this.showSuccessLead();
               this.app.getRootNav().setRoot('InicioPage');
@@ -176,6 +177,40 @@ export class AgregarLeadPage implements OnInit {
       });
     }
   }
+
+  public registerAddLead(lead_uuid, tipo) {
+
+    const acceso = 'App';
+
+    const body = new URLSearchParams();
+    body.set('idUsuario', this.id);
+    body.set('lead_uuid', lead_uuid);
+    body.set('tipo', tipo);
+    body.set('acceso', acceso);
+    body.set('pagina', this.pagina);
+
+    const options = {
+      headers: new HttpHeaders().set(
+        'Content-Type',
+        'application/x-www-form-urlencoded'
+      )
+    };
+
+    // console.log(body.toString());
+    const url = 'https://www.koomkin.com.mx/api/reporte/registerLeadAdd/';
+
+    return new Promise((resolve, reject) => {
+      this.http.post(url, body.toString(), options).subscribe(
+        data => {
+          // console.log(data);
+        },
+        err => {
+          return reject(err);
+        }
+      );
+    });
+  }
+
 
   public registerComentario(clave, comentario, clasificaLead) {
 

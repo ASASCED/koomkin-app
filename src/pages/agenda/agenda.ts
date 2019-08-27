@@ -388,7 +388,7 @@ export class AgendaPage implements OnInit {
   }
 
   agregarLead() {
-    this.navCtrl.push('AgregarLeadPage');
+    this.navCtrl.push('AgregarLeadPage','agenda');
   }
 
   public changeLeido(lead) {

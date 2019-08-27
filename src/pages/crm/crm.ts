@@ -1653,7 +1653,7 @@ export class CrmPage implements OnInit {
   }
 
   agregarLead() {
-    this.navCtrl.push('AgregarLeadPage');
+    this.navCtrl.push('AgregarLeadPage','crm');
   }
 
   public changeLeido(lead) {
