@@ -73,7 +73,6 @@ export class AgregarLeadPage implements OnInit {
     this.empresa = this.authService.empresa;
     this.id = this.authService.id;
     this.pagina = navParams.data;
-    console.log(this.pagina);
   }
 
   onValueChanged(data?: any) {

@@ -87,19 +87,11 @@ export class ModalUpgradePage {
       .then(
         (data) => {
           let upsell_id = data[0].ID;
-          this.immediateUpsell(upsell_id);
-        },
-        (error) => {
-          console.log(error);
-        }
-      );
-  }
-
-  public getDowngradeMembership(upsell_id) {
-    this.provedor.getDowngradeMembership(upsell_id)
-      .then(
-        (data) => {
-
+          if(this.tipoBanner == 16) {
+            this.immediateUpsell(upsell_id);
+          } else if(this.tipoBanner == 17) {
+            this.immediateUpsell(upsell_id);
+          }
         },
         (error) => {
           console.log(error);
@@ -149,6 +141,18 @@ export class ModalUpgradePage {
       );
     });
 
+  }
+
+  public getDowngradeMembership(upsell_id) {
+    this.provedor.getDowngradeMembership(upsell_id)
+      .then(
+        (data) => {
+
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
   }
 
   public getInsertUpgradeMembresia() {

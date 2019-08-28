@@ -35,6 +35,7 @@
             <td class="campos">Móvil </td>
             <td class="datos">{{celular}}</td>
         </tr>
+       <!--
         <tr>
             <th class="contacto" colspan="2">Configuración de Chat Bot</th>
         </tr>
@@ -42,6 +43,7 @@
             <td class="campos">Saludo automático <br><span class="maximo">(Máximo 150 caracteres)</span></td>
             <td class="datos" style="text-align: justify">{{mensaje}}</td>
         </tr>
+       --> 
     </table>
     <table *ngIf="vista === 'editar'">
         <tr>
@@ -84,6 +86,7 @@
                 <input type="tel" name="Móvil" [(ngModel)]="celular" required>
             </td>
         </tr>
+        <!--
         <tr>
             <th class="contacto" colspan="2">Configuración de Chat Bot</th>
         </tr>
@@ -93,6 +96,7 @@
                 <textarea class="msg" rows="8" cols="50" maxlength="150" [(ngModel)]="mensaje" required></textarea>
             </td>
         </tr>
+        -->
     </table>
 
     <div class="cuadro">
@@ -104,8 +108,7 @@
         <br>
         <button *ngIf="vista == 'informacion'" class="edit" (click)="changePage('editar')">Modificar Datos</button>
         <button *ngIf="vista === 'editar'" class="edit" (click)="changePage('informacion');">Cancelar</button>
-        <button *ngIf="vista === 'editar'" class="edit"
-            (click)="changePage('informacion');updateUser();updateMessage(mensaje);cambiarMensaje(mensaje);cambioAnidado()">Guardar</button>
+        <button *ngIf="vista === 'editar'" class="edit" (click)="changePage('informacion');updateUser();cambioAnidado()">Guardar</button>
     </div>
 
 </ion-content>
