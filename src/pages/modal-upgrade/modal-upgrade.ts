@@ -78,8 +78,6 @@ export class ModalUpgradePage {
     }).then(result => {
       if (result.value) {
         this.getUpgradeMembership();
-        this.getInsertUpgradeMembresia();
-        this.registrarInteres(0);
       }
     });
   }
@@ -90,6 +88,18 @@ export class ModalUpgradePage {
         (data) => {
           let upsell_id = data[0].ID;
           this.immediateUpsell(upsell_id);
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+  }
+
+  public getDowngradeMembership(upsell_id) {
+    this.provedor.getDowngradeMembership(upsell_id)
+      .then(
+        (data) => {
+
         },
         (error) => {
           console.log(error);
@@ -122,8 +132,11 @@ export class ModalUpgradePage {
             loading.dismiss();
             this.showSuccessUpgrade();
             this.navCtrl.setRoot('InicioPage');
+            this.getInsertUpgradeMembresia();
+            this.registrarInteres(0);
           } else if (data['result'] == 'Upsell aplicado pero no se aplicó el cargo. Se intentará en el siguiente pago recurrente.') {
             loading.dismiss();
+            this.getDowngradeMembership(upsell_id);
             this.showErrorUpgrade();
             this.navCtrl.setRoot('InicioPage');
           }
@@ -182,7 +195,7 @@ export class ModalUpgradePage {
   public showErrorUpgrade() {
     swal({
       title: 'No se ha podido realizar el Upgrade.',
-      text: 'Se intentará en el siguiente pago recurrente.',
+      text: 'Por facor comunicate a servicio a cliente.',
       type: 'error',
       showCancelButton: false,
       confirmButtonColor: '#3085d6',

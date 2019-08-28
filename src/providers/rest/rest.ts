@@ -692,6 +692,17 @@ export class RestProvider {
     });
   }
 
+  getDowngradeMembership(RecurringPaymentID) {
+    return new Promise(resolve => {
+      this.http.get(this.apiUrl + '/getDowngradeMembership/'  + RecurringPaymentID).subscribe(data => {
+        resolve(data);
+      }, err => {
+         console.log(err);
+      });
+    });
+  }
+
+
   getCancelUpdateMembership(RecurringPaymentID) {
     return new Promise(resolve => {
       this.http.get(this.apiUrl + '/getCancelUpdateMembership/' + RecurringPaymentID).subscribe(data => {

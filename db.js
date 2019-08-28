@@ -1533,6 +1533,22 @@ db.executeUpdateMembership = function (RecurringPaymentID, RecurringPaymentUUID,
     });
 };
 
+db.executeDowngradeMembership = function (RecurringPaymentID) {
+
+    const requestStr = `delete from RecurringPaymentUpsell where ID =  ${RecurringPaymentID}`;
+        
+    return new Promise((resolve, reject) => {
+        tp.sql(requestStr)
+        .execute()
+        .then(results => {
+            resolve(results);
+        })
+        .catch(err => {
+            reject(err);
+        });
+    });
+};
+
 db.executeCancelUpdateMembership = function (RecurringPaymentID) {
 
     const requestStr = `UPDATE RecurringPaymentUpsell SET CancellationDate = GETDATE(),Enabled = 0 WHERE RecurringPaymentID = ${RecurringPaymentID} and ID = (select top 1 ID from RecurringPaymentUpsell where RecurringPaymentID = ${RecurringPaymentID} order by ID desc);`

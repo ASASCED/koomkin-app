@@ -1470,6 +1470,20 @@ app.get('/getUpdateMembership/:RecurringPaymentID/:RecurringPaymentUUID/:amount'
         });
 });
 
+
+app.get('/getDowngradeMembership/:RecurringPaymentID', function (req, res) {
+
+    const RecurringPaymentID = parseInt(req.params.RecurringPaymentID, 10);
+
+    db.executeDowngradeMembership(RecurringPaymentID)
+        .then(rows => {
+            res.json(rows).status(200).send();
+        })
+        .catch(err => {
+            res.status(500).json({ error: err }).send();
+        });
+});
+
 app.get('/getCancelUpdateMembership/:RecurringPaymentID', function (req, res) {
 
     const RecurringPaymentID = parseInt(req.params.RecurringPaymentID, 10);
