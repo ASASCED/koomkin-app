@@ -53,10 +53,10 @@ export class ModalUpgradePage {
   ngOnInit() {
     if(this.tipo == 16) {
       this.getRandomImage(this.banner1);
-      this.selectedAmount = 250;
+      this.selectedAmount = 1;
     } else if(this.tipo == 17) {
       this.getRandomImage(this.banner2);
-      this.selectedAmount = 350;
+      this.selectedAmount = 2;
     }
   }
 
@@ -86,10 +86,12 @@ export class ModalUpgradePage {
     this.provedor.getUpdateMembership(this.idRecurrente, this.uuidRecurrente, this.selectedAmount)
       .then(
         (data) => {
-          if(this.tipoBanner == 16) {
-            this.getUpgradeMembership();
-          } else if(this.tipoBanner == 17) {
+          if(this.tipo == 16) {
+            let last_upgrade = data[0].ID;
+            this.getUpgradeMembership(last_upgrade);
+          } else if(this.tipo == 17) {
             this.showSuccessUpgrade();
+            this.closeModal();
           }
         },
         (error) => {
@@ -99,12 +101,13 @@ export class ModalUpgradePage {
   }
 
 
-  public getUpgradeMembership() {
+  public getUpgradeMembership(last_upgrade) {
+
     this.provedor.getUpdateMembership(this.idRecurrente, this.uuidRecurrente, this.selectedAmount)
       .then(
         (data) => {
           let upsell_id = data[0].ID;
-          this.immediateUpsell(upsell_id);
+          this.immediateUpsell(upsell_id,last_upgrade);
         },
         (error) => {
           console.log(error);
@@ -112,13 +115,13 @@ export class ModalUpgradePage {
       );
   }
 
-  public immediateUpsell(upsell_id) {
+  public immediateUpsell(upsell_id,last_upgrade) {
 
     let loading = this.loadingCtrl.create({
       content: "Realizando pago..."
     });
 
-    const cuerpo = `{'user_id': '${this.id}', 'upsell_id': '${upsell_id}'}`;
+    const cuerpo = `{'user_id': ${this.id}, 'upsell_id': ${upsell_id}}`;
 
     const options = {
       headers: new HttpHeaders().set(
@@ -131,16 +134,19 @@ export class ModalUpgradePage {
     }).catch(reason => { console.log(reason) });
     return new Promise((resolve, reject) => {
       const url = 'https://www.koomkin.com.mx/api/openPay/immediateUpsell';
+
       this.http.post(url, cuerpo, options).subscribe(
         data => {
+          console.log(data);
           if (data['result'] == 'OK') {
             loading.dismiss();
             this.showSuccessUpgrade();
-            this.navCtrl.setRoot('InicioPage');
             this.getInsertUpgradeMembresia();
             this.registrarInteres(0);
+            this.closeModal();
           } else if (data['result'] == 'Upsell aplicado pero no se aplicó el cargo. Se intentará en el siguiente pago recurrente.') {
             loading.dismiss();
+            this.getDowngradeMembership(last_upgrade);
             this.getDowngradeMembership(upsell_id);
             this.showErrorUpgrade();
             this.navCtrl.setRoot('InicioPage');
@@ -153,7 +159,7 @@ export class ModalUpgradePage {
         }
       );
     });
-
+    
   }
 
   public getDowngradeMembership(upsell_id) {
@@ -183,7 +189,7 @@ export class ModalUpgradePage {
   }
 
   public registrarInteres(interes: number) {
-    console.log(interes + "/" + this.idReporteBanner + "/" + this.uuidPase);
+    console.log(interes + "/" + this.idReporteBanner);
     return new Promise((resolve, reject) => {
       const urlBanner = "https://www.koomkin.com.mx/api/app/registrarInteresBanner/" + interes + "/" + this.idReporteBanner;
       this.http.get(urlBanner).subscribe(

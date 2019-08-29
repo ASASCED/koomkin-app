@@ -1311,12 +1311,13 @@ app.get('/getUpdateBanner/:id', function (req, res) {
         });
 });
 
-app.get('/registrarInteresBanner/:interes/:idReporteBanner', function (req, res) {
+app.get('/registrarInteresBanner/:interes/:idReporteBanner/:idPase?', function (req, res) {
 
     const interes = req.params.interes;
     const idReporteBanner = req.params.idReporteBanner;
+    let idPase = req.params.idPase;
 
-    db.executeInteresBanner(interes, idReporteBanner)
+    db.executeInteresBanner(interes, idReporteBanner, idPase)
         .then(rows => {
             res.json(rows).status(200).send();
         })

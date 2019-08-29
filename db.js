@@ -674,7 +674,7 @@ db.executeInteresBanner = function (interes,idReporteBanner) {
 };
 
 
-db.executeInteresBannerReporte = function (interes,idReporteBanner) {
+db.executeInteresBannerReporte = function (interes,idReporteBanner,idPase) {
 
     var requestStr = '';
 
