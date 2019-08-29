@@ -77,21 +77,34 @@ export class ModalUpgradePage {
       reverseButtons: true
     }).then(result => {
       if (result.value) {
-        this.getUpgradeMembership();
+        this.upgradeMembership();
       }
     });
   }
+
+  public upgradeMembership() {
+    this.provedor.getUpdateMembership(this.idRecurrente, this.uuidRecurrente, this.selectedAmount)
+      .then(
+        (data) => {
+          if(this.tipoBanner == 16) {
+            this.getUpgradeMembership();
+          } else if(this.tipoBanner == 17) {
+            this.showSuccessUpgrade();
+          }
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+  }
+
 
   public getUpgradeMembership() {
     this.provedor.getUpdateMembership(this.idRecurrente, this.uuidRecurrente, this.selectedAmount)
       .then(
         (data) => {
           let upsell_id = data[0].ID;
-          if(this.tipoBanner == 16) {
-            this.immediateUpsell(upsell_id);
-          } else if(this.tipoBanner == 17) {
-            this.immediateUpsell(upsell_id);
-          }
+          this.immediateUpsell(upsell_id);
         },
         (error) => {
           console.log(error);
