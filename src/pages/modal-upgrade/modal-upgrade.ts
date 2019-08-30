@@ -181,14 +181,9 @@ export class ModalUpgradePage {
 
   public getRegisterUpdateMembership() {
     let canal = 'App';
-    let idpopup;
+    let idpopup = this.banner;
 
-    if(this.tipo == 16) {
-      idpopup = this.banner1;
-    } else if(this.tipo == 17) {
-      idpopup = this.banner2;
-    }
-
+    console.log(this.id, this.banner, canal);
     this.provedor.getRegisterUpdateMembership(this.id, idpopup, canal)
       .then(
         (data) => {

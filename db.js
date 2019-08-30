@@ -1534,6 +1534,8 @@ db.executeRegisterUpdateMembership = function (idUsuario, idpopup, canal) {
 
     const requestStr = `insert into ClickUpgrade (idusuario, idpopup, fecharegistro, canal) values (${idUsuario},${idpopup},getdate(),'${canal}')`;
         
+    console.log(requestStr);
+    
     return new Promise((resolve, reject) => {
         tp.sql(requestStr)
         .execute()
