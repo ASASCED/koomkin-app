@@ -598,7 +598,6 @@ db.executeFechaEntradaBanner = function (idReporteBanner,canal) {
     });
 };
 
-
 db.executeGetEficiency = function (idUsuario) {
 
 const requestStr = `select * from Eficiencia where fecha = (select max(fecha) from Eficiencia) and idusuario = ${idUsuario}`;
@@ -673,7 +672,6 @@ db.executeInteresBanner = function (interes,idReporteBanner) {
     });
 };
 
-
 db.executeInteresBannerReporte = function (interes,idReporteBanner,idPase) {
 
     var requestStr = '';
@@ -696,7 +694,6 @@ db.executeInteresBannerReporte = function (interes,idReporteBanner,idPase) {
             });
     });
 };
-
 
 //getInsertCambiarMensaje
 db.executeCambiarMensaje = function (command, usuario, acceso, mensaje) {
@@ -1520,6 +1517,22 @@ db.executeUpdateMembership = function (RecurringPaymentID, RecurringPaymentUUID,
     VALUES (${RecurringPaymentID},'${RecurringPaymentUUID}','${amount}',1,GETDATE());
     
     select top 1 * from RecurringPaymentUpsell where RecurringPaymentID = ${RecurringPaymentID} and RecurringPaymentUUID = '${RecurringPaymentUUID}' order by ID desc`;
+        
+    return new Promise((resolve, reject) => {
+        tp.sql(requestStr)
+        .execute()
+        .then(results => {
+            resolve(results);
+        })
+        .catch(err => {
+            reject(err);
+        });
+    });
+};
+
+db.executeRegisterUpdateMembership = function (idUsuario, idpopup, canal) {
+
+    const requestStr = `insert into ClickUpgrade (idusuario, idpopup, fecharegistro, canal) values (${idUsuario},${idpopup},getdate(),'${canal}')`;
         
     return new Promise((resolve, reject) => {
         tp.sql(requestStr)

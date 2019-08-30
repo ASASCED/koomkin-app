@@ -692,6 +692,16 @@ export class RestProvider {
     });
   }
 
+  getRegisterUpdateMembership(idUsuario, idpopup, canal) {
+    return new Promise(resolve => {
+      this.http.get(this.apiUrl + '/getRegisterUpdateMembership/'  + idUsuario + '/' + idpopup + '/' + canal).subscribe(data => {
+        resolve(data);
+      }, err => {
+         console.log(err);
+      });
+    });
+  }
+
   getDowngradeMembership(RecurringPaymentID) {
     return new Promise(resolve => {
       this.http.get(this.apiUrl + '/getDowngradeMembership/'  + RecurringPaymentID).subscribe(data => {

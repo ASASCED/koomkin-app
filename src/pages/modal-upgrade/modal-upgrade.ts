@@ -56,9 +56,11 @@ export class ModalUpgradePage {
     if(this.tipo == 16) {
       this.getRandomImage(this.banner1);
       this.getRandomBanner(this.upgrade1);
+      this.selectedAmount = 250;
     } else if(this.tipo == 17) {
       this.getRandomImage(this.banner2);
       this.getRandomBanner(this.upgrade2);
+      this.selectedAmount = 350;
     }
   }
 
@@ -145,6 +147,7 @@ export class ModalUpgradePage {
             this.showSuccessUpgrade();
             this.getInsertUpgradeMembresia();
             this.registrarInteres(0);
+            this.getRegisterUpdateMembership();
             this.closeModal();
           } else if (data['result'] == 'Upsell aplicado pero no se aplicó el cargo. Se intentará en el siguiente pago recurrente.') {
             loading.dismiss();
@@ -169,6 +172,27 @@ export class ModalUpgradePage {
       .then(
         (data) => {
 
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+  }
+
+  public getRegisterUpdateMembership() {
+    let canal = 'App';
+    let idpopup;
+
+    if(this.tipo == 16) {
+      idpopup = this.banner1;
+    } else if(this.tipo == 17) {
+      idpopup = this.banner2;
+    }
+
+    this.provedor.getRegisterUpdateMembership(this.id, idpopup, canal)
+      .then(
+        (data) => {
+          console.log(data);
         },
         (error) => {
           console.log(error);

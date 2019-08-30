@@ -1471,6 +1471,20 @@ app.get('/getUpdateMembership/:RecurringPaymentID/:RecurringPaymentUUID/:amount'
         });
 });
 
+app.get('/getRegisterUpdateMembership/:idUsuario/:idpopup/:canal', function (req, res) {
+
+    const idUsuario = parseInt(req.params.idUsuario, 10);
+    const idpopup = parseInt(req.params.idpopup, 10);
+    const canal = req.params.canal;
+
+    db.executeRegisterUpdateMembership(idUsuario, idpopup, canal)
+        .then(rows => {
+            res.json(rows).status(200).send();
+        })
+        .catch(err => {
+            res.status(500).json({ error: err }).send();
+        });
+});
 
 app.get('/getDowngradeMembership/:RecurringPaymentID', function (req, res) {
 
