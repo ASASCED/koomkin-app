@@ -2,8 +2,8 @@
   <ion-grid>
     <ion-row>
       <ion-col col-12>
-        <img *ngIf="tipo == 16" src="assets/imgs/upgrade/2x1.svg" width="100%" />
-        <img *ngIf="tipo == 17" src="assets/imgs/upgrade/upgrade.svg" width="100%" />
+        <img *ngIf="tipo == 16" src="assets/imgs/upgrade/{{upgrade}}.svg" width="100%" />
+        <img *ngIf="tipo == 17" src="assets/imgs/upgrade/{{upgrade}}.svg" width="100%" />
       </ion-col>
     </ion-row>
     <ion-row>
@@ -35,7 +35,7 @@
       <ion-col col-1>
       </ion-col>
       <ion-col col-10>
-        <img [ngClass]="{ flecha: banner == 'flecha', otro: banner !== 'flecha' }" src="assets/imgs/upgrade/{{banner}}.svg"/> 
+        <img [ngClass]="{ flecha: banner == 'promo5', otro: banner === 'promo1' ||  banner === 'promo2' || banner === 'promo4', dinero: banner === 'promo3' ||  banner === 'promo6' }" src="assets/imgs/upgrade/{{banner}}.svg"/> 
       </ion-col>
       <ion-col col-1>
       </ion-col>

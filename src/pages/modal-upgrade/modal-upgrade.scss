@@ -9,7 +9,12 @@ page-modal-upgrade {
     width: 90%;
     margin-left: 5%;
   }
-  
+
+  .dinero {
+    width: 42%;
+    margin-left: 29%;  
+  }
+
   @media (min-width: 300px) and (min-height: 1050000px) {
     ion-backdrop {
       visibility: visible;

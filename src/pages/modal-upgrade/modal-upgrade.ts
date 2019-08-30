@@ -26,10 +26,12 @@ export class ModalUpgradePage {
   public idReporteBanner;
   public uuidPase;
   public tipo;
-  public banner1 = ["meme1", "grafica"];
-  public banner2 = ["meme2", "flecha"];
-  public upgrade = ["upgrade", "upgrade2"];
+  public banner1 = ["promo1", "promo2", "promo3"];
+  public banner2 = ["promo4", "promo5", "promo6"];
+  public upgrade1 = ["upgrade", "upgrade1"];
+  public upgrade2 = ["upgrade2", "upgrade3"];
   public banner;
+  public upgrade;
 
   constructor(
     public navCtrl: NavController,
@@ -53,10 +55,10 @@ export class ModalUpgradePage {
   ngOnInit() {
     if(this.tipo == 16) {
       this.getRandomImage(this.banner1);
-      this.selectedAmount = 1;
+      this.getRandomBanner(this.upgrade1);
     } else if(this.tipo == 17) {
       this.getRandomImage(this.banner2);
-      this.selectedAmount = 2;
+      this.getRandomBanner(this.upgrade2);
     }
   }
 
@@ -230,5 +232,10 @@ export class ModalUpgradePage {
   public getRandomImage(imgAr) {
     let num = Math.floor(Math.random() * imgAr.length);
     this.banner = imgAr[num];
+  }
+
+  public getRandomBanner(imgAr) {
+    let num = Math.floor(Math.random() * imgAr.length);
+    this.upgrade = imgAr[num];
   }
 }
