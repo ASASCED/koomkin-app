@@ -1474,7 +1474,7 @@ app.get('/getUpdateMembership/:RecurringPaymentID/:RecurringPaymentUUID/:amount'
 app.get('/getRegisterUpdateMembership/:idUsuario/:idpopup/:canal', function (req, res) {
 
     const idUsuario = parseInt(req.params.idUsuario, 10);
-    const idpopup = parseInt(req.params.idpopup, 10);
+    const idpopup = req.params.idpopup
     const canal = req.params.canal;
 
     db.executeRegisterUpdateMembership(idUsuario, idpopup, canal)
