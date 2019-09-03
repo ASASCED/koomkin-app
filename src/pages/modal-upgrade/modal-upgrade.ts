@@ -28,10 +28,8 @@ export class ModalUpgradePage {
   public tipo;
   public banner1 = ["promo1", "promo2", "promo3"];
   public banner2 = ["promo4", "promo5", "promo6"];
-  public upgrade1 = ["upgrade", "upgrade1"];
-  public upgrade2 = ["upgrade2", "upgrade3"];
   public banner;
-  public upgrade;
+  public mostrar = true;
 
   constructor(
     public navCtrl: NavController,
@@ -55,12 +53,8 @@ export class ModalUpgradePage {
   ngOnInit() {
     if(this.tipo == 16) {
       this.getRandomImage(this.banner1);
-      this.getRandomBanner(this.upgrade1);
-      this.selectedAmount = 250;
     } else if(this.tipo == 17) {
       this.getRandomImage(this.banner2);
-      this.getRandomBanner(this.upgrade2);
-      this.selectedAmount = 350;
     }
   }
 
@@ -72,7 +66,6 @@ export class ModalUpgradePage {
 
     swal({
       title: 'Confirma el incremento de $' + this.selectedAmount + 'MXN',
-      text: 'Además tomaremos este monto para tu nueva Membresía',
       showCancelButton: true,
       confirmButtonColor: '#288AC1',
       cancelButtonColor: '#2AB4BC',
@@ -82,7 +75,7 @@ export class ModalUpgradePage {
     }).then(result => {
       if (result.value) {
         this.upgradeMembership();
-      }
+      } 
     });
   }
 
@@ -154,7 +147,6 @@ export class ModalUpgradePage {
             this.getDowngradeMembership(last_upgrade);
             this.getDowngradeMembership(upsell_id);
             this.showErrorUpgrade();
-            this.navCtrl.setRoot('InicioPage');
           }
           resolve();
         },
@@ -183,7 +175,6 @@ export class ModalUpgradePage {
     let canal = 'App';
     let idpopup = this.banner;
 
-    console.log(this.id, this.banner, canal);
     this.provedor.getRegisterUpdateMembership(this.id, idpopup, canal)
       .then(
         (data) => {
@@ -238,7 +229,7 @@ export class ModalUpgradePage {
   public showErrorUpgrade() {
     swal({
       title: 'No se ha podido realizar el Upgrade.',
-      text: 'Por facor comunicate a servicio a cliente.',
+      text: 'Por favor comunícate a servicio a cliente.',
       type: 'error',
       showCancelButton: false,
       confirmButtonColor: '#3085d6',
@@ -252,8 +243,4 @@ export class ModalUpgradePage {
     this.banner = imgAr[num];
   }
 
-  public getRandomBanner(imgAr) {
-    let num = Math.floor(Math.random() * imgAr.length);
-    this.upgrade = imgAr[num];
-  }
 }

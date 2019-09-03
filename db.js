@@ -1153,7 +1153,7 @@ db.executeGetLastCampania = function (idUsuario) {
         });
 };
 
-db.executeUpdateBriefInformation = function (idUsuario,idProducto,new_Producto,new_TipoEmpresa,new_CodigoPostal,new_IDMembresia,new_PorqueEresMejor,new_ClientesTarget,new_Correo1,new_Correo2,new_Correo3,new_IdSubSector,idEstado ) {
+db.executeUpdateBriefInformation = function (idUsuario,idProducto,new_Producto,new_TipoEmpresa,new_CodigoPostal,new_IDMembresia,new_PorqueEresMejor,new_ClientesTarget,new_Correo1,new_Correo2,new_Correo3,new_IdSubSector,idEstado,palabraGoogle ) {
 
     var requestStr = '';
 
@@ -1174,7 +1174,8 @@ db.executeUpdateBriefInformation = function (idUsuario,idProducto,new_Producto,n
                                     '${new_PorqueEresMejor}',
                                     '${new_ClientesTarget}',
                                     '${new_Correo1}',
-                                    ${new_IdSubSector});
+                                    ${new_IdSubSector},
+                                    '${palabraGoogle}');
         select top 1 * from tbl_tuCampania where IDUSUARIO = ${idUsuario} order by IDCampania desc`;                       
 
     } else if(idEstado != 'NULL') {
@@ -1199,9 +1200,9 @@ db.executeUpdateBriefInformation = function (idUsuario,idProducto,new_Producto,n
                                                     '${new_Correo1}',
                                                     '${new_Correo1}',
                                                     '${new_Correo1}',
-                                                    ${new_IdSubSector});
-                        select top 1 * from tbl_tuCampania where IDUSUARIO = ${idUsuario} order by IDCampania desc`;   
-                        
+                                                    ${new_IdSubSector},
+                                                    '${palabraGoogle}');
+                        select top 1 * from tbl_tuCampania where IDUSUARIO = ${idUsuario} order by IDCampania desc`;    
     }
     
     console.log(requestStr);

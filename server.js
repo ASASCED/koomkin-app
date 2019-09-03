@@ -767,7 +767,7 @@ app.get('/getInsertClickChat/:usuario/:id/:acceso/:dispositivo/:metodo', functio
 
 //updateBriefInformation
 
-app.get('/updateBriefInformation/:usuario/:idProducto/:new_Producto/:new_TipoEmpresa/:new_CodigoPostal/:new_IDMembresia/:new_PorqueEresMejor/:new_ClientesTarget/:new_Correo1?/:new_Correo2?/:new_Correo3?/:new_IdSubSector?/:idEstado?', function (req, res) {
+app.get('/updateBriefInformation/:usuario/:idProducto/:new_Producto/:new_TipoEmpresa/:new_CodigoPostal/:new_IDMembresia/:new_PorqueEresMejor/:new_ClientesTarget/:new_Correo1?/:new_Correo2?/:new_Correo3?/:new_IdSubSector?/:idEstado?/:palabraGoogle', function (req, res) {
 
     const usuario = parseInt(req.params.usuario, 10);
     const idProducto = parseInt(req.params.idProducto, 10);
@@ -782,6 +782,7 @@ app.get('/updateBriefInformation/:usuario/:idProducto/:new_Producto/:new_TipoEmp
     let new_Correo3 = req.params.new_Correo3;
     let new_IdSubSector = parseInt(req.params.new_IdSubSector, 10);
     let idEstado = parseInt(req.params.idEstado, 10);
+    let palabraGoogle = req.params
 
     if (!new_IDMembresia) {
         new_IDMembresia = 'NULL';
@@ -1805,6 +1806,7 @@ app.post('/updateBriefInformation2/', function (req, res) {
     let new_Correo3 = req.body.new_Correo3;
     let new_IdSubSector = parseInt(req.body.new_IdSubSector, 10);
     let idEstado = parseInt(req.body.idEstado, 10);
+    let palabraGoogle = req.body.palabraGoogle;
 
     if (!new_IDMembresia) {
         new_IDMembresia = 'NULL';
@@ -1830,9 +1832,11 @@ app.post('/updateBriefInformation2/', function (req, res) {
         idEstado = 'NULL';
     }
 
-    console.log(usuario, idProducto, new_Producto, new_TipoEmpresa, new_CodigoPostal, new_IDMembresia, new_PorqueEresMejor, new_ClientesTarget, new_Correo1, new_Correo2, new_Correo3, new_IdSubSector, idEstado);
+    if (!palabraGoogle) {
+        palabraGoogle = 'NULL';
+    }
 
-    db.executeUpdateBriefInformation(usuario, idProducto, new_Producto, new_TipoEmpresa, new_CodigoPostal, new_IDMembresia, new_PorqueEresMejor, new_ClientesTarget, new_Correo1, new_Correo2, new_Correo3, new_IdSubSector, idEstado)
+    db.executeUpdateBriefInformation(usuario, idProducto, new_Producto, new_TipoEmpresa, new_CodigoPostal, new_IDMembresia, new_PorqueEresMejor, new_ClientesTarget, new_Correo1, new_Correo2, new_Correo3, new_IdSubSector, idEstado, palabraGoogle)
         .then(rows => {
             res.json(rows).status(200).send();
         })

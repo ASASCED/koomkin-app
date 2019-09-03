@@ -2,8 +2,10 @@
   <ion-grid>
     <ion-row>
       <ion-col col-12>
-        <img *ngIf="tipo == 16" src="assets/imgs/upgrade/{{upgrade}}.svg" width="100%" />
-        <img *ngIf="tipo == 17" src="assets/imgs/upgrade/{{upgrade}}.svg" width="100%" />
+        <img *ngIf="tipo == 16 && banner !== 'promo3'" src="assets/imgs/upgrade/upgrade.svg" width="100%" />
+        <img *ngIf="tipo == 16 && banner == 'promo3'" src="assets/imgs/upgrade/upgrade1.svg" width="100%" />
+        <img *ngIf="tipo == 17 && banner !== 'promo6'" src="assets/imgs/upgrade/upgrade2.svg" width="100%" />
+        <img *ngIf="tipo == 17 && banner == 'promo6'" src="assets/imgs/upgrade/upgrade3.svg" width="100%" />
       </ion-col>
     </ion-row>
     <ion-row>
