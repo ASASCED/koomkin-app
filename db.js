@@ -1167,7 +1167,8 @@ db.executeUpdateBriefInformation = function (idUsuario,idProducto,new_Producto,n
                                     PorqueEresMejor,
                                     ClientesTarget,
                                     Correo1,
-                                    IdSubSector)
+                                    IdSubSector,
+                                    PalabraGoogle)
                                 values (
                                     ${new_IDMembresia},
                                     ${idUsuario},
@@ -1191,7 +1192,8 @@ db.executeUpdateBriefInformation = function (idUsuario,idProducto,new_Producto,n
                                                     Correo1,
                                                     Correo2,
                                                     Correo3,
-                                                    IdSubSector)
+                                                    IdSubSector,
+                                                    PalabraGoogle)
                                                 values (
                                                     ${new_IDMembresia},
                                                     ${idUsuario},
