@@ -1846,6 +1846,26 @@ app.post('/updateBriefInformation2/', function (req, res) {
 });
 
 //Genera un comentario por lead
+app.post('/updateLead/', function (req, res) {
+
+    const claveLead = parseInt(req.body.claveLead, 10);
+    const nombreLead = req.body.nombreLead;
+    const empresaLead = req.body.comentario;
+    const emailLead = req.body.clasificaLead;
+    const fechaEnvio= req.body.clasificaLead;
+    const idEstado = parseInt(req.body.idEstado, 10);
+
+    db.executeUpdateLead(claveLead, nombreLead, empresaLead, emailLead, fechaEnvio, idEstado)
+        .then(rows => {
+            res.json(rows).status(200).send();
+        })
+        .catch(err => {
+            res.status(500).json({ error: err }).send();
+        });
+});
+
+
+//Genera un comentario por lead
 app.post('/registerComment/', function (req, res) {
 
     const idUsuario = parseInt(req.body.idUsuario, 10);
