@@ -1850,10 +1850,22 @@ app.post('/updateLead/', function (req, res) {
 
     const claveLead = parseInt(req.body.claveLead, 10);
     const nombreLead = req.body.nombreLead;
-    const empresaLead = req.body.comentario;
-    const emailLead = req.body.clasificaLead;
-    const fechaEnvio= req.body.clasificaLead;
-    const idEstado = parseInt(req.body.idEstado, 10);
+    let empresaLead = req.body.empresaLead;
+    const emailLead = req.body.emailLead;
+    let fechaEnvio = req.body.fechaEnvio;
+    let idEstado = parseInt(req.body.idEstado, 10);
+
+    if (!empresaLead) {
+        empresaLead = 'NULL';
+    }
+
+    if (!fechaEnvio) {
+        fechaEnvio = 'NULL';
+    }
+
+    if (!idEstado) {
+        idEstado = 'NULL';
+    }
 
     db.executeUpdateLead(claveLead, nombreLead, empresaLead, emailLead, fechaEnvio, idEstado)
         .then(rows => {

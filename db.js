@@ -1398,7 +1398,7 @@ db.executeUpdateLead = function(
   fechaEnvio,
   idEstado
 ) {
-  const requestStr = `update TACotizacion set NombreUsuarioEnvio = '${nombreLead}', EmailUsuarioEnvio = '${emailLead}', EmpresaUsuarioEnvio = '${empresaLead}', FechaEnvio = '${fechaEnvio}', IdEstado = '${idEstado}'  where Clave = ${claveLead}`;
+  const requestStr = `update TACotizacion set NombreUsuarioEnvio = '${nombreLead}', EmailUsuarioEnvio = '${emailLead}', EmpresaUsuarioEnvio = '${empresaLead}', FechaEnvio = '${fechaEnvio}', IdEstado = ${idEstado}  where Clave = ${claveLead}`;
 
   console.log(requestStr);
 
