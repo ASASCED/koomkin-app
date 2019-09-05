@@ -1789,7 +1789,7 @@ app.post('/registerReason/', function (req, res) {
         });
 });
 
-//updateBriefInformation
+//updateBriefInformation version compatible 4.0 y 30
 
 app.post('/updateBriefInformation2/', function (req, res) {
 
@@ -1837,6 +1837,113 @@ app.post('/updateBriefInformation2/', function (req, res) {
     }
 
     db.executeUpdateBriefInformation(usuario, idProducto, new_Producto, new_TipoEmpresa, new_CodigoPostal, new_IDMembresia, new_PorqueEresMejor, new_ClientesTarget, new_Correo1, new_Correo2, new_Correo3, new_IdSubSector, idEstado, palabraGoogle)
+        .then(rows => {
+            res.json(rows).status(200).send();
+        })
+        .catch(err => {
+            res.status(500).json({ error: err }).send();
+        });
+});
+
+//updateBriefInformation superior a la version compatible 4.0 y 30
+
+app.post('/updateBriefInformation3/', function (req, res) {
+
+    let usuario = parseInt(req.body.usuario, 10);
+    let idProducto = parseInt(req.body.idProducto, 10);
+    let new_Producto = req.body.new_Producto;
+    let new_TipoEmpresa = parseInt(req.body.new_TipoEmpresa, 10);
+    let new_CodigoPostal = parseInt(req.body.new_CodigoPostal, 10);
+    let new_IDMembresia = parseInt(req.body.new_IDMembresia, 10);
+    let new_PorqueEresMejor = req.body.new_PorqueEresMejor;
+    let new_ClientesTarget = req.body.new_ClientesTarget;
+    let new_Correo1 = req.body.new_Correo1;
+    let new_IdSubSector = parseInt(req.body.new_IdSubSector, 10);
+    let idEstado = parseInt(req.body.idEstado, 10);
+    let ClientesTargetIngresosAnuales = req.body.ClientesTargetIngresosAnuales;
+    let ClientesTargetEdad = req.body.ClientesTargetEdad;
+    let ClientesTargetGenero = req.body.ClientesTargetGenero;
+    let ClientesTargetIntereses = req.body.ClientesTargetIntereses;
+    let ClientesTargetSector = req.body.ClientesTargetSector;
+    let ClientesTargetCategoria = req.body.ClientesTargetCategoria;
+    let ClientesTargetSectores = req.body.ClientesTargetSectores;
+    let palabraGoogle = req.body.palabraGoogle;
+
+    if (!new_IDMembresia) {
+        new_IDMembresia = 'NULL';
+    }
+
+    if (!new_Correo1) {
+        new_Correo1 = 'NULL';
+    }
+
+    if (!new_Correo2) {
+        new_Correo2 = 'NULL';
+    }
+
+    if (!new_Correo3) {
+        new_Correo3 = 'NULL';
+    }
+
+    if (!new_IdSubSector) {
+        new_IdSubSector = 'NULL';
+    }
+
+    if (!idEstado) {
+        idEstado = 'NULL';
+    }
+
+    if (!ClientesTargetIngresosAnuales) {
+        ClientesTargetIngresosAnuales = 'NULL';
+    }
+
+    if (!ClientesTargetEdad) {
+        ClientesTargetEdad = 'NULL';
+    }
+
+    if (!ClientesTargetGenero) {
+        ClientesTargetGenero = 'NULL';
+    }
+
+    if (!ClientesTargetIntereses) {
+        ClientesTargetIntereses = 'NULL';
+    }
+
+    if (!ClientesTargetSector) {
+        ClientesTargetSector = 'NULL';
+    }
+
+    if (!ClientesTargetCategoria) {
+        ClientesTargetCategoria = 'NULL';
+    }
+
+    if (!ClientesTargetSectores) {
+        ClientesTargetSectores = 'NULL';
+    }
+    
+    if (!palabraGoogle) {
+        palabraGoogle = 'NULL';
+    }
+
+    db.executeUpdateBriefInformation2(idUsuario,
+        idProducto,
+        new_Producto,
+        new_TipoEmpresa,
+        new_CodigoPostal,
+        new_IDMembresia,
+        new_PorqueEresMejor,
+        new_ClientesTarget,
+        new_Correo1,
+        new_IdSubSector,
+        idEstado,
+        ClientesTargetIngresosAnuales,
+        ClientesTargetEdad,
+        ClientesTargetGenero,
+        ClientesTargetIntereses,
+        ClientesTargetSector,
+        ClientesTargetCategoria,
+        ClientesTargetSectores,
+        palabraGoogle)
         .then(rows => {
             res.json(rows).status(200).send();
         })

@@ -911,6 +911,13 @@ export class MasBriefPage implements OnInit {
     body.set('new_Correo3', this.correo1);
     body.set('new_IdSubSector', this.IdSubSector);
     body.set('idEstado', nuevo_estado);
+    body.set('ClientesTargetIngresosAnuales', this.ingresosAnuales);
+    body.set('ClientesTargetEdad', this.edad);
+    body.set('ClientesTargetGenero', this.genero);
+    body.set('ClientesTargetIntereses', this.intereses);
+    body.set('ClientesTargetSector', this.sector);
+    body.set('ClientesTargetCategoria', this.categoria);
+    body.set('ClientesTargetSectores', this.sectores);
     body.set('palabraGoogle', this.google);
 
     const options = {
@@ -920,7 +927,7 @@ export class MasBriefPage implements OnInit {
       )
     };
 
-    const url = 'https://www.koomkin.com.mx/api/app/updateBriefInformation2/';
+    const url = 'https://www.koomkin.com.mx/api/app/updateBriefInformation3/';
 
     return new Promise((resolve, reject) => {
       this.http.post(url, body.toString(), options).subscribe(
