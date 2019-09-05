@@ -1410,13 +1410,13 @@ db.executeUpdateBriefInformation2 = function(
                                     '${new_ClientesTarget}',
                                     '${new_Correo1}',
                                     ${new_IdSubSector},
-                                    ${ClientesTargetIngresosAnuales}, 
-                                    ${ClientesTargetEdad}, 
-                                    ${ClientesTargetGenero}, 
-                                    ${ClientesTargetIntereses}, 
-                                    ${ClientesTargetSector}, 
-                                    ${ClientesTargetCategoria}, 
-                                    ${ClientesTargetSectores},
+                                    '${ClientesTargetIngresosAnuales}', 
+                                    '${ClientesTargetEdad}', 
+                                    '${ClientesTargetGenero}', 
+                                    '${ClientesTargetIntereses}', 
+                                    '${ClientesTargetSector}', 
+                                    '${ClientesTargetCategoria}', 
+                                    '${ClientesTargetSectores}',
                                     '${palabraGoogle}');
         select top 1 * from tbl_tuCampania where IDUSUARIO = ${idUsuario} order by IDCampania desc`;
   } else if (idEstado != "NULL") {
