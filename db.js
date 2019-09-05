@@ -1384,84 +1384,26 @@ db.executeUpdateBriefInformation2 = function(
 ) {
   var requestStr = "";
 
-  if (idEstado == "NULL") {
-    console.log("entro");
-    requestStr = `Update TBL_CATALOGOPRODUCTOS set NOMBRE = '${new_Producto}' where IDUSUARIO = ${idUsuario} and ID_PRODUCTO = ${idProducto}; 
-        Update TBL_BRIEF set ID_TIPOEMPRESA = ${new_TipoEmpresa} , CODIGOPOSTAL = ${new_CodigoPostal} where IDUSUARIO = ${idUsuario};
-        Update tbl_direccionGoogle set cp = ${new_CodigoPostal} where IDUSUARIO = ${idUsuario};
-        Insert into tbl_tuCampania (IDMembresia,
-                                    IDUSUARIO,
-                                    PorqueEresMejor,
-                                    ClientesTarget,
-                                    Correo1,
-                                    IdSubSector,
-                                    ClientesTargetIngresosAnuales, 
-                                    ClientesTargetEdad, 
-                                    ClientesTargetGenero, 
-                                    ClientesTargetIntereses, 
-                                    ClientesTargetSector, 
-                                    ClientesTargetCategoria, 
-                                    ClientesTargetSectores,
-                                    PalabrasGoogle)
-                                values (
-                                    ${new_IDMembresia},
-                                    ${idUsuario},
-                                    '${new_PorqueEresMejor}',
-                                    '${new_ClientesTarget}',
-                                    '${new_Correo1}',
-                                    ${new_IdSubSector},
-                                    '${ClientesTargetIngresosAnuales}', 
-                                    '${ClientesTargetEdad}', 
-                                    '${ClientesTargetGenero}', 
-                                    '${ClientesTargetIntereses}', 
-                                    '${ClientesTargetSector}', 
-                                    '${ClientesTargetCategoria}', 
-                                    '${ClientesTargetSectores}',
-                                    '${palabraGoogle}');
-        select top 1 * from tbl_tuCampania where IDUSUARIO = ${idUsuario} order by IDCampania desc`;
-  } else if (idEstado != "NULL") {
-    console.log("entro if");
-
-    requestStr = `Update TBL_CATALOGOPRODUCTOS set NOMBRE = '${new_Producto}' where IDUSUARIO = ${idUsuario} and ID_PRODUCTO = ${idProducto}; 
-                            Update TBL_BRIEF set ID_TIPOEMPRESA = ${new_TipoEmpresa} , CODIGOPOSTAL = ${new_CodigoPostal}, IDESTADO = ${idEstado} where IDUSUARIO = ${idUsuario};
-                            Update tbl_direccionGoogle set cp = ${new_CodigoPostal} where IDUSUARIO = ${idUsuario};
-                            Insert into tbl_tuCampania (IDMembresia,
-                                                    IDUSUARIO,
-                                                    PorqueEresMejor,
-                                                    ClientesTarget,
-                                                    Correo1,
-                                                    Correo2,
-                                                    Correo3,
-                                                    IdSubSector,
-                                                    ClientesTargetIngresosAnuales, 
-                                                    ClientesTargetEdad, 
-                                                    ClientesTargetGenero, 
-                                                    ClientesTargetIntereses, 
-                                                    ClientesTargetSector, 
-                                                    ClientesTargetCategoria, 
-                                                    ClientesTargetSectores,
-                                                    PalabrasGoogle)
-                                                values (
-                                                    ${new_IDMembresia},
-                                                    ${idUsuario},
-                                                    '${new_PorqueEresMejor}',
-                                                    '${new_ClientesTarget}',
-                                                    '${new_Correo1}',
-                                                    '${new_Correo1}',
-                                                    '${new_Correo1}',
-                                                    ${new_IdSubSector},
-                                                    '${ClientesTargetIngresosAnuales}', 
-                                                    '${ClientesTargetEdad}', 
-                                                    '${ClientesTargetGenero}', 
-                                                    '${ClientesTargetIntereses}', 
-                                                    '${ClientesTargetSector}', 
-                                                    '${ClientesTargetCategoria}', 
-                                                    '${ClientesTargetSectores}',
-                                                    '${palabraGoogle}');
-                        select top 1 * from tbl_tuCampania where IDUSUARIO = ${idUsuario} order by IDCampania desc`;
-  }
-
-  console.log(requestStr);
+  
+  console.log(idUsuario,
+    idProducto,
+    new_Producto,
+    new_TipoEmpresa,
+    new_CodigoPostal,
+    new_IDMembresia,
+    new_PorqueEresMejor,
+    new_ClientesTarget,
+    new_Correo1,
+    new_IdSubSector,
+    idEstado,
+    ClientesTargetIngresosAnuales,
+    ClientesTargetEdad,
+    ClientesTargetGenero,
+    ClientesTargetIntereses,
+    ClientesTargetSector,
+    ClientesTargetCategoria,
+    ClientesTargetSectores,
+    palabraGoogle);
 
   return new Promise((resolve, reject) => {
     tp.sql(requestStr)

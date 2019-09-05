@@ -1917,6 +1917,26 @@ app.post('/updateBriefInformation3/', function (req, res) {
         palabraGoogle = 'NULL';
     }
 
+    console.log(idUsuario,
+        idProducto,
+        new_Producto,
+        new_TipoEmpresa,
+        new_CodigoPostal,
+        new_IDMembresia,
+        new_PorqueEresMejor,
+        new_ClientesTarget,
+        new_Correo1,
+        new_IdSubSector,
+        idEstado,
+        ClientesTargetIngresosAnuales,
+        ClientesTargetEdad,
+        ClientesTargetGenero,
+        ClientesTargetIntereses,
+        ClientesTargetSector,
+        ClientesTargetCategoria,
+        ClientesTargetSectores,
+        palabraGoogle)
+
     db.executeUpdateBriefInformation2(
         idUsuario,
         idProducto,
