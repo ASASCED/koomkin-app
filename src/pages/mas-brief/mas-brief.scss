@@ -26,6 +26,10 @@ page-mas-brief {
         border-radius: 5px;
         margin: 1%;
         box-shadow: 6px 6px 12px -6px rgba(0,0,0,0.75);
+        display: grid;
+        justify-content: center;
+        align-items: center;
+        line-height: normal;
     }
     
     .segment-md .segment-button.segment-activated {
@@ -42,6 +46,10 @@ page-mas-brief {
         border: 1px solid #288AC1;
         margin: 1%;
         box-shadow: 6px 6px 12px -6px rgba(0,0,0,0.75);
+        display: grid;
+        justify-content: center;
+        align-items: center;
+        line-height: normal;
     }
 
     .adicional-container {
@@ -57,7 +65,7 @@ page-mas-brief {
         }
         .adicional-content-container {
             grid-area: adicional-content-container;
-            height: 100%;
+            height: 92%;
             width: 100%;
             text-align: center;
             padding: 4%;
@@ -313,8 +321,10 @@ page-mas-brief {
         margin-bottom: 20%;
     }
     .img-mitad-particulares {
-        width: 100%;
-        margin-bottom: 20%;
+        height: 100%;
+        display: grid;
+        justify-content: center;
+        align-items: center;
     }
     .img-completo {
         width: 100%;
@@ -343,5 +353,76 @@ page-mas-brief {
         color: white !important;
         background: #00B9BE !important;
         font-weight: bold !important;
+    }
+
+    .activity-content-container {
+        grid-area: activity-content-container;
+        height: 100%;
+        width: 100%;
+        text-align: center;
+        display: grid;
+
+        .botones-cobertura-brief {
+            display: inline-block;
+            .boton-cobertura-brief-blanco{ 
+                width: 23%;
+                display: inline-block;
+                border: 1px #00B9BE solid;
+                border-radius: 7px;
+                background: #00B9BE;
+                .texto-boton-brief {
+                    color: white;
+                    margin: 0;
+                    font-weight: bold;
+                }
+            }
+            .boton-cobertura-brief {
+                width: 23%;
+                display: inline-block;
+                border: 1px #CECECE solid;
+                border-radius: 7px;
+                background: white;
+                .texto-boton-brief {
+                    color: #A09D9D;
+                    margin: 0;
+                    font-weight: bold;
+                }
+            }
+        }
+        .botones-brief{
+            display: inline-block;
+            .boton-brief {
+                width: 47.5%;
+                height: 56px;
+                margin: 2% 1%;
+                display: inline-block;
+                border: 1px #CECECE solid;
+                border-radius: 7px;
+                background: white;
+                display:table-cell;
+            }
+            .boton-brief-activo {
+                width: 47.5%;
+                height: 56px;
+                margin: 2% 1%;
+                display: inline-block;
+                border: 1px #00B9BE solid;
+                background: #00B9BE;
+                border-radius: 7px;
+                display:table-cell;
+            }
+        } 
+        .guardar-brief {
+            background-color: #FE703F;
+            color: white;
+            border: 1.1px solid #FE703F;
+            width: 60%;
+            margin-left: 20%;
+            height: 32px;
+            font-size: 4.5vw;
+            border-radius: 30px;
+            font-weight: bold;
+            box-shadow: 8px 8px 10px -6px rgba(0, 0, 0, .9);
+        }
     }
 }

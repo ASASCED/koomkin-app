@@ -18,7 +18,7 @@ export class InicioPage implements OnInit {
   login = 'LoginPage';
   inicio = 'InicioPage';
   eficiencia = 'EficienciaPage';
-  brief = 'BriefPage';
+  brief = 'MasBriefPage';
   financieros = 'DatosFinancierosPage';
   crm = 'CrmPage';
   agenda = 'AgendaPage';
