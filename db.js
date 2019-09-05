@@ -1462,7 +1462,7 @@ db.executeUpdateBriefInformation2 = function(
                         select top 1 * from tbl_tuCampania where IDUSUARIO = ${idUsuario} order by IDCampania desc`;
   }
 
-  console.log(requestStr);
+  console.log('Guardando cambios en el brief');
 
   return new Promise((resolve, reject) => {
     tp.sql(requestStr)

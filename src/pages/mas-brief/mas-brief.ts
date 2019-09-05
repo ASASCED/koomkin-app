@@ -172,127 +172,7 @@ export class MasBriefPage implements OnInit {
     public http: HttpClient
   ) {
     this.empresa = this.authService.empresa;
-    this.id = this.authService.id;
-    this.target = navParams.get('target');
-    this.fechaNacimiento = navParams.get('fechaNacimiento');
-    this.idpuesto = navParams.get('puesto');
-
-    this.positions.forEach(element => {
-      if (element['id'] == this.idpuesto) {
-        this.idpuesto = element['nombre'];
-      }
-    });
-    this.nombre = navParams.get('nombre');
-    this.apaterno = navParams.get('apaterno');
-    this.amaterno = navParams.get('amaterno');
-
-    this.cpDomicilio = navParams.get('cpDomicilio');
-    this.aniosEmpresa = navParams.get('aniosEmpresa');
-    this.educacion = navParams.get('educacion');
-    this.nombreComercial = navParams.get('nombreComercial');
-    this.rfcEmpresa = navParams.get('rfcEmpresa');
-    this.numeroEmpleados = navParams.get('numeroEmpleados');
-    this.numeroSocios = navParams.get('numeroSocios');
-    this.empresaFamiliar = navParams.get('empresaFamiliar');
-    this.regimenFiscal = navParams.get('regimenFiscal');
-    this.ventajaCompetitiva = navParams.get('ventajaCompetitiva');
-    this.rangoVentasAnuales = navParams.get('rangoVentasAnuales');
-    this.ingresosAnuales = navParams.get('ingresosAnuales');
-    this.edad = navParams.get('edad');
-    this.genero = navParams.get('genero');
-    this.intereses = navParams.get('intereses');
-    this.sector = navParams.get('sector');
-    this.categoria = navParams.get('categoria');
-    this.sectores = navParams.get('sectores');
-
-    if (this.sectores !== null && this.sectores !== 'null' && this.sectores !== undefined && this.sectores !== '') {
-      this.sectores = this.sectores.split(',');
-    }
-
-    if (this.intereses == null || this.intereses == 'null' || this.intereses == undefined || this.intereses == 'NULL') {
-      this.intereses = '';
-    }
-
-    if (this.ingresosAnuales != null && this.ingresosAnuales != undefined && this.ingresosAnuales != 'null' && this.ingresosAnuales != 'null' && this.ingresosAnuales != '') {
-
-      if (this.ingresosAnuales.includes('Bajo')) {
-        this.ingresosBajo = true;
-        this.ingresosArray.push('Bajo');
-      }
-
-      if (this.ingresosAnuales.includes('Medio')) {
-        this.ingresosMedio = true;
-        this.ingresosArray.push('Medio');
-      }
-
-      if (this.ingresosAnuales.includes('Intermedio')) {
-        this.ingresosMedioAlto = true;
-        this.ingresosArray.push('Intermedio');
-      }
-
-      if (this.ingresosAnuales.includes('Alto')) {
-        this.ingresosAlto = true;
-        this.ingresosArray.push('Alto');
-      }
-    }
-
-    if (this.edad !== null && this.edad !== undefined && this.edad !== 'null' && this.edad !== '') {
-
-      if (this.edad.includes('18-25 años')) {
-        this.edad18 = true;
-        this.edadArray.push('18-25 años');
-      }
-
-      if (this.edad.includes('26-32 años')) {
-        this.edad26 = true;
-        this.edadArray.push('26-32 años');
-      }
-
-      if (this.edad.includes('33-40 años')) {
-        this.edad33 = true;
-        this.edadArray.push('33-40 años');
-      }
-
-      if (this.edad.includes('41-55 años')) {
-        this.edad41 = true;
-        this.edadArray.push('41-55 años');
-      }
-
-      if (this.edad.includes('55-65 años')) {
-        this.edad55 = true;
-        this.edadArray.push('55-65 años');
-      }
-    }
-
-    if (this.categoria !== null && this.categoria !== undefined && this.categoria !== 'null' && this.categoria !== '') {
-      if (this.categoria.includes('PYME')) {
-        this.pyme = true;
-        this.categoriaArray.push('PYME');
-      }
-
-      if (this.categoria.includes('Corporativo')) {
-        this.corporativo = true;
-        this.categoriaArray.push('Corporativo');
-      }
-    }
-
-    if (this.sector !== null && this.sector !== 'null' && this.sector !== undefined && this.sector !== '') {
-      if (this.sector.includes('Privado')) {
-        this.privado = true;
-        this.sectorArray.push('Privado');
-      }
-
-      if (this.sector.includes('Gobierno')) {
-        this.gobierno = true;
-        this.sectorArray.push('Gobierno');
-      }
-    }
-
-    this.idCampania = navParams.get('idCampania');
-    if (this.idCampania == undefined) {
-      this.getLastCampania();
-    }
-
+    this.id = this.authService.id;   
   }
 
   ngOnInit() {
@@ -345,7 +225,6 @@ export class MasBriefPage implements OnInit {
         this.apaterno = this.datos[0].APEPATERNO;
         this.amaterno = this.datos[0].APEMATERNO;
         this.fechaNacimiento = this.datos[0].FECHANACIMIENTO;
-        this.puesto = this.datos[0].ID_PUESTO;
         this.cpDomicilio = this.datos[0].CodigoPostalDomicilio;
         this.aniosEmpresa = this.datos[0].AniosEmpresa;
         this.educacion = this.datos[0].Educacion;
@@ -358,30 +237,107 @@ export class MasBriefPage implements OnInit {
         this.rangoVentasAnuales = this.datos[0].RangoVentasAnuales;
         this.ventajaCompetitiva = this.datos[0].VentajaCompetitiva;
         this.ingresosAnuales = this.datos[0].ClientesTargetIngresosAnuales;
-        this.edad = this.datos[0].ClientesTargetEdad;
-        if(this.edad == undefined || this.edad == null || this.edad == 'null') {
-          this.edad = '';
-        }
         this.genero = this.datos[0].ClientesTargetGenero;
-        if(this.genero == undefined || this.genero == null || this.genero == 'null') {
-          this.genero = '';
-        }
+        this.edad = this.datos[0].ClientesTargetEdad;
         this.intereses = this.datos[0].ClientesTargetIntereses;
-        if(this.intereses == undefined || this.intereses == null || this.intereses == 'null') {
+        this.idpuesto = this.datos[0].ID_PUESTO;
+        this.sector = this.datos[0].ClientesTargetSector;
+        this.sectores = this.datos[0].ClientesTargetSectores;
+        this.categoria = this.datos[0].ClientesTargetCategoria;
+
+        this.positions.forEach(element => {
+          if (element['id'] == this.idpuesto) {
+            this.idpuesto = element['nombre'];
+          }
+        });
+
+        if (this.sectores !== null && this.sectores !== 'null' && this.sectores !== undefined && this.sectores !== '') {
+          this.sectores = this.sectores.split(',');
+        }
+    
+        if (this.intereses == null || this.intereses == 'null' || this.intereses == undefined || this.intereses == 'NULL') {
           this.intereses = '';
         }
-        this.sector = this.datos[0].ClientesTargetSector;
-        if(this.sector == undefined || this.sector == null || this.sector == 'null') {
-          this.sector = '';
+    
+        if (this.ingresosAnuales != null && this.ingresosAnuales != undefined && this.ingresosAnuales != 'null' && this.ingresosAnuales != 'null' && this.ingresosAnuales != '') {
+    
+          if (this.ingresosAnuales.includes('Bajo')) {
+            this.ingresosBajo = true;
+            this.ingresosArray.push('Bajo');
+          }
+    
+          if (this.ingresosAnuales.includes('Medio')) {
+            this.ingresosMedio = true;
+            this.ingresosArray.push('Medio');
+          }
+    
+          if (this.ingresosAnuales.includes('Intermedio')) {
+            this.ingresosMedioAlto = true;
+            this.ingresosArray.push('Intermedio');
+          }
+    
+          if (this.ingresosAnuales.includes('Alto')) {
+            this.ingresosAlto = true;
+            this.ingresosArray.push('Alto');
+          }
         }
-        this.categoria = this.datos[0].ClientesTargetCategoria;
-        if(this.categoria == undefined || this.categoria == null || this.categoria == 'null') {
-          this.categoria = '';
+    
+        if (this.edad !== null && this.edad !== undefined && this.edad !== 'null' && this.edad !== '') {
+    
+          if (this.edad.includes('18-25 años')) {
+            this.edad18 = true;
+            this.edadArray.push('18-25 años');
+          }
+    
+          if (this.edad.includes('26-32 años')) {
+            this.edad26 = true;
+            this.edadArray.push('26-32 años');
+          }
+    
+          if (this.edad.includes('33-40 años')) {
+            this.edad33 = true;
+            this.edadArray.push('33-40 años');
+          }
+    
+          if (this.edad.includes('41-55 años')) {
+            this.edad41 = true;
+            this.edadArray.push('41-55 años');
+          }
+    
+          if (this.edad.includes('55-65 años')) {
+            this.edad55 = true;
+            this.edadArray.push('55-65 años');
+          }
         }
-        this.sectores = this.datos[0].ClientesTargetSectores;
-        if(this.sectores == undefined || this.sectores == null || this.sectores == 'null') {
-          this.sectores = '';
+    
+        if (this.categoria !== null && this.categoria !== undefined && this.categoria !== 'null' && this.categoria !== '') {
+          if (this.categoria.includes('PYME')) {
+            this.pyme = true;
+            this.categoriaArray.push('PYME');
+          }
+    
+          if (this.categoria.includes('Corporativo')) {
+            this.corporativo = true;
+            this.categoriaArray.push('Corporativo');
+          }
         }
+    
+        if (this.sector !== null && this.sector !== 'null' && this.sector !== undefined && this.sector !== '') {
+          if (this.sector.includes('Privado')) {
+            this.privado = true;
+            this.sectorArray.push('Privado');
+          }
+    
+          if (this.sector.includes('Gobierno')) {
+            this.gobierno = true;
+            this.sectorArray.push('Gobierno');
+          }
+        }
+    
+        if (this.idCampania == undefined) {
+          this.getLastCampania();
+        }
+    
         this.getCobertura(idUsuario, this.datos[0].IDCampania);
       },
       err => {
