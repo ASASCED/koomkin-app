@@ -359,11 +359,29 @@ export class MasBriefPage implements OnInit {
         this.ventajaCompetitiva = this.datos[0].VentajaCompetitiva;
         this.ingresosAnuales = this.datos[0].ClientesTargetIngresosAnuales;
         this.edad = this.datos[0].ClientesTargetEdad;
+        if(this.edad == undefined || this.edad == null || this.edad == 'null') {
+          this.edad = '';
+        }
         this.genero = this.datos[0].ClientesTargetGenero;
+        if(this.genero == undefined || this.genero == null || this.genero == 'null') {
+          this.genero = '';
+        }
         this.intereses = this.datos[0].ClientesTargetIntereses;
+        if(this.intereses == undefined || this.intereses == null || this.intereses == 'null') {
+          this.intereses = '';
+        }
         this.sector = this.datos[0].ClientesTargetSector;
+        if(this.sector == undefined || this.sector == null || this.sector == 'null') {
+          this.sector = '';
+        }
         this.categoria = this.datos[0].ClientesTargetCategoria;
+        if(this.categoria == undefined || this.categoria == null || this.categoria == 'null') {
+          this.categoria = '';
+        }
         this.sectores = this.datos[0].ClientesTargetSectores;
+        if(this.sectores == undefined || this.sectores == null || this.sectores == 'null') {
+          this.sectores = '';
+        }
         this.getCobertura(idUsuario, this.datos[0].IDCampania);
       },
       err => {
