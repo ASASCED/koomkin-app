@@ -916,7 +916,7 @@ export class MasBriefPage implements OnInit {
   updateBriefInformation(nuevo_estado) {
 
     const body = new URLSearchParams();
-    body.set('usuario', this.id);
+    body.set('idUsuario', this.id);
     body.set('idProducto', this.IdProducto);
     body.set('new_Producto', this.producto);
     body.set('new_TipoEmpresa', this.tipo_empresa);
