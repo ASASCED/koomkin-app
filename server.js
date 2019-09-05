@@ -1849,7 +1849,6 @@ app.post('/updateBriefInformation2/', function (req, res) {
 
 app.post('/updateBriefInformation3/', function (req, res) {
 
-    let usuario = parseInt(req.body.usuario, 10);
     let idProducto = parseInt(req.body.idProducto, 10);
     let new_Producto = req.body.new_Producto;
     let new_TipoEmpresa = parseInt(req.body.new_TipoEmpresa, 10);
@@ -1875,14 +1874,6 @@ app.post('/updateBriefInformation3/', function (req, res) {
 
     if (!new_Correo1) {
         new_Correo1 = 'NULL';
-    }
-
-    if (!new_Correo2) {
-        new_Correo2 = 'NULL';
-    }
-
-    if (!new_Correo3) {
-        new_Correo3 = 'NULL';
     }
 
     if (!new_IdSubSector) {
@@ -1920,7 +1911,7 @@ app.post('/updateBriefInformation3/', function (req, res) {
     if (!ClientesTargetSectores) {
         ClientesTargetSectores = 'NULL';
     }
-    
+
     if (!palabraGoogle) {
         palabraGoogle = 'NULL';
     }

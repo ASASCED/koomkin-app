@@ -925,8 +925,6 @@ export class MasBriefPage implements OnInit {
     body.set('new_PorqueEresMejor', this.mejor);
     body.set('new_ClientesTarget', this.target);
     body.set('new_Correo1', this.correo1);
-    body.set('new_Correo2', this.correo1);
-    body.set('new_Correo3', this.correo1);
     body.set('new_IdSubSector', this.IdSubSector);
     body.set('idEstado', nuevo_estado);
     body.set('ClientesTargetIngresosAnuales', this.ingresosAnuales);
@@ -947,6 +945,7 @@ export class MasBriefPage implements OnInit {
 
     const url = 'https://www.koomkin.com.mx/api/app/updateBriefInformation3/';
 
+    console.log(url, body.toString());
     return new Promise((resolve, reject) => {
       this.http.post(url, body.toString(), options).subscribe(
         data => {
