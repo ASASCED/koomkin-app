@@ -1383,6 +1383,28 @@ db.executeUpdateBriefInformation2 = function(
   palabraGoogle
 ) {
 
+  if(ClientesTargetIngresosAnuales == 'NULL') {
+    ClientesTargetIngresosAnuales = null;
+  }
+  if(ClientesTargetEdad == 'NULL') {
+    ClientesTargetEdad = null;
+  }
+  if(ClientesTargetGenero == 'NULL') {
+    ClientesTargetGenero = null;
+  }
+  if(ClientesTargetIntereses == 'NULL') {
+    ClientesTargetIntereses = null;
+  }
+  if(ClientesTargetSector == 'NULL') {
+    ClientesTargetSector = null;
+  }
+  if(ClientesTargetCategoria == 'NULL') {
+    ClientesTargetCategoria = null;
+  }
+  if(ClientesTargetSectores == 'NULL') {
+    ClientesTargetSectores = null;
+  }
+
   var requestStr = "";
 
   if (idEstado == "NULL") {
@@ -1422,10 +1444,6 @@ db.executeUpdateBriefInformation2 = function(
         select top 1 * from tbl_tuCampania where IDUSUARIO = ${idUsuario} order by IDCampania desc`;
   } else if (idEstado != "NULL") {
     console.log("entro if");
-    if(ClientesTargetIngresosAnuales == 'NULL') {
-      ClientesTargetIngresosAnuales = null;
-    }
-    console.log(ClientesTargetIngresosAnuales);
     requestStr = `Update TBL_CATALOGOPRODUCTOS set NOMBRE = '${new_Producto}' where IDUSUARIO = ${idUsuario} and ID_PRODUCTO = ${idProducto}; 
                             Update TBL_BRIEF set ID_TIPOEMPRESA = ${new_TipoEmpresa} , CODIGOPOSTAL = ${new_CodigoPostal}, IDESTADO = ${idEstado} where IDUSUARIO = ${idUsuario};
                             Update tbl_direccionGoogle set cp = ${new_CodigoPostal} where IDUSUARIO = ${idUsuario};
