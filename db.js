@@ -1382,6 +1382,26 @@ db.executeUpdateBriefInformation2 = function(
   ClientesTargetSectores,
   palabraGoogle
 ) {
+
+  console.log( 'id', idUsuario,
+  'idProducto',idProducto,
+  'new_Producto',new_Producto,
+  'new_TipoEmpresa',new_TipoEmpresa,
+  'new_CodigoPostal', new_CodigoPostal,
+  'new_IDMembresia', new_IDMembresia,
+  'new_PorqueEresMejor', new_PorqueEresMejor,
+  'new_ClientesTarget', new_ClientesTarget,
+  'new_Correo1', new_Correo1,
+  'new_IdSubSector',  new_IdSubSector,
+  'idEstado', idEstado,
+  'ClientesTargetIngresosAnuales', ClientesTargetIngresosAnuales,
+  'ClientesTargetEdad', ClientesTargetEdad,
+  'ClientesTargetGenero', ClientesTargetGenero,
+  'ClientesTargetIntereses', ClientesTargetIntereses,
+  'ClientesTargetSector', ClientesTargetSector,
+  'ClientesTargetCategoria', ClientesTargetCategoria,
+  'ClientesTargetSectores', ClientesTargetSectores,
+  'palabraGoogle', palabraGoogle);
   var requestStr = "";
 
   if (idEstado == "NULL") {
@@ -1431,8 +1451,6 @@ db.executeUpdateBriefInformation2 = function(
                                                     PorqueEresMejor,
                                                     ClientesTarget,
                                                     Correo1,
-                                                    Correo2,
-                                                    Correo3,
                                                     IdSubSector,
                                                     ClientesTargetIngresosAnuales, 
                                                     ClientesTargetEdad, 
@@ -1447,8 +1465,6 @@ db.executeUpdateBriefInformation2 = function(
                                                     ${idUsuario},
                                                     '${new_PorqueEresMejor}',
                                                     '${new_ClientesTarget}',
-                                                    '${new_Correo1}',
-                                                    '${new_Correo1}',
                                                     '${new_Correo1}',
                                                     ${new_IdSubSector},
                                                     '${ClientesTargetIngresosAnuales}', 
