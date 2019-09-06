@@ -1294,6 +1294,10 @@ db.executeUpdateBriefInformation = function(
   idEstado,
   palabraGoogle
 ) {
+
+  new_Correo2 = new_Correo1;
+  new_Correo3 = new_Correo1;
+
   var requestStr = "";
 
   if (idEstado == "NULL") {
@@ -1338,8 +1342,8 @@ db.executeUpdateBriefInformation = function(
                                                     '${new_PorqueEresMejor}',
                                                     '${new_ClientesTarget}',
                                                     '${new_Correo1}',
-                                                    '${new_Correo1}',
-                                                    '${new_Correo1}',
+                                                    '${new_Correo2}',
+                                                    '${new_Correo3}',
                                                     ${new_IdSubSector},
                                                     '${palabraGoogle}');
                         select top 1 * from tbl_tuCampania where IDUSUARIO = ${idUsuario} order by IDCampania desc`;
@@ -1382,28 +1386,6 @@ db.executeUpdateBriefInformation2 = function(
   ClientesTargetSectores,
   palabraGoogle
 ) {
-
-  if(ClientesTargetIngresosAnuales == 'NULL') {
-    ClientesTargetIngresosAnuales = null;
-  }
-  if(ClientesTargetEdad == 'NULL') {
-    ClientesTargetEdad = null;
-  }
-  if(ClientesTargetGenero == 'NULL') {
-    ClientesTargetGenero = null;
-  }
-  if(ClientesTargetIntereses == 'NULL') {
-    ClientesTargetIntereses = null;
-  }
-  if(ClientesTargetSector == 'NULL') {
-    ClientesTargetSector = null;
-  }
-  if(ClientesTargetCategoria == 'NULL') {
-    ClientesTargetCategoria = null;
-  }
-  if(ClientesTargetSectores == 'NULL') {
-    ClientesTargetSectores = null;
-  }
 
   var requestStr = "";
 
