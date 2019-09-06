@@ -1383,25 +1383,6 @@ db.executeUpdateBriefInformation2 = function(
   palabraGoogle
 ) {
 
-  console.log( 'id', idUsuario,
-  'idProducto',idProducto,
-  'new_Producto',new_Producto,
-  'new_TipoEmpresa',new_TipoEmpresa,
-  'new_CodigoPostal', new_CodigoPostal,
-  'new_IDMembresia', new_IDMembresia,
-  'new_PorqueEresMejor', new_PorqueEresMejor,
-  'new_ClientesTarget', new_ClientesTarget,
-  'new_Correo1', new_Correo1,
-  'new_IdSubSector',  new_IdSubSector,
-  'idEstado', idEstado,
-  'ClientesTargetIngresosAnuales', ClientesTargetIngresosAnuales,
-  'ClientesTargetEdad', ClientesTargetEdad,
-  'ClientesTargetGenero', ClientesTargetGenero,
-  'ClientesTargetIntereses', ClientesTargetIntereses,
-  'ClientesTargetSector', ClientesTargetSector,
-  'ClientesTargetCategoria', ClientesTargetCategoria,
-  'ClientesTargetSectores', ClientesTargetSectores,
-  'palabraGoogle', palabraGoogle);
   var requestStr = "";
 
   if (idEstado == "NULL") {
@@ -1441,7 +1422,10 @@ db.executeUpdateBriefInformation2 = function(
         select top 1 * from tbl_tuCampania where IDUSUARIO = ${idUsuario} order by IDCampania desc`;
   } else if (idEstado != "NULL") {
     console.log("entro if");
-
+    if(ClientesTargetIngresosAnuales == 'NULL') {
+      ClientesTargetIngresosAnuales = null;
+    }
+    console.log(ClientesTargetIngresosAnuales);
     requestStr = `Update TBL_CATALOGOPRODUCTOS set NOMBRE = '${new_Producto}' where IDUSUARIO = ${idUsuario} and ID_PRODUCTO = ${idProducto}; 
                             Update TBL_BRIEF set ID_TIPOEMPRESA = ${new_TipoEmpresa} , CODIGOPOSTAL = ${new_CodigoPostal}, IDESTADO = ${idEstado} where IDUSUARIO = ${idUsuario};
                             Update tbl_direccionGoogle set cp = ${new_CodigoPostal} where IDUSUARIO = ${idUsuario};
