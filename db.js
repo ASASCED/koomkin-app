@@ -1294,7 +1294,6 @@ db.executeUpdateBriefInformation = function(
   idEstado,
   palabraGoogle
 ) {
-
   new_Correo2 = new_Correo1;
   new_Correo3 = new_Correo1;
 
@@ -1346,7 +1345,7 @@ db.executeUpdateBriefInformation = function(
                                                     '${new_Correo3}',
                                                     ${new_IdSubSector},
                                                     '${palabraGoogle}');
-                        select top 1 * from tbl_tuCampania where IDUSUARIO = ${idUsuario} order by IDCampania desc`;
+                select top 1 * from tbl_tuCampania where IDUSUARIO = ${idUsuario} order by IDCampania desc`;
   }
 
   console.log(requestStr);
@@ -1386,7 +1385,6 @@ db.executeUpdateBriefInformation2 = function(
   ClientesTargetSectores,
   palabraGoogle
 ) {
-
   var requestStr = "";
 
   if (idEstado == "NULL") {
@@ -1394,35 +1392,36 @@ db.executeUpdateBriefInformation2 = function(
     requestStr = `Update TBL_CATALOGOPRODUCTOS set NOMBRE = '${new_Producto}' where IDUSUARIO = ${idUsuario} and ID_PRODUCTO = ${idProducto}; 
         Update TBL_BRIEF set ID_TIPOEMPRESA = ${new_TipoEmpresa} , CODIGOPOSTAL = ${new_CodigoPostal} where IDUSUARIO = ${idUsuario};
         Update tbl_direccionGoogle set cp = ${new_CodigoPostal} where IDUSUARIO = ${idUsuario};
-        Insert into tbl_tuCampania (IDMembresia,
-                                    IDUSUARIO,
-                                    PorqueEresMejor,
-                                    ClientesTarget,
-                                    Correo1,
-                                    IdSubSector,
-                                    ClientesTargetIngresosAnuales, 
-                                    ClientesTargetEdad, 
-                                    ClientesTargetGenero, 
-                                    ClientesTargetIntereses, 
-                                    ClientesTargetSector, 
-                                    ClientesTargetCategoria, 
-                                    ClientesTargetSectores,
-                                    PalabrasGoogle)
-                                values (
-                                    ${new_IDMembresia},
-                                    ${idUsuario},
-                                    '${new_PorqueEresMejor}',
-                                    '${new_ClientesTarget}',
-                                    '${new_Correo1}',
-                                    ${new_IdSubSector},
-                                    '${ClientesTargetIngresosAnuales}', 
-                                    '${ClientesTargetEdad}', 
-                                    '${ClientesTargetGenero}', 
-                                    '${ClientesTargetIntereses}', 
-                                    '${ClientesTargetSector}', 
-                                    '${ClientesTargetCategoria}', 
-                                    '${ClientesTargetSectores}',
-                                    '${palabraGoogle}');
+        Insert into tbl_tuCampania (
+          IDMembresia,
+          IDUSUARIO,
+          PorqueEresMejor,
+          ClientesTarget,
+          Correo1,
+          IdSubSector,
+          PalabrasGoogle)
+      values (
+          ${new_IDMembresia},
+          ${idUsuario},
+          '${new_PorqueEresMejor}',
+          '${new_ClientesTarget}',
+          '${new_Correo1}',
+          ${new_IdSubSector},
+          '${palabraGoogle}');
+          update tbl_TuCampania
+          set ClientesTargetIngresosAnuales = '${ClientesTargetIngresosAnuales}',
+              ClientesTargetEdad            = '${ClientesTargetEdad}',
+              ClientesTargetGenero          = '${ClientesTargetGenero}',
+              ClientesTargetIntereses       = '${ClientesTargetIntereses}',
+              ClientesTargetSector          = '${ClientesTargetSector}',
+              ClientesTargetCategoria       = '${ClientesTargetCategoria}',
+              ClientesTargetSectores        = '${ClientesTargetSectores}'
+          where IDCampania IN (select
+                               top 1
+                               IDCampania
+                               from tbl_tuCampania
+                               where IDUSUARIO = ${idUsuario}
+                               order by IDCampania desc)
         select top 1 * from tbl_tuCampania where IDUSUARIO = ${idUsuario} order by IDCampania desc`;
   } else if (idEstado != "NULL") {
     console.log("entro if");
@@ -1436,13 +1435,6 @@ db.executeUpdateBriefInformation2 = function(
                                                     ClientesTarget,
                                                     Correo1,
                                                     IdSubSector,
-                                                    ClientesTargetIngresosAnuales, 
-                                                    ClientesTargetEdad, 
-                                                    ClientesTargetGenero, 
-                                                    ClientesTargetIntereses, 
-                                                    ClientesTargetSector, 
-                                                    ClientesTargetCategoria, 
-                                                    ClientesTargetSectores,
                                                     PalabrasGoogle)
                                                 values (
                                                     ${new_IDMembresia},
@@ -1451,14 +1443,21 @@ db.executeUpdateBriefInformation2 = function(
                                                     '${new_ClientesTarget}',
                                                     '${new_Correo1}',
                                                     ${new_IdSubSector},
-                                                    '${ClientesTargetIngresosAnuales}', 
-                                                    '${ClientesTargetEdad}', 
-                                                    '${ClientesTargetGenero}', 
-                                                    '${ClientesTargetIntereses}', 
-                                                    '${ClientesTargetSector}', 
-                                                    '${ClientesTargetCategoria}', 
-                                                    '${ClientesTargetSectores}',
                                                     '${palabraGoogle}');
+                                                    update tbl_TuCampania
+                                                    set ClientesTargetIngresosAnuales = '${ClientesTargetIngresosAnuales}',
+                                                        ClientesTargetEdad            = '${ClientesTargetEdad}',
+                                                        ClientesTargetGenero          = '${ClientesTargetGenero}',
+                                                        ClientesTargetIntereses       = '${ClientesTargetIntereses}',
+                                                        ClientesTargetSector          = '${ClientesTargetSector}',
+                                                        ClientesTargetCategoria       = '${ClientesTargetCategoria}',
+                                                        ClientesTargetSectores        = '${ClientesTargetSectores}'
+                                                    where IDCampania IN (select
+                                                                         top 1
+                                                                         IDCampania
+                                                                         from tbl_tuCampania
+                                                                         where IDUSUARIO = ${idUsuario}
+                                                                         order by IDCampania desc)
                         select top 1 * from tbl_tuCampania where IDUSUARIO = ${idUsuario} order by IDCampania desc`;
   }
 

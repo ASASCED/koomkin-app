@@ -1894,7 +1894,7 @@ app.post('/updateBriefInformation3/', function (req, res) {
     }
 
     if (!ClientesTargetGenero) {
-        ClientesTargetGenero = 'NULL';
+        ClientesTargetGenero = 'A';
     }
 
     if (!ClientesTargetIntereses) {
