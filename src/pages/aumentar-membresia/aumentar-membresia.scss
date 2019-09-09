@@ -1,0 +1,227 @@
+page-aumentar-membresia {
+    
+    @import "../../assets/styles.scss";
+
+    .title-white{
+        color: white !important;
+    }
+    .cuadro {
+        text-align: center;
+    }
+    .cuadro1 {
+        text-align: right;
+        width: 100%;
+        height: auto;
+        margin-top: 20%;
+    }
+    .cancelar {
+        color: gray;
+        text-decoration: underline;
+        background: transparent;
+    }
+    .contacto {
+        text-align: center !important;
+        color: $koomkin-blue;
+        font-size: 5.5vw;
+        margin-bottom: 4%;
+        font-weight: bold !important;
+    }
+    .contacto-segment {
+        width: 90%;
+        margin: 5%;
+    }
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+    td {
+        width: 45%;
+        padding-bottom: 5.8%;
+        font-size: 4vw;
+    }
+    tr {
+        padding: 5px;
+    }
+    th {
+        text-align: left !important;
+        font-weight: normal !important;
+        padding-bottom: 4%;
+        padding-top: 1%;
+        margin-left: 0% !important;
+    }
+    .edit {
+        background: #00B9BE;
+        border: transparent;
+        font-size: 4.5vw;
+        text-align: center;
+        color: white;
+        border-radius: 10px;
+        cursor: pointer;
+        padding: 3%;
+        width: 45%;
+        box-shadow: 8px 8px 10px -6px rgba(0, 0, 0, .9);
+    }
+    .cancelar-suscripcion {
+        background: #FE703F;
+        border: transparent;
+        font-size: 6vw;
+        font-weight: bold;
+        text-align: center;
+        color: white;
+        border-radius: 10px;
+        cursor: pointer;
+        padding: 2%;
+        width: 60%;
+        box-shadow: 8px 8px 10px -6px rgba(0, 0, 0, .9);
+    }
+    .campos {
+        font-size: 4.5vw;
+        color: #606060;
+        font-weight: 700;
+    }
+    .datos {
+        font-size: 4vw;
+        color: #606060;
+        font-weight: 350;
+        background: transparent;
+    }
+    .msg {
+        width: 99%;
+        border: 1px solid #c4c4c4;
+        border-radius: 5px;
+        padding: 3px 5px;
+        cursor: pointer;
+        text-align: justify;
+        box-shadow: none;
+    }
+    .maximo {
+        font-size: 4vw;
+        color: #c4c4c4;
+        font-weight: 500;
+    }
+    input {
+        border: 1px solid #c4c4c4;
+        border-radius: 5px;
+        padding: 3px 5px;
+        width: 99%;
+        cursor: pointer;
+        box-shadow: none;
+    }
+    
+    .segment-md .segment-button {
+        color: #707070 !important;
+        background: #ECECEC !important;
+        opacity: 1 !important;
+        transition: 100ms all linear !important;
+        font-size: 4.3vw !important;
+        font-weight: bold !important;
+        text-transform: none !important;
+        padding: 0% !important;
+        background: white !important;
+        border: 1px solid gray;
+        border-radius: 5px;
+        margin: 1%;
+        box-shadow: 6px 6px 12px -6px rgba(0,0,0,0.75);
+    }
+
+    .segment-md .segment-button.segment-activated {
+        color: white !important;
+        opacity: 1 !important;
+        -webkit-transition: 100ms all linear !important;
+        transition: 100ms all linear !important;
+        border-color: none !important;
+        font-size: 4.5vw !important;
+        text-transform: none !important;
+        background: $koomkin-green !important;
+        padding: 0% !important;    
+        border-radius: 5px;
+        border: 1px solid $koomkin-green;
+        margin: 1%;
+        font-weight: bold;
+        box-shadow: 6px 6px 12px -6px rgba(0,0,0,0.75);
+    }
+
+    .activity-title {
+        position: absolute;
+        top: 17%;
+        height: 45px;
+        width: 90%;
+        margin-left: 5%;
+        background-color: white;
+        display: flex;
+        color: $koomkin-blue;
+        bottom: 2px;
+        align-items: center;
+        justify-content: center;
+        font-weight: 900;
+        border-radius: 10px;
+        font-size: 5.3vw;
+        box-shadow: 2px 2px 5px -1px $koomkin-grey-light;
+    }
+
+    .activity-title-gray {
+        color:  #707070;
+        text-align: justify;
+        margin-top: 14%;
+        height: 45px;
+        width: 90%;
+        margin-left: 5%;
+        font-size: 4.2vw;
+        display: grid;
+        justify-content: center;
+        align-items: center;
+        font-weight: bold;
+    }
+
+    .activity-subtitle {
+        background: $koomkin-green;
+        margin-top: 6%;
+        color:  white;
+        text-align: center;
+        height: 45px;
+        width: 90%;
+        margin-left: 5%;
+        font-size: 5vw;
+        display: grid;
+        justify-content: center;
+        align-items: center;
+        font-weight: bold;
+    }
+
+    .activity-subtitle-gray {
+        color:  #707070;
+        text-align: center;
+        height: 45px;
+        width: 90%;
+        margin-left: 5%;
+        font-size: 5vw;
+        display: grid;
+        justify-content: center;
+        align-items: center;
+        font-weight: bold;
+    }
+
+    .activity-oferta {
+        width: 100%;
+        text-align: center;
+        color: $koomkin-green !important;
+        font-weight: bold;
+        font-size: 8vw;
+    }
+
+    .activity-header {
+        grid-area: activity-header;
+        height: 100%;
+        width: 100%;
+    }
+
+    .nota {
+        color:  #707070;
+        text-align: center;
+    }
+
+    .asterisco {
+        font-size: 4vw;
+        position: absolute;
+    }
+}

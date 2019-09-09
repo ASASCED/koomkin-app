@@ -1,0 +1,71 @@
+<ion-header>
+    <ion-navbar color="azul">
+        <ion-title>Empresa: {{empresa}}
+            <br>ID Cliente: {{id}}
+        </ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content *ngIf="recurrente == true">
+    <div>
+        <div class="activity-header">
+            <img src="assets/imgs/banner/img_headerupgrade.svg" width="100%">
+            <div class="activity-title">Mejora tu campaña</div>
+        </div>
+        <p class="activity-title-gray">Incrementa tus clientes potenciales invirtiendo más en tu suscripción actual.</p>
+        <div class="activity-subtitle">
+            Elige tu inversión
+        </div>
+        <br>
+        <div class="contacto-segment">
+            <ion-segment class="adiconal-header" [(ngModel)]="selectedAmount">
+                <ion-segment-button value="250" class="segment-datos" (click)='onChangeAmount("first")'>
+                    $ 250 <span style="font-size: 3vw !important;">MXN</span>
+                </ion-segment-button>
+                <ion-segment-button value="500" class="segment-empresa" (click)='onChangeAmount("second")'>
+                    $ 500 <span style="font-size: 3vw !important;">MXN</span>
+                </ion-segment-button>
+                <ion-segment-button value="1000" class="segment-objetivo" (click)='onChangeAmount("third")'>
+                    $ 1,000 <span style="font-size: 3vw !important;">MXN</span>
+                </ion-segment-button>
+            </ion-segment>
+        </div>
+        <div class="activity-subtitle-gray">
+            CLIENTES POTENCIALES
+        </div>
+        <div class="activity-oferta">
+            +{{ ofertaLeads }}<span class="asterisco">*</span>
+        </div>
+        <br>
+        <div class="cuadro">
+            <button class="cancelar-suscripcion" (click)='btnUpgradeMembership()'>Invertir</button>
+        </div>
+        <br>
+        <div class="cuadro" *ngIf="tieneUpgrade == true">
+            <button class="cancelar-suscripcion" (click)='btnCancelMembership()'>Cancelar Upgrade</button>
+        </div>
+        <br>
+        <div class="nota">
+            * Adicionales en el mes
+        </div>
+    </div>
+</ion-content>
+<ion-content padding *ngIf="recurrente !== true">
+    <table>
+        <tr>
+            <th class="contacto" colspan="2">Membresía Actual</th>
+        </tr>
+        <tr>
+            <td class="campos">Plan actual</td>
+            <td class="datos">$ {{ monto }} MXN por {{ dias }} días</td>
+        </tr>
+        <tr>
+            <td class="campos">Inicio de campaña</td>
+            <td class="datos">{{ fechaInicio | date: 'dd/MM/yyyy' }}</td>
+        </tr>
+        <tr>
+            <td class="campos">Días restantes de campaña</td>
+            <td class="datos">{{ diasRestantes }}</td>
+        </tr>
+    </table>
+</ion-content>
