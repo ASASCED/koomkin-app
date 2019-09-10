@@ -19,7 +19,7 @@ export class InicioPage implements OnInit {
   inicio = 'InicioPage';
   eficiencia = 'EficienciaPage';
   brief = 'MasBriefPage';
-  financieros = 'DatosFinancierosPage';
+  financieros = 'MembresiaPage';
   crm = 'CrmPage';
   agenda = 'AgendaPage';
 
