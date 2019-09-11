@@ -289,6 +289,10 @@ page-membresia {
 
   .encabezado {
     background: #005999;
+    color: white;
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
   }
 
   .encabezado-texto {
@@ -296,6 +300,21 @@ page-membresia {
     text-align: center;
     font-size: 16px;
     font-weight: bold;
+  }
+
+  .encabezado-texto-chico {
+    color: white;
+    text-align: left;
+    font-size: 12px;
+    font-weight: bold;
+  }
+
+  .encabezado-detalles {
+    color: #00B9BE;
+    text-align: left;
+    font-size: 14px;
+    font-weight: bold;
+    text-decoration: underline;
   }
 
   .encabezado-texto-light {
@@ -313,98 +332,4 @@ page-membresia {
     border-radius: 20px;
   }
 
-  .cuadro {
-    text-align: center;
-    height: auto;
-  }
-  .cuadro1 {
-    text-align: right;
-    width: 100%;
-    height: auto;
-    margin-top: 20%;
-  }
-  .cancelar {
-    color: gray;
-    text-decoration: underline;
-    background: transparent;
-  }
-  .contacto {
-    text-align: center !important;
-    color: #288ac1;
-    font-size: 5.5vw;
-    margin-bottom: 4%;
-    font-weight: bold !important;
-  }
-  table {
-    border-collapse: collapse;
-    width: 100%;
-  }
-  td {
-    width: 45%;
-    padding-bottom: 5.8%;
-    font-size: 4vw;
-  }
-  tr {
-    padding: 5px;
-  }
-  th {
-    text-align: left !important;
-    font-weight: normal !important;
-    padding-bottom: 4%;
-    padding-top: 1%;
-    margin-left: 0% !important;
-  }
-  .edit {
-    background: #00b9be;
-    border: transparent;
-    font-size: 4.5vw;
-    text-align: center;
-    color: white;
-    border-radius: 10px;
-    cursor: pointer;
-    padding: 3%;
-    width: 45%;
-    box-shadow: 8px 8px 10px -6px rgba(0, 0, 0, 0.9);
-  }
-  select {
-    font-size: 16px;
-    cursor: pointer;
-    width: 99%;
-    background: white;
-  }
-  .campos {
-    font-size: 4.5vw;
-    color: #606060;
-    font-weight: 700;
-  }
-  .datos {
-    font-size: 4vw;
-    color: #606060;
-    font-weight: 350;
-    background: transparent;
-  }
-  input {
-    border: 1px solid #c4c4c4;
-    border-radius: 5px;
-    padding: 3px 5px;
-    width: 99%;
-    cursor: pointer;
-    box-shadow: none;
-    color: #606060;
-  }
-
-
-  .footer {
-    display: -webkit-box;
-    width: 100%;
-    height: 10px;
-    .footer-left {
-        background-color: #005999;
-        width: 50%;
-    }
-    .footer-right {
-        background-color: #00B9BE;
-        width: 50%;
-    }
-}
 }

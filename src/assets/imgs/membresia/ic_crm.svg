@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="69.187" height="69.187" viewBox="0 0 69.187 69.187">
+  <defs>
+    <linearGradient id="linear-gradient" x1="0.5" y1="1" x2="0.5" y2="0.046" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#3dcdbb"/>
+      <stop offset="1" stop-color="#33a2bd"/>
+    </linearGradient>
+    <filter id="Trazado_19896" x="0" y="0" width="69.187" height="69.187" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="Grupo_11580" data-name="Grupo 11580" transform="translate(9 6)">
+    <g transform="matrix(1, 0, 0, 1, -9, -6)" filter="url(#Trazado_19896)">
+      <path id="Trazado_19896-2" data-name="Trazado 19896" d="M25.594,0A25.594,25.594,0,1,1,0,25.594,25.594,25.594,0,0,1,25.594,0Z" transform="translate(9 6)" fill="url(#linear-gradient)"/>
+    </g>
+    <path id="filter" d="M17.3,0H.778A.776.776,0,0,0,.086.421a.787.787,0,0,0,.061.819L6.2,9.766l.006.009a1.728,1.728,0,0,1,.34,1.026v6.951a.773.773,0,0,0,.773.778.8.8,0,0,0,.3-.061l3.4-1.3a.737.737,0,0,0,.507-.727V10.8a1.73,1.73,0,0,1,.339-1.026l.006-.009L17.928,1.24a.786.786,0,0,0,.061-.819A.776.776,0,0,0,17.3,0Zm0,0" transform="translate(17.653 27.252)" fill="#fff"/>
+    <g id="Grupo_10941" data-name="Grupo 10941" transform="matrix(0.899, 0.438, -0.438, 0.899, 17.339, 13.099)">
+      <circle id="Elipse_930" data-name="Elipse 930" cx="4.228" cy="4.228" r="4.228" fill="#005999"/>
+      <g id="person_outline" transform="translate(1.23 1.23)">
+        <rect id="Path" width="6.027" height="5.98" fill="rgba(0,0,0,0)"/>
+        <path id="Icon" d="M4.018,3.971H0V3.226c0-.2.131-.5.753-.744a3.77,3.77,0,0,1,1.256-.249,3.77,3.77,0,0,1,1.256.249c.622.246.753.541.753.744v.744ZM2.009,2.7c-.747,0-1.532.362-1.532.521V3.5H3.541V3.226C3.541,3.067,2.756,2.7,2.009,2.7Zm0-.72A1,1,0,0,1,1,.993a1,1,0,0,1,2.009,0A1,1,0,0,1,2.009,1.985Zm0-1.514a.521.521,0,1,0,.527.521A.525.525,0,0,0,2.009.471Z" transform="translate(1.004 1.005)" fill="#fff"/>
+      </g>
+    </g>
+    <g id="Grupo_10942" data-name="Grupo 10942" transform="matrix(0.946, 0.326, -0.326, 0.946, 29.704, 13.378)">
+      <circle id="Elipse_930-2" data-name="Elipse 930" cx="4.228" cy="4.228" r="4.228" transform="translate(0 0)" fill="#005999"/>
+      <g id="person_outline-2" data-name="person_outline" transform="translate(1.23 1.23)">
+        <rect id="Path-2" data-name="Path" width="6.027" height="5.98" transform="translate(0 0)" fill="rgba(0,0,0,0)"/>
+        <path id="Icon-2" data-name="Icon" d="M4.018,3.971H0V3.226c0-.2.131-.5.753-.744a3.77,3.77,0,0,1,1.256-.249,3.77,3.77,0,0,1,1.256.249c.622.246.753.541.753.744v.744ZM2.009,2.7c-.747,0-1.532.362-1.532.521V3.5H3.541V3.226C3.541,3.067,2.756,2.7,2.009,2.7Zm0-.72A1,1,0,0,1,1,.993a1,1,0,0,1,2.009,0A1,1,0,0,1,2.009,1.985Zm0-1.514a.521.521,0,1,0,.527.521A.525.525,0,0,0,2.009.471Z" transform="translate(1.004 1.005)" fill="#fff"/>
+      </g>
+    </g>
+    <g id="Grupo_10943" data-name="Grupo 10943" transform="matrix(0.891, -0.454, 0.454, 0.891, 21.76, 8.447)">
+      <circle id="Elipse_930-3" data-name="Elipse 930" cx="3.483" cy="3.483" r="3.483" transform="translate(0 0)" fill="#005999"/>
+      <g id="person_outline-3" data-name="person_outline" transform="translate(1.013 1.013)">
+        <rect id="Path-3" data-name="Path" width="4.965" height="4.927" transform="translate(0 0)" fill="rgba(0,0,0,0)"/>
+        <path id="Icon-3" data-name="Icon" d="M3.31,3.271H0V2.658c0-.168.108-.41.62-.613a3.106,3.106,0,0,1,1.035-.2,3.106,3.106,0,0,1,1.035.2c.513.2.62.445.62.613v.613ZM1.655,2.228c-.615,0-1.262.3-1.262.429v.225H2.917V2.658C2.917,2.526,2.27,2.228,1.655,2.228Zm0-.593A.824.824,0,0,1,.828.818a.828.828,0,0,1,1.655,0A.824.824,0,0,1,1.655,1.636Zm0-1.247a.43.43,0,1,0,.434.43A.433.433,0,0,0,1.655.388Z" transform="translate(0.828 0.828)" fill="#fff"/>
+      </g>
+    </g>
+  </g>
+</svg>

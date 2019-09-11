@@ -11,6 +11,8 @@ export class DatosFinancierosPage {
 
   Pago: any = 'PagoPage';
   Membresia: any = 'MembresiaPage';
+  Servicio: any = 'ServcioClientesPage';
+
 
   public empresa;
   public id;
