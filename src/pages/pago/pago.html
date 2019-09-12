@@ -7,124 +7,245 @@
 </ion-header>
 
 
-<ion-content padding>
-    <table *ngIf="vista == 'informacion'">
-        <tr>
-            <th class="contacto" colspan="2">Datos Fiscales</th>
-        </tr>
-        <tr>
-            <td class="campos">Nombre del titular</td>
-            <td class="datos">{{f_nombre}} {{f_paterno}} {{f_materno}}</td>
-        </tr>
-        <tr>
-            <td class="campos">Razón social</td>
-            <td class="datos">{{razon}}</td>
-        </tr>
-        <tr>
-            <td class="campos" class="campos">RFC</td>
-            <td class="datos">{{rfc}}</td>
-        </tr>
-        <tr>
-            <td class="campos">Domicilio Fiscal</td>
-            <td class="datos">{{calle}} {{numeroexterior}} {{numerointerior}}, {{colonia}}, {{ciudad}} {{cp}}</td>
-        </tr>
-    </table>
-    <table *ngIf="vista === 'editar'">
-        <tr>
-            <th class="contacto" colspan="2">Datos fiscales</th>
-        </tr>
-        <tr>
-            <td class="campos">Nombre del titular *</td>
-            <input type="text" name="Nombre del titular" [(ngModel)]="f_nombre" required>
-        </tr>
-        <tr>
-            <td class="campos">Apellido Paterno *</td>
-            <input type="text" name="Nombre del titular" [(ngModel)]="f_paterno" required>
-        </tr>
-        <tr>
-            <td class="campos">Apellido Materno *</td>
-            <input type="text" name="Nombre del titular" [(ngModel)]="f_materno" required>
-        </tr>
-        <tr>
-            <td class="campos">Razón social *</td>
-            <input type="text" name="Razón social" [(ngModel)]="razon" required>
-        </tr>
-        <tr>
-            <td class="campos">RFC *</td>
-            <input type="text" name="RFC" [(ngModel)]="rfc" required>
-        </tr>
-        <tr>
-            <td class="campos">Calle *</td>
-            <input type="text" name="RFC" [(ngModel)]="calle" required>
-        </tr>
-        <tr>
-            <td class="campos">No. Exterior *</td>
-            <input type="text" name="RFC" [(ngModel)]="numeroexterior" required>
-        </tr>
-        <tr>
-            <td class="campos">No. Interior</td>
-            <input type="text" name="RFC" [(ngModel)]="numerointerior" required>
-        </tr>
-        <tr>
-            <td class="campos">Codigo Postal *</td>
-            <input type="text" name="RFC" [(ngModel)]="cp" required>
-        </tr>
-        <tr>
-            <td class="campos">Colonia *</td>
-            <input type="text" name="RFC" [(ngModel)]="colonia" required>
-        </tr>
-        <tr>
-            <td class="campos">Ciudad *</td>
-            <input type="text" name="RFC" [(ngModel)]="ciudad" required>
-        </tr>
-        <tr>
-            <td class="campos">Delegación *</td>
-            <input type="text" name="RFC" [(ngModel)]="delegacion" required>
-        </tr>
-        <tr>
-            <td class="campos">Estado *</td>
-            <select type="text" [(ngModel)]="stateId" [name]="dictionary[getState(estado)]">
-                <option value="0">Seleccionar estado</option>
-                <option value="2537">Aguascalientes</option>
-                <option value="2538">Baja California N</option>
-                <option value="2539">Baja California S</option>
-                <option value="2540">Campeche</option>
-                <option value="2541">Chiapas</option>
-                <option value="2542">Chihuahua</option>
-                <option value="2543">Coahuila</option>
-                <option value="2544">Colima</option>
-                <option value="2545">Ciudad de México</option>
-                <option value="2546">Durango</option>
-                <option value="2547">Guanajuato</option>
-                <option value="2548">Guerrero</option>
-                <option value="2549">Hidalgo</option>
-                <option value="2550">Jalisco</option>
-                <option value="2551">Estado de México</option>
-                <option value="2552">Michoacán</option>
-                <option value="2553">Morelos</option>
-                <option value="2554">Nayarit</option>
-                <option value="2555">Nuevo León</option>
-                <option value="2556">Oaxaca</option>
-                <option value="2557">Puebla</option>
-                <option value="2558">Querétaro</option>
-                <option value="2559">Quintana Roo</option>
-                <option value="2560">San Luis Potosí</option>
-                <option value="2561">Sinaloa</option>
-                <option value="2562">Sonora</option>
-                <option value="2563">Tabasco</option>
-                <option value="2564">Tamaulipas</option>
-                <option value="2565">Tlaxcala</option>
-                <option value="2566">Veracruz</option>
-                <option value="2567">Yucatán</option>
-                <option value="2568">Zacatecas</option>
-            </select>
-        </tr>
-
-    </table>
-    <div class="cuadro">
-        <button *ngIf="vista == 'informacion'" class="edit" (click)="changePage('editar')">Modificar Datos</button>
-        <button *ngIf="vista === 'editar'" class="edit" (click)="changePage('informacion');">Cancelar</button>
-        <button *ngIf="vista === 'editar'" class="edit"
-            (click)="changePage('informacion');updateFiscal();cambioInformacion()">Guardar</button>
+<ion-content>
+    <tarjeta></tarjeta>
+    <div *ngIf="vista == 'informacion'">
+        <div>
+            <ion-grid>
+                <ion-row>
+                    <ion-col col-6>
+                        <ion-card>
+                            <div class="encabezado">
+                                <ion-grid>
+                                    <ion-row>
+                                        <ion-col col-5>
+                                        </ion-col>
+                                        <ion-col col-2>
+                                            <img src="assets/imgs/facturacion/ic_usuario.svg" width="20px"
+                                                height="20px" />
+                                        </ion-col>
+                                        <ion-col col-5>
+                                        </ion-col>
+                                    </ion-row>
+                                </ion-grid>
+                                <ion-grid>
+                                    <ion-row>
+                                        <ion-col col-1>
+                                        </ion-col>
+                                        <ion-col col-10>
+                                            <p class="encabezado-texto">{{f_nombre}} {{f_paterno}} {{f_materno}}</p>
+                                        </ion-col>
+                                        <ion-col col-1>
+                                        </ion-col>
+                                    </ion-row>
+                                </ion-grid>
+                            </div>
+                            <ion-card-content>
+                                <ion-card-title class="titulo">
+                                    Nombre del Titular
+                                </ion-card-title>
+                            </ion-card-content>
+                        </ion-card>
+                    </ion-col>
+                    <ion-col col-6>
+                        <ion-card>
+                            <div class="encabezado">
+                                <ion-grid>
+                                    <ion-row>
+                                        <ion-col col-5>
+                                        </ion-col>
+                                        <ion-col col-2>
+                                            <img src="assets/imgs/facturacion/ic_empresa.svg" width="20px"
+                                                height="20px" />
+                                        </ion-col>
+                                        <ion-col col-5>
+                                        </ion-col>
+                                    </ion-row>
+                                </ion-grid>
+                                <ion-grid>
+                                    <ion-row>
+                                        <ion-col col-12>
+                                            <p class="encabezado-texto">{{razon}}</p>
+                                        </ion-col>
+                                    </ion-row>
+                                </ion-grid>
+                            </div>
+                            <ion-card-content>
+                                <ion-card-title class="titulo">
+                                    Razón Social
+                                </ion-card-title>
+                            </ion-card-content>
+                        </ion-card>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+            <ion-grid>
+                <ion-row>
+                    <ion-col col-6>
+                        <ion-card>
+                            <div class="encabezado">
+                                <ion-grid>
+                                    <ion-row>
+                                        <ion-col col-5>
+                                        </ion-col>
+                                        <ion-col col-2>
+                                            <img src="assets/imgs/facturacion/ic_rfc.svg" width="20px" height="20px" />
+                                        </ion-col>
+                                        <ion-col col-5>
+                                        </ion-col>
+                                    </ion-row>
+                                </ion-grid>
+                                <ion-grid>
+                                    <ion-row>
+                                        <ion-col col-1>
+                                        </ion-col>
+                                        <ion-col col-10>
+                                            <p class="encabezado-texto">{{rfc}}</p>
+                                        </ion-col>
+                                        <ion-col col-1>
+                                        </ion-col>
+                                    </ion-row>
+                                </ion-grid>
+                            </div>
+                            <ion-card-content>
+                                <ion-card-title class="titulo">
+                                    RFC
+                                </ion-card-title>
+                            </ion-card-content>
+                        </ion-card>
+                    </ion-col>
+                    <ion-col col-6>
+                        <ion-card>
+                            <div class="encabezado">
+                                <ion-grid>
+                                    <ion-row>
+                                        <ion-col col-5>
+                                        </ion-col>
+                                        <ion-col col-2>
+                                            <img src="assets/imgs/facturacion/ic_ubicacion.svg" width="20px"
+                                                height="20px" />
+                                        </ion-col>
+                                        <ion-col col-5>
+                                        </ion-col>
+                                    </ion-row>
+                                </ion-grid>
+                                <ion-grid>
+                                    <ion-row>
+                                        <ion-col col-1>
+                                        </ion-col>
+                                        <ion-col col-10>
+                                            <p class="encabezado-texto">{{calle}} {{numeroexterior}} {{numerointerior}}
+                                                {{colonia}} {{ciudad}} {{cp}}</p>
+                                        </ion-col>
+                                        <ion-col col-1>
+                                        </ion-col>
+                                    </ion-row>
+                                </ion-grid>
+                            </div>
+                            <ion-card-content>
+                                <ion-card-title class="titulo">
+                                    Domicilio Fiscal
+                                </ion-card-title>
+                            </ion-card-content>
+                        </ion-card>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </div>
     </div>
+    <table *ngIf="vista === 'editar'">
+            <tr>
+                <th class="contacto" colspan="2">Datos fiscales</th>
+            </tr>
+            <tr>
+                <td class="campos">Nombre del titular *</td>
+                <input type="text" name="Nombre del titular" [(ngModel)]="f_nombre" required>
+            </tr>
+            <tr>
+                <td class="campos">Apellido Paterno *</td>
+                <input type="text" name="Nombre del titular" [(ngModel)]="f_paterno" required>
+            </tr>
+            <tr>
+                <td class="campos">Apellido Materno *</td>
+                <input type="text" name="Nombre del titular" [(ngModel)]="f_materno" required>
+            </tr>
+            <tr>
+                <td class="campos">Razón social *</td>
+                <input type="text" name="Razón social" [(ngModel)]="razon" required>
+            </tr>
+            <tr>
+                <td class="campos">RFC *</td>
+                <input type="text" name="RFC" [(ngModel)]="rfc" required>
+            </tr>
+            <tr>
+                <td class="campos">Calle *</td>
+                <input type="text" name="RFC" [(ngModel)]="calle" required>
+            </tr>
+            <tr>
+                <td class="campos">No. Exterior *</td>
+                <input type="text" name="RFC" [(ngModel)]="numeroexterior" required>
+            </tr>
+            <tr>
+                <td class="campos">No. Interior</td>
+                <input type="text" name="RFC" [(ngModel)]="numerointerior" required>
+            </tr>
+            <tr>
+                <td class="campos">Codigo Postal *</td>
+                <input type="text" name="RFC" [(ngModel)]="cp" required>
+            </tr>
+            <tr>
+                <td class="campos">Colonia *</td>
+                <input type="text" name="RFC" [(ngModel)]="colonia" required>
+            </tr>
+            <tr>
+                <td class="campos">Ciudad *</td>
+                <input type="text" name="RFC" [(ngModel)]="ciudad" required>
+            </tr>
+            <tr>
+                <td class="campos">Delegación *</td>
+                <input type="text" name="RFC" [(ngModel)]="delegacion" required>
+            </tr>
+            <tr>
+                <td class="campos">Estado *</td>
+                <select type="text" [(ngModel)]="stateId" [name]="dictionary[getState(estado)]">
+                    <option value="0">Seleccionar estado</option>
+                    <option value="2537">Aguascalientes</option>
+                    <option value="2538">Baja California N</option>
+                    <option value="2539">Baja California S</option>
+                    <option value="2540">Campeche</option>
+                    <option value="2541">Chiapas</option>
+                    <option value="2542">Chihuahua</option>
+                    <option value="2543">Coahuila</option>
+                    <option value="2544">Colima</option>
+                    <option value="2545">Ciudad de México</option>
+                    <option value="2546">Durango</option>
+                    <option value="2547">Guanajuato</option>
+                    <option value="2548">Guerrero</option>
+                    <option value="2549">Hidalgo</option>
+                    <option value="2550">Jalisco</option>
+                    <option value="2551">Estado de México</option>
+                    <option value="2552">Michoacán</option>
+                    <option value="2553">Morelos</option>
+                    <option value="2554">Nayarit</option>
+                    <option value="2555">Nuevo León</option>
+                    <option value="2556">Oaxaca</option>
+                    <option value="2557">Puebla</option>
+                    <option value="2558">Querétaro</option>
+                    <option value="2559">Quintana Roo</option>
+                    <option value="2560">San Luis Potosí</option>
+                    <option value="2561">Sinaloa</option>
+                    <option value="2562">Sonora</option>
+                    <option value="2563">Tabasco</option>
+                    <option value="2564">Tamaulipas</option>
+                    <option value="2565">Tlaxcala</option>
+                    <option value="2566">Veracruz</option>
+                    <option value="2567">Yucatán</option>
+                    <option value="2568">Zacatecas</option>
+                </select>
+            </tr>
+    
+        </table>
+    <button *ngIf="vista == 'informacion'" class="edit" (click)="changePage('editar')">Modificar Datos</button>
+    <button *ngIf="vista === 'editar'" class="edit edit-cancelar" (click)="changePage('informacion');">Cancelar</button>
+    <button *ngIf="vista === 'editar'" class="edit edit-guardar" (click)="changePage('informacion');updateFiscal();cambioInformacion()">Guardar</button>
 </ion-content>

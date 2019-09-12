@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="99.738" height="99.738" viewBox="0 0 99.738 99.738">
+  <defs>
+    <linearGradient id="linear-gradient" x1="0.084" x2="1" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#243e56"/>
+      <stop offset="1" stop-color="#005999"/>
+    </linearGradient>
+    <filter id="Elipse_971" x="0" y="0" width="99.738" height="99.738" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="Grupo_11585" data-name="Grupo 11585" transform="translate(-2000.408 -2762.403)">
+    <g id="Grupo_11457" data-name="Grupo 11457" transform="translate(2009.408 2768.403)">
+      <g transform="matrix(1, 0, 0, 1, -9, -6)" filter="url(#Elipse_971)">
+        <circle id="Elipse_971-2" data-name="Elipse 971" cx="40.869" cy="40.869" r="40.869" transform="translate(9 6)" fill="url(#linear-gradient)"/>
+      </g>
+      <g id="Elipse_972" data-name="Elipse 972" transform="translate(10.149 10.149)" fill="none" stroke="#fff" stroke-width="3" opacity="0.5">
+        <circle cx="31.021" cy="31.021" r="31.021" stroke="none"/>
+        <circle cx="31.021" cy="31.021" r="29.521" fill="none"/>
+      </g>
+    </g>
+    <g id="Grupo_11462" data-name="Grupo 11462" transform="translate(2038.072 2797.658)">
+      <path id="Unión_1" data-name="Unión 1" d="M0,23.63V10.764A5.479,5.479,0,0,1,2,7.35C3.948,5.53,5.354,3.936,5.068,1.815c-.308-2.241,2.715-2.662,3.557.2a10.631,10.631,0,0,1-.573,7.069h6.4a2.2,2.2,0,0,1,1.674,3.643,2.2,2.2,0,0,1-.521,4.082,2.2,2.2,0,0,1,.381,1.239,2.22,2.22,0,0,1-1.682,2.138,2.2,2.2,0,0,1-1.837,3.442H6.625v.008Z" transform="translate(7.279 0)" fill="#fff"/>
+      <path id="Trazado_14057" data-name="Trazado 14057" d="M0,0V12.866H6.625V0ZM4.745,11.565a.978.978,0,1,1,.978-.978A.976.976,0,0,1,4.745,11.565Z" transform="translate(0 10.764)" fill="#fff"/>
+    </g>
+  </g>
+</svg>

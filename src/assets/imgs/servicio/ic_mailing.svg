@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+  <g id="mail_outline" transform="translate(0 -0.199)">
+    <rect id="Path" width="32" height="32" transform="translate(0 0.199)" fill="rgba(0,0,0,0)"/>
+    <path id="Icon" d="M28.8,27H3.2A3.294,3.294,0,0,1,0,23.625L.016,3.375A3.287,3.287,0,0,1,3.2,0H28.8A3.294,3.294,0,0,1,32,3.375V23.625A3.294,3.294,0,0,1,28.8,27ZM3.2,6.751h0V23.625H28.8V6.751L16,15.187Zm0-3.376L16,11.813,28.8,3.375Z" transform="translate(0 1.199)" fill="#00b9be"/>
+  </g>
+</svg>
