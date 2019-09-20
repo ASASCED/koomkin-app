@@ -95,6 +95,7 @@ page-social {
     border-radius: 20px;
     color: #243E56;
     font-weight: bold;
+    background: transparent;
   }
 
   .boton-cobertura-brief-blanco {
@@ -188,8 +189,8 @@ page-social {
     font-weight: 350;
   }
   .redsocial {
-    height: 100%;
-    padding: 3%;
+    height:100%;
+    padding: 1%;
     border: 1px #c4c4c4 solid;
     border-radius: 4px;
     font-size: 4vw;
@@ -224,14 +225,14 @@ page-social {
   }
   .campos {
     font-size: 4.5vw;
-    color: #606060;
+    color: #243E56;
     font-weight: 700;
     margin-bottom: 1%;
     margin-top: 2%;
   }
   .datos {
     font-size: 4vw;
-    color: #606060;
+    color: #243E56;
     font-weight: 350;
     background: transparent;
   }
@@ -253,9 +254,7 @@ page-social {
   }
   .puntos {
     overflow: hidden;
-    /* Escondemos la parte sobrante */
     white-space: nowrap;
-    /* Indicamos que no realice salto de linea si no cabe en la anchura indicada */
     text-overflow: ellipsis;
   }
   input {
@@ -266,5 +265,13 @@ page-social {
     cursor: pointer;
     box-shadow: none;
     color: #606060;
+  }
+
+  .preguntas-center {
+    text-align: center;
+    margin: 2% 0%;
+    color: #288ac1;
+    font-size: 13px;
+    font-weight: bold !important;
   }
 }
