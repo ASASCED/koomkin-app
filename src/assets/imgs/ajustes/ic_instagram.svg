@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+  <g id="Grupo_11692" data-name="Grupo 11692" transform="translate(-3083 -1086)">
+    <g id="Grupo_11678" data-name="Grupo 11678" transform="translate(3089 1092)">
+      <path id="Trazado_474" data-name="Trazado 474" d="M39.188,91H31.6a6.244,6.244,0,0,0-6.3,6.3v7.592a6.244,6.244,0,0,0,6.3,6.3h7.592a6.244,6.244,0,0,0,6.3-6.3V97.3A6.242,6.242,0,0,0,39.188,91Zm4.444,14.073a4.506,4.506,0,0,1-4.444,4.444H31.6a4.506,4.506,0,0,1-4.444-4.444V97.481A4.506,4.506,0,0,1,31.6,93.037h7.592a4.506,4.506,0,0,1,4.444,4.444Z" transform="translate(-25.3 -91)" fill="#707070"/>
+      <path id="Trazado_475" data-name="Trazado 475" d="M33.185,93.8a5.185,5.185,0,1,0,5.185,5.185A5.3,5.3,0,0,0,33.185,93.8Zm0,8.147A3.148,3.148,0,1,1,36.333,98.8,3.121,3.121,0,0,1,33.185,101.947Z" transform="translate(-23 -88.615)" fill="#707070"/>
+      <ellipse id="Elipse_60" data-name="Elipse 60" cx="0.741" cy="0.741" rx="0.741" ry="0.741" transform="translate(14.814 4.074)" fill="#707070"/>
+    </g>
+    <rect id="Rectángulo_7459" data-name="Rectángulo 7459" width="32" height="32" transform="translate(3083 1086)" fill="none"/>
+  </g>
+</svg>

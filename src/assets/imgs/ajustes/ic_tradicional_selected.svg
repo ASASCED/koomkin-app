@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+  <g id="Grupo_11682" data-name="Grupo 11682" transform="translate(-3077 -1039)">
+    <g id="printer-tool" transform="translate(3079 1041)">
+      <g id="Grupo_11603" data-name="Grupo 11603" transform="translate(0)">
+        <path id="Trazado_20354" data-name="Trazado 20354" d="M92.677,1.7h13.589V5.1h1.7V1.7a1.7,1.7,0,0,0-1.7-1.7H92.677a1.7,1.7,0,0,0-1.7,1.7V5.1h1.7Z" transform="translate(-85.882 0)" fill="#fff"/>
+        <path id="Trazado_20355" data-name="Trazado 20355" d="M25.48,121.3H1.7A1.7,1.7,0,0,0,0,123V131.5a1.7,1.7,0,0,0,1.7,1.7H5.1v6.794a1.7,1.7,0,0,0,1.7,1.7H20.384a1.7,1.7,0,0,0,1.7-1.7v-6.794h3.4a1.7,1.7,0,0,0,1.7-1.7V123A1.7,1.7,0,0,0,25.48,121.3Zm-5.1,18.685H6.8V128.1H20.384Zm3.4-13.589a1.7,1.7,0,1,1,1.7-1.7A1.7,1.7,0,0,1,23.782,126.4Z" transform="translate(-0.001 -114.51)" fill="#fff"/>
+        <rect id="Rectángulo_7425" data-name="Rectángulo 7425" width="6.794" height="1.699" transform="translate(8.493 15.287)" fill="#fff"/>
+        <rect id="Rectángulo_7426" data-name="Rectángulo 7426" width="10.192" height="1.698" transform="translate(8.493 18.685)" fill="#fff"/>
+        <rect id="Rectángulo_7427" data-name="Rectángulo 7427" width="10.192" height="1.698" transform="translate(8.493 22.082)" fill="#fff"/>
+      </g>
+    </g>
+    <rect id="Rectángulo_7457" data-name="Rectángulo 7457" width="32" height="32" transform="translate(3077 1039)" fill="none"/>
+  </g>
+</svg>

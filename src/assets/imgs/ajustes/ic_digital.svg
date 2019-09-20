@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="50" height="32" viewBox="0 0 50 32">
+  <g id="Grupo_11688" data-name="Grupo 11688" transform="translate(-0.465 0.5)">
+    <g id="smartphone" transform="translate(0 10.4)">
+      <rect id="Path" width="20" height="21" transform="translate(0.465 0.101)" fill="rgba(0,0,0,0)"/>
+      <path id="Icon" d="M11.143,19H1.858A1.8,1.8,0,0,1,0,17.273V1.727A1.8,1.8,0,0,1,1.858,0l9.285.008A1.794,1.794,0,0,1,13,1.727V17.273A1.8,1.8,0,0,1,11.143,19ZM1.858,3.454V15.546h9.285V3.454Z" transform="translate(3.465 1.101)" fill="#707070"/>
+    </g>
+    <g id="desktop_mac" transform="translate(19.5 0)">
+      <rect id="Path-2" data-name="Path" width="31" height="32" transform="translate(-0.035 -0.499)" fill="rgba(0,0,0,0)"/>
+      <path id="Icon-2" data-name="Icon" d="M19.772,27H9.228V25.65l2.636-4.05H2.636A2.671,2.671,0,0,1,0,18.9V2.7A2.671,2.671,0,0,1,2.636,0H26.364A2.671,2.671,0,0,1,29,2.7V18.9a2.671,2.671,0,0,1-2.636,2.7H17.136l2.636,4.05V27ZM2.636,2.7V16.2H26.364V2.7Z" transform="translate(0.965 1.501)" fill="#707070"/>
+    </g>
+  </g>
+</svg>

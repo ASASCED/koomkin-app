@@ -1,73 +1,259 @@
 <ion-header>
     <ion-navbar>
-        <ion-title>email</ion-title>
+        <ion-title>Email</ion-title>
     </ion-navbar>
 </ion-header>
-
-
-<ion-content padding>
-    <table *ngIf="vista == 'informacion'">
-        <tr>
-            <th class="contacto" colspan="2">Configura tu email de presentación</th>
-        </tr>
-        <tr>
-            <td class="campos">Mail de atención</td>
-            <td class="datos">{{email}}</td>
-        </tr>
-        <tr>
-            <td class="campos">Mensaje<br><span class="maximo">(Máximo 240 caracteres)</span></td>
-            <td class="datos">
-                <div class="saludos">
-                    {{saludo}}
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <td class="campos">Carta de Presentación<br><span class="maximo">(Máximo 20 MB)</span></td>
-            <td class="datos">
-                <div class="saludos">
-                    {{pdf}}
-                </div>
-            </td>
-        </tr>
-
-    </table>
-    <table *ngIf="vista === 'editar'">
-        <tr>
-            <th class="contacto" colspan="2">Configura tu email de presentación</th>
-        </tr>
-        <tr>
-            <td class="campos">Mail de atención</td>
-            <td class="datos">
-                <input type="text " name="Email " style="padding: 2.7%; " [(ngModel)]="email">
-            </td>
-        </tr>
-        <tr>
-            <td class="campos">Mensaje<br><span class="maximo">(Máximo 240 caracteres)</span></td>
-            <td class="datos">
-                <textarea class="msg" rows="8" cols="50" maxlength="240" [(ngModel)]="saludo"></textarea>
-            </td>
-        </tr>
-        <tr>
-            <td class="campos">Carta de Presentación<br><span class="maximo">(Máximo 20 MB)</span></td>
-            <td class="datos">
-                <div style="border: 1px solid #c4c4c4;border-radius: 5px;">
-                    <span class="datos">{{pdf}}</span>
-                    <button class="subirarchivo" ion-button clear icon-only item-right (click)="chooseFile()">Subir
-                        Archivo</button>
-                </div>
-            </td>
-        </tr>
-    </table>
-    <div class="cuadro" style="margin-bottom: 6%;">
-        <button *ngIf="vista == 'informacion'" class="enviar-mail" (click)="enviarVistaPrevia();">Enviar Vista
-            Previa</button>
-    </div>
-    <div class="cuadro">
-        <button *ngIf="vista == 'informacion'" class="edit" (click)="changePage('editar')">Modificar Datos</button>
-        <button *ngIf="vista === 'editar'" class="edit" (click)="changePage('informacion');">Cancelar</button>
-        <button *ngIf="vista === 'editar'" class="edit"
-            (click)="changePage('informacion');changeInfo();changeMail();cambioInformacion()">Guardar</button>
+<ion-content>
+    <div class="banner">
+        <img src="assets/imgs/ajustes/img_bannerajustes.svg" width="100%" height="100%" />
+        <p class="titulo">AJUSTES</p>
+        <p class="subtitulo">Modifica la configuración de tu campaña</p>
     </div>
 
+    <div class="tarjeta">
+        <ion-grid>
+            <ion-row>
+                <ion-col col-12>
+                    <ion-card>
+                        <div class="encabezado-horario primero">
+                            <ion-grid>
+                                <ion-row style="margin-bottom: 0%">
+                                    <ion-col col-2>
+                                            <ion-icon name="md-phone-portrait" class="iconos-w">
+                                                </ion-icon>
+                                    </ion-col>
+                                    <ion-col col-8>
+                                        <p class="encabezado-texto-grande">Call Tracking</p>
+                                    </ion-col>
+                                    <ion-col col-2>
+                                    </ion-col>
+                                </ion-row>
+                            </ion-grid>
+                        </div>
+                        <ion-card-content>
+                            <ion-grid>
+                                <ion-row style="margin-bottom: 0%">
+                                    <ion-col col-5>
+                                        Móvil
+                                    </ion-col>
+                                    <ion-col col-7>
+                                        <input type="text">
+                                    </ion-col>
+                                </ion-row>
+                                <ion-row style="margin-bottom: 0%">
+                                    <ion-col col-5>
+                                        Ejecutivo Comercial
+                                    </ion-col>
+                                    <ion-col col-7>
+                                        <input type="text">
+                                    </ion-col>
+                                </ion-row>
+                                <hr>
+                                <ion-row style="margin-bottom: 0%">
+                                    <ion-col col-12>
+                                        Horario de Atención (tuyo)
+                                    </ion-col>
+                                </ion-row>
+                                <ion-row style="margin-bottom: 0%">
+                                    <ion-col col-5>
+                                        Días
+                                    </ion-col>
+                                    <ion-col col-7>
+                                        Días
+                                    </ion-col>
+                                </ion-row>
+                                <ion-row style="margin-bottom: 0%">
+                                    <ion-col col-5>
+                                        Horario (24 horas)
+                                    </ion-col>
+                                    <ion-col col-7>
+
+                                    </ion-col>
+                                </ion-row>
+                            </ion-grid>
+                        </ion-card-content>
+                    </ion-card>
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col col-12>
+                    <ion-card>
+                        <div class="encabezado-horario segundo">
+                            <ion-grid>
+                                <ion-row style="margin-bottom: 0%">
+                                    <ion-col col-2>
+                                            <ion-icon name="md-mail" class="iconos-w">
+                                                </ion-icon>
+                                    </ion-col>
+                                    <ion-col col-8>
+                                        <p class="encabezado-texto-grande">Emailing</p>
+                                    </ion-col>
+                                    <ion-col col-2>
+                                    </ion-col>
+                                </ion-row>
+                            </ion-grid>
+                        </div>
+                        <ion-card-content>
+                            <ion-grid>
+                                <ion-row style="margin-bottom: 0%">
+                                    <ion-col col-12>
+                                        Adjunta el archivo que se enviará a tus clientes, dependediendo de su estatus de
+                                        venta
+                                    </ion-col>
+                                </ion-row>
+                                <ion-row style="margin-bottom: 0%">
+                                    <ion-col col-2>
+
+                                    </ion-col>
+                                    <ion-col col-1>
+                                        < </ion-col> <ion-col col-6>
+                                            Inicial
+                                    </ion-col>
+                                    <ion-col col-1>
+                                        >
+                                    </ion-col>
+                                    <ion-col col-2>
+
+                                    </ion-col>
+                                </ion-row>
+                                <hr>
+                                <ion-row style="margin-bottom: 0%">
+                                    <ion-col col-5>
+                                        Archivo Inicial
+                                    </ion-col>
+                                    <ion-col col-7>
+                                        <input type="text">
+                                    </ion-col>
+                                </ion-row>
+                                <ion-row style="margin-bottom: 0%">
+                                    <ion-col col-5>
+                                        Mensaje (Máximo 240 caracteres)
+                                    </ion-col>
+                                    <ion-col col-7>
+                                        <textarea></textarea>
+                                    </ion-col>
+                                </ion-row>
+                                <ion-row style="margin-bottom: 0%">
+                                    <ion-col col-3>
+                                    </ion-col>
+                                    <ion-col col-6>
+                                        <button> Enviar Vista Previa</button>
+                                    </ion-col>
+                                    <ion-col col-3>
+                                    </ion-col>
+                                </ion-row>
+                            </ion-grid>
+                        </ion-card-content>
+                    </ion-card>
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col col-12>
+                    <ion-card>
+                        <div class="encabezado-horario tercero">
+                            <ion-grid>
+                                <ion-row style="margin-bottom: 0%">
+                                    <ion-col col-2>
+                                            <ion-icon name="ios-chatbubbles" class="iconos-w">
+                                                </ion-icon>
+                                    </ion-col>
+                                    <ion-col col-8>
+                                        <p class="encabezado-texto-grande">Chat</p>
+                                    </ion-col>
+                                    <ion-col col-2>
+                                    </ion-col>
+                                </ion-row>
+                            </ion-grid>
+                        </div>
+                        <ion-card-content>
+                            <ion-grid>
+                                <ion-row style="margin-bottom: 0%">
+                                    <ion-col col-12>
+                                        Escribe la especialidad de tu negocio y selecciona el mensaje que enviará el
+                                        Chatbot dependiendo del estatus de venta de tu cliente potencial
+                                    </ion-col>
+                                </ion-row>
+                                <ion-row style="margin-bottom: 0%">
+                                    <ion-col col-5>
+                                        Especialidad
+                                    </ion-col>
+                                    <ion-col col-7>
+                                        <input type="text">
+                                    </ion-col>
+                                </ion-row>
+                                <ion-row style="margin-bottom: 0%">
+                                    <ion-col col-5>
+                                        Inicial
+                                    </ion-col>
+                                    <ion-col col-1>
+
+                                    </ion-col>
+                                    <ion-col col-6>
+                                        ¡Hola nombre_lead! Acabas de ver mi anuncio por internet y dejaste tus datos.
+                                        Somos especialistas en especialidad
+                                        ¿En qué te podemos ayudar?
+                                    </ion-col>
+                                </ion-row>
+                                <ion-row style="margin-bottom: 0%">
+                                    <ion-col col-5>
+
+                                    </ion-col>
+                                    <ion-col col-1>
+
+                                    </ion-col>
+                                    <ion-col col-6>
+                                        Buen día, ¿En qué puedo ayudar?
+                                    </ion-col>
+                                </ion-row>
+                                <ion-row style="margin-bottom: 0%">
+                                    <ion-col col-5>
+                                        Seguimiento
+                                    </ion-col>
+                                    <ion-col col-1>
+
+                                    </ion-col>
+                                    <ion-col col-6>
+                                        Estamos realizando tu cotización
+                                    </ion-col>
+                                </ion-row>
+                                <ion-row style="margin-bottom: 0%">
+                                    <ion-col col-5>
+
+                                    </ion-col>
+                                    <ion-col col-1>
+
+                                    </ion-col>
+                                    <ion-col col-6>
+                                        Disculpa la demora, estamos trabajando para darte la mejor solución
+                                    </ion-col>
+                                </ion-row>
+                                <ion-row style="margin-bottom: 0%">
+                                    <ion-col col-5>
+                                        Agradecimiento
+                                    </ion-col>
+                                    <ion-col col-1>
+
+                                    </ion-col>
+                                    <ion-col col-6>
+                                        Gracias por tu compra
+                                    </ion-col>
+                                </ion-row>
+                                <ion-row style="margin-bottom: 0%">
+                                    <ion-col col-5>
+
+                                    </ion-col>
+                                    <ion-col col-1>
+
+                                    </ion-col>
+                                    <ion-col col-6>
+                                        Gracias por elegirnos
+                                    </ion-col>
+                                </ion-row>
+                            </ion-grid>
+                        </ion-card-content>
+                    </ion-card>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </div>
 </ion-content>

@@ -1,115 +1,270 @@
 page-social {
-    .cuadro {
-        text-align: center;
-        height: auto;
+  .banner {
+    position: relative;
+    text-align: center;
+    color: white;
+    z-index: 1;
+    .titulo {
+      width: 100%;
+      position: absolute;
+      top: 20%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 18px;
+      font-weight: bold;
+      z-index: 100;
     }
-    .cuadro1 {
-        text-align: right;
-        width: 100%;
-        height: auto;
-        margin-top: 20%;
+
+    .subtitulo {
+      width: 100%;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 14px;
+      font-weight: bold;
     }
-    .cancelar {
-        color: gray;
-        text-decoration: underline;
-        background: transparent;
+  }
+
+  .card-md {
+    margin-left: 2%;
+    margin-bottom: 2%;
+    border-radius: 10px 10px 0px 0px;
+    width: 96%;
+    background: white;
+    -webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14),
+      0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14),
+      0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+  }
+
+  .tarjeta {
+    .encabezado-horario {
+      color: white;
+      text-align: center;
+      font-size: 16px;
+      font-weight: bold;
     }
-    .contacto {
-        text-align: center !important;
-        color: #288AC1;
-        font-size: 5.5vw;
-        margin-bottom: 4%;
-        font-weight: bold !important;
+    .primero {
+      background: #0ea7c2;
     }
-    table {
-        border-collapse: collapse;
-        width: 100%;
+    .segundo {
+      background: #005999;
     }
-    td {
-        width: 45%;
-        padding-bottom: 2.5%;
-        font-size: 4vw;
+    .tercero {
+      background: #2ab4bc;
     }
-    td.social {
-        width: 70% !important;
-        font-size: 4vw;
-        padding-bottom: 4.5%;
-        color: #606060;
-        font-weight: 350;
+    .cuarto {
+      background: #243E56;
     }
-    .redsocial {
-        padding: 3%;
-        border: 1px #c4c4c4 solid;
-        border-radius: 4px;
-        font-size: 4vw;
-        color: #606060;
-        font-weight: 350;
+    .encabezado-texto-grande {
+      color: white;
+      text-align: center;
+      font-size: 16px;
+      font-weight: bold;
     }
-    td.socialicon {
-        width: 30% !important;
-        padding-bottom: 0;
+
+    .encabezado-texto {
+      color: white;
+      text-align: center;
+      font-size: 14px;
+      font-weight: bold;
     }
-    tr {
-        padding: 5px;
+  }
+
+  .distribucion {
+    text-align: right;
+    font-weight: bold;
+    color: #243E56;
+  }
+
+  .distribucion-porcentaje {
+    height: 90%;
+  }
+
+  .porcentaje {
+    font-weight: bold;
+    color: #243E56;
+  }
+
+  .vende {
+    width: 90%;
+    margin-left: 5%;
+    padding: 5%;
+    border: 1px solid #c4c4c4;
+    border-radius: 20px;
+    color: #243E56;
+    font-weight: bold;
+  }
+
+  .boton-cobertura-brief-blanco {
+    width: 90%;
+    height: 65px;
+    margin-left: 5%;
+    display: inline-block;
+    border: 1px #00b9be solid;
+    border-radius: 7px;
+    background: #00b9be;
+    .texto-boton-brief {
+      color: white;
+      margin: 0;
+      font-size: 8px;
+      font-weight: bold;
     }
-    th {
-        text-align: left !important;
-        font-weight: normal !important;
-        padding-bottom: 4%;
-        padding-top: 1%;
-        margin-left: 0% !important;
+  }
+
+  .boton-cobertura-brief {
+    width: 90%;
+    height: 65px;
+    margin-left: 5%;
+    display: inline-block;
+    border: 1px #cecece solid;
+    border-radius: 7px;
+    background: white;
+    .texto-boton-brief {
+      color: #a09d9d;
+      margin: 0;
+      font-size: 8px;
+      font-weight: bold;
     }
-    .edit {
-        background: #00B9BE;
-        border: transparent;
-        font-size: 4.5vw;
-        text-align: center;
-        color: white;
-        border-radius: 10px;
-        cursor: pointer;
-        padding: 3%;
-        width: 45%;
-        box-shadow: 8px 8px 10px -6px rgba(0, 0, 0, .9);
-    }
-    .campos {
-        font-size: 4.5vw;
-        color: #606060;
-        font-weight: 700;
-        margin-bottom: 1%;
-        margin-top: 2%;
-    }
-    .datos {
-        font-size: 4vw;
-        color: #606060;
-        font-weight: 350;
-        background: transparent;
-    }
-    .msg {
-        width: 99%;
-        border: 1px solid #c4c4c4;
-        border-radius: 5px;
-        padding: 3px 5px;
-        cursor: pointer;
-        text-align: justify;
-        box-shadow: none;
-    }
-    .nocuento {
-        color: red;
-    }
-    .puntos {
-        overflow: hidden;
-        /* Escondemos la parte sobrante */
-        white-space: nowrap;
-        /* Indicamos que no realice salto de linea si no cabe en la anchura indicada */
-        text-overflow: ellipsis;
-    }
-    input {
-        border: 1px solid #c4c4c4;
-        border-radius: 5px;
-        padding: 3px 5px;
-        width: 99%;
-        cursor: pointer;
-        box-shadow: none;
-        color: #606060;
-    }
+  }
+
+  .referidos {
+    width: 60%;
+    margin-left: 20%;
+  }
+
+  .publicidad {
+    width: 64%;
+    margin-left: 18%;
+  }
+
+  .digital {
+    width: 70%;
+    margin-left: 15%;
+  }
+
+  .cuadro {
+    text-align: center;
+    height: auto;
+  }
+  .cuadro1 {
+    text-align: right;
+    width: 100%;
+    height: auto;
+    margin-top: 20%;
+  }
+  .cancelar {
+    color: gray;
+    text-decoration: underline;
+    background: transparent;
+  }
+  .preguntas {
+    margin: 2%;
+    color: #288ac1;
+    font-size: 15px;
+    font-weight: bold !important;
+  }
+  .contacto {
+    text-align: center !important;
+    color: #288ac1;
+    font-size: 16px;
+    font-weight: bold !important;
+  }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  td {
+    width: 45%;
+    padding-bottom: 2.5%;
+    font-size: 4vw;
+  }
+  td.social {
+    width: 70% !important;
+    font-size: 4vw;
+    padding-bottom: 4.5%;
+    color: #606060;
+    font-weight: 350;
+  }
+  .redsocial {
+    height: 100%;
+    padding: 3%;
+    border: 1px #c4c4c4 solid;
+    border-radius: 4px;
+    font-size: 4vw;
+    color: #606060;
+    font-weight: 350;
+  }
+  td.socialicon {
+    width: 30% !important;
+    padding-bottom: 0;
+  }
+  tr {
+    padding: 5px;
+  }
+  th {
+    text-align: left !important;
+    font-weight: normal !important;
+    padding-bottom: 4%;
+    padding-top: 1%;
+    margin-left: 0% !important;
+  }
+  .edit {
+    background: #00b9be;
+    border: transparent;
+    font-size: 4.5vw;
+    text-align: center;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+    padding: 3%;
+    width: 45%;
+    box-shadow: 8px 8px 10px -6px rgba(0, 0, 0, 0.9);
+  }
+  .campos {
+    font-size: 4.5vw;
+    color: #606060;
+    font-weight: 700;
+    margin-bottom: 1%;
+    margin-top: 2%;
+  }
+  .datos {
+    font-size: 4vw;
+    color: #606060;
+    font-weight: 350;
+    background: transparent;
+  }
+  .msg {
+    width: 99%;
+    border: 1px solid #c4c4c4;
+    border-radius: 5px;
+    padding: 3px 5px;
+    cursor: pointer;
+    text-align: justify;
+    box-shadow: none;
+  }
+  .cuento {
+    width: 50%;
+    margin-left: 25%;
+  }
+  .nocuento {
+    color: red;
+  }
+  .puntos {
+    overflow: hidden;
+    /* Escondemos la parte sobrante */
+    white-space: nowrap;
+    /* Indicamos que no realice salto de linea si no cabe en la anchura indicada */
+    text-overflow: ellipsis;
+  }
+  input {
+    border: 1px solid #c4c4c4;
+    border-radius: 5px;
+    padding: 3px 5px;
+    width: 99%;
+    cursor: pointer;
+    box-shadow: none;
+    color: #606060;
+  }
 }

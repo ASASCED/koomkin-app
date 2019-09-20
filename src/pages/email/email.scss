@@ -1,121 +1,191 @@
 page-email {
-    .cuadro {
-        text-align: center;
-        height: auto;
+  .banner {
+    position: relative;
+    text-align: center;
+    color: white;
+    z-index: 1;
+    .titulo {
+      width: 100%;
+      position: absolute;
+      top: 20%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 18px;
+      font-weight: bold;
+      z-index: 100;
     }
-    .cuadro1 {
-        text-align: right;
-        width: 100%;
-        height: auto;
-        margin-top: 20%;
+
+    .subtitulo {
+      width: 100%;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 14px;
+      font-weight: bold;
     }
-    .cancelar {
-        color: gray;
-        text-decoration: underline;
-        background: transparent;
+  }
+
+  .card-md {
+    margin-left: 2%;
+    margin-bottom: 2%;
+    border-radius: 10px 10px 0px 0px;
+    width: 96%;
+    background: white;
+    -webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14),
+      0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14),
+      0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+  }
+
+  .tarjeta {
+    .encabezado-horario {
+      color: white;
+      text-align: center;
+      font-size: 16px;
+      font-weight: bold;
     }
-    .contacto {
-        text-align: center !important;
-        color: #288AC1;
-        font-size: 5.5vw;
-        margin-bottom: 4%;
-        font-weight: bold !important;
+    .primero {
+        background: #0EA7C2;
+      }
+      .segundo {
+        background: #005999;
+      }
+      .tercero {
+        background: #2AB4BC;
+      }
+    .encabezado-texto-grande {
+      color: white;
+      text-align: center;
+      font-size: 16px;
+      font-weight: bold;
     }
-    table {
-        border-collapse: collapse;
-        width: 100%;
+
+    .encabezado-texto {
+      color: white;
+      text-align: center;
+      font-size: 14px;
+      font-weight: bold;
     }
-    td {
-        width: 45%;
-        padding-bottom: 5.8%;
-        font-size: 4vw;
-    }
-    tr {
-        padding: 5px;
-    }
-    th {
-        text-align: left !important;
-        font-weight: normal !important;
-        padding-bottom: 4%;
-        padding-top: 1%;
-        margin-left: 0% !important;
-    }
-    .edit {
-        background: #00B9BE;
-        border: transparent;
-        font-size: 4.5vw;
-        text-align: center;
-        color: white;
-        border-radius: 10px;
-        cursor: pointer;
-        padding: 3%;
-        width: 45%;
-        box-shadow: 8px 8px 10px -6px rgba(0, 0, 0, .9);
-    }
-    .enviar-mail {
-        background: #FE703F;
-        border: transparent;
-        font-size: 4.5vw;
-        text-align: center;
-        color: white;
-        border-radius: 10px;
-        cursor: pointer;
-        padding: 3%;
-        width: 45%;
-        box-shadow: 8px 8px 10px -6px rgba(0, 0, 0, .9);
-    }
-    .campos {
-        font-size: 4.5vw;
-        color: #606060;
-        font-weight: 700;
-    }
-    .datos {
-        font-size: 4vw;
-        color: #606060;
-        font-weight: 350;
-        background: transparent;
-    }
-    .msg {
-        width: 99%;
-        border: 1px solid #c4c4c4;
-        border-radius: 5px;
-        padding: 3px 5px;
-        box-shadow: none;
-        cursor: pointer;
-        text-align: justify;
-    }
-    .maximo {
-        font-size: 4vw;
-        color: #c4c4c4;
-        font-weight: 500;
-    }
-    .saludos {
-        text-align: justify !important;
-        border: 1px solid #c4c4c4;
-        border-radius: 5px;
-        font-size: 4vw;
-        color: #606060;
-        font-weight: 350;
-        padding: 2%;
-    }
-    .subirarchivo {
-        background: #00B9BE;
-        border: transparent;
-        font-size: 3.5vw;
-        text-align: center;
-        color: white;
-        border-radius: 10px;
-        cursor: pointer;
-        padding: 3%;
-        width: 55%;
-        text-transform: capitalize;
-    }
-    input {
-        border: 1px solid #c4c4c4;
-        border-radius: 5px;
-        padding: 3px 5px;
-        width: 99%;
-        cursor: pointer;
-        box-shadow: none;
-    }
+  }
+
+  .cuadro {
+    text-align: center;
+    height: auto;
+  }
+  .cuadro1 {
+    text-align: right;
+    width: 100%;
+    height: auto;
+    margin-top: 20%;
+  }
+  .cancelar {
+    color: gray;
+    text-decoration: underline;
+    background: transparent;
+  }
+  .contacto {
+    text-align: center !important;
+    color: #288ac1;
+    font-size: 5.5vw;
+    margin-bottom: 4%;
+    font-weight: bold !important;
+  }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  td {
+    width: 45%;
+    padding-bottom: 5.8%;
+    font-size: 4vw;
+  }
+  tr {
+    padding: 5px;
+  }
+  th {
+    text-align: left !important;
+    font-weight: normal !important;
+    padding-bottom: 4%;
+    padding-top: 1%;
+    margin-left: 0% !important;
+  }
+  .edit {
+    background: #00b9be;
+    border: transparent;
+    font-size: 4.5vw;
+    text-align: center;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+    padding: 3%;
+    width: 45%;
+    box-shadow: 8px 8px 10px -6px rgba(0, 0, 0, 0.9);
+  }
+  .enviar-mail {
+    background: #fe703f;
+    border: transparent;
+    font-size: 4.5vw;
+    text-align: center;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+    padding: 3%;
+    width: 45%;
+    box-shadow: 8px 8px 10px -6px rgba(0, 0, 0, 0.9);
+  }
+  .campos {
+    font-size: 4.5vw;
+    color: #606060;
+    font-weight: 700;
+  }
+  .datos {
+    font-size: 4vw;
+    color: #606060;
+    font-weight: 350;
+    background: transparent;
+  }
+  .msg {
+    width: 99%;
+    border: 1px solid #c4c4c4;
+    border-radius: 5px;
+    padding: 3px 5px;
+    box-shadow: none;
+    cursor: pointer;
+    text-align: justify;
+  }
+  .maximo {
+    font-size: 4vw;
+    color: #c4c4c4;
+    font-weight: 500;
+  }
+  .saludos {
+    text-align: justify !important;
+    border: 1px solid #c4c4c4;
+    border-radius: 5px;
+    font-size: 4vw;
+    color: #606060;
+    font-weight: 350;
+    padding: 2%;
+  }
+  .subirarchivo {
+    background: #00b9be;
+    border: transparent;
+    font-size: 3.5vw;
+    text-align: center;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+    padding: 3%;
+    width: 55%;
+    text-transform: capitalize;
+  }
+  input {
+    border: 1px solid #c4c4c4;
+    border-radius: 5px;
+    padding: 3px 5px;
+    width: 99%;
+    cursor: pointer;
+    box-shadow: none;
+  }
 }

@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+  <g id="local_offer" transform="translate(-372 -3166)">
+    <rect id="Path" width="24" height="24" transform="translate(372 3166)" fill="rgba(0,0,0,0)"/>
+    <path id="Icon" d="M11,20a1.98,1.98,0,0,1-1.41-.58l-9-9A2,2,0,0,1,0,9V2A2,2,0,0,1,2,0H9A1.979,1.979,0,0,1,10.41.58l9,9A2.024,2.024,0,0,1,20,11a1.952,1.952,0,0,1-.59,1.41l-7,7A1.949,1.949,0,0,1,11,20ZM2,2V9l9,9.01,7-7.019-9-9V2ZM4.5,6A1.5,1.5,0,1,1,6,4.5,1.5,1.5,0,0,1,4.5,6Z" transform="translate(374 3168)" fill="#fff"/>
+  </g>
+</svg>
