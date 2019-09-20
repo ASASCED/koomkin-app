@@ -177,7 +177,10 @@ page-email {
     font-weight: 700;
   }
   .datos {
-    font-size: 4vw;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     color: #606060;
     font-weight: 350;
     background: transparent;
@@ -205,16 +208,28 @@ page-email {
     font-weight: 350;
     padding: 2%;
   }
+  .subir {
+    width: 90%;
+    height: 100%;
+    border: 1px solid #c4c4c4;
+    border-radius: 5px;
+    margin-left: 5%;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    vertical-align: middle;
+  }
   .subirarchivo {
+    width: 50%;
     background: #00b9be;
     border: transparent;
-    font-size: 3.5vw;
+    font-size: 12px;
     text-align: center;
     color: white;
     border-radius: 10px;
     cursor: pointer;
     padding: 3%;
-    width: 55%;
+    height: auto;
     text-transform: capitalize;
   }
   input {

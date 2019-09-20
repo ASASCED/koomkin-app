@@ -118,24 +118,35 @@
 
                                     </ion-col>
                                 </ion-row>
-                                <hr>
                                 <ion-row style="margin: 2% 0%">
                                     <ion-col col-4 class="texto">
-                                        Archivo Inicial
+                                        Email de atención
                                     </ion-col>
                                     <ion-col col-8>
-                                        <input type="text">
+                                        <input type="text" name="Email" [(ngModel)]="email">
                                     </ion-col>
                                 </ion-row>
-                                <ion-row style="margin-bottom: 0%">
+                                <ion-row style="margin: 0%">
+                                    <ion-col col-4 class="texto">
+                                        Archivo Inicial <span class="texto chico">(Máximo 20 MB)</span> 
+                                    </ion-col>
+                                    <ion-col col-8>
+                                        <div class="subir">
+                                            <span class="datos">{{pdf}}</span>
+                                            <button class="subirarchivo" ion-button clear icon-only item-right (click)="chooseFile()">Subir
+                                                Archivo</button>
+                                        </div>                                    
+                                    </ion-col>
+                                </ion-row>
+                                <ion-row style="margin: 2% 0%">
                                     <ion-col col-4 class="texto">
                                         Mensaje <br> <span class="texto chico">(Máximo 240 caracteres)</span> 
                                     </ion-col>
                                     <ion-col col-8>
-                                        <textarea></textarea>
+                                        <textarea rows="5" cols="50" maxlength="240" [(ngModel)]="saludo"></textarea>
                                     </ion-col>
                                 </ion-row>
-                                <ion-row style="margin: 2% 0%">
+                                <ion-row style="margin-bottom: 2%">
                                     <ion-col col-3>
                                     </ion-col>
                                     <ion-col col-6>
