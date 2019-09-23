@@ -85,6 +85,9 @@ page-social {
   .porcentaje {
     font-weight: bold;
     color: #243E56;
+    display: flex;
+    align-items: center;
+    vertical-align: middle;
   }
 
   .vende {
@@ -100,7 +103,7 @@ page-social {
 
   .boton-cobertura-brief-blanco {
     width: 90%;
-    height: 65px;
+    height: 70px;
     margin-left: 5%;
     display: inline-block;
     border: 1px #00b9be solid;
@@ -116,7 +119,7 @@ page-social {
 
   .boton-cobertura-brief {
     width: 90%;
-    height: 65px;
+    height: 70px;
     margin-left: 5%;
     display: inline-block;
     border: 1px #cecece solid;
@@ -163,13 +166,13 @@ page-social {
   .preguntas {
     margin: 2%;
     color: #288ac1;
-    font-size: 15px;
+    font-size: 14px;
     font-weight: bold !important;
   }
   .contacto {
     text-align: center !important;
     color: #288ac1;
-    font-size: 16px;
+    font-size: 14px;
     font-weight: bold !important;
   }
   table {
@@ -193,7 +196,6 @@ page-social {
     padding: 1%;
     border: 1px #c4c4c4 solid;
     border-radius: 4px;
-    font-size: 4vw;
     color: #606060;
     font-weight: 350;
   }
@@ -224,7 +226,6 @@ page-social {
     box-shadow: 8px 8px 10px -6px rgba(0, 0, 0, 0.9);
   }
   .campos {
-    font-size: 4.5vw;
     color: #243E56;
     font-weight: 700;
     margin-bottom: 1%;

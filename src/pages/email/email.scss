@@ -87,6 +87,7 @@ page-email {
   }
 
   .opciones {
+    display: flex;
     text-align: left;
     color: #606060;
     font-size: 11px;
@@ -241,6 +242,8 @@ page-email {
     cursor: pointer;
     -webkit-box-shadow: none;
     box-shadow: none;
+    color: #606060;
+    padding-left: 2%;
   }
   textarea {
     border: 1px solid #c4c4c4;
@@ -251,6 +254,8 @@ page-email {
     cursor: pointer;
     -webkit-box-shadow: none;
     box-shadow: none;
+    color: #606060;
+    padding-left: 2%;
   }
   .content-md hr {
     background-color: rgba(0, 0, 0, .3);
