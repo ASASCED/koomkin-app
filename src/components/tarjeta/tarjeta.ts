@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
 
 @Component({
   selector: 'tarjeta',
@@ -6,10 +7,14 @@ import { Component } from '@angular/core';
 })
 export class TarjetaComponent {
 
-  text: string;
+  public empresa;
+  public id;
 
-  constructor() {
-    
+  constructor(
+    public authService: AuthServiceProvider
+  ) {
+    this.empresa = this.authService.empresa;
+    this.id = this.authService.id;
   }
 
 }

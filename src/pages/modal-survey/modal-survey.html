@@ -781,472 +781,612 @@
 
 
 <ion-content *ngIf="tipoBanner == 13">
-    <div class="encuesta-container" *ngIf="pagina == 1">
-        <div class="activity-header">
-            <img src="https://firebasestorage.googleapis.com/v0/b/chatcintanegra.appspot.com/o/img_encuesta.svg?alt=media&token=d573e9e2-b5f5-4371-82df-39b1bd3ff414"
-                width="100%">
-            <div class="encabezado-encuesta">Encuesta</div>
-        </div>
-        <div class="activity-content-container">
-            <p class="azul-encuesta">¡Lamentamos que te vayas!</p>
-            <p class="gris">Antes de irte, te pedimos responder esta encuesta para mejorar nuestro servicio.</p>
-        </div>
-        <div class="activity-footer">
-            <button class="encuesta-comenzar" (click)="nextQuestion();setChoice(0)">Comenzar</button>
-        </div>
-    </div>
-    <div class="encuesta-container" *ngIf="pagina == 2">
-        <div class="activity-header">
-            <img src="https://firebasestorage.googleapis.com/v0/b/chatcintanegra.appspot.com/o/img_encuesta.svg?alt=media&token=d573e9e2-b5f5-4371-82df-39b1bd3ff414"
-                width="100%">
-            <div class="encabezado-encuesta">Encuesta</div>
-        </div>
-        <div class="activity-content-container" style="display: grid;align-items: center;">
-            <p class="azul">1. Del 1 al 10, ¿Cómo calificarías tu campaña digital con Koomkin?</p>
-            <ul class="grade">
-                <li class="zero" [ngClass]="{'selection':eleccion === 1}" (click)="changeChoice(1)">
-                    <span>1</span>
-                </li>
-                <li class="zero" [ngClass]="{'selection':eleccion === 2}" (click)="changeChoice(2)">
-                    <span>2</span>
-                </li>
-                <li class="zero" [ngClass]="{'selection':eleccion === 3}" (click)="changeChoice(3)">
-                    <span>3</span>
-                </li>
-                <li class="zero" [ngClass]="{'selection':eleccion === 4}" (click)="changeChoice(4)">
-                    <span>4</span>
-                </li>
-                <li class="zero" [ngClass]="{'selection':eleccion === 5}" (click)="changeChoice(5)">
-                    <span>5</span>
-                </li>
-                <li class="zero" [ngClass]="{'selection':eleccion === 6}" (click)="changeChoice(6)">
-                    <span>6</span>
-                </li>
-                <li class="zero " [ngClass]="{'selection':eleccion === 7}" (click)="changeChoice(7)">
-                    <span>7</span>
-                </li>
-                <li class="zero" [ngClass]="{'selection':eleccion === 8}" (click)="changeChoice(8)">
-                    <span>8</span>
-                </li>
-                <li class="zero" [ngClass]="{'selection':eleccion === 9}" (click)="changeChoice(9)">
-                    <span>9</span>
-                </li>
-                <li class="zero" [ngClass]="{'selection':eleccion === 10}" (click)="changeChoice(10)">
-                    <span>10</span>
-                </li>
-            </ul>
-        </div>
-        <div class="activity-footer">
-            <div class="progress-bar-container-eight">
-                <div class="section1 selection">
-                </div>
-                <div class="section2">
-                </div>
-                <div class="section3">
-                </div>
-                <div class="section4">
-                </div>
-                <div class="section5">
-                </div>
-                <div class="section6">
-                </div>
-                <div class="section7">
-                </div>
-                <div class="section8">
-                </div>
-            </div>
-            <button class="encuesta-regresar" (click)="previousQuestion();">Regresar</button>
-            <button [disabled]="apagado === true" class="encuesta-siguiente"
-                (click)="nextQuestion();saveAnswer(0,eleccion);changeChoice();disabledButton();">Siguiente</button>
-        </div>
-    </div>
-    <div class="encuesta-container" *ngIf="pagina == 3">
-        <div class="activity-header">
-            <img src="https://firebasestorage.googleapis.com/v0/b/chatcintanegra.appspot.com/o/img_encuesta.svg?alt=media&token=d573e9e2-b5f5-4371-82df-39b1bd3ff414"
-                width="100%">
-            <div class="encabezado-encuesta">Encuesta</div>
-        </div>
-        <div class="activity-content-container" style="display: grid;align-items: center;">
-            <p class="azul">2. Del 1 al 10, ¿Cómo calificarías la cantidad de Leads que recibió?</p>
-            <ul class="grade">
-                <li class="zero" [ngClass]="{'selection':eleccion === 1}" (click)="changeChoice(1)">
-                    <span>1</span>
-                </li>
-                <li class="zero" [ngClass]="{'selection':eleccion === 2}" (click)="changeChoice(2)">
-                    <span>2</span>
-                </li>
-                <li class="zero" [ngClass]="{'selection':eleccion === 3}" (click)="changeChoice(3)">
-                    <span>3</span>
-                </li>
-                <li class="zero" [ngClass]="{'selection':eleccion === 4}" (click)="changeChoice(4)">
-                    <span>4</span>
-                </li>
-                <li class="zero" [ngClass]="{'selection':eleccion === 5}" (click)="changeChoice(5)">
-                    <span>5</span>
-                </li>
-                <li class="zero" [ngClass]="{'selection':eleccion === 6}" (click)="changeChoice(6)">
-                    <span>6</span>
-                </li>
-                <li class="zero " [ngClass]="{'selection':eleccion === 7}" (click)="changeChoice(7)">
-                    <span>7</span>
-                </li>
-                <li class="zero" [ngClass]="{'selection':eleccion === 8}" (click)="changeChoice(8)">
-                    <span>8</span>
-                </li>
-                <li class="zero" [ngClass]="{'selection':eleccion === 9}" (click)="changeChoice(9)">
-                    <span>9</span>
-                </li>
-                <li class="zero" [ngClass]="{'selection':eleccion === 10}" (click)="changeChoice(10)">
-                    <span>10</span>
-                </li>
-            </ul>
-        </div>
-        <div class="activity-footer">
-            <div class="progress-bar-container-eight">
-                <div class="section1 selection">
-                </div>
-                <div class="section2 selection">
-                </div>
-                <div class="section3">
-                </div>
-                <div class="section4">
-                </div>
-                <div class="section5">
-                </div>
-                <div class="section6">
-                </div>
-                <div class="section7">
-                </div>
-                <div class="section8">
-                </div>
-            </div>
-            <button class="encuesta-regresar" (click)="previousQuestion();setChoice(0);">Regresar</button>
-            <button [disabled]="apagado === true" class="encuesta-siguiente"
-                (click)="nextQuestion();saveAnswer(1,eleccion);changeChoice();disabledButton();">Siguiente</button>
-        </div>
-    </div>
-    <div class="encuesta-container" *ngIf="pagina == 4">
-        <div class="activity-header">
-            <img src="https://firebasestorage.googleapis.com/v0/b/chatcintanegra.appspot.com/o/img_encuesta.svg?alt=media&token=d573e9e2-b5f5-4371-82df-39b1bd3ff414"
-                width="100%">
-            <div class="encabezado-encuesta">Encuesta</div>
-        </div>
-        <div class="activity-content-container" style="display: grid;align-items: center;">
-            <p class="azul">3. Del 1 al 10, ¿Cómo calificarías el perfil o calidad de estos leads?</p>
-            <ul class="grade">
-                <li class="zero" [ngClass]="{'selection':eleccion === 1}" (click)="changeChoice(1)">
-                    <span>1</span>
-                </li>
-                <li class="zero" [ngClass]="{'selection':eleccion === 2}" (click)="changeChoice(2)">
-                    <span>2</span>
-                </li>
-                <li class="zero" [ngClass]="{'selection':eleccion === 3}" (click)="changeChoice(3)">
-                    <span>3</span>
-                </li>
-                <li class="zero" [ngClass]="{'selection':eleccion === 4}" (click)="changeChoice(4)">
-                    <span>4</span>
-                </li>
-                <li class="zero" [ngClass]="{'selection':eleccion === 5}" (click)="changeChoice(5)">
-                    <span>5</span>
-                </li>
-                <li class="zero" [ngClass]="{'selection':eleccion === 6}" (click)="changeChoice(6)">
-                    <span>6</span>
-                </li>
-                <li class="zero " [ngClass]="{'selection':eleccion === 7}" (click)="changeChoice(7)">
-                    <span>7</span>
-                </li>
-                <li class="zero" [ngClass]="{'selection':eleccion === 8}" (click)="changeChoice(8)">
-                    <span>8</span>
-                </li>
-                <li class="zero" [ngClass]="{'selection':eleccion === 9}" (click)="changeChoice(9)">
-                    <span>9</span>
-                </li>
-                <li class="zero" [ngClass]="{'selection':eleccion === 10}" (click)="changeChoice(10)">
-                    <span>10</span>
-                </li>
-            </ul>
-        </div>
-        <div class="activity-footer">
-            <div class="progress-bar-container-eight">
-                <div class="section1 selection">
-                </div>
-                <div class="section2 selection">
-                </div>
-                <div class="section3 selection">
-                </div>
-                <div class="section4">
-                </div>
-                <div class="section5">
-                </div>
-                <div class="section6">
-                </div>
-                <div class="section7">
-                </div>
-                <div class="section8">
-                </div>
-            </div>
-            <button class="encuesta-regresar" (click)="previousQuestion();setChoice(1);">Regresar</button>
-            <button [disabled]="apagado === true" class="encuesta-siguiente"
-                (click)="nextQuestion();saveAnswer(2,eleccion);changeChoice();disabledButton();">Siguiente</button>
-        </div>
-    </div>
-    <div class="encuesta-container" *ngIf="pagina == 5">
-        <div class="activity-header">
-            <img src="https://firebasestorage.googleapis.com/v0/b/chatcintanegra.appspot.com/o/img_encuesta.svg?alt=media&token=d573e9e2-b5f5-4371-82df-39b1bd3ff414"
-                width="100%">
-            <div class="encabezado-encuesta">Encuesta</div>
-        </div>
-        <div class="activity-content-container" style="display: grid;align-items: center;">
-            <p class="azul">4. Del 1 al 10, ¿Cómo calificarías nuestra tecnología/plataforma?</p>
-            <ul class="grade">
 
-                <li class="zero" [ngClass]="{'selection':eleccion === 1}" (click)="changeChoice(1)">
-                    <span>1</span>
-                </li>
-                <li class="zero" [ngClass]="{'selection':eleccion === 2}" (click)="changeChoice(2)">
-                    <span>2</span>
-                </li>
-                <li class="zero" [ngClass]="{'selection':eleccion === 3}" (click)="changeChoice(3)">
-                    <span>3</span>
-                </li>
-                <li class="zero" [ngClass]="{'selection':eleccion === 4}" (click)="changeChoice(4)">
-                    <span>4</span>
-                </li>
-                <li class="zero" [ngClass]="{'selection':eleccion === 5}" (click)="changeChoice(5)">
-                    <span>5</span>
-                </li>
-                <li class="zero" [ngClass]="{'selection':eleccion === 6}" (click)="changeChoice(6)">
-                    <span>6</span>
-                </li>
-                <li class="zero " [ngClass]="{'selection':eleccion === 7}" (click)="changeChoice(7)">
-                    <span>7</span>
-                </li>
-                <li class="zero" [ngClass]="{'selection':eleccion === 8}" (click)="changeChoice(8)">
-                    <span>8</span>
-                </li>
-                <li class="zero" [ngClass]="{'selection':eleccion === 9}" (click)="changeChoice(9)">
-                    <span>9</span>
-                </li>
-                <li class="zero" [ngClass]="{'selection':eleccion === 10}" (click)="changeChoice(10)">
-                    <span>10</span>
-                </li>
-            </ul>
-        </div>
-        <div class="activity-footer">
-            <div class="progress-bar-container-eight">
-                <div class="section1 selection">
-                </div>
-                <div class="section2 selection">
-                </div>
-                <div class="section3 selection">
-                </div>
-                <div class="section4 selection">
-                </div>
-                <div class="section5">
-                </div>
-                <div class="section6">
-                </div>
-                <div class="section7">
-                </div>
-                <div class="section8">
-                </div>
-            </div>
-            <button class="encuesta-regresar" (click)="previousQuestion();setChoice(2);">Regresar</button>
-            <button [disabled]="apagado === true" class="encuesta-siguiente"
-                (click)="nextQuestion();saveAnswer(3,eleccion);changeChoice();disabledButton();">Siguiente</button>
-        </div>
+    <div class="banner">
+        <img src="https://firebasestorage.googleapis.com/v0/b/chatcintanegra.appspot.com/o/img_bannercancelacion.svg?alt=media&token=74a3e09c-9a99-419f-af67-596f40a5ab79"
+            width="100%" height="100%" />
+        <p class="titulo">CANCELACIÓN</p>
+        <p class="subtitulo">¡Lamentamos que te vayas!</p>
     </div>
-    <div class="encuesta-container" *ngIf="pagina == 6">
-        <div class="activity-header">
-            <img src="https://firebasestorage.googleapis.com/v0/b/chatcintanegra.appspot.com/o/img_encuesta.svg?alt=media&token=d573e9e2-b5f5-4371-82df-39b1bd3ff414"
-                width="100%">
-            <div class="encabezado-encuesta">Encuesta</div>
-        </div>
-        <div class="activity-content-container" style="display: grid;align-items: center;">
-            <p class="azul">5. Del 1 al 10, ¿Cómo calificarías la atención por parte del área de Servicio al Cliente?
-            </p>
-            <ul class="grade">
-                <li class="zero" [ngClass]="{'selection':eleccion === 1}" (click)="changeChoice(1)">
-                    <span>1</span>
-                </li>
-                <li class="zero" [ngClass]="{'selection':eleccion === 2}" (click)="changeChoice(2)">
-                    <span>2</span>
-                </li>
-                <li class="zero" [ngClass]="{'selection':eleccion === 3}" (click)="changeChoice(3)">
-                    <span>3</span>
-                </li>
-                <li class="zero" [ngClass]="{'selection':eleccion === 4}" (click)="changeChoice(4)">
-                    <span>4</span>
-                </li>
-                <li class="zero" [ngClass]="{'selection':eleccion === 5}" (click)="changeChoice(5)">
-                    <span>5</span>
-                </li>
-                <li class="zero" [ngClass]="{'selection':eleccion === 6}" (click)="changeChoice(6)">
-                    <span>6</span>
-                </li>
-                <li class="zero " [ngClass]="{'selection':eleccion === 7}" (click)="changeChoice(7)">
-                    <span>7</span>
-                </li>
-                <li class="zero" [ngClass]="{'selection':eleccion === 8}" (click)="changeChoice(8)">
-                    <span>8</span>
-                </li>
-                <li class="zero" [ngClass]="{'selection':eleccion === 9}" (click)="changeChoice(9)">
-                    <span>9</span>
-                </li>
-                <li class="zero" [ngClass]="{'selection':eleccion === 10}" (click)="changeChoice(10)">
-                    <span>10</span>
-                </li>
-            </ul>
-        </div>
-        <div class="activity-footer">
-            <div class="progress-bar-container-eight">
-                <div class="section1 selection">
-                </div>
-                <div class="section2 selection">
-                </div>
-                <div class="section3 selection">
-                </div>
-                <div class="section4 selection">
-                </div>
-                <div class="section5 selection">
-                </div>
-                <div class="section6">
-                </div>
-                <div class="section7">
-                </div>
-                <div class="section8">
-                </div>
-            </div>
-            <button class="encuesta-regresar" (click)="previousQuestion();setChoice(3);">Regresar</button>
-            <button [disabled]="apagado === true" class="encuesta-siguiente"
-                (click)="nextQuestion();saveAnswer(4,eleccion);changeChoice();disabledButton();">Siguiente</button>
-        </div>
-    </div>
-    <div class="encuesta-container" *ngIf="pagina == 7">
-        <div class="activity-header">
-            <img src="https://firebasestorage.googleapis.com/v0/b/chatcintanegra.appspot.com/o/img_encuesta.svg?alt=media&token=d573e9e2-b5f5-4371-82df-39b1bd3ff414"
-                width="100%">
-            <div class="encabezado-encuesta">Encuesta</div>
-        </div>
-        <div class="activity-content-container" style="display: grid;align-items: center;">
-            <p class="azul">6. ¿Estás trabajando con alguna otra agencia digital?</p>
-            <button class="encuesta-opcion" [ngClass]="{'elegida':eleccion === 1}" (click)="changeChoice(1)">Sí</button>
-            <button class="encuesta-opcion" [ngClass]="{'elegida':eleccion === 2}" (click)="changeChoice(2)">No</button>
-            <p class="azul">¿Cuál?</p>
-            <textarea class="comentario" rows="2" cols="50" maxlength="150" [(ngModel)]="comentario" required
-                placeholder="Escribe el nombre de la Agencia"></textarea>
-        </div>
-        <div class="activity-footer">
-            <div class="progress-bar-container-eight">
-                <div class="section1 selection">
-                </div>
-                <div class="section2 selection">
-                </div>
-                <div class="section3 selection">
-                </div>
-                <div class="section4 selection">
-                </div>
-                <div class="section5 selection">
-                </div>
-                <div class="section6 selection">
-                </div>
-                <div class="section7">
-                </div>
-                <div class="section8">
-                </div>
-            </div>
-            <button class="encuesta-regresar" (click)="previousQuestion();setChoice(4);">Regresar</button>
-            <button [disabled]="apagado === true" class="encuesta-siguiente"
-                (click)="nextQuestion();saveAnswer(5,eleccion);changeChoice();disabledButton();">Siguiente</button>
-        </div>
-    </div>
-    <div class="encuesta-container" *ngIf="pagina == 8">
-        <div class="activity-header">
-            <img src="https://firebasestorage.googleapis.com/v0/b/chatcintanegra.appspot.com/o/img_encuesta.svg?alt=media&token=d573e9e2-b5f5-4371-82df-39b1bd3ff414"
-                width="100%">
-            <div class="encabezado-encuesta">Encuesta</div>
-        </div>
-        <div class="activity-content-container" style="display: grid;align-items: center;">
-            <p class="azul">7. Comparado con otras agencias o competidores, nuestra campaña digital fue...</p>
-            <button class="encuesta-opcion" [ngClass]="{'elegida':eleccion === 1}" (click)="changeChoice(1)">a)
-                Mejor</button>
-            <button class="encuesta-opcion" [ngClass]="{'elegida':eleccion === 2}" (click)="changeChoice(2)">b)
-                Igual</button>
-            <button class="encuesta-opcion" [ngClass]="{'elegida':eleccion === 3}" (click)="changeChoice(3)">c)
-                Peor</button>
-        </div>
-        <div class="activity-footer">
-            <div class="progress-bar-container-eight">
-                <div class="section1 selection">
-                </div>
-                <div class="section2 selection">
-                </div>
-                <div class="section3 selection">
-                </div>
-                <div class="section4 selection">
-                </div>
-                <div class="section5 selection">
-                </div>
-                <div class="section6 selection">
-                </div>
-                <div class="section7 selection">
-                </div>
-                <div class="section8">
-                </div>
-            </div>
-            <button class="encuesta-regresar" (click)="previousQuestion();setChoice(5);">Regresar</button>
-            <button [disabled]="apagado === true" class="encuesta-siguiente"
-                (click)="nextQuestion();saveAnswer(6,eleccion);changeChoice();disabledButton();">Siguiente</button>
-        </div>
-    </div>
-    <div class="encuesta-container" *ngIf="pagina == 9">
-        <div class="activity-header">
-            <img src="https://firebasestorage.googleapis.com/v0/b/chatcintanegra.appspot.com/o/img_encuesta.svg?alt=media&token=d573e9e2-b5f5-4371-82df-39b1bd3ff414"
-                width="100%">
-            <div class="encabezado-encuesta">Encuesta</div>
-        </div>
-        <div class="activity-content-container" style="display: grid;align-items: center;">
-            <p class="azul">8. ¿Deseas agregar algún comentario? Esto con el objetivo de que la Dirección de Servicio al
-                Cliente lo tome en cuenta</p>
-            <textarea class="comentario" rows="8" cols="50" maxlength="250" [(ngModel)]="comentarios"
-                placeholder="Escribe tu comentario..." (click)="changeChoice(1)" required></textarea>
-        </div>
-        <div class="activity-footer">
-            <div class="progress-bar-container-eight">
-                <div class="section1 selection">
-                </div>
-                <div class="section2 selection">
-                </div>
-                <div class="section3 selection">
-                </div>
-                <div class="section4 selection">
-                </div>
-                <div class="section5 selection">
-                </div>
-                <div class="section6 selection">
-                </div>
-                <div class="section7 selection">
-                </div>
-                <div class="section8 selection">
-                </div>
-            </div>
-            <button class="encuesta-regresar" (click)="previousQuestion();setChoice(6);">Regresar</button>
-            <button [disabled]="apagado === true" class="encuesta-siguiente"
-                (click)="nextQuestion();saveAnswer(7,eleccion);changeChoice();disabledButton();">Siguiente</button>
-        </div>
-    </div>
-    <div class="encuesta-container" *ngIf="pagina == 10">
-        <div class="activity-header">
-            <img src="https://firebasestorage.googleapis.com/v0/b/chatcintanegra.appspot.com/o/img_encuesta.svg?alt=media&token=d573e9e2-b5f5-4371-82df-39b1bd3ff414"
-                width="100%">
-            <div class="encabezado-encuesta">Encuesta</div>
-        </div>
-        <div class="activity-content-container">
-            <p class="azul-encuesta">Gracias por tomarte el tiempo y compartir tu experiencia con nosotros</p>
-            <p class="gris">Tomaremos en cuenta todas tus respuestas.</p>
-        </div>
-        <div class="activity-footer">
-            <button class="encuesta-comenzar" (click)="cancelMembershipOP()">Finalizar</button>
-        </div>
-    </div>
+
+    <ion-grid *ngIf="pagina == 1">
+        <ion-row>
+            <ion-col col-10 offset-1>
+                <p class="texto">Antes de irte, te pedimos responder esta encuesta para mejorar nuestro servicio</p>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col col-12>
+                <ion-card>
+                    <div class="encabezado">
+                        <ion-grid style="display: flex;align-items: center;">
+                            <ion-row>
+                                Pregunta 1/8
+                            </ion-row>
+                        </ion-grid>
+                    </div>
+                    <ion-card-content>
+                        <ion-card-title class="texto">
+                            1. Del 1 al 10, ¿Cómo calificarías tu campaña digital<br> con Koomkin?
+                        </ion-card-title>
+
+                        <ion-row>
+                            <ion-col col-10 offset-1>
+                                  <ul class="grade">
+                                                    
+                                    <li class="zero" [ngClass]="{'selection':eleccion === 1}" (click)="changeChoice(1)">
+                                                            <span>1</span>
+                                                        </li>
+                                                    
+                                    <li class="zero" [ngClass]="{'selection':eleccion === 2}" (click)="changeChoice(2)">
+                                                            <span>2</span>
+                                                        </li>
+                                                    
+                                    <li class="zero" [ngClass]="{'selection':eleccion === 3}" (click)="changeChoice(3)">
+                                                            <span>3</span>
+                                                        </li>
+                                                    
+                                    <li class="zero" [ngClass]="{'selection':eleccion === 4}" (click)="changeChoice(4)">
+                                                            <span>4</span>
+                                                        </li>
+                                                    
+                                    <li class="zero" [ngClass]="{'selection':eleccion === 5}" (click)="changeChoice(5)">
+                                                            <span>5</span>
+                                                        </li>
+                                                    
+                                    <li class="zero" [ngClass]="{'selection':eleccion === 6}" (click)="changeChoice(6)">
+                                                            <span>6</span>
+                                                        </li>
+                                                    
+                                    <li class="zero " [ngClass]="{'selection':eleccion === 7}" (click)="changeChoice(7)">
+                                                            <span>7</span>
+                                                        </li>
+                                                    
+                                    <li class="zero" [ngClass]="{'selection':eleccion === 8}" (click)="changeChoice(8)">
+                                                            <span>8</span>
+                                                        </li>
+                                                    
+                                    <li class="zero" [ngClass]="{'selection':eleccion === 9}" (click)="changeChoice(9)">
+                                                            <span>9</span>
+                                                        </li>
+                                                    
+                                    <li class="zero" [ngClass]="{'selection':eleccion === 10}" (click)="changeChoice(10)">
+                                                            <span>10</span>
+                                                        </li>
+                                                </ul>
+                            </ion-col>
+                        </ion-row>
+                        <ion-row>
+                            <ion-col col-6>
+                                <button class="cancelar-regresar" (click)="irInicio()">Regresar</button>
+                            </ion-col>
+                            <ion-col col-6>
+                                <button [disabled]="apagado === true" class="cancelar-siguiente" (click)="nextQuestion();saveAnswer(0,eleccion);changeChoice();disabledButton();">Siguiente</button>
+                            </ion-col>
+                        </ion-row>
+
+                    </ion-card-content>
+                </ion-card>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+
+    <ion-grid *ngIf="pagina == 2">
+            <ion-row>
+                <ion-col col-10 offset-1>
+                    <p class="texto">Antes de irte, te pedimos responder esta encuesta para mejorar nuestro servicio</p>
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col col-12>
+                    <ion-card>
+                        <div class="encabezado">
+                            <ion-grid style="display: flex;align-items: center;">
+                                <ion-row>
+                                    Pregunta 2/8
+                                </ion-row>
+                            </ion-grid>
+                        </div>
+                        <ion-card-content>
+                            <ion-card-title class="texto">
+                                    2. Del 1 al 10, ¿Cómo calificarías la cantidad <br> de Leads que recibió?
+                            </ion-card-title>
+    
+                            <ion-row>
+                                <ion-col col-10 offset-1>
+                                      <ul class="grade">
+                                                        
+                                        <li class="zero" [ngClass]="{'selection':eleccion === 1}" (click)="changeChoice(1)">
+                                                                <span>1</span>
+                                                            </li>
+                                                        
+                                        <li class="zero" [ngClass]="{'selection':eleccion === 2}" (click)="changeChoice(2)">
+                                                                <span>2</span>
+                                                            </li>
+                                                        
+                                        <li class="zero" [ngClass]="{'selection':eleccion === 3}" (click)="changeChoice(3)">
+                                                                <span>3</span>
+                                                            </li>
+                                                        
+                                        <li class="zero" [ngClass]="{'selection':eleccion === 4}" (click)="changeChoice(4)">
+                                                                <span>4</span>
+                                                            </li>
+                                                        
+                                        <li class="zero" [ngClass]="{'selection':eleccion === 5}" (click)="changeChoice(5)">
+                                                                <span>5</span>
+                                                            </li>
+                                                        
+                                        <li class="zero" [ngClass]="{'selection':eleccion === 6}" (click)="changeChoice(6)">
+                                                                <span>6</span>
+                                                            </li>
+                                                        
+                                        <li class="zero " [ngClass]="{'selection':eleccion === 7}" (click)="changeChoice(7)">
+                                                                <span>7</span>
+                                                            </li>
+                                                        
+                                        <li class="zero" [ngClass]="{'selection':eleccion === 8}" (click)="changeChoice(8)">
+                                                                <span>8</span>
+                                                            </li>
+                                                        
+                                        <li class="zero" [ngClass]="{'selection':eleccion === 9}" (click)="changeChoice(9)">
+                                                                <span>9</span>
+                                                            </li>
+                                                        
+                                        <li class="zero" [ngClass]="{'selection':eleccion === 10}" (click)="changeChoice(10)">
+                                                                <span>10</span>
+                                                            </li>
+                                                    </ul>
+                                </ion-col>
+                            </ion-row>
+                            <ion-row>
+                                <ion-col col-6>
+                                    <button class="cancelar-regresar" (click)="previousQuestion();setChoice(0);">Regresar</button>
+                                </ion-col>
+                                <ion-col col-6>
+                                    <button [disabled]="apagado === true" class="cancelar-siguiente"  (click)="nextQuestion();saveAnswer(1,eleccion);changeChoice();disabledButton();">Siguiente</button>
+                                </ion-col>
+                            </ion-row>
+    
+                        </ion-card-content>
+                    </ion-card>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+
+        <ion-grid *ngIf="pagina == 3">
+                <ion-row>
+                    <ion-col col-10 offset-1>
+                        <p class="texto">Antes de irte, te pedimos responder esta encuesta para mejorar nuestro servicio</p>
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col col-12>
+                        <ion-card>
+                            <div class="encabezado">
+                                <ion-grid style="display: flex;align-items: center;">
+                                    <ion-row>
+                                        Pregunta 3/8
+                                    </ion-row>
+                                </ion-grid>
+                            </div>
+                            <ion-card-content>
+                                <ion-card-title class="texto">
+                                        3. Del 1 al 10, ¿Cómo calificarías el perfil o <br> calidad de estos leads?
+                                </ion-card-title>
+        
+                                <ion-row>
+                                    <ion-col col-10 offset-1>
+                                          <ul class="grade">
+                                                            
+                                            <li class="zero" [ngClass]="{'selection':eleccion === 1}" (click)="changeChoice(1)">
+                                                                    <span>1</span>
+                                                                </li>
+                                                            
+                                            <li class="zero" [ngClass]="{'selection':eleccion === 2}" (click)="changeChoice(2)">
+                                                                    <span>2</span>
+                                                                </li>
+                                                            
+                                            <li class="zero" [ngClass]="{'selection':eleccion === 3}" (click)="changeChoice(3)">
+                                                                    <span>3</span>
+                                                                </li>
+                                                            
+                                            <li class="zero" [ngClass]="{'selection':eleccion === 4}" (click)="changeChoice(4)">
+                                                                    <span>4</span>
+                                                                </li>
+                                                            
+                                            <li class="zero" [ngClass]="{'selection':eleccion === 5}" (click)="changeChoice(5)">
+                                                                    <span>5</span>
+                                                                </li>
+                                                            
+                                            <li class="zero" [ngClass]="{'selection':eleccion === 6}" (click)="changeChoice(6)">
+                                                                    <span>6</span>
+                                                                </li>
+                                                            
+                                            <li class="zero " [ngClass]="{'selection':eleccion === 7}" (click)="changeChoice(7)">
+                                                                    <span>7</span>
+                                                                </li>
+                                                            
+                                            <li class="zero" [ngClass]="{'selection':eleccion === 8}" (click)="changeChoice(8)">
+                                                                    <span>8</span>
+                                                                </li>
+                                                            
+                                            <li class="zero" [ngClass]="{'selection':eleccion === 9}" (click)="changeChoice(9)">
+                                                                    <span>9</span>
+                                                                </li>
+                                                            
+                                            <li class="zero" [ngClass]="{'selection':eleccion === 10}" (click)="changeChoice(10)">
+                                                                    <span>10</span>
+                                                                </li>
+                                                        </ul>
+                                    </ion-col>
+                                </ion-row>
+                                <ion-row>
+                                    <ion-col col-6>
+                                        <button class="cancelar-regresar" (click)="previousQuestion();setChoice(1);">Regresar</button>
+                                    </ion-col>
+                                    <ion-col col-6>
+                                        <button [disabled]="apagado === true" class="cancelar-siguiente"  (click)="nextQuestion();saveAnswer(2,eleccion);changeChoice();disabledButton();">Siguiente</button>
+                                    </ion-col>
+                                </ion-row>
+        
+                            </ion-card-content>
+                        </ion-card>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+    
+            <ion-grid *ngIf="pagina == 4">
+                    <ion-row>
+                        <ion-col col-10 offset-1>
+                            <p class="texto">Antes de irte, te pedimos responder esta encuesta para mejorar nuestro servicio</p>
+                        </ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col col-12>
+                            <ion-card>
+                                <div class="encabezado">
+                                    <ion-grid style="display: flex;align-items: center;">
+                                        <ion-row>
+                                            Pregunta 4/8
+                                        </ion-row>
+                                    </ion-grid>
+                                </div>
+                                <ion-card-content>
+                                    <ion-card-title class="texto">
+                                            4. Del 1 al 10, ¿Cómo calificarías nuestra <br> tecnología/plataforma?
+                                        </ion-card-title>
+            
+                                    <ion-row>
+                                        <ion-col col-10 offset-1>
+                                              <ul class="grade">
+                                                                
+                                                <li class="zero" [ngClass]="{'selection':eleccion === 1}" (click)="changeChoice(1)">
+                                                                        <span>1</span>
+                                                                    </li>
+                                                                
+                                                <li class="zero" [ngClass]="{'selection':eleccion === 2}" (click)="changeChoice(2)">
+                                                                        <span>2</span>
+                                                                    </li>
+                                                                
+                                                <li class="zero" [ngClass]="{'selection':eleccion === 3}" (click)="changeChoice(3)">
+                                                                        <span>3</span>
+                                                                    </li>
+                                                                
+                                                <li class="zero" [ngClass]="{'selection':eleccion === 4}" (click)="changeChoice(4)">
+                                                                        <span>4</span>
+                                                                    </li>
+                                                                
+                                                <li class="zero" [ngClass]="{'selection':eleccion === 5}" (click)="changeChoice(5)">
+                                                                        <span>5</span>
+                                                                    </li>
+                                                                
+                                                <li class="zero" [ngClass]="{'selection':eleccion === 6}" (click)="changeChoice(6)">
+                                                                        <span>6</span>
+                                                                    </li>
+                                                                
+                                                <li class="zero " [ngClass]="{'selection':eleccion === 7}" (click)="changeChoice(7)">
+                                                                        <span>7</span>
+                                                                    </li>
+                                                                
+                                                <li class="zero" [ngClass]="{'selection':eleccion === 8}" (click)="changeChoice(8)">
+                                                                        <span>8</span>
+                                                                    </li>
+                                                                
+                                                <li class="zero" [ngClass]="{'selection':eleccion === 9}" (click)="changeChoice(9)">
+                                                                        <span>9</span>
+                                                                    </li>
+                                                                
+                                                <li class="zero" [ngClass]="{'selection':eleccion === 10}" (click)="changeChoice(10)">
+                                                                        <span>10</span>
+                                                                    </li>
+                                                            </ul>
+                                        </ion-col>
+                                    </ion-row>
+                                    <ion-row>
+                                        <ion-col col-6>
+                                            <button class="cancelar-regresar" (click)="previousQuestion();setChoice(2);">Regresar</button>
+                                        </ion-col>
+                                        <ion-col col-6>
+                                            <button [disabled]="apagado === true" class="cancelar-siguiente"  (click)="nextQuestion();saveAnswer(3,eleccion);changeChoice();disabledButton();">Siguiente</button>
+                                        </ion-col>
+                                    </ion-row>
+            
+                                </ion-card-content>
+                            </ion-card>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+    
+                <ion-grid *ngIf="pagina == 5">
+                        <ion-row>
+                            <ion-col col-10 offset-1>
+                                <p class="texto">Antes de irte, te pedimos responder esta encuesta para mejorar nuestro servicio</p>
+                            </ion-col>
+                        </ion-row>
+                        <ion-row>
+                            <ion-col col-12>
+                                <ion-card>
+                                    <div class="encabezado">
+                                        <ion-grid style="display: flex;align-items: center;">
+                                            <ion-row>
+                                                Pregunta 5/8
+                                            </ion-row>
+                                        </ion-grid>
+                                    </div>
+                                    <ion-card-content>
+                                        <ion-card-title class="texto">
+                                                5. Del 1 al 10, ¿Cómo calificarías la atención por parte  <br>del área de Servicio al Cliente?
+                                        </ion-card-title>
+                
+                                        <ion-row>
+                                            <ion-col col-10 offset-1>
+                                                  <ul class="grade">
+                                                                    
+                                                    <li class="zero" [ngClass]="{'selection':eleccion === 1}" (click)="changeChoice(1)">
+                                                                            <span>1</span>
+                                                                        </li>
+                                                                    
+                                                    <li class="zero" [ngClass]="{'selection':eleccion === 2}" (click)="changeChoice(2)">
+                                                                            <span>2</span>
+                                                                        </li>
+                                                                    
+                                                    <li class="zero" [ngClass]="{'selection':eleccion === 3}" (click)="changeChoice(3)">
+                                                                            <span>3</span>
+                                                                        </li>
+                                                                    
+                                                    <li class="zero" [ngClass]="{'selection':eleccion === 4}" (click)="changeChoice(4)">
+                                                                            <span>4</span>
+                                                                        </li>
+                                                                    
+                                                    <li class="zero" [ngClass]="{'selection':eleccion === 5}" (click)="changeChoice(5)">
+                                                                            <span>5</span>
+                                                                        </li>
+                                                                    
+                                                    <li class="zero" [ngClass]="{'selection':eleccion === 6}" (click)="changeChoice(6)">
+                                                                            <span>6</span>
+                                                                        </li>
+                                                                    
+                                                    <li class="zero " [ngClass]="{'selection':eleccion === 7}" (click)="changeChoice(7)">
+                                                                            <span>7</span>
+                                                                        </li>
+                                                                    
+                                                    <li class="zero" [ngClass]="{'selection':eleccion === 8}" (click)="changeChoice(8)">
+                                                                            <span>8</span>
+                                                                        </li>
+                                                                    
+                                                    <li class="zero" [ngClass]="{'selection':eleccion === 9}" (click)="changeChoice(9)">
+                                                                            <span>9</span>
+                                                                        </li>
+                                                                    
+                                                    <li class="zero" [ngClass]="{'selection':eleccion === 10}" (click)="changeChoice(10)">
+                                                                            <span>10</span>
+                                                                        </li>
+                                                                </ul>
+                                            </ion-col>
+                                        </ion-row>
+                                        <ion-row>
+                                            <ion-col col-6>
+                                                <button class="cancelar-regresar" (click)="previousQuestion();setChoice(3);">Regresar</button>
+                                            </ion-col>
+                                            <ion-col col-6>
+                                                <button [disabled]="apagado === true" class="cancelar-siguiente"  (click)="nextQuestion();saveAnswer(4,eleccion);changeChoice();disabledButton();">Siguiente</button>
+                                            </ion-col>
+                                        </ion-row>
+                
+                                    </ion-card-content>
+                                </ion-card>
+                            </ion-col>
+                        </ion-row>
+                    </ion-grid>
+    
+                    <ion-grid *ngIf="pagina == 6">
+                            <ion-row>
+                                <ion-col col-10 offset-1>
+                                    <p class="texto">Antes de irte, te pedimos responder esta encuesta para mejorar nuestro servicio</p>
+                                </ion-col>
+                            </ion-row>
+                            <ion-row>
+                                <ion-col col-12>
+                                    <ion-card>
+                                        <div class="encabezado">
+                                            <ion-grid style="display: flex;align-items: center;">
+                                                <ion-row>
+                                                    Pregunta 6/8
+                                                </ion-row>
+                                            </ion-grid>
+                                        </div>
+                                        <ion-card-content>
+                                            <ion-card-title class="texto">
+                                                    6. ¿Estás trabajando con alguna otra agencia digital?
+                                            </ion-card-title>
+                    
+                                            <ion-row>
+                                                <ion-col col-4 offset-2>
+                                                    <button class="encuesta-opcion-left" [ngClass]="{'elegida':eleccion === 1}" (click)="changeChoice(1)">Sí</button>
+                                                </ion-col>
+                                                <ion-col col-4>
+                                                    <button class="encuesta-opcion-right" [ngClass]="{'elegida':eleccion === 2}" (click)="changeChoice(2)">No</button>
+                                                </ion-col>
+                                            </ion-row>
+
+                                            <ion-card-title class="texto">
+                                                    ¿Cuál?
+                                            </ion-card-title>
+
+                                            <ion-row>
+                                                <ion-col col-10 offset-1>
+                                                    <textarea class="comentario" rows="2" cols="50" maxlength="150" [(ngModel)]="comentario" required placeholder="Escribe el nombre de la Agencia"></textarea>
+                                                </ion-col>
+                                            </ion-row>
+                                             
+                                            <ion-row>
+                                                <ion-col col-6>
+                                                    <button class="cancelar-regresar" (click)="previousQuestion();setChoice(4);">Regresar</button>
+                                                </ion-col>
+                                                <ion-col col-6>
+                                                    <button [disabled]="apagado === true" class="cancelar-siguiente"  (click)="nextQuestion();saveAnswer(5,eleccion);changeChoice();disabledButton();">Siguiente</button>
+                                                </ion-col>
+                                            </ion-row>
+                    
+                                        </ion-card-content>
+                                    </ion-card>
+                                </ion-col>
+                            </ion-row>
+                        </ion-grid>
+    
+                        <ion-grid *ngIf="pagina == 7">
+                                <ion-row>
+                                    <ion-col col-10 offset-1>
+                                        <p class="texto">Antes de irte, te pedimos responder esta encuesta para mejorar nuestro servicio</p>
+                                    </ion-col>
+                                </ion-row>
+                                <ion-row>
+                                    <ion-col col-12>
+                                        <ion-card>
+                                            <div class="encabezado">
+                                                <ion-grid style="display: flex;align-items: center;">
+                                                    <ion-row>
+                                                        Pregunta 7/8
+                                                    </ion-row>
+                                                </ion-grid>
+                                            </div>
+                                            <ion-card-content>
+                                                <ion-card-title class="texto">
+                                                        7. Comparado con otras agencias o competidores,<br> nuestra campaña digital fue...
+                                                </ion-card-title>
+                        
+                                                <ion-row>
+                                                    <ion-col col-4>
+                                                        <button class="encuesta-opcion-left" [ngClass]="{'elegida':eleccion === 1}" (click)="changeChoice(1)">a) Mejor</button>
+                                                    </ion-col>
+                                                    <ion-col col-4>
+                                                        <button class="encuesta-opcion-center" [ngClass]="{'elegida':eleccion === 2}" (click)="changeChoice(2)">b) Igual</button>
+                                                    </ion-col>
+                                                    <ion-col col-4>
+                                                        <button class="encuesta-opcion-right" [ngClass]="{'elegida':eleccion === 3}" (click)="changeChoice(3)">c) Peor</button>
+                                                    </ion-col>
+                                                    <br>
+                                                </ion-row>
+                                                <br>
+                                                <ion-row>
+                                                    <ion-col col-6>
+                                                        <button class="cancelar-regresar" (click)="previousQuestion();setChoice(5);">Regresar</button>
+                                                    </ion-col>
+                                                    <ion-col col-6>
+                                                        <button [disabled]="apagado === true" class="cancelar-siguiente"  (click)="nextQuestion();saveAnswer(6,eleccion);changeChoice();disabledButton();">Siguiente</button>
+                                                    </ion-col>
+                                                </ion-row>
+                        
+                                            </ion-card-content>
+                                        </ion-card>
+                                    </ion-col>
+                                </ion-row>
+                            </ion-grid>
+    
+                            <ion-grid *ngIf="pagina == 8">
+                                    <ion-row>
+                                        <ion-col col-10 offset-1>
+                                            <p class="texto">Antes de irte, te pedimos responder esta encuesta para mejorar nuestro servicio</p>
+                                        </ion-col>
+                                    </ion-row>
+                                    <ion-row>
+                                        <ion-col col-12>
+                                            <ion-card>
+                                                <div class="encabezado">
+                                                    <ion-grid style="display: flex;align-items: center;">
+                                                        <ion-row>
+                                                            Pregunta 8/8
+                                                        </ion-row>
+                                                    </ion-grid>
+                                                </div>
+                                                <ion-card-content>
+                                                    <ion-card-title class="texto">
+                                                            8. ¿Deseas agregar algún comentario?  Esto con el <br> objetivo de que la Dirección de Servicio al <br> Cliente lo tome en cuenta
+                                                    </ion-card-title>
+                            
+                                                    <ion-row>
+                                                        <ion-col col-10 offset-1>
+                                                                <textarea class="comentario" rows="4" cols="50" maxlength="250" [(ngModel)]="comentarios"
+                                                                                placeholder="Escribe tu comentario..." (click)="changeChoice(1)" required></textarea>
+                                                                                                                        </ion-col>
+                                                    </ion-row>
+                                                    <ion-row>
+                                                        <ion-col col-6>
+                                                            <button class="cancelar-regresar" (click)="previousQuestion();setChoice(6);">Regresar</button>
+                                                        </ion-col>
+                                                        <ion-col col-6>
+                                                            <button [disabled]="apagado === true" class="cancelar-siguiente"  (click)="nextQuestion();saveAnswer(7,eleccion);changeChoice();disabledButton();">Siguiente</button>
+                                                        </ion-col>
+                                                    </ion-row>
+                            
+                                                </ion-card-content>
+                                            </ion-card>
+                                        </ion-col>
+                                    </ion-row>
+                                </ion-grid>
+                                                                
+                                <ion-grid *ngIf="pagina == 9">
+                                    <ion-row>
+                                        <ion-col col-10 offset-1>
+                                            <p class="texto">Antes de irte, te pedimos responder esta encuesta para mejorar nuestro servicio</p>
+                                        </ion-col>
+                                    </ion-row>
+                                    <ion-row>
+                                        <ion-col col-12>
+                                            <ion-card>
+                                                <div class="encabezado">
+                                                    <ion-grid style="display: flex;align-items: center;">
+                                                        <ion-row>
+                                                        </ion-row>
+                                                    </ion-grid>
+                                                </div>
+                                                <ion-card-content>
+                                                    <ion-card-title class="texto">
+                                                        <img src="assets/imgs/cancelar/ic_cancelacion.svg" class="adios">
+                                                    </ion-card-title>
+                            
+                                                    <ion-row>
+                                                            <ion-col col-10 offset-1>
+                                                                    <ion-card-title class="texto-grande">
+                                                                            Gracias por tus comentarios, los tomaremos en cuenta
+                                                                    </ion-card-title>
+                                                            </ion-col>
+                                                            <ion-col col-10 offset-1>
+                                                                    <ion-card-title class="texto-chico">
+                                                                            Esperamos verte de regreso
+                                                                    </ion-card-title>
+                                                            </ion-col>
+                                                    </ion-row>
+                                                    
+                                                    <ion-row>
+                                                        <ion-col col-8 offset-2>
+                                                            <button class="cancelar-siguiente" (click)="cancelMembershipOP()">Finalizar</button>
+                                                        </ion-col>
+                                                    </ion-row>
+                            
+                                                </ion-card-content>
+                                            </ion-card>
+                                        </ion-col>
+                                    </ion-row>
+                                </ion-grid>
 </ion-content>

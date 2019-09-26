@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController, ModalController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, ModalController, App } from 'ionic-angular';
 import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
 import { RestProvider } from './../../providers/rest/rest';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -81,6 +81,8 @@ export class MembresiaPage {
   public telefono;
   public celular;
   public uidf;
+  public tipo = "13";
+
 
   constructor(
     public navCtrl: NavController, 
@@ -91,6 +93,7 @@ export class MembresiaPage {
     public userService: UserProvider,
     public loadingCtrl: LoadingController,
     public http: HttpClient,
+    public app: App
   ) {
     this.empresa = this.authService.empresa;
     this.id = this.authService.id;
@@ -188,6 +191,7 @@ export class MembresiaPage {
             this.tarjeta = data['credit_card'];       
             this.periodo = data['period'];
             this.fin = data['end_date'];
+            console.log(data);
           }
         },
         err => {
@@ -333,6 +337,19 @@ export class MembresiaPage {
       confirmButtonText: 'OK',
       reverseButtons: true
     });
+  }
+
+  openModal() {
+    const myModal = this.modalCtrl.create(
+      "ModalGarantyPage", 
+      { enableBackdropDismiss: true, cssClass: "Modal-comentario" }
+    );
+    myModal.present();
+    myModal.onDidDismiss(() => { });
+  }
+
+  mostrar_encuesta() {
+    this.app.getRootNav().setRoot('ModalSurveyPage', { tipo: this.tipo }); 
   }
 
 }

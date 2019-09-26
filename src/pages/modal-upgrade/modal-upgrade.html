@@ -2,27 +2,21 @@
   <ion-grid>
     <ion-row>
       <ion-col col-12>
-        <img *ngIf="tipo == 16 && banner !== 'promo3'" src="assets/imgs/upgrade/upgrade.svg" width="100%" />
-        <img *ngIf="tipo == 16 && banner == 'promo3'" src="assets/imgs/upgrade/upgrade1.svg" width="100%" />
-        <img *ngIf="tipo == 17 && banner !== 'promo6'" src="assets/imgs/upgrade/upgrade2.svg" width="100%" />
-        <img *ngIf="tipo == 17 && banner == 'promo6'" src="assets/imgs/upgrade/upgrade3.svg" width="100%" />
+        <img *ngIf="tipo == 16 && banner !== 'promo3'" src="https://firebasestorage.googleapis.com/v0/b/brief-1521736053741.appspot.com/o/imagenes%2Fupgrade.svg?alt=media&token=810f2da1-d8ea-4dd9-9987-fd0cf959591f" width="100%" />
+        <img *ngIf="tipo == 16 && banner == 'promo3'" src="https://firebasestorage.googleapis.com/v0/b/brief-1521736053741.appspot.com/o/imagenes%2Fupgrade1.svg?alt=media&token=1b7f6325-1df5-4933-8607-cc780bef3158" width="100%" />
+        <img *ngIf="tipo == 17 && banner !== 'promo6'" src="https://firebasestorage.googleapis.com/v0/b/brief-1521736053741.appspot.com/o/imagenes%2Fupgrade2.svg?alt=media&token=4cece13e-edc1-4bd8-aeeb-1fec530e6f1b" width="100%" />
+        <img *ngIf="tipo == 17 && banner == 'promo6'" src="https://firebasestorage.googleapis.com/v0/b/brief-1521736053741.appspot.com/o/imagenes%2Fupgrade3.svg?alt=media&token=31dbb88e-9fd2-490c-93dd-a44419a9f0a5" width="100%" />
       </ion-col>
     </ion-row>
     <ion-row>
-      <ion-col col-1>
-      </ion-col>
-      <ion-col col-10>
+      <ion-col col-10 offset-1>
         <div class="cuadro-membresia">
           ¡Te regalamos<br> <span class="naranja">${{selectedAmount}}</span> pesos!
         </div>
       </ion-col>
-      <ion-col col-1>
-      </ion-col>
     </ion-row>
     <ion-row>
-      <ion-col col-1>
-      </ion-col>
-      <ion-col col-10>
+      <ion-col col-10 offset-1>
         <div class="promocion" *ngIf="tipo == 16">
           ¡Invierte <span class="naranja">${{selectedAmount}}</span> pesos y te regalamos <b>la misma cantidad!</b>
         </div>
@@ -30,31 +24,19 @@
           ¡Te regalamos los primeros <span class="naranja">${{selectedAmount}}</span> pesos si <b>incrementas tu membresía!</b>
         </div>
       </ion-col>
-      <ion-col col-1>
-      </ion-col>
     </ion-row>
     <ion-row>
-      <ion-col col-1>
-      </ion-col>
-      <ion-col col-10>
+      <ion-col col-10 offset-1>
         <img [ngClass]="{ flecha: banner == 'promo5', otro: banner === 'promo1' ||  banner === 'promo2' || banner === 'promo4', dinero: banner === 'promo3' ||  banner === 'promo6' }" src="assets/imgs/upgrade/{{banner}}.svg"/> 
       </ion-col>
-      <ion-col col-1>
-      </ion-col>
     </ion-row>
     <ion-row>
-      <ion-col col-1>
-      </ion-col>
-      <ion-col col-5>
+      <ion-col col-5 offset-1>
         <button ion-button class="btn-cancelar-comentario" (click)="closeModal();registrarInteres(0);">Más adelante</button>
       </ion-col>
       <ion-col col-5>
         <button *ngIf="tipo == 16" ion-button class="btn-guardar-comentario" (click)="btnUpgradeMembership();">Aceptar</button>
         <button *ngIf="tipo == 17" ion-button class="btn-guardar-comentario" (click)="btnUpgradeMembership();registrarInteres(0);getRegisterUpdateMembership();">Aceptar</button>
-      </ion-col>
-      <ion-col col-1>
-      </ion-col>
-      <ion-col col-2>
       </ion-col>
     </ion-row>
   </ion-grid>
