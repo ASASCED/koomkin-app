@@ -24,6 +24,7 @@ export class MembresiaPage {
   public nuevoMonto;
   public monto;
   public diasRestantes;
+  public diasPagados;
   public dias;
   
   public fechaActual;
@@ -52,8 +53,6 @@ export class MembresiaPage {
   public pages: Array<string> = ['Membresia', 'Facturacion', 'Servicio'];
 
   // facturacion
-  public paymentData: Payment[];
-  public invoiceData: Payment[];
   public dictionary = {};
   public vista;
   public stateId;
@@ -104,7 +103,6 @@ export class MembresiaPage {
     this.getDiasRestantes();
     this.infoCard();
     this.vista = 'informacion';
-    this.getPaymentData();
     this.initDictionary();
     this.authService.getUserFiscalData(this.id)
       .then(data => {
@@ -140,10 +138,12 @@ export class MembresiaPage {
   public getInicioCampana() {
     this.provedor.getInicioCampana().then(
       data => {
+        console.log(data);
         if (data['length'] > 0) {
-        this.fechaInicio = data[0].FInicio;
-        this.dias = data[0].PenultimoDiasPagados;
-        this.monto = data[0].Monto;
+          this.fechaInicio = data[0].FInicio;
+          this.diasPagados = data[0].UltimoDiasPagados;
+          this.dias = data[0].PenultimoDiasPagados;
+          this.monto = data[0].Monto;
         }
       },
       err => {
@@ -191,7 +191,6 @@ export class MembresiaPage {
             this.tarjeta = data['credit_card'];       
             this.periodo = data['period'];
             this.fin = data['end_date'];
-            console.log(data);
           }
         },
         err => {
@@ -249,18 +248,6 @@ export class MembresiaPage {
 
   changePage(pagina) {
     this.vista = pagina;
-  }
-
-  public getPaymentData() {
-    this.userService.userRequest('datosPagos?id=' + this.id)
-      .then((payments: [Payment]) => {
-        this.paymentData = payments;
-        // // console.log(this.userFiscal);
-        this.invoiceData = this.removeDuplicates(payments.filter(x => x.TieneFactura === '1'));
-      })
-      .catch(err => {
-        console.error(err);
-      });
   }
 
   public removeDuplicates(arr) {
