@@ -66,15 +66,42 @@ export class PagoPage implements OnInit{
         this.authService.setUserFiscal(data[0]);
         this.userFiscal = data[0];
         this.nombre = this.userFiscal.NOMBRE;
+        if(this.nombre == null || this.nombre == 'null' || this.nombre == 'NULL' || this.nombre == 'Null') {
+          this.nombre = '';
+        }
         this.materno = this.userFiscal.APEMATERNO;
+        if(this.materno == null || this.materno == 'null' || this.materno == 'NULL' || this.materno == 'Null') {
+          this.materno = '';
+        }
         this.paterno = this.userFiscal.APEPATERNO;
+        if(this.paterno == null || this.paterno == 'null' || this.paterno == 'NULL' || this.paterno == 'Null') {
+          this.paterno = '';
+        }
         this.calle = this.userFiscal.CALLE;
+        if(this.calle == null || this.calle == 'null' || this.calle == 'NULL' || this.calle == 'Null') {
+          this.calle = '';
+        }
         this.ciudad = this.userFiscal.CIUDAD;
+        if(this.ciudad == null || this.ciudad == 'null' || this.ciudad == 'NULL' || this.ciudad == 'Null') {
+          this.ciudad = '';
+        }
         this.cp = this.userFiscal.CODIGOPOSTAL;
+        if(this.cp == null || this.cp == 'null' || this.cp == 'NULL' || this.cp == 'Null') {
+          this.cp = '';
+        }
         this.colonia = this.userFiscal.COLONIA;
+        if(this.colonia == null || this.colonia == 'null' || this.colonia == 'NULL' || this.colonia == 'Null') {
+          this.colonia = '';
+        }
         this.delegacion = this.userFiscal.DELEGACION;
+        if(this.delegacion == null || this.delegacion == 'null' || this.delegacion == 'NULL' || this.delegacion == 'Null') {
+          this.delegacion = '';
+        }
         this.email = this.userFiscal.EMAIL;
         this.estado = this.userFiscal.ESTADO;
+        if(this.estado == null || this.estado == 'null' || this.estado == 'NULL' || this.estado == 'Null') {
+          this.estado = '';
+        }
         this.f_materno = this.userFiscal.F_APEMATERNO;
         this.f_paterno = this.userFiscal.F_APEPATERNO;
         this.f_email = this.userFiscal.F_EMAIL;
@@ -83,7 +110,13 @@ export class PagoPage implements OnInit{
         this.iddatosfiscales = this.userFiscal.IDDATOSFISCALES;
         this.empresa = this.userFiscal.NOMEMPRESACOMPRADOR;
         this.numeroexterior = this.userFiscal.NUMEROEXTERIOR;
+        if(this.numeroexterior == null || this.numeroexterior == 'null' || this.numeroexterior == 'NULL' || this.numeroexterior == 'Null') {
+          this.numeroexterior = '';
+        }
         this.numerointerior = this.userFiscal.NUMEROINTERNO;
+        if(this.numerointerior == null || this.numerointerior == 'null' || this.numerointerior == 'NULL' || this.numerointerior == 'Null') {
+          this.numerointerior = '';
+        }
         this.razon = this.userFiscal.RAZON_SOCIAL;
         this.rfc = this.userFiscal.RFC;
         this.telefono = this.userFiscal.TELEFONO;

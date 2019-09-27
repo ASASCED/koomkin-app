@@ -120,11 +120,11 @@ export class AgendaPage implements OnInit {
     let f = new Date();
     this.dia = f.getFullYear() + '-' + ('0' + (f.getMonth() + 1)).slice(-2) + '-' + ('0' + f.getDate()).slice(-2);
     this.manana = new Date();
-    this.treintaDias = new Date();
     this.hoy = f.getFullYear() + '-' + ('0' + (f.getMonth() + 1)).slice(-2) + '-' + ('0' + f.getDate()).slice(-2);
     this.manana.setDate(this.manana.getDate() + 1);
     // tslint:disable-next-line: max-line-length
     this.manana = this.manana.getFullYear() + '-' + ('0' + (this.manana.getMonth() + 1)).slice(-2) + '-' + ('0' + this.manana.getDate()).slice(-2);
+    this.treintaDias = new Date();
     this.treintaDias.setDate(this.treintaDias.getDate() + 30);
     // tslint:disable-next-line: max-line-length
     this.treintaDias = this.treintaDias.getFullYear() + '-' + ('0' + (this.treintaDias.getMonth() + 1)).slice(-2) + '-' + ('0' + this.treintaDias.getDate()).slice(-2);

@@ -21,6 +21,7 @@ export class MembresiaPage {
   public uuidRecurrente;
 
   public fechaInicio;
+  public fechaFin:any;
   public nuevoMonto;
   public monto;
   public diasRestantes;
@@ -141,6 +142,9 @@ export class MembresiaPage {
         console.log(data);
         if (data['length'] > 0) {
           this.fechaInicio = data[0].FInicio;
+          this.fechaFin = new Date(this.fechaInicio);
+          this.fechaFin.setDate(this.fechaFin.getDate() + 30);
+          this.fechaFin = this.fechaFin.getFullYear() + '-' + ('0' + (this.fechaFin.getMonth() + 1)).slice(-2) + '-' + ('0' + this.fechaFin.getDate()).slice(-2);
           this.diasPagados = data[0].UltimoDiasPagados;
           this.dias = data[0].PenultimoDiasPagados;
           this.monto = data[0].Monto;
