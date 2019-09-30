@@ -1626,6 +1626,113 @@ db.updateBriefDatos = function(
   });
 };
 
+//executeRegistrarLeadAgregado
+db.executeGetBriefSettingsInformation = function(IDUSUARIO) {
+  const requestStr = `select DistribucionOnline,DistribucionOffline,QuienVende,NumeroVendedores,TipoVendedores,CrmDiferente,ClientesNuevos,TipoPublicidad,PublicidadTradicional,PublicidadDigital from tbl_brief where IDUSUARIO = ${IDUSUARIO}`;
+
+  console.log(requestStr);
+
+  return new Promise((resolve, reject) => {
+    tp.sql(requestStr)
+      .execute()
+      .then(results => {
+        resolve(results);
+      })
+      .catch(err => {
+        console.log(err);
+        reject(err);
+      });
+  });
+};
+
+//executeRegistrarProcesoComercial
+
+db.executeRegistrarProcesoComercial = function(
+    idUsuario,
+    distribucionOnline,
+    distribucionOffline,
+    quienVende,
+    numeroVendedores,
+    tipoVendedores,
+    crmDiferente
+  ) {
+    const requestStr = `Update tbl_brief set DistribucionOnline = ${distribucionOnline}, 
+                                             DistribucionOnline = ${distribucionOffline}, 
+                                             QuienVende = '${quienVende}',  
+                                             NumeroVendedores = ${numeroVendedores},  
+                                             TipoVendedores = '${tipoVendedores}',  
+                                             CrmDiferente = ${crmDiferente}
+    where IDUSUARIO = ${idUsuario};`;
+  
+    console.log(requestStr);
+  
+    return new Promise((resolve, reject) => {
+      tp.sql(requestStr)
+        .execute()
+        .then(results => {
+          resolve(results);
+        })
+        .catch(err => {
+          console.log(err);
+          reject(err);
+        });
+    });
+  };
+  
+//registrarClientesNuevos
+
+db.executeRegistrarClientesNuevos = function(
+    idUsuario,
+    clientesNuevos,
+    tipoPublicidad,
+    publicidadTracicional,
+    publicidadDigital
+  ) {
+    const requestStr = `Update tbl_brief set ClientesNuevos = ${clientesNuevos}, 
+                                             tipoPublicidad = ${tipoPublicidad}, 
+                                             publicidadTracicional = '${publicidadTracicional}',  
+                                             publicidadDigital = ${publicidadDigital}
+    where IDUSUARIO = ${idUsuario};`;
+  
+    console.log(requestStr);
+  
+    return new Promise((resolve, reject) => {
+      tp.sql(requestStr)
+        .execute()
+        .then(results => {
+          resolve(results);
+        })
+        .catch(err => {
+          console.log(err);
+          reject(err);
+        });
+    });
+  };
+
+//registrarObjetivoCampania
+
+db.executeRegistrarObjetivoCampania = function(
+    idUsuario,
+    campaniaObjetivo
+  ) {
+    const requestStr = `Update tbl_TuCampania set CampanaObjetivo = ${campaniaObjetivo} where IDUSUARIO = ${idUsuario};`;
+  
+    console.log(requestStr);
+  
+    return new Promise((resolve, reject) => {
+      tp.sql(requestStr)
+        .execute()
+        .then(results => {
+          resolve(results);
+        })
+        .catch(err => {
+          console.log(err);
+          reject(err);
+        });
+    });
+  };
+
+
 db.updateBriefEmpresa = function(
   idUsuario,
   nombreEmpresa,

@@ -1173,7 +1173,6 @@ app.get('/getBanner/:idUsuario', function (req, res) {
         });
 });
 
-
 app.get('/registrarEntradaBanner/:idReporteBanner/:canal?', function (req, res) {
 
     const id = parseInt(req.params.idReporteBanner, 10);
@@ -1712,7 +1711,6 @@ app.post('/updateAgendaOptimizaciones/', function (req, res) {
         });
 });
 
-
 app.post('/registerDeviceId/:idUsuario/:idDevice', function (req, res) {
 
     console.log("Registrando DeviceID");
@@ -2087,6 +2085,56 @@ app.post('/deleteComment/', function (req, res) {
     const idComentario = parseInt(req.body.idComentario, 10);
 
     db.executeDeleteComment(idComentario)
+        .then(rows => {
+            res.json(rows).status(200).send();
+        })
+        .catch(err => {
+            res.status(500).json({ error: err }).send();
+        });
+});
+
+app.post('/registrarProcesoComercial/', function (req, res) {
+
+    const idUsuario = parseInt(req.body.idUsuario, 10);
+    const distribucionOnline = req.body.distribucionOnline;
+    const distribucionOffline = req.body.distribucionOffline;
+    const quienVende = req.body.quienVende;
+    const numeroVendedores = req.body.numeroVendedores;
+    const tipoVendedores = req.body.tipoVendedores;
+    const crmDiferente = req.body.crmDiferente;
+
+    db.executeRegistrarProcesoComercial(idUsuario,distribucionOnline,distribucionOffline,quienVende,numeroVendedores,tipoVendedores,crmDiferente)
+        .then(rows => {
+            res.json(rows).status(200).send();
+        })
+        .catch(err => {
+            res.status(500).json({ error: err }).send();
+        });
+});
+
+app.post('/registrarClientesNuevos/', function (req, res) {
+
+    const idUsuario = parseInt(req.body.idUsuario, 10);
+    const clientesNuevos = req.body.clientesNuevos;
+    const tipoPublicidad = req.body.tipoPublicidad;
+    const publicidadTracicional = req.body.publicidadTracicional;
+    const publicidadDigital = req.body.publicidadDigital;
+
+    db.executeRegistrarClientesNuevos(idUsuario,clientesNuevos,tipoPublicidad,publicidadTracicional,publicidadDigital)
+        .then(rows => {
+            res.json(rows).status(200).send();
+        })
+        .catch(err => {
+            res.status(500).json({ error: err }).send();
+        });
+});
+
+app.post('/registrarObjetivoCampania/', function (req, res) {
+
+    const idUsuario = parseInt(req.body.idUsuario, 10);
+    const campaniaObjetivo = req.body.campaniaObjetivo;
+
+    db.executeRegistrarObjetivoCampania(idUsuario,campaniaObjetivo)
         .then(rows => {
             res.json(rows).status(200).send();
         })

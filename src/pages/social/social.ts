@@ -22,6 +22,26 @@ export class SocialPage implements OnInit{
   public twitter;
   public saludo;
 
+  // Proceso Comercial
+
+  public distribucionOffline;
+  public distribucionOnline;
+  public quienVende;
+  public numeroVendedores;
+  public tipoVendedores;
+  public crmDiferente;
+
+  // Clientes Nuevos
+
+  public clientesNuevos;
+  public tipoPublicidad;
+  public publicidadTracicional;
+  public publicidadDigital;
+
+  // Objetivo Campaña
+
+  public campanaObjetivo
+
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
     public provedor: RestProvider,
