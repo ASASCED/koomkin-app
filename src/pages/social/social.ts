@@ -228,7 +228,7 @@ export class SocialPage implements OnInit{
       )
     };
 
-    const url = "https://www.koomkin.com.mx/bot/registrarProcesoComercial/";
+    const url = "https://www.koomkin.com.mx/api/app/registrarProcesoComercial/";
     return new Promise((resolve, reject) => {
       this.http.post(url, body.toString(), options).subscribe(
         data => {
@@ -257,7 +257,7 @@ export class SocialPage implements OnInit{
       )
     };
 
-    const url = "https://www.koomkin.com.mx/bot/registrarClientesNuevos/";
+    const url = "https://www.koomkin.com.mx/api/app/registrarClientesNuevos/";
     return new Promise((resolve, reject) => {
       this.http.post(url, body.toString(), options).subscribe(
         data => {
@@ -283,7 +283,7 @@ export class SocialPage implements OnInit{
       )
     };
 
-    const url = "https://www.koomkin.com.mx/bot/registrarObjetivoCampania/";
+    const url = "https://www.koomkin.com.mx/api/app/registrarObjetivoCampania/";
     return new Promise((resolve, reject) => {
       this.http.post(url, body.toString(), options).subscribe(
         data => {

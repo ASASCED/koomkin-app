@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController, ModalController, App } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, ModalController, App, Platform } from 'ionic-angular';
 import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
 import { RestProvider } from './../../providers/rest/rest';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Payment } from '../../models/Payment';
+import { HttpClient } from '@angular/common/http';
 import { UserProvider } from '../../providers/user/user';
 import swal from 'sweetalert2';
+declare var cordova: any;
 
 @IonicPage()
 @Component({
@@ -20,6 +20,8 @@ export class MembresiaPage {
   public idRecurrente;
   public uuidRecurrente;
 
+  public contrato;
+  public prospectId;
   public fechaInicio;
   public fechaFin:any;
   public nuevoMonto;
@@ -93,6 +95,7 @@ export class MembresiaPage {
     public userService: UserProvider,
     public loadingCtrl: LoadingController,
     public http: HttpClient,
+    public platform: Platform,
     public app: App
   ) {
     this.empresa = this.authService.empresa;
@@ -102,7 +105,6 @@ export class MembresiaPage {
     this.uuidRecurrente = this.authService.uuidRecurrente;
     this.getInicioCampana();
     this.getDiasRestantes();
-    this.infoCard();
     this.vista = 'informacion';
     this.initDictionary();
     this.authService.getUserFiscalData(this.id)
@@ -141,6 +143,9 @@ export class MembresiaPage {
       data => {
         console.log(data);
         if (data['length'] > 0) {
+          this.prospectId = data[0].UltimoProspecto;
+          this.contrato = 'http://contrato.koomkin.com.mx/?q=' + this.prospectId;
+          console.log(this.contrato);
           this.fechaInicio = data[0].FInicio;
           this.fechaFin = new Date(this.fechaInicio);
           this.fechaFin.setDate(this.fechaFin.getDate() + 30);
@@ -176,33 +181,6 @@ export class MembresiaPage {
         }
       );
   } 
-
-  public infoCard() {
-    const cuerpo = `{'user_id': '${this.id}'}`;
-
-    const options = {
-      headers: new HttpHeaders().set(
-        'Content-Type',
-        'application/json'
-      )
-    };
-    return new Promise((resolve, reject) => {
-      const url = 'https://www.koomkin.com.mx/api/openPay/creditCardData';
-      this.http.post(url, cuerpo, options).subscribe(
-        data => {
-          if(data['result'] !== 'error') {
-            this.datosMembresia = data;
-            this.tarjeta = data['credit_card'];       
-            this.periodo = data['period'];
-            this.fin = data['end_date'];
-          }
-        },
-        err => {
-            console.log(err);
-        }
-      );
-    });
-  }
 
   public getState(name: string) {
     let result;
@@ -341,6 +319,12 @@ export class MembresiaPage {
 
   mostrar_encuesta() {
     this.app.getRootNav().setRoot('ModalSurveyPage', { tipo: this.tipo }); 
+  }
+
+  launch(contrato) {
+    this.platform.ready().then(() => {
+      cordova.InAppBrowser.open(contrato, "_system", "location=no");
+    });
   }
 
 }

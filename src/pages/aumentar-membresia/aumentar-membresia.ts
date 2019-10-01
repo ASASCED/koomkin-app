@@ -64,7 +64,6 @@ export class AumentarMembresiaPage {
     this.getLastUpdateMembership();
     this.getInicioCampana();
     this.getDiasRestantes();
-    this.infoCard();
   }
 
   public getInicioCampana() {
@@ -218,33 +217,6 @@ export class AumentarMembresiaPage {
       default:
     }
     
-  }
-
-  public infoCard() {
-    const cuerpo = `{'user_id': '${this.id}'}`;
-
-    const options = {
-      headers: new HttpHeaders().set(
-        'Content-Type',
-        'application/json'
-      )
-    };
-    return new Promise((resolve, reject) => {
-      const url = 'https://www.koomkin.com.mx/api/openPay/creditCardData';
-      this.http.post(url, cuerpo, options).subscribe(
-        data => {
-          if(data['result'] !== 'error') {
-            this.datosMembresia = data;
-            this.tarjeta = data['credit_card'];       
-            this.periodo = data['period'];
-            this.fin = data['end_date'];
-          }
-        },
-        err => {
-            console.log(err);
-        }
-      );
-    });
   }
 
   public btnUpgradeMembership() {

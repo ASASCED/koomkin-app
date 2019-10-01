@@ -1939,6 +1939,21 @@ db.executeGetInicioCampana = function(idUsuario) {
   });
 };
 
+db.executeGetContract = function(email) {
+  const requestStr = `SELECT top 1 * FROM dbo.ContractProspectInfo where Email = '${email}' order by Date desc`;
+  return new Promise((resolve, reject) => {
+    tp.sql(requestStr)
+      .execute()
+      .then(results => {
+        resolve(results);
+      })
+      .catch(err => {
+        console.log(err);
+        reject(err);
+      });
+  });
+};
+
 db.executeGetCobertura = function(idUsuario, idCampania) {
   const requestStr = `select * from tbl_tucampaniacobertura where IDUSUARIO = ${idUsuario} and IDCampania = ${idCampania}`;
   return new Promise((resolve, reject) => {

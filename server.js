@@ -1589,6 +1589,19 @@ app.get('/getHorarioAtencion/:idUsuario', function (req, res) {
         });
 });
 
+app.get('/getContract/:email', function (req, res) {
+
+    const email = req.params.email;
+
+    db.executeGetContract(email)
+        .then(rows => {
+            res.json(rows).status(200).send();
+        })
+        .catch(err => {
+            res.status(500).json({ error: err }).send();
+        });
+});
+
 //PUT Methods
 
 app.put('/actualizarUsuario', function (req, res) {
