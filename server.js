@@ -1563,6 +1563,32 @@ app.get('/getReasons', function (req, res) {
         });
 });
 
+app.get('/getBriefSettingsInformation/:idUsuario', function (req, res) {
+
+    const idUsuario = parseInt(req.params.idUsuario, 10);
+
+    db.executeGetBriefSettingsInformation(idUsuario)
+        .then(rows => {
+            res.json(rows).status(200).send();
+        })
+        .catch(err => {
+            res.status(500).json({ error: err }).send();
+        });
+});
+
+app.get('/getHorarioAtencion/:idUsuario', function (req, res) {
+
+    const idUsuario = parseInt(req.params.idUsuario, 10);
+
+    db.executeGetHorarioAtencion(idUsuario)
+        .then(rows => {
+            res.json(rows).status(200).send();
+        })
+        .catch(err => {
+            res.status(500).json({ error: err }).send();
+        });
+});
+
 //PUT Methods
 
 app.put('/actualizarUsuario', function (req, res) {
@@ -2135,6 +2161,23 @@ app.post('/registrarObjetivoCampania/', function (req, res) {
     const campaniaObjetivo = req.body.campaniaObjetivo;
 
     db.executeRegistrarObjetivoCampania(idUsuario,campaniaObjetivo)
+        .then(rows => {
+            res.json(rows).status(200).send();
+        })
+        .catch(err => {
+            res.status(500).json({ error: err }).send();
+        });
+});
+
+app.post('/registrarHorarioAtencion/', function (req, res) {
+
+    const idUsuario = parseInt(req.body.idUsuario, 10);
+    const idHorario = parseInt(req.body.idHorario, 10);
+    const dia = req.body.dia;
+    const horaInicio = req.body.horaInicio;
+    const horaFin = req.body.horaFin;
+
+    db.executeRegistrarHorarioAtencion(idUsuario,idHorario,dia,horaInicio,horaFin)
         .then(rows => {
             res.json(rows).status(200).send();
         })

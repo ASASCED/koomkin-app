@@ -40,7 +40,7 @@ export class SocialPage implements OnInit{
 
   // Objetivo Campaña
 
-  public campanaObjetivo
+  public campaniaObjetivo
 
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
@@ -191,6 +191,111 @@ export class SocialPage implements OnInit{
       reverseButtons: true
     });
   }
+
+  public getBriefSettingsInformation() {
+    return new Promise((resolve, reject) => {
+
+      const url = "https://www.koomkin.com.mx/api/app/getBriefSettingsInformation/" + this.id;
+
+      this.http.get(url).subscribe(
+        data => {
+          console.log(data);
+          resolve();
+        },
+        err => {
+          // console.log(err);
+          reject(err);
+        }
+      );
+    });
+  }
+
+  registrarProcesoComercial() {
+
+    const body = new URLSearchParams();
+    body.set("idUsuario", this.id);
+    body.set("distribucionOnline", this.distribucionOnline);
+    body.set("distribucionOffline", this.distribucionOffline);
+    body.set("quienVende", this.quienVende);
+    body.set("numeroVendedores", this.numeroVendedores);
+    body.set("tipoVendedores", this.tipoVendedores);
+    body.set("crmDiferente", this.crmDiferente);
+
+    const options = {
+      headers: new HttpHeaders().set(
+        "Content-Type",
+        "application/x-www-form-urlencoded"
+      )
+    };
+
+    const url = "https://www.koomkin.com.mx/bot/registrarProcesoComercial/";
+    return new Promise((resolve, reject) => {
+      this.http.post(url, body.toString(), options).subscribe(
+        data => {
+          return resolve(data);
+        },
+        err => {
+          return resolve(err);
+        }
+      );
+    });
+  }
+
+  registrarClientesNuevos() {
+    
+    const body = new URLSearchParams();
+    body.set("idUsuario", this.id);
+    body.set("clientesNuevos", this.clientesNuevos);
+    body.set("tipoPublicidad", this.tipoPublicidad);
+    body.set("publicidadTracicional", this.publicidadTracicional);
+    body.set("publicidadDigital", this.publicidadDigital);
+
+    const options = {
+      headers: new HttpHeaders().set(
+        "Content-Type",
+        "application/x-www-form-urlencoded"
+      )
+    };
+
+    const url = "https://www.koomkin.com.mx/bot/registrarClientesNuevos/";
+    return new Promise((resolve, reject) => {
+      this.http.post(url, body.toString(), options).subscribe(
+        data => {
+          return resolve(data);
+        },
+        err => {
+          return resolve(err);
+        }
+      );
+    });
+  }
+
+  registrarObjetivoCampania() {
+    
+    const body = new URLSearchParams();
+    body.set("idUsuario", this.id);
+    body.set("campaniaObjetivo", this.campaniaObjetivo);
+
+    const options = {
+      headers: new HttpHeaders().set(
+        "Content-Type",
+        "application/x-www-form-urlencoded"
+      )
+    };
+
+    const url = "https://www.koomkin.com.mx/bot/registrarObjetivoCampania/";
+    return new Promise((resolve, reject) => {
+      this.http.post(url, body.toString(), options).subscribe(
+        data => {
+          return resolve(data);
+        },
+        err => {
+          return resolve(err);
+        }
+      );
+    });
+  }
+
 
 }
   

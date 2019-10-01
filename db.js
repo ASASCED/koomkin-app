@@ -1627,8 +1627,50 @@ db.updateBriefDatos = function(
 };
 
 //executeRegistrarLeadAgregado
+
 db.executeGetBriefSettingsInformation = function(IDUSUARIO) {
   const requestStr = `select DistribucionOnline,DistribucionOffline,QuienVende,NumeroVendedores,TipoVendedores,CrmDiferente,ClientesNuevos,TipoPublicidad,PublicidadTradicional,PublicidadDigital from tbl_brief where IDUSUARIO = ${IDUSUARIO}`;
+
+  console.log(requestStr);
+
+  return new Promise((resolve, reject) => {
+    tp.sql(requestStr)
+      .execute()
+      .then(results => {
+        resolve(results);
+      })
+      .catch(err => {
+        console.log(err);
+        reject(err);
+      });
+  });
+};
+
+//executeRegistrarLeadAgregado
+
+db.executeGetHorarioAtencion = function(IDUSUARIO) {
+  const requestStr = `SELECT * FROM HorarioAtencion WHERE idhorario IN (SELECT MAX(idhorario) FROM HorarioAtencion GROUP BY IdUsuario) and IdUsuario ${IDUSUARIO}`;
+
+  console.log(requestStr);
+
+  return new Promise((resolve, reject) => {
+    tp.sql(requestStr)
+      .execute()
+      .then(results => {
+        resolve(results);
+      })
+      .catch(err => {
+        console.log(err);
+        reject(err);
+      });
+  });
+};
+
+//executeRegistrarHorarioAtencion
+
+db.executeRegistrarHorarioAtencion = function(idUsuario,idHorario,dia,horaInicio,horaFin) {
+
+  const requestStr = `insert into HorarioAtencion (IdUsuario, IdHorario, Dia, HoraInicio, HoraFin, FechaRegistro) values (${idUsuario},${idHorario}, '${dia}','${horaInicio}','${horaFin}', getdate()) `;
 
   console.log(requestStr);
 
