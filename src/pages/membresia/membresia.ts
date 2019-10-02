@@ -85,6 +85,8 @@ export class MembresiaPage {
   public uidf;
   public tipo = "13";
 
+  public correo;
+
 
   constructor(
     public navCtrl: NavController, 
@@ -100,9 +102,11 @@ export class MembresiaPage {
   ) {
     this.empresa = this.authService.empresa;
     this.id = this.authService.id;
+    this.correo = this.authService.email;
     this.recurrente = this.authService.recurrente;
     this.idRecurrente = this.authService.idRecurrente;
     this.uuidRecurrente = this.authService.uuidRecurrente;
+    this.getContract();
     this.getInicioCampana();
     this.getDiasRestantes();
     this.vista = 'informacion';
@@ -144,8 +148,6 @@ export class MembresiaPage {
         console.log(data);
         if (data['length'] > 0) {
           this.prospectId = data[0].UltimoProspecto;
-          this.contrato = 'http://contrato.koomkin.com.mx/?q=' + this.prospectId;
-          console.log(this.contrato);
           this.fechaInicio = data[0].FInicio;
           this.fechaFin = new Date(this.fechaInicio);
           this.fechaFin.setDate(this.fechaFin.getDate() + 30);
@@ -159,6 +161,25 @@ export class MembresiaPage {
         // console.log('error');
       }
     );
+  }
+
+  public getContract() {
+
+    return new Promise((resolve, reject) => {
+      const url = 'https://www.koomkin.com.mx/api/app/getContract/' + this.correo;
+      this.http.get(url).subscribe(
+        data => {
+          if (data['length'] > 0) {
+            this.contrato = data[0].ContractURL;
+          }
+          resolve();
+        },
+        err => {
+          // console.log(err);
+          reject(err);
+        }
+      );
+    });
   }
 
   public getDiasRestantes() {
@@ -321,9 +342,9 @@ export class MembresiaPage {
     this.app.getRootNav().setRoot('ModalSurveyPage', { tipo: this.tipo }); 
   }
 
-  launch(contrato) {
+  launch() {
     this.platform.ready().then(() => {
-      cordova.InAppBrowser.open(contrato, "_system", "location=no");
+      cordova.InAppBrowser.open(this.contrato, "_system", "location=no");
     });
   }
 

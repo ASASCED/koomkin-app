@@ -1649,7 +1649,7 @@ db.executeGetBriefSettingsInformation = function(IDUSUARIO) {
 //executeRegistrarLeadAgregado
 
 db.executeGetHorarioAtencion = function(IDUSUARIO) {
-  const requestStr = `SELECT * FROM HorarioAtencion WHERE idhorario IN (SELECT MAX(idhorario) FROM HorarioAtencion GROUP BY IdUsuario) and IdUsuario ${IDUSUARIO}`;
+  const requestStr = `SELECT * FROM HorarioAtencion WHERE idhorario IN (SELECT MAX(idhorario) FROM HorarioAtencion GROUP BY IdUsuario) and IdUsuario = ${IDUSUARIO}`;
 
   console.log(requestStr);
 

@@ -48,6 +48,7 @@ export class EmailPage implements OnInit {
   ngOnInit() {
     this.vista = "informacion";
     this.getMailCliente(this.id);
+    this.getHorarioAtencion();
   }
 
   changePage(pagina) {
@@ -327,6 +328,24 @@ export class EmailPage implements OnInit {
       confirmButtonColor: '#3085d6',
       confirmButtonText: 'OK',
       reverseButtons: true
+    });
+  }
+
+  public getHorarioAtencion() {
+    return new Promise((resolve, reject) => {
+      const url = "https://www.koomkin.com.mx/api/app/getHorarioAtencion/" + this.id ;
+      console.log(url)
+
+      this.http.get(url).subscribe(
+        data => {
+          console.log(data);
+          resolve();
+        },
+        err => {
+          // console.log(err);
+          reject(err);
+        }
+      );
     });
   }
 }
