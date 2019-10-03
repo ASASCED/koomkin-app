@@ -1629,7 +1629,7 @@ db.updateBriefDatos = function(
 //executeRegistrarLeadAgregado
 
 db.executeGetBriefSettingsInformation = function(IDUSUARIO) {
-  const requestStr = `select DistribucionOnline,DistribucionOffline,QuienVende,NumeroVendedores,TipoVendedores,CrmDiferente,ClientesNuevos,TipoPublicidad,PublicidadTradicional,PublicidadDigital from tbl_brief where IDUSUARIO = ${IDUSUARIO}`;
+  const requestStr = `select DistribucionOnline,DistribucionOffline,QuienVende,NumeroVendedores,TipoVendedores,CrmDiferente,ClientesNuevos,TipoPublicidad,PublicidadTradicional,PublicidadDigital,CampaniaObjetivo from tbl_brief where IDUSUARIO = ${IDUSUARIO}`;
 
   console.log(requestStr);
 
@@ -1751,13 +1751,36 @@ db.executeRegistrarClientesNuevos = function(
     });
   };
 
+//registrarClientesNuevos
+
+db.executeRegistrarGiroChat = function(
+    idUsuario,
+    giroChat
+  ) {
+    const requestStr = `Update tbl_brief set DESCRIPCIONJIROCHAT = ${giroChat} where IDUSUARIO = ${idUsuario};`;
+  
+    console.log(requestStr);
+  
+    return new Promise((resolve, reject) => {
+      tp.sql(requestStr)
+        .execute()
+        .then(results => {
+          resolve(results);
+        })
+        .catch(err => {
+          console.log(err);
+          reject(err);
+        });
+    });
+  };
+
 //registrarObjetivoCampania
 
 db.executeRegistrarObjetivoCampania = function(
     idUsuario,
     campaniaObjetivo
   ) {
-    const requestStr = `Update tbl_TuCampania set CampanaObjetivo = ${campaniaObjetivo} where IDUSUARIO = ${idUsuario};`;
+    const requestStr = `Update tbl_Brief set CampanaObjetivo = ${campaniaObjetivo} where IDUSUARIO = ${idUsuario};`;
   
     console.log(requestStr);
   

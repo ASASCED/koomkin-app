@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { AlertController, IonicPage, LoadingController, NavController, NavParams } from "ionic-angular";
-import { RestProvider } from "./../../providers/rest/rest";
+import { RestProvider } from "../../providers/rest/rest";
 import { AuthServiceProvider } from "../../providers/auth-service/auth-service";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { ChatServiceProvider } from "../../providers/chat-service/chat-service";
@@ -8,10 +8,10 @@ import swal from 'sweetalert2';
 
 @IonicPage()
 @Component({
-  selector: "page-email",
-  templateUrl: "email.html"
+  selector: "page-configuracion-crm",
+  templateUrl: "configuracion-crm.html"
 })
-export class EmailPage implements OnInit {
+export class ConfiguracionCrmPage implements OnInit {
   public vista;
   public saludo;
   public slogan;
@@ -25,6 +25,17 @@ export class EmailPage implements OnInit {
   public web;
   public twitter;
   public uuid;
+
+  public dias;
+  public cat_dias = [
+    { id: 1, nombre: 'Lunes' },
+    { id: 2, nombre: 'Martes' },
+    { id: 3, nombre: 'Miércoles' },
+    { id: 4, nombre: 'Jueves' },
+    { id: 5, nombre: 'Viernes' },
+    { id: 6, nombre: 'Sábado' },
+    { id: 7, nombre: 'Domingo' },
+  ];
 
   apiUrl = 'https://www.koomkin.com.mx/mailing/update_pdf/';
 
@@ -264,10 +275,10 @@ export class EmailPage implements OnInit {
               }).catch(() => {
                 loading.dismiss();
               });
-          }).catch(reason => {console.log(reason)});
-        }).catch(reason=>{console.log(reason)});
+          }).catch(reason => { console.log(reason) });
+        }).catch(reason => { console.log(reason) });
       })();
-    }).catch(reason => {console.log(reason)});
+    }).catch(reason => { console.log(reason) });
   }
 
   public cambioInformacion() {
@@ -333,12 +344,17 @@ export class EmailPage implements OnInit {
 
   public getHorarioAtencion() {
     return new Promise((resolve, reject) => {
-      const url = "https://www.koomkin.com.mx/api/app/getHorarioAtencion/" + this.id ;
+      const url = "https://www.koomkin.com.mx/api/app/getHorarioAtencion/" + this.id;
       console.log(url)
 
       this.http.get(url).subscribe(
         data => {
           console.log(data);
+            for (let j in data) {
+              if (data[j].hasOwnProperty('Dia')) {
+                console.log(data[j])
+              }
+            }
           resolve();
         },
         err => {
@@ -348,4 +364,5 @@ export class EmailPage implements OnInit {
       );
     });
   }
+
 }

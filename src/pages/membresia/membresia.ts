@@ -164,7 +164,6 @@ export class MembresiaPage {
   }
 
   public getContract() {
-
     return new Promise((resolve, reject) => {
       const url = 'https://www.koomkin.com.mx/api/app/getContract/' + this.correo;
       this.http.get(url).subscribe(

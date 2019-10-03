@@ -26,6 +26,8 @@
                                         <p class="encabezado-texto-grande">Proceso Comercial</p>
                                     </ion-col>
                                     <ion-col col-2>
+                                        <ion-icon *ngIf="proceso !== 'Editar'" (click)="changeEdit('proceso')" name="md-create" class="iconos-w"></ion-icon>
+                                        <ion-icon *ngIf="proceso == 'Editar'" (click)="changeEdit('proceso')" name="md-checkbox-outline" class="iconos-w"></ion-icon>
                                     </ion-col>
                                 </ion-row>
                             </ion-grid>
@@ -42,7 +44,10 @@
                                         Offline o Tradicional:&nbsp;
                                     </ion-col>
                                     <ion-col col-3>
-                                        <input type="number" name="quantity" min="0" max="100" class="distribucion-porcentaje">
+                                        <div class="proceso" *ngIf="proceso !== 'Editar'">
+                                            <div class="puntos">{{distribucionOffline}}</div>
+                                        </div>
+                                        <input *ngIf="proceso == 'Editar'"  type="number" name="quantity" min="0" max="100" class="distribucion-porcentaje" [(ngModel)]="distribucionOffline">
                                     </ion-col>
                                     <ion-col col-3 class="porcentaje">
                                         &nbsp;%
@@ -53,7 +58,10 @@
                                         Online o Digital:&nbsp;
                                     </ion-col>
                                     <ion-col col-3>
-                                        <input type="number" name="quantity" min="0" max="100" class="distribucion-porcentaje">
+                                        <div class="proceso" *ngIf="proceso !== 'Editar'">
+                                            <div class="puntos">{{distribucionOnline}}</div>
+                                        </div>
+                                        <input type="number" *ngIf="proceso == 'Editar'" name="quantity" min="0" max="100" class="distribucion-porcentaje" [(ngModel)]="distribucionOnline">
                                     </ion-col>
                                     <ion-col col-3 class="porcentaje">
                                         &nbsp;%
@@ -67,13 +75,16 @@
                                 </ion-row>
                                 <ion-row style="margin-bottom: 0%">
                                     <ion-col col-4>
-                                        <button class="vende">Sólo dueño</button>
+                                        <button class="vende" *ngIf="proceso !== 'Editar'">Sólo dueño</button>
+                                        <button class="vende" *ngIf="proceso == 'Editar'" (click)="changeSeller('Solo dueño')">Sólo dueño</button>
                                     </ion-col>
                                     <ion-col col-4>
-                                        <button class="vende">Fuerza de Ventas</button>
+                                        <button class="vende" *ngIf="proceso !== 'Editar'">Fuerza de Ventas</button>
+                                        <button class="vende" *ngIf="proceso == 'Editar'" (click)="changeSeller('Fuerza de Ventas')">Fuerza de Ventas</button>
                                     </ion-col>
                                     <ion-col col-4>
-                                        <button class="vende">Ambos</button>
+                                        <button class="vende" *ngIf="proceso !== 'Editar'">Ambos</button>
+                                        <button class="vende" *ngIf="proceso == 'Editar'" (click)="changeSeller('Ambos')">Ambos</button>
                                     </ion-col>
                                 </ion-row>
 
@@ -84,21 +95,23 @@
                                 </ion-row>
                                 <ion-row style="margin-bottom: 0%">
                                     <ion-col col-2 offset-2>
-                                        <input type="number">
+                                        <input type="number" [(ngModel)]="numeroVendedores">
                                     </ion-col>
                                     
                                     <ion-col col-4 offset-2 class="porcentaje">
                                         <input type="radio" style="width: 20%;"> Telefónicos  
+                                        <input type="radio" style="width: 20%;" (click)="changeType('Telefonicos')"> Telefónicos  
                                     </ion-col>
                                     <ion-col col-4 offset-6 class="porcentaje">
                                         <input type="radio" style="width: 20%;"> De campo
+                                        <input type="radio" style="width: 20%;" (click)="changeType('De Campo')"> De Campo  
                                     </ion-col>
                                 </ion-row>
                              
 
                                 <ion-row style="margin-bottom: 0%">
                                     <ion-col col-12 class="preguntas">
-                                        ¿Quién vende en tu empresa?
+                                        ¿Ya cuenta con CRM diferente a Koomkin?
                                     </ion-col>
                                 </ion-row>
                                 <ion-row style="margin-bottom: 0%">
@@ -107,9 +120,11 @@
                                     </ion-col>
                                     <ion-col col-4>
                                         <button class="vende">Si</button>
+                                        <button class="vende" (click)="changeSeller('Local')">Si</button>
                                     </ion-col>
                                     <ion-col col-4>
                                         <button class="vende">No</button>
+                                        <button class="vende" (click)="changeSeller('Local')">No</button>
                                     </ion-col>
                                     <ion-col col-2>
 
@@ -134,6 +149,8 @@
                                         <p class="encabezado-texto-grande">Clientes Nuevos</p>
                                     </ion-col>
                                     <ion-col col-2>
+                                        <ion-icon *ngIf="clientes !== 'Editar'" (click)="changeEdit('clientes')" name="md-create" class="iconos-w"></ion-icon>
+                                        <ion-icon *ngIf="clientes == 'Editar'" (click)="changeEdit('clientes')" name="md-checkbox-outline" class="iconos-w"></ion-icon>
                                     </ion-col>
                                 </ion-row>
                             </ion-grid>
@@ -304,6 +321,8 @@
                                         <p class="encabezado-texto-grande">Redes Sociales</p>
                                     </ion-col>
                                     <ion-col col-2>
+                                        <ion-icon *ngIf="redes !== 'Editar'" (click)="changeEdit('redes')" name="md-create" class="iconos-w"></ion-icon>
+                                        <ion-icon *ngIf="redes == 'Editar'" (click)="changeEdit('redes');changeInfo();cambioInformacion()" name="md-checkbox-outline" class="iconos-w"></ion-icon>
                                     </ion-col>
                                 </ion-row>
                             </ion-grid>
@@ -442,6 +461,8 @@
                                         <p class="encabezado-texto-grande">Objetivo Campaña-CRM-BOT</p>
                                     </ion-col>
                                     <ion-col col-2>
+                                        <ion-icon *ngIf="objetivo !== 'Editar'" (click)="changeEdit('objetivo')" name="md-create" class="iconos-w"></ion-icon>
+                                        <ion-icon *ngIf="objetivo == 'Editar'" (click)="changeEdit('objetivo')" name="md-checkbox-outline" class="iconos-w"></ion-icon>
                                     </ion-col>
                                 </ion-row>
                             </ion-grid>

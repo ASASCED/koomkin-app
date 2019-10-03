@@ -59,15 +59,20 @@
                                         Días
                                     </ion-col>
                                     <ion-col col-8>
-                                        
+                                        <ion-select class="input-date" style="max-width: 96%;" [(ngModel)]="dias" multiple>
+                                            <ion-option *ngFor="let dia of cat_dias">{{dia.nombre}}</ion-option>
+                                        </ion-select>
                                     </ion-col>
                                 </ion-row>
-                                <ion-row style="margin-bottom: 0%">
+                                <ion-row style="margin: 2% 0%">
                                     <ion-col col-4 class="texto">
                                         Horario <br> (24 horas)
                                     </ion-col>
-                                    <ion-col col-8>
-
+                                    <ion-col col-4 style="display: flex;">
+                                        <input type="time" placeholder="Hora Inicio">
+                                    </ion-col>
+                                    <ion-col col-4 style="display: flex;">
+                                        <input type="time" placeholder="Hora Fin">
                                     </ion-col>
                                 </ion-row>
                             </ion-grid>
@@ -192,8 +197,8 @@
                                         <input type="text">
                                     </ion-col>
                                 </ion-row>
+                                <!--
                                 <ion-row style="margin: 1.5%">
-                                    
                                     <ion-col col-1 offset-3 class="flechas">
                                         <
                                     </ion-col> 

@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController, AlertController} from 'ionic-angular';
-import { RestProvider } from './../../providers/rest/rest';
+import { RestProvider } from '../../providers/rest/rest';
 import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import swal from 'sweetalert2';
 
 @IonicPage()
 @Component({
-  selector: 'page-social',
-  templateUrl: 'social.html',
+  selector: 'page-comercial',
+  templateUrl: 'comercial.html',
 })
-export class SocialPage implements OnInit{
+export class ComercialPage implements OnInit{
 
   public id;
   public datos;
@@ -21,6 +21,10 @@ export class SocialPage implements OnInit{
   public web;
   public twitter;
   public saludo;
+  public proceso = 'Guardar';
+  public clientes = 'Guardar';
+  public redes = 'Guardar';
+  public objetivo = 'Guardar';
 
   // Proceso Comercial
 
@@ -55,10 +59,7 @@ export class SocialPage implements OnInit{
   ngOnInit() {
     this.vista = 'informacion';
     this.getMailCliente(this.id);
-  }
-
-  changePage(pagina) {
-    this.vista = pagina;
+    this.getBriefSettingsInformation();
   }
 
   changeTengo(red) {
@@ -144,6 +145,7 @@ export class SocialPage implements OnInit{
         err => {
           if (err.status === 200) {
             this.showSuccess();
+            this.redes = "Guardar"
           } else {
             this.showError();
 
@@ -200,6 +202,16 @@ export class SocialPage implements OnInit{
       this.http.get(url).subscribe(
         data => {
           console.log(data);
+          this.distribucionOffline = data[0].DistribucionOffline;
+          this.distribucionOnline = data[0].DistribucionOnline;
+          this.quienVende = data[0].QuienVende;
+          this.numeroVendedores = data[0].NumeroVendedores;
+          this.tipoVendedores = data[0].TipoVendedores;
+          this.crmDiferente = data[0].CrmDiferente;
+          this.clientesNuevos = data[0].ClientesNuevos;
+          this.tipoPublicidad = data[0].TipoPublicidad;
+          this.publicidadTracicional = data[0].PublicidadTradicional;
+          this.publicidadDigital = data[0].PublicidadDigital;
           resolve();
         },
         err => {
@@ -294,6 +306,42 @@ export class SocialPage implements OnInit{
         }
       );
     });
+  }
+
+  changeEdit(variable) {
+
+    switch(variable) {
+      case "proceso": {
+        if (this.proceso == 'Guardar') {
+          this.proceso = 'Editar';
+        } 
+        break;
+      }
+
+      case "clientes": {
+        if (this.clientes == 'Guardar') {
+          this.clientes = 'Editar';
+        } 
+        break;
+      }
+
+      case "redes": {
+        if (this.redes == 'Guardar') {
+          this.redes = 'Editar';
+        } 
+        break;
+      }
+
+      case "objetivo": {
+        if (this.objetivo == 'Guardar') {
+          this.objetivo = 'Editar';
+        } 
+        break;
+      }
+
+      default:
+        
+    }
   }
 
 

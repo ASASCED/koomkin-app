@@ -1,5 +1,5 @@
-export { SocialPage } from './social/social';
-export { EmailPage } from './email/email';
+export { ComercialPage } from './comercial/comercial';
+export { ConfiguracionCrmPage } from './configuracion-crm/configuracion-crm';
 export { DatosPage } from './datos/datos';
 export { ReportePage } from './reporte/reporte';
 export { LeadsPage } from './leads/leads';

@@ -1,4 +1,4 @@
-page-social {
+page-configuracion-crm {
   .banner {
     position: relative;
     text-align: center;
@@ -46,17 +46,14 @@ page-social {
       font-weight: bold;
     }
     .primero {
-      background: #0ea7c2;
-    }
-    .segundo {
-      background: #005999;
-    }
-    .tercero {
-      background: #2ab4bc;
-    }
-    .cuarto {
-      background: #243E56;
-    }
+        background: #0EA7C2;
+      }
+      .segundo {
+        background: #005999;
+      }
+      .tercero {
+        background: #2AB4BC;
+      }
     .encabezado-texto-grande {
       color: white;
       text-align: center;
@@ -72,80 +69,42 @@ page-social {
     }
   }
 
-  .distribucion {
+  .texto {
     text-align: right;
     font-weight: bold;
     color: #243E56;
   }
 
-  .distribucion-porcentaje {
-    height: 90%;
+  .chico {
+    font-size: 10px;
   }
 
-  .porcentaje {
-    font-weight: bold;
-    color: #243E56;
+  .center {
     display: flex;
+    justify-content: center;
     align-items: center;
     vertical-align: middle;
   }
 
-  .vende {
-    width: 90%;
-    margin-left: 5%;
-    padding: 5%;
-    border: 1px solid #c4c4c4;
-    border-radius: 20px;
-    color: #243E56;
-    font-weight: bold;
-    background: transparent;
+  .opciones {
+    display: flex;
+    text-align: left;
+    color: #606060;
+    font-size: 12px;
   }
 
-  .boton-cobertura-brief-blanco {
-    width: 90%;
-    height: 70px;
-    margin-left: 5%;
-    display: inline-block;
-    border: 1px #00b9be solid;
-    border-radius: 7px;
-    background: #00b9be;
-    .texto-boton-brief {
-      color: white;
-      margin: 0;
-      font-size: 8px;
-      font-weight: bold;
-    }
+  .texto-center {
+    text-align: center;
+    margin: 2% 0%;
+    color: #288ac1;
+    font-weight: bold !important;
   }
 
-  .boton-cobertura-brief {
-    width: 90%;
-    height: 70px;
-    margin-left: 5%;
-    display: inline-block;
-    border: 1px #cecece solid;
-    border-radius: 7px;
-    background: white;
-    .texto-boton-brief {
-      color: #a09d9d;
-      margin: 0;
-      font-size: 8px;
-      font-weight: bold;
-    }
-  }
-
-  .referidos {
-    width: 60%;
-    margin-left: 20%;
-  }
-
-  .publicidad {
-    width: 64%;
-    margin-left: 18%;
-  }
-
-  .digital {
-    width: 70%;
-    margin-left: 15%;
+  .flechas {
+    text-align: center;
+    color: #288ac1;
+    font-size: 16px;
+    font-weight: bold !important;
   }
 
   .cuadro {
@@ -163,16 +122,11 @@ page-social {
     text-decoration: underline;
     background: transparent;
   }
-  .preguntas {
-    margin: 2%;
-    color: #288ac1;
-    font-size: 14px;
-    font-weight: bold !important;
-  }
   .contacto {
     text-align: center !important;
     color: #288ac1;
-    font-size: 14px;
+    font-size: 5.5vw;
+    margin-bottom: 4%;
     font-weight: bold !important;
   }
   table {
@@ -181,27 +135,8 @@ page-social {
   }
   td {
     width: 45%;
-    padding-bottom: 2.5%;
+    padding-bottom: 5.8%;
     font-size: 4vw;
-  }
-  td.social {
-    width: 70% !important;
-    font-size: 4vw;
-    padding-bottom: 4.5%;
-    color: #606060;
-    font-weight: 350;
-  }
-  .redsocial {
-    height:100%;
-    padding: 1%;
-    border: 1px #c4c4c4 solid;
-    border-radius: 4px;
-    color: #606060;
-    font-weight: 350;
-  }
-  td.socialicon {
-    width: 30% !important;
-    padding-bottom: 0;
   }
   tr {
     padding: 5px;
@@ -225,15 +160,29 @@ page-social {
     width: 45%;
     box-shadow: 8px 8px 10px -6px rgba(0, 0, 0, 0.9);
   }
+  .enviar-mail {
+    width: 100%;
+    padding: 5%;
+    background: #fe703f;
+    border: transparent;
+    text-align: center;
+    color: white;
+    font-weight: bold;
+    border-radius: 40px;
+    cursor: pointer;
+    box-shadow: 8px 8px 10px -6px rgba(0, 0, 0, 0.9);
+  }
   .campos {
-    color: #243E56;
+    font-size: 4.5vw;
+    color: #606060;
     font-weight: 700;
-    margin-bottom: 1%;
-    margin-top: 2%;
   }
   .datos {
-    font-size: 4vw;
-    color: #243E56;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #606060;
     font-weight: 350;
     background: transparent;
   }
@@ -242,37 +191,86 @@ page-social {
     border: 1px solid #c4c4c4;
     border-radius: 5px;
     padding: 3px 5px;
+    box-shadow: none;
     cursor: pointer;
     text-align: justify;
-    box-shadow: none;
   }
-  .cuento {
+  .maximo {
+    font-size: 4vw;
+    color: #c4c4c4;
+    font-weight: 500;
+  }
+  .saludos {
+    text-align: justify !important;
+    border: 1px solid #c4c4c4;
+    border-radius: 5px;
+    font-size: 4vw;
+    color: #606060;
+    font-weight: 350;
+    padding: 2%;
+  }
+  .subir {
+    width: 90%;
+    height: 100%;
+    border: 1px solid #c4c4c4;
+    border-radius: 5px;
+    margin-left: 5%;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    vertical-align: middle;
+  }
+  .subirarchivo {
     width: 50%;
-    margin-left: 25%;
-  }
-  .nocuento {
-    color: red;
-  }
-  .puntos {
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
+    background: #00b9be;
+    border: transparent;
+    font-size: 12px;
+    text-align: center;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+    padding: 3%;
+    height: auto;
+    text-transform: capitalize;
   }
   input {
     border: 1px solid #c4c4c4;
     border-radius: 5px;
-    padding: 3px 5px;
-    width: 99%;
+    padding: 0;
+    width: 90%;
+    margin-left: 5%;
     cursor: pointer;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    color: #606060;
+    padding-left: 2%;
+  }
+  ion-select {
+    border: 1px solid #c4c4c4;
+    border-radius: 5px;
+    padding: 0;
+    width: 96%;
+    margin-left: 2%;
+    padding: 0px 8px !important;
+    cursor: pointer;
+    -webkit-box-shadow: none;
     box-shadow: none;
     color: #606060;
   }
-
-  .preguntas-center {
-    text-align: center;
-    margin: 2% 0%;
-    color: #288ac1;
-    font-size: 13px;
-    font-weight: bold !important;
+  textarea {
+    border: 1px solid #c4c4c4;
+    border-radius: 5px;
+    padding: 0;
+    width: 90%;
+    margin-left: 5%;
+    cursor: pointer;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    color: #606060;
+    padding-left: 2%;
+  }
+  .content-md hr {
+    background-color: rgba(0, 0, 0, .3);
+    width: 90%;
   }
 }
