@@ -7,9 +7,7 @@
     <br>
     <ion-grid>
         <ion-row>
-            <ion-col col-4>
-            </ion-col>
-            <ion-col col-4>
+            <ion-col col-4 offset-4>
                 <img src="assets/imgs/iconos/icn_underconstruction.svg" width="100%" />
             </ion-col>
             <ion-col col-4>
@@ -29,9 +27,7 @@
         </ion-row>
         <br>
         <ion-row *ngIf="respuesta===false">
-            <ion-col col-2>
-            </ion-col>
-            <ion-col col-8>
+            <ion-col col-8 offset-2>
                 <button ion-button class="btn-modal" style="width: 100%;text-transform: none;"
                     (click)="closeModal()">Aceptar</button>
             </ion-col>

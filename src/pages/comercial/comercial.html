@@ -243,14 +243,14 @@
                                     </ion-col>
                                 </ion-row>
                                 <ion-row style="margin-bottom: 0%" *ngIf="clientesNuevos === 'Publicidad' && tipoPublicidad == 'Tradicional'">
-                                    <ion-col col-3>
+                                    <ion-col col-3 offset-2>
                                         <button
                                             [ngClass]="{'boton-cobertura-brief-blanco':publicidadTracicional === 'Impresos','boton-cobertura-brief':publicidadTracicional !== 'Impresos'}"
                                             style="margin-right: 1%;" (click)="changeMarketingTradicional('Impresos')">
                                             <img *ngIf="publicidadTracicional !== 'Impresos'"
-                                                src="assets/imgs/ajustes/ic_facebook.svg" class="digital">
+                                                src="assets/imgs/ajustes/ic_impresos.svg" class="tradicional">
                                             <img *ngIf="publicidadTracicional === 'Impresos'"
-                                                src="assets/imgs/ajustes/ic_facebook_selected.svg" class="digital">
+                                                src="assets/imgs/ajustes/ic_impresos_selected.svg" class="tradicional">
                                             <p class="texto-boton-brief">Impresos</p>
                                         </button>
                                     </ion-col>
@@ -259,31 +259,20 @@
                                             [ngClass]="{'boton-cobertura-brief-blanco':publicidadTracicional === 'Expos','boton-cobertura-brief':publicidadTracicional !== 'Expos'}"
                                             style="margin-right: 1%;" (click)="changeMarketingTradicional('Expos')">
                                             <img *ngIf="publicidadTracicional !== 'Expos'"
-                                                src="assets/imgs/ajustes/ic_instagram.svg" class="digital">
+                                                src="assets/imgs/ajustes/ic_expos.svg" class="expos">
                                             <img *ngIf="publicidadTracicional === 'Expos'"
-                                                src="assets/imgs/ajustes/ic_instagram_selected.svg" class="digital">
+                                                src="assets/imgs/ajustes/ic_expos_selected.svg" class="expos">
                                             <p class="texto-boton-brief">Expos</p>
                                         </button>
                                     </ion-col>
-                                    <ion-col col-3>
-                                            <button
-                                                [ngClass]="{'boton-cobertura-brief-blanco':publicidadTracicional === 'Directorios','boton-cobertura-brief':publicidadTracicional !== 'Directorios'}"
-                                                style="margin-right: 1%;" (click)="changeMarketingTradicional('Directorios')">
-                                                <img *ngIf="publicidadTracicional !== 'Directorios'"
-                                                    src="assets/imgs/ajustes/ic_facebook.svg" class="digital">
-                                                <img *ngIf="publicidadTracicional === 'Directorios'"
-                                                    src="assets/imgs/ajustes/ic_facebook_selected.svg" class="digital">
-                                                <p class="texto-boton-brief">Directorios</p>
-                                            </button>
-                                        </ion-col>
                                     <ion-col col-3>
                                         <button
                                             [ngClass]="{'boton-cobertura-brief-blanco':publicidadTracicional === 'Otros','boton-cobertura-brief':publicidadTracicional !== 'Otros'}"
                                             style="margin-right: 1%;" (click)="changeMarketingTradicional('Otros')">
                                             <img *ngIf="publicidadTracicional !== 'Otros'"
-                                                src="assets/imgs/ajustes/ic_otros.svg" class="digital">
+                                                src="assets/imgs/ajustes/otros.svg" class="tradicional">
                                             <img *ngIf="publicidadTracicional === 'Otros'"
-                                                src="assets/imgs/ajustes/ic_otros_selected.svg" class="digital">
+                                                src="assets/imgs/ajustes/otros_selected.svg" class="tradicional">
                                             <p class="texto-boton-brief">Otros</p>
                                         </button>
                                     </ion-col>

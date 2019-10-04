@@ -18,24 +18,16 @@
                             <div class="encabezado">
                                 <ion-grid>
                                     <ion-row>
-                                        <ion-col col-5>
-                                        </ion-col>
-                                        <ion-col col-2>
+                                        <ion-col col-2 offset-5>
                                             <img src="assets/imgs/facturacion/ic_usuario.svg" width="20px"
                                                 height="20px" />
-                                        </ion-col>
-                                        <ion-col col-5>
                                         </ion-col>
                                     </ion-row>
                                 </ion-grid>
                                 <ion-grid>
                                     <ion-row>
-                                        <ion-col col-1>
-                                        </ion-col>
-                                        <ion-col col-10>
+                                        <ion-col col-10 offset-1>
                                             <p class="encabezado-texto">{{f_nombre}} {{f_paterno}} {{f_materno}}</p>
-                                        </ion-col>
-                                        <ion-col col-1>
                                         </ion-col>
                                     </ion-row>
                                 </ion-grid>
@@ -52,13 +44,9 @@
                             <div class="encabezado">
                                 <ion-grid>
                                     <ion-row>
-                                        <ion-col col-5>
-                                        </ion-col>
-                                        <ion-col col-2>
+                                        <ion-col col-2 offset-5>
                                             <img src="assets/imgs/facturacion/ic_empresa.svg" width="20px"
                                                 height="20px" />
-                                        </ion-col>
-                                        <ion-col col-5>
                                         </ion-col>
                                     </ion-row>
                                 </ion-grid>
@@ -86,23 +74,15 @@
                             <div class="encabezado">
                                 <ion-grid>
                                     <ion-row>
-                                        <ion-col col-5>
-                                        </ion-col>
-                                        <ion-col col-2>
+                                        <ion-col col-2 offset-5>
                                             <img src="assets/imgs/facturacion/ic_rfc.svg" width="20px" height="20px" />
-                                        </ion-col>
-                                        <ion-col col-5>
                                         </ion-col>
                                     </ion-row>
                                 </ion-grid>
                                 <ion-grid>
                                     <ion-row>
-                                        <ion-col col-1>
-                                        </ion-col>
-                                        <ion-col col-10>
+                                        <ion-col col-10 offset-1>
                                             <p class="encabezado-texto">{{rfc}}</p>
-                                        </ion-col>
-                                        <ion-col col-1>
                                         </ion-col>
                                     </ion-row>
                                 </ion-grid>
@@ -119,25 +99,17 @@
                             <div class="encabezado">
                                 <ion-grid>
                                     <ion-row>
-                                        <ion-col col-5>
-                                        </ion-col>
-                                        <ion-col col-2>
+                                        <ion-col col-2 offset-5>
                                             <img src="assets/imgs/facturacion/ic_ubicacion.svg" width="20px"
                                                 height="20px" />
-                                        </ion-col>
-                                        <ion-col col-5>
                                         </ion-col>
                                     </ion-row>
                                 </ion-grid>
                                 <ion-grid>
                                     <ion-row>
-                                        <ion-col col-1>
-                                        </ion-col>
-                                        <ion-col col-10>
+                                        <ion-col col-10 offset-1>
                                             <p class="encabezado-texto">{{calle}} {{numeroexterior}} {{numerointerior}}
                                                 {{colonia}} {{ciudad}} {{cp}}</p>
-                                        </ion-col>
-                                        <ion-col col-1>
                                         </ion-col>
                                     </ion-row>
                                 </ion-grid>
@@ -243,7 +215,6 @@
                     <option value="2568">Zacatecas</option>
                 </select>
             </tr>
-    
         </table>
     <button *ngIf="vista == 'informacion'" class="edit" (click)="changePage('editar')">Modificar Datos</button>
     <button *ngIf="vista === 'editar'" class="edit edit-cancelar" (click)="changePage('informacion');">Cancelar</button>
