@@ -75,16 +75,16 @@
                                 </ion-row>
                                 <ion-row style="margin-bottom: 0%">
                                     <ion-col col-4>
-                                        <button class="vende" *ngIf="proceso !== 'Editar'">Sólo dueño</button>
-                                        <button class="vende" *ngIf="proceso == 'Editar'" (click)="changeSeller('Solo dueño')">Sólo dueño</button>
+                                        <button [ngClass]="{'vende':quienVende != 'Solo dueño','vende-activo':quienVende == 'Solo dueño'}" *ngIf="proceso !== 'Editar'">Sólo dueño</button>
+                                        <button [ngClass]="{'vende':quienVende != 'Solo dueño','vende-activo':quienVende == 'Solo dueño'}" *ngIf="proceso == 'Editar'" (click)="changeSeller('Solo dueño')">Sólo dueño</button>
                                     </ion-col>
                                     <ion-col col-4>
-                                        <button class="vende" *ngIf="proceso !== 'Editar'">Fuerza de Ventas</button>
-                                        <button class="vende" *ngIf="proceso == 'Editar'" (click)="changeSeller('Fuerza de Ventas')">Fuerza de Ventas</button>
+                                        <button [ngClass]="{'vende':quienVende != 'Fuerza de Ventas','vende-activo':quienVende == 'Fuerza de Ventas'}" *ngIf="proceso !== 'Editar'">Fuerza de Ventas</button>
+                                        <button [ngClass]="{'vende':quienVende != 'Fuerza de Ventas','vende-activo':quienVende == 'Fuerza de Ventas'}" *ngIf="proceso == 'Editar'" (click)="changeSeller('Fuerza de Ventas')">Fuerza de Ventas</button>
                                     </ion-col>
                                     <ion-col col-4>
-                                        <button class="vende" *ngIf="proceso !== 'Editar'">Ambos</button>
-                                        <button class="vende" *ngIf="proceso == 'Editar'" (click)="changeSeller('Ambos')">Ambos</button>
+                                        <button [ngClass]="{'vende':quienVende != 'Ambos','vende-activo':quienVende == 'Ambos'}" *ngIf="proceso !== 'Editar'">Ambos</button>
+                                        <button [ngClass]="{'vende':quienVende != 'Ambos','vende-activo':quienVende == 'Ambos'}" *ngIf="proceso == 'Editar'" (click)="changeSeller('Ambos')">Ambos</button>
                                     </ion-col>
                                 </ion-row>
 
@@ -95,39 +95,33 @@
                                 </ion-row>
                                 <ion-row style="margin-bottom: 0%">
                                     <ion-col col-2 offset-2>
-                                        <input type="number" [(ngModel)]="numeroVendedores">
+                                        <div class="proceso" *ngIf="proceso !== 'Editar'">
+                                            <div class="puntos">{{numeroVendedores}}</div>
+                                        </div>
+                                        <input type="number" *ngIf="proceso == 'Editar'" [(ngModel)]="numeroVendedores">
                                     </ion-col>
                                     
-                                    <ion-col col-4 offset-2 class="porcentaje">
-                                        <input type="radio" style="width: 20%;"> Telefónicos  
-                                        <input type="radio" style="width: 20%;" (click)="changeType('Telefonicos')"> Telefónicos  
+                                    <ion-col col-4 offset-2 class="porcentaje" *ngIf="proceso !== 'Editar'">
+                                        <input type="radio" name="tipoVendedores" value="Telefonicos" style="width: 20%;"> Telefónicos  
                                     </ion-col>
-                                    <ion-col col-4 offset-6 class="porcentaje">
-                                        <input type="radio" style="width: 20%;"> De campo
-                                        <input type="radio" style="width: 20%;" (click)="changeType('De Campo')"> De Campo  
+                                    <ion-col col-4 offset-6 class="porcentaje" *ngIf="proceso !== 'Editar'">
+                                        <input type="radio" name="tipoVendedores" value="De campo" style="width: 20%;"> De Campo
                                     </ion-col>
                                 </ion-row>
                              
-
                                 <ion-row style="margin-bottom: 0%">
                                     <ion-col col-12 class="preguntas">
                                         ¿Ya cuenta con CRM diferente a Koomkin?
                                     </ion-col>
                                 </ion-row>
                                 <ion-row style="margin-bottom: 0%">
-                                    <ion-col col-2>
-
+                                    <ion-col col-4 offset-2>
+                                        <button [ngClass]="{'vende':crmDiferente != true,'vende-activo':crmDiferente == true}" *ngIf="proceso !== 'Editar'">Si</button>
+                                        <button [ngClass]="{'vende':crmDiferente != true,'vende-activo':crmDiferente == true}" *ngIf="proceso == 'Editar'" (click)="changeCRM('true')">Si</button>
                                     </ion-col>
                                     <ion-col col-4>
-                                        <button class="vende">Si</button>
-                                        <button class="vende" (click)="changeSeller('Local')">Si</button>
-                                    </ion-col>
-                                    <ion-col col-4>
-                                        <button class="vende">No</button>
-                                        <button class="vende" (click)="changeSeller('Local')">No</button>
-                                    </ion-col>
-                                    <ion-col col-2>
-
+                                        <button [ngClass]="{'vende':crmDiferente != false,'vende-activo':crmDiferente == false}" *ngIf="proceso !== 'Editar'">No</button>
+                                        <button [ngClass]="{'vende':crmDiferente != false,'vende-activo':crmDiferente == false}" *ngIf="proceso == 'Editar'" (click)="changeCRM('false')">No</button>
                                     </ion-col>
                                 </ion-row>
                             </ion-grid>
@@ -165,24 +159,24 @@
                                 <ion-row style="margin-bottom: 0%">
                                     <ion-col col-3>
                                         <button
-                                            [ngClass]="{'boton-cobertura-brief-blanco':cobertura_empresa === 'Local','boton-cobertura-brief':cobertura_empresa !== 'Local'}"
-                                            style="margin-right: 1%;" (click)="changeCobertura('Local')">
-                                            <img *ngIf="cobertura_empresa !== 'Local'"
+                                            [ngClass]="{'boton-cobertura-brief-blanco':clientesNuevos === 'Recomendacion','boton-cobertura-brief':clientesNuevos !== 'Recomendacion'}"
+                                            style="margin-right: 1%;" (click)="changeNewClients('Recomendacion')">
+                                            <img *ngIf="clientesNuevos !== 'Recomendacion'"
                                                 src="assets/imgs/ajustes/ic_referidos.svg" class="referidos">
-                                            <img *ngIf="cobertura_empresa === 'Local'"
-                                                src="assets/imgs/brief/ic_referidos_selected.svg" class="referidos">
+                                            <img *ngIf="clientesNuevos === 'Recomendacion'"
+                                                src="assets/imgs/ajustes/ic_referidos_selected.svg" class="referidos">
                                             <p class="texto-boton-brief">Recomendación <br>/ Referidos</p>
                                         </button>
                                     </ion-col>
                                     <ion-col col-3>
                                         <button
-                                            [ngClass]="{'boton-cobertura-brief-blanco':cobertura_empresa === 'Local','boton-cobertura-brief':cobertura_empresa !== 'Local'}"
-                                            style="margin-right: 1%;" (click)="changeCobertura('Local')">
-                                            <img *ngIf="cobertura_empresa !== 'Local'"
+                                            [ngClass]="{'boton-cobertura-brief-blanco':clientesNuevos === 'Prospeccion','boton-cobertura-brief':clientesNuevos !== 'Prospeccion'}"
+                                            style="margin-right: 1%;" (click)="changeNewClients('Prospeccion')">
+                                            <img *ngIf="clientesNuevos !== 'Prospeccion'"
                                                 src="assets/imgs/ajustes/ic_prospecciontelefonica.svg"
                                                 class="referidos">
-                                            <img *ngIf="cobertura_empresa === 'Local'"
-                                                src="assets/imgs/brief/ic_prospecciontelefonica_selected.svg"
+                                            <img *ngIf="clientesNuevos === 'Prospeccion'"
+                                                src="assets/imgs/ajustes/ic_prospecciontelefonica_selected.svg"
                                                 class="referidos">
                                             <p class="texto-boton-brief">Prospección Telefónica</p>
                                         </button>
@@ -190,118 +184,157 @@
 
                                     <ion-col col-3>
                                         <button
-                                            [ngClass]="{'boton-cobertura-brief-blanco':cobertura_empresa === 'Local','boton-cobertura-brief':cobertura_empresa !== 'Local'}"
-                                            style="margin-right: 1%;" (click)="changeCobertura('Local')">
-                                            <img *ngIf="cobertura_empresa !== 'Local'"
+                                            [ngClass]="{'boton-cobertura-brief-blanco':clientesNuevos === 'Cambaceo','boton-cobertura-brief':clientesNuevos !== 'Cambaceo'}"
+                                            style="margin-right: 1%;" (click)="changeNewClients('Cambaceo')">
+                                            <img *ngIf="clientesNuevos !== 'Cambaceo'"
                                                 src="assets/imgs/ajustes/ic_cambaceo.svg" class="referidos">
-                                            <img *ngIf="cobertura_empresa === 'Local'"
-                                                src="assets/imgs/brief/ic_cambaceo_selected.svg" class="referidos">
+                                            <img *ngIf="clientesNuevos === 'Cambaceo'"
+                                                src="assets/imgs/ajustes/ic_cambaceo_selected.svg" class="referidos">
                                             <p class="texto-boton-brief"><br>Cambaceo</p>
                                         </button>
                                     </ion-col>
                                     <ion-col col-3>
                                         <button
-                                            [ngClass]="{'boton-cobertura-brief-blanco':cobertura_empresa === 'Local','boton-cobertura-brief':cobertura_empresa !== 'Local'}"
-                                            style="margin-right: 1%;" (click)="changeCobertura('Local')">
-                                            <img *ngIf="cobertura_empresa !== 'Local'"
+                                            [ngClass]="{'boton-cobertura-brief-blanco':clientesNuevos === 'Publicidad','boton-cobertura-brief':clientesNuevos !== 'Publicidad'}"
+                                            style="margin-right: 1%;" (click)="changeNewClients('Publicidad')">
+                                            <img *ngIf="clientesNuevos !== 'Publicidad'"
                                                 src="assets/imgs/ajustes/ic_publicidad.svg" class="referidos">
-                                            <img *ngIf="cobertura_empresa === 'Local'"
-                                                src="assets/imgs/brief/ic_publicidad_selected.svg" class="referidos">
+                                            <img *ngIf="clientesNuevos === 'Publicidad'"
+                                                src="assets/imgs/ajustes/ic_publicidad_selected.svg" class="referidos">
                                             <p class="texto-boton-brief"><br>Publicidad</p>
                                         </button>
                                     </ion-col>
                                 </ion-row>
 
-                                <ion-row style="margin-bottom: 0%">
+                                <ion-row style="margin-bottom: 0%" *ngIf="clientesNuevos === 'Publicidad'">
                                     <ion-col col-12 class="preguntas">
                                         ¿Qué tipo de publicidad?
                                     </ion-col>
                                 </ion-row>
-                                <ion-row style="margin-bottom: 0%">
-                                    <ion-col col-3>
-
-                                    </ion-col>
-                                    <ion-col col-3>
+                                <ion-row style="margin-bottom: 0%" *ngIf="clientesNuevos === 'Publicidad'">
+                                    <ion-col col-3 offset-3>
                                         <button
-                                            [ngClass]="{'boton-cobertura-brief-blanco':cobertura_empresa === 'Local','boton-cobertura-brief':cobertura_empresa !== 'Local'}"
-                                            style="margin-right: 1%;" (click)="changeCobertura('Local')">
-                                            <img *ngIf="cobertura_empresa !== 'Local'"
+                                            [ngClass]="{'boton-cobertura-brief-blanco':tipoPublicidad === 'Tradicional','boton-cobertura-brief':tipoPublicidad !== 'Tradicional'}"
+                                            style="margin-right: 1%;" (click)="changeMarketing('Tradicional')">
+                                            <img *ngIf="tipoPublicidad !== 'Tradicional'"
                                                 src="assets/imgs/ajustes/ic_tradicional.svg" class="publicidad">
-                                            <img *ngIf="cobertura_empresa === 'Local'"
-                                                src="assets/imgs/brief/ic_tradicional_selected.svg" class="publicidad">
+                                            <img *ngIf="tipoPublicidad === 'Tradicional'"
+                                                src="assets/imgs/ajustes/ic_tradicional_selected.svg" class="publicidad">
                                             <p class="texto-boton-brief">Tradicional</p>
                                         </button>
                                     </ion-col>
 
                                     <ion-col col-3>
                                         <button
-                                            [ngClass]="{'boton-cobertura-brief-blanco':cobertura_empresa === 'Local','boton-cobertura-brief':cobertura_empresa !== 'Local'}"
-                                            style="margin-right: 1%;" (click)="changeCobertura('Local')">
-                                            <img *ngIf="cobertura_empresa !== 'Local'"
+                                            [ngClass]="{'boton-cobertura-brief-blanco':tipoPublicidad === 'Digital','boton-cobertura-brief':tipoPublicidad !== 'Digital'}"
+                                            style="margin-right: 1%;" (click)="changeMarketing('Digital')">
+                                            <img *ngIf="tipoPublicidad !== 'Digital'"
                                                 src="assets/imgs/ajustes/ic_digital.svg">
-                                            <img *ngIf="cobertura_empresa === 'Local'"
-                                                src="assets/imgs/brief/ic_rdigital_selected.svg">
+                                            <img *ngIf="tipoPublicidad === 'Digital'"
+                                                src="assets/imgs/ajustes/ic_rdigital_selected.svg">
                                             <p class="texto-boton-brief">Digital</p>
                                         </button>
                                     </ion-col>
-                                    <ion-col col-3>
-
-                                    </ion-col>
                                 </ion-row>
 
-                                <ion-row style="margin-bottom: 0%">
+                                <ion-row style="margin-bottom: 0%" *ngIf="tipoPublicidad == 'Tradicional' || tipoPublicidad == 'Digital'">
                                     <ion-col col-12 class="preguntas">
-                                        Específica que tipo de publicidad digital
+                                        Específica que tipo de publicidad {{tipoPublicidad}}
                                     </ion-col>
                                 </ion-row>
-                                <ion-row style="margin-bottom: 0%">
+                                <ion-row style="margin-bottom: 0%" *ngIf="tipoPublicidad == 'Tradicional'">
                                     <ion-col col-3>
                                         <button
-                                            [ngClass]="{'boton-cobertura-brief-blanco':cobertura_empresa === 'Local','boton-cobertura-brief':cobertura_empresa !== 'Local'}"
-                                            style="margin-right: 1%;" (click)="changeCobertura('Local')">
-                                            <img *ngIf="cobertura_empresa !== 'Local'"
+                                            [ngClass]="{'boton-cobertura-brief-blanco':publicidadTracicional === 'Impresos','boton-cobertura-brief':publicidadTracicional !== 'Impresos'}"
+                                            style="margin-right: 1%;" (click)="changeMarketingTradicional('Impresos')">
+                                            <img *ngIf="publicidadTracicional !== 'Impresos'"
                                                 src="assets/imgs/ajustes/ic_facebook.svg" class="digital">
-                                            <img *ngIf="cobertura_empresa === 'Local'"
-                                                src="assets/imgs/brief/ic_facebook_selected.svg" class="digital">
-                                            <p class="texto-boton-brief">Facebook</p>
+                                            <img *ngIf="publicidadTracicional === 'Impresos'"
+                                                src="assets/imgs/ajustes/ic_facebook_selected.svg" class="digital">
+                                            <p class="texto-boton-brief">Impresos</p>
                                         </button>
                                     </ion-col>
                                     <ion-col col-3>
                                         <button
-                                            [ngClass]="{'boton-cobertura-brief-blanco':cobertura_empresa === 'Local','boton-cobertura-brief':cobertura_empresa !== 'Local'}"
-                                            style="margin-right: 1%;" (click)="changeCobertura('Local')">
-                                            <img *ngIf="cobertura_empresa !== 'Local'"
+                                            [ngClass]="{'boton-cobertura-brief-blanco':publicidadTracicional === 'Expos','boton-cobertura-brief':publicidadTracicional !== 'Expos'}"
+                                            style="margin-right: 1%;" (click)="changeMarketingTradicional('Expos')">
+                                            <img *ngIf="publicidadTracicional !== 'Expos'"
                                                 src="assets/imgs/ajustes/ic_instagram.svg" class="digital">
-                                            <img *ngIf="cobertura_empresa === 'Local'"
-                                                src="assets/imgs/brief/ic_instagram_selected.svg" class="digital">
-                                            <p class="texto-boton-brief">Instagram</p>
-                                        </button>
-                                    </ion-col>
-
-                                    <ion-col col-3>
-                                        <button
-                                            [ngClass]="{'boton-cobertura-brief-blanco':cobertura_empresa === 'Local','boton-cobertura-brief':cobertura_empresa !== 'Local'}"
-                                            style="margin-right: 1%;" (click)="changeCobertura('Local')">
-                                            <img *ngIf="cobertura_empresa !== 'Local'"
-                                                src="assets/imgs/ajustes/ic_google.svg" class="digital">
-                                            <img *ngIf="cobertura_empresa === 'Local'"
-                                                src="assets/imgs/brief/ic_google_selected.svg" class="digital">
-                                            <p class="texto-boton-brief">Google</p>
+                                            <img *ngIf="publicidadTracicional === 'Expos'"
+                                                src="assets/imgs/ajustes/ic_instagram_selected.svg" class="digital">
+                                            <p class="texto-boton-brief">Expos</p>
                                         </button>
                                     </ion-col>
                                     <ion-col col-3>
+                                            <button
+                                                [ngClass]="{'boton-cobertura-brief-blanco':publicidadTracicional === 'Directorios','boton-cobertura-brief':publicidadTracicional !== 'Directorios'}"
+                                                style="margin-right: 1%;" (click)="changeMarketingTradicional('Directorios')">
+                                                <img *ngIf="publicidadTracicional !== 'Directorios'"
+                                                    src="assets/imgs/ajustes/ic_facebook.svg" class="digital">
+                                                <img *ngIf="publicidadTracicional === 'Directorios'"
+                                                    src="assets/imgs/ajustes/ic_facebook_selected.svg" class="digital">
+                                                <p class="texto-boton-brief">Directorios</p>
+                                            </button>
+                                        </ion-col>
+                                    <ion-col col-3>
                                         <button
-                                            [ngClass]="{'boton-cobertura-brief-blanco':cobertura_empresa === 'Local','boton-cobertura-brief':cobertura_empresa !== 'Local'}"
-                                            style="margin-right: 1%;" (click)="changeCobertura('Local')">
-                                            <img *ngIf="cobertura_empresa !== 'Local'"
+                                            [ngClass]="{'boton-cobertura-brief-blanco':publicidadTracicional === 'Otros','boton-cobertura-brief':publicidadTracicional !== 'Otros'}"
+                                            style="margin-right: 1%;" (click)="changeMarketingTradicional('Otros')">
+                                            <img *ngIf="publicidadTracicional !== 'Otros'"
                                                 src="assets/imgs/ajustes/ic_otros.svg" class="digital">
-                                            <img *ngIf="cobertura_empresa === 'Local'"
-                                                src="assets/imgs/brief/ic_otros_selected.svg" class="digital">
+                                            <img *ngIf="publicidadTracicional === 'Otros'"
+                                                src="assets/imgs/ajustes/ic_otros_selected.svg" class="digital">
                                             <p class="texto-boton-brief">Otros</p>
                                         </button>
                                     </ion-col>
                                 </ion-row>
-
+                                <ion-row style="margin-bottom: 0%" *ngIf="tipoPublicidad == 'Digital'">
+                                        <ion-col col-3>
+                                            <button
+                                                [ngClass]="{'boton-cobertura-brief-blanco':publicidadDigital === 'Facebook','boton-cobertura-brief':publicidadDigital !== 'Facebook'}"
+                                                style="margin-right: 1%;" (click)="changeMarketingDigital('Facebook')">
+                                                <img *ngIf="publicidadDigital !== 'Facebook'"
+                                                    src="assets/imgs/ajustes/ic_facebook.svg" class="digital">
+                                                <img *ngIf="publicidadDigital === 'Facebook'"
+                                                    src="assets/imgs/ajustes/ic_facebook_selected.svg" class="digital">
+                                                <p class="texto-boton-brief">Facebook</p>
+                                            </button>
+                                        </ion-col>
+                                        <ion-col col-3>
+                                            <button
+                                                [ngClass]="{'boton-cobertura-brief-blanco':publicidadDigital === 'Instagram','boton-cobertura-brief':publicidadDigital !== 'Instagram'}"
+                                                style="margin-right: 1%;" (click)="changeMarketingDigital('Instagram')">
+                                                <img *ngIf="publicidadDigital !== 'Instagram'"
+                                                    src="assets/imgs/ajustes/ic_instagram.svg" class="digital">
+                                                <img *ngIf="publicidadDigital === 'Instagram'"
+                                                    src="assets/imgs/ajustes/ic_instagram_selected.svg" class="digital">
+                                                <p class="texto-boton-brief">Instagram</p>
+                                            </button>
+                                        </ion-col>
+    
+                                        <ion-col col-3>
+                                            <button
+                                                [ngClass]="{'boton-cobertura-brief-blanco':publicidadDigital === 'Google','boton-cobertura-brief':publicidadDigital !== 'Google'}"
+                                                style="margin-right: 1%;" (click)="changeMarketingDigital('Google')">
+                                                <img *ngIf="publicidadDigital !== 'Google'"
+                                                    src="assets/imgs/ajustes/ic_google.svg" class="digital">
+                                                <img *ngIf="publicidadDigital === 'Google'"
+                                                    src="assets/imgs/ajustes/ic_google_selected.svg" class="digital">
+                                                <p class="texto-boton-brief">Google</p>
+                                            </button>
+                                        </ion-col>
+                                        <ion-col col-3>
+                                            <button
+                                                [ngClass]="{'boton-cobertura-brief-blanco':publicidadDigital === 'Otros','boton-cobertura-brief':publicidadDigital !== 'Otros'}"
+                                                style="margin-right: 1%;" (click)="changeMarketingDigital('Otros')">
+                                                <img *ngIf="publicidadDigital !== 'Otros'"
+                                                    src="assets/imgs/ajustes/ic_otros.svg" class="digital">
+                                                <img *ngIf="publicidadDigital === 'Otros'"
+                                                    src="assets/imgs/ajustes/ic_otros_selected.svg" class="digital">
+                                                <p class="texto-boton-brief">Otros</p>
+                                            </button>
+                                        </ion-col>
+                                    </ion-row>
                             </ion-grid>
                         </ion-card-content>
                     </ion-card>
@@ -478,7 +511,7 @@
                                     <ion-col col-2 style="display: flex;
                                     justify-content: center;
                                     align-items: center;">
-                                        <input type="radio" style="width: 70%;">
+                                        <input type="radio" name="campaniaObjetivo" value="Llamada" style="width: 70%;">
                                     </ion-col>
                                     <ion-col col-10 class="porcentaje">
                                         a. Llamada Telefónica con Cliente
@@ -488,7 +521,7 @@
                                     <ion-col col-2 style="display: flex;
                                     justify-content: center;
                                     align-items: center;">
-                                        <input type="radio" style="width: 70%;">
+                                        <input type="radio" name="campaniaObjetivo" value="Cita" style="width: 70%;">
                                     </ion-col>
                                     <ion-col col-10 class="porcentaje">
                                         b. Agendar Cita en tu Punto de Venta / Oficina
@@ -498,7 +531,7 @@
                                     <ion-col col-2 style="display: flex;
                                     justify-content: center;
                                     align-items: center;">
-                                        <input type="radio" style="width: 70%;">
+                                        <input type="radio" name="campaniaObjetivo" value="Visita" style="width: 70%;">
                                     </ion-col>
                                     <ion-col col-10 class="porcentaje">
                                         c. Visitar al Cliente Potencial en su Domicilio
@@ -508,7 +541,7 @@
                                     <ion-col col-2 style="display: flex;
                                     justify-content: center;
                                     align-items: center;">
-                                        <input type="radio" style="width: 70%;">
+                                        <input type="radio" name="campaniaObjetivo" value="Cotización" style="width: 70%;">
                                     </ion-col>
                                     <ion-col col-10 class="porcentaje">
                                         d. Enviar Cotización Directamente
