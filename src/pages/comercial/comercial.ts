@@ -119,7 +119,6 @@ export class ComercialPage implements OnInit{
   }
 
   changeInfo() {
-    // console.log('entro');
 
     const body = new URLSearchParams();
     body.set('id_usuario', this.id);
@@ -137,7 +136,6 @@ export class ComercialPage implements OnInit{
     };
 
     const url = 'https://www.koomkin.com.mx/mailing/update_social_media/';
-    // console.log(url, body.toString(), options);
       this.http.post(url, body.toString(), options).subscribe(
         data => {
           this.showSuccess();
@@ -169,6 +167,30 @@ export class ComercialPage implements OnInit{
         }
       );
     });
+  }
+
+  changeSeller(seller) {
+    this.quienVende = seller;
+  }
+
+  changeCRM(crm) {
+    this.crmDiferente = crm;
+  }
+  
+  changeNewClients(nuevos) {
+    this.clientesNuevos = nuevos;
+  }
+
+  changeMarketing(marketing) {
+    this.tipoPublicidad = marketing;
+  }
+
+  changeMarketingTradicional(tradicional) {
+    this.publicidadTracicional = tradicional;
+  }
+
+  changeMarketingDigital(digital) {
+    this.publicidadDigital = digital;
   }
 
   public showSuccess() {
@@ -241,6 +263,8 @@ export class ComercialPage implements OnInit{
     };
 
     const url = "https://www.koomkin.com.mx/api/app/registrarProcesoComercial/";
+
+    console.log(url, body.toString());
     return new Promise((resolve, reject) => {
       this.http.post(url, body.toString(), options).subscribe(
         data => {

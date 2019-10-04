@@ -1698,13 +1698,7 @@ db.executeRegistrarProcesoComercial = function(
     tipoVendedores,
     crmDiferente
   ) {
-    const requestStr = `Update tbl_brief set DistribucionOnline = ${distribucionOnline}, 
-                                             DistribucionOnline = ${distribucionOffline}, 
-                                             QuienVende = '${quienVende}',  
-                                             NumeroVendedores = ${numeroVendedores},  
-                                             TipoVendedores = '${tipoVendedores}',  
-                                             CrmDiferente = ${crmDiferente}
-    where IDUSUARIO = ${idUsuario};`;
+    const requestStr = `Update tbl_brief set DistribucionOnline = ${distribucionOnline}, DistribucionOffline = ${distribucionOffline}, QuienVende = '${quienVende}', NumeroVendedores = ${numeroVendedores}, TipoVendedores = '${tipoVendedores}', CrmDiferente = ${crmDiferente} where IDUSUARIO = ${idUsuario};`;
   
     console.log(requestStr);
   
