@@ -874,6 +874,27 @@ app.get('/updateBriefDatos/:usuario/:nombre?/:aPaterno?/:aMaterno?/:fechaNac?/:i
         });
 });
 
+app.get('/descargarFactura', function (req, res) {
+
+    const uid = req.query.uid;
+    const v = req.query.v;
+    //console.log(uid)
+    getPDF(uid, v)
+        .then((f) => {
+            res.writeHead(200, {
+                'Content-Type': 'text/plain'
+            });
+            res.end(f);
+        }, (err) => {
+            res.status(400);
+            console.log('Descarga facturas: ', err);
+        })
+        .catch(err => {
+            console.log('Descarga facturas: ', err);
+        });
+
+});
+
 //updateBriefInformation Empresa
 
 app.get('/updateBriefEmpresa/:usuario/:nombreEmpresa?/:rfcEmpresa?/:numeroEmpleados?/:numeroSocios?/:empresaFamiliar?/:regimenFiscal?/:rangoVentasAnuales?/:ventajaCompetitiva?/:idCampania', function (req, res) {
@@ -2273,6 +2294,150 @@ var facturaAPIUpdateUsuario = (uid, rows) => {
         request(options, callback);
     });
 };
+
+var enviarCorreo = (q, pdf, xml) => {
+    return new Promise((resolve, reject) => {
+        //var template_name = 'kadm-enviofactura';
+
+        var template_name = 'kadm-enviofactura-ecm'
+        var template_content = [
+            {
+                "name": "nombreCliente",
+                "content": q.nombre
+            },
+            {
+                "name": "nombreEmpresa",
+                "content": "Empresa: <strong>" + q.empresa + "</strong><br>"
+            },
+            {
+                "name": "IdCliente",
+                "content": "Id Usuario: " + q.idusuario + "<br>"
+            },
+            {
+                "name": "folioFactura",
+                "content": q.folio
+            },
+            {
+                "name": "fechaFactura",
+                "content": q.fecha
+            }
+        ];
+
+        mandrill_client = new mandrill.Mandrill(config.MANDRILL_KEY);
+
+        const to = [
+            /*{
+                "email": "gmedina@koomkin.com",
+                "name": "Gerardo Medina"
+            */
+            {
+                "email": q.email,
+                "name": q.nombre
+            }
+        ]
+
+        var attachments = [
+            {
+                "type": "application/pdf",
+                "name": `${q.fechaCorta}-${q.nombre}-${q.membresia}.pdf`,
+                "content": pdf
+            },
+            {
+                "type": "application/xml",
+                "name": `${q.fechaCorta}-${q.nombre}-${q.membresia}.xml`,
+                "content": xml
+            }
+        ];
+
+        var message = {
+            "subject": "Te mandamos tu factura de servicio",
+            "from_email": "facturacion@koomkin.com",
+            "from_name": "Facturacion",
+            "to": to,
+            "attachments": attachments
+        };
+
+        var async = false;
+        var ip_pool = '';
+        var send_at = new Date().toJSON();
+        mandrill_client.messages.sendTemplate({
+            "template_name": template_name,
+            "template_content": template_content,
+            "message": message,
+            "async": async,
+            "ip_pool": ip_pool,
+            "send_at": send_at
+        }, function (result) {
+            //console.log(result)
+            resolve(result);
+        }, function (e) {
+            // console.log(e)
+            reject('A mandrill error occurred: ' + e.name + ' - ' + e.message);
+        });
+    });
+}
+
+var getXML = (uid) => {
+    return new Promise((resolve, reject) => {
+        const url = config.URL_FACTURA + '/publica/invoice/' + uid + '/xml';
+        var options = {
+            url: url,
+            method: 'GET',
+            headers: {
+                'F-API-KEY': config.API_KEY,
+                'F-SECRET-KEY': config.SCT_KEY,
+                'Content-Type': 'application/json'
+            },
+            encoding: null
+        };
+
+        function callback(error, response, body) {
+            if (!error) {
+                const f = body.toString('base64')
+                resolve(f);
+            } else {
+                reject(error);
+            }
+        }
+
+        request(options, callback);
+
+    });
+}
+
+var getPDF = (uid, v) => {
+    //console.log(v);
+    return new Promise((resolve, reject) => {
+        let url = ''
+        if (v + '' === '3') {
+            url = config.URL_FACTURA + '/v3/cfdi33/' + uid + '/pdf';
+        } else {
+            url = config.URL_FACTURA + '/publica/invoice/' + uid + '/pdf';
+        }
+
+        var options = {
+            url: url,
+            method: 'GET',
+            headers: {
+                'F-API-KEY': config.API_KEY,
+                'F-SECRET-KEY': config.SCT_KEY,
+                'Content-Type': 'application/json'
+            },
+            encoding: null
+        };
+
+        function callback(error, response, body) {
+            if (!error) {
+                const f = body.toString('base64')
+                resolve(f);
+            } else {
+                reject(error);
+            }
+        }
+
+        request(options, callback);
+    });
+}
 
 // catch 404 and forward to error handler
 app.use(function (req, res) {
