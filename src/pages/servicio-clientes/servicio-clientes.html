@@ -27,7 +27,7 @@
                 <ion-grid>
                   <ion-row>
                     <ion-col col-10 offset-1>
-                      <p class="encabezado-texto">55 41 69 63 40</p>
+                      <a class="encabezado-texto" href="tel:5541696340">55 41 69 63 40</a>
                     </ion-col>
                   </ion-row>
                 </ion-grid>
@@ -56,7 +56,7 @@
                 <ion-grid>
                   <ion-row>
                     <ion-col col-12>
-                      <p class="encabezado-texto">scliente@koomkin.com</p>
+                      <a href="mailto:scliente@koomkin.com" class="encabezado-texto">scliente@koomkin.com</a>
                     </ion-col>
                   </ion-row>
                 </ion-grid>
@@ -89,7 +89,7 @@
                 <ion-grid>
                   <ion-row>
                     <ion-col col-10 offset-1>
-                      <button class="boton-whatsapp">Enviar WhatsApp</button>
+                      <button class="boton-whatsapp" (click)="launchWA()">Enviar WhatsApp</button>
                     </ion-col>
                   </ion-row>
                 </ion-grid>
@@ -118,7 +118,7 @@
                 <ion-grid>
                   <ion-row>
                     <ion-col col-10 offset-1>
-                      <button class="boton-messenger">Enviar Messenger</button>
+                      <button class="boton-messenger" (click)="launchMessenger()">Enviar Messenger</button>
                     </ion-col>
                   </ion-row>
                 </ion-grid>
@@ -142,6 +142,7 @@
                     <ion-col col-10 offset-1>
                       <p class="encabezado-texto-grande">
                         Lunes a Viernes de 9 a.m. a 6 p.m.
+                        <br> Sabado de 9 a.m. a 2 p.m.
                       </p>
                     </ion-col>
                   </ion-row>

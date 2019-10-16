@@ -84,9 +84,7 @@ export class MembresiaPage {
   public celular;
   public uidf;
   public tipo = "13";
-
   public correo;
-
 
   constructor(
     public navCtrl: NavController, 
@@ -145,7 +143,7 @@ export class MembresiaPage {
   public getInicioCampana() {
     this.provedor.getInicioCampana().then(
       data => {
-        console.log(data);
+        console.log('inicio',data);
         if (data['length'] > 0) {
           this.prospectId = data[0].UltimoProspecto;
           this.fechaInicio = data[0].FInicio;
@@ -168,6 +166,8 @@ export class MembresiaPage {
       const url = 'https://www.koomkin.com.mx/api/app/getContract/' + this.correo;
       this.http.get(url).subscribe(
         data => {
+          console.log('contrato',data);
+
           if (data['length'] > 0) {
             this.contrato = data[0].ContractURL;
           }
@@ -186,6 +186,8 @@ export class MembresiaPage {
       .then(
         (data) => {
           if (data[0]) {
+            console.log('diasrestantes',data);
+
             let result = data[0].DIAS_RESTANTES;
             if (result > 0) {
               this.diasRestantes = result + ' días';

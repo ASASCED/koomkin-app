@@ -48,7 +48,6 @@ export class MyApp {
     public http: HttpClient,
     public storage: Storage,
     private screenOrientation: ScreenOrientation) {
-
     this.initializeApp();
   }
 
