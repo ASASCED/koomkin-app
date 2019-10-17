@@ -1748,22 +1748,25 @@ db.executeRegistrarClientesNuevos = function(
   //registrarClientesNuevos
 
 db.executeGetGiroChat= function(idUsuario) {
+   try{
+      const requestStr = `select DESCRIPCIONJIROCHAT from tbl_brief where IDUSUARIO = ${idUsuario};`;
   
-    const requestStr = `select DESCRIPCIONJIROCHAT from tbl_brief where IDUSUARIO = ${idUsuario};`;
-  
-    console.log(requestStr);
-  
-    return new Promise((resolve, reject) => {
-      tp.sql(requestStr)
-        .execute()
-        .then(results => {
-          resolve(results);
-        })
-        .catch(err => {
-          console.log(err);
-          reject(err);
-        });
-    });
+      console.log(requestStr);  
+      return new Promise((resolve, reject) => {
+        tp.sql(requestStr)
+          .execute()
+          .then(results => {
+            resolve(results);
+          })
+          .catch(err => {
+            console.log(err);
+            reject(err);
+          });
+      });
+   } catch(e) {
+     console.log(e);
+   }
+
   };
 
 //registrarClientesNuevos
