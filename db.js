@@ -1755,7 +1755,7 @@ db.executeGetGiroChat= function(idUsuario) {
   
       console.log(requestStr2);  
       return new Promise((resolve, reject) => {
-        tp.sql(requestStr)
+        tp.sql(requestStr2)
           .execute()
           .then(results => {
             resolve(results);
