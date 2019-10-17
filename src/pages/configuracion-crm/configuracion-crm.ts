@@ -127,7 +127,6 @@ export class ConfiguracionCrmPage implements OnInit {
 
     this.http.post('https://www.koomkin.com.mx/mailing/update_message/', body.toString(), options).subscribe(
       data => {
-        console.log(data);
         this.showSuccess();
       },
       err => {
@@ -184,9 +183,7 @@ export class ConfiguracionCrmPage implements OnInit {
     this.http.post('https://www.koomkin.com.mx/mailing/preview/', body.toString(), options).subscribe(
       data => {
         this.showSuccessP();
-        console.log(data);
       }, err => {
-        console.log(err);
         if (err.status === 200) {
           this.showSuccessP();
         } else {
@@ -406,6 +403,23 @@ export class ConfiguracionCrmPage implements OnInit {
 
   }
 
+  
+  public getGiroChat() {
+
+    const url = 'https://www.koomkin.com.mx/api/app/getGiroChat/' + this.id;
+
+    return new Promise((resolve, reject) => {
+      this.http.get(url).subscribe(
+        data => {
+          console.log(data);
+        },
+        err => {
+          return reject(err);
+        }
+      );
+    });
+  }
+
   public registrarGiroChat() {
 
     const body = new URLSearchParams();
@@ -419,9 +433,8 @@ export class ConfiguracionCrmPage implements OnInit {
       )
     };
 
-    console.log(body.toString());
 
-    const url = 'https://www.koomkin.com.mx/api/app/registrarHorarioAtencion/';
+    const url = 'https://www.koomkin.com.mx/api/app/registrarGiroChat/';
 
     return new Promise((resolve, reject) => {
       this.http.post(url, body.toString(), options).subscribe(

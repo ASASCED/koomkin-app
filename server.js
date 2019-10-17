@@ -1623,6 +1623,19 @@ app.get('/getContract/:email', function (req, res) {
         });
 });
 
+app.get('/getGiroChat/:idUsuario', function (req, res) {
+
+    const idUsuario = parseInt(req.params.idUsuario, 10);
+
+    db.executeGetGiroChat(idUsuario)
+        .then(rows => {
+            res.json(rows).status(200).send();
+        })
+        .catch(err => {
+            res.status(500).json({ error: err }).send();
+        });
+});
+
 //PUT Methods
 
 app.put('/actualizarUsuario', function (req, res) {
