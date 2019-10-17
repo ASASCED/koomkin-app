@@ -234,6 +234,7 @@ export class ComercialPage implements OnInit{
           this.tipoPublicidad = data[0].TipoPublicidad;
           this.publicidadTracicional = data[0].PublicidadTradicional;
           this.publicidadDigital = data[0].PublicidadDigital;
+          this.campaniaObjetivo = data[0].CampaniaObjetivo;
           resolve();
         },
         err => {

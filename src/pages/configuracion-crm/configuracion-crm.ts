@@ -66,6 +66,7 @@ export class ConfiguracionCrmPage implements OnInit {
     this.vista = "informacion";
     this.getMailCliente(this.id);
     this.getHorarioAtencion();
+    this.getGiroChat();
   }
 
   changePage(pagina) {
@@ -452,3 +453,5 @@ export class ConfiguracionCrmPage implements OnInit {
     });
   }
 }
+
+

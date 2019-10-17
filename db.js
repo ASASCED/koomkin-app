@@ -1748,7 +1748,8 @@ db.executeRegistrarClientesNuevos = function(
   //registrarClientesNuevos
 
 db.executeGetGiroChat= function(idUsuario) {
-    const requestStr = `select DESCRIPCIONJIROCHAT from tbl_brief where IDUSUARIO = ${idUsuario};`;
+
+  const requestStr = `select top 1 * from tbl_tuCampania where IDUSUARIO = ${idUsuario} order by IDCampania desc`;
   
     console.log(requestStr);
   
