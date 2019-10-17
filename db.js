@@ -1772,7 +1772,7 @@ db.executeRegistrarGiroChat = function(
     giroChat
   ) {
 
-    const requestStr = `Update tbl_brief set DESCRIPCIONJIROCHAT = "${giroChat} where IDUSUARIO = ${idUsuario}`
+    const requestStr = `Update tbl_brief set DESCRIPCIONJIROCHAT = "${giroChat}" where IDUSUARIO = ${idUsuario}`
   
     console.log(requestStr);
   
