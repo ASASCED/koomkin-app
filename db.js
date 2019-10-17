@@ -1748,10 +1748,8 @@ db.executeRegistrarClientesNuevos = function(
   //registrarClientesNuevos
 
 db.executeGetGiroChat= function(idUsuario) {
-   try{
-      const requestStr = `select DESCRIPCIONJIROCHAT from tbl_brief where IDUSUARIO = ${idUsuario};`;
-
-      const requestStr2 = `select DESCRIPCIONJIROCHAT from tbl_brief where IDUSUARIO = ${idUsuario}`;
+      
+  const requestStr2 = `select DESCRIPCIONJIROCHAT from tbl_brief where IDUSUARIO = ${idUsuario}`;
   
       console.log(requestStr2);  
       return new Promise((resolve, reject) => {
@@ -1765,10 +1763,6 @@ db.executeGetGiroChat= function(idUsuario) {
             reject(err);
           });
       });
-   } catch(e) {
-     console.log(e);
-   }
-
   };
 
 //registrarClientesNuevos
@@ -1777,7 +1771,8 @@ db.executeRegistrarGiroChat = function(
     idUsuario,
     giroChat
   ) {
-    const requestStr = `Update tbl_brief set DESCRIPCIONJIROCHAT = "${giroChat}" where IDUSUARIO = ${idUsuario};`;
+
+    const requestStr = `Update tbl_brief set DESCRIPCIONJIROCHAT = "${giroChat} where IDUSUARIO = ${idUsuario}`
   
     console.log(requestStr);
   
