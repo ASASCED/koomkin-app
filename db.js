@@ -1750,8 +1750,10 @@ db.executeRegistrarClientesNuevos = function(
 db.executeGetGiroChat= function(idUsuario) {
    try{
       const requestStr = `select DESCRIPCIONJIROCHAT from tbl_brief where IDUSUARIO = ${idUsuario};`;
+
+      const requestStr2 = `select DESCRIPCIONJIROCHAT from tbl_brief where IDUSUARIO = ${idUsuario}`;
   
-      console.log(requestStr);  
+      console.log(requestStr2);  
       return new Promise((resolve, reject) => {
         tp.sql(requestStr)
           .execute()
