@@ -26,7 +26,13 @@ export class ConfiguracionCrmPage implements OnInit {
   public twitter;
   public uuid;
 
+  public horaFin;
+  public horaInicio;
   public dias;
+  public idHorario;
+
+  public giroChat;
+
   public cat_dias = [
     { id: 1, nombre: 'Lunes' },
     { id: 2, nombre: 'Martes' },
@@ -345,16 +351,18 @@ export class ConfiguracionCrmPage implements OnInit {
   public getHorarioAtencion() {
     return new Promise((resolve, reject) => {
       const url = "https://www.koomkin.com.mx/api/app/getHorarioAtencion/" + this.id;
-      console.log(url)
 
       this.http.get(url).subscribe(
         data => {
-          console.log(data);
-            for (let j in data) {
-              if (data[j].hasOwnProperty('Dia')) {
-                console.log(data[j])
-              }
+          for (let j in data) {
+            if (data[j].hasOwnProperty('Dia')) {
+              this.idHorario = data[j].IdHorario;
+              this.horaInicio = new Date(data[j].HoraInicio);
+              this.horaInicio = ('0' + (this.horaInicio.getHours() + 6)).slice(-2) + ":" + ('0' + this.horaInicio.getMinutes()).slice(-2) + ":" + ('0' + this.horaInicio.getSeconds()).slice(-2);
+              this.horaFin = new Date(data[j].HoraFin);
+              this.horaFin = ('0' + (this.horaFin.getHours() + 6)).slice(-2) + ":" + ('0' + this.horaFin.getMinutes()).slice(-2) + ":" + ('0' + this.horaFin.getSeconds()).slice(-2);
             }
+          }
           resolve();
         },
         err => {
@@ -365,4 +373,65 @@ export class ConfiguracionCrmPage implements OnInit {
     });
   }
 
+  public registrarHorarioAtencion(dia) {
+
+    const body = new URLSearchParams();
+    body.set('idUsuario', this.id);
+    body.set('idHorario', this.idHorario);
+    body.set('dia', dia);
+    body.set('horaInicio', this.horaInicio);
+    body.set('horaFin', this.horaFin);
+
+    const options = {
+      headers: new HttpHeaders().set(
+        'Content-Type',
+        'application/x-www-form-urlencoded'
+      )
+    };
+
+    console.log(body.toString());
+
+    const url = 'https://www.koomkin.com.mx/api/app/registrarHorarioAtencion/';
+
+    return new Promise((resolve, reject) => {
+      this.http.post(url, body.toString(), options).subscribe(
+        data => {
+          console.log(data);
+        },
+        err => {
+          return reject(err);
+        }
+      );
+    });
+
+  }
+
+  public registrarGiroChat() {
+
+    const body = new URLSearchParams();
+    body.set('idUsuario', this.id);
+    body.set('giroChat', this.giroChat);
+
+    const options = {
+      headers: new HttpHeaders().set(
+        'Content-Type',
+        'application/x-www-form-urlencoded'
+      )
+    };
+
+    console.log(body.toString());
+
+    const url = 'https://www.koomkin.com.mx/api/app/registrarHorarioAtencion/';
+
+    return new Promise((resolve, reject) => {
+      this.http.post(url, body.toString(), options).subscribe(
+        data => {
+          console.log(data);
+        },
+        err => {
+          return reject(err);
+        }
+      );
+    });
+  }
 }

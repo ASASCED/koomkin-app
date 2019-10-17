@@ -1924,19 +1924,21 @@ db.executeGetInicioCampana = function(idUsuario) {
     SELECT CAT.idUsuario, PAG.Monto, PAG.idPago, PAG.idProspecto AS 'UltimoProspecto', PAGP.idProspecto AS 'PenultimoProspecto', ULTIMAMEM.DiasPagados AS 'UltimoDiasPagados', (PENMEM.DiasPagaDos + PENMEM.DiasRegalados)  AS 'PenultimoDiasPagados',ULTIMAMEM.Finicio AS 'UltimaFInicio',PENMEM.Finicio AS 'PenultimaFInicio',PRIMEM.Finicio AS 'FInicio', DATEDIFF(DAY,PENMEM.Finicio,ULTIMAMEM.Finicio) DiasDif,(DATEDIFF (DAY,DATEADD(DAY,1,ULTIMAMEM.FInicio),GETDATE()) + 1 ) as inicioCampana, DATEDIFF(DAY,DATEDIFF(DAY,PENMEM.Finicio,ULTIMAMEM.Finicio) ,(PENMEM.DiasPagaDos + PENMEM.DiasRegalados)) duracion FROM CATUSUARIO CAT
     OUTER APPLY (SELECT TOP 1 * FROM kad_Tbl_PagosClientesKoomkinAdmin PAG
 			WHERE PAG.idUsuario = CAT.idUsuario
-			AND estatus='A'
-			ORDER BY idPago DESC) PAG
+            AND estatus='A' 
+            AND PAG.IdConceptoPago !=3
+			      ORDER BY idPago DESC) PAG
     OUTER APPLY (SELECT TOP 1 * FROM kad_Tbl_PagosClientesKoomkinAdmin PAGP
 			WHERE PAGP.idUsuario = CAT.idUsuario
-			AND estatus='A'
+            AND estatus='A'
+            AND PAG.IdConceptoPago !=3
             AND PAGP.idProspecto NOT IN
-            (SELECT TOP 1 IDPROSPECTO FROM kad_Tbl_PagosClientesKoomkinAdmin PAG WHERE PAG.idUsuario= CAT.idUsuario AND estatus='A' ORDER BY idPago DESC)
+            (SELECT TOP 1 IDPROSPECTO FROM kad_Tbl_PagosClientesKoomkinAdmin PAG WHERE PAG.idUsuario= CAT.idUsuario AND estatus='A' AND PAG.IdConceptoPago !=3 ORDER BY idPago DESC)
             ORDER BY idPago DESC)PAGP
     OUTER APPLY (SELECT TOP 1 * FROM kad_Tbl_PagosClientesKoomkinAdmin PAGI
             WHERE PAGI.idUsuario = CAT.idUsuario
             AND estatus='A'
             AND PAGI.idProspecto NOT IN
-            (SELECT TOP 1 IDPROSPECTO FROM kad_Tbl_PagosClientesKoomkinAdmin PAG WHERE PAG.idUsuario= CAT.idUsuario AND estatus='A' ORDER BY idPago DESC)
+            (SELECT TOP 1 IDPROSPECTO FROM kad_Tbl_PagosClientesKoomkinAdmin PAG WHERE PAG.idUsuario= CAT.idUsuario AND estatus='A' AND PAG.IdConceptoPago !=3 ORDER BY idPago DESC)
             ORDER BY idPago ASC)PAGI
     LEFT JOIN kad_Tbl_Membresias ULTIMAMEM ON ULTIMAMEM.IDPROSPECTO=PAG.idProspecto
     LEFT JOIN kad_Tbl_Membresias PENMEM ON PENMEM.idProspecto=PAGP.idProspecto

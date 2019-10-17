@@ -69,10 +69,10 @@
                                         Horario <br> (24 horas)
                                     </ion-col>
                                     <ion-col col-4 style="display: flex;">
-                                        <input type="time" placeholder="Hora Inicio">
+                                        <input type="time" placeholder="Hora Inicio" [(ngModel)]="horaInicio" value="{{horaInicio}}">
                                     </ion-col>
                                     <ion-col col-4 style="display: flex;">
-                                        <input type="time" placeholder="Hora Fin">
+                                        <input type="time" placeholder="Hora Fin" [(ngModel)]="horaFin" value="{{horaFin}}">
                                     </ion-col>
                                 </ion-row>
                             </ion-grid>
@@ -183,7 +183,7 @@
                                         Especialidad
                                     </ion-col>
                                     <ion-col col-7 offset-1>
-                                        <input type="text">
+                                        <input type="text" [(ngModel)]="giroChat">
                                     </ion-col>
                                 </ion-row>
                                 <!--
