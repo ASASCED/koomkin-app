@@ -1771,7 +1771,7 @@ db.executeRegistrarGiroChat = function(
     idUsuario,
     giroChat
   ) {
-    const requestStr = `Update tbl_brief set DESCRIPCIONJIROCHAT = ${giroChat} where IDUSUARIO = ${idUsuario};`;
+    const requestStr = `Update tbl_brief set DESCRIPCIONJIROCHAT = '${giroChat}' where IDUSUARIO = ${idUsuario};`;
   
     console.log(requestStr);
   
@@ -1794,7 +1794,7 @@ db.executeRegistrarObjetivoCampania = function(
     idUsuario,
     campaniaObjetivo
   ) {
-    const requestStr = `Update tbl_Brief set CampanaObjetivo = ${campaniaObjetivo} where IDUSUARIO = ${idUsuario};`;
+    const requestStr = `Update tbl_Brief set CampanaObjetivo = '${campaniaObjetivo}' where IDUSUARIO = ${idUsuario};`;
   
     console.log(requestStr);
   

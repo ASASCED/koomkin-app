@@ -25,7 +25,7 @@ export class ConfiguracionCrmPage implements OnInit {
   public web;
   public twitter;
   public uuid;
-
+  public newIdHorario = 1;
   public horaFin;
   public horaInicio;
   public dias;
@@ -353,13 +353,17 @@ export class ConfiguracionCrmPage implements OnInit {
         data => {
           for (let j in data) {
             if (data[j].hasOwnProperty('Dia')) {
-              this.idHorario = data[j].IdHorario;
+              this.idHorario = parseInt(data[j].IdHorario);
               this.horaInicio = new Date(data[j].HoraInicio);
               this.horaInicio = ('0' + (this.horaInicio.getHours() + 6)).slice(-2) + ":" + ('0' + this.horaInicio.getMinutes()).slice(-2) + ":" + ('0' + this.horaInicio.getSeconds()).slice(-2);
               this.horaFin = new Date(data[j].HoraFin);
               this.horaFin = ('0' + (this.horaFin.getHours() + 6)).slice(-2) + ":" + ('0' + this.horaFin.getMinutes()).slice(-2) + ":" + ('0' + this.horaFin.getSeconds()).slice(-2);
             }
           }
+          if(this.idHorario) {
+            this.newIdHorario = this.newIdHorario + this.idHorario;
+          }
+          console.log(this.newIdHorario);
           resolve();
         },
         err => {
