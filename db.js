@@ -1724,11 +1724,7 @@ db.executeRegistrarClientesNuevos = function(
     publicidadTracicional,
     publicidadDigital
   ) {
-    const requestStr = `Update tbl_brief set ClientesNuevos = ${clientesNuevos}, 
-                                             tipoPublicidad = ${tipoPublicidad}, 
-                                             publicidadTracicional = '${publicidadTracicional}',  
-                                             publicidadDigital = ${publicidadDigital}
-    where IDUSUARIO = ${idUsuario}`;
+    const requestStr = `Update tbl_brief set ClientesNuevos = ${clientesNuevos}, tipoPublicidad = '${tipoPublicidad}',  publicidadTracicional = '${publicidadTracicional}', publicidadDigital = '${publicidadDigital}' where IDUSUARIO = ${idUsuario}`;
   
     console.log(requestStr);
   
