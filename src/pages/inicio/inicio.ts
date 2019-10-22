@@ -125,7 +125,10 @@ export class InicioPage implements OnInit {
     return new Promise((resolve, reject) => {
       // const url = `http://localhost:4859/freemiumInfo?userId=${this.id}`
       const url =`https://www.koomkin.com.mx/api/app/freemiumInfo?userId=${this.id}`
+      console.log(url);
+
       this.http.get(url).subscribe(template => {
+        console.log(template);
         if (template['freemiumPromo'] === 1) {
           this.bannerFreemium = { active: true, gender: template['gender'], briefId: template['fireBaseBriefId'] };
         }

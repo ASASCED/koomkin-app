@@ -2323,8 +2323,6 @@ db.executeInsertSale = function(
   });
 };
 
-
-
 db.executeGetFreemiumData = function(userId){
   const requestStr = `
     SELECT idUsuario, CAT.demoUserID, fireBaseBriefId,
@@ -2343,6 +2341,8 @@ db.executeGetFreemiumData = function(userId){
                     ORDER BY registerAt DESC) F
     WHERE IDUSUARIO = ${userId}`
 
+  console.log(requestStr);
+
   return new Promise((resolve, reject) => {
     tp.sql(requestStr)
       .execute()
@@ -2357,7 +2357,10 @@ db.executeGetFreemiumData = function(userId){
 }
 
 db.executeGetFreemiumTemplates = function(gender){
-  const requestStr = `SELECT * FROM FreemiumPromoTemplate WHERE active =1 AND gender ='${gender}'`
+  
+  const requestStr = `SELECT * FROM FreemiumPromoTemplate WHERE active = 1 AND gender ='${gender}'`
+
+  console.log(requestStr);
 
   return new Promise((resolve, reject) => {
     tp.sql(requestStr)

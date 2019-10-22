@@ -10,6 +10,7 @@ import { InmobiliariaComponent } from './inmobiliaria/inmobiliaria';
 import { BannerComponent } from './banner/banner';
 import { IonicModule } from 'ionic-angular';
 import { TarjetaComponent } from './tarjeta/tarjeta';
+import { FreemiumComponent } from './freemium/freemium';
 
 @NgModule({
 	declarations: [
@@ -22,7 +23,8 @@ import { TarjetaComponent } from './tarjeta/tarjeta';
         HotelComponent,
         InmobiliariaComponent,
         BannerComponent,
-        TarjetaComponent
+        TarjetaComponent,
+        FreemiumComponent
     ],
 	imports: [
         IonicModule
@@ -37,7 +39,8 @@ import { TarjetaComponent } from './tarjeta/tarjeta';
         HotelComponent,
         InmobiliariaComponent,
         BannerComponent,
-        TarjetaComponent
+        TarjetaComponent,
+        FreemiumComponent
     ]
 })
 export class ComponentsModule {}
