@@ -18,22 +18,26 @@ export class FreemiumComponent implements OnInit{
   public loaded: boolean = false;
   text: string;
 
-  constructor(public http: HttpClient,
-              public navCtrl: NavController) {
+  constructor(
+    public http: HttpClient,
+    public navCtrl: NavController
+  ) {
   }
 
   ngOnInit() {
     this. genderTemplate = this.gender;
     this.brief = this.briefId
     this.loadImageTemplateRandom();
-
   }
 
   loadImageTemplateRandom() {
     return new Promise((resolve,reject)=> {
       // this.http.get(`http://localhost:4859/freemiumTemplates?gender=${this.gender}`)
+      console.log(`https://www.koomkin.com.mx/api/app/freemiumTemplates?gender=${this.gender}`);
+
       this.http.get(`https://www.koomkin.com.mx/api/app/freemiumTemplates?gender=${this.gender}`)
       .subscribe(images => {
+        console.log(images);
         this.getImageRandom(images);
         resolve();
       },
