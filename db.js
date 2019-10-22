@@ -1699,7 +1699,7 @@ db.executeRegistrarProcesoComercial = function(
     crmDiferente
   ) {
       
-    const requestStr = `Update tbl_brief set DistribucionOnline = ${distribucionOnline}, DistribucionOffline = ${distribucionOffline}, QuienVende = '${quienVende}' where IDUSUARIO = ${IdUsuario}`
+    const requestStr = `Update tbl_brief set DistribucionOnline = ${distribucionOnline}, DistribucionOffline = ${distribucionOffline}, QuienVende = '${quienVende}' where IDUSUARIO = ${idUsuario}`
     console.log(requestStr);
   
     return new Promise((resolve, reject) => {
