@@ -1700,7 +1700,8 @@ db.executeRegistrarProcesoComercial = function(
   ) {
   
     const requestStr = `Update tbl_brief set DistribucionOnline = ${distribucionOnline}, DistribucionOffline = ${distribucionOffline}, QuienVende = '${quienVende}', NumeroVendedores = ${numeroVendedores}, TipoVendedores = '${tipoVendedores}', CrmDiferente = ${crmDiferente} where IDUSUARIO = ${idUsuario};`
-    console.log(requestStr);
+    
+    console.log(requestStr);
   
     return new Promise((resolve, reject) => {
       tp.sql(requestStr)
@@ -1726,6 +1727,7 @@ db.executeRegistrarClientesNuevos = function(
   ) {
     const requestStr = `Update tbl_brief set ClientesNuevos = ${clientesNuevos}, tipoPublicidad = '${tipoPublicidad}',  publicidadTracicional = '${publicidadTracicional}', publicidadDigital = '${publicidadDigital}' where IDUSUARIO = ${idUsuario}`;
   
+    const requestStr = `Update tbl_brief set ClientesNuevos = ${clientesNuevos} where IDUSUARIO = ${idUsuario}`
     console.log(requestStr);
   
     return new Promise((resolve, reject) => {
