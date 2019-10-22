@@ -8,7 +8,13 @@
 
 
 <ion-content>
-
+    <ion-content *ngIf="bannerFreemium.active" class="freemium-container">
+        <freemium 
+            [gender]="bannerFreemium.gender"
+            [briefId]="bannerFreemium.briefId"
+            (showFreemiumTemplate)="bannerFreemium.active=false">
+        </freemium>
+    </ion-content>
     <banner *ngIf="tipoBanner >= 1 && tipoBanner <= 9 || tipoBanner >= 10 && tipoBanner <= 12 && habilitado == 1 || tipoBanner >= 14 && tipoBanner <= 15"
         [title]='title' [subtitle]='subtitle' [img]='img' [fondo]='fondo' [notification]='notification'
         [idReportBanner]='idReportBanner' [uuidPass]='uuidPass' [tipoBanner]='tipoBanner' [description]='description'

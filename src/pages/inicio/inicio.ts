@@ -22,6 +22,7 @@ export class InicioPage implements OnInit {
   financieros = 'DatosFinancierosPage';
   crm = 'CrmPage';
   agenda = 'AgendaPage';
+  freemium = 'FreemiumPage';
 
   pages: Array<{ title: string, component: any }>;
 
@@ -39,6 +40,7 @@ export class InicioPage implements OnInit {
   public habilitado;
   public activo;
   public recurrente;
+  public bannerFreemium;
 
   constructor(
     private modal: ModalController,
@@ -55,7 +57,8 @@ export class InicioPage implements OnInit {
   }
 
   ngOnInit() {
-    this.showBanner()
+    this.showBanner();
+    this.showFreemium();
   }
 
   pagina(pagina: any) {
@@ -72,10 +75,10 @@ export class InicioPage implements OnInit {
           if (data == null) {
             this.mostrar = 0;
             this.tipoBanner = 0;
-              this.habilitado = 0;
+            this.habilitado = 0;
           } else if (data) {
             datos = data;
-            if(datos[0]) {
+            if (datos[0]) {
               this.title = datos[0].titulo;
               this.subtitle = datos[0].subtitulo;
               this.fondo = datos[0].fondo;
@@ -84,15 +87,15 @@ export class InicioPage implements OnInit {
               this.uuidPass = datos[0].uuidPase;
               this.description = datos[0].descripcionBanner;
               this.habilitado = datos[0].habilitado;
-              if(this.habilitado == null) {
+              if (this.habilitado == null) {
                 this.habilitado = 0;
               }
               this.notification = JSON.parse(datos[0].dataPage);
               this.tipoBanner = datos[0].tipoBanner;
-              if(this.tipoBanner == 16 || this.tipoBanner == 17){
+              if (this.tipoBanner == 16 || this.tipoBanner == 17) {
                 this.openModal();
               }
-            } else if(datos.length == 0) {
+            } else if (datos.length == 0) {
               this.tipoBanner = 0;
               this.habilitado = 0;
             }
@@ -117,16 +120,34 @@ export class InicioPage implements OnInit {
       });
   }
 
+  public showFreemium() {
+    this.bannerFreemium = { active: false, gender: 'M', briefId: '' };
+    return new Promise((resolve, reject) => {
+      // const url = `http://localhost:4859/freemiumInfo?userId=${this.id}`
+      const url =`https://www.koomkin.com.mx/api/app/freemiumInfo?userId=${this.id}`
+      this.http.get(url).subscribe(template => {
+        if (template['freemiumPromo'] === 1) {
+          this.bannerFreemium = { active: true, gender: template['gender'], briefId: template['fireBaseBriefId'] };
+        }
+        resolve();
+      },
+        err => {
+          //  console.log(err);
+          reject(err);
+        });
+    });
+  }
+
   public clickBanner() {
     return new Promise((resolve, reject) => {
       const urlBanner = "https://www.koomkin.com.mx/api/app/clickBanner/" + this.id + '/App/' + this.tipoBanner;
       this.http.get(urlBanner).subscribe(
         data => {
-         // // console.log('registro',data);
+          // // console.log('registro',data);
           resolve();
         },
         err => {
-         // // console.log(err);
+          // // console.log(err);
           reject(err);
         }
       );
@@ -146,7 +167,7 @@ export class InicioPage implements OnInit {
   openModal() {
     const myModal = this.modal.create(
       "ModalUpgradePage",
-      { notification: this.notification, idReportBanner: this.idReportBanner, tipoBanner: this.tipoBanner, uuidPass:this.uuidPass }, 
+      { notification: this.notification, idReportBanner: this.idReportBanner, tipoBanner: this.tipoBanner, uuidPass: this.uuidPass },
       { enableBackdropDismiss: true, cssClass: "Modal-comentario" }
     );
     myModal.present();

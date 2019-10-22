@@ -1,0 +1,60 @@
+
+.freemium-promo-conatiner {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+
+    .panel-template {
+        height: 80vh;
+        max-width: 95vw;
+        display: flex;
+        align-items: center;
+    }
+
+    @media screen and (max-width:455px) {
+        .panel-template {
+            width: 95vw;
+            height: auto!important;
+        }
+    }
+
+    .image-template {
+        height: inherit;
+        width: inherit;
+        .icon-container {
+            position: absolute;
+            z-index:1000;
+            width: 60px;
+            height: 60px;
+            align-self: flex-start;
+            justify-self: start;
+    
+            .close-icon {
+                margin: 15%;
+                font-size: 200%;
+                color:#fff;
+                text-shadow: 0 0 1.5px #243E56;
+                cursor:pointer;
+            }
+        }
+        img {
+            height: inherit;
+            width: inherit;
+            max-width:none;
+            max-height:none;
+            border-radius: 10px;
+        }
+    }
+    
+    .loading-spinner {
+        position: absolute;
+        z-index:2000;
+        text-align: center;
+    }
+
+    .img-loaded + ion-spinner {
+        display:none;
+      }
+}
+

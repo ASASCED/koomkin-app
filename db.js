@@ -1790,9 +1790,8 @@ db.executeRegistrarGiroChat = function(
 db.executeRegistrarObjetivoCampania = function(
     idUsuario,
     campaniaObjetivo
-  ) {
-    const requestStr = `Update tbl_Brief set CampanaObjetivo = '${campaniaObjetivo}' where IDUSUARIO = ${idUsuario};`;
-  
+  ) {  
+    const requestStr = `Update tbl_brief set CampanaObjetivo = '${campaniaObjetivo}' where IDUSUARIO = ${idUsuario}`
     console.log(requestStr);
   
     return new Promise((resolve, reject) => {
@@ -2323,6 +2322,55 @@ db.executeInsertSale = function(
       });
   });
 };
+
+
+
+db.executeGetFreemiumData = function(userId){
+  const requestStr = `
+    SELECT idUsuario, CAT.demoUserID, fireBaseBriefId,
+    CASE
+      WHEN gender IS NOT NULL THEN gender
+      ELSE 'M'
+    END as gender, genderProbability,
+    CASE
+        WHEN F.id IS NOT NULL THEN 1
+        ELSE 0
+    END AS 'freemiumPromo'
+    FROM CATUSUARIO CAT
+    OUTER APPLY (SELECT TOP 1 * FROM FreemiumPool F
+                    WHERE CAT.IDUSUARIO = F.userId
+                    AND active=1
+                    ORDER BY registerAt DESC) F
+    WHERE IDUSUARIO = ${userId}`
+
+  return new Promise((resolve, reject) => {
+    tp.sql(requestStr)
+      .execute()
+      .then(result => {
+        resolve(result);
+      })
+      .fail(err => {
+        console.log(err);
+        reject(err);
+      });
+  });
+}
+
+db.executeGetFreemiumTemplates = function(gender){
+  const requestStr = `SELECT * FROM FreemiumPromoTemplate WHERE active =1 AND gender ='${gender}'`
+
+  return new Promise((resolve, reject) => {
+    tp.sql(requestStr)
+      .execute()
+      .then(result => {
+        resolve(result);
+      })
+      .fail(err => {
+        console.log(err);
+        reject(err);
+      });
+  });
+}
 
 function getDateTime() {
   var date = new Date();

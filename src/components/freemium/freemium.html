@@ -1,0 +1,17 @@
+<div class="freemium-promo-conatiner">
+  <div class="panel-template">
+    <div class="image-template">
+      <div class="icon-container" (click)="exitFreemiumTemplate()">
+          <ion-icon class="close-icon" name="md-close" *ngIf="loaded"></ion-icon>
+      </div>
+      <img [src]="srcTemplate"
+        [ngClass]="{'img-loaded':loaded}" 
+        [hidden]="!loaded"
+        (load)="loaded = true" 
+        (click)= "goToFreemiumDetails()"/>
+    </div>
+
+    <ion-spinner [ngClass]="{'loading-spinner':true}" *ngIf="!loaded"></ion-spinner>
+  </div>
+</div>
+

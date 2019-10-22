@@ -1636,6 +1636,28 @@ app.get('/getGiroChat/:idUsuario', function (req, res) {
         });
 });
 
+app.get('/freemiumInfo', (req, res) => {
+    const userId= req.query.userId
+    db.executeGetFreemiumData(userId)
+    .then(rows => {
+        res.status(200).send(rows[0]);
+    })
+    .catch(err => {
+        res.status(500).send(err);
+    });
+});
+
+app.get('/freemiumTemplates', (req, res) => {
+    const gender = req.query.gender
+    db.executeGetFreemiumTemplates(gender)
+    .then(rows => {
+        res.status(200).send(rows);
+    })
+    .catch(err => {
+        res.status(500).send(err);
+    });
+});
+
 //PUT Methods
 
 app.put('/actualizarUsuario', function (req, res) {
