@@ -1893,7 +1893,9 @@ db.updateCobertura = function(idCampania, idEstado, idUsuario, idCobertura) {
     requestStr = `insert into tbl_TuCampaniaCobertura (IDCampania,IdPAIS,IDESTADO,IDUSUARIO) VALUES (${idCampania},156,${idEstado},${idUsuario});
      update TBL_BRIEF set IDESTADO = ${idEstado}, ID_COBERTURA = ${idCobertura} where IDUSUARIO = ${idUsuario}`;
   }
-   
+  
+  console.log(requestStr);
+
   return new Promise((resolve, reject) => {
     tp.sql(requestStr)
       .execute()
@@ -1918,6 +1920,8 @@ db.updateCoberturaRegion = function(idCampania, idEstado, idUsuario, idCobertura
      update TBL_BRIEF set ID_COBERTURA = ${idCobertura} where IDUSUARIO = ${idUsuario}`;
   }
 
+  console.log(requestStr);
+
   return new Promise((resolve, reject) => {
     tp.sql(requestStr)
       .execute()
@@ -1941,6 +1945,8 @@ db.updateCoberturaNacional = function(idCampania, idUsuario, idCobertura) {
     requestStr = `insert into tbl_TuCampaniaCobertura (IDCampania,IdPAIS,IDESTADO,IDUSUARIO) VALUES (${idCampania},156,NULL,${idUsuario});
      update TBL_BRIEF set ID_COBERTURA = ${idCobertura} where IDUSUARIO = ${idUsuario}`;
   }
+
+  console.log(requestStr);
   
   return new Promise((resolve, reject) => {
     tp.sql(requestStr)
