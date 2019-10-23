@@ -1891,7 +1891,7 @@ db.updateCobertura = function(idCampania, idEstado, idUsuario, idCobertura) {
                         update TBL_BRIEF set IDESTADO = ${idEstado} where IDUSUARIO = ${idUsuario}`;
   } else {
     requestStr = `insert into tbl_TuCampaniaCobertura (IDCampania,IdPAIS,IDESTADO,IDUSUARIO) VALUES (${idCampania},156,${idEstado},${idUsuario});
-     update TBL_BRIEF set IDESTADO = ${idEstado}, IDCOBERTURA = ${idCobertura} where IDUSUARIO = ${idUsuario}`;
+     update TBL_BRIEF set IDESTADO = ${idEstado}, ID_COBERTURA = ${idCobertura} where IDUSUARIO = ${idUsuario}`;
   }
    
   console.log(requestStr);
@@ -1916,7 +1916,7 @@ db.updateCoberturaRegion = function(idCampania, idEstado, idUsuario, idCobertura
     requestStr = `insert into tbl_TuCampaniaCobertura (IDCampania,IdPAIS,IDESTADO,IDUSUARIO) VALUES (${idCampania},156,${idEstado},${idUsuario});`;
   } else {
     requestStr = `insert into tbl_TuCampaniaCobertura (IDCampania,IdPAIS,IDESTADO,IDUSUARIO) VALUES (${idCampania},156,${idEstado},${idUsuario});
-     update TBL_BRIEF set IDCOBERTURA = ${idCobertura} where IDUSUARIO = ${idUsuario}`;
+     update TBL_BRIEF set ID_COBERTURA = ${idCobertura} where IDUSUARIO = ${idUsuario}`;
   }
 
   console.log(requestStr);
@@ -1941,7 +1941,7 @@ db.updateCoberturaNacional = function(idCampania, idUsuario, idCobertura) {
     requestStr = `insert into tbl_TuCampaniaCobertura (IDCampania,IdPAIS,IDESTADO,IDUSUARIO) VALUES (${idCampania},156,NULL,${idUsuario});`;
   } else {
     requestStr = `insert into tbl_TuCampaniaCobertura (IDCampania,IdPAIS,IDESTADO,IDUSUARIO) VALUES (${idCampania},156,NULL,${idUsuario});
-     update TBL_BRIEF set IDCOBERTURA = ${idCobertura} where IDUSUARIO = ${idUsuario}`;
+     update TBL_BRIEF set ID_COBERTURA = ${idCobertura} where IDUSUARIO = ${idUsuario}`;
   }
   
   console.log(requestStr);
