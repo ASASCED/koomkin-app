@@ -1884,7 +1884,7 @@ db.updateBriefClienteEmpresas = function(
 
 db.updateCobertura = function(idCampania, idEstado, idUsuario, idCobertura) {
 
-  var requestStr;
+  var requestStr = "";
 
   if (idCobertura == "NULL") {
     requestStr = `insert into tbl_TuCampaniaCobertura (IDCampania,IdPAIS,IDESTADO,IDUSUARIO) VALUES (${idCampania},156,${idEstado},${idUsuario});
@@ -1910,7 +1910,7 @@ db.updateCobertura = function(idCampania, idEstado, idUsuario, idCobertura) {
 
 db.updateCoberturaRegion = function(idCampania, idEstado, idUsuario, idCobertura) {
 
-  var requestStr;
+  var requestStr = "";
 
   if (idCobertura == "NULL") {
     requestStr = `insert into tbl_TuCampaniaCobertura (IDCampania,IdPAIS,IDESTADO,IDUSUARIO) VALUES (${idCampania},156,${idEstado},${idUsuario});`;
@@ -1935,7 +1935,7 @@ db.updateCoberturaRegion = function(idCampania, idEstado, idUsuario, idCobertura
 
 db.updateCoberturaNacional = function(idCampania, idUsuario, idCobertura) {
   
-  var requestStr;
+  var requestStr = "";
 
   if (idCobertura == "NULL") {
     requestStr = `insert into tbl_TuCampaniaCobertura (IDCampania,IdPAIS,IDESTADO,IDUSUARIO) VALUES (${idCampania},156,NULL,${idUsuario});`;

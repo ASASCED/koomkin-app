@@ -417,7 +417,6 @@ export class BriefPage implements OnInit, AfterContentChecked {
             this.cobertura_empresa == 'Local';
             let idCobertura = 4;
             this.updateCobertura(this.idCampania, this.estado_cob, this.id, idCobertura);
-
           } else if (this.cobertura_empresa == 'Estado') {
             let idCobertura = 1;
             this.updateCobertura(this.idCampania, this.estado_cob, this.id, idCobertura);
