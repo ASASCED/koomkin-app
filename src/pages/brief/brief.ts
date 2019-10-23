@@ -415,8 +415,12 @@ export class BriefPage implements OnInit, AfterContentChecked {
           this.idCampania = this.datosCampania[0].IDCampania;
           if (this.cobertura_empresa == 'Local' && this.cobertura_empresa !== 'Nacional') {
             this.cobertura_empresa == 'Local';
+            let idCobertura = 4;
+            this.updateCobertura(this.idCampania, this.estado_cob, this.id, idCobertura);
+
           } else if (this.cobertura_empresa == 'Estado') {
-            this.updateCobertura(this.idCampania, this.estado_cob, this.id);
+            let idCobertura = 1;
+            this.updateCobertura(this.idCampania, this.estado_cob, this.id, idCobertura);
           } else if (this.cobertura_empresa == 'Region') {
             for (let i = 0; this.estado.length > i; i++) {
               this.cat_estados.forEach(element => {
@@ -424,10 +428,12 @@ export class BriefPage implements OnInit, AfterContentChecked {
                   this.estado_cob = element['IDESTADO'];
                 }
               });
-              this.updateCoberturaRegion(this.idCampania, this.estado_cob, this.id)
+              let idCobertura = 5;
+              this.updateCoberturaRegion(this.idCampania, this.estado_cob, this.id, idCobertura)
             }
           } else if (this.cobertura_empresa == 'Nacional') {
-            this.updateCoberturaNacional(this.idCampania, this.id);
+            let idCobertura = 2;
+            this.updateCoberturaNacional(this.idCampania, this.id, idCobertura);
           }
           this.lleno = true;
           this.showSuccess();
@@ -439,8 +445,8 @@ export class BriefPage implements OnInit, AfterContentChecked {
     });
   }
 
-  updateCobertura(idCampania, idEstado, idUsuario) {
-    this.provedor.updateCobertura(idCampania, idEstado, idUsuario).then(
+  updateCobertura(idCampania, idEstado, idUsuario, idCobertura) {
+    this.provedor.updateCobertura(idCampania, idEstado, idUsuario, idCobertura).then(
       data => {
         // console.log(data);
       },
@@ -450,8 +456,8 @@ export class BriefPage implements OnInit, AfterContentChecked {
     );
   }
 
-  updateCoberturaRegion(idCampania, idEstado, idUsuario) {
-    this.provedor.updateCoberturaRegion(idCampania, idEstado, idUsuario).then(
+  updateCoberturaRegion(idCampania, idEstado, idUsuario, idCobertura) {
+    this.provedor.updateCoberturaRegion(idCampania, idEstado, idUsuario, idCobertura).then(
       data => {
         // console.log(data);
       },
@@ -461,8 +467,8 @@ export class BriefPage implements OnInit, AfterContentChecked {
     );
   }
 
-  updateCoberturaNacional(idCampania, idUsuario) {
-    this.provedor.updateCoberturaNacional(idCampania, idUsuario).then(
+  updateCoberturaNacional(idCampania, idUsuario, idCobertura) {
+    this.provedor.updateCoberturaNacional(idCampania, idUsuario, idCobertura).then(
       data => {
         // console.log(data);
       },

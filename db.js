@@ -1767,7 +1767,6 @@ db.executeRegistrarGiroChat = function(
     idUsuario,
     giroChat
   ) {
-
     const requestStr = `Update tbl_brief set DESCRIPCIONJIROCHAT = '${giroChat}' where IDUSUARIO = ${idUsuario}`
   
     console.log(requestStr);
@@ -1791,7 +1790,6 @@ db.executeRegistrarObjetivoCampania = function(
     idUsuario,
     campaniaObjetivo
   ) {  
-    
     const requestStr = `Update tbl_brief set CampaniaObjetivo ='${campaniaObjetivo}' where IDUSUARIO = ${idUsuario}`
     
     console.log(requestStr);
@@ -1884,9 +1882,42 @@ db.updateBriefClienteEmpresas = function(
   });
 };
 
-db.updateCobertura = function(idCampania, idEstado, idUsuario) {
-  const requestStr = `insert into tbl_TuCampaniaCobertura (IDCampania,IdPAIS,IDESTADO,IDUSUARIO) VALUES (${idCampania},156,${idEstado},${idUsuario});
+db.updateCobertura = function(idCampania, idEstado, idUsuario, idCobertura) {
+
+  var requestStr;
+
+  if (idCobertura == "NULL") {
+    requestStr = `insert into tbl_TuCampaniaCobertura (IDCampania,IdPAIS,IDESTADO,IDUSUARIO) VALUES (${idCampania},156,${idEstado},${idUsuario});
                         update TBL_BRIEF set IDESTADO = ${idEstado} where IDUSUARIO = ${idUsuario}`;
+  } else {
+    `insert into tbl_TuCampaniaCobertura (IDCampania,IdPAIS,IDESTADO,IDUSUARIO) VALUES (${idCampania},156,${idEstado},${idUsuario});
+     update TBL_BRIEF set IDESTADO = ${idEstado}, IDCOBERTURA = ${idCobertura} where IDUSUARIO = ${idUsuario}`;
+  }
+   
+  console.log(requestStr);
+  return new Promise((resolve, reject) => {
+    tp.sql(requestStr)
+      .execute()
+      .then(results => {
+        resolve(results);
+      })
+      .catch(err => {
+        console.log(err);
+        reject(err);
+      });
+  });
+};
+
+db.updateCoberturaRegion = function(idCampania, idEstado, idUsuario, idCobertura) {
+
+  var requestStr;
+
+  if (idCobertura == "NULL") {
+    requestStr = `insert into tbl_TuCampaniaCobertura (IDCampania,IdPAIS,IDESTADO,IDUSUARIO) VALUES (${idCampania},156,${idEstado},${idUsuario});`;
+  } else {
+    `insert into tbl_TuCampaniaCobertura (IDCampania,IdPAIS,IDESTADO,IDUSUARIO) VALUES (${idCampania},156,${idEstado},${idUsuario});
+     update TBL_BRIEF set IDCOBERTURA = ${idCobertura} where IDUSUARIO = ${idUsuario}`;
+  }
 
   console.log(requestStr);
   return new Promise((resolve, reject) => {
@@ -1902,25 +1933,17 @@ db.updateCobertura = function(idCampania, idEstado, idUsuario) {
   });
 };
 
-db.updateCoberturaRegion = function(idCampania, idEstado, idUsuario) {
-  const requestStr = `insert into tbl_TuCampaniaCobertura (IDCampania,IdPAIS,IDESTADO,IDUSUARIO) VALUES (${idCampania},156,${idEstado},${idUsuario});`;
+db.updateCoberturaNacional = function(idCampania, idUsuario, idCobertura) {
+  
+  var requestStr;
 
-  console.log(requestStr);
-  return new Promise((resolve, reject) => {
-    tp.sql(requestStr)
-      .execute()
-      .then(results => {
-        resolve(results);
-      })
-      .catch(err => {
-        console.log(err);
-        reject(err);
-      });
-  });
-};
-
-db.updateCoberturaNacional = function(idCampania, idUsuario) {
-  const requestStr = `insert into tbl_TuCampaniaCobertura (IDCampania,IdPAIS,IDESTADO,IDUSUARIO) VALUES (${idCampania},156,NULL,${idUsuario});`;
+  if (idCobertura == "NULL") {
+    requestStr = `insert into tbl_TuCampaniaCobertura (IDCampania,IdPAIS,IDESTADO,IDUSUARIO) VALUES (${idCampania},156,NULL,${idUsuario});`;
+  } else {
+    `insert into tbl_TuCampaniaCobertura (IDCampania,IdPAIS,IDESTADO,IDUSUARIO) VALUES (${idCampania},156,NULL,${idUsuario});
+     update TBL_BRIEF set IDCOBERTURA = ${idCobertura} where IDUSUARIO = ${idUsuario}`;
+  }
+  
   console.log(requestStr);
   return new Promise((resolve, reject) => {
     tp.sql(requestStr)
