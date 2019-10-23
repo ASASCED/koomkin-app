@@ -1791,8 +1791,10 @@ db.executeRegistrarObjetivoCampania = function(
     idUsuario,
     campaniaObjetivo
   ) {  
-    const requestStr = `Update tbl_brief set CampanaObjetivo = '${campaniaObjetivo}' where IDUSUARIO = ${idUsuario}`
-    console.log(requestStr);
+    
+    const requestStr = `Update tbl_brief set CampaniaObjetivo ='${campaniaObjetivo}' where IDUSUARIO = ${idUsuario}`
+    
+    console.log(requestStr);
   
     return new Promise((resolve, reject) => {
       tp.sql(requestStr)
