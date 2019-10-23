@@ -147,9 +147,7 @@ export class MembresiaPage {
         if (data['length'] > 0) {
           this.prospectId = data[0].UltimoProspecto;
           this.fechaInicio = data[0].FInicio;
-          this.fechaFin = new Date(this.fechaInicio);
-          this.fechaFin.setDate(this.fechaFin.getDate() + 30);
-          this.fechaFin = this.fechaFin.getFullYear() + '-' + ('0' + (this.fechaFin.getMonth() + 1)).slice(-2) + '-' + ('0' + this.fechaFin.getDate()).slice(-2);
+          this.fechaFin = data[0].UltimaFFin;
           this.diasPagados = data[0].UltimoDiasPagados;
           this.dias = data[0].PenultimoDiasPagados;
           this.monto = data[0].Monto;

@@ -1939,7 +1939,7 @@ db.executeGetInicioCampana = function(idUsuario) {
   // const requestStr = select top 1 (DATEDIFF (DAY,DATEADD(DAY,1,FInicio),GETDATE()) + 1 ) as inicioCampana from kad_Tbl_Membresias where IDUSUARIO = ${idUsuario} order by IDMembresia ASC`;
 
   const requestStr = `
-    SELECT CAT.idUsuario, PAG.Monto, PAG.idPago, PAG.idProspecto AS 'UltimoProspecto', PAGP.idProspecto AS 'PenultimoProspecto', ULTIMAMEM.DiasPagados AS 'UltimoDiasPagados', (PENMEM.DiasPagaDos + PENMEM.DiasRegalados)  AS 'PenultimoDiasPagados',ULTIMAMEM.Finicio AS 'UltimaFInicio',PENMEM.Finicio AS 'PenultimaFInicio',PRIMEM.Finicio AS 'FInicio', DATEDIFF(DAY,PENMEM.Finicio,ULTIMAMEM.Finicio) DiasDif,(DATEDIFF (DAY,DATEADD(DAY,1,ULTIMAMEM.FInicio),GETDATE()) + 1 ) as inicioCampana, DATEDIFF(DAY,DATEDIFF(DAY,PENMEM.Finicio,ULTIMAMEM.Finicio) ,(PENMEM.DiasPagaDos + PENMEM.DiasRegalados)) duracion FROM CATUSUARIO CAT
+    SELECT CAT.idUsuario, PAG.Monto, PAG.idPago, PAG.idProspecto AS 'UltimoProspecto', PAGP.idProspecto AS 'PenultimoProspecto', ULTIMAMEM.DiasPagados AS 'UltimoDiasPagados', (PENMEM.DiasPagaDos + PENMEM.DiasRegalados)  AS 'PenultimoDiasPagados',ULTIMAMEM.Finicio AS 'UltimaFInicio',ULTIMAMEM.FFin AS 'UltimaFFin',PENMEM.Finicio AS 'PenultimaFInicio',PRIMEM.Finicio AS 'FInicio', DATEDIFF(DAY,PENMEM.Finicio,ULTIMAMEM.Finicio) DiasDif,(DATEDIFF (DAY,DATEADD(DAY,1,ULTIMAMEM.FInicio),GETDATE()) + 1 ) as inicioCampana, DATEDIFF(DAY,DATEDIFF(DAY,PENMEM.Finicio,ULTIMAMEM.Finicio) ,(PENMEM.DiasPagaDos + PENMEM.DiasRegalados)) duracion FROM CATUSUARIO CAT
     OUTER APPLY (SELECT TOP 1 * FROM kad_Tbl_PagosClientesKoomkinAdmin PAG
 			WHERE PAG.idUsuario = CAT.idUsuario
             AND estatus='A' 
