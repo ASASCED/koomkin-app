@@ -1031,7 +1031,7 @@ app.get('/updateCobertura/:idCampania/:idEstado?/:idUsuario/:idCobertura?', func
     const idCampania = parseInt(req.params.idCampania, 10);
     const idEstado = parseInt(req.params.idEstado, 10);
     const idUsuario = parseInt(req.params.idUsuario, 10);
-    const idCobertura = parseInt(req.params.idCobertura, 10);
+    let idCobertura = parseInt(req.params.idCobertura, 10);
 
     if (!idEstado) {
         idEstado = 'NULL';
@@ -1057,7 +1057,7 @@ app.get('/updateCoberturaRegion/:idCampania/:idEstado/:idUsuario/:idCobertura?',
     const idCampania = parseInt(req.params.idCampania, 10);
     const idEstado = parseInt(req.params.idEstado, 10);
     const idUsuario = parseInt(req.params.idUsuario, 10);
-    const idCobertura = parseInt(req.params.idCobertura, 10);
+    let idCobertura = parseInt(req.params.idCobertura, 10);
 
     if (!idCobertura) {
         idCobertura = 'NULL';
@@ -1078,7 +1078,7 @@ app.get('/updateCoberturaNacional/:idCampania/:idUsuario/:idCobertura?', functio
 
     const idCampania = parseInt(req.params.idCampania, 10);
     const idUsuario = parseInt(req.params.idUsuario, 10);
-    const idCobertura = parseInt(req.params.idCobertura, 10);
+    let idCobertura = parseInt(req.params.idCobertura, 10);
 
     if (!idCobertura) {
         idCobertura = 'NULL';

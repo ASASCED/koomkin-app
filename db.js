@@ -1886,11 +1886,6 @@ db.updateCobertura = function(idCampania, idEstado, idUsuario, idCobertura) {
 
   var requestStr = "";
 
-  
-  console.log(requestStr);
-
-  console.log(idCobertura);
-
   if (idCobertura == "NULL") {
     requestStr = `insert into tbl_TuCampaniaCobertura (IDCampania,IdPAIS,IDESTADO,IDUSUARIO) VALUES (${idCampania},156,${idEstado},${idUsuario});
                         update TBL_BRIEF set IDESTADO = ${idEstado} where IDUSUARIO = ${idUsuario}`;
@@ -1899,7 +1894,6 @@ db.updateCobertura = function(idCampania, idEstado, idUsuario, idCobertura) {
      update TBL_BRIEF set IDESTADO = ${idEstado}, ID_COBERTURA = ${idCobertura} where IDUSUARIO = ${idUsuario}`;
   }
    
-  console.log(requestStr);
   return new Promise((resolve, reject) => {
     tp.sql(requestStr)
       .execute()
@@ -1917,11 +1911,6 @@ db.updateCoberturaRegion = function(idCampania, idEstado, idUsuario, idCobertura
 
   var requestStr = "";
 
-  
-  console.log(requestStr);
-
-  console.log(idCobertura);
-
   if (idCobertura == "NULL") {
     requestStr = `insert into tbl_TuCampaniaCobertura (IDCampania,IdPAIS,IDESTADO,IDUSUARIO) VALUES (${idCampania},156,${idEstado},${idUsuario});`;
   } else if (idCobertura != "NULL") {
@@ -1929,7 +1918,6 @@ db.updateCoberturaRegion = function(idCampania, idEstado, idUsuario, idCobertura
      update TBL_BRIEF set ID_COBERTURA = ${idCobertura} where IDUSUARIO = ${idUsuario}`;
   }
 
-  console.log(requestStr);
   return new Promise((resolve, reject) => {
     tp.sql(requestStr)
       .execute()
@@ -1947,11 +1935,6 @@ db.updateCoberturaNacional = function(idCampania, idUsuario, idCobertura) {
   
   var requestStr = "";
 
-  console.log(requestStr);
-
-  console.log(idCobertura);
-
-
   if (idCobertura == "NULL") {
     requestStr = `insert into tbl_TuCampaniaCobertura (IDCampania,IdPAIS,IDESTADO,IDUSUARIO) VALUES (${idCampania},156,NULL,${idUsuario});`;
   } else if (idCobertura != "NULL") {
@@ -1959,7 +1942,6 @@ db.updateCoberturaNacional = function(idCampania, idUsuario, idCobertura) {
      update TBL_BRIEF set ID_COBERTURA = ${idCobertura} where IDUSUARIO = ${idUsuario}`;
   }
   
-  console.log(requestStr);
   return new Promise((resolve, reject) => {
     tp.sql(requestStr)
       .execute()
