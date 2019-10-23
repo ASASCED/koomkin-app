@@ -1890,7 +1890,7 @@ db.updateCobertura = function(idCampania, idEstado, idUsuario, idCobertura) {
     requestStr = `insert into tbl_TuCampaniaCobertura (IDCampania,IdPAIS,IDESTADO,IDUSUARIO) VALUES (${idCampania},156,${idEstado},${idUsuario});
                         update TBL_BRIEF set IDESTADO = ${idEstado} where IDUSUARIO = ${idUsuario}`;
   } else {
-    `insert into tbl_TuCampaniaCobertura (IDCampania,IdPAIS,IDESTADO,IDUSUARIO) VALUES (${idCampania},156,${idEstado},${idUsuario});
+    requestStr = `insert into tbl_TuCampaniaCobertura (IDCampania,IdPAIS,IDESTADO,IDUSUARIO) VALUES (${idCampania},156,${idEstado},${idUsuario});
      update TBL_BRIEF set IDESTADO = ${idEstado}, IDCOBERTURA = ${idCobertura} where IDUSUARIO = ${idUsuario}`;
   }
    
@@ -1915,7 +1915,7 @@ db.updateCoberturaRegion = function(idCampania, idEstado, idUsuario, idCobertura
   if (idCobertura == "NULL") {
     requestStr = `insert into tbl_TuCampaniaCobertura (IDCampania,IdPAIS,IDESTADO,IDUSUARIO) VALUES (${idCampania},156,${idEstado},${idUsuario});`;
   } else {
-    `insert into tbl_TuCampaniaCobertura (IDCampania,IdPAIS,IDESTADO,IDUSUARIO) VALUES (${idCampania},156,${idEstado},${idUsuario});
+    requestStr = `insert into tbl_TuCampaniaCobertura (IDCampania,IdPAIS,IDESTADO,IDUSUARIO) VALUES (${idCampania},156,${idEstado},${idUsuario});
      update TBL_BRIEF set IDCOBERTURA = ${idCobertura} where IDUSUARIO = ${idUsuario}`;
   }
 
@@ -1940,7 +1940,7 @@ db.updateCoberturaNacional = function(idCampania, idUsuario, idCobertura) {
   if (idCobertura == "NULL") {
     requestStr = `insert into tbl_TuCampaniaCobertura (IDCampania,IdPAIS,IDESTADO,IDUSUARIO) VALUES (${idCampania},156,NULL,${idUsuario});`;
   } else {
-    `insert into tbl_TuCampaniaCobertura (IDCampania,IdPAIS,IDESTADO,IDUSUARIO) VALUES (${idCampania},156,NULL,${idUsuario});
+    requestStr = `insert into tbl_TuCampaniaCobertura (IDCampania,IdPAIS,IDESTADO,IDUSUARIO) VALUES (${idCampania},156,NULL,${idUsuario});
      update TBL_BRIEF set IDCOBERTURA = ${idCobertura} where IDUSUARIO = ${idUsuario}`;
   }
   
