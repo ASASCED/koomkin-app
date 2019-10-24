@@ -1151,7 +1151,7 @@ app.get('/getNewCodigoPostal/:cpMin/:cpMax', function (req, res) {
     const cpMin = parseInt(req.params.cpMin, 10);
     const cpMax = parseInt(req.params.cpMax, 10);
 
-    db.executeNewGetCodigoPostal(cpMin,cpMax)
+    db.executeGetNewCodigoPostal(cpMin,cpMax)
         .then(rows => {
             res.json(rows).status(200).send();
         })
