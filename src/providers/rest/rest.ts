@@ -622,9 +622,9 @@ export class RestProvider {
     });
   }
 
-  updateCoberturaRegion(idCampania,idEstado,idUsuario,idCobertura)  {
+  updateCoberturaRegion(idCampania,idEstado,idUsuario)  {
     return new Promise(resolve => {
-      this.http.get(this.apiUrl + '/updateCoberturaRegion/' + idCampania + '/' + idEstado + '/' + idUsuario + '/' +  idCobertura).subscribe(data => {
+      this.http.get(this.apiUrl + '/updateCoberturaRegion/' + idCampania + '/' + idEstado + '/' + idUsuario).subscribe(data => {
         resolve(data);
       }, err => {
          console.log(err);
@@ -632,9 +632,9 @@ export class RestProvider {
     });
   }
 
-  updateCoberturaNacional(idCampania,idUsuario,idCobertura)  {
+  updateCoberturaNacional(idCampania,idUsuario)  {
     return new Promise(resolve => {
-      this.http.get(this.apiUrl + '/updateCoberturaNacional/' + idCampania + '/' + idUsuario + '/' +  idCobertura).subscribe(data => {
+      this.http.get(this.apiUrl + '/updateCoberturaNacional/' + idCampania + '/' + idUsuario).subscribe(data => {
         resolve(data);
       }, err => {
          console.log(err);

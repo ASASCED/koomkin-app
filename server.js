@@ -1052,20 +1052,17 @@ app.get('/updateCobertura/:idCampania/:idEstado?/:idUsuario/:idCobertura?', func
 
 //por region
 
-app.get('/updateCoberturaRegion/:idCampania/:idEstado/:idUsuario/:idCobertura?', function (req, res) {
+app.get('/updateCoberturaRegion/:idCampania/:idEstado/:idUsuario', function (req, res) {
 
     const idCampania = parseInt(req.params.idCampania, 10);
     const idEstado = parseInt(req.params.idEstado, 10);
     const idUsuario = parseInt(req.params.idUsuario, 10);
-    let idCobertura = parseInt(req.params.idCobertura, 10);
 
     if (!idCobertura) {
         idCobertura = 'NULL';
     }
-
-    console.log(idCampania, idEstado, idUsuario, idCobertura);
     
-    db.updateCoberturaRegion(idCampania, idEstado, idUsuario, idCobertura)
+    db.updateCoberturaRegion(idCampania, idEstado, idUsuario)
         .then(rows => {
             res.json(rows).status(200).send();
         })
@@ -1076,17 +1073,12 @@ app.get('/updateCoberturaRegion/:idCampania/:idEstado/:idUsuario/:idCobertura?',
 
 //updateBriefInformation Cliente Objetivo Particulares
 
-app.get('/updateCoberturaNacional/:idCampania/:idUsuario/:idCobertura?', function (req, res) {
+app.get('/updateCoberturaNacional/:idCampania/:idUsuario', function (req, res) {
 
     const idCampania = parseInt(req.params.idCampania, 10);
     const idUsuario = parseInt(req.params.idUsuario, 10);
-    let idCobertura = parseInt(req.params.idCobertura, 10);
 
-    if (!idCobertura) {
-        idCobertura = 'NULL';
-    }
-
-    db.updateCoberturaNacional(idCampania, idUsuario, idCobertura)
+    db.updateCoberturaNacional(idCampania, idUsuario)
         .then(rows => {
             res.json(rows).status(200).send();
         })

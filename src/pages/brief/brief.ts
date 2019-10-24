@@ -427,12 +427,10 @@ export class BriefPage implements OnInit, AfterContentChecked {
                   this.estado_cob = element['IDESTADO'];
                 }
               });
-              let idCobertura = 5;
-              this.updateCoberturaRegion(this.idCampania, this.estado_cob, this.id, idCobertura)
+              this.updateCoberturaRegion(this.idCampania, this.estado_cob, this.id)
             }
           } else if (this.cobertura_empresa == 'Nacional') {
-            let idCobertura = 2;
-            this.updateCoberturaNacional(this.idCampania, this.id, idCobertura);
+            this.updateCoberturaNacional(this.idCampania, this.id);
           }
           this.lleno = true;
           this.showSuccess();
@@ -455,8 +453,8 @@ export class BriefPage implements OnInit, AfterContentChecked {
     );
   }
 
-  updateCoberturaRegion(idCampania, idEstado, idUsuario, idCobertura) {
-    this.provedor.updateCoberturaRegion(idCampania, idEstado, idUsuario, idCobertura).then(
+  updateCoberturaRegion(idCampania, idEstado, idUsuario) {
+    this.provedor.updateCoberturaRegion(idCampania, idEstado, idUsuario).then(
       data => {
         // console.log(data);
       },
@@ -466,8 +464,8 @@ export class BriefPage implements OnInit, AfterContentChecked {
     );
   }
 
-  updateCoberturaNacional(idCampania, idUsuario, idCobertura) {
-    this.provedor.updateCoberturaNacional(idCampania, idUsuario, idCobertura).then(
+  updateCoberturaNacional(idCampania, idUsuario) {
+    this.provedor.updateCoberturaNacional(idCampania, idUsuario).then(
       data => {
         // console.log(data);
       },
