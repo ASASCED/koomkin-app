@@ -79,7 +79,7 @@ export class MasBriefPage implements OnInit {
   public ticket;
   public ticketfinal;
   public comentarioCierre;
-
+  public idCobertura;
   // Multiples ingresos
   public ingresosArray = [];
   public ultIngresosArray;
@@ -199,6 +199,10 @@ export class MasBriefPage implements OnInit {
         this.cuarta = this.datos[0].TipoCuartaPantalla;
         this.campania = this.datos[0].IDCampania;
         this.google = this.datos[0].PalabrasGoogle;
+        if (this.google == 'NULL') {
+          this.google = '';
+        } 
+        this.idCobertura = this.datos[0].IdCobertura; 
         this.cobertura_nacional = this.datos[0].Nacional;
         this.IdProducto = this.datos[0].IdProducto;
         if (this.cobertura_nacional == 1) {
@@ -725,6 +729,7 @@ export class MasBriefPage implements OnInit {
     this.provedor.getCobertura(idUsuario, campania).then(
       data => {
         this.cobertura = data;
+        console.log(this.cobertura);
         if ((this.cuarta == 2 || this.cuarta == 3 || this.cuarta == 5) && this.cobertura.length == 1 && this.cobertura_empresa !== 'Nacional' && this.cobertura_empresa !== 'Estado' && this.cobertura_empresa !== 'Region') {
           this.cobertura_empresa = 'Local';
         } else if (this.cobertura.length == 1 && this.cobertura_nacional !== 1 && this.cuarta !== 2 && this.cuarta !== 3 && this.cuarta !== 5) {

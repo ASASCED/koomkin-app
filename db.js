@@ -2144,6 +2144,7 @@ db.executeGetEmpresas = function() {
 db.executeGetCodigoPostal = function(cp) {
   const requestStr = `select CP, Estado From Tbl_SEPOMEX where CP = ${cp}`;
 
+  
   return new Promise((resolve, reject) => {
     tp.sql(requestStr)
       .execute()
@@ -2156,6 +2157,24 @@ db.executeGetCodigoPostal = function(cp) {
       });
   });
 };
+
+db.executeGetNewCodigoPostal = function(cpMin,cpMax) {
+
+  const requestStr = `select top(1) IDESTADO,CP, Estado From Tbl_SEPOMEX s join CATESTADO e on e.NOMBRE=s.Estado where CP between ${cpMin} and ${cpMax}`;
+
+  return new Promise((resolve, reject) => {
+    tp.sql(requestStr)
+      .execute()
+      .then(results => {
+        resolve(results);
+      })
+      .catch(err => {
+        console.log(err);
+        reject(err);
+      });
+  });
+};
+
 
 db.executeGetReasons = function() {
   const requestStr = `select * from CatDescartado`;
@@ -2357,6 +2376,25 @@ db.executeGetFreemiumData = function(userId){
                     AND active=1
                     ORDER BY registerAt DESC) F
     WHERE IDUSUARIO = ${userId}`
+
+  console.log(requestStr);
+
+  return new Promise((resolve, reject) => {
+    tp.sql(requestStr)
+      .execute()
+      .then(result => {
+        resolve(result);
+      })
+      .fail(err => {
+        console.log(err);
+        reject(err);
+      });
+  });
+}
+
+db.executeGetFreemiumTemplates = function(gender){
+  
+  const requestStr = `SELECT * FROM FreemiumPromoTemplate WHERE active = 1 AND gender ='${gender}'`
 
   console.log(requestStr);
 

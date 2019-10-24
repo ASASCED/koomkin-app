@@ -1143,6 +1143,23 @@ app.get('/getCodigoPostal/:codigo', function (req, res) {
         });
 });
 
+
+//getCodigoPostal
+
+app.get('/getCodigoPostal/:cpMin/:cpMax', function (req, res) {
+
+    const cpMin = parseInt(req.params.cpMin, 10);
+    const cpMax = parseInt(req.params.cpMax, 10);
+
+    db.executeNewGetCodigoPostal(cpMin,cpMax)
+        .then(rows => {
+            res.json(rows).status(200).send();
+        })
+        .catch(err => {
+            res.status(500).json({ error: err }).send();
+        });
+});
+
 //getCobertura
 
 app.get('/getCobertura/:usuario/:campania', function (req, res) {
