@@ -1029,7 +1029,7 @@ app.get('/updateBriefClienteEmpresas/:clientesTargetSector?/:clientesTargetCateg
 app.get('/updateCobertura/:idCampania/:idEstado?/:idUsuario/:idCobertura?', function (req, res) {
 
     const idCampania = parseInt(req.params.idCampania, 10);
-    const idEstado = parseInt(req.params.idEstado, 10);
+    let idEstado = parseInt(req.params.idEstado, 10);
     const idUsuario = parseInt(req.params.idUsuario, 10);
     let idCobertura = parseInt(req.params.idCobertura, 10);
 
