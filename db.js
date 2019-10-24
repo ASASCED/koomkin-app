@@ -1909,19 +1909,10 @@ db.updateCobertura = function(idCampania, idEstado, idUsuario, idCobertura) {
   });
 };
 
-db.updateCoberturaRegion = function(idCampania, idEstado, idUsuario, idCobertura) {
-
-  var requestStr = "";
-
-  if (idCobertura == "NULL") {
-    requestStr = `insert into tbl_TuCampaniaCobertura (IDCampania,IdPAIS,IDESTADO,IDUSUARIO) VALUES (${idCampania},156,${idEstado},${idUsuario});`;
-  } else if (idCobertura != "NULL") {
-    requestStr = `insert into tbl_TuCampaniaCobertura (IDCampania,IdPAIS,IDESTADO,IDUSUARIO) VALUES (${idCampania},156,${idEstado},${idUsuario});
-     update TBL_BRIEF set ID_COBERTURA = ${idCobertura} where IDUSUARIO = ${idUsuario}`;
-  }
+db.updateCoberturaRegion = function(idCampania, idEstado, idUsuario) {
+  const requestStr = `insert into tbl_TuCampaniaCobertura (IDCampania,IdPAIS,IDESTADO,IDUSUARIO) VALUES (${idCampania},156,${idEstado},${idUsuario});`;
 
   console.log(requestStr);
-
   return new Promise((resolve, reject) => {
     tp.sql(requestStr)
       .execute()
@@ -1934,6 +1925,7 @@ db.updateCoberturaRegion = function(idCampania, idEstado, idUsuario, idCobertura
       });
   });
 };
+
 
 db.updateCoberturaNacional = function(idCampania, idUsuario, idCobertura) {
   
