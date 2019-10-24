@@ -1063,6 +1063,8 @@ app.get('/updateCoberturaRegion/:idCampania/:idEstado/:idUsuario/:idCobertura?',
         idCobertura = 'NULL';
     }
 
+    console.log(idCampania, idEstado, idUsuario, idCobertura);
+    
     db.updateCoberturaRegion(idCampania, idEstado, idUsuario, idCobertura)
         .then(rows => {
             res.json(rows).status(200).send();
