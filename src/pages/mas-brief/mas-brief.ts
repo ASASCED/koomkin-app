@@ -671,7 +671,6 @@ export class MasBriefPage implements OnInit {
     this.app.getRootNav().setRoot('InicioPage');
   }
 
-
   getCodigoPostal(cp) {
     this.provedor.getCodigoPostal(cp).then(
       data => {

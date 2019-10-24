@@ -1146,7 +1146,7 @@ app.get('/getCodigoPostal/:codigo', function (req, res) {
 
 //getCodigoPostal
 
-app.get('/getCodigoPostal/:cpMin/:cpMax', function (req, res) {
+app.get('/getNewCodigoPostal/:cpMin/:cpMax', function (req, res) {
 
     const cpMin = parseInt(req.params.cpMin, 10);
     const cpMax = parseInt(req.params.cpMax, 10);
