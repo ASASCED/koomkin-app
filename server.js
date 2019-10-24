@@ -1057,10 +1057,6 @@ app.get('/updateCoberturaRegion/:idCampania/:idEstado/:idUsuario', function (req
     const idCampania = parseInt(req.params.idCampania, 10);
     const idEstado = parseInt(req.params.idEstado, 10);
     const idUsuario = parseInt(req.params.idUsuario, 10);
-
-    if (!idCobertura) {
-        idCobertura = 'NULL';
-    }
     
     db.updateCoberturaRegion(idCampania, idEstado, idUsuario)
         .then(rows => {
