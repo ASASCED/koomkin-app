@@ -269,6 +269,7 @@ export class ComercialPage implements OnInit{
     return new Promise((resolve, reject) => {
       this.http.post(url, body.toString(), options).subscribe(
         data => {
+          this.showSuccess();
           return resolve(data);
         },
         err => {
@@ -298,6 +299,7 @@ export class ComercialPage implements OnInit{
     return new Promise((resolve, reject) => {
       this.http.post(url, body.toString(), options).subscribe(
         data => {
+          this.showSuccess();
           return resolve(data);
         },
         err => {
@@ -324,6 +326,7 @@ export class ComercialPage implements OnInit{
     return new Promise((resolve, reject) => {
       this.http.post(url, body.toString(), options).subscribe(
         data => {
+          this.showSuccess();
           return resolve(data);
         },
         err => {
@@ -339,28 +342,37 @@ export class ComercialPage implements OnInit{
       case "proceso": {
         if (this.proceso == 'Guardar') {
           this.proceso = 'Editar';
-        } 
+        } else {
+          this.proceso = 'Guardar';
+        }
         break;
       }
 
       case "clientes": {
         if (this.clientes == 'Guardar') {
           this.clientes = 'Editar';
-        } 
+        } else {
+          this.proceso = 'Guardar';
+        }
+
         break;
       }
 
       case "redes": {
         if (this.redes == 'Guardar') {
           this.redes = 'Editar';
-        } 
+        } else {
+          this.proceso = 'Guardar';
+        }
         break;
       }
 
       case "objetivo": {
         if (this.objetivo == 'Guardar') {
           this.objetivo = 'Editar';
-        } 
+        } else {
+          this.proceso = 'Guardar';
+        }
         break;
       }
 

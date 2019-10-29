@@ -187,12 +187,32 @@ export class MasBriefPage implements OnInit {
         this.datos = data;
         console.log(this.datos)
         this.cp = this.datos[0].CP;
-        this.getCodigoPostal(this.cp);
+          if (this.cp.length < 5) {
+            this.cp = '0' + this.cp;
+          }
+          if (this.cp === undefined || this.cp === 'NULL' || this.cp === null) {
+            this.cp = 11320;
+          }
+        const cpMin = parseInt(this.cp) - 10;
+        const cpMax = parseInt(this.cp) + 10;
+        this.getCodigoPostal(cpMin, cpMax);
         this.ciudad = this.datos[0].Ciudad;
         this.target = this.datos[0].ClientesTarget;
-        this.mejor = this.datos[0].Mejor;
-        this.producto = this.datos[0].Producto;
-        this.productoInicial = this.datos[0].Producto;
+          if (this.target === undefined || this.target === 'NULL' || this.target === null) {
+            this.target = '';
+          }
+          this.mejor = this.datos[0].Mejor;
+          if (this.mejor === undefined || this.mejor === 'NULL' || this.mejor === null) {
+            this.mejor = '';
+          }
+          this.producto = this.datos[0].Producto;
+          if (this.producto === undefined || this.producto === 'NULL' || this.producto === null) {
+            this.producto = '';
+          }
+          this.productoInicial = this.datos[0].Producto;
+          if (this.productoInicial === undefined || this.productoInicial === 'NULL' || this.productoInicial === null) {
+            this.productoInicial = '';
+          }
         this.direccion = this.datos[0].Direccion;
         this.latitud = this.datos[0].Latitud;
         this.longitud = this.datos[0].Longitud;
@@ -360,7 +380,7 @@ export class MasBriefPage implements OnInit {
 
     this.provedor.updateBriefDatos(this.id, this.nombre, this.apaterno, this.amaterno, this.fechaNacimiento, this.id_puesto, this.cpDomicilio, this.aniosEmpresa, this.educacion).then(
       data => {
-        console.log('updateBriefDatos');
+        console.log('updateBriefDatos',data);
       },
       err => {
         // console.log('error');
@@ -376,7 +396,7 @@ export class MasBriefPage implements OnInit {
     }
     this.provedor.updateBriefEmpresa(this.id, this.nombreComercial, this.rfcEmpresa, this.numeroEmpleados, this.numeroSocios, this.empresaFamiliar, this.regimenFiscal, this.rangoVentasAnuales, this.ventajaCompetitiva, this.idCampania).then(
       data => {
-        console.log('updateBriefEmpresa');
+        console.log('updateBriefEmpresa',data);
       },
       err => {
         // console.log('error');
@@ -393,7 +413,7 @@ export class MasBriefPage implements OnInit {
       data => {
         this.showSuccess();
         this.irInicio();
-        console.log('updateBriefClienteParticular');
+        console.log('updateBriefClienteParticular',data);
       },
       err => {
         this.showError();
@@ -415,7 +435,7 @@ export class MasBriefPage implements OnInit {
       data => {
         this.showSuccess();
         this.irInicio();
-        console.log('updateBriefClienteEmpresas');
+        console.log('updateBriefClienteEmpresas',data);
       },
       err => {
         this.showError();
@@ -671,26 +691,24 @@ export class MasBriefPage implements OnInit {
     this.app.getRootNav().setRoot('InicioPage');
   }
 
-  getCodigoPostal(cp) {
-    this.provedor.getCodigoPostal(cp).then(
+  getCodigoPostal(cpMin, cpMax) {
+    this.provedor.getNewCodigoPostal(cpMin, cpMax).then(
       data => {
         this.datos_ciudad = data;
         if (this.datos_ciudad.length > 0) {
           this.estado_cob = this.datos_ciudad[0].Estado;
-          if (this.estado_cob == 'Nuevo León') {
-            this.estado_cob = 'Nuevo Leon'
+          if (this.estado_cob === 'Nuevo León') {
+            this.estado_cob = 'Nuevo Leon';
           }
           this.cat_estados.forEach(element => {
-            if (element['NOMBRE'] == this.estado_cob) {
+            if (element['NOMBRE'] === this.estado_cob) {
               this.estado_cob = element['IDESTADO'];
             }
           });
         }
         if (this.cobertura_empresa !== 'Nacional' && this.cobertura_empresa !== 'Estado' && this.cobertura_empresa !== 'Region') {
           this.cobertura_empresa = 'Local';
-          console.log(this.cobertura_empresa);
         }
-
       },
       err => {
         // console.log('error');
@@ -699,22 +717,29 @@ export class MasBriefPage implements OnInit {
   }
 
   getNewCodigoPostal(cp) {
+
+    const cpMin = parseInt(cp) - 10;
+    const cpMax = parseInt(cp) + 10;
+
     return new Promise(resolve => {
-      this.provedor.getCodigoPostal(cp).then(
+      this.provedor.getNewCodigoPostal(cpMin, cpMax).then(
         data => {
           this.datos_ciudad = data;
           if (this.datos_ciudad.length > 0) {
             this.cambio_estado_cob = this.datos_ciudad[0].Estado;
-            if (this.cambio_estado_cob == 'Nuevo León') {
-              this.cambio_estado_cob = 'Nuevo Leon'
+            if (this.cambio_estado_cob === 'Nuevo León') {
+              this.cambio_estado_cob = 'Nuevo Leon';
             }
             this.cat_estados.forEach(element => {
-              if (element['NOMBRE'] == this.cambio_estado_cob) {
+              if (element['NOMBRE'] === this.cambio_estado_cob) {
                 this.cambio_estado_cob = element['IDESTADO'];
-                let nuevo_estado = this.cambio_estado_cob
+                const nuevo_estado = this.cambio_estado_cob;
                 resolve(nuevo_estado);
               }
             });
+          }
+          if (this.cobertura_empresa !== 'Nacional' && this.cobertura_empresa !== 'Estado' && this.cobertura_empresa !== 'Region') {
+            this.cobertura_empresa = 'Local';
           }
         },
         err => {
@@ -786,7 +811,6 @@ export class MasBriefPage implements OnInit {
       }
     );
   }
-
 
   changeCobertura(tipo) {
     switch (tipo) {
@@ -911,21 +935,21 @@ export class MasBriefPage implements OnInit {
         data => {
           this.datosCampania = data;
           this.idCampania = this.datosCampania[0].IDCampania;
-          if (this.cobertura_empresa == 'Local' && this.cobertura_empresa !== 'Nacional') {
-            this.cobertura_empresa == 'Local';
-            let idCobertura = 4;
-            this.updateCobertura(this.idCampania, this.estado_cob, this.id, idCobertura);
+          if (this.cobertura_empresa == 'Local') {
+            this.cobertura_empresa = 'Local';
+            const idCobertura = 4;
+            this.updateCobertura(this.idCampania, this.cambio_estado_cob, this.id, idCobertura);
           } else if (this.cobertura_empresa == 'Estado') {
-            let idCobertura = 1;
-            this.updateCobertura(this.idCampania, this.estado_cob, this.id, idCobertura);
+            const idCobertura = 1;
+            this.updateCobertura(this.idCampania, this.cambio_estado_cob, this.id, idCobertura);
           } else if (this.cobertura_empresa == 'Region') {
             for (let i = 0; this.estado.length > i; i++) {
               this.cat_estados.forEach(element => {
                 if (element['NOMBRE'] == this.estado[i]) {
-                  this.estado_cob = element['IDESTADO'];
+                  this.cambio_estado_cob = element['IDESTADO'];
                 }
               });
-              this.updateCoberturaRegion(this.idCampania, this.estado_cob, this.id);
+              this.updateCoberturaRegion(this.idCampania, this.cambio_estado_cob, this.id);
             }
           } else if (this.cobertura_empresa == 'Nacional') {
             this.updateCoberturaNacional(this.idCampania, this.id);

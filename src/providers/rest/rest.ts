@@ -662,6 +662,16 @@ export class RestProvider {
     });
   }
 
+  getNewCodigoPostal(cpMin,cpMax) {
+    return new Promise(resolve => {
+      this.http.get(this.apiUrl + '/getNewCodigoPostal/' + cpMin + '/' + cpMax ).subscribe(data => {
+        resolve(data);
+      }, err => {
+         console.log(err);
+      });
+    });
+  }
+
   getEstados() {
     return new Promise(resolve => {
       this.http.get(this.apiUrl + '/getEstados').subscribe(data => {

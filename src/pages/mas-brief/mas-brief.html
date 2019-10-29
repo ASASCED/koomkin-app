@@ -131,9 +131,7 @@
             <p class="titulo-brief" style="text-align: center;text-decoration: underline;font-size: 4.5vw">
               Particulares
             </p>
-  
             <p class="titulo-brief">Segmento de ingresos*</p>
-  
             <ul class="mediano">
               <li class="zero-mediano" [ngClass]="{ 'elegida-brief': ingresosBajo == true }"
                 (click)="changeIngresos('Bajo')">
@@ -391,7 +389,6 @@
         <div class="brief-contenedor">
           <p class="titulo-brief">Nombre(s)*</p>
           <input [(ngModel)]="nombre" type="text" class="input-brief" style="width: 95%" />
-
           <ion-grid class="anuncio-grid">
             <ion-row style="width: 100%;margin-bottom: 0%;">
               <ion-col col-6>
