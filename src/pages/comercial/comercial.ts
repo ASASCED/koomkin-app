@@ -247,24 +247,27 @@ export class ComercialPage implements OnInit{
 
   registrarProcesoComercial() {
 
+    if (this.crmDiferente == true) {
+      this.crmDiferente = 1;
+    } else {
+      this.crmDiferente = 0;
+    } 
+    this.numeroVendedores = this.numeroVendedores.toString();
     const body = new URLSearchParams();
-    body.set("idUsuario", this.id);
-    body.set("distribucionOnline", this.distribucionOnline);
-    body.set("distribucionOffline", this.distribucionOffline);
-    body.set("quienVende", this.quienVende);
-    body.set("numeroVendedores", this.numeroVendedores);
-    body.set("tipoVendedores", this.tipoVendedores);
-    body.set("crmDiferente", this.crmDiferente);
-
+    body.set('idUsuario', this.id);
+    body.set('distribucionOnline', this.distribucionOnline);
+    body.set('distribucionOffline', this.distribucionOffline);
+    body.set('quienVende', this.quienVende);
+    body.set('numeroVendedores', this.numeroVendedores);
+    body.set('tipoVendedores', this.tipoVendedores);
+    body.set('crmDiferente', this.crmDiferente);
     const options = {
       headers: new HttpHeaders().set(
-        "Content-Type",
-        "application/x-www-form-urlencoded"
+        'Content-Type',
+        'application/x-www-form-urlencoded'
       )
     };
-
-    const url = "https://www.koomkin.com.mx/api/app/registrarProcesoComercial/";
-
+    const url = 'https://www.koomkin.com.mx/api/app/registrarProcesoComercial/';
     console.log(url, body.toString());
     return new Promise((resolve, reject) => {
       this.http.post(url, body.toString(), options).subscribe(
@@ -273,10 +276,12 @@ export class ComercialPage implements OnInit{
           return resolve(data);
         },
         err => {
+          this.showError();
           return resolve(err);
         }
       );
     });
+ 
   }
 
   registrarClientesNuevos() {
@@ -352,7 +357,7 @@ export class ComercialPage implements OnInit{
         if (this.clientes == 'Guardar') {
           this.clientes = 'Editar';
         } else {
-          this.proceso = 'Guardar';
+          this.clientes = 'Guardar';
         }
 
         break;
@@ -362,7 +367,7 @@ export class ComercialPage implements OnInit{
         if (this.redes == 'Guardar') {
           this.redes = 'Editar';
         } else {
-          this.proceso = 'Guardar';
+          this.redes = 'Guardar';
         }
         break;
       }
@@ -371,7 +376,7 @@ export class ComercialPage implements OnInit{
         if (this.objetivo == 'Guardar') {
           this.objetivo = 'Editar';
         } else {
-          this.proceso = 'Guardar';
+          this.objetivo = 'Guardar';
         }
         break;
       }

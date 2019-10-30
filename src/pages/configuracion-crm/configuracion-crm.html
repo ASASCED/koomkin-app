@@ -40,14 +40,7 @@
                                         <input type="text">
                                     </ion-col>
                                 </ion-row>
-                                <ion-row style="margin-bottom: 0%">
-                                    <ion-col col-4 class="texto">
-                                        Ejecutivo<br> Comercial
-                                    </ion-col>
-                                    <ion-col col-8 style="display: flex;">
-                                        <input type="text">
-                                    </ion-col>
-                                </ion-row>
+                               
                                 <hr>
                                 <ion-row style="margin-bottom: 0%">
                                     <ion-col col-12 class="texto-center">
@@ -175,7 +168,7 @@
                             <ion-grid>
                                 <ion-row style="margin-bottom: 0%">
                                     <ion-col col-12 class="texto-center">
-                                        Escribe la especialidad de tu negocio 
+                                        Escribe la especialidad de tu negocio y selecciona el mensaje que enviará el Chatbot dependiendo del estatus de venta de tu cliente potencial
                                     </ion-col>
                                 </ion-row>
                                 <ion-row style="margin: 2% 0%">
@@ -186,31 +179,31 @@
                                         <input type="text" [(ngModel)]="giroChat">
                                     </ion-col>
                                 </ion-row>
-                                <!--
+                                
                                 <ion-row style="margin: 1.5%">
                                     <ion-col col-1 offset-3 class="flechas">
-                                        <
+                                        
                                     </ion-col> 
                                     <ion-col col-4 class="texto center">
                                             Inicial
                                     </ion-col>
                                     <ion-col col-1 class="flechas">
-                                        >
+                                        
                                     </ion-col>
                                 </ion-row>
                                 <ion-row style="margin-bottom: 0%">
                                     <ion-col col-1 style="display: flex;
                                     justify-content: center;
                                     align-items: center;">
-                                        <input type="radio" style="width: 70%;">
+                                        <input type="radio" style="width: 70%;" checked>
                                     </ion-col>
                                     <ion-col col-11 class="opciones">
                                         a)   ¡Hola nombre_lead! Acabas de ver mi anuncio por internet y dejaste tus datos.
-                                        Somos especialistas en especialidad
+                                        Somos especialistas en "{{giroChat}}"
                                         ¿En qué te podemos ayudar?
                                     </ion-col>
                                 </ion-row>
-                                
+                                <!--
                                 <ion-row style="margin-bottom: 2%">
                                     <ion-col col-1 style="display: flex;
                                     justify-content: center;
@@ -221,7 +214,7 @@
                                         b)   Buen día, ¿En qué puedo ayudar?
                                     </ion-col>
                                 </ion-row>
-                                <!-- 
+                               
                                 <ion-row style="margin-bottom: 0%">
                                     <ion-col col-4 class="texto">
                                         Seguimiento

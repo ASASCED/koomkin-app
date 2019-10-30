@@ -185,14 +185,13 @@ export class MasBriefPage implements OnInit {
     this.provedor.getBriefInformation(idUsuario).then(
       data => {
         this.datos = data;
-        console.log(this.datos)
         this.cp = this.datos[0].CP;
-          if (this.cp.length < 5) {
-            this.cp = '0' + this.cp;
-          }
-          if (this.cp === undefined || this.cp === 'NULL' || this.cp === null) {
-            this.cp = 11320;
-          }
+        if (this.cp.length < 5) {
+          this.cp = '0' + this.cp;
+        }
+        if (this.cp === undefined || this.cp === 'NULL' || this.cp === null) {
+          this.cp = 11320;
+        }
         const cpMin = parseInt(this.cp) - 10;
         const cpMax = parseInt(this.cp) + 10;
         this.getCodigoPostal(cpMin, cpMax);
@@ -223,11 +222,11 @@ export class MasBriefPage implements OnInit {
           this.google = '';
         } 
         this.idCobertura = this.datos[0].IdCobertura; 
-        this.cobertura_nacional = this.datos[0].Nacional;
-        this.IdProducto = this.datos[0].IdProducto;
-        if (this.cobertura_nacional == 1) {
+        if (this.idCobertura == 2) {
           this.cobertura_empresa = 'Nacional';
         }
+        this.cobertura_nacional = this.datos[0].Nacional;
+        this.IdProducto = this.datos[0].IdProducto;
         this.tipoempresa = this.datos[0].TipoEmpresa;
         if (this.tipoempresa == 1) {
           this.tipoempresa = 'Fabricante';
@@ -411,8 +410,6 @@ export class MasBriefPage implements OnInit {
 
     this.provedor.updateBriefClienteParticular(this.ingresosAnuales, this.edad, this.genero, this.intereses, this.idCampania).then(
       data => {
-        this.showSuccess();
-        this.irInicio();
         console.log('updateBriefClienteParticular',data);
       },
       err => {
@@ -433,8 +430,6 @@ export class MasBriefPage implements OnInit {
 
     this.provedor.updateBriefClienteEmpresas(this.sector, this.categoria, this.sectores, this.intereses, this.idCampania).then(
       data => {
-        this.showSuccess();
-        this.irInicio();
         console.log('updateBriefClienteEmpresas',data);
       },
       err => {
@@ -706,9 +701,6 @@ export class MasBriefPage implements OnInit {
             }
           });
         }
-        if (this.cobertura_empresa !== 'Nacional' && this.cobertura_empresa !== 'Estado' && this.cobertura_empresa !== 'Region') {
-          this.cobertura_empresa = 'Local';
-        }
       },
       err => {
         // console.log('error');
@@ -738,9 +730,6 @@ export class MasBriefPage implements OnInit {
               }
             });
           }
-          if (this.cobertura_empresa !== 'Nacional' && this.cobertura_empresa !== 'Estado' && this.cobertura_empresa !== 'Region') {
-            this.cobertura_empresa = 'Local';
-          }
         },
         err => {
           // console.log('error');
@@ -753,20 +742,21 @@ export class MasBriefPage implements OnInit {
     this.provedor.getCobertura(idUsuario, campania).then(
       data => {
         this.cobertura = data;
-        console.log(this.cobertura);
-        if ((this.cuarta == 2 || this.cuarta == 3 || this.cuarta == 5) && this.cobertura.length == 1 && this.cobertura_empresa !== 'Nacional' && this.cobertura_empresa !== 'Estado' && this.cobertura_empresa !== 'Region') {
+        if (this.idCobertura == 4) {
           this.cobertura_empresa = 'Local';
-        } else if (this.cobertura.length == 1 && this.cobertura_nacional !== 1 && this.cuarta !== 2 && this.cuarta !== 3 && this.cuarta !== 5) {
+        } else if (this.idCobertura == 1) {
           this.cobertura_empresa = 'Estado';
-        } else if (this.cobertura.length >= 2 && this.cobertura_nacional !== 1) {
+        } else if (this.idCobertura == 5) {
           this.cobertura_empresa = 'Region';
           for (let i = 0; this.cobertura.length > i; i++) {
             this.cat_estados.forEach(element => {
-              if (element['IDESTADO'] == this.cobertura[i].IDESTADO) {
+              if (element['IDESTADO'] === this.cobertura[i].IDESTADO) {
                 this.estado.push(element['NOMBRE']);
               }
             });
           }
+        } else if (this.idCobertura == 2) {
+          this.cobertura_empresa = 'Nacional';
         }
       },
       err => {
@@ -963,8 +953,8 @@ export class MasBriefPage implements OnInit {
     });
   }
 
-  updateCobertura(idCampania, idEstado, idUsuario, idCobertura) {
-    this.provedor.updateCobertura(idCampania, idEstado, idUsuario, idCobertura).then(
+  updateCobertura(idCampania, nuevo_estado, idUsuario, idCobertura) {
+    this.provedor.updateCobertura(idCampania, nuevo_estado, idUsuario, idCobertura).then(
       data => {
         // console.log(data);
       },
@@ -974,8 +964,8 @@ export class MasBriefPage implements OnInit {
     );
   }
 
-  updateCoberturaRegion(idCampania, idEstado, idUsuario) {
-    this.provedor.updateCoberturaRegion(idCampania, idEstado, idUsuario).then(
+  updateCoberturaRegion(idCampania, nuevo_estado, idUsuario) {
+    this.provedor.updateCoberturaRegion(idCampania, nuevo_estado, idUsuario).then(
       data => {
         // console.log(data);
       },

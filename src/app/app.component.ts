@@ -28,7 +28,6 @@ export class MyApp {
   lead = 'LeadPage';
   inicio = 'InicioPage';
   eficiencia = 'EficienciaPage';
-  brief = 'BriefPage';
   masbrief = 'MasBriefPage';
   membresia = 'MembresiaPage';
   datosFinancieros = 'DatosFinancierosPage';

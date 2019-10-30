@@ -13,12 +13,13 @@
       <ion-segment-button value="first" class="segment-datos">
         Cliente<br> Objetivo
       </ion-segment-button>
-      <ion-segment-button value="second" class="segment-empresa">
-        Datos<br> Personales
-      </ion-segment-button>
-      <ion-segment-button value="third" class="segment-objetivo">
+      <ion-segment-button value="second" class="segment-objetivo">
         Datos<br> Empresa
       </ion-segment-button>
+      <ion-segment-button value="third" class="segment-empresa">
+        Datos<br> Personales
+      </ion-segment-button>
+
     </ion-segment>
 
     <ion-slides class="adicional-content-container" (ionSlideDidChange)="onSlideChanged($event)" #loopSlider>
@@ -278,7 +279,7 @@
             <textarea class="otro" rows="2" cols="32" maxlength="150" [(ngModel)]="intereses"
               placeholder="Escribe sus intereses o comentarios adicionales..." required></textarea>
   
-            <button class="guardar" (click)="updateBriefClienteParticular()">
+            <button class="guardar" (click)="onChangeSegment('second');updateBriefClienteParticular()">
               Guardar
             </button>
           </div>
@@ -380,76 +381,11 @@
             <textarea class="otro" rows="2" cols="32" maxlength="150" [(ngModel)]="intereses"
               placeholder="Describe detalladamente el perfil de tu cliente más común o constante" required></textarea>
   
-            <button class="guardar" (click)="updateBriefClienteEmpresas()">
+            <button class="guardar" (click)="onChangeSegment('second');updateBriefClienteEmpresas()">
               Guardar
             </button>
           </div>
         </ion-slide>
-      <ion-slide style="width: 100% !important;">
-        <div class="brief-contenedor">
-          <p class="titulo-brief">Nombre(s)*</p>
-          <input [(ngModel)]="nombre" type="text" class="input-brief" style="width: 95%" />
-          <ion-grid class="anuncio-grid">
-            <ion-row style="width: 100%;margin-bottom: 0%;">
-              <ion-col col-6>
-                <p class="titulo-brief">Apellido Paterno*</p>
-                <input [(ngModel)]="apaterno" type="text" class="input-brief" style="width: 95%" />
-              </ion-col>
-              <ion-col col-6>
-                <p class="titulo-brief">Apellido Materno*</p>
-                <input [(ngModel)]="amaterno" type="text" class="input-brief" style="width: 95%" />
-              </ion-col>
-            </ion-row>
-          </ion-grid>
-
-          <ion-grid class="anuncio-grid">
-            <p class="titulo-brief">Fecha de Nacimiento</p>
-            <ion-item>
-              <ion-datetime class="seleccion-brief-grande" displayFormat="DD MMMM YYYY" [(ngModel)]="fechaNacimiento"
-                cancelText="Cancelar" doneText="Aceptar"></ion-datetime>
-            </ion-item>
-          </ion-grid>
-
-          <ion-grid class="anuncio-grid">
-            <ion-row style="width: 100%;margin-bottom: 0%;">
-              <ion-col col-6>
-                <p class="titulo-brief">Puesto*</p>
-                <select type="text" class="seleccion-brief" [(ngModel)]="idpuesto">
-                  <option *ngFor="let puesto of positions">
-                    {{ puesto.nombre }}
-                  </option>
-                </select>
-              </ion-col>
-              <ion-col col-6>
-                <p class="titulo-brief">C.P. domicilio*</p>
-                <input type="text" minlength="5" maxlength="5" [(ngModel)]="cpDomicilio" (keypress)="numberOnly($event)"
-                  class="seleccion-brief" />
-              </ion-col>
-            </ion-row>
-          </ion-grid>
-
-          <ion-grid class="anuncio-grid">
-            <ion-row style="width: 100%;margin-bottom: 0%;">
-              <ion-col col-6>
-                <p class="titulo-brief">Años en tu empresa</p>
-                <input type="text" minlength="1" maxlength="8" [(ngModel)]="aniosEmpresa"
-                  (keypress)="numberOnly($event)" class="seleccion-brief" />
-              </ion-col>
-              <ion-col col-6>
-                <p class="titulo-brief">Educación</p>
-                <select type="text" class="seleccion-brief" [(ngModel)]="educacion">
-                  <option *ngFor="let carrera of carreras">
-                    {{ carrera.nombre }}
-                  </option>
-                </select>
-              </ion-col>
-            </ion-row>
-          </ion-grid>
-          <button class="guardar" (click)="onChangeSegment('second'); updateBriefDatos()">
-            Guardar
-          </button>
-        </div>
-      </ion-slide>
       <ion-slide>
         <div class="brief-contenedor">
           <p class="titulo-brief">Nombre Comercial de tu empresa*</p>
@@ -623,6 +559,71 @@
         </div>
       </ion-slide>
 
+      <ion-slide style="width: 100% !important;">
+        <div class="brief-contenedor">
+          <p class="titulo-brief">Nombre(s)*</p>
+          <input [(ngModel)]="nombre" type="text" class="input-brief" style="width: 95%" />
+          <ion-grid class="anuncio-grid">
+            <ion-row style="width: 100%;margin-bottom: 0%;">
+              <ion-col col-6>
+                <p class="titulo-brief">Apellido Paterno*</p>
+                <input [(ngModel)]="apaterno" type="text" class="input-brief" style="width: 95%" />
+              </ion-col>
+              <ion-col col-6>
+                <p class="titulo-brief">Apellido Materno*</p>
+                <input [(ngModel)]="amaterno" type="text" class="input-brief" style="width: 95%" />
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+
+          <ion-grid class="anuncio-grid">
+            <p class="titulo-brief">Fecha de Nacimiento</p>
+            <ion-item>
+              <ion-datetime class="seleccion-brief-grande" displayFormat="DD MMMM YYYY" [(ngModel)]="fechaNacimiento"
+                cancelText="Cancelar" doneText="Aceptar"></ion-datetime>
+            </ion-item>
+          </ion-grid>
+
+          <ion-grid class="anuncio-grid">
+            <ion-row style="width: 100%;margin-bottom: 0%;">
+              <ion-col col-6>
+                <p class="titulo-brief">Puesto*</p>
+                <select type="text" class="seleccion-brief" [(ngModel)]="idpuesto">
+                  <option *ngFor="let puesto of positions">
+                    {{ puesto.nombre }}
+                  </option>
+                </select>
+              </ion-col>
+              <ion-col col-6>
+                <p class="titulo-brief">C.P. domicilio*</p>
+                <input type="text" minlength="5" maxlength="5" [(ngModel)]="cpDomicilio" (keypress)="numberOnly($event)"
+                  class="seleccion-brief" />
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+
+          <ion-grid class="anuncio-grid">
+            <ion-row style="width: 100%;margin-bottom: 0%;">
+              <ion-col col-6>
+                <p class="titulo-brief">Años en tu empresa</p>
+                <input type="text" minlength="1" maxlength="8" [(ngModel)]="aniosEmpresa"
+                  (keypress)="numberOnly($event)" class="seleccion-brief" />
+              </ion-col>
+              <ion-col col-6>
+                <p class="titulo-brief">Educación</p>
+                <select type="text" class="seleccion-brief" [(ngModel)]="educacion">
+                  <option *ngFor="let carrera of carreras">
+                    {{ carrera.nombre }}
+                  </option>
+                </select>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+          <button class="guardar" (click)="onChangeSegment('zero'); updateBriefDatos()">
+            Guardar
+          </button>
+        </div>
+      </ion-slide>
     </ion-slides>
   </div>
 </ion-content>
