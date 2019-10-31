@@ -2039,6 +2039,23 @@ db.executeLastUpdateMembership = function(
   });
 };
 
+db.executeRegistrarCelularCT = function(idUsuario,celular) {
+
+  const requestStr = `update CATUSUARIO set TelefonoCelular2 = '${celular}' where IDUSUARIO = ${idUsuario}`;
+
+  return new Promise((resolve, reject) => {
+    tp.sql(requestStr)
+      .execute()
+      .then(results => {
+        resolve(results);
+      })
+      .catch(err => {
+        reject(err);
+      });
+  });
+};
+
+
 db.executeUpdateMembership = function(
   RecurringPaymentID,
   RecurringPaymentUUID,

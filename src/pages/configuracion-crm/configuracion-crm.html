@@ -26,7 +26,9 @@
                                         <p class="encabezado-texto-grande">Call Tracking</p>
                                     </ion-col>
                                     <ion-col col-2>
-                                    </ion-col>
+                                            <ion-icon *ngIf="calltracking !== 'Editar'" (click)="changeEdit('calltracking')" name="md-create" class="iconos-w"></ion-icon>
+                                            <ion-icon *ngIf="calltracking == 'Editar'" (click)="changeEdit('calltracking');" name="md-checkbox-outline" class="iconos-w"></ion-icon>
+                                        </ion-col>
                                 </ion-row>
                             </ion-grid>
                         </div>
@@ -34,10 +36,10 @@
                             <ion-grid>
                                 <ion-row style="margin: 2% 0%">
                                     <ion-col col-4 class="texto">
-                                        Móvil
+                                        Celular
                                     </ion-col>
                                     <ion-col col-8>
-                                        <input type="text">
+                                        <input type="text" [(ngModel)]="celular">
                                     </ion-col>
                                 </ion-row>
                                
@@ -87,7 +89,9 @@
                                         <p class="encabezado-texto-grande">Emailing</p>
                                     </ion-col>
                                     <ion-col col-2>
-                                    </ion-col>
+                                            <ion-icon *ngIf="emailing !== 'Editar'" (click)="changeEdit('emailing')" name="md-create" class="iconos-w"></ion-icon>
+                                            <ion-icon *ngIf="emailing == 'Editar'" (click)="changeEdit('emailing');" name="md-checkbox-outline" class="iconos-w"></ion-icon>
+                                        </ion-col>
                                 </ion-row>
                             </ion-grid>
                         </div>
@@ -161,6 +165,10 @@
                                     <ion-col col-8>
                                         <p class="encabezado-texto-grande">ChatBot</p>
                                     </ion-col>
+                                    <ion-col col-2>
+                                            <ion-icon *ngIf="chatbot !== 'Editar'" (click)="changeEdit('chatbot')" name="md-create" class="iconos-w"></ion-icon>
+                                            <ion-icon *ngIf="chatbot == 'Editar'" (click)="changeEdit('chatbot');registrarGiroChat();" name="md-checkbox-outline" class="iconos-w"></ion-icon>
+                                        </ion-col>
                                 </ion-row>
                             </ion-grid>
                         </div>

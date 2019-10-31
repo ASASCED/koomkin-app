@@ -8,6 +8,6 @@ import 'moment/locale/es';
 export class MomentPipe implements PipeTransform {
     transform(date: any, args?: any): any {
         let d = new Date(date)
-        return moment(d).locale('es').add(5, 'hours').format('DD-MMMM-YYYY HH:mm ')
+        return moment(d).locale('es').add(6, 'hours').format('DD-MMMM-YYYY HH:mm ')
     }
 }

@@ -852,7 +852,7 @@ export class LeadsPage implements OnInit {
 
   agregarHoras(time){
     let date = new Date(time);
-    date.setTime(date.getTime() + (5*60*60*1000));
+    date.setTime(date.getTime() + (6*60*60*1000));
     return date.toISOString();
   }
 

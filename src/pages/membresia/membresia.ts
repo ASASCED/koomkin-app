@@ -145,8 +145,8 @@ export class MembresiaPage {
       data => {
         console.log('inicio',data);
         if (data['length'] > 0) {
+          this.fechaInicio = data[0].UltimaFInicio;
           this.prospectId = data[0].UltimoProspecto;
-          this.fechaInicio = data[0].FInicio;
           this.fechaFin = data[0].UltimaFFin;
           this.diasPagados = data[0].UltimoDiasPagados;
           this.dias = data[0].PenultimoDiasPagados;
@@ -164,15 +164,20 @@ export class MembresiaPage {
       const url = 'https://www.koomkin.com.mx/api/app/getContract/' + this.correo;
       this.http.get(url).subscribe(
         data => {
-          console.log('contrato',data);
-
           if (data['length'] > 0) {
-            this.contrato = data[0].ContractURL;
+            let tempContrato = data[0].ContractURL;
+            let contractId = data[0].ContractProspectInfoId;
+            let tipoContrato = tempContrato.includes('Suscripcion');
+            if (tipoContrato === false) {
+              this.contrato = 'http://contrato.koomkin.com.mx/Suscripcion?q=' + contractId;
+            } else {
+              this.contrato = data[0].ContractURL;
+            }
           }
           resolve();
         },
         err => {
-          // console.log(err);
+          console.log(err);
           reject(err);
         }
       );

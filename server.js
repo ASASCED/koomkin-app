@@ -2291,6 +2291,20 @@ app.post('/registrarGiroChat/', function (req, res) {
         });
 });
 
+app.post('/registrarCelularCT/', function (req, res) {
+
+    const idUsuario = parseInt(req.body.idUsuario, 10);
+    const celular = req.body.celular;
+
+    db.executeRegistrarCelularCT(idUsuario,celular)
+        .then(rows => {
+            res.json(rows).status(200).send();
+        })
+        .catch(err => {
+            res.status(500).json({ error: err }).send();
+        });
+});
+
 var facturaAPICrearUsuario = (json) => {
 
     //const url = 'http://devfactura.in/api/v1/clients/create'

@@ -196,7 +196,7 @@ export class AgregarLeadPage implements OnInit {
     };
 
     // console.log(body.toString());
-    const url = 'https://www.koomkin.com.mx/api/reporte/registerLeadAdd/';
+    const url = 'https://www.koomkin.com.mx/api/app/registerLeadAdd/';
 
     return new Promise((resolve, reject) => {
       this.http.post(url, body.toString(), options).subscribe(
@@ -227,7 +227,7 @@ export class AgregarLeadPage implements OnInit {
         )
       };
 
-      const url = 'https://www.koomkin.com.mx/api/reporte/registerComment/';
+      const url = 'https://www.koomkin.com.mx/api/app/registerComment/';
 
       return new Promise((resolve, reject) => {
         this.http.post(url, body.toString(), options).subscribe(

@@ -873,7 +873,7 @@ export class MasBriefPage implements OnInit {
     };
 
     // console.log(body.toString());
-    const url = 'https://www.koomkin.com.mx/api/reporte/registerProduct/';
+    const url = 'https://www.koomkin.com.mx/api/app/registerProduct/';
 
     return new Promise((resolve, reject) => {
       this.http.post(url, body.toString(), options).subscribe(

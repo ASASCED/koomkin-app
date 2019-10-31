@@ -26,6 +26,7 @@ export class AuthServiceProvider {
   public activo;
   public idRecurrente;
   public uuidRecurrente;
+  public celular;
 
   constructor(public http: HttpClient, public plt: Platform) {
     this.userLogged = false;
@@ -43,6 +44,7 @@ export class AuthServiceProvider {
           this.setClientUUID(this.info[0]['uuid']);
           this.contrasena = this.info[0].PASSWORD2;
           this.id = this.info[0].IDUSUARIO;
+          this.celular = this.info[0].TelefonoCelular2;
           this.email = this.info[0].EMAIL;
           this.empresa = this.info[0].NOMEMPRESACOMPRADOR;
           this.mensajebot = this.info[0].mensajebot;

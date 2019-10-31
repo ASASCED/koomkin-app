@@ -5,6 +5,7 @@ import { AuthServiceProvider } from "../../providers/auth-service/auth-service";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { ChatServiceProvider } from "../../providers/chat-service/chat-service";
 import swal from 'sweetalert2';
+import { UserProvider } from "../../providers/user/user";
 
 @IonicPage()
 @Component({
@@ -12,6 +13,8 @@ import swal from 'sweetalert2';
   templateUrl: "configuracion-crm.html"
 })
 export class ConfiguracionCrmPage implements OnInit {
+
+  public celular;
   public vista;
   public saludo;
   public slogan;
@@ -25,13 +28,17 @@ export class ConfiguracionCrmPage implements OnInit {
   public web;
   public twitter;
   public uuid;
-  public newIdHorario = 1;
+  public newIdHorario:any = 1;
   public horaFin;
   public horaInicio;
   public dias;
   public idHorario;
 
   public giroChat;
+
+  public calltracking = 'Guardar';
+  public emailing = 'Guardar';
+  public chatbot = 'Guardar';
 
   public cat_dias = [
     { id: 1, nombre: 'Lunes' },
@@ -52,6 +59,7 @@ export class ConfiguracionCrmPage implements OnInit {
     public navParams: NavParams,
     public provedor: RestProvider,
     public authService: AuthServiceProvider,
+    public userService: UserProvider,
     public http: HttpClient,
     public chatService: ChatServiceProvider,
     public loadingCtrl: LoadingController,
@@ -60,6 +68,7 @@ export class ConfiguracionCrmPage implements OnInit {
     this.id = this.authService.id;
     this.uuid = this.authService.uuid;
     this.pdf = this.id + ".pdf";
+    this.celular = this.authService.celular;
   }
 
   ngOnInit() {
@@ -67,10 +76,7 @@ export class ConfiguracionCrmPage implements OnInit {
     this.getMailCliente(this.id);
     this.getHorarioAtencion();
     this.getGiroChat();
-  }
 
-  changePage(pagina) {
-    this.vista = pagina;
   }
 
   getMailCliente(idUsuario) {
@@ -346,25 +352,25 @@ export class ConfiguracionCrmPage implements OnInit {
     });
   }
 
+
   public getHorarioAtencion() {
     return new Promise((resolve, reject) => {
-      const url = "https://www.koomkin.com.mx/api/app/getHorarioAtencion/" + this.id;
-
+      const url = 'https://www.koomkin.com.mx/api/app/getHorarioAtencion/' + this.id;
       this.http.get(url).subscribe(
         data => {
           for (let j in data) {
             if (data[j].hasOwnProperty('Dia')) {
               this.idHorario = parseInt(data[j].IdHorario);
               this.horaInicio = new Date(data[j].HoraInicio);
-              this.horaInicio = ('0' + (this.horaInicio.getHours() + 6)).slice(-2) + ":" + ('0' + this.horaInicio.getMinutes()).slice(-2) + ":" + ('0' + this.horaInicio.getSeconds()).slice(-2);
+              this.horaInicio = ('0' + (this.horaInicio.getHours() + 6)).slice(-2) + ('0' + this.horaInicio.getMinutes()).slice(-2) + ('0' + this.horaInicio.getSeconds()).slice(-2);
               this.horaFin = new Date(data[j].HoraFin);
-              this.horaFin = ('0' + (this.horaFin.getHours() + 6)).slice(-2) + ":" + ('0' + this.horaFin.getMinutes()).slice(-2) + ":" + ('0' + this.horaFin.getSeconds()).slice(-2);
+              this.horaFin = ('0' + (this.horaFin.getHours() + 6)).slice(-2) + ('0' + this.horaFin.getMinutes()).slice(-2) + ('0' + this.horaFin.getSeconds()).slice(-2);
             }
           }
-          if(this.idHorario) {
+          if (this.idHorario) {
             this.newIdHorario = this.newIdHorario + this.idHorario;
           }
-          console.log(this.newIdHorario);
+
           resolve();
         },
         err => {
@@ -379,7 +385,7 @@ export class ConfiguracionCrmPage implements OnInit {
 
     const body = new URLSearchParams();
     body.set('idUsuario', this.id);
-    body.set('idHorario', this.idHorario);
+    body.set('idHorario', this.newIdHorario);
     body.set('dia', dia);
     body.set('horaInicio', this.horaInicio);
     body.set('horaFin', this.horaFin);
@@ -399,16 +405,17 @@ export class ConfiguracionCrmPage implements OnInit {
       this.http.post(url, body.toString(), options).subscribe(
         data => {
           console.log(data);
+          this.newIdHorario = this.newIdHorario + 1;
         },
         err => {
-          return reject(err);
+          console.log(err);
         }
       );
     });
 
+
   }
 
-  
   public getGiroChat() {
 
     const url = 'https://www.koomkin.com.mx/api/app/getGiroChat/' + this.id;
@@ -416,6 +423,7 @@ export class ConfiguracionCrmPage implements OnInit {
     return new Promise((resolve, reject) => {
       this.http.get(url).subscribe(
         data => {
+          this.giroChat = data[0].DESCRIPCIONJIROCHAT;
           console.log(data);
         },
         err => {
@@ -452,6 +460,43 @@ export class ConfiguracionCrmPage implements OnInit {
       );
     });
   }
+
+  changeEdit(variable) {
+
+    switch(variable) {
+      case "calltracking": {
+        if (this.calltracking == 'Guardar') {
+          this.calltracking = 'Editar';
+        } else {
+          this.calltracking = 'Guardar';
+        }
+        break;
+      }
+
+      case "emailing": {
+        if (this.emailing == 'Guardar') {
+          this.emailing = 'Editar';
+        } else {
+          this.emailing = 'Guardar';
+        }
+
+        break;
+      }
+
+      case "chatbot": {
+        if (this.chatbot == 'Guardar') {
+          this.chatbot = 'Editar';
+        } else {
+          this.chatbot = 'Guardar';
+        }
+        break;
+      }
+     
+      default:
+        
+    }
+  }
+
 }
 
 
