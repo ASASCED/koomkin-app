@@ -31,7 +31,8 @@ export class ConfiguracionCrmPage implements OnInit {
   public newIdHorario:any = 1;
   public horaFin;
   public horaInicio;
-  public dias;
+  public dias: any = [ 'Lunes'];
+
   public idHorario;
 
   public giroChat;
@@ -41,13 +42,13 @@ export class ConfiguracionCrmPage implements OnInit {
   public chatbot = 'Guardar';
 
   public cat_dias = [
-    { id: 1, nombre: 'Lunes' },
-    { id: 2, nombre: 'Martes' },
-    { id: 3, nombre: 'Miércoles' },
-    { id: 4, nombre: 'Jueves' },
-    { id: 5, nombre: 'Viernes' },
-    { id: 6, nombre: 'Sábado' },
-    { id: 7, nombre: 'Domingo' },
+    { nombre: 'Lunes' },
+    { nombre: 'Martes' },
+    { nombre: 'Miércoles' },
+    { nombre: 'Jueves' },
+    { nombre: 'Viernes' },
+    { nombre: 'Sábado' },
+    { nombre: 'Domingo' }
   ];
 
   apiUrl = 'https://www.koomkin.com.mx/mailing/update_pdf/';
@@ -69,6 +70,7 @@ export class ConfiguracionCrmPage implements OnInit {
     this.uuid = this.authService.uuid;
     this.pdf = this.id + ".pdf";
     this.celular = this.authService.celular;
+    this.email = this.authService.email;
   }
 
   ngOnInit() {
@@ -84,7 +86,6 @@ export class ConfiguracionCrmPage implements OnInit {
       data => {
         this.datos = data;
         if (this.datos[0]) {
-          this.email = this.datos[0].email;
           this.facebook = this.datos[0].facebook;
           this.instagram = this.datos[0].instagram;
           this.linkedIn = this.datos[0].linkedin;
@@ -360,15 +361,27 @@ export class ConfiguracionCrmPage implements OnInit {
         data => {
           for (let j in data) {
             if (data[j].hasOwnProperty('Dia')) {
+              this.cat_dias.forEach(element => {
+                if (element['nombre'] == data[j].Dia) {
+                  this.dias.push(element['nombre']);
+                } 
+              });
+              console.log( this.dias);
               this.idHorario = parseInt(data[j].IdHorario);
               this.horaInicio = new Date(data[j].HoraInicio);
-              this.horaInicio = ('0' + (this.horaInicio.getHours() + 6)).slice(-2) + ('0' + this.horaInicio.getMinutes()).slice(-2) + ('0' + this.horaInicio.getSeconds()).slice(-2);
+              this.horaInicio = ('0' + (this.horaInicio.getHours() + 6)).slice(-2)  + ':' +  ('0' + this.horaInicio.getMinutes()).slice(-2)  + ':' +  ('0' + this.horaInicio.getSeconds()).slice(-2);
               this.horaFin = new Date(data[j].HoraFin);
-              this.horaFin = ('0' + (this.horaFin.getHours() + 6)).slice(-2) + ('0' + this.horaFin.getMinutes()).slice(-2) + ('0' + this.horaFin.getSeconds()).slice(-2);
+              this.horaFin = ('0' + (this.horaFin.getHours() + 6)).slice(-2) + ':' + ('0' + this.horaFin.getMinutes()).slice(-2)  + ':' +  ('0' + this.horaFin.getSeconds()).slice(-2);
+            } else {
+              this.horaInicio = new Date('1970-01-01T09:00:00.000Z');
+              this.horaInicio = ('0' + (this.horaInicio.getHours() + 6)).slice(-2)  + ':' +  ('0' + this.horaInicio.getMinutes()).slice(-2)  + ':' +  ('0' + this.horaInicio.getSeconds()).slice(-2);
+              this.horaFin = new Date('1970-01-01T18:00:00.000Z');
+              this.horaFin = ('0' + (this.horaFin.getHours() + 6)).slice(-2) + ':' + ('0' + this.horaFin.getMinutes()).slice(-2)  + ':' +  ('0' + this.horaFin.getSeconds()).slice(-2);
             }
           }
           if (this.idHorario) {
             this.newIdHorario = this.newIdHorario + this.idHorario;
+            console.log(this.newIdHorario);
           }
 
           resolve();
@@ -380,6 +393,15 @@ export class ConfiguracionCrmPage implements OnInit {
       );
     });
   }
+
+  public removeItemFromArr ( arr, item ) {
+    var i = arr.indexOf( item );
+ 
+    if ( i !== -1 ) {
+        arr.splice( i, 1 );
+    }
+}
+ 
 
   public registrarHorarioAtencion(dia) {
 
@@ -405,7 +427,6 @@ export class ConfiguracionCrmPage implements OnInit {
       this.http.post(url, body.toString(), options).subscribe(
         data => {
           console.log(data);
-          this.newIdHorario = this.newIdHorario + 1;
         },
         err => {
           console.log(err);
@@ -446,7 +467,6 @@ export class ConfiguracionCrmPage implements OnInit {
       )
     };
 
-
     const url = 'https://www.koomkin.com.mx/api/app/registrarGiroChat/';
 
     return new Promise((resolve, reject) => {
@@ -461,40 +481,36 @@ export class ConfiguracionCrmPage implements OnInit {
     });
   }
 
-  changeEdit(variable) {
+  public registrarDatos() {
 
-    switch(variable) {
-      case "calltracking": {
-        if (this.calltracking == 'Guardar') {
-          this.calltracking = 'Editar';
-        } else {
-          this.calltracking = 'Guardar';
+    const body = new URLSearchParams();
+    body.set('idUsuario', this.id);
+    body.set('celular', this.celular);
+    body.set('email', this.email);
+
+    const options = {
+      headers: new HttpHeaders().set(
+        'Content-Type',
+        'application/x-www-form-urlencoded'
+      )
+    };
+
+    const url = 'https://www.koomkin.com.mx/api/app/registrarDatos/';
+
+    return new Promise((resolve, reject) => {
+      this.http.post(url, body.toString(), options).subscribe(
+        data => {
+          /*
+          this.dias.forEach(value => {
+            this.registrarHorarioAtencion(value);
+          })
+          */
+        },
+        err => {
+          return reject(err);
         }
-        break;
-      }
-
-      case "emailing": {
-        if (this.emailing == 'Guardar') {
-          this.emailing = 'Editar';
-        } else {
-          this.emailing = 'Guardar';
-        }
-
-        break;
-      }
-
-      case "chatbot": {
-        if (this.chatbot == 'Guardar') {
-          this.chatbot = 'Editar';
-        } else {
-          this.chatbot = 'Guardar';
-        }
-        break;
-      }
-     
-      default:
-        
-    }
+      );
+    });
   }
 
 }

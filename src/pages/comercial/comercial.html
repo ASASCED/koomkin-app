@@ -26,8 +26,7 @@
                                         <p class="encabezado-texto-grande">Proceso Comercial</p>
                                     </ion-col>
                                     <ion-col col-2>
-                                        <ion-icon *ngIf="proceso !== 'Editar'" (click)="changeEdit('proceso')" name="md-create" class="iconos-w"></ion-icon>
-                                        <ion-icon *ngIf="proceso == 'Editar'" (click)="changeEdit('proceso');registrarProcesoComercial();" name="md-checkbox-outline" class="iconos-w"></ion-icon>
+                                        <ion-icon (click)="changeEdit('proceso');registrarProcesoComercial();" name="md-checkbox-outline" class="iconos-w"></ion-icon>
                                     </ion-col>
                                 </ion-row>
                             </ion-grid>
@@ -44,10 +43,7 @@
                                         Offline o Tradicional:&nbsp;
                                     </ion-col>
                                     <ion-col col-3>
-                                        <div class="proceso" *ngIf="proceso !== 'Editar'">
-                                            <div class="puntos">{{distribucionOffline}}</div>
-                                        </div>
-                                        <input *ngIf="proceso == 'Editar'" type="number" name="quantity" min="0" max="100" class="distribucion-porcentaje" [(ngModel)]="distribucionOffline">
+                                        <input type="number" name="quantity" min="0" max="100" class="distribucion-porcentaje" [(ngModel)]="distribucionOffline">
                                     </ion-col>
                                     <ion-col col-3 class="porcentaje">
                                         &nbsp;%
@@ -58,10 +54,7 @@
                                         Online o Digital:&nbsp;
                                     </ion-col>
                                     <ion-col col-3>
-                                        <div class="proceso" *ngIf="proceso !== 'Editar'">
-                                            <div class="puntos">{{distribucionOnline}}</div>
-                                        </div>
-                                        <input type="number" *ngIf="proceso == 'Editar'" name="quantity" min="0" max="100" class="distribucion-porcentaje" [(ngModel)]="distribucionOnline">
+                                        <input type="number"  name="quantity" min="0" max="100" class="distribucion-porcentaje" [(ngModel)]="distribucionOnline">
                                     </ion-col>
                                     <ion-col col-3 class="porcentaje">
                                         &nbsp;%
@@ -75,16 +68,13 @@
                                 </ion-row>
                                 <ion-row style="margin-bottom: 0%">
                                     <ion-col col-4>
-                                        <button [ngClass]="{'vende':quienVende != 'Solo dueño','vende-activo':quienVende == 'Solo dueño'}" *ngIf="proceso !== 'Editar'">Sólo dueño</button>
-                                        <button [ngClass]="{'vende':quienVende != 'Solo dueño','vende-activo':quienVende == 'Solo dueño'}" *ngIf="proceso == 'Editar'" (click)="changeSeller('Solo dueño')">Sólo dueño</button>
+                                        <button [ngClass]="{'vende':quienVende != 'Solo dueño','vende-activo':quienVende == 'Solo dueño'}"  (click)="changeSeller('Solo dueño')">Sólo dueño</button>
                                     </ion-col>
                                     <ion-col col-4>
-                                        <button [ngClass]="{'vende':quienVende != 'Fuerza de Ventas','vende-activo':quienVende == 'Fuerza de Ventas'}" *ngIf="proceso !== 'Editar'">Fuerza de Ventas</button>
-                                        <button [ngClass]="{'vende':quienVende != 'Fuerza de Ventas','vende-activo':quienVende == 'Fuerza de Ventas'}" *ngIf="proceso == 'Editar'" (click)="changeSeller('Fuerza de Ventas')">Fuerza de Ventas</button>
+                                        <button [ngClass]="{'vende':quienVende != 'Fuerza de Ventas','vende-activo':quienVende == 'Fuerza de Ventas'}"  (click)="changeSeller('Fuerza de Ventas')">Fuerza de Ventas</button>
                                     </ion-col>
                                     <ion-col col-4>
-                                        <button [ngClass]="{'vende':quienVende != 'Ambos','vende-activo':quienVende == 'Ambos'}" *ngIf="proceso !== 'Editar'">Ambos</button>
-                                        <button [ngClass]="{'vende':quienVende != 'Ambos','vende-activo':quienVende == 'Ambos'}" *ngIf="proceso == 'Editar'" (click)="changeSeller('Ambos')">Ambos</button>
+                                        <button [ngClass]="{'vende':quienVende != 'Ambos','vende-activo':quienVende == 'Ambos'}"  (click)="changeSeller('Ambos')">Ambos</button>
                                     </ion-col>
                                 </ion-row>
 
@@ -95,23 +85,13 @@
                                 </ion-row>
                                 <ion-row style="margin-bottom: 0%" >
                                     <ion-col col-2 offset-2>
-                                        <div class="proceso" *ngIf="proceso !== 'Editar'">
-                                            <div class="puntos">{{numeroVendedores}}</div>
-                                        </div>
-                                        <input type="number" *ngIf="proceso == 'Editar'" [(ngModel)]="numeroVendedores">
-                                    </ion-col>
-                                    
-                                    <ion-col col-4 offset-2 class="porcentaje" *ngIf="proceso !== 'Editar'">
-                                        <input type="radio" name="tipoVendedores" value="Telefonicos" style="width: 20%;" checked="tipoVendedores == 'Telefonicos'"> Telefónicos 
-                                    </ion-col>
-                                    <ion-col col-4 offset-6 class="porcentaje" *ngIf="proceso !== 'Editar'" >
-                                        <input type="radio" name="tipoVendedores" value="De Campo" style="width: 20%;" checked="tipoVendedores == 'De Campo'"> De Campo
+                                        <input type="number"  [(ngModel)]="numeroVendedores">
                                     </ion-col>
 
-                                    <ion-col col-4 offset-2 class="porcentaje" *ngIf="proceso == 'Editar'">
+                                    <ion-col col-4 offset-2 class="porcentaje" >
                                         <input type="radio" name="tipoVendedores" [(ngModel)]="tipoVendedores" value="Telefonicos"value="Telefonicos" style="width: 20%;" checked="Telefonicos"> Telefónicos   
                                     </ion-col>
-                                    <ion-col col-4 offset-6 class="porcentaje" *ngIf="proceso == 'Editar'">
+                                    <ion-col col-4 offset-6 class="porcentaje" >
                                         <input type="radio" name="tipoVendedores" [(ngModel)]="tipoVendedores" [(ngModel)]="tipoVendedores" value="De Campo"  value="De Campo" style="width: 20%;" checked="De Campo"> De Campo
                                     </ion-col>
                                 </ion-row>
@@ -123,12 +103,10 @@
                                 </ion-row>
                                 <ion-row style="margin-bottom: 0%">
                                     <ion-col col-4 offset-2>
-                                        <button [ngClass]="{'vende':crmDiferente != true,'vende-activo':crmDiferente == true}" *ngIf="proceso !== 'Editar'">Si</button>
-                                        <button [ngClass]="{'vende':crmDiferente != true,'vende-activo':crmDiferente == true}" *ngIf="proceso == 'Editar'" (click)="changeCRM(true)">Si</button>
+                                        <button [ngClass]="{'vende':crmDiferente != true,'vende-activo':crmDiferente == true}"  (click)="changeCRM(true)">Si</button>
                                     </ion-col>
                                     <ion-col col-4>
-                                        <button [ngClass]="{'vende':crmDiferente != false,'vende-activo':crmDiferente == false}" *ngIf="proceso !== 'Editar'">No</button>
-                                        <button [ngClass]="{'vende':crmDiferente != false,'vende-activo':crmDiferente == false}" *ngIf="proceso == 'Editar'" (click)="changeCRM(false)">No</button>
+                                        <button [ngClass]="{'vende':crmDiferente != false,'vende-activo':crmDiferente == false}"  (click)="changeCRM(false)">No</button>
                                     </ion-col>
                                 </ion-row>
                             </ion-grid>
@@ -150,8 +128,7 @@
                                         <p class="encabezado-texto-grande">Clientes Nuevos</p>
                                     </ion-col>
                                     <ion-col col-2>
-                                        <ion-icon *ngIf="clientes !== 'Editar'" (click)="changeEdit('clientes')" name="md-create" class="iconos-w"></ion-icon>
-                                        <ion-icon *ngIf="clientes == 'Editar'" (click)="changeEdit('clientes');registrarClientesNuevos()" name="md-checkbox-outline" class="iconos-w"></ion-icon>
+                                        <ion-icon (click)="changeEdit('clientes');registrarClientesNuevos()" name="md-checkbox-outline" class="iconos-w"></ion-icon>
                                     </ion-col>
                                 </ion-row>
                             </ion-grid>
@@ -350,8 +327,7 @@
                                         <p class="encabezado-texto-grande">Redes Sociales</p>
                                     </ion-col>
                                     <ion-col col-2>
-                                        <ion-icon *ngIf="redes !== 'Editar'" (click)="changeEdit('redes')" name="md-create" class="iconos-w"></ion-icon>
-                                        <ion-icon *ngIf="redes == 'Editar'" (click)="changeEdit('redes');changeInfo();cambioInformacion()" name="md-checkbox-outline" class="iconos-w"></ion-icon>
+                                        <ion-icon (click)="changeEdit('redes');changeInfo();cambioInformacion()" name="md-checkbox-outline" class="iconos-w"></ion-icon>
                                     </ion-col>
                                 </ion-row>
                             </ion-grid>
@@ -364,26 +340,22 @@
                                     </ion-col>
                                 </ion-row>
                                 <ion-row>
-                                        <ion-col col-12>
-                                            <p class="campos ">Web (Empresa)</p>
-                                        </ion-col>
-                                    </ion-row>
-                                    <ion-row>
-                                        <ion-col col-10 class="social ">
-                                            <div class="redsocial "
-                                                [ngClass]="{ 'nocuento':web=='No cuento con esta red' } ">
-                                                <div class="puntos">{{web}}</div>
-                                            </div>
-                                        </ion-col>
-                                        <ion-col col-2>
-                                            <img *ngIf="web !=='' && web !=='No cuento con esta red' "
-                                                src="assets/imgs/ajustes/tengo.svg " class="cuento" />
-                                            <img *ngIf="web === ''" src="assets/imgs/ajustes/tengo.svg" class="cuento"
-                                                (click)="changeTengo('web')" />
-                                            <img *ngIf="web==='No cuento con esta red' "
-                                                src="assets/imgs/ajustes/notengo.svg " class="cuento">
-                                        </ion-col>
-                                    </ion-row>
+                                    <ion-col col-12>
+                                        <p class="campos ">Web (Empresa)</p>
+                                    </ion-col>
+                                </ion-row>
+                                <ion-row>
+                                    <ion-col col-10 class="social ">
+                                        <div [ngClass]="{ 'nocuento':web=='No cuento con esta red' } ">
+                                            <input type="text " name="Facebook" [(ngModel)]="web">
+                                        </div>
+                                    </ion-col>
+                                    <ion-col col-2>
+                                        <img *ngIf="web !=='' && web !=='No cuento con esta red' " src="assets/imgs/ajustes/tengo.svg " class="cuento" />
+                                        <img *ngIf="web === ''" src="assets/imgs/ajustes/tengo.svg" class="cuento" (click)="changeTengo('web')" />
+                                        <img *ngIf="web==='No cuento con esta red' " src="assets/imgs/ajustes/notengo.svg " class="cuento">
+                                    </ion-col>
+                                </ion-row>
     
                                 <ion-row>
                                     <ion-col col-12>
@@ -392,9 +364,8 @@
                                 </ion-row>
                                 <ion-row>
                                     <ion-col col-10>
-                                        <div class="redsocial"
-                                            [ngClass]="{'nocuento':facebook == 'No cuento con esta red'}">
-                                            <div class="puntos">{{facebook}}</div>
+                                        <div [ngClass]="{'nocuento':facebook == 'No cuento con esta red'}">
+                                            <input type="text " name="Facebook "  [(ngModel)]="facebook ">
                                         </div>
                                     </ion-col>
                                     <ion-col col-2>
@@ -413,9 +384,8 @@
                                 </ion-row>
                                 <ion-row>
                                     <ion-col col-10 class="social ">
-                                        <div class="redsocial "
-                                            [ngClass]="{ 'nocuento':instagram=='No cuento con esta red' } ">
-                                            <div class="puntos">{{instagram}}</div>
+                                        <div [ngClass]="{ 'nocuento':instagram == 'No cuento con esta red' } ">
+                                            <input type="text " name="instagram" [(ngModel)]="instagram">
                                         </div>
                                     </ion-col>
                                     <ion-col col-2>
@@ -434,9 +404,8 @@
                                 </ion-row>
                                 <ion-row>
                                     <ion-col col-10 class="social ">
-                                        <div class="redsocial "
-                                            [ngClass]="{ 'nocuento':twitter=='No cuento con esta red' } ">
-                                            <div class="puntos">{{twitter}}</div>
+                                        <div [ngClass]="{ 'nocuento':twitter=='No cuento con esta red' } ">
+                                            <input type="text " name="twitter" [(ngModel)]="twitter">
                                         </div>
                                     </ion-col>
                                     <ion-col col-2>
@@ -456,9 +425,8 @@
                                 </ion-row>
                                 <ion-row>
                                     <ion-col col-10 class="social ">
-                                        <div class="redsocial "
-                                            [ngClass]="{ 'nocuento':linkedIn=='No cuento con esta red' } ">
-                                            <div class="puntos">{{linkedIn}}</div>
+                                        <div [ngClass]="{ 'nocuento':linkedIn=='No cuento con esta red' } ">
+                                            <input type="text " name="twitter" [(ngModel)]="linkedIn">
                                         </div>
                                     </ion-col>
                                     <ion-col col-2>
@@ -491,66 +459,13 @@
                                         <p class="encabezado-texto-grande">Objetivo Campaña-CRM-BOT</p>
                                     </ion-col>
                                     <ion-col col-2>
-                                        <ion-icon *ngIf="objetivo !== 'Editar'" (click)="changeEdit('objetivo')" name="md-create" class="iconos-w"></ion-icon>
-                                        <ion-icon *ngIf="objetivo == 'Editar'" (click)="changeEdit('objetivo');registrarObjetivoCampania()" name="md-checkbox-outline" class="iconos-w"></ion-icon>
+                                        <ion-icon (click)="changeEdit('objetivo');registrarObjetivoCampania()" name="md-checkbox-outline" class="iconos-w"></ion-icon>
                                     </ion-col>
                                 </ion-row>
                             </ion-grid>
                         </div>
                         <ion-card-content>
-                                <ion-grid *ngIf="objetivo !== 'Editar'">
-                                        <ion-row style="margin-bottom: 0%">
-                                            <ion-col col-12 class="preguntas" style="text-align: left">
-                                                ¿Cuál es tu objetivo de Campaña - CRM - BOT?
-                                            </ion-col>
-                                        </ion-row>
-                                        <ion-row style="margin-bottom: 0%">
-                                            <ion-col col-2 style="display: flex;
-                                            justify-content: center;
-                                            align-items: center;">
-                                                <input type="radio" name="campaniaObjetivo" value="Llamada" style="width: 70%;" checked="Llamada">
-                                            </ion-col>
-                                            <ion-col col-10 class="porcentaje">
-                                                a. Llamada Telefónica con Cliente
-                                            </ion-col>
-                                        </ion-row>
-                                        <ion-row style="margin-bottom: 0%">
-                                            <ion-col col-2 style="display: flex;
-                                            justify-content: center;
-                                            align-items: center;">
-                                                <input type="radio" name="campaniaObjetivo" value="Cita" style="width: 70%;" checked="Cita">
-                                            </ion-col>
-                                            <ion-col col-10 class="porcentaje">
-                                                b. Agendar Cita en tu Punto de Venta / Oficina
-                                            </ion-col>
-                                        </ion-row>
-                                        <ion-row style="margin-bottom: 0%">
-                                            <ion-col col-2 style="display: flex;
-                                            justify-content: center;
-                                            align-items: center;">
-                                                <input type="radio" name="campaniaObjetivo" value="Visita" style="width: 70%;" checked="Visita">
-                                            </ion-col>
-                                            <ion-col col-10 class="porcentaje">
-                                                c. Visitar al Cliente Potencial en su Domicilio
-                                            </ion-col>
-                                        </ion-row>
-                                        <ion-row style="margin-bottom: 0%">
-                                            <ion-col col-2 style="display: flex;
-                                            justify-content: center;
-                                            align-items: center;">
-                                                <input type="radio" name="campaniaObjetivo" value="Cotizacion" style="width: 70%;" checked="Cotizacion">
-                                            </ion-col>
-                                            <ion-col col-10 class="porcentaje">
-                                                d. Enviar Cotización Directamente
-                                            </ion-col>
-                                        </ion-row>
-                                        <ion-row style="margin-bottom: 0%">
-                                            <ion-col col-12 class="preguntas-center">
-                                                Para que Koomkin Bot trabajé y se alineé a dicho objetivo
-                                            </ion-col>
-                                        </ion-row>
-                                    </ion-grid>
-                            <ion-grid *ngIf="objetivo == 'Editar'"> 
+                            <ion-grid> 
                                 <ion-row style="margin-bottom: 0%">
                                     <ion-col col-12 class="preguntas" style="text-align: left">
                                         ¿Cuál es tu objetivo de Campaña - CRM - BOT?

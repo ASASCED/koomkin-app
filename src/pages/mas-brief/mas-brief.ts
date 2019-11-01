@@ -753,6 +753,8 @@ export class MasBriefPage implements OnInit {
               if (element['IDESTADO'] === this.cobertura[i].IDESTADO) {
                 this.estado.push(element['NOMBRE']);
               }
+              console.log(this.estado);
+
             });
           }
         } else if (this.idCobertura == 2) {

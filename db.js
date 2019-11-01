@@ -2039,9 +2039,9 @@ db.executeLastUpdateMembership = function(
   });
 };
 
-db.executeRegistrarCelularCT = function(idUsuario,celular) {
+db.executeRegistrarDatos = function(idUsuario,celular,email) {
 
-  const requestStr = `update CATUSUARIO set TelefonoCelular2 = '${celular}' where IDUSUARIO = ${idUsuario}`;
+  const requestStr = `update CATUSUARIO set TelefonoCelular2 = '${celular}', EMAIL = '${email}' where IDUSUARIO = ${idUsuario}`;
 
   return new Promise((resolve, reject) => {
     tp.sql(requestStr)

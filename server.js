@@ -2291,12 +2291,13 @@ app.post('/registrarGiroChat/', function (req, res) {
         });
 });
 
-app.post('/registrarCelularCT/', function (req, res) {
+app.post('/registrarDatos/', function (req, res) {
 
     const idUsuario = parseInt(req.body.idUsuario, 10);
     const celular = req.body.celular;
+    const email = req.body.email;
 
-    db.executeRegistrarCelularCT(idUsuario,celular)
+    db.executeRegistrarDatos(idUsuario,celular,email)
         .then(rows => {
             res.json(rows).status(200).send();
         })
