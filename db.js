@@ -1912,7 +1912,7 @@ db.updateCobertura = function(idCampania, idEstado, idUsuario, idCobertura) {
 db.updateCoberturaRegion = function(idCampania, idEstado, idUsuario) {
 
   const requestStr = `insert into tbl_TuCampaniaCobertura (IDCampania,IdPAIS,IDESTADO,IDUSUARIO) VALUES (${idCampania},156,${idEstado},${idUsuario});
-  update TBL_BRIEF set ID_COBERTURA = 1 where IDUSUARIO = ${idUsuario}`;
+  update TBL_BRIEF set ID_COBERTURA = 5 where IDUSUARIO = ${idUsuario}`;
 
   console.log(requestStr);
 
