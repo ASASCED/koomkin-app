@@ -192,9 +192,7 @@ export class MasBriefPage implements OnInit {
         if (this.cp === undefined || this.cp === 'NULL' || this.cp === null) {
           this.cp = 11320;
         }
-        const cpMin = parseInt(this.cp) - 10;
-        const cpMax = parseInt(this.cp) + 10;
-        this.getCodigoPostal(cpMin, cpMax);
+        this.getCodigoPostal(this.cp);
         this.ciudad = this.datos[0].Ciudad;
         this.target = this.datos[0].ClientesTarget;
           if (this.target === undefined || this.target === 'NULL' || this.target === null) {
@@ -686,10 +684,11 @@ export class MasBriefPage implements OnInit {
     this.app.getRootNav().setRoot('InicioPage');
   }
 
-  getCodigoPostal(cpMin, cpMax) {
-    this.provedor.getNewCodigoPostal(cpMin, cpMax).then(
+  getCodigoPostal(cp) {
+    this.provedor.getCPostal(cp).then(
       data => {
         this.datos_ciudad = data;
+        console.log(this.datos_ciudad);
         if (this.datos_ciudad.length > 0) {
           this.estado_cob = this.datos_ciudad[0].Estado;
           if (this.estado_cob === 'Nuevo León') {
@@ -700,6 +699,8 @@ export class MasBriefPage implements OnInit {
               this.estado_cob = element['IDESTADO'];
             }
           });
+        } else {
+          this.getNewCodigoPostal(cp);
         }
       },
       err => {
@@ -717,6 +718,7 @@ export class MasBriefPage implements OnInit {
       this.provedor.getNewCodigoPostal(cpMin, cpMax).then(
         data => {
           this.datos_ciudad = data;
+          console.log('dos cp',this.datos_ciudad )
           if (this.datos_ciudad.length > 0) {
             this.cambio_estado_cob = this.datos_ciudad[0].Estado;
             if (this.cambio_estado_cob === 'Nuevo León') {

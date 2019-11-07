@@ -2161,7 +2161,22 @@ db.executeGetEmpresas = function() {
 db.executeGetCodigoPostal = function(cp) {
   const requestStr = `select CP, Estado From Tbl_SEPOMEX where CP = ${cp}`;
 
-  
+  return new Promise((resolve, reject) => {
+    tp.sql(requestStr)
+      .execute()
+      .then(results => {
+        resolve(results);
+      })
+      .catch(err => {
+        console.log(err);
+        reject(err);
+      });
+  });
+};
+
+db.executeGetCPostal = function(cp) {
+  const requestStr = `select top(1) IDESTADO,CP, Estado From Tbl_SEPOMEX s join CATESTADO e on e.NOMBRE=s.Estado where CP = ${cp}`;
+
   return new Promise((resolve, reject) => {
     tp.sql(requestStr)
       .execute()

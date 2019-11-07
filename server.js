@@ -1143,6 +1143,18 @@ app.get('/getCodigoPostal/:codigo', function (req, res) {
         });
 });
 
+app.get('/getCPostal/:codigo', function (req, res) {
+
+    const codigo = parseInt(req.params.codigo, 10);
+
+    db.executeGetCPostal(codigo)
+        .then(rows => {
+            res.json(rows).status(200).send();
+        })
+        .catch(err => {
+            res.status(500).json({ error: err }).send();
+        });
+});
 
 //getCodigoPostal
 

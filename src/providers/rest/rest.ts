@@ -662,6 +662,17 @@ export class RestProvider {
     });
   }
 
+  getCPostal(codigo) {
+    return new Promise(resolve => {
+      this.http.get(this.apiUrl + '/getCPostal/' + codigo ).subscribe(data => {
+        resolve(data);
+      }, err => {
+         console.log(err);
+      });
+    });
+  }
+
+
   getNewCodigoPostal(cpMin,cpMax) {
     return new Promise(resolve => {
       this.http.get(this.apiUrl + '/getNewCodigoPostal/' + cpMin + '/' + cpMax ).subscribe(data => {
