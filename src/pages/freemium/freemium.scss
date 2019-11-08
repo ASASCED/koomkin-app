@@ -1,84 +1,63 @@
 page-freemium {
-    margin: 0;
-    padding: 0;
-    max-height: 100%;
+  .test {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+  }
 
-    .test {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-around;
-        height: 85vh;
+  .freemium-content {
+    background: linear-gradient(#215796, #0f3154);
+    height: 100vh;
+  }
+
+  .header-image {
+    display: flex;
+    justify-content: flex-end;
+
+    img {
+        width: 94%;
+        margin: 2%;
     }
+  }
 
-    .freemium-content {
-        background: linear-gradient(#215796, #0F3154);
-        height: 100vh;
-    }
-
-    .header-image {
-        margin-top: 9vh;
-        margin-right: 2.5vw;
-        display: flex;
-        justify-content: flex-end;
-       
-        img {
-            width: 23vh;
-        }
-    }
-
-    @media screen and (max-width: 435px){
-        .principal-title { 
-            margin-top: 0!important;
-        }
-
-    }
-
-    @media screen and (max-height: 575px){
-        .principal-title { 
-            margin-top: -2.5em!important;
-        }
-
-    }
-    // @media screen and (max-height: 435px) {
-        
-    // }
-
+  @media screen and (max-width: 435px) {
     .principal-title {
-        padding: 0em 2.5em 0em 2.5em;
-        margin-top: -2.5em;
-
-        img {
-            height: 7vh;
-            
-        }
+      margin-top: 4% !important;
     }
+  }
 
-    .central-content {
-        display: flex;
-        justify-content: center;
-        margin: 0.2em 0 0.5em 0.5em;
-        max-height: 65vh;
-        img {
-            width: 95vw;
-        }
+  .principal-title {
+    padding: 0em 1em 0em 1em;
+    margin-top: -2.5em;
+    img {
+      width: 100%;
     }
+  }
 
-    .btn-container {
-       
-        display: flex;
-        justify-content: center;
-
-        button {
-            background-color: #F2680A;
-            color: #fff;
-            padding: 5px 10px;
-            border-radius: 1em;
-            width: 25%;
-            font-size: 80%;
-            cursor: pointer;
-            border:none;
-        }
-
+  .central-content {
+    display: flex;
+    justify-content: center;
+    margin: 0.2em 0 0.5em 0.5em;
+    max-height: 65vh;
+    img {
+      width: 95vw;
     }
+  }
+
+  .btn-container {
+    display: flex;
+    justify-content: center;
+
+    button {
+        background-color: #f2680a;
+        color: #fff;
+        padding: 8px 10px;
+        border-radius: 40px;
+        width: 40%;
+        font-size: 16px;
+        cursor: pointer;
+        border: none;
+        margin: 3%;
+    }
+  }
 }
-

@@ -58,12 +58,15 @@ tarjeta {
       width: 100%;
       height: 42%;
       background-image: linear-gradient(to bottom, #3dcdbb, #33a2bd);
+      @media screen and (min-height:820px) {
+        height: 35%;
+      }
     }
     .tarjeta {
       width: 350px;
       height: 210px;
       margin-left: 1%;
-      @media screen and (min-width:485px) {
+      @media screen and (min-width:412px) {
         width: 380px;
         height: 210px;
         margin-left: 4%;

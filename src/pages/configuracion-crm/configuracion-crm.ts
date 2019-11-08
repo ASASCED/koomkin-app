@@ -28,7 +28,7 @@ export class ConfiguracionCrmPage implements OnInit {
   public twitter;
   public uuid;
   public horario: any;
-  public newIdHorario:any = 1;
+  public newIdHorario: any = 1;
   public horaFin;
   public horaInicio;
   public dias: any = [''];
@@ -78,9 +78,9 @@ export class ConfiguracionCrmPage implements OnInit {
     this.getHorarioAtencion();
     this.getGiroChat();
     this.horaInicio = new Date('1970-01-01T09:00:00.000Z');
-    this.horaInicio = ('0' + (this.horaInicio.getHours() + 6)).slice(-2)  + ':' +  ('0' + this.horaInicio.getMinutes()).slice(-2)  + ':' +  ('0' + this.horaInicio.getSeconds()).slice(-2);
+    this.horaInicio = ('0' + (this.horaInicio.getHours() + 6)).slice(-2) + ':' + ('0' + this.horaInicio.getMinutes()).slice(-2) + ':' + ('0' + this.horaInicio.getSeconds()).slice(-2);
     this.horaFin = new Date('1970-01-01T18:00:00.000Z');
-    this.horaFin = ('0' + (this.horaFin.getHours() + 6)).slice(-2) + ':' + ('0' + this.horaFin.getMinutes()).slice(-2)  + ':' +  ('0' + this.horaFin.getSeconds()).slice(-2);        
+    this.horaFin = ('0' + (this.horaFin.getHours() + 6)).slice(-2) + ':' + ('0' + this.horaFin.getMinutes()).slice(-2) + ':' + ('0' + this.horaFin.getSeconds()).slice(-2);
   }
 
   getMailCliente(idUsuario) {
@@ -366,22 +366,21 @@ export class ConfiguracionCrmPage implements OnInit {
               this.cat_dias.forEach(element => {
                 if (element['nombre'] == data[j].Dia) {
                   this.dias.push(element['nombre']);
-                } 
+                }
               });
-              console.log( this.dias);
               this.idHorario = parseInt(data[j].IdHorario);
               this.horario = parseInt(data[j].IdHorario);
 
               this.horaInicio = new Date(data[j].HoraInicio);
-              this.horaInicio = ('0' + (this.horaInicio.getHours() + 6)).slice(-2)  + ':' +  ('0' + this.horaInicio.getMinutes()).slice(-2)  + ':' +  ('0' + this.horaInicio.getSeconds()).slice(-2);
+              this.horaInicio = ('0' + (this.horaInicio.getHours() + 6)).slice(-2) + ':' + ('0' + this.horaInicio.getMinutes()).slice(-2) + ':' + ('0' + this.horaInicio.getSeconds()).slice(-2);
               this.horaFin = new Date(data[j].HoraFin);
-              this.horaFin = ('0' + (this.horaFin.getHours() + 6)).slice(-2) + ':' + ('0' + this.horaFin.getMinutes()).slice(-2)  + ':' +  ('0' + this.horaFin.getSeconds()).slice(-2);
+              this.horaFin = ('0' + (this.horaFin.getHours() + 6)).slice(-2) + ':' + ('0' + this.horaFin.getMinutes()).slice(-2) + ':' + ('0' + this.horaFin.getSeconds()).slice(-2);
             } else {
               this.horario = 0;
               this.horaInicio = new Date('1970-01-01T09:00:00.000Z');
-              this.horaInicio = ('0' + (this.horaInicio.getHours() + 6)).slice(-2)  + ':' +  ('0' + this.horaInicio.getMinutes()).slice(-2)  + ':' +  ('0' + this.horaInicio.getSeconds()).slice(-2);
+              this.horaInicio = ('0' + (this.horaInicio.getHours() + 6)).slice(-2) + ':' + ('0' + this.horaInicio.getMinutes()).slice(-2) + ':' + ('0' + this.horaInicio.getSeconds()).slice(-2);
               this.horaFin = new Date('1970-01-01T18:00:00.000Z');
-              this.horaFin = ('0' + (this.horaFin.getHours() + 6)).slice(-2) + ':' + ('0' + this.horaFin.getMinutes()).slice(-2)  + ':' +  ('0' + this.horaFin.getSeconds()).slice(-2);
+              this.horaFin = ('0' + (this.horaFin.getHours() + 6)).slice(-2) + ':' + ('0' + this.horaFin.getMinutes()).slice(-2) + ':' + ('0' + this.horaFin.getSeconds()).slice(-2);
             }
           }
 
@@ -430,16 +429,15 @@ export class ConfiguracionCrmPage implements OnInit {
     });
   }
 
-  public removeItemFromArr ( arr, item ) {
-    var i = arr.indexOf( item );
- 
-    if ( i !== -1 ) {
-        arr.splice( i, 1 );
-    }
-}
- 
+  public removeItemFromArr(arr, item) {
+    var i = arr.indexOf(item);
 
-  public registrarHorarioAtencion(dia,horarioAtencion) {
+    if (i !== -1) {
+      arr.splice(i, 1);
+    }
+  }
+
+  public registrarHorarioAtencion(dia, horarioAtencion) {
 
     const body = new URLSearchParams();
     body.set('idUsuario', this.id);
@@ -455,14 +453,13 @@ export class ConfiguracionCrmPage implements OnInit {
       )
     };
 
-    console.log(body.toString());
 
     const url = 'https://www.koomkin.com.mx/api/app/registrarHorarioAtencion/';
 
     return new Promise((resolve, reject) => {
       this.http.post(url, body.toString(), options).subscribe(
         data => {
-          console.log(data);
+          this.showSuccess();
         },
         err => {
           console.log(err);
@@ -478,8 +475,12 @@ export class ConfiguracionCrmPage implements OnInit {
     return new Promise((resolve, reject) => {
       this.http.get(url).subscribe(
         data => {
-          this.giroChat = data[0].DESCRIPCIONJIROCHAT;
-          console.log(data);
+          if (Object.keys(data).length > 0) {
+            this.giroChat = data[0].DESCRIPCIONJIROCHAT;
+            if (this.giroChat == undefined || this.giroChat == null || this.giroChat == 'null') {
+              this.giroChat = '';
+            }
+          }
         },
         err => {
           return reject(err);
@@ -506,6 +507,7 @@ export class ConfiguracionCrmPage implements OnInit {
     return new Promise((resolve, reject) => {
       this.http.post(url, body.toString(), options).subscribe(
         data => {
+          this.showSuccess();
           console.log(data);
         },
         err => {
@@ -536,10 +538,10 @@ export class ConfiguracionCrmPage implements OnInit {
     return new Promise((resolve, reject) => {
       this.http.post(url, body.toString(), options).subscribe(
         data => {
-          console.log('guardando',data);
+          console.log('guardando', data);
           this.dias.forEach(value => {
-            if(value !== '') {
-              this.registrarHorarioAtencion(value,horarioAtencion);
+            if (value !== '') {
+              this.registrarHorarioAtencion(value, horarioAtencion);
             }
           })
         },

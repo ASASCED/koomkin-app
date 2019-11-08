@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
-import { IonicPage } from 'ionic-angular';
+import { IonicPage, Platform } from 'ionic-angular';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { NavParams } from 'ionic-angular';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+declare var cordova: any;
 
 @IonicPage()
 @Component({
@@ -10,21 +12,57 @@ import { NavParams } from 'ionic-angular';
 })
 
 export class FreemiumPage {
+
   public briefId;
-  
-  constructor(public iab: InAppBrowser,
-              public navParams: NavParams) {
-                
+  public url;
+
+  constructor(
+    public iab: InAppBrowser,
+    public navParams: NavParams,
+    public http: HttpClient,
+    public platform: Platform,
+  ) {
     this.briefId = navParams.get('brief');
+    this.getUrl()
   }
 
   ionViewDidLoad() {
   }
 
-  goToWorkPlan(){
-    // produccion `https://www.koomkin.com.mx/payment/details?id_brief=${this.briefId}`
-    const browser = this.iab.create(`http://localhost:4200/details?id_brief=${this.briefId}`);
-    browser.show();
+  getUrl(){
 
+    const cuerpo = `{
+      "brief_id": "${this.briefId}",
+      "plan_id": 47,
+      "promo": "freemium-app-1"
+    }`;
+
+    const options = {
+      headers: new HttpHeaders().set(
+        'Content-Type',
+        'application/json'
+      )
+    };
+
+    const url = 'https://www.koomkin.com.mx/api/payment/clientFromBrief';
+
+    return new Promise((resolve, reject) => {
+      this.http.post(url, cuerpo, options).subscribe(
+        data => {
+          if(data['status'] == 'OK') {
+            this.url = data['link']
+          } 
+        },
+        err => {
+          return reject(err);
+        }
+      );
+    });
+  }
+
+  goToWorkPlan() {
+    this.platform.ready().then(() => {
+      cordova.InAppBrowser.open(this.url, "_system", "location=no");
+    });
   }
 }

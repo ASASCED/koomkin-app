@@ -195,10 +195,10 @@ export class MembresiaPage {
             if (result > 0) {
               this.diasRestantes = result + ' días';
             } else {
-              this.diasRestantes = 'Renueva tu campaña';
+              this.diasRestantes = 'Renueva';
             }
           } else {
-            this.diasRestantes = 'Renueva tu campaña';
+            this.diasRestantes = 'Renueva';
           }
         },
         (error) => {

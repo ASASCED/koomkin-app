@@ -184,7 +184,10 @@ export class MasBriefPage implements OnInit {
   getBriefInformation(idUsuario) {
     this.provedor.getBriefInformation(idUsuario).then(
       data => {
+        if(Object.keys(data).length > 0) {
+
         this.datos = data;
+        
         this.cp = this.datos[0].CP;
         if (this.cp.length < 5) {
           this.cp = '0' + this.cp;
@@ -360,6 +363,7 @@ export class MasBriefPage implements OnInit {
         }
     
         this.getCobertura(idUsuario, this.datos[0].IDCampania);
+        } 
       },
       err => {
         // console.log('error');

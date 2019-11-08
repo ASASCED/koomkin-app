@@ -223,18 +223,41 @@ export class ComercialPage implements OnInit{
 
       this.http.get(url).subscribe(
         data => {
-          console.log(data);
-          this.distribucionOffline = data[0].DistribucionOffline;
-          this.distribucionOnline = data[0].DistribucionOnline;
-          this.quienVende = data[0].QuienVende;
-          this.numeroVendedores = data[0].NumeroVendedores;
-          this.tipoVendedores = data[0].TipoVendedores;
-          this.crmDiferente = data[0].CrmDiferente;
-          this.clientesNuevos = data[0].ClientesNuevos;
-          this.tipoPublicidad = data[0].TipoPublicidad;
-          this.publicidadTracicional = data[0].PublicidadTradicional;
-          this.publicidadDigital = data[0].PublicidadDigital;
-          this.campaniaObjetivo = data[0].CampaniaObjetivo;
+          if(Object.keys(data).length > 0) {
+            this.distribucionOffline = data[0].DistribucionOffline;
+            if(this.distribucionOffline == undefined || this.distribucionOffline == null || this.distribucionOffline == 'null') {
+              this.distribucionOffline = '';
+            }
+            this.distribucionOnline = data[0].DistribucionOnline;
+            if(this.distribucionOnline == undefined || this.distribucionOnline == null || this.distribucionOnline == 'null') {
+              this.distribucionOnline = '';
+            }
+            this.quienVende = data[0].QuienVende;
+            if(this.quienVende == undefined || this.quienVende == null || this.quienVende == 'null') {
+              this.quienVende = '';
+            }
+            this.numeroVendedores = data[0].NumeroVendedores;
+            if(this.numeroVendedores == undefined || this.numeroVendedores == null || this.numeroVendedores == 'null') {
+              this.numeroVendedores = '';
+            }
+            this.tipoVendedores = data[0].TipoVendedores;
+            if(this.tipoVendedores == undefined || this.tipoVendedores == null || this.tipoVendedores == 'null') {
+              this.tipoVendedores = '';
+            }
+            this.crmDiferente = data[0].CrmDiferente;
+            this.clientesNuevos = data[0].ClientesNuevos;
+            this.tipoPublicidad = data[0].TipoPublicidad;
+            if(this.tipoPublicidad == undefined || this.tipoPublicidad == null || this.tipoPublicidad == 'null') {
+              this.tipoPublicidad = '';
+            }
+            this.publicidadTracicional = data[0].PublicidadTradicional;
+            if(this.publicidadTracicional == undefined || this.publicidadTracicional == null || this.publicidadTracicional == 'null') {
+              this.publicidadTracicional = '';
+            }
+            this.publicidadDigital = data[0].PublicidadDigital;
+            this.campaniaObjetivo = data[0].CampaniaObjetivo;
+          }
+          
           resolve();
         },
         err => {
