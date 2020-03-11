@@ -19,8 +19,11 @@ import { Platform } from "ionic-angular";
 })
 export class FlowchartPage {
   @ViewChild("mermaid") zoomGraph: ElementRef;
-  // zoomGraph = document.getElementsByClassName("graph")[0] as HTMLElement;
+  pregunta = document.getElementsByClassName("pregunta");
+
   zoom: number = 1;
+  acum: number = 0;
+  idElement: any;
 
   idGeneral: number;
 
@@ -40,7 +43,9 @@ export class FlowchartPage {
     private platform: Platform,
     private renderer: Renderer2
   ) {
-    if (this.platform.is("android")) {
+    this.dragulaService = dragulaService;
+
+    if (this.platform.is("cordova")) {
       this.screenOrientation.lock(
         this.screenOrientation.ORIENTATIONS.LANDSCAPE
       );
@@ -71,13 +76,30 @@ export class FlowchartPage {
     ${this.clases}
     `;
 
-    this.dragulaService.drop.subscribe((value: any) => {
-      let alert = this.alertCtrl.create({
-        title: "Item moved",
-        subTitle: "So much fun!",
-        buttons: ["OK"]
-      });
-      alert.present();
+    $(document).on("touchmove", "#body", e => {
+      var xPos = e.originalEvent.touches[0].pageX;
+      var yPos = e.originalEvent.touches[0].pageY;
+      console.log(xPos + " " + yPos);
+
+      var el = document.elementFromPoint(xPos, yPos);
+      this.idElement = el.parentElement.getAttribute("id");
+
+      if (this.idElement === null) {
+        this.idElement = el.parentNode.parentNode.parentNode.parentNode.id;
+      }
+
+      let elementMirror = Array.from(
+        document.getElementsByClassName("gu-mirror") as HTMLCollectionOf<
+          HTMLElement
+        >
+      )[0];
+
+      if (/(P|R|C[0-9]*)/.test(this.idElement)) {
+        elementMirror.style.backgroundColor = "#37c5bb";
+      } else {
+        elementMirror.style.backgroundColor = "#288ac1";
+      }
+      console.log(this.idElement);
     });
   }
 
@@ -102,20 +124,57 @@ export class FlowchartPage {
     });
   }
 
-  getElementHover = (selector: string, id: string) => {
-    // Mouseup para desktop
-    $(selector).mouseenter((elemento: any) => {
-      if (id === "P") {
-        this.alertOptions(elemento.currentTarget.id, "P", "pregunta");
-        id = "";
-      } else if (id === "R") {
-        this.alertOptions(elemento.currentTarget.id, "R", "respuesta");
-        id = "";
-      } else if (id === "C") {
-        this.alertOptions(elemento.currentTarget.id, "C", "cotizacion");
-        id = "";
-      } else {
-        console.log("La operacion no es valida");
+  getElementHover = (id: string) => {
+    // Mouseup desktop - Mouseenter mobile
+    $("#R, #C, #P").on("touchend", () => {
+      console.log(this.idElement + " " + id + " " + this.acum);
+
+      let regExpPR: RegExp = new RegExp(
+        `${this.idElement} --> (C[0-9]*)\\([a-zA-Z0-9\\s!@#$%^&*()_+\\-=\\[\\]{};':"\\\\|,.<>\\/¿?¡!]*\\)`,
+        "gm"
+      );
+      let regExpC: RegExp = new RegExp(
+        `${this.idElement} --> (P[0-9]*)\\([a-zA-Z0-9\\s!@#$%^&*()_+\\-=\\[\\]{};':"\\\\|,.<>\\/¿?¡!]*\\)`,
+        "gm"
+      );
+
+      console.log(this.uniones);
+      console.log(regExpC);
+      console.log(
+        `
+        Entrada: ${this.idElement}
+        Comprueba: ${regExpC.test(this.uniones)}
+        Exec: ${regExpC.exec(this.uniones)}
+        `
+      );
+
+      if (!regExpPR.test(this.uniones)) {
+        if (id === "P" && /(R[0-9]*)/.test(this.idElement) && this.acum === 0) {
+          this.alertOptions(this.idElement, "P", "pregunta");
+          id = "";
+          this.acum++;
+          this.idElement = "";
+        } else if (
+          id === "R" &&
+          /(P[0-9]*)/.test(this.idElement) &&
+          this.acum === 0
+        ) {
+          this.alertOptions(this.idElement, "R", "respuesta");
+          id = "";
+          this.acum++;
+          this.idElement = "";
+        } else {
+          console.log("La operacion no es valida");
+        }
+      }
+
+      if (!regExpC.test(this.uniones)) {
+        if (id === "C" && /(R[0-9]*)/.test(this.idElement) && this.acum === 0) {
+          this.alertOptions(this.idElement, "C", "cotizacion");
+          id = "";
+          this.acum++;
+          this.idElement = "";
+        }
       }
     });
   };
@@ -135,12 +194,14 @@ export class FlowchartPage {
           text: "Cancel",
           handler: data => {
             console.log("Cancel clicked");
+            this.acum = 0;
           }
         },
         {
           text: "Save",
           handler: data => {
             this.addElement(entrada, addElement, data.title, type);
+            this.acum = 0;
           }
         }
       ]

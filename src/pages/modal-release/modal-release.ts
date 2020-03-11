@@ -1,17 +1,24 @@
-import { Component, OnInit } from "@angular/core";
-import { IonicPage, NavController, NavParams, ViewController, App, MenuController, Platform } from "ionic-angular";
+import { Component } from "@angular/core";
+import {
+  IonicPage,
+  NavController,
+  NavParams,
+  ViewController,
+  App,
+  MenuController,
+  Platform
+} from "ionic-angular";
 import { AuthServiceProvider } from "../../providers/auth-service/auth-service";
 import { HttpClient } from "@angular/common/http";
 import { AlertController } from "ionic-angular";
-import { Market } from '@ionic-native/market';
+import { Market } from "@ionic-native/market";
 
 @IonicPage()
 @Component({
-  selector: 'page-modal-release',
-  templateUrl: 'modal-release.html',
+  selector: "page-modal-release",
+  templateUrl: "modal-release.html"
 })
 export class ModalReleasePage {
-
   public id;
   public empresa;
   public notificacion;
@@ -55,7 +62,7 @@ export class ModalReleasePage {
   ionViewWillLeave() {
     this.menuCtrl.swipeEnable(true);
   }
-  
+
   dismiss() {
     let data = { foo: "bar" };
     this.viewCtrl.dismiss(data);
@@ -66,13 +73,16 @@ export class ModalReleasePage {
     this.cancelar_notificacion = this.notificacion.cancelar;
     this.mensaje_notificacion = this.notificacion.mensaje;
     this.titulo_notificacion = this.notificacion.titulo;
-    this.imagen_notificacion = this.notificacion.img;  
+    this.imagen_notificacion = this.notificacion.img;
   }
 
   public registrarInteres(interes: number) {
     return new Promise((resolve, reject) => {
       const urlBanner =
-        "https://www.koomkin.com.mx/api/app/registrarInteresBanner/" + interes + "/" + this.idReporteBanner;
+        "https://www.koomkin.com.mx/api/app/registrarInteresBanner/" +
+        interes +
+        "/" +
+        this.idReporteBanner;
       this.http.get(urlBanner).subscribe(
         data => {
           resolve();
@@ -86,12 +96,12 @@ export class ModalReleasePage {
   }
 
   public irInicio() {
-    this.app.getRootNav().setRoot('InicioPage'); 
+    this.app.getRootNav().setRoot("InicioPage");
   }
 
-  goStore(){
-    if (this.platform.is('cordova')) {
-      this.market.open('com.koomkin.koomkinapp');
+  goStore() {
+    if (this.platform.is("cordova")) {
+      this.market.open("com.koomkin.koomkinapp");
     }
   }
 }

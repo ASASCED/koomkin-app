@@ -4,7 +4,7 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content>
+<ion-content id="body">
   <div class="banner">
     <h1>cotizador automatico</h1>
     <p>
@@ -13,22 +13,22 @@
   </div>
   <div class="buttons">
     <div class="first">
-      <div [dragula]="pregunta">
-        <div (mousedown)="getElementHover('.respuesta', 'P')" id="P">
+      <div [dragula]='"pregunta"'>
+        <div (touchstart)="getElementHover('P')" id="P">
           <i class="fas fa-ellipsis-v"></i>
           <i class="fas fa-ellipsis-v"></i>
           <span>pregunta</span>
         </div>
       </div>
-      <div [dragula]="respuesta">
-        <div (mousedown)="getElementHover('.pregunta', 'R')" id="R">
+      <div [dragula]='"respuesta"'>
+        <div (touchstart)="getElementHover('R')" id="R">
           <i class="fas fa-ellipsis-v"></i>
           <i class="fas fa-ellipsis-v"></i>
           <span>respuesta</span>
         </div>
       </div>
-      <div [dragula]="cotizacion">
-        <div (mousedown)="getElementHover('.respuesta', 'C')" id="C">
+      <div [dragula]='"cotizacion"'>
+        <div (touchstart)="getElementHover('C')" id="C">
           <i class="fas fa-ellipsis-v"></i>
           <i class="fas fa-ellipsis-v"></i>
           <span>precio</span>
