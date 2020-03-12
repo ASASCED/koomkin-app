@@ -64,16 +64,16 @@
         </div>
       </div>
     </div>
-    <div class="zoom-btn">
-      <button (click)="zoomIn()">+</button>
-      <button (click)="zoomOut()">-</button>
-    </div>
   </div>
   <div class="flowchart">
     <div class="header">
       <span>Arbol de preguntas</span>
+      <div class="zoom-btn">
+        <button (click)="zoomIn()">+</button>
+        <button (click)="zoomOut()">-</button>
+      </div>
     </div>
-    <div class="graph" #zoomGraph>
+    <div class="graph" #divZoom>
       <div class="zoomG" #mermaid></div>
     </div>
     <!-- <div class="foo">

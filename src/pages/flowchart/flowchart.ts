@@ -19,6 +19,7 @@ import { Platform } from "ionic-angular";
 })
 export class FlowchartPage {
   @ViewChild("mermaid") zoomGraph: ElementRef;
+  @ViewChild("divZoom") divZoom: ElementRef;
   pregunta = document.getElementsByClassName("pregunta");
 
   zoom: number = 1;
@@ -75,32 +76,6 @@ export class FlowchartPage {
     ${this.uniones}
     ${this.clases}
     `;
-
-    $(document).on("touchmove", "#body", e => {
-      var xPos = e.originalEvent.touches[0].pageX;
-      var yPos = e.originalEvent.touches[0].pageY;
-      console.log(xPos + " " + yPos);
-
-      var el = document.elementFromPoint(xPos, yPos);
-      this.idElement = el.parentElement.getAttribute("id");
-
-      if (this.idElement === null) {
-        this.idElement = el.parentNode.parentNode.parentNode.parentNode.id;
-      }
-
-      let elementMirror = Array.from(
-        document.getElementsByClassName("gu-mirror") as HTMLCollectionOf<
-          HTMLElement
-        >
-      )[0];
-
-      if (/(P|R|C[0-9]*)/.test(this.idElement)) {
-        elementMirror.style.backgroundColor = "#37c5bb";
-      } else {
-        elementMirror.style.backgroundColor = "#288ac1";
-      }
-      console.log(this.idElement);
-    });
   }
 
   ionViewDidLoad() {
@@ -125,6 +100,8 @@ export class FlowchartPage {
   }
 
   getElementHover = (id: string) => {
+    this.getPositionElement();
+
     // Mouseup desktop - Mouseenter mobile
     $("#R, #C, #P").on("touchend", () => {
       console.log(this.idElement + " " + id + " " + this.acum);
@@ -134,7 +111,7 @@ export class FlowchartPage {
         "gm"
       );
       let regExpC: RegExp = new RegExp(
-        `${this.idElement} --> (P[0-9]*)\\([a-zA-Z0-9\\s!@#$%^&*()_+\\-=\\[\\]{};':"\\\\|,.<>\\/¿?¡!]*\\)`,
+        `${this.idElement} --> (P|C[0-9]*)\\([a-zA-Z0-9\\s!@#$%^&*()_+\\-=\\[\\]{};':"\\\\|,.<>\\/¿?¡!]*\\)`,
         "gm"
       );
 
@@ -178,6 +155,34 @@ export class FlowchartPage {
       }
     });
   };
+
+  getPositionElement() {
+    $(document).on("touchmove", "#body", e => {
+      var xPos = e.originalEvent.touches[0].pageX;
+      var yPos = e.originalEvent.touches[0].pageY;
+      console.log(xPos + " " + yPos);
+
+      var el = document.elementFromPoint(xPos, yPos);
+      this.idElement = el.parentElement.getAttribute("id");
+
+      if (this.idElement === null) {
+        this.idElement = el.parentNode.parentNode.parentNode.parentNode["id"];
+      }
+
+      let elementMirror = Array.from(
+        document.getElementsByClassName("gu-mirror") as HTMLCollectionOf<
+          HTMLElement
+        >
+      )[0];
+
+      if (/(P|R|C[0-9]*)/.test(this.idElement)) {
+        elementMirror.style.backgroundColor = "#37c5bb";
+      } else {
+        elementMirror.style.backgroundColor = "#288ac1";
+      }
+      console.log(this.idElement);
+    });
+  }
 
   async alertOptions(entrada: string, addElement: string, type: string) {
     const prompt = this.alertCtrl.create({
