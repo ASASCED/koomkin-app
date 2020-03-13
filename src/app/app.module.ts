@@ -25,6 +25,7 @@ import { Clipboard } from "@ionic-native/clipboard";
 import { SweetAlert2Module } from "@toverux/ngx-sweetalert2";
 import { TooltipsModule } from "ionic-tooltips";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { GraphProvider } from "../providers/graph/graph";
 
 @NgModule({
   declarations: [MyApp],
@@ -91,7 +92,8 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
     File,
     FileOpener,
     Transfer,
-    HTTP
+    HTTP,
+    GraphProvider
   ]
 })
 export class AppModule {}
