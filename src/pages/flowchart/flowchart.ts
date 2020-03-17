@@ -86,6 +86,37 @@ export class FlowchartPage {
 
   ionViewDidLoad() {
     this.mermaidStart();
+
+    $(".node").on("click", () => {
+      const prompt = this.alertCtrl.create({
+        title: "Editar/Eliminar",
+        message: `Valor actual: ${$(".node").attr("id")}`,
+        inputs: [
+          {
+            name: "title",
+            placeholder: "Title"
+          }
+        ],
+        buttons: [
+          {
+            text: "Cancel",
+            handler: data => {
+              console.log(data);
+            }
+          },
+          {
+            text: "Save",
+            handler: data => {
+              console.log(data);
+
+              this.propiedades = this.propiedades.replace();
+            }
+          }
+        ]
+      });
+
+      prompt.present();
+    });
   }
 
   mermaidStart() {
@@ -110,8 +141,6 @@ export class FlowchartPage {
 
     // Mouseup desktop - Mouseenter mobile
     $("#R, #C, #P").on("touchend", () => {
-      console.log(this.idElement + " " + id + " " + this.acum);
-
       let regExpPR: RegExp = new RegExp(
         `${this.idElement} --> (C[0-9]*)`,
         "gm"
@@ -119,16 +148,6 @@ export class FlowchartPage {
       let regExpC: RegExp = new RegExp(
         `${this.idElement} --> (P|C[0-9]*)`,
         "gm"
-      );
-
-      console.log(this.uniones);
-      console.log(regExpC);
-      console.log(
-        `
-        Entrada: ${this.idElement}
-        Comprueba: ${regExpC.test(this.uniones)}
-        Exec: ${regExpC.exec(this.uniones)}
-        `
       );
 
       if (!regExpPR.test(this.uniones)) {
@@ -165,7 +184,6 @@ export class FlowchartPage {
     $(document).on("touchmove", "#body", e => {
       var xPos = e.originalEvent.touches[0].pageX;
       var yPos = e.originalEvent.touches[0].pageY;
-      console.log(xPos + " " + yPos);
 
       var el = document.elementFromPoint(xPos, yPos);
 
@@ -190,7 +208,6 @@ export class FlowchartPage {
       } else {
         elementMirror.style.backgroundColor = "#288ac1";
       }
-      console.log(this.idElement);
     });
   }
 
@@ -239,16 +256,11 @@ export class FlowchartPage {
     if (addElement === "R") {
       this.graphJSON.ux_data[this.idElement] = { text: message, type: "mult" };
 
-      console.log("Id Element: " + JSON.stringify(this.graphJSON));
-
       const len: string = String(
         Object.keys(this.graphJSON.ux_data[this.idElement]).length - 1
       );
 
-      console.log(len);
-
       this.graphJSON.ux_data[this.idElement][len] += message;
-      console.log(this.graphJSON);
     }
 
     this.graphDefinition = `
@@ -257,9 +269,6 @@ export class FlowchartPage {
     ${this.uniones}
     ${this.clases}
     `;
-
-    console.log(this.uniones);
-    console.log(this.propiedades);
 
     this.mermaidStart();
   };
