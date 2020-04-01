@@ -1,0 +1,17 @@
+{
+  "_id": 8574,
+  "user_id": 8285,
+  "questions": { "P0": { "1": "Q1", "2": "Q2", "3": "Q3" } },
+  "ux_data": {
+    "Q0": {
+      "Text": "Some text",
+      "TYPE": "MULTIPLE",
+      "A": "Option1",
+      "B": "Option2",
+      "C": "Option3"
+    }
+  },
+  "properties": {},
+  "classes": {},
+  "relationships": {}
+}

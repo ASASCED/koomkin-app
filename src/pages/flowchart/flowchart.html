@@ -4,6 +4,8 @@
   </ion-navbar>
 </ion-header>
 
+<iframe width="560" height="349" src="assets/video/tutorial.mp4" frameborder="0" allowfullscreen></iframe>
+
 <ion-content id="body">
   <div class="banner">
     <h1>cotizador automatico</h1>
@@ -12,41 +14,6 @@
     </p>
   </div>
   <div class="buttons">
-    <div class="first">
-      <div [dragula]='"pregunta"'>
-        <div (touchstart)="getElementHover('P')" id="P">
-          <i class="fas fa-ellipsis-v"></i>
-          <i class="fas fa-ellipsis-v"></i>
-          <span>pregunta</span>
-        </div>
-      </div>
-      <div [dragula]='"respuesta"'>
-        <div (touchstart)="getElementHover('R')" id="R">
-          <i class="fas fa-ellipsis-v"></i>
-          <i class="fas fa-ellipsis-v"></i>
-          <span>respuesta</span>
-        </div>
-      </div>
-      <div [dragula]='"cotizacion"'>
-        <div (touchstart)="getElementHover('C')" id="C">
-          <i class="fas fa-ellipsis-v"></i>
-          <i class="fas fa-ellipsis-v"></i>
-          <span>precio</span>
-        </div>
-      </div>
-    </div>
-    <div class="second">
-      <div class="activar">
-        <div class="boton">
-          <span>activar</span>
-        </div>
-      </div>
-      <div class="desactivar">
-        <div class="boton">
-          <span>desactivar</span>
-        </div>
-      </div>
-    </div>
     <div class="third">
       <div class="ejemplo">
         <div class="boton">
@@ -64,13 +31,48 @@
         </div>
       </div>
     </div>
+    <div class="second">
+      <div class="activar">
+        <div [class.btn-change]="!condition" (click)="changeBotStatus(true)">
+          <span>activar</span>
+        </div>
+      </div>
+      <div class="desactivar">
+        <div [class.btn-change]="condition" (click)="changeBotStatus(false)">
+          <span>desactivar</span>
+        </div>
+      </div>
+    </div>
+    <div class="first">
+      <div [dragula]='"pregunta"'>
+        <div (touchstart)="getElementHover('Q')" id="Q">
+          <i class="fas fa-ellipsis-v"></i>
+          <i class="fas fa-ellipsis-v"></i>
+          <span>pregunta</span>
+        </div>
+      </div>
+      <div [dragula]='"respuesta"'>
+        <div (touchstart)="getElementHover('A')" id="A">
+          <i class="fas fa-ellipsis-v"></i>
+          <i class="fas fa-ellipsis-v"></i>
+          <span>respuesta</span>
+        </div>
+      </div>
+      <div [dragula]='"cotizacion"'>
+        <div (touchstart)="getElementHover('C')" id="C">
+          <i class="fas fa-ellipsis-v"></i>
+          <i class="fas fa-ellipsis-v"></i>
+          <span>precio</span>
+        </div>
+      </div>
+    </div>
   </div>
   <div class="flowchart">
     <div class="header">
       <span>Arbol de preguntas</span>
       <div class="zoom-btn">
-        <button (click)="postJSON()">+</button>
-        <button (click)="getJSON()">-</button>
+        <button (click)="zoomIn()">+</button>
+        <button (click)="zoomOut()">-</button>
         <button (click)="zoomDefault()">Default</button>
       </div>
     </div>

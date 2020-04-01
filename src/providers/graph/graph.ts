@@ -4,15 +4,14 @@ import { Observable } from "rxjs";
 
 @Injectable()
 export class GraphProvider {
-  private url = "http://192.168.0.173:5010/";
-
-  // TODO: user_id & status
+  // private url = "http://192.168.0.173:5010/";
+  private url = "https://63797407.ngrok.io/";
 
   constructor(public http: Http) {
     console.log("Hello GraphProvider Provider");
   }
 
-  upGraph(id: number, obj: Object) {
+  postGraph(id: number, obj: any) {
     return this.http.post(`${this.url}updateQuotationBot`, {
       user_id: id,
       record: obj
