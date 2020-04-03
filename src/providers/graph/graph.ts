@@ -5,7 +5,7 @@ import { Observable } from "rxjs";
 @Injectable()
 export class GraphProvider {
   // private url = "http://192.168.0.173:5010/";
-  private url = "https://63797407.ngrok.io/";
+  private url = "https://7aade4c5.eu.ngrok.io/";
 
   constructor(public http: Http) {
     console.log("Hello GraphProvider Provider");
@@ -20,6 +20,21 @@ export class GraphProvider {
 
   getGraph(id: number): Observable<any> {
     return this.http.get(`${this.url}getQuotationBot`, {
+      params: {
+        user_id: id
+      }
+    });
+  }
+
+  postStatusBot(id: number, status: number) {
+    return this.http.post(`${this.url}setQuotationBotStatus`, {
+      user_id: id,
+      status: status
+    });
+  }
+
+  getStatusBot(id: number) {
+    return this.http.get(`${this.url}getQuotationBotStatus`, {
       params: {
         user_id: id
       }

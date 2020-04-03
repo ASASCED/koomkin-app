@@ -3,7 +3,8 @@ import {
   IonicPage,
   NavController,
   NavParams,
-  AlertController
+  AlertController,
+  ToastController
 } from "ionic-angular";
 
 import { ScreenOrientation } from "@ionic-native/screen-orientation";
@@ -33,10 +34,10 @@ export class FlowchartPage {
   graphJSON: any = {
     user_id: "10553",
     questions: {
-      Q1585262720121: {}
+      Q0000000000000: {}
     },
     ux_data: {
-      Q1585262720121: {
+      Q0000000000000: {
         text: "Pregunta",
         type: "MULTIPLE",
         starting_q: "QXXXXX"
@@ -49,15 +50,12 @@ export class FlowchartPage {
 
   @ViewChild("mermaid")
   public mermaidDiv;
-  propiedades: string = `Q1585262720121(Pregunta):::pregunta`;
-  uniones: string = `Q1585262720121`;
+  propiedades: string = `Q0000000000000(Pregunta):::pregunta`;
+  uniones: string = `Q0000000000000`;
   clases: string = `classDef pregunta:first-child fill: #f1f1f1, stroke: #3590C4, stroke-width: 4px, color: #3590C4, font-weight: bold, font-size: 10px
   classDef pregunta fill: #f1f1f1, stroke: #f1f1f1, stroke-width: 4px, color: #3590C4, font-weight: bold, font-size: 10px
-  classDef pregunta:hover fill: #f8f8f8, stroke: #f1f1f1, stroke-width: 4px, color: #3590C4, font-weight: bold, font-size: 10px
   classDef respuesta fill: #f1f1f1, stroke: #f1f1f1, stroke-width: 0px, color: #243E56, font-weight: bold, font-size: 10px
-  classDef respuesta:hover fill: #288AC1, stroke: #288AC1, stroke-width: 0px, color: #ffffff, font-weight: bold, font-size: 10px, cursor: pointer
-  classDef cotizacion fill: #f2680a, stroke: #f2680a, stroke-width: 4px, color: #ffffff, font-weight: bold, font-size: 10px
-  classDef cotizacion:hover fill: #f2420a, stroke: #f2420a, stroke-width: 4px, color: #ffffff, font-weight: bold, font-size: 10px, cursor: pointer`;
+  classDef cotizacion fill: #f2680a, stroke: #f2680a, stroke-width: 4px, color: #ffffff, font-weight: bold, font-size: 10px`;
   graphDefinition: string;
 
   constructor(
@@ -68,7 +66,8 @@ export class FlowchartPage {
     private screenOrientation: ScreenOrientation,
     private platform: Platform,
     private renderer: Renderer2,
-    private graphService: GraphProvider
+    private graphService: GraphProvider,
+    public toastCtrl: ToastController
   ) {
     if (this.platform.is("cordova")) {
       this.screenOrientation.lock(
@@ -76,26 +75,37 @@ export class FlowchartPage {
       );
     }
 
-    this.graphService.getGraph(10553).subscribe((data: any) => {
-      if (Object.keys(JSON.parse(data["_body"])).length === 0) {
-        this.postJSON();
-        return;
+    this.graphService.getStatusBot(10553).subscribe((data: any) => {
+      console.log(JSON.parse(data._body).status);
+      if (Number(JSON.parse(data._body).status) === 0) {
+        this.condition = false;
+      } else {
+        this.condition = true;
       }
 
-      this.graphJSON = JSON.parse(data["_body"]);
-      this.uniones = this.graphJSON["relationships"];
-      this.propiedades = this.graphJSON["properties"];
+      console.log(this.condition);
 
-      this.graphDefinition = `graph TD
+      this.graphService.getGraph(10553).subscribe(async (data: any) => {
+        if (Object.keys(JSON.parse(data["_body"])).length === 0) {
+          this.postJSON();
+          return;
+        }
+
+        this.graphJSON = JSON.parse(data["_body"]);
+        this.uniones = this.graphJSON["relationships"];
+        this.propiedades = this.graphJSON["properties"];
+
+        this.graphDefinition = `graph TD
       ${this.propiedades}
       ${this.uniones}
       ${this.clases}`;
 
-      this.mermaidStart();
-      this.setFunctionEdit();
-
-      console.log(JSON.parse(data["_body"]));
+        this.mermaidStart();
+        this.setFunctionEdit();
+      });
     });
+
+    console.log(this.graphJSON);
   }
 
   ionViewDidLoad() {}
@@ -119,26 +129,41 @@ export class FlowchartPage {
 
   setFunctionEdit() {
     $(".node").on("click", (target: any) => {
+      const regExp: RegExp = new RegExp(
+        `${target["currentTarget"]["id"]}\\(.*\\):::(pregunta|cotizacion|respuesta)`,
+        "gm"
+      );
+      const repOne: RegExp = new RegExp(
+        `${target["currentTarget"]["id"]}\\(`,
+        "gm"
+      );
+      const repTwo: RegExp = new RegExp(
+        `\\):::(pregunta|cotizacion|respuesta)`,
+        "gm"
+      );
+
+      const questionText: string[] = this.propiedades.match(regExp);
+      const preQuestion = questionText[0].replace(repOne, "");
+      const messageQuestion = preQuestion.replace(repTwo, "");
+
       const prompt = this.alertCtrl.create({
-        title: "Editar/Eliminar",
-        message: `Valor actual: #${target["currentTarget"]["id"]}`,
+        title: "Editar",
+        message: `Texto: ${messageQuestion}`,
         inputs: [
           {
-            name: "title",
-            placeholder: "Title"
+            name: "Valor",
+            placeholder: "valor"
           }
         ],
         buttons: [
           {
-            text: "Cancel",
-            handler: data => {
-              console.log("Cancel click!");
-            }
+            text: "Cancelar",
+            handler: data => {}
           },
           {
-            text: "Save",
+            text: "Confirmar",
             handler: data => {
-              if (data.title.length > 0) {
+              if (data.Valor.length > 0) {
                 let types: string;
                 const regExp: RegExp = new RegExp(
                   `(${target["currentTarget"]["id"]}\(.*\):::(pregunta|respuesta|cotizacion))`,
@@ -157,10 +182,10 @@ export class FlowchartPage {
 
                 this.propiedades = this.propiedades.replace(
                   regExp,
-                  `\n${target["currentTarget"]["id"]}(${data["title"]}):::${types}`
+                  `\n${target["currentTarget"]["id"]}(${data["Valor"]}):::${types}`
                 );
 
-                this.editJSON(target["currentTarget"]["id"], data["title"]);
+                this.editJSON(target["currentTarget"]["id"], data["Valor"]);
 
                 this.graphDefinition = `graph TD
                 ${this.propiedades}
@@ -178,7 +203,7 @@ export class FlowchartPage {
   }
 
   editJSON(id: string, message: string) {
-    if (id.charAt(0) === "Q") {
+    if (id.charAt(0) === "Q" || id.charAt(0) === "C") {
       this.graphJSON.ux_data[id].text = message;
     } else {
       let inc: number = 1;
@@ -254,7 +279,7 @@ export class FlowchartPage {
       }
 
       if (!regExpC.test(this.uniones)) {
-        if (id === "C" && /(Q[0-9]*)/.test(this.idElement) && this.acum === 0) {
+        if (id === "C" && /(A[0-9]*)/.test(this.idElement) && this.acum === 0) {
           this.alertOptions(this.idElement, "C", "cotizacion");
           this.acum++;
         }
@@ -300,27 +325,29 @@ export class FlowchartPage {
 
   async alertOptions(entrada: string, addElement: string, type: string) {
     const prompt = this.alertCtrl.create({
-      title: "Login",
-      message: "Enter a name for this new album you're so keen on adding",
+      title: `Añadir ${type}`,
+      message: `Agrega el texto correspondiente a tu ${type}`,
       inputs: [
         {
-          name: "title",
-          placeholder: "Title"
+          name: "Valor",
+          placeholder: "valor"
         }
       ],
       buttons: [
         {
-          text: "Cancel",
+          text: "Cancelar",
           handler: data => {
             console.log("Cancel clicked");
             this.acum = 0;
           }
         },
         {
-          text: "Save",
+          text: "Confirmar",
           handler: data => {
-            this.addElement(entrada, addElement, data.title, type);
-            this.acum = 0;
+            if (data.Valor.length > 0) {
+              this.addElement(entrada, addElement, data.Valor, type);
+              this.acum = 0;
+            }
           }
         }
       ]
@@ -340,7 +367,7 @@ export class FlowchartPage {
     this.propiedades += `\n${addElement}${id}(${message}):::${type}`;
     this.propiedades = this.propiedades.replace(/^\s*$(?:\r\n?|\n)/gm, "");
 
-    if (addElement === "A" || addElement === "C") {
+    if (addElement === "A") {
       let len: number;
       const regExp: RegExp = new RegExp(
         `${this.idElement}\\(.*\\):::pregunta`,
@@ -359,7 +386,7 @@ export class FlowchartPage {
         };
       }
 
-      if (this.idElement === "Q1585262720121") {
+      if (this.idElement === "Q0000000000000") {
         len = Object.keys(this.graphJSON.ux_data[this.idElement]).length - 2;
       } else {
         len = Object.keys(this.graphJSON.ux_data[this.idElement]).length - 1;
@@ -378,6 +405,16 @@ export class FlowchartPage {
       this.addQuestionsAns(this.idElement);
     }
 
+    if (addElement === "C") {
+      if (!this.graphJSON.ux_data[addElement + id]) {
+        this.graphJSON.ux_data[addElement + id] = {
+          text: message,
+          type: "QUOTATION"
+        };
+      }
+      this.addQuotation(this.idElement, addElement + id);
+    }
+
     this.graphDefinition = `graph TD
       ${this.propiedades}
       ${this.uniones}
@@ -388,7 +425,9 @@ export class FlowchartPage {
     this.idElement = "";
 
     console.log(this.graphJSON);
+    console.log(JSON.stringify(this.graphJSON));
     this.postJSON();
+    this.condition = false;
   };
 
   addQuestionsAns(id: string) {
@@ -430,6 +469,34 @@ export class FlowchartPage {
         aux++;
       }
     }
+  }
+
+  addQuotation(id: string, element: string) {
+    let len: number;
+    // const findAnswere: RegExp = new RegExp(`${id} --> ${element}`, "gm");
+    // const replaceAnswere: RegExp = new RegExp(`--> ${element}`, "gm");
+    const findQuestion: RegExp = new RegExp(`Q[0-9]* --> ${id}`, "gm");
+    const replaceQuestion: RegExp = new RegExp(` --> ${id}`, "gm");
+    // const answere: string = this.uniones
+    //   .match(findAnswere)[0]
+    //   .replace(replaceAnswere, "");
+    const question: string = this.uniones
+      .match(findQuestion)[0]
+      .replace(replaceQuestion, "");
+
+    console.log(question);
+    console.log(this.graphJSON);
+
+    if (!this.graphJSON.questions[question]) {
+      this.graphJSON.questions[question] = {};
+    }
+
+    console.log(this.graphJSON.questions[question]);
+    len = Object.keys(this.graphJSON.questions[question]).length + 1;
+
+    console.log(len);
+
+    this.graphJSON.questions[question][len] = element;
   }
 
   zoomIn() {
@@ -474,23 +541,56 @@ export class FlowchartPage {
   }
 
   changeBotStatus(value: boolean) {
-    this.condition = value;
-
-    this.validateGraph();
+    if (value === true && this.validateGraph()) {
+      this.condition = true;
+      this.postStatusBot(1);
+    } else if (value === false) {
+      this.condition = false;
+      this.postStatusBot(1);
+    } else {
+      const toast = this.toastCtrl.create({
+        message: "Tienes que completar el arbol para poder activar el bot",
+        duration: 2000
+      });
+      toast.present();
+    }
   }
 
   validateGraph() {
-    const questions: RegExp = new RegExp("Q[0-9]*\\(.*\\):::pregunta", "gm");
+    let graph: boolean;
+    const questions: RegExp = new RegExp(
+      "(A|Q)[0-9]*\\(.*\\):::respuesta",
+      "gm"
+    );
     const questionsMatch: string[] = this.propiedades.match(questions);
 
-    const replaceQst: RegExp = new RegExp("\\(.*\\):::pregunta", "gm");
-    let questionsReplaced: string[];
+    const replaceQst: RegExp = new RegExp(
+      "\\(.*\\):::(respuesta|pregunta)",
+      "gm"
+    );
 
     for (const question of questionsMatch) {
-      console.log(question);
-      questionsReplaced.push(question.replace(replaceQst, ""));
+      const validator: RegExp = new RegExp(
+        `${question.replace(replaceQst, "")} --> (C|A)[0-9]*`,
+        "gm"
+      );
+
+      console.log(this.uniones.match(validator));
+
+      if (this.uniones.match(validator) !== null) {
+        graph = true;
+      } else {
+        graph = false;
+        break;
+      }
     }
 
-    console.log(questionsReplaced);
+    return graph;
+  }
+
+  postStatusBot(status: number) {
+    this.graphService.postStatusBot(10553, status).subscribe((data: any) => {
+      console.log(data);
+    });
   }
 }

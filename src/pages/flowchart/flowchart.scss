@@ -472,20 +472,50 @@ textarea {
 
 // Page design - start
 
+.header {
+  display: flex;
+  align-items: center;
+  color: #fff;
+  background-color: #243e56;
+  height: 2em;
+  padding: 0 1em;
+
+  span {
+    padding: 0 0.5em;
+  }
+}
+
 .banner {
-  background-color: #37c5bb;
+  background: rgb(56, 198, 187);
+  background: linear-gradient(
+    90deg,
+    rgba(56, 198, 187, 1) 0%,
+    rgba(40, 139, 193, 1) 100%
+  );
   color: white;
   text-transform: uppercase;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 4em;
 
   h1 {
-    padding: 1em 0.5em;
-    font-size: 18px;
+    display: inline-block;
+    font-size: 15pt;
+    border-right: 3px solid #fff;
+    padding: 0 1em;
+    height: 1em;
   }
 
   p {
-    font-size: 12px;
-    padding: 0 0.5em;
-    padding-bottom: 1em;
+    display: inline-block;
+    font-size: 9pt;
+    padding: 0 1em;
+    width: 60%;
+  }
+
+  img {
+    width: 6em;
   }
 }
 
@@ -521,10 +551,7 @@ textarea {
       div {
         border-radius: 0.5em;
         border: 2px solid #288ac1;
-
-        span {
-          padding: 0.1em;
-        }
+        padding: 0.5em 0.4em;
       }
 
       div:hover {
@@ -547,10 +574,7 @@ textarea {
         border-radius: 0.5em 0 0 0.5em;
         border: 2px solid #288ac1;
         color: white;
-
-        span {
-          padding: 1em 0.4em;
-        }
+        padding: 0.5em 0.4em;
       }
     }
 
@@ -566,19 +590,26 @@ textarea {
   .third {
     display: flex;
     flex-wrap: wrap;
-    color: #243e56;
+    // color: #243e56;
+    color: #9ea8b2;
 
-    div {
+    div:first-child {
       padding: 0.2em 0.2em;
 
       div {
-        border-radius: 2em;
-        border: 2px solid #243e56;
-
-        span {
-          padding: 1em 0.3em;
-        }
+        border-radius: 0.5em;
+        border: 1px solid #9ea8b2;
+        padding: 0.5em 0.4em;
       }
+    }
+
+    i {
+      padding: 0.2em 0.3em;
+      font-size: 15pt;
+    }
+
+    .fa-save {
+      color: #243e56;
     }
   }
 }
@@ -592,7 +623,7 @@ textarea {
 .flowchart {
   position: absolute;
   width: 100%;
-  top: 5.5em;
+  top: 4em;
   bottom: 0;
 
   rect {

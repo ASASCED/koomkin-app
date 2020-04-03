@@ -1,33 +1,32 @@
-<ion-header>
-  <ion-navbar>
-    <ion-title>flowChart</ion-title>
-  </ion-navbar>
-</ion-header>
-
 <iframe width="560" height="349" src="assets/video/tutorial.mp4" frameborder="0" allowfullscreen></iframe>
 
 <ion-content id="body">
-  <div class="banner">
+  <div class="header">
+    <i class="fas fa-arrow-left"></i>
+    <span>Regresar</span>
+  </div>
+  <!-- <div class="banner">
     <h1>cotizador automatico</h1>
     <p>
-      Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+      Arrastrar la pregunta, respuesta o precio al arbol de preguntas y configurarlas al seleccionar la opcion
     </p>
-  </div>
+    <img src="assets/imgs/img_cotizador.svg" alt="">
+  </div> -->
   <div class="buttons">
     <div class="third">
-      <div class="ejemplo">
-        <div class="boton">
-          <span>ver ejemplo</span>
-        </div>
-      </div>
       <div class="prueba">
         <div class="boton">
           <span>enviar prueba</span>
         </div>
       </div>
+      <div class="ejemplo">
+        <div class="boton">
+          <i class="fas fa-eye"></i>
+        </div>
+      </div>
       <div class="guardar">
         <div class="boton">
-          <span>guardar</span>
+          <i class="fas fa-save"></i>
         </div>
       </div>
     </div>
@@ -71,17 +70,17 @@
     <div class="header">
       <span>Arbol de preguntas</span>
       <div class="zoom-btn">
-        <button (click)="zoomIn()">+</button>
         <button (click)="zoomOut()">-</button>
+        <button (click)="zoomIn()">+</button>
         <button (click)="zoomDefault()">Default</button>
       </div>
     </div>
     <div class="graph" #divZoom>
       <div class="zoomG" #mermaid></div>
     </div>
-    <!-- <div class="foo">
+    <div class="foo">
       <i class="far fa-lightbulb"></i>
       <p><span>Consejo:</span> Agrega precio a tu respuesta 04 y 05</p>
-    </div> -->
+    </div>
   </div>
 </ion-content>
