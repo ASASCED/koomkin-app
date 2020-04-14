@@ -4,7 +4,7 @@ import {
   NavController,
   NavParams,
   AlertController,
-  ToastController
+  ToastController,
 } from "ionic-angular";
 
 import { ScreenOrientation } from "@ionic-native/screen-orientation";
@@ -17,7 +17,7 @@ import * as $ from "jquery";
 @IonicPage()
 @Component({
   selector: "page-flowchart",
-  templateUrl: "flowchart.html"
+  templateUrl: "flowchart.html",
 })
 export class FlowchartPage {
   @ViewChild("mermaid") zoomGraph: ElementRef;
@@ -34,18 +34,18 @@ export class FlowchartPage {
   graphJSON: any = {
     user_id: "10553",
     questions: {
-      Q0000000000000: {}
+      Q0000000000000: {},
     },
     ux_data: {
       Q0000000000000: {
         text: "Pregunta",
         type: "MULTIPLE",
-        starting_q: "QXXXXX"
-      }
+        starting_q: "QXXXXX",
+      },
     },
     properties: {},
     classes: {},
-    relationships: {}
+    relationships: {},
   };
 
   @ViewChild("mermaid")
@@ -117,8 +117,8 @@ export class FlowchartPage {
       startOnLoad: true,
       flowchart: {
         useMaxWidth: true,
-        htmlLabels: true
-      }
+        htmlLabels: true,
+      },
     });
 
     const element: any = this.mermaidDiv.nativeElement;
@@ -152,17 +152,17 @@ export class FlowchartPage {
         inputs: [
           {
             name: "Valor",
-            placeholder: "valor"
-          }
+            placeholder: "valor",
+          },
         ],
         buttons: [
           {
             text: "Cancelar",
-            handler: data => {}
+            handler: (data) => {},
           },
           {
             text: "Confirmar",
-            handler: data => {
+            handler: (data) => {
               if (data.Valor.length > 0) {
                 let types: string;
                 const regExp: RegExp = new RegExp(
@@ -182,7 +182,7 @@ export class FlowchartPage {
 
                 this.propiedades = this.propiedades.replace(
                   regExp,
-                  `\n${target["currentTarget"]["id"]}(${data["Valor"]}):::${types}`
+                  `\n${target["currentTarget"]["id"]}("${data["Valor"]}"):::${types}`
                 );
 
                 this.editJSON(target["currentTarget"]["id"], data["Valor"]);
@@ -194,9 +194,9 @@ export class FlowchartPage {
                 this.mermaidStart();
                 this.setFunctionEdit();
               }
-            }
-          }
-        ]
+            },
+          },
+        ],
       });
       prompt.present();
     });
@@ -330,27 +330,27 @@ export class FlowchartPage {
       inputs: [
         {
           name: "Valor",
-          placeholder: "valor"
-        }
+          placeholder: "valor",
+        },
       ],
       buttons: [
         {
           text: "Cancelar",
-          handler: data => {
+          handler: (data) => {
             console.log("Cancel clicked");
             this.acum = 0;
-          }
+          },
         },
         {
           text: "Confirmar",
-          handler: data => {
+          handler: (data) => {
             if (data.Valor.length > 0) {
               this.addElement(entrada, addElement, data.Valor, type);
               this.acum = 0;
             }
-          }
-        }
-      ]
+          },
+        },
+      ],
     });
     await prompt.present();
   }
@@ -364,7 +364,7 @@ export class FlowchartPage {
     let id = Date.now();
 
     this.uniones += `\n${entrada} --> ${addElement}${id}`;
-    this.propiedades += `\n${addElement}${id}(${message}):::${type}`;
+    this.propiedades += `\n${addElement}${id}("${message}"):::${type}`;
     this.propiedades = this.propiedades.replace(/^\s*$(?:\r\n?|\n)/gm, "");
 
     if (addElement === "A") {
@@ -382,7 +382,7 @@ export class FlowchartPage {
       if (!this.graphJSON.ux_data[this.idElement]) {
         this.graphJSON.ux_data[this.idElement] = {
           text: messageQuestion,
-          type: "MULTIPLE"
+          type: "MULTIPLE",
         };
       }
 
@@ -399,7 +399,7 @@ export class FlowchartPage {
       if (!this.graphJSON.ux_data[addElement + id]) {
         this.graphJSON.ux_data[addElement + id] = {
           text: message,
-          type: "MULTIPLE"
+          type: "MULTIPLE",
         };
       }
       this.addQuestionsAns(this.idElement);
@@ -409,7 +409,7 @@ export class FlowchartPage {
       if (!this.graphJSON.ux_data[addElement + id]) {
         this.graphJSON.ux_data[addElement + id] = {
           text: message,
-          type: "QUOTATION"
+          type: "QUOTATION",
         };
       }
       this.addQuotation(this.idElement, addElement + id);
@@ -550,7 +550,7 @@ export class FlowchartPage {
     } else {
       const toast = this.toastCtrl.create({
         message: "Tienes que completar el arbol para poder activar el bot",
-        duration: 2000
+        duration: 2000,
       });
       toast.present();
     }
