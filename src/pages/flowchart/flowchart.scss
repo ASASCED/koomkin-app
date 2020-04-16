@@ -1,3 +1,20 @@
+.alert-button-group {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+.button-inner {
+  display: inline-block;
+}
+
+.alert-button {
+  width: 93%;
+  text-align: center;
+  border: 0.1em solid #fff;
+  height: 2.5em;
+}
+
 .example-box {
   width: 200px;
   height: 200px;
@@ -20,10 +37,6 @@
 .example-box:active {
   box-shadow: 0 5px 5px -3px rgba(117, 92, 92, 0.2),
     0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12);
-}
-
-foreignObject {
-  width: 60px;
 }
 
 // RESET CSS
@@ -472,6 +485,15 @@ textarea {
 
 // Page design - start
 
+video {
+  position: fixed;
+  z-index: 10;
+  width: 100%;
+  height: 100vh;
+  background-color: #fff;
+  overflow-y: hidden;
+}
+
 .header {
   display: flex;
   align-items: center;
@@ -701,4 +723,56 @@ textarea {
 .btn-change {
   background-color: #fff !important;
   color: #288ac1 !important;
+}
+
+// Cells
+foreignObject {
+  div {
+    display: inline-block;
+    overflow-wrap: break-word;
+    line-height: 1;
+    margin-top: -1.8px;
+  }
+}
+
+input {
+  height: 40px;
+}
+
+input::placeholder {
+  font-size: 12pt;
+  padding: 0 1em;
+}
+
+// Example
+.example-container {
+  display: none;
+  width: 100%;
+  z-index: 10;
+  position: absolute;
+  top: 5.4em;
+  bottom: 0;
+  text-align: center;
+  background-color: white;
+
+  .example {
+    margin: auto auto;
+  }
+}
+
+.eye:active {
+  color: #288ac1;
+}
+
+.prueba {
+  .boton:active {
+    border: 1px solid #288ac1;
+    color: #288ac1;
+  }
+}
+
+// Toast
+.toast-container {
+  background-color: #288ac1;
+  color: white;
 }

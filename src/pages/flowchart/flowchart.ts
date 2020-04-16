@@ -1,10 +1,13 @@
+// TODO: Cambiar cotizacion por precio
+// TODO: Cambiar color de cajas
+
 import { Component, ViewChild, ElementRef, Renderer2 } from "@angular/core";
 import {
   IonicPage,
   NavController,
   NavParams,
   AlertController,
-  ToastController
+  ToastController,
 } from "ionic-angular";
 
 import { ScreenOrientation } from "@ionic-native/screen-orientation";
@@ -13,39 +16,43 @@ import { DragulaService } from "ng2-dragula/ng2-dragula";
 import { Platform } from "ionic-angular";
 import * as mermaid from "mermaid";
 import * as $ from "jquery";
+import { Storage } from "@ionic/storage";
 
 @IonicPage()
 @Component({
   selector: "page-flowchart",
-  templateUrl: "flowchart.html"
+  templateUrl: "flowchart.html",
 })
 export class FlowchartPage {
   @ViewChild("mermaid") zoomGraph: ElementRef;
   @ViewChild("divZoom") divZoom: ElementRef;
+  @ViewChild("video") video: ElementRef;
+  @ViewChild("exampleContainer") exampleContainer: ElementRef;
   pregunta = document.getElementsByClassName("pregunta");
 
   zoom: number = 1;
   acum: number = 0;
   idElement: any;
   condition = true;
+  showImage = false;
 
   idGeneral: number;
 
   graphJSON: any = {
     user_id: "10553",
     questions: {
-      Q0000000000000: {}
+      Q0000000000000: {},
     },
     ux_data: {
       Q0000000000000: {
         text: "Pregunta",
         type: "MULTIPLE",
-        starting_q: "QXXXXX"
-      }
+        starting_q: "QXXXXX",
+      },
     },
     properties: {},
     classes: {},
-    relationships: {}
+    relationships: {},
   };
 
   @ViewChild("mermaid")
@@ -54,7 +61,7 @@ export class FlowchartPage {
   uniones: string = `Q0000000000000`;
   clases: string = `classDef pregunta:first-child fill: #f1f1f1, stroke: #3590C4, stroke-width: 4px, color: #3590C4, font-weight: bold, font-size: 10px
   classDef pregunta fill: #f1f1f1, stroke: #f1f1f1, stroke-width: 4px, color: #3590C4, font-weight: bold, font-size: 10px
-  classDef respuesta fill: #f1f1f1, stroke: #f1f1f1, stroke-width: 0px, color: #243E56, font-weight: bold, font-size: 10px
+  classDef respuesta fill: #243e56, stroke: #f1f1f1, stroke-width: 0px, color: #ffffff, font-weight: bold, font-size: 10px
   classDef cotizacion fill: #f2680a, stroke: #f2680a, stroke-width: 4px, color: #ffffff, font-weight: bold, font-size: 10px`;
   graphDefinition: string;
 
@@ -67,7 +74,8 @@ export class FlowchartPage {
     private platform: Platform,
     private renderer: Renderer2,
     private graphService: GraphProvider,
-    public toastCtrl: ToastController
+    public toastCtrl: ToastController,
+    private storage: Storage
   ) {
     if (this.platform.is("cordova")) {
       this.screenOrientation.lock(
@@ -76,17 +84,18 @@ export class FlowchartPage {
     }
 
     this.graphService.getStatusBot(10553).subscribe((data: any) => {
-      console.log(JSON.parse(data._body).status);
-      if (Number(JSON.parse(data._body).status) === 0) {
-        this.condition = false;
-      } else {
+      console.log(data);
+      if (JSON.parse(data._body).status === 0) {
         this.condition = true;
+      } else {
+        this.condition = false;
       }
 
-      console.log(this.condition);
-
       this.graphService.getGraph(10553).subscribe(async (data: any) => {
+        console.log(JSON.parse(data["_body"]));
         if (Object.keys(JSON.parse(data["_body"])).length === 0) {
+          this.condition = true;
+          this.postStatusBot(0);
           this.postJSON();
           return;
         }
@@ -96,19 +105,32 @@ export class FlowchartPage {
         this.propiedades = this.graphJSON["properties"];
 
         this.graphDefinition = `graph TD
-      ${this.propiedades}
-      ${this.uniones}
-      ${this.clases}`;
+        ${this.propiedades}
+        ${this.uniones}
+        ${this.clases}`;
 
         this.mermaidStart();
         this.setFunctionEdit();
       });
     });
-
-    console.log(this.graphJSON);
   }
 
-  ionViewDidLoad() {}
+  ionViewDidLoad() {
+    this.storage.get("played").then((data: boolean) => {
+      if (data === null) {
+        setTimeout(() => {
+          this.video.nativeElement.play();
+        }, 500);
+
+        setTimeout(() => {
+          this.renderer.setStyle(this.video.nativeElement, "display", "none");
+          this.storage.set("played", false);
+        }, 47000);
+      } else {
+        this.renderer.setStyle(this.video.nativeElement, "display", "none");
+      }
+    });
+  }
 
   mermaidStart() {
     mermaid.initialize({
@@ -117,14 +139,153 @@ export class FlowchartPage {
       startOnLoad: true,
       flowchart: {
         useMaxWidth: true,
-        htmlLabels: true
-      }
+        htmlLabels: true,
+      },
     });
 
     const element: any = this.mermaidDiv.nativeElement;
     mermaid.render("graphDiv", this.graphDefinition, (svgCode: any) => {
       element.innerHTML = svgCode;
     });
+  }
+
+  deleteNode(target: string) {
+    if (target.match(`C[0-9]*`)) {
+      const questionsText: string[] = [];
+      const removeRelationship: RegExp = new RegExp(
+        `A[0-9]* --> ${target}`,
+        "gm"
+      );
+      const removeProperty: RegExp = new RegExp(
+        `${target}\\(.*\\):::cotizacion`,
+        "gm"
+      );
+      const removeQuotation: RegExp = new RegExp(` --> ${target}`);
+      const getQuestion: RegExp = new RegExp(
+        `Q[0-9]* --> ${this.uniones
+          .match(removeRelationship)[0]
+          .replace(removeQuotation, "")}`
+      );
+
+      const replaceAnswere: RegExp = new RegExp(` --> A[0-9]*`, "g");
+      const question: string = this.uniones
+        .match(getQuestion)[0]
+        .replace(replaceAnswere, "");
+      const length = Object.keys(this.graphJSON.questions[question]).length;
+
+      delete this.graphJSON.ux_data[target];
+      for (let i = 1; i <= length; i++) {
+        if (this.graphJSON.questions[question][i] === target) {
+          delete this.graphJSON.questions[question][i];
+        } else {
+          questionsText.push(this.graphJSON.questions[question][i]);
+          delete this.graphJSON.questions[question][i];
+        }
+      }
+
+      for (let i = 1; i <= questionsText.length; i++) {
+        this.graphJSON.questions[question][i] = questionsText[i - 1];
+      }
+
+      this.uniones = this.uniones.replace(removeRelationship, "");
+      this.propiedades = this.propiedades.replace(removeProperty, "");
+
+      this.graphDefinition = `graph TD
+      ${this.propiedades}
+      ${this.uniones}
+      ${this.clases}`;
+
+      this.mermaidStart();
+      this.setFunctionEdit();
+      this.postJSON();
+      this.validateGraph();
+
+      console.log(this.graphJSON);
+    } else if (target.match(`Q[0-9]*`)) {
+      console.log(target);
+      const removeRelationship: RegExp = new RegExp(
+        `A[0-9]* --> ${target}`,
+        "gm"
+      );
+      const removeProperty: RegExp = new RegExp(
+        `${target}\\(.*\\):::pregunta`,
+        "gm"
+      );
+
+      this.uniones = this.uniones.replace(removeRelationship, "");
+      this.propiedades = this.propiedades.replace(removeProperty, "");
+
+      delete this.graphJSON.questions[target];
+      delete this.graphJSON.ux_data[target];
+      const length = Object.keys(this.graphJSON.questions).length;
+
+      for (let i = 1; i <= length; i++) {
+        if (
+          this.graphJSON.questions[
+            Object.keys(this.graphJSON.questions)[i - 1]
+          ][i] === target
+        ) {
+          delete this.graphJSON.questions[
+            Object.keys(this.graphJSON.questions)[i - 1]
+          ][i];
+        }
+      }
+
+      this.graphDefinition = `graph TD
+      ${this.propiedades}
+      ${this.uniones}
+      ${this.clases}`;
+
+      this.mermaidStart();
+      this.setFunctionEdit();
+      this.postJSON();
+      this.validateGraph();
+
+      console.log(this.graphJSON);
+    } else {
+      let acum: number = 1;
+      const replaceProperty: RegExp = new RegExp(
+        `${target}\\(.*\\):::respuesta`
+      );
+      const getquestion: RegExp = new RegExp(`Q[0-9]* --> ${target}`, "gm");
+      const replaceAnswere: RegExp = new RegExp(` --> ${target}`);
+      const question: string = this.uniones
+        .match(getquestion)[0]
+        .replace(replaceAnswere, "");
+      const getAnsweres: RegExp = new RegExp(`${question} --> A[0-9]*`, "gm");
+      const replaceQuestion: RegExp = new RegExp(`${question} --> A`);
+      const answeres: string[] = this.uniones.match(getAnsweres);
+      const answeresText: string[] = [];
+
+      for (let i = 1; i <= answeres.length; i++) {
+        if (answeres[i - 1].replace(replaceQuestion, "") === target.substr(1)) {
+          delete this.graphJSON.ux_data[question][acum];
+        } else {
+          answeresText.push(this.graphJSON.ux_data[question][acum]);
+          delete this.graphJSON.ux_data[question][acum];
+        }
+        acum++;
+      }
+
+      for (let i = 1; i <= answeresText.length; i++) {
+        this.graphJSON.ux_data[question][i] = answeresText[i - 1];
+      }
+
+      this.uniones = this.uniones.replace(getquestion, "");
+      this.propiedades = this.propiedades.replace(replaceProperty, "");
+
+      this.graphDefinition = `graph TD
+      ${this.propiedades}
+      ${this.uniones}
+      ${this.clases}`;
+
+      this.mermaidStart();
+      this.setFunctionEdit();
+      this.postJSON();
+      this.validateGraph();
+
+      console.log(this.graphJSON);
+    }
   }
 
   setFunctionEdit() {
@@ -141,65 +302,208 @@ export class FlowchartPage {
         `\\):::(pregunta|cotizacion|respuesta)`,
         "gm"
       );
+      const matchRelation: RegExp = new RegExp(
+        `${target["currentTarget"]["id"]} --> (Q|A|C)`,
+        "gm"
+      );
 
       const questionText: string[] = this.propiedades.match(regExp);
       const preQuestion = questionText[0].replace(repOne, "");
       const messageQuestion = preQuestion.replace(repTwo, "");
 
-      const prompt = this.alertCtrl.create({
-        title: "Editar",
-        message: `Texto: ${messageQuestion}`,
-        inputs: [
-          {
-            name: "Valor",
-            placeholder: "valor"
-          }
-        ],
-        buttons: [
-          {
-            text: "Cancelar",
-            handler: data => {}
-          },
-          {
-            text: "Confirmar",
-            handler: data => {
-              if (data.Valor.length > 0) {
-                let types: string;
-                const regExp: RegExp = new RegExp(
-                  `(${target["currentTarget"]["id"]}\(.*\):::(pregunta|respuesta|cotizacion))`,
-                  "gm"
-                );
-
-                if (/(Q[0-9]*)/.test(`${target["currentTarget"]["id"]}`)) {
-                  types = "pregunta";
-                } else if (
-                  /(A[0-9]*)/.test(`${target["currentTarget"]["id"]}`)
-                ) {
-                  types = "respuesta";
-                } else {
-                  types = "cotizacion";
-                }
-
-                this.propiedades = this.propiedades.replace(
-                  regExp,
-                  `\n${target["currentTarget"]["id"]}(${data["Valor"]}):::${types}`
-                );
-
-                this.editJSON(target["currentTarget"]["id"], data["Valor"]);
-
-                this.graphDefinition = `graph TD
-                ${this.propiedades}
-                ${this.uniones}
-                ${this.clases}`;
-                this.mermaidStart();
-                this.setFunctionEdit();
-              }
-            }
-          }
-        ]
-      });
-      prompt.present();
+      if (
+        !this.uniones.match(matchRelation) &&
+        String(target["currentTarget"]["id"]).match(`(A|Q)[0-9]*`) &&
+        String(target["currentTarget"]["id"]) !== "Q0000000000000"
+      ) {
+        this.promptDelete(messageQuestion, target);
+      } else if (String(target["currentTarget"]["id"]).match(`C[0-9]*`)) {
+        if (messageQuestion.includes("-")) {
+          this.promptQuotationRange(messageQuestion, target);
+        } else {
+          this.promptQuotation(messageQuestion, target);
+        }
+      } else {
+        this.promptNormal(messageQuestion, target);
+      }
     });
+  }
+
+  promptDelete(messageQuestion: string, target: any) {
+    const prompt = this.alertCtrl.create({
+      title: "Editar",
+      message: `Texto: ${messageQuestion}`,
+      inputs: [
+        {
+          name: "Valor",
+          placeholder: "valor",
+          // type: "number",
+        },
+      ],
+      buttons: [
+        {
+          text: "Cancelar",
+          handler: () => {},
+        },
+        {
+          text: "Eliminar",
+          handler: () => {
+            this.deleteNode(target["currentTarget"]["id"]);
+          },
+        },
+        {
+          text: "Confirmar",
+          handler: (data) => {
+            if (data.Valor.length > 0) {
+              const value = data.Valor;
+              this.editPrompt(value, target);
+            }
+          },
+        },
+      ],
+    });
+    prompt.present();
+  }
+
+  promptNormal(messageQuestion: string, target: any) {
+    const prompt = this.alertCtrl.create({
+      title: "Editar",
+      message: `Texto: ${messageQuestion}`,
+      inputs: [
+        {
+          name: "Valor",
+          placeholder: "valor",
+          // type: "number",
+        },
+      ],
+      buttons: [
+        {
+          text: "Cancelar",
+          handler: () => {},
+        },
+        {
+          text: "Confirmar",
+          handler: (data) => {
+            if (data.Valor.length > 0) {
+              const value = data.Valor;
+              this.editPrompt(value, target);
+            }
+          },
+        },
+      ],
+    });
+    prompt.present();
+  }
+
+  promptQuotation(messageQuestion: string, target: any) {
+    const prompt = this.alertCtrl.create({
+      title: "Editar",
+      message: `Texto: ${messageQuestion}`,
+      inputs: [
+        {
+          name: "Valor",
+          placeholder: "valor",
+          type: "number",
+        },
+      ],
+      buttons: [
+        {
+          text: "Cancelar",
+          handler: () => {},
+        },
+        {
+          text: "Eliminar",
+          handler: () => {
+            this.deleteNode(target["currentTarget"]["id"]);
+          },
+        },
+        {
+          text: "Confirmar",
+          handler: (data) => {
+            if (data.Valor.length > 0) {
+              const value = `$${data.Valor}`;
+              this.editPrompt(value, target);
+            }
+          },
+        },
+      ],
+    });
+    prompt.present();
+  }
+
+  async promptQuotationRange(messageQuestion: string, target: any) {
+    console.log(this.propiedades);
+    const prompt = this.alertCtrl.create({
+      title: "Editar",
+      message: `Texto: ${messageQuestion}`,
+      inputs: [
+        {
+          name: "ValorInicio",
+          placeholder: "De:",
+          type: "number",
+        },
+        {
+          name: "ValorFinal",
+          placeholder: "A:",
+          type: "number",
+        },
+      ],
+      buttons: [
+        {
+          text: "Cancelar",
+          handler: () => {
+            console.log("Cancel clicked");
+            this.acum = 0;
+          },
+        },
+        {
+          text: "Eliminar",
+          handler: () => {
+            this.deleteNode(target["currentTarget"]["id"]);
+          },
+        },
+        {
+          text: "Confirmar",
+          handler: (data) => {
+            if (data.ValorInicio.length > 0 && data.ValorFinal.length > 0) {
+              const value = `$${data.ValorInicio} - $${data.ValorFinal}`;
+              this.editPrompt(value, target);
+            }
+          },
+        },
+      ],
+    });
+    await prompt.present();
+  }
+
+  editPrompt(data: any, target: any) {
+    let types: string;
+    const regExp: RegExp = new RegExp(
+      `${target["currentTarget"]["id"]}\\(.*\\):::(pregunta|respuesta|cotizacion)`,
+      "gm"
+    );
+
+    if (/(Q[0-9]*)/.test(`${target["currentTarget"]["id"]}`)) {
+      types = "pregunta";
+    } else if (/(A[0-9]*)/.test(`${target["currentTarget"]["id"]}`)) {
+      types = "respuesta";
+    } else {
+      types = "cotizacion";
+    }
+
+    this.propiedades = this.propiedades.replace(
+      regExp,
+      `\n${target["currentTarget"]["id"]}("${data}"):::${types}`
+    );
+
+    this.editJSON(target["currentTarget"]["id"], data);
+
+    this.graphDefinition = `graph TD
+      ${this.propiedades}
+      ${this.uniones}
+      ${this.clases}`;
+    this.mermaidStart();
+    this.setFunctionEdit();
   }
 
   editJSON(id: string, message: string) {
@@ -280,7 +584,8 @@ export class FlowchartPage {
 
       if (!regExpC.test(this.uniones)) {
         if (id === "C" && /(A[0-9]*)/.test(this.idElement) && this.acum === 0) {
-          this.alertOptions(this.idElement, "C", "cotizacion");
+          this.presentConfirm(this.idElement, "C", "cotizacion");
+          // this.alertOptions(this.idElement, "C", "cotizacion");
           this.acum++;
         }
       }
@@ -323,6 +628,7 @@ export class FlowchartPage {
     });
   }
 
+  // TODO: Cambiar cotizacion por precio
   async alertOptions(entrada: string, addElement: string, type: string) {
     const prompt = this.alertCtrl.create({
       title: `Añadir ${type}`,
@@ -330,29 +636,124 @@ export class FlowchartPage {
       inputs: [
         {
           name: "Valor",
-          placeholder: "valor"
-        }
+          placeholder: "valor",
+        },
       ],
       buttons: [
         {
           text: "Cancelar",
-          handler: data => {
+          handler: () => {
             console.log("Cancel clicked");
             this.acum = 0;
-          }
+          },
         },
         {
           text: "Confirmar",
-          handler: data => {
+          handler: (data) => {
             if (data.Valor.length > 0) {
               this.addElement(entrada, addElement, data.Valor, type);
               this.acum = 0;
             }
-          }
-        }
-      ]
+          },
+        },
+      ],
     });
     await prompt.present();
+  }
+
+  async quotationUnique(entrada: string, addElement: string, type: string) {
+    const prompt = this.alertCtrl.create({
+      title: `Añadir ${type}`,
+      message: `Agrega el texto correspondiente a tu ${type}`,
+      inputs: [
+        {
+          name: "Valor",
+          placeholder: "valor",
+          type: "number",
+        },
+      ],
+      buttons: [
+        {
+          text: "Cancelar",
+          handler: () => {
+            console.log("Cancel clicked");
+            this.acum = 0;
+          },
+        },
+        {
+          text: "Confirmar",
+          handler: (data) => {
+            if (data.Valor.length > 0) {
+              const value = `$${data.Valor}`;
+              this.addElement(entrada, addElement, value, type);
+              this.acum = 0;
+            }
+          },
+        },
+      ],
+    });
+    await prompt.present();
+  }
+
+  async quotationRange(entrada: string, addElement: string, type: string) {
+    const prompt = this.alertCtrl.create({
+      title: `Añadir ${type}`,
+      message: `Agrega el texto correspondiente a tu ${type}`,
+      inputs: [
+        {
+          name: "ValorInicio",
+          placeholder: "De:",
+          type: "number",
+        },
+        {
+          name: "ValorFinal",
+          placeholder: "A:",
+          type: "number",
+        },
+      ],
+      buttons: [
+        {
+          text: "Cancelar",
+          handler: () => {
+            console.log("Cancel clicked");
+            this.acum = 0;
+          },
+        },
+        {
+          text: "Confirmar",
+          handler: (data) => {
+            if (data.ValorInicio.length > 0 && data.ValorFinal.length > 0) {
+              const value = `$${data.ValorInicio} - $${data.ValorFinal}`;
+              this.addElement(entrada, addElement, value, type);
+              this.acum = 0;
+            }
+          },
+        },
+      ],
+    });
+    await prompt.present();
+  }
+
+  presentConfirm(entrada: string, addElement: string, type: string) {
+    let alert = this.alertCtrl.create({
+      title: "Tipo de precio",
+      message: "¿Que tipo de precio desea ingresar?",
+      buttons: [
+        {
+          text: "Unico",
+          handler: () => {
+            this.quotationUnique(entrada, addElement, type);
+          },
+        },
+        {
+          text: "Rango",
+          handler: () => {
+            this.quotationRange(entrada, addElement, type);
+          },
+        },
+      ],
+    });
+    alert.present();
   }
 
   addElement = (
@@ -364,7 +765,7 @@ export class FlowchartPage {
     let id = Date.now();
 
     this.uniones += `\n${entrada} --> ${addElement}${id}`;
-    this.propiedades += `\n${addElement}${id}(${message}):::${type}`;
+    this.propiedades += `\n${addElement}${id}("${message}"):::${type}`;
     this.propiedades = this.propiedades.replace(/^\s*$(?:\r\n?|\n)/gm, "");
 
     if (addElement === "A") {
@@ -382,7 +783,7 @@ export class FlowchartPage {
       if (!this.graphJSON.ux_data[this.idElement]) {
         this.graphJSON.ux_data[this.idElement] = {
           text: messageQuestion,
-          type: "MULTIPLE"
+          type: "MULTIPLE",
         };
       }
 
@@ -399,7 +800,7 @@ export class FlowchartPage {
       if (!this.graphJSON.ux_data[addElement + id]) {
         this.graphJSON.ux_data[addElement + id] = {
           text: message,
-          type: "MULTIPLE"
+          type: "MULTIPLE",
         };
       }
       this.addQuestionsAns(this.idElement);
@@ -409,7 +810,7 @@ export class FlowchartPage {
       if (!this.graphJSON.ux_data[addElement + id]) {
         this.graphJSON.ux_data[addElement + id] = {
           text: message,
-          type: "QUOTATION"
+          type: "QUOTATION",
         };
       }
       this.addQuotation(this.idElement, addElement + id);
@@ -425,9 +826,9 @@ export class FlowchartPage {
     this.idElement = "";
 
     console.log(this.graphJSON);
-    console.log(JSON.stringify(this.graphJSON));
     this.postJSON();
     this.condition = false;
+    this.postStatusBot(0);
   };
 
   addQuestionsAns(id: string) {
@@ -473,34 +874,24 @@ export class FlowchartPage {
 
   addQuotation(id: string, element: string) {
     let len: number;
-    // const findAnswere: RegExp = new RegExp(`${id} --> ${element}`, "gm");
-    // const replaceAnswere: RegExp = new RegExp(`--> ${element}`, "gm");
     const findQuestion: RegExp = new RegExp(`Q[0-9]* --> ${id}`, "gm");
     const replaceQuestion: RegExp = new RegExp(` --> ${id}`, "gm");
-    // const answere: string = this.uniones
-    //   .match(findAnswere)[0]
-    //   .replace(replaceAnswere, "");
     const question: string = this.uniones
       .match(findQuestion)[0]
       .replace(replaceQuestion, "");
 
-    console.log(question);
     console.log(this.graphJSON);
 
     if (!this.graphJSON.questions[question]) {
       this.graphJSON.questions[question] = {};
     }
 
-    console.log(this.graphJSON.questions[question]);
     len = Object.keys(this.graphJSON.questions[question]).length + 1;
-
-    console.log(len);
-
     this.graphJSON.questions[question][len] = element;
   }
 
   zoomIn() {
-    this.zoom += 0.1;
+    this.zoom += 0.3;
     this.renderer.setStyle(
       this.zoomGraph.nativeElement,
       "transform",
@@ -509,7 +900,7 @@ export class FlowchartPage {
   }
 
   zoomOut() {
-    this.zoom -= 0.1;
+    this.zoom -= 0.3;
     this.renderer.setStyle(
       this.zoomGraph.nativeElement,
       "transform",
@@ -550,7 +941,7 @@ export class FlowchartPage {
     } else {
       const toast = this.toastCtrl.create({
         message: "Tienes que completar el arbol para poder activar el bot",
-        duration: 2000
+        duration: 2000,
       });
       toast.present();
     }
@@ -559,7 +950,7 @@ export class FlowchartPage {
   validateGraph() {
     let graph: boolean;
     const questions: RegExp = new RegExp(
-      "(A|Q)[0-9]*\\(.*\\):::respuesta",
+      "(A|Q)[0-9]*\\(.*\\):::(respuesta|pregunta)",
       "gm"
     );
     const questionsMatch: string[] = this.propiedades.match(questions);
@@ -571,11 +962,9 @@ export class FlowchartPage {
 
     for (const question of questionsMatch) {
       const validator: RegExp = new RegExp(
-        `${question.replace(replaceQst, "")} --> (C|A)[0-9]*`,
+        `${question.replace(replaceQst, "")} --> (A|Q|C)[0-9]*`,
         "gm"
       );
-
-      console.log(this.uniones.match(validator));
 
       if (this.uniones.match(validator) !== null) {
         graph = true;
@@ -592,5 +981,55 @@ export class FlowchartPage {
     this.graphService.postStatusBot(10553, status).subscribe((data: any) => {
       console.log(data);
     });
+  }
+
+  showExample() {
+    this.showImage = !this.showImage;
+
+    if (!this.showImage) {
+      this.renderer.setStyle(
+        this.exampleContainer.nativeElement,
+        "display",
+        "none"
+      );
+
+      const toast = this.toastCtrl.create({
+        message: "Construir Bot...",
+        duration: 2000,
+      });
+      toast.present();
+    } else {
+      this.renderer.setStyle(
+        this.exampleContainer.nativeElement,
+        "display",
+        "initial"
+      );
+
+      const toast = this.toastCtrl.create({
+        message: "Ejemplo Bot...",
+        duration: 2000,
+      });
+      toast.present();
+    }
+  }
+
+  sendTest() {
+    this.graphService.postTriggerQuotationBot(10553).subscribe(
+      (data: any) => {
+        console.log(data);
+        const toast = this.toastCtrl.create({
+          message: "Prueba enviada...",
+          duration: 2000,
+        });
+        toast.present();
+      },
+      (err: any) => {
+        const toast = this.toastCtrl.create({
+          message: "Fallo al enviar la prueba...",
+          duration: 2000,
+        });
+        toast.present();
+      }
+    );
   }
 }

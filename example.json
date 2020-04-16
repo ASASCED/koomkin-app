@@ -1,27 +1,29 @@
 {
-  "_id": 8574,
-  "user_id": 8285,
+  "result": "Ok",
+  "user_id": "10553",
   "questions": {
-    "Q093247898237": {
-      "1": "Q1256665435",
-      "2": "Q45643564365462",
-      "3": "C475890346542"
+    "Q0000000000000": {
+      "1": "C1586282320296"
     }
   },
   "ux_data": {
-    "Q093247898237": {
-      "Text": "Some text",
-      "TYPE": "MULTIPLE",
-      "1": "Option1",
-      "2": "Option2",
-      "3": "Option3"
+    "Q0000000000000": {
+      "1": "wqdqwd",
+      "2": "wdqddqw",
+      "text": "jesus",
+      "type": "MULTIPLE",
+      "starting_q": "QXXXXX",
+      "position": {
+        "A1586282320296": 1,
+        "A1586282325966": 2
+      }
     },
-    "C475890346542": {
-      "Text": "1000",
-      "TYPE": "QUOTATION"
+    "C1586282320296": {
+      "text": "wfefwefw",
+      "type": "QUOTATION"
     }
   },
-  "properties": {},
-  "classes": {},
-  "relationships": {}
+  "properties": "Q0000000000000(jesus):::pregunta\nA1586270953381(wqdqwd):::respuesta\nA1586270957244(wdqddqw):::respuesta\nC1586282320296(wfefwefw):::cotizacion",
+  "classes": "classDef pregunta:first-child fill: #f1f1f1, stroke: #3590C4, stroke-width: 4px, color: #3590C4, font-weight: bold, font-size: 10px\n  classDef pregunta fill: #f1f1f1, stroke: #f1f1f1, stroke-width: 4px, color: #3590C4, font-weight: bold, font-size: 10px\n  classDef respuesta fill: #f1f1f1, stroke: #f1f1f1, stroke-width: 0px, color: #243E56, font-weight: bold, font-size: 10px\n  classDef cotizacion fill: #f2680a, stroke: #f2680a, stroke-width: 4px, color: #ffffff, font-weight: bold, font-size: 10px",
+  "relationships": "Q0000000000000\nQ0000000000000 --> A1586270953381\nQ0000000000000 --> A1586270957244\nA1586270957244 --> C1586282320296"
 }
