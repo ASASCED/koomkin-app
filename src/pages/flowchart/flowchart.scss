@@ -556,9 +556,9 @@ video {
     display: flex;
     flex-wrap: wrap;
 
-    div {
+    div:nth-child(1) {
       padding: 0.2em;
-      color: #288ac1;
+      color: #3590c4;
       background-color: transparent;
 
       i:first-child {
@@ -572,13 +572,68 @@ video {
 
       div {
         border-radius: 0.5em;
-        border: 2px solid #288ac1;
+        border: 2px solid #3590c4;
         padding: 0.5em 0.4em;
+        background-color: #f1f1f1;
       }
 
-      div:hover {
+      div:active {
+        color: #f1f1f1;
+        background-color: #3590c4;
+      }
+    }
+
+    div:nth-child(2) {
+      padding: 0.2em;
+      background-color: transparent;
+
+      i:first-child {
+        padding-left: 0.5em;
+        margin-right: -4px;
+      }
+
+      i {
+        color: #d8d8d8;
+      }
+
+      div {
         color: white;
-        background-color: #288ac1;
+        border-radius: 0.5em;
+        border: 2px solid #243e56;
+        padding: 0.5em 0.4em;
+        background-color: #243e56;
+      }
+
+      div:active {
+        color: #243e56;
+        background-color: #f1f1f1;
+      }
+    }
+
+    div:nth-child(3) {
+      padding: 0.2em;
+      background-color: transparent;
+
+      i:first-child {
+        padding-left: 0.5em;
+        margin-right: -4px;
+      }
+
+      i {
+        color: #d8d8d8;
+      }
+
+      div {
+        color: white;
+        border-radius: 0.5em;
+        border: 2px solid #f2680a;
+        padding: 0.5em 0.4em;
+        background-color: #f2680a;
+      }
+
+      div:active {
+        color: #f2680a;
+        background-color: #f1f1f1;
       }
     }
   }

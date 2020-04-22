@@ -1,6 +1,3 @@
-// TODO: Cambiar cotizacion por precio
-// TODO: Cambiar color de cajas
-
 import { Component, ViewChild, ElementRef, Renderer2 } from "@angular/core";
 import {
   IonicPage,
@@ -36,10 +33,10 @@ export class FlowchartPage {
   condition = true;
   showImage = false;
 
-  idGeneral: number;
+  idGeneral: number = 55020;
 
   graphJSON: any = {
-    user_id: "10553",
+    user_id: String(this.idGeneral),
     questions: {
       Q0000000000000: {},
     },
@@ -47,7 +44,6 @@ export class FlowchartPage {
       Q0000000000000: {
         text: "Pregunta",
         type: "MULTIPLE",
-        starting_q: "QXXXXX",
       },
     },
     properties: {},
@@ -62,7 +58,7 @@ export class FlowchartPage {
   clases: string = `classDef pregunta:first-child fill: #f1f1f1, stroke: #3590C4, stroke-width: 4px, color: #3590C4, font-weight: bold, font-size: 10px
   classDef pregunta fill: #f1f1f1, stroke: #f1f1f1, stroke-width: 4px, color: #3590C4, font-weight: bold, font-size: 10px
   classDef respuesta fill: #243e56, stroke: #f1f1f1, stroke-width: 0px, color: #ffffff, font-weight: bold, font-size: 10px
-  classDef cotizacion fill: #f2680a, stroke: #f2680a, stroke-width: 4px, color: #ffffff, font-weight: bold, font-size: 10px`;
+  classDef precio fill: #f2680a, stroke: #f2680a, stroke-width: 4px, color: #ffffff, font-weight: bold, font-size: 10px`;
   graphDefinition: string;
 
   constructor(
@@ -83,7 +79,7 @@ export class FlowchartPage {
       );
     }
 
-    this.graphService.getStatusBot(10553).subscribe((data: any) => {
+    this.graphService.getStatusBot(this.idGeneral).subscribe((data: any) => {
       console.log(data);
       if (JSON.parse(data._body).status === 0) {
         this.condition = true;
@@ -91,27 +87,29 @@ export class FlowchartPage {
         this.condition = false;
       }
 
-      this.graphService.getGraph(10553).subscribe(async (data: any) => {
-        console.log(JSON.parse(data["_body"]));
-        if (Object.keys(JSON.parse(data["_body"])).length === 0) {
-          this.condition = true;
-          this.postStatusBot(0);
-          this.postJSON();
-          return;
-        }
+      this.graphService
+        .getGraph(this.idGeneral)
+        .subscribe(async (data: any) => {
+          console.log(JSON.parse(data["_body"]));
+          if (Object.keys(JSON.parse(data["_body"])).length === 0) {
+            this.condition = true;
+            this.postStatusBot(0);
+            this.postJSON();
+            return;
+          }
 
-        this.graphJSON = JSON.parse(data["_body"]);
-        this.uniones = this.graphJSON["relationships"];
-        this.propiedades = this.graphJSON["properties"];
+          this.graphJSON = JSON.parse(data["_body"]);
+          this.uniones = this.graphJSON["relationships"];
+          this.propiedades = this.graphJSON["properties"];
 
-        this.graphDefinition = `graph TD
+          this.graphDefinition = `graph TD
         ${this.propiedades}
         ${this.uniones}
         ${this.clases}`;
 
-        this.mermaidStart();
-        this.setFunctionEdit();
-      });
+          this.mermaidStart();
+          this.setFunctionEdit();
+        });
     });
   }
 
@@ -157,7 +155,7 @@ export class FlowchartPage {
         "gm"
       );
       const removeProperty: RegExp = new RegExp(
-        `${target}\\(.*\\):::cotizacion`,
+        `${target}\\(.*\\):::precio`,
         "gm"
       );
       const removeQuotation: RegExp = new RegExp(` --> ${target}`);
@@ -291,7 +289,7 @@ export class FlowchartPage {
   setFunctionEdit() {
     $(".node").on("click", (target: any) => {
       const regExp: RegExp = new RegExp(
-        `${target["currentTarget"]["id"]}\\(.*\\):::(pregunta|cotizacion|respuesta)`,
+        `${target["currentTarget"]["id"]}\\(.*\\):::(pregunta|precio|respuesta)`,
         "gm"
       );
       const repOne: RegExp = new RegExp(
@@ -299,7 +297,7 @@ export class FlowchartPage {
         "gm"
       );
       const repTwo: RegExp = new RegExp(
-        `\\):::(pregunta|cotizacion|respuesta)`,
+        `\\):::(pregunta|precio|respuesta)`,
         "gm"
       );
       const matchRelation: RegExp = new RegExp(
@@ -479,7 +477,7 @@ export class FlowchartPage {
   editPrompt(data: any, target: any) {
     let types: string;
     const regExp: RegExp = new RegExp(
-      `${target["currentTarget"]["id"]}\\(.*\\):::(pregunta|respuesta|cotizacion)`,
+      `${target["currentTarget"]["id"]}\\(.*\\):::(pregunta|respuesta|precio)`,
       "gm"
     );
 
@@ -488,7 +486,7 @@ export class FlowchartPage {
     } else if (/(A[0-9]*)/.test(`${target["currentTarget"]["id"]}`)) {
       types = "respuesta";
     } else {
-      types = "cotizacion";
+      types = "precio";
     }
 
     this.propiedades = this.propiedades.replace(
@@ -584,8 +582,8 @@ export class FlowchartPage {
 
       if (!regExpC.test(this.uniones)) {
         if (id === "C" && /(A[0-9]*)/.test(this.idElement) && this.acum === 0) {
-          this.presentConfirm(this.idElement, "C", "cotizacion");
-          // this.alertOptions(this.idElement, "C", "cotizacion");
+          this.presentConfirm(this.idElement, "C", "precio");
+          // this.alertOptions(this.idElement, "C", "precio");
           this.acum++;
         }
       }
@@ -628,7 +626,6 @@ export class FlowchartPage {
     });
   }
 
-  // TODO: Cambiar cotizacion por precio
   async alertOptions(entrada: string, addElement: string, type: string) {
     const prompt = this.alertCtrl.create({
       title: `Añadir ${type}`,
@@ -787,11 +784,7 @@ export class FlowchartPage {
         };
       }
 
-      if (this.idElement === "Q0000000000000") {
-        len = Object.keys(this.graphJSON.ux_data[this.idElement]).length - 2;
-      } else {
-        len = Object.keys(this.graphJSON.ux_data[this.idElement]).length - 1;
-      }
+      len = Object.keys(this.graphJSON.ux_data[this.idElement]).length - 1;
 
       this.graphJSON.ux_data[this.idElement][len] = message;
     }
@@ -925,7 +918,7 @@ export class FlowchartPage {
     console.log(this.graphJSON);
 
     this.graphService
-      .postGraph(10553, this.graphJSON)
+      .postGraph(this.idGeneral, this.graphJSON)
       .subscribe((data: any) => {
         console.log(data);
       });
@@ -978,9 +971,11 @@ export class FlowchartPage {
   }
 
   postStatusBot(status: number) {
-    this.graphService.postStatusBot(10553, status).subscribe((data: any) => {
-      console.log(data);
-    });
+    this.graphService
+      .postStatusBot(this.idGeneral, status)
+      .subscribe((data: any) => {
+        console.log(data);
+      });
   }
 
   showExample() {
@@ -1014,7 +1009,7 @@ export class FlowchartPage {
   }
 
   sendTest() {
-    this.graphService.postTriggerQuotationBot(10553).subscribe(
+    this.graphService.postTriggerQuotationBot(this.idGeneral).subscribe(
       (data: any) => {
         console.log(data);
         const toast = this.toastCtrl.create({

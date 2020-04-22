@@ -5,7 +5,7 @@ import { Observable } from "rxjs";
 @Injectable()
 export class GraphProvider {
   // private url = "http://192.168.0.173:5010/";
-  private url = "https://cdcc3aba.ngrok.io/";
+  private url = "https://e476d87b.ngrok.io/";
 
   constructor(public http: Http) {
     console.log("Hello GraphProvider Provider");
