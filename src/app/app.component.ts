@@ -9,12 +9,12 @@ import { HttpClient } from "@angular/common/http";
 import { Storage } from "@ionic/storage";
 
 @Component({
-  templateUrl: "app.html"
+  templateUrl: "app.html",
 })
 export class MyApp {
   @ViewChild(Nav) nav: NavController;
 
-  rootPage: any = "FlowchartPage";
+  rootPage: any = "LoginPage";
   leads = "LeadsPage";
   reporte = "ReportePage";
   datos = "DatosPage";
@@ -61,7 +61,7 @@ export class MyApp {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
-      var notificationOpenedCallback = jsonData => {
+      var notificationOpenedCallback = (jsonData) => {
         var notif_additional_data =
           jsonData.notification.payload.additionalData;
         const actionButtonPressed = jsonData.action.actionID;
@@ -185,10 +185,10 @@ export class MyApp {
           "/notificacion"
       )
       .subscribe(
-        data => {
+        (data) => {
           // console.log("calificado exitosamente desde notificación");
         },
-        err => {
+        (err) => {
           // console.log("Error calificando desde notificacion");
         }
       );
