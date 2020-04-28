@@ -1,18 +1,20 @@
-.alert-button-group {
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-}
+.alert-wrapper {
+  div:last-child {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+  }
 
-.button-inner {
-  display: inline-block;
-}
+  button {
+    width: 100%;
+    text-align: center;
+    border: 0.1em solid #fff;
+    height: 2.5em;
 
-.alert-button {
-  width: 93%;
-  text-align: center;
-  border: 0.1em solid #fff;
-  height: 2.5em;
+    span {
+      display: inline-block;
+    }
+  }
 }
 
 .example-box {
@@ -494,7 +496,7 @@ video {
   overflow-y: hidden;
 }
 
-.header {
+.header-flowchart-bot {
   display: flex;
   align-items: center;
   color: #fff;

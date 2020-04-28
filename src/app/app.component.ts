@@ -14,7 +14,7 @@ import { Storage } from "@ionic/storage";
 export class MyApp {
   @ViewChild(Nav) nav: NavController;
 
-  rootPage: any = "LoginPage";
+  rootPage: any = "FlowchartPage";
   leads = "LeadsPage";
   reporte = "ReportePage";
   datos = "DatosPage";

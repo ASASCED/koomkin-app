@@ -4,26 +4,26 @@ import {
   NavController,
   ViewController,
   NavParams,
-  Platform
+  Platform,
 } from "ionic-angular";
 import { RestProvider } from "./../../providers/rest/rest";
 import { HttpClient } from "@angular/common/http";
 import {
   AlertController,
   ModalController,
-  LoadingController
+  LoadingController,
 } from "ionic-angular";
 import { AuthServiceProvider } from "../../providers/auth-service/auth-service";
 import {
   StreamingMedia,
-  StreamingAudioOptions
+  StreamingAudioOptions,
 } from "@ionic-native/streaming-media";
 import { Storage } from "@ionic/storage";
 import { ElementRef, ViewChild } from "@angular/core";
 import { Content } from "ionic-angular";
 import {
   ChatServiceProvider,
-  ChatMessage
+  ChatMessage,
 } from "../../providers/chat-service/chat-service";
 import { HttpHeaders } from "@angular/common/http";
 import { FileOpener } from "@ionic-native/file-opener";
@@ -33,13 +33,14 @@ import * as distanceinWordsStrict from "date-fns/distance_in_words_strict";
 import * as esLocale from "date-fns/locale/es";
 import swal from "sweetalert2";
 import * as moment from "moment";
+import Swal from "sweetalert2";
 
 declare var cordova: any;
 
 @IonicPage()
 @Component({
   selector: "page-lead",
-  templateUrl: "lead.html"
+  templateUrl: "lead.html",
 })
 export class LeadPage implements OnInit {
   leadActual;
@@ -177,7 +178,7 @@ export class LeadPage implements OnInit {
     const autoScroller = new MutationObserver(this.scrollDown.bind(this));
     autoScroller.observe(this.messageContent, {
       childList: true,
-      subtree: true
+      subtree: true,
     });
     return autoScroller;
   }
@@ -231,7 +232,7 @@ export class LeadPage implements OnInit {
       { enableBackdropDismiss: false, cssClass: "Modal-iniciar-chat" }
     );
     myModal2.present();
-    myModal2.onDidDismiss(conversacionIniciada => {
+    myModal2.onDidDismiss((conversacionIniciada) => {
       if (conversacionIniciada) {
         this.leadActual.intentos = 1;
       } else {
@@ -279,7 +280,7 @@ export class LeadPage implements OnInit {
         () => {
           //this.connectChat();
         },
-        err => {}
+        (err) => {}
       );
     }
   }
@@ -288,10 +289,10 @@ export class LeadPage implements OnInit {
     const url = "https://www.koomkin.com.mx/chat/api/read-messages/";
     return new Promise((resolve, reject) => {
       this.http.post(url + this.leadActual.uuid, { device: "app" }).subscribe(
-        data => {
+        (data) => {
           return resolve();
         },
-        err => {
+        (err) => {
           return resolve(err);
         }
       );
@@ -306,12 +307,12 @@ export class LeadPage implements OnInit {
       buttons: [
         {
           text: "Ok",
-          handler: data => {
+          handler: (data) => {
             this.page = "Lead";
             this.content.resize();
-          }
-        }
-      ]
+          },
+        },
+      ],
     });
     alert.present();
   }
@@ -347,7 +348,7 @@ export class LeadPage implements OnInit {
   }
 
   ngOnInit() {
-    this.chatService.msgListActualizada.subscribe(result => {
+    this.chatService.msgListActualizada.subscribe((result) => {
       if (result.length === 0) {
         this.msgListLead = result;
         console.log(this.msgListLead);
@@ -379,7 +380,7 @@ export class LeadPage implements OnInit {
       }
     });
 
-    this.chatService.loadingMessagesActualizado.subscribe(result => {
+    this.chatService.loadingMessagesActualizado.subscribe((result) => {
       this.ngz.run(() => {});
       this.loadingMessages = result;
     });
@@ -449,6 +450,7 @@ export class LeadPage implements OnInit {
     this.attentionSpeed = "-";
     // Obtenemos parametros de la página de LEADS
     this.leadActual = navParams.data;
+    console.log(navParams.data);
     if (
       this.leadActual.RazonDescartado != "null" &&
       this.leadActual.RazonDescartado != null &&
@@ -622,18 +624,18 @@ export class LeadPage implements OnInit {
       headers: new HttpHeaders().set(
         "Content-Type",
         "application/x-www-form-urlencoded"
-      )
+      ),
     };
 
     const url = "https://koomkin.com.mx/calltracker/calling/";
 
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       this.http.post(url, body.toString(), options).subscribe(
-        data => {
+        (data) => {
           console.log(data);
           resolve(data);
         },
-        err => {
+        (err) => {
           console.log(err);
         }
       );
@@ -668,7 +670,7 @@ export class LeadPage implements OnInit {
     }
     const body = {
       clave: this.leadActual.clave,
-      classification: this.clasifica
+      classification: this.clasifica,
     };
     this.http
       .get(
@@ -680,11 +682,11 @@ export class LeadPage implements OnInit {
           "/app"
       )
       .subscribe(
-        data => {
+        (data) => {
           this.clasificacion = data[0].clasificaLead;
           //// console.log(this.clasificacion);
         },
-        err => {
+        (err) => {
           // console.log("Error occured");
         }
       );
@@ -697,7 +699,7 @@ export class LeadPage implements OnInit {
       cssClass: "cancel-button",
       handler: () => {
         // console.log('Disagree clicked');
-      }
+      },
     };
 
     let btnOk = {
@@ -707,13 +709,13 @@ export class LeadPage implements OnInit {
         this.callClient();
         this.FbotonOn();
         // console.log('Agree clicked');
-      }
+      },
     };
 
     let confirm = this.alertCtrl.create({
       title: "¿Desea llamar a " + this.leadActual.NOMBRE + "?",
       cssClass: "buttonCss",
-      buttons: [btnCancel, btnOk]
+      buttons: [btnCancel, btnOk],
     });
     confirm.present();
   }
@@ -721,7 +723,7 @@ export class LeadPage implements OnInit {
   public getLeadCalls() {
     this.http
       .get(this.apiUrl + "/getLeadCalls/" + this.leadActual.clave)
-      .subscribe(data => {
+      .subscribe((data) => {
         this.llamadas = data;
         if (this.llamadas) {
           for (let k in this.llamadas) {
@@ -782,7 +784,7 @@ export class LeadPage implements OnInit {
   public getCountLeadCalls() {
     this.http
       .get(this.apiUrl + "/getCountLeadCalls/" + this.leadActual.clave)
-      .subscribe(data => {
+      .subscribe((data) => {
         //// console.log(data);
         this.llamada = data;
         if (this.llamada.length > 0) {
@@ -816,11 +818,11 @@ export class LeadPage implements OnInit {
   }
 
   public getCheckLeadComplement() {
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       const apiUrl2 =
         this.apiUrl + "/getLeadComplement/" + this.leadActual.clave;
       this.http.get(apiUrl2).subscribe(
-        data => {
+        (data) => {
           if (data == null || Object.keys(data).length == 0) {
             this.mensaje = this.leadActual.MENSAJE;
             this.urgencia = "No";
@@ -1484,7 +1486,7 @@ export class LeadPage implements OnInit {
             }
           }
         },
-        err => {}
+        (err) => {}
       );
     });
   }
@@ -1510,7 +1512,7 @@ export class LeadPage implements OnInit {
 
     const body = {
       clave: this.leadActual.clave,
-      classification: this.califica
+      classification: this.califica,
     };
 
     this.http
@@ -1523,10 +1525,10 @@ export class LeadPage implements OnInit {
           "/app"
       )
       .subscribe(
-        data => {
+        (data) => {
           this.calificacion = data[0].calificaLead;
         },
-        err => {
+        (err) => {
           // console.log("Error occured");
         }
       );
@@ -1553,7 +1555,7 @@ export class LeadPage implements OnInit {
 
     const body = {
       clave: this.leadActual.clave,
-      classification: this.califica
+      classification: this.califica,
     };
 
     this.http
@@ -1566,10 +1568,10 @@ export class LeadPage implements OnInit {
           "/appchat"
       )
       .subscribe(
-        data => {
+        (data) => {
           this.calificacion = data[0].calificaLead;
         },
-        err => {
+        (err) => {
           // console.log("Error occured");
         }
       );
@@ -1586,7 +1588,7 @@ export class LeadPage implements OnInit {
   public getUrlAudio() {
     this.http
       .get(this.apiUrl + "/getUrlAudio/" + this.leadActual.clave)
-      .subscribe(data => {
+      .subscribe((data) => {
         this.audio = data;
 
         for (let k in this.audio) {
@@ -1620,10 +1622,10 @@ export class LeadPage implements OnInit {
     this.provedor
       .getInsertClickLlamar(usuario, id, acceso, this.dispositivo)
       .then(
-        data => {
+        (data) => {
           this.datosenvio = data;
         },
-        err => {
+        (err) => {
           // console.log('error');
         }
       );
@@ -1637,7 +1639,7 @@ export class LeadPage implements OnInit {
       errorCallback: () => {
         console.log();
       },
-      initFullscreen: false
+      initFullscreen: false,
     };
     // // console.log(this.urlaudio);
     this.streamingMedia.playAudio(this.urlaudio, options);
@@ -1656,12 +1658,12 @@ export class LeadPage implements OnInit {
       this.chatService.tc.currentChannel.sendMessage(formData).then(() => {
         this.chatService.tc.currentChannel
           .getMessages()
-          .then(messagesPaginator => {
+          .then((messagesPaginator) => {
             const message =
               messagesPaginator.items[messagesPaginator.items.length - 1];
             if (message.type === "media") {
               // console.log('Media attributes', message.media);
-              message.media.getContentUrl().then(url => {
+              message.media.getContentUrl().then((url) => {
                 this.http
                   .post(
                     "https://koomkin.com.mx/call-tracking/api/twilio-media-message",
@@ -1669,14 +1671,14 @@ export class LeadPage implements OnInit {
                       channelsid: this.chatService.tc.currentChannel.sid,
                       url: url,
                       mime: file.mediaType,
-                      filename: file.name
+                      filename: file.name,
                     }
                   )
                   .subscribe(
-                    data => {
+                    (data) => {
                       //alert('enviado a whatsapp'+ JSON.stringify(data));
                     },
-                    err => {
+                    (err) => {
                       //alert('not good '+ JSON.stringify(err));
                     }
                   );
@@ -1690,7 +1692,7 @@ export class LeadPage implements OnInit {
   openFile(url, contentType) {
     console.log(url, contentType);
     let loading = this.loadingCtrl.create({
-      content: "Cargando archivo multimedia..."
+      content: "Cargando archivo multimedia...",
     });
 
     loading
@@ -1701,11 +1703,11 @@ export class LeadPage implements OnInit {
           .then(() => {
             loading.dismiss();
           })
-          .catch(e => {
+          .catch((e) => {
             loading.dismiss();
           });
       })
-      .catch(err => {});
+      .catch((err) => {});
   }
 
   launch(url) {
@@ -1716,12 +1718,12 @@ export class LeadPage implements OnInit {
 
   getRazones() {
     this.provedor.getReasons().then(
-      data => {
+      (data) => {
         let razones = data;
         this.razones = razones;
         // console.log(this.razones);
       },
-      err => {
+      (err) => {
         // console.log('error');
       }
     );
@@ -1729,12 +1731,12 @@ export class LeadPage implements OnInit {
 
   getComentarios() {
     this.provedor.getComments(this.leadActual.uuid).then(
-      data => {
+      (data) => {
         let comentarios = data;
         this.comentarios = comentarios;
         // console.log(this.comentarios);
       },
-      err => {
+      (err) => {
         // console.log('error');
       }
     );
@@ -1748,8 +1750,8 @@ export class LeadPage implements OnInit {
       cancelButtonColor: "#2AB4BC",
       confirmButtonText: "Confirmar",
       cancelButtonText: "Cancelar",
-      reverseButtons: true
-    }).then(result => {
+      reverseButtons: true,
+    }).then((result) => {
       if (result.value) {
         this.deleteComentario(idComentario);
       }
@@ -1764,17 +1766,17 @@ export class LeadPage implements OnInit {
       headers: new HttpHeaders().set(
         "Content-Type",
         "application/x-www-form-urlencoded"
-      )
+      ),
     };
 
     const url = "https://www.koomkin.com.mx/api/app/deleteComment/";
 
     return new Promise((resolve, reject) => {
       this.http.post(url, body.toString(), options).subscribe(
-        data => {
+        (data) => {
           console.log(data);
         },
-        err => {
+        (err) => {
           return reject(err);
         }
       );
@@ -1789,11 +1791,36 @@ export class LeadPage implements OnInit {
         leadActual: this.leadActual,
         clasificaLead: clasificaLead,
         idComentario: idComentario,
-        comentario: comentario
+        comentario: comentario,
       },
       { enableBackdropDismiss: false, cssClass: "Modal-comentario" }
     );
     myModal.present();
     myModal.onDidDismiss(() => {});
+  }
+
+  callLead() {
+    Swal({
+      title: `Contactar a ${this.leadActual.NombreUsuarioEnvio}`,
+      text:
+        "Es posible que se generen tarifas de acuerdo al operador de tu telefonia movil",
+      showCancelButton: true,
+      confirmButtonColor: "#288AC1",
+      cancelButtonColor: "#288AC1",
+      confirmButtonText: "+525525403965",
+      cancelButtonText: "Llamar Gratis",
+      imageUrl: "https://svgshare.com/i/KS9.svg",
+      imageWidth: 100,
+      imageHeight: 100,
+      showCloseButton: true,
+    }).then((result) => {
+      if (result.value) {
+        console.log("Numero");
+        console.log(result);
+        // this.getInsertClickLlamar();
+      } else {
+        console.log("Gratis");
+      }
+    });
   }
 }

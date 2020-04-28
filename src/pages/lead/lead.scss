@@ -69,6 +69,10 @@ page-lead {
     align-items: center;
   }
 
+  .list {
+    padding: 0 0 2em 0;
+  }
+
   .normal {
     display: inline-block;
     vertical-align: middle;
@@ -88,7 +92,7 @@ page-lead {
     vertical-align: middle;
     align-items: center;
     color: #818181;
-    text-align: center
+    text-align: center;
   }
 
   .llamadas-area {
@@ -247,8 +251,6 @@ hr {
   margin-left: 15%;
 }
 
-
-
 //Fecha del Lead
 .rate-fechal {
   font-size: 4vw !important;
@@ -285,7 +287,6 @@ hr {
   text-align: right !important;
   font-weight: bold;
   font-style: normal;
-
 }
 
 //Agenda
@@ -296,19 +297,19 @@ hr {
   border-left: 1px solid dimgray;
 }
 
-.vendido-agenda  {
+.vendido-agenda {
   color: #00b9be !important;
 }
 
-.seguimiento-agenda  {
-  color:  #288ac1 !important;
+.seguimiento-agenda {
+  color: #288ac1 !important;
 }
 
-.descartado-agenda  {
-  color:  #fe703f !important;
+.descartado-agenda {
+  color: #fe703f !important;
 }
 
-.negociacion-agenda  {
+.negociacion-agenda {
   color: #6b4595 !important;
 }
 
@@ -484,7 +485,6 @@ hr {
   color: white;
   background-color: #fe703f !important;
 }
-
 
 .razon {
   margin: 0;
@@ -944,4 +944,28 @@ video::-internal-media-controls-cast-button {
 
 audio::-webkit-media-controls-toggle-closed-captions-button {
   display: none;
+}
+
+.swal2-container {
+  font-family: Roboto;
+
+  .swal2-title {
+    .swal2-header {
+      color: #288ac1 !important;
+      margin-bottom: 2em;
+    }
+  }
+
+  .swal2-content {
+    text-align: left;
+  }
+
+  .swal2-actions {
+    display: flex;
+    flex-direction: column;
+
+    button {
+      width: 100% !important;
+    }
+  }
 }

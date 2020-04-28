@@ -5,6 +5,7 @@ import {
   NavParams,
   AlertController,
   ToastController,
+  MenuController,
 } from "ionic-angular";
 
 import { ScreenOrientation } from "@ionic-native/screen-orientation";
@@ -33,23 +34,9 @@ export class FlowchartPage {
   condition = true;
   showImage = false;
 
-  idGeneral: number = 55020;
+  idGeneral: number;
 
-  graphJSON: any = {
-    user_id: String(this.idGeneral),
-    questions: {
-      Q0000000000000: {},
-    },
-    ux_data: {
-      Q0000000000000: {
-        text: "Pregunta",
-        type: "MULTIPLE",
-      },
-    },
-    properties: {},
-    classes: {},
-    relationships: {},
-  };
+  graphJSON: any;
 
   @ViewChild("mermaid")
   public mermaidDiv;
@@ -71,8 +58,26 @@ export class FlowchartPage {
     private renderer: Renderer2,
     private graphService: GraphProvider,
     public toastCtrl: ToastController,
-    private storage: Storage
+    private menuCtrl: MenuController
   ) {
+    this.idGeneral = Number(JSON.stringify(this.navParams.data));
+
+    this.graphJSON = {
+      user_id: String(this.idGeneral),
+      questions: {
+        Q0000000000000: {},
+      },
+      ux_data: {
+        Q0000000000000: {
+          text: "Pregunta",
+          type: "MULTIPLE",
+        },
+      },
+      properties: {},
+      classes: {},
+      relationships: {},
+    };
+
     if (this.platform.is("cordova")) {
       this.screenOrientation.lock(
         this.screenOrientation.ORIENTATIONS.LANDSCAPE
@@ -113,22 +118,7 @@ export class FlowchartPage {
     });
   }
 
-  ionViewDidLoad() {
-    this.storage.get("played").then((data: boolean) => {
-      if (data === null) {
-        setTimeout(() => {
-          this.video.nativeElement.play();
-        }, 500);
-
-        setTimeout(() => {
-          this.renderer.setStyle(this.video.nativeElement, "display", "none");
-          this.storage.set("played", false);
-        }, 47000);
-      } else {
-        this.renderer.setStyle(this.video.nativeElement, "display", "none");
-      }
-    });
-  }
+  ionViewDidLoad() {}
 
   mermaidStart() {
     mermaid.initialize({
@@ -145,6 +135,11 @@ export class FlowchartPage {
     mermaid.render("graphDiv", this.graphDefinition, (svgCode: any) => {
       element.innerHTML = svgCode;
     });
+  }
+
+  pagina() {
+    this.navCtrl.push("InicioPage");
+    this.menuCtrl.close();
   }
 
   deleteNode(target: string) {
@@ -930,13 +925,14 @@ export class FlowchartPage {
       this.postStatusBot(1);
     } else if (value === false) {
       this.condition = false;
-      this.postStatusBot(1);
+      this.postStatusBot(0);
     } else {
       const toast = this.toastCtrl.create({
         message: "Tienes que completar el arbol para poder activar el bot",
         duration: 2000,
       });
       toast.present();
+      this.postStatusBot(0);
     }
   }
 
@@ -1009,22 +1005,31 @@ export class FlowchartPage {
   }
 
   sendTest() {
-    this.graphService.postTriggerQuotationBot(this.idGeneral).subscribe(
-      (data: any) => {
-        console.log(data);
-        const toast = this.toastCtrl.create({
-          message: "Prueba enviada...",
-          duration: 2000,
-        });
-        toast.present();
-      },
-      (err: any) => {
-        const toast = this.toastCtrl.create({
-          message: "Fallo al enviar la prueba...",
-          duration: 2000,
-        });
-        toast.present();
-      }
-    );
+    if (this.condition && this.validateGraph()) {
+      this.graphService.postTriggerQuotationBot(this.idGeneral).subscribe(
+        (data: any) => {
+          console.log(data);
+          const toast = this.toastCtrl.create({
+            message: "Prueba enviada...",
+            duration: 2000,
+          });
+          toast.present();
+        },
+        (err: any) => {
+          const toast = this.toastCtrl.create({
+            message: "Fallo al enviar la prueba...",
+            duration: 2000,
+          });
+          toast.present();
+        }
+      );
+    } else {
+      const toast = this.toastCtrl.create({
+        message:
+          "El bot debe de encontrarse activo y debe de estar completado...",
+        duration: 2000,
+      });
+      toast.present();
+    }
   }
 }
