@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { IonicPage, MenuController, NavController, NavParams, ModalController } from "ionic-angular";
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
 import { ToastController } from 'ionic-angular';
 
@@ -57,8 +57,9 @@ export class InicioPage implements OnInit {
   }
 
   ngOnInit() {
-    this.showBanner();
-    this.showFreemium();
+    // this.showBanner();
+    // this.showFreemium();
+    this.getUpsellsOffer();
   }
 
   pagina(pagina: any) {
@@ -93,7 +94,7 @@ export class InicioPage implements OnInit {
               this.notification = JSON.parse(datos[0].dataPage);
               this.tipoBanner = datos[0].tipoBanner;
               if (this.tipoBanner == 16 || this.tipoBanner == 17) {
-                this.openModal();
+                // this.openModal();
               }
             } else if (datos.length == 0) {
               this.tipoBanner = 0;
@@ -167,13 +168,31 @@ export class InicioPage implements OnInit {
     toast.present();
   }
 
-  openModal() {
+  openUpsellsModal(offerData) {
     const myModal = this.modal.create(
-      "ModalUpgradePage",
-      { notification: this.notification, idReportBanner: this.idReportBanner, tipoBanner: this.tipoBanner, uuidPass: this.uuidPass },
+      "ModalUpsellsPage",
+      {
+        data: offerData
+      },
       { enableBackdropDismiss: true, cssClass: "Modal-comentario" }
     );
     myModal.present();
     myModal.onDidDismiss(() => { });
+  }
+
+  getUpsellsOffer() {
+    const options = {
+      headers: new HttpHeaders().set('Content-Type', 'application/json').set('Access-Control-Allow-Origin', '*')
+        .set('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization')
+    };
+
+    this.http.post('https://www.koomkin.com.mx/api/payment/upsell/check', {
+      user_id: this.authService.id
+    }, options).toPromise().then((response: any) => {
+      if (response.offer === true) {
+        this.openUpsellsModal(response);
+      }
+    }).catch((error: any) => {
+    });
   }
 }
