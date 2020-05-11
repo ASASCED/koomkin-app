@@ -1,0 +1,74 @@
+<ion-content class="modal-ayuda-body">
+  <ion-grid [ngClass]="page === 1 ? 'background-gradient' : ''" *ngIf="page === 1">
+    <ion-row justify-content-center="">
+      <ion-col col-10>
+        <label>¿Cómo se siente con nuestro servicio?</label>
+      </ion-col>
+      <ion-col col-4>
+        <img src="https://koomkin.s3.amazonaws.com/assets/img/svg/tickets/button_bad.svg"
+             (click)="setHappinessLevel(-1)"/>
+      </ion-col>
+      <ion-col col-4>
+        <img src="https://koomkin.s3.amazonaws.com/assets/img/svg/tickets/button_regular.svg"
+             (click)="setHappinessLevel(0)"/>
+      </ion-col>
+      <ion-col col-4>
+        <img src="https://koomkin.s3.amazonaws.com/assets/img/svg/tickets/button_good.svg"
+             (click)="setHappinessLevel(1)"/>
+      </ion-col>
+      <ion-col col-12>
+        <img src="https://koomkin.s3.amazonaws.com/assets/img/svg/tickets/progress_bar.svg"/>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid *ngIf="page === 2">
+    <ion-row justify-content-center="">
+      <ion-col col-11 class="step2-label">
+        ¿Quiere chatear con alguno de nuestros ejecutivos?
+      </ion-col>
+      <ion-col col-10 style="margin-bottom: 15px">
+        <img src="https://koomkin.s3.amazonaws.com/assets/img/svg/tickets/chat2.svg" class="mt-2"/>
+      </ion-col>
+      <ion-col col-12>
+        <ion-row>
+          <ion-col col-6 text-right="">
+            <button class="modal-help-button modal-help-button-left" (click)="requestCall()">
+              Si
+            </button>
+          </ion-col>
+          <ion-col col-6 text-left="">
+            <button class="modal-help-button modal-help-button-right" (click)="createTicket()">
+              No
+            </button>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid *ngIf="page === 3">
+    <ion-row justify-content-center="">
+      <ion-col col-11 class="step2-label">
+        Lo estamos comunicando con uno de nuestros ejecutivos.
+      </ion-col>
+      <ion-col col-3 style="margin-bottom: 10px">
+        <img src="https://koomkin.s3.amazonaws.com/assets/img/svg/tickets/calling.svg" class="mt-2"/>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid *ngIf="page === 4">
+    <ion-row justify-content-center="">
+      <ion-col col-11 class="step2-label-1">
+        ¡Gracias por contactarnos!
+      </ion-col>
+      <ion-col col-4>
+        <img src="https://koomkin.s3.amazonaws.com/assets/img/svg/tickets/created2.svg" class="mt-2"/>
+      </ion-col>
+      <ion-col col-11 class="step2-label">
+        Tu ticket se ha creado
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

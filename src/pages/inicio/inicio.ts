@@ -29,6 +29,7 @@ export class InicioPage implements OnInit {
   agenda = "AgendaPage";
   freemium = "FreemiumPage";
   flowchart = "FlowchartPage";
+  ayuda = 'AyudaPage';
 
   pages: Array<{ title: string; component: any }>;
 

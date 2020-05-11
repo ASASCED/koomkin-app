@@ -1,0 +1,55 @@
+<ion-header>
+  <ion-navbar color="azul">
+  </ion-navbar>
+</ion-header>
+<ion-content id="bodyHelp" class="page-ayuda">
+  <ion-row justify-content-center="">
+    <ion-col col-11>
+      <div class="header-help background-gradient">
+        <h1 class="header-title">AYUDA</h1>
+        <hr class="header-divider"/>
+        <ion-row justify-content-center="">
+          <ion-col col-8>
+            <p class="header-text">Recuerda que en Koomkin estamos para ayudarte, cualquier inquietud, no dudes en
+              contactarnos.</p>
+          </ion-col>
+        </ion-row>
+      </div>
+    </ion-col>
+    <ion-col col-11 class="text-help-container">
+      <div class="text-help">
+        Selecciona el problema que tengas en el siguiente formulario
+      </div>
+    </ion-col>
+    <ion-col col-8 class="background-gradient user_id">
+      ID USUARIO: {{ user_id }}
+    </ion-col>
+    <ion-col col-12 class="background-gradient user_name">
+      Hola {{ user_name }}, ¿Qué problema tienes?
+    </ion-col>
+    <ion-col col-11>
+      <ion-row justify-content-center="">
+        <ion-col col-3 *ngFor="let button of buttons">
+          <button class="issue-button"
+                  [ngClass]="button?.text === currentIssue?.text ? 'issue-button-selected' : ''"
+                  (click)="setIssue(button)">
+            {{ button.text }}
+          </button>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+    <ion-col col-10>
+      <div class="issue-question">
+        <label>
+          ¿Qué está fallando?
+        </label>
+        <input [(ngModel)]="issueComments"/>
+      </div>
+    </ion-col>
+    <ion-col col-4>
+      <button class="issue-button-send" [disabled]="!checkStatusTicket()" (click)="requestTicket()">
+        Crear ticket
+      </button>
+    </ion-col>
+  </ion-row>
+</ion-content>
