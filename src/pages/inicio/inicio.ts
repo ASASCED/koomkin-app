@@ -192,7 +192,7 @@ export class InicioPage implements OnInit {
       {
         data: offerData,
       },
-      { enableBackdropDismiss: true, cssClass: "Modal-comentario" }
+      { enableBackdropDismiss: true, cssClass: "Modal-upsells" }
     );
     myModal.present();
     myModal.onDidDismiss(() => {});
