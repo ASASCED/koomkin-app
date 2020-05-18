@@ -31,6 +31,7 @@ export class AyudaPage {
   private issueComments: string;
   private user_id: number;
   private user_name: string;
+  private config: any;
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
@@ -44,6 +45,7 @@ export class AyudaPage {
   ionViewDidLoad() {
     this.user_id = this.authService.id;
     this.user_name = this.authService.name;
+    this.getConfig();
   }
 
   setIssue(issue) {
@@ -70,7 +72,8 @@ export class AyudaPage {
       const myModal = this.modal.create(
         'ModalHelpPage',
         {
-          data: response
+          data: response,
+          requestCall: this.config.ask_chat_after_poll
         },
         {enableBackdropDismiss: true, cssClass: "Modal-ayuda"}
       );
@@ -90,5 +93,11 @@ export class AyudaPage {
     } catch (e) {
       return false;
     }
+  }
+
+  getConfig() {
+    this.http.get('https://www.koomkin.com.mx/api/app2/conf').toPromise().then((response: any) => {
+      this.config = response.customer_service;
+    });
   }
 }

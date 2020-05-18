@@ -16,8 +16,9 @@ export class ModalHelpPage {
   @Input() data: any;
 
   private happinessLevel: number;
-  private page: number;
+  public page: number;
   private ticket_id: number;
+  public config;
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
@@ -25,6 +26,7 @@ export class ModalHelpPage {
     this.happinessLevel = 0;
     this.page = 1;
     this.data = navParams.get("data");
+    this.config = navParams.get("requestCall");
     this.ticket_id = this.data.json_master.ticket_id;
   }
 
@@ -44,6 +46,10 @@ export class ModalHelpPage {
     }
 
     this.http.post(url, body).toPromise().then((response) => {}).catch((error) => {});
+
+    if (this.config === false) {
+      this.page = 4;
+    }
   }
 
   requestCall() {
