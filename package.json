@@ -51,7 +51,7 @@
         "body-parser": "~1.18.2",
         "connect-ensure-login": "^0.1.1",
         "cookie-parser": "~1.4.3",
-        "cordova-android": "^8.0.0",
+        "cordova-android": "^8.1.0",
         "cordova-android-support-gradle-release": "^3.0.1",
         "cordova-clipboard": "^1.2.1",
         "cordova-custom-config": "^5.1.0",

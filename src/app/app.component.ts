@@ -14,7 +14,7 @@ import { Storage } from "@ionic/storage";
 export class MyApp {
   @ViewChild(Nav) nav: NavController;
 
-  rootPage: any = "FlowchartPage";
+  rootPage: any = "LoginPage";
   leads = "LeadsPage";
   reporte = "ReportePage";
   datos = "DatosPage";
@@ -52,12 +52,6 @@ export class MyApp {
   }
 
   initializeApp() {
-    if (this.platform.is("cordova")) {
-      this.screenOrientation.lock(
-        this.screenOrientation.ORIENTATIONS.LANDSCAPE
-      );
-    }
-
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();

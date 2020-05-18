@@ -5,7 +5,6 @@ import {
   NavParams,
   AlertController,
   ToastController,
-  MenuController,
 } from "ionic-angular";
 
 import { ScreenOrientation } from "@ionic-native/screen-orientation";
@@ -14,8 +13,7 @@ import { DragulaService } from "ng2-dragula/ng2-dragula";
 import { Platform } from "ionic-angular";
 import * as mermaid from "mermaid";
 import * as $ from "jquery";
-import { Storage } from "@ionic/storage";
-
+import { AuthServiceProvider } from "../../providers/auth-service/auth-service";
 @IonicPage()
 @Component({
   selector: "page-flowchart",
@@ -58,9 +56,9 @@ export class FlowchartPage {
     private renderer: Renderer2,
     private graphService: GraphProvider,
     public toastCtrl: ToastController,
-    private menuCtrl: MenuController
+    private authService: AuthServiceProvider
   ) {
-    this.idGeneral = Number(JSON.stringify(this.navParams.data));
+    this.idGeneral = this.authService.id;
 
     this.graphJSON = {
       user_id: String(this.idGeneral),
@@ -77,12 +75,6 @@ export class FlowchartPage {
       classes: {},
       relationships: {},
     };
-
-    if (this.platform.is("cordova")) {
-      this.screenOrientation.lock(
-        this.screenOrientation.ORIENTATIONS.LANDSCAPE
-      );
-    }
 
     this.graphService.getStatusBot(this.idGeneral).subscribe((data: any) => {
       console.log(data);
@@ -101,6 +93,8 @@ export class FlowchartPage {
             this.postStatusBot(0);
             this.postJSON();
             return;
+          } else {
+            this.condition = false;
           }
 
           this.graphJSON = JSON.parse(data["_body"]);
@@ -108,9 +102,9 @@ export class FlowchartPage {
           this.propiedades = this.graphJSON["properties"];
 
           this.graphDefinition = `graph TD
-        ${this.propiedades}
-        ${this.uniones}
-        ${this.clases}`;
+          ${this.propiedades}
+          ${this.uniones}
+          ${this.clases}`;
 
           this.mermaidStart();
           this.setFunctionEdit();
@@ -118,7 +112,22 @@ export class FlowchartPage {
     });
   }
 
-  ionViewDidLoad() {}
+  ionViewDidLoad() {
+    console.log("Hola mundo!");
+    if (this.platform.is("cordova")) {
+      this.screenOrientation.lock(
+        this.screenOrientation.ORIENTATIONS.LANDSCAPE
+      );
+    }
+  }
+
+  ionViewWillLeave() {
+    console.log("Salio");
+    if (this.platform.is("cordova")) {
+      this.screenOrientation.unlock();
+      this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
+    }
+  }
 
   mermaidStart() {
     mermaid.initialize({
@@ -135,11 +144,6 @@ export class FlowchartPage {
     mermaid.render("graphDiv", this.graphDefinition, (svgCode: any) => {
       element.innerHTML = svgCode;
     });
-  }
-
-  pagina() {
-    this.navCtrl.push("InicioPage");
-    this.menuCtrl.close();
   }
 
   deleteNode(target: string) {
@@ -458,6 +462,7 @@ export class FlowchartPage {
         {
           text: "Confirmar",
           handler: (data) => {
+            console.log(data.ValorInicio.length, data.ValorFinal.length);
             if (data.ValorInicio.length > 0 && data.ValorFinal.length > 0) {
               const value = `$${data.ValorInicio} - $${data.ValorFinal}`;
               this.editPrompt(value, target);
@@ -598,9 +603,17 @@ export class FlowchartPage {
         }
 
         if (el.parentElement.getAttribute("id") === null) {
-          if (el.parentNode.parentNode.parentNode.parentNode["id"] !== null) {
+          if (
+            el.parentNode.parentNode.parentNode.parentNode["id"] !== null &&
+            el.parentNode.parentNode.parentNode.parentNode["id"] !== ""
+          ) {
             this.idElement =
               el.parentNode.parentNode.parentNode.parentNode["id"];
+          } else if (
+            el.parentNode.parentNode.parentNode["id"] !== null &&
+            el.parentNode.parentNode.parentNode["id"] !== ""
+          ) {
+            this.idElement = el.parentNode.parentNode.parentNode["id"];
           }
         }
 
@@ -714,9 +727,12 @@ export class FlowchartPage {
         {
           text: "Confirmar",
           handler: (data) => {
+            console.log(data.ValorInicio.length, data.ValorFinal.length);
             if (data.ValorInicio.length > 0 && data.ValorFinal.length > 0) {
               const value = `$${data.ValorInicio} - $${data.ValorFinal}`;
               this.addElement(entrada, addElement, value, type);
+              this.acum = 0;
+            } else {
               this.acum = 0;
             }
           },

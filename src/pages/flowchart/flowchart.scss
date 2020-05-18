@@ -702,14 +702,12 @@ video {
 .flowchart {
   position: absolute;
   width: 100%;
-  top: 4em;
+  top: 2em;
   bottom: 0;
 
   rect {
-    min-height: 15px;
-    max-height: 20px;
-    min-width: 60px;
-    max-width: 80px;
+    width: 1;
+    height: 1;
   }
 
   .header {

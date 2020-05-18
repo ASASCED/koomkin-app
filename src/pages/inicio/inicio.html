@@ -56,12 +56,12 @@
       </ion-col>
     </ion-row>
 
-    <ion-row class="grande tres" (click)="pagina(flowchart)">
+    <ion-row class="grande tres" (click)="pagina(flowchart)" *ngIf="cotizador">
       <ion-col col-3>
-        <img src="assets/imgs/inicio/eficiencia.svg" width="100%" />
+        <img src="assets/imgs/inicio/ic_cotizador.svg" width="100%" />
       </ion-col>
       <ion-col col-7>
-        <span>Flowchart</span>
+        <span>Cotizador</span>
       </ion-col>
       <ion-col col-2 style="text-align: center;">
         <ion-icon name="ios-arrow-forward" style="font-size: 4em;"></ion-icon>

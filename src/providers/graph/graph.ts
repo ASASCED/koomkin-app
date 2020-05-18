@@ -4,12 +4,9 @@ import { Observable } from "rxjs";
 
 @Injectable()
 export class GraphProvider {
-  // private url = "http://192.168.0.173:5010/";
   private url = "https://www.koomkin.com.mx/api/quotation_bot/";
 
-  constructor(public http: Http) {
-    console.log("Hello GraphProvider Provider");
-  }
+  constructor(public http: Http) {}
 
   postGraph(id: number, obj: any) {
     return this.http.post(`${this.url}updateQuotationBot`, {

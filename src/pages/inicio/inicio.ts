@@ -9,6 +9,7 @@ import {
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { AuthServiceProvider } from "../../providers/auth-service/auth-service";
 import { ToastController } from "ionic-angular";
+import { GraphProvider } from "../../providers/graph/graph";
 
 @IonicPage()
 @Component({
@@ -29,7 +30,7 @@ export class InicioPage implements OnInit {
   agenda = "AgendaPage";
   freemium = "FreemiumPage";
   flowchart = "FlowchartPage";
-  ayuda = 'AyudaPage';
+  ayuda = "AyudaPage";
 
   pages: Array<{ title: string; component: any }>;
 
@@ -49,6 +50,9 @@ export class InicioPage implements OnInit {
   public recurrente;
   public bannerFreemium;
 
+  // Pages
+  cotizador = false;
+
   constructor(
     private modal: ModalController,
     public navCtrl: NavController,
@@ -56,11 +60,20 @@ export class InicioPage implements OnInit {
     private menuCtrl: MenuController,
     public authService: AuthServiceProvider,
     public http: HttpClient,
-    public toastCtrl: ToastController
+    public toastCtrl: ToastController,
+    private graphService: GraphProvider
   ) {
     this.recurrente = this.authService.recurrente;
     this.id = this.authService.id;
     this.activo = this.authService.activo;
+
+    this.graphService
+      .getStatusBot(this.authService.id)
+      .subscribe((data: any) => {
+        if (JSON.parse(data._body).result === "Ok") {
+          this.cotizador = true;
+        }
+      });
   }
 
   ngOnInit() {
