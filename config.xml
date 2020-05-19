@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.koomkin.koomkinapp" version="3.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.koomkin.koomkinapp" version="4.2.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Koomkin</name>
     <description>Te presentamos el canal de Ventas Nº1 para empresas en México.</description>
     <author email="dlvalle@koomkin.com" href="http://koomkin.com.mx/">Koomkin</author>

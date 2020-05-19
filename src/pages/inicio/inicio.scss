@@ -1,60 +1,60 @@
 page-inicio {
-    .freemium-container {
-        background-color: rgba(0, 0, 0, 0.9);
-        overflow: hidden;
+  .freemium-container {
+    background-color: rgba(0, 0, 0, 0.9);
+    overflow: hidden;
+  }
+  .flex-col {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  span {
+    display: inline-block;
+    vertical-align: middle;
+    color: white;
+    font-size: 5vw;
+    font-weight: 700;
+    margin-top: 2%;
+    text-align: left;
+  }
+  .row {
+    margin-bottom: 1%;
+    height: 100%;
+    display: flex;
+    vertical-align: middle;
+    justify-content: center;
+    text-align: left;
+  }
+  .grande {
+    height: 90px;
+    background: #00b9be;
+    border-radius: 10px;
+    vertical-align: middle;
+    margin-bottom: 5%;
+    align-items: center;
+  }
+  .tres {
+    background: #005999;
+  }
+  .dos {
+    background: #288ac1;
+  }
+  img {
+    vertical-align: middle;
+    max-height: 45px;
+    max-width: 160px;
+  }
+  .footer {
+    display: -webkit-box;
+    width: 100%;
+    height: 10px;
+    .left {
+      background-color: #288ac1;
+      width: 50%;
     }
-    .flex-col {
-        display: flex;
-        justify-content: center;
-        align-items: center;
+    .right {
+      background-color: #005999;
+      width: 50%;
     }
-    span {
-        display: inline-block;
-        vertical-align: middle;
-        color: white;
-        font-size: 5vw;
-        font-weight: 700;
-        margin-top: 2%;
-        text-align: left;
-    }
-    .row {
-        margin-bottom: 1%;
-        height: 100%;
-        display: flex;
-        vertical-align: middle;
-        justify-content: center;
-        text-align: left;
-    }
-    .grande {
-        height: 90px;
-        background: #00B9BE;
-        border-radius: 10px;
-        vertical-align: middle;
-        margin-bottom: 5%;
-        align-items: center;
-    }
-    .tres {
-        background: #005999;
-    }
-    .dos {
-        background: #288AC1;
-    }
-    img {
-        vertical-align: middle;
-        max-height: 45px;
-        max-width: 160px;
-    }
-    .footer {
-        display: -webkit-box;
-        width: 100%;
-        height: 10px;
-        .left {
-            background-color: #288AC1;
-            width: 50%;
-        }
-        .right {
-            background-color: #005999;
-            width: 50%;
-        }
-    }
+  }
 }
