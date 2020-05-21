@@ -351,12 +351,10 @@ export class LeadPage implements OnInit {
     this.chatService.msgListActualizada.subscribe((result) => {
       if (result.length === 0) {
         this.msgListLead = result;
-        console.log(this.msgListLead);
       }
       if (result.length > 1) {
         this.ngz.run(() => {
           this.msgListLead = result;
-          console.log(this.msgListLead);
           setTimeout(() => {
             this.scrollDown.bind(this);
           }, 5000);
@@ -375,9 +373,13 @@ export class LeadPage implements OnInit {
         }
         this.ngz.run(() => {
           this.msgListLead = this.msgListLead.concat(result);
-          console.log(this.msgListLead);
         });
       }
+
+      console.log("=========== MENSAJES DEL LEAD ===========");
+      console.log(JSON.stringify(result));
+      console.log(result);
+      console.log("=========================================");
     });
 
     this.chatService.loadingMessagesActualizado.subscribe((result) => {
@@ -450,7 +452,6 @@ export class LeadPage implements OnInit {
     this.attentionSpeed = "-";
     // Obtenemos parametros de la página de LEADS
     this.leadActual = navParams.data;
-    console.log(navParams.data);
     if (
       this.leadActual.RazonDescartado != "null" &&
       this.leadActual.RazonDescartado != null &&
@@ -612,7 +613,6 @@ export class LeadPage implements OnInit {
   FbotonOn() {
     let uno = document.getElementById("tel");
     uno.innerHTML = "Llamando a " + this.leadActual.NOMBRE;
-    //  // console.log(this.leadActual);
   }
 
   public callClient() {
@@ -632,12 +632,9 @@ export class LeadPage implements OnInit {
     return new Promise((resolve) => {
       this.http.post(url, body.toString(), options).subscribe(
         (data) => {
-          console.log(data);
           resolve(data);
         },
-        (err) => {
-          console.log(err);
-        }
+        (err) => {}
       );
     });
   }
@@ -662,7 +659,6 @@ export class LeadPage implements OnInit {
       case "V": {
         this.leadActual.clasificaLead = "V";
         this.clasifica = "Vendido";
-        //  // console.log(this.clasifica);
         break;
       }
       default:
@@ -684,11 +680,8 @@ export class LeadPage implements OnInit {
       .subscribe(
         (data) => {
           this.clasificacion = data[0].clasificaLead;
-          //// console.log(this.clasificacion);
         },
-        (err) => {
-          // console.log("Error occured");
-        }
+        (err) => {}
       );
   }
 
@@ -697,9 +690,7 @@ export class LeadPage implements OnInit {
       text: "Cancelar",
       role: "cancelar",
       cssClass: "cancel-button",
-      handler: () => {
-        // console.log('Disagree clicked');
-      },
+      handler: () => {},
     };
 
     let btnOk = {
@@ -708,7 +699,6 @@ export class LeadPage implements OnInit {
       handler: () => {
         this.callClient();
         this.FbotonOn();
-        // console.log('Agree clicked');
       },
     };
 
@@ -728,7 +718,6 @@ export class LeadPage implements OnInit {
         if (this.llamadas) {
           for (let k in this.llamadas) {
             this.llamadas[k].CallStatus = this.llamadas[k].CallStatus;
-            // console.log(this.llamadas[k].CallStatus,this.llamadas[k].LlamadaLead);
             if (
               this.llamadas[k].CallStatus == "failed" ||
               (this.llamadas[k].CallStatus == "completed" &&
@@ -785,7 +774,6 @@ export class LeadPage implements OnInit {
     this.http
       .get(this.apiUrl + "/getCountLeadCalls/" + this.leadActual.clave)
       .subscribe((data) => {
-        //// console.log(data);
         this.llamada = data;
         if (this.llamada.length > 0) {
           this.exitosa_c = this.llamada[0].COMPLETED_COMPRADOR;
@@ -812,7 +800,6 @@ export class LeadPage implements OnInit {
           if (this.buzon == null) {
             this.buzon = "0";
           }
-          //// console.log(this.exitosa_c, this.exitosa_v, this.exitosa, this.perdida, this.buzon);
         }
       });
   }
@@ -832,10 +819,8 @@ export class LeadPage implements OnInit {
             this.usoproveedor = "";
             this.unidadesproveedor = "";
             this.categoria = 1;
-            //  // console.log(this.mensaje);
           } else if (Object.keys(data).length > 0) {
             this.categoria = data[0].CompanyType;
-            // console.log(this.categoria);
             switch (this.categoria) {
               case 1:
                 if (data[0] === null) {
@@ -980,7 +965,6 @@ export class LeadPage implements OnInit {
                     } else if (this.usoservicio == "1") {
                       this.usoservicio = "Mi empresa";
                     }
-                    // console.log(this.usoservicio);
                     this.frecuenciaservicio = data[0].Frequency;
                     if (
                       this.frecuenciaservicio == null ||
@@ -1528,9 +1512,7 @@ export class LeadPage implements OnInit {
         (data) => {
           this.calificacion = data[0].calificaLead;
         },
-        (err) => {
-          // console.log("Error occured");
-        }
+        (err) => {}
       );
   }
 
@@ -1571,9 +1553,7 @@ export class LeadPage implements OnInit {
         (data) => {
           this.calificacion = data[0].calificaLead;
         },
-        (err) => {
-          // console.log("Error occured");
-        }
+        (err) => {}
       );
   }
 
@@ -1618,30 +1598,22 @@ export class LeadPage implements OnInit {
     } else if (this.platform.is("android")) {
       this.dispositivo = "android";
     }
-    // console.log(usuario, this.dispositivo, acceso, id);
     this.provedor
       .getInsertClickLlamar(usuario, id, acceso, this.dispositivo)
       .then(
         (data) => {
           this.datosenvio = data;
         },
-        (err) => {
-          // console.log('error');
-        }
+        (err) => {}
       );
   }
 
   startAudio() {
     let options: StreamingAudioOptions = {
-      successCallback: () => {
-        console.log();
-      },
-      errorCallback: () => {
-        console.log();
-      },
+      successCallback: () => {},
+      errorCallback: () => {},
       initFullscreen: false,
     };
-    // // console.log(this.urlaudio);
     this.streamingMedia.playAudio(this.urlaudio, options);
   }
 
@@ -1662,7 +1634,6 @@ export class LeadPage implements OnInit {
             const message =
               messagesPaginator.items[messagesPaginator.items.length - 1];
             if (message.type === "media") {
-              // console.log('Media attributes', message.media);
               message.media.getContentUrl().then((url) => {
                 this.http
                   .post(
@@ -1690,7 +1661,6 @@ export class LeadPage implements OnInit {
   }
 
   openFile(url, contentType) {
-    console.log(url, contentType);
     let loading = this.loadingCtrl.create({
       content: "Cargando archivo multimedia...",
     });
@@ -1721,11 +1691,8 @@ export class LeadPage implements OnInit {
       (data) => {
         let razones = data;
         this.razones = razones;
-        // console.log(this.razones);
       },
-      (err) => {
-        // console.log('error');
-      }
+      (err) => {}
     );
   }
 
@@ -1734,11 +1701,8 @@ export class LeadPage implements OnInit {
       (data) => {
         let comentarios = data;
         this.comentarios = comentarios;
-        // console.log(this.comentarios);
       },
-      (err) => {
-        // console.log('error');
-      }
+      (err) => {}
     );
   }
 
@@ -1773,9 +1737,7 @@ export class LeadPage implements OnInit {
 
     return new Promise((resolve, reject) => {
       this.http.post(url, body.toString(), options).subscribe(
-        (data) => {
-          console.log(data);
-        },
+        (data) => {},
         (err) => {
           return reject(err);
         }
@@ -1815,11 +1777,8 @@ export class LeadPage implements OnInit {
       showCloseButton: true,
     }).then((result) => {
       if (result.value) {
-        console.log("Numero");
-        console.log(result);
         // this.getInsertClickLlamar();
       } else {
-        console.log("Gratis");
       }
     });
   }

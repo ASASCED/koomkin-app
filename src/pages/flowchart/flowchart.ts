@@ -593,6 +593,8 @@ export class FlowchartPage {
   getPositionElement() {
     $(document).on("touchmove", "#body", (e: any) => {
       try {
+        this.idElement = "";
+
         var xPos = e.originalEvent.touches[0].pageX;
         var yPos = e.originalEvent.touches[0].pageY;
 
@@ -602,16 +604,32 @@ export class FlowchartPage {
           this.idElement = el.parentElement.getAttribute("id");
         }
 
+        const exp = /((Q|C|A)[0-9]*)/g;
+
         if (el.parentElement.getAttribute("id") === null) {
+          console.log(
+            String(el.parentNode.parentNode.parentNode.parentNode["id"]).match(
+              exp
+            )
+          );
+          console.log(
+            String(el.parentNode.parentNode.parentNode["id"]).match(exp)
+          );
+
           if (
             el.parentNode.parentNode.parentNode.parentNode["id"] !== null &&
-            el.parentNode.parentNode.parentNode.parentNode["id"] !== ""
+            el.parentNode.parentNode.parentNode.parentNode["id"] !== "" &&
+            String(el.parentNode.parentNode.parentNode.parentNode["id"]).match(
+              exp
+            ) !== null
           ) {
             this.idElement =
               el.parentNode.parentNode.parentNode.parentNode["id"];
           } else if (
             el.parentNode.parentNode.parentNode["id"] !== null &&
-            el.parentNode.parentNode.parentNode["id"] !== ""
+            el.parentNode.parentNode.parentNode["id"] !== "" &&
+            String(el.parentNode.parentNode.parentNode["id"]).match(exp) !==
+              null
           ) {
             this.idElement = el.parentNode.parentNode.parentNode["id"];
           }

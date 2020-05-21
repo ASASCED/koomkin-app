@@ -918,6 +918,8 @@
         <p class="text-spinner">Cargando Mensajes...</p>
       </ion-grid>
 
+      <div>{{msgListLead | json}}</div>
+
       <div class="message-wrap">
         <div
           *ngFor="let msg of msgListLead;"
