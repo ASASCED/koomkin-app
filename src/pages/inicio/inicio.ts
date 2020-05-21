@@ -29,7 +29,6 @@ export class InicioPage implements OnInit {
   crm = "CrmPage";
   agenda = "AgendaPage";
   freemium = "FreemiumPage";
-  flowchart = "FlowchartPage";
   ayuda = "AyudaPage";
 
   pages: Array<{ title: string; component: any }>;
@@ -79,7 +78,6 @@ export class InicioPage implements OnInit {
   ngOnInit() {
     // this.showBanner();
     // this.showFreemium();
-    this.getUpsellsOffer();
   }
 
   pagina(pagina: any) {
@@ -197,45 +195,5 @@ export class InicioPage implements OnInit {
       dismissOnPageChange: true,
     });
     toast.present();
-  }
-
-  openUpsellsModal(offerData) {
-    const myModal = this.modal.create(
-      "ModalUpsellsPage",
-      {
-        data: offerData,
-      },
-      { enableBackdropDismiss: true, cssClass: "Modal-upsells" }
-    );
-    myModal.present();
-    myModal.onDidDismiss(() => {});
-  }
-
-  getUpsellsOffer() {
-    const options = {
-      headers: new HttpHeaders()
-        .set("Content-Type", "application/json")
-        .set("Access-Control-Allow-Origin", "*")
-        .set(
-          "Access-Control-Allow-Headers",
-          "Origin, X-Requested-With, Content-Type, Accept, Authorization"
-        ),
-    };
-
-    this.http
-      .post(
-        "https://www.koomkin.com.mx/api/payment/upsell/check",
-        {
-          user_id: this.authService.id,
-        },
-        options
-      )
-      .toPromise()
-      .then((response: any) => {
-        if (response.offer === true) {
-          this.openUpsellsModal(response);
-        }
-      })
-      .catch((error: any) => {});
   }
 }

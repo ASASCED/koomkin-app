@@ -1,15 +1,14 @@
-
 .page-ayuda {
   font-size: unset;
 
   .background-gradient {
-    background: #1C88BB;
-    background: linear-gradient(90deg, #1C88BB 30%, #33b0b3 100%);
+    background: #1c88bb;
+    background: linear-gradient(90deg, #1c88bb 30%, #33b0b3 100%);
   }
 
   .header-help {
     margin-top: 15px;
-    color: #FFFFFF;
+    color: #ffffff;
     text-align: center !important;
     height: 18vh;
 
@@ -25,7 +24,7 @@
     }
 
     .header-text {
-      font-size: 0.80rem;
+      font-size: 0.8rem;
     }
   }
 
@@ -36,22 +35,22 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    -webkit-box-shadow: 0 5px 8px 0 rgba(0,0,0,0.75);
-    -moz-box-shadow: 0 5px 8px 0 rgba(0,0,0,0.75);
-    box-shadow: 0 5px 8px 0 rgba(0,0,0,0.75);
+    -webkit-box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.75);
+    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.75);
     height: 7vh;
 
     .text-help {
       padding-left: 1vh;
       padding-right: 1vh;
-      color: #34465B;
+      color: #34465b;
     }
   }
 
   .user_id {
     margin-top: 15px;
     text-align: center;
-    color: #FFFFFF;
+    color: #ffffff;
     border-radius: 15px;
     font-size: 0.55em;
     height: 4vh;
@@ -63,16 +62,16 @@
 
   .user_name {
     margin-top: 15px;
-    color: #FFFFFF;
+    color: #ffffff;
     font-weight: bold;
     font-size: 0.6em;
     height: 4vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    -webkit-box-shadow: 0 5px 8px 0 rgba(0,0,0,0.75);
-    -moz-box-shadow: 0 5px 8px 0 rgba(0,0,0,0.75);
-    box-shadow: 0 5px 8px 0 rgba(0,0,0,0.75);
+    -webkit-box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.75);
+    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.75);
   }
 
   .issue-button {
@@ -84,16 +83,16 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #1E4D70;
-    -webkit-box-shadow: 0 1px 4px 0 rgba(0,0,0,0.75);
-    -moz-box-shadow: 0 1px 4px 0 rgba(0,0,0,0.75);
-    box-shadow: 0 1px 4px 0 rgba(0,0,0,0.75);
-    background: #FFFFFF;
+    color: #1e4d70;
+    -webkit-box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.75);
+    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.75);
+    background: #ffffff;
   }
 
   .issue-question {
     margin-top: 15px;
-    color: #1E4D70;
+    color: #1e4d70;
     font-size: 0.8em;
 
     label {
@@ -111,7 +110,7 @@
   }
 
   .issue-button-selected {
-    background: #90CBDC;
+    background: #90cbdc;
   }
 
   .issue-button-send {
@@ -119,7 +118,7 @@
     margin-top: 15px;
     font-size: 0.8em;
     background: #e86f2b;
-    color: #FFFFFF;
+    color: #ffffff;
     border-radius: 15px;
   }
 }

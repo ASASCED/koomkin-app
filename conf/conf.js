@@ -1,17 +1,18 @@
 module.exports.config = {
-
   /*** Datos de acceso API sandbox devfactura.com ***/
   // API_KEY_P: 'JDJ5JDEwJHhNVGdnZVltWjJHQUQzLkIuWGIzbnVPeUF2S0J4eEhRcXg5c2pIVEtMWkJJMXdudVNQNVJ1',
   // SCT_KEY_P: 'JDJ5JDEwJHgzTHRGdFdiMnR1Zy5XOWllek11U09YQjlOWDY0Uk5NQnFoQ3RaMXRySXdmNVZCZEYvYmIu',
   // URL_FACTURA_P: 'http://devfactura.in/api',
 
   /*** Datos de acceso API factura.com ***/
-  API_KEY: 'JDJ5JDEwJG55U0Vsd2VGZVVnRk12T3V6ZXZoS3VzOWhVNXNwV1NXc1h4bTBVOWd4bUY1dU12NXo4bDFX',
-  SCT_KEY: 'JDJ5JDEwJEVIdVloNE1DUFZIZmlmZnpkOU1xRWViUUxHRXFVYVc2NEhvYS9ZUkpPenM2NkZiUmZYWDZT',
-  URL_FACTURA: 'https://factura.com/api',
+  API_KEY:
+    "JDJ5JDEwJG55U0Vsd2VGZVVnRk12T3V6ZXZoS3VzOWhVNXNwV1NXc1h4bTBVOWd4bUY1dU12NXo4bDFX",
+  SCT_KEY:
+    "JDJ5JDEwJEVIdVloNE1DUFZIZmlmZnpkOU1xRWViUUxHRXFVYVc2NEhvYS9ZUkpPenM2NkZiUmZYWDZT",
+  URL_FACTURA: "https://factura.com/api",
 
   /*** API Mandrill mailing ***/
-  MANDRILL_KEY: 'ALev50nS5NboejBdJhmuiQ',
+  MANDRILL_KEY: "We687_0OhFkqsymUF_JNiA",
 
   /*** Variables de desarrollo ***/
   // HOST: 6842,
@@ -33,7 +34,7 @@ module.exports.config = {
      database: 'AGO_KOOMKIN'     
    }*/
 
-     /* //Variables de desarollo amazon
+  /* //Variables de desarollo amazon
      userName: 'Koomkin',
      HOST: 5545,
      //HOST: 6843,
@@ -44,14 +45,14 @@ module.exports.config = {
        database: 'AGO_KOOMKIN'
      }*/
 
-      // /!* Variables de produccion amazon *!/
-     userName: 'Reporte',
-     HOST: 4859,
-     // HOST: 6843,
-     password: 'n6WHF9ydE6vkAWa2',
-     server: 'koomkindb.cqgvwp6knhug.us-east-1.rds.amazonaws.com',
-     options: {
-       port:1433,
-       database: 'AGO_KOOMKIN'     
-     }
-}
+  // /!* Variables de produccion amazon *!/
+  userName: "Reporte",
+  HOST: 4859,
+  // HOST: 6843,
+  password: "n6WHF9ydE6vkAWa2",
+  server: "koomkindb.cqgvwp6knhug.us-east-1.rds.amazonaws.com",
+  options: {
+    port: 1433,
+    database: "AGO_KOOMKIN",
+  },
+};
