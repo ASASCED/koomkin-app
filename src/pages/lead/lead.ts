@@ -287,7 +287,7 @@ export class LeadPage implements OnInit {
 
   public leerChat() {
     const url = "https://www.koomkin.com.mx/chat/api/read-messages/";
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve, _reject) => {
       this.http.post(url + this.leadActual.uuid, { device: "app" }).subscribe(
         (data) => {
           return resolve();

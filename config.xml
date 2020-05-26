@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.koomkin.koomkinapp" version="4.2.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.koomkin.koomkinapp" version="4.2.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Koomkin</name>
     <description>Te presentamos el canal de Ventas Nº1 para empresas en México.</description>
     <author email="dlvalle@koomkin.com" href="http://koomkin.com.mx/">Koomkin</author>
@@ -113,7 +113,6 @@
     <plugin name="cordova-plugin-market" spec="1.2.0" />
     <plugin name="cordova-plugin-advanced-http" spec="2.0.2" />
     <plugin name="cordova-clipboard" spec="1.2.1" />
-    <plugin name="onesignal-cordova-plugin" spec="^2.4.6" />
     <plugin name="cordova-plugin-splashscreen" spec="^5.0.2" />
     <plugin name="cordova-android-support-gradle-release" spec="^3.0.1">
         <variable name="ANDROID_SUPPORT_VERSION" value="{7.0.0}" />

@@ -101,7 +101,7 @@
         "ngx-toastr": "^10.0.4",
         "node-sass": "^4.12.0",
         "npm": "^6.13.7",
-        "onesignal-cordova-plugin": "^2.8.3",
+        "onesignal-cordova-plugin": "^2.4.6",
         "request": "^2.83.0",
         "rxjs": "^5.5.11",
         "serve-favicon": "~2.4.5",
@@ -128,7 +128,6 @@
             "cordova-plugin-splashscreen": {},
             "cordova-plugin-ionic-webview": {},
             "cordova-plugin-ionic-keyboard": {},
-            "onesignal-cordova-plugin": {},
             "cordova-plugin-streaming-media": {},
             "cordova-plugin-network-information": {},
             "cordova-plugin-twilio-common": {},
@@ -151,8 +150,11 @@
             "cordova-android-support-gradle-release": {
                 "ANDROID_SUPPORT_VERSION": "{7.0.0}"
             },
-            "cordova-sqlite-storage": {}
+            "cordova-sqlite-storage": {},
+            "onesignal-cordova-plugin": {}
         },
-        "platforms": []
+        "platforms": [
+            "android"
+        ]
     }
 }
