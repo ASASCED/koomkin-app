@@ -1,228 +1,259 @@
 <ion-header>
-    <ion-navbar color="azul">
-        <div style="text-align: center">
-            <img src="assets/imgs/login/logo_koomkin.svg" width="45%" />
-        </div>
-    </ion-navbar>
+  <ion-navbar color="azul">
+    <div style="text-align: center;">
+      <img src="assets/imgs/login/logo_koomkin.svg" width="45%" />
+    </div>
+  </ion-navbar>
 </ion-header>
 
-
 <ion-content>
-    <ion-content *ngIf="bannerFreemium.active" class="freemium-container">
-        <freemium 
-            [gender]="bannerFreemium.gender"
-            [briefId]="bannerFreemium.briefId"
-            (showFreemiumTemplate)="bannerFreemium.active=false">
-        </freemium>
-    </ion-content>
-    <banner *ngIf="(tipoBanner >= 1 && tipoBanner <= 9 || tipoBanner >= 10 && tipoBanner <= 12 && habilitado == 1 || tipoBanner >= 14 && tipoBanner <= 15) && !bannerFreemium.active"
-        [title]='title' [subtitle]='subtitle' [img]='img' [fondo]='fondo' [notification]='notification'
-        [idReportBanner]='idReportBanner' [uuidPass]='uuidPass' [tipoBanner]='tipoBanner' [description]='description'
-        (click)="clickBanner();"></banner>
-    <ion-grid padding
-        *ngIf="(tipoBanner == 0 || tipoBanner >= 3 && tipoBanner <= 9  || tipoBanner == 10  && habilitado == 1 ||  tipoBanner == 12 && habilitado == 1 || tipoBanner >= 10 && tipoBanner <= 12 && habilitado == 0 || tipoBanner >= 14 && tipoBanner <= 20) && !bannerFreemium.active">
+  <ion-content *ngIf="bannerFreemium.active" class="freemium-container">
+    <freemium
+      [gender]="bannerFreemium.gender"
+      [briefId]="bannerFreemium.briefId"
+      (showFreemiumTemplate)="bannerFreemium.active=false"
+    >
+    </freemium>
+  </ion-content>
+  <banner
+    *ngIf="(tipoBanner >= 1 && tipoBanner <= 9 || tipoBanner >= 10 && tipoBanner <= 12 && habilitado == 1 || tipoBanner >= 14 && tipoBanner <= 15) && !bannerFreemium.active"
+    [title]="title"
+    [subtitle]="subtitle"
+    [img]="img"
+    [fondo]="fondo"
+    [notification]="notification"
+    [idReportBanner]="idReportBanner"
+    [uuidPass]="uuidPass"
+    [tipoBanner]="tipoBanner"
+    [description]="description"
+    (click)="clickBanner();"
+  ></banner>
+  <ion-grid
+    padding
+    *ngIf="(tipoBanner == 0 || tipoBanner >= 3 && tipoBanner <= 9  || tipoBanner == 10  && habilitado == 1 ||  tipoBanner == 12 && habilitado == 1 || tipoBanner >= 10 && tipoBanner <= 12 && habilitado == 0 || tipoBanner >= 14 && tipoBanner <= 20) && !bannerFreemium.active"
+  >
     <ion-row class="grande tres" (click)="pagina(leads)">
-            <ion-col col-3>
-                <img src="assets/imgs/inicio/leads.svg" width="100%" />
-            </ion-col>
-            <ion-col col-7>
-                <span>Leads o Clientes Potenciales</span>
-            </ion-col>
-            <ion-col col-2 style="text-align:center">
-                <ion-icon name="ios-arrow-forward" style="font-size: 4em;"></ion-icon>
-            </ion-col>
-        </ion-row>
+      <ion-col col-3>
+        <img src="assets/imgs/inicio/leads.svg" width="100%" />
+      </ion-col>
+      <ion-col col-7>
+        <span>Leads o Clientes Potenciales</span>
+      </ion-col>
+      <ion-col col-2 style="text-align: center;">
+        <ion-icon name="ios-arrow-forward" style="font-size: 4em;"></ion-icon>
+      </ion-col>
+    </ion-row>
 
-        <ion-row class="grande tres" (click)="pagina(crm)">
-            <ion-col col-3 style="text-align: center;">
-                <img src="assets/imgs/inicio/crm.svg" width="60%" />
-            </ion-col>
-            <ion-col col-7>
-                <span>CRM</span>
-            </ion-col>
-            <ion-col col-2 style="text-align:center">
-                <ion-icon name="ios-arrow-forward" style="font-size: 4em;"></ion-icon>
-            </ion-col>
-        </ion-row>
+    <ion-row class="grande tres" (click)="pagina(crm)">
+      <ion-col col-3 style="text-align: center;">
+        <img src="assets/imgs/inicio/crm.svg" width="60%" />
+      </ion-col>
+      <ion-col col-7>
+        <span>CRM</span>
+      </ion-col>
+      <ion-col col-2 style="text-align: center;">
+        <ion-icon name="ios-arrow-forward" style="font-size: 4em;"></ion-icon>
+      </ion-col>
+    </ion-row>
 
-        <ion-row class="grande tres" (click)="pagina(agenda)">
-            <ion-col col-3 style="text-align: center;">
-                <img src="assets/imgs/inicio/agenda.svg" width="60%" />
-            </ion-col>
-            <ion-col col-7>
-                <span>Agenda</span>
-            </ion-col>
-            <ion-col col-2 style="text-align:center">
-                <ion-icon name="ios-arrow-forward" style="font-size: 4em;"></ion-icon>
-            </ion-col>
-        </ion-row>
+    <ion-row class="grande tres" (click)="pagina(agenda)">
+      <ion-col col-3 style="text-align: center;">
+        <img src="assets/imgs/inicio/agenda.svg" width="60%" />
+      </ion-col>
+      <ion-col col-7>
+        <span>Agenda</span>
+      </ion-col>
+      <ion-col col-2 style="text-align: center;">
+        <ion-icon name="ios-arrow-forward" style="font-size: 4em;"></ion-icon>
+      </ion-col>
+    </ion-row>
 
-        <ion-row class="grande tres" (click)="pagina(eficiencia)">
-            <ion-col col-3>
-                <img src="assets/imgs/inicio/eficiencia.svg" width="100%" />
-            </ion-col>
-            <ion-col col-7>
-                <span>Eficiencia Comercial</span>
-            </ion-col>
-            <ion-col col-2 style="text-align:center">
-                <ion-icon name="ios-arrow-forward" style="font-size: 4em;"></ion-icon>
-            </ion-col>
-        </ion-row>
+    <ion-row class="grande tres" (click)="pagina(eficiencia)">
+      <ion-col col-3>
+        <img src="assets/imgs/inicio/eficiencia.svg" width="100%" />
+      </ion-col>
+      <ion-col col-7>
+        <span>Eficiencia Comercial</span>
+      </ion-col>
+      <ion-col col-2 style="text-align: center;">
+        <ion-icon name="ios-arrow-forward" style="font-size: 4em;"></ion-icon>
+      </ion-col>
+    </ion-row>
 
-        <ion-row class="grande" (click)="pagina(brief)">
-            <ion-col col-3>
-                <img src="assets/imgs/inicio/brief.svg" width="100%" style="max-height: 65px !important;" />
-            </ion-col>
-            <ion-col col-7>
-                <span>Configuración de Campaña</span>
-            </ion-col>
-            <ion-col col-2 style="text-align:center">
-                <ion-icon name="ios-arrow-forward" style="font-size: 4em;"></ion-icon>
-            </ion-col>
-        </ion-row>
+    <ion-row class="grande tres" (click)="pagina(flowchart)">
+      <ion-col col-3>
+        <img src="assets/imgs/inicio/ic_cotizador.svg" width="100%" />
+      </ion-col>
+      <ion-col col-7>
+        <span>Cotizador</span>
+      </ion-col>
+      <ion-col col-2 style="text-align: center;">
+        <ion-icon name="ios-arrow-forward" style="font-size: 4em;"></ion-icon>
+      </ion-col>
+    </ion-row>
 
-        <ion-row class="grande" (click)="pagina(reporte)">
-            <ion-col col-3>
-                <img src="assets/imgs/inicio/reporte.svg" width="100%" />
-            </ion-col>
-            <ion-col col-7>
-                <span>Reporte</span>
-            </ion-col>
-            <ion-col col-2 style="text-align:center">
-                <ion-icon name="ios-arrow-forward" style="font-size: 4em;"></ion-icon>
-            </ion-col>
-        </ion-row>
+    <ion-row class="grande" (click)="pagina(brief)">
+      <ion-col col-3>
+        <img
+          src="assets/imgs/inicio/brief.svg"
+          width="100%"
+          style="max-height: 65px !important;"
+        />
+      </ion-col>
+      <ion-col col-7>
+        <span>Configuración de Campaña</span>
+      </ion-col>
+      <ion-col col-2 style="text-align: center;">
+        <ion-icon name="ios-arrow-forward" style="font-size: 4em;"></ion-icon>
+      </ion-col>
+    </ion-row>
 
-        <ion-row class="grande" (click)="pagina(datos)">
-            <ion-col col-3>
-                <img src="assets/imgs/inicio/ajustes.svg" width="100%" />
-            </ion-col>
-            <ion-col col-7>
-                <span>Ajustes</span>
-            </ion-col>
-            <ion-col col-2 style="text-align:center">
-                <ion-icon name="ios-arrow-forward" style="font-size: 4em;"></ion-icon>
-            </ion-col>
-        </ion-row>
+    <ion-row class="grande" (click)="pagina(reporte)">
+      <ion-col col-3>
+        <img src="assets/imgs/inicio/reporte.svg" width="100%" />
+      </ion-col>
+      <ion-col col-7>
+        <span>Reporte</span>
+      </ion-col>
+      <ion-col col-2 style="text-align: center;">
+        <ion-icon name="ios-arrow-forward" style="font-size: 4em;"></ion-icon>
+      </ion-col>
+    </ion-row>
 
-        <ion-row class="grande" (click)="pagina(financieros)">
-            <ion-col col-3 style="text-align: center;">
-                <img src="assets/imgs/inicio/membresia.svg" width="60%" />
-            </ion-col>
-            <ion-col col-7>
-                <span>Membresía</span>
-            </ion-col>
-            <ion-col col-2 style="text-align:center">
-                <ion-icon name="ios-arrow-forward" style="font-size: 4em;"></ion-icon>
-            </ion-col>
-        </ion-row>
+    <ion-row class="grande" (click)="pagina(datos)">
+      <ion-col col-3>
+        <img src="assets/imgs/inicio/ajustes.svg" width="100%" />
+      </ion-col>
+      <ion-col col-7>
+        <span>Ajustes</span>
+      </ion-col>
+      <ion-col col-2 style="text-align: center;">
+        <ion-icon name="ios-arrow-forward" style="font-size: 4em;"></ion-icon>
+      </ion-col>
+    </ion-row>
 
-    </ion-grid>
+    <ion-row class="grande" (click)="pagina(financieros)">
+      <ion-col col-3 style="text-align: center;">
+        <img src="assets/imgs/inicio/membresia.svg" width="60%" />
+      </ion-col>
+      <ion-col col-7>
+        <span>Membresía</span>
+      </ion-col>
+      <ion-col col-2 style="text-align: center;">
+        <ion-icon name="ios-arrow-forward" style="font-size: 4em;"></ion-icon>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 
-    <ion-grid padding
-        *ngIf="tipoBanner == 1 || tipoBanner == 2 || tipoBanner == 11 && habilitado == 1">
+  <ion-grid
+    padding
+    *ngIf="tipoBanner == 1 || tipoBanner == 2 || tipoBanner == 11 && habilitado == 1"
+  >
+    <ion-row class="grande tres" (click)="presentToast()">
+      <ion-col col-3>
+        <img src="assets/imgs/inicio/leads.svg" width="100%" />
+      </ion-col>
+      <ion-col col-7>
+        <span>Leads o Clientes Potenciales</span>
+      </ion-col>
+      <ion-col col-2 style="text-align: center;">
+        <ion-icon name="ios-arrow-forward" style="font-size: 4em;"></ion-icon>
+      </ion-col>
+    </ion-row>
 
-        <ion-row class="grande tres" (click)="presentToast()">
-            <ion-col col-3>
-                <img src="assets/imgs/inicio/leads.svg" width="100%" />
-            </ion-col>
-            <ion-col col-7>
-                <span>Leads o Clientes Potenciales</span>
-            </ion-col>
-            <ion-col col-2 style="text-align:center">
-                <ion-icon name="ios-arrow-forward" style="font-size: 4em;"></ion-icon>
-            </ion-col>
-        </ion-row>
+    <ion-row class="grande tres" (click)="presentToast()">
+      <ion-col col-3 style="text-align: center;">
+        <img src="assets/imgs/inicio/crm.svg" width="60%" />
+      </ion-col>
+      <ion-col col-7>
+        <span>CRM</span>
+      </ion-col>
+      <ion-col col-2 style="text-align: center;">
+        <ion-icon name="ios-arrow-forward" style="font-size: 4em;"></ion-icon>
+      </ion-col>
+    </ion-row>
 
-        <ion-row class="grande tres" (click)="presentToast()">
-            <ion-col col-3 style="text-align: center;">
-                <img src="assets/imgs/inicio/crm.svg" width="60%" />
-            </ion-col>
-            <ion-col col-7>
-                <span>CRM</span>
-            </ion-col>
-            <ion-col col-2 style="text-align:center">
-                <ion-icon name="ios-arrow-forward" style="font-size: 4em;"></ion-icon>
-            </ion-col>
-        </ion-row>
+    <ion-row class="grande tres" (click)="presentToast()">
+      <ion-col col-3 style="text-align: center;">
+        <img src="assets/imgs/inicio/agenda.svg" width="60%" />
+      </ion-col>
+      <ion-col col-7>
+        <span>Agenda</span>
+      </ion-col>
+      <ion-col col-2 style="text-align: center;">
+        <ion-icon name="ios-arrow-forward" style="font-size: 4em;"></ion-icon>
+      </ion-col>
+    </ion-row>
 
-        <ion-row class="grande tres" (click)="presentToast()">
-            <ion-col col-3 style="text-align: center;">
-                <img src="assets/imgs/inicio/agenda.svg" width="60%" />
-            </ion-col>
-            <ion-col col-7>
-                <span>Agenda</span>
-            </ion-col>
-            <ion-col col-2 style="text-align:center">
-                <ion-icon name="ios-arrow-forward" style="font-size: 4em;"></ion-icon>
-            </ion-col>
-        </ion-row>
+    <ion-row class="grande tres" (click)="presentToast()">
+      <ion-col col-3>
+        <img src="assets/imgs/inicio/eficiencia.svg" width="100%" />
+      </ion-col>
+      <ion-col col-7>
+        <span>Eficiencia Comercial</span>
+      </ion-col>
+      <ion-col col-2 style="text-align: center;">
+        <ion-icon name="ios-arrow-forward" style="font-size: 4em;"></ion-icon>
+      </ion-col>
+    </ion-row>
 
-        <ion-row class="grande tres" (click)="presentToast()">
-            <ion-col col-3>
-                <img src="assets/imgs/inicio/eficiencia.svg" width="100%" />
-            </ion-col>
-            <ion-col col-7>
-                <span>Eficiencia Comercial</span>
-            </ion-col>
-            <ion-col col-2 style="text-align:center">
-                <ion-icon name="ios-arrow-forward" style="font-size: 4em;"></ion-icon>
-            </ion-col>
-        </ion-row>
+    <ion-row class="grande" (click)="presentToast()">
+      <ion-col col-3>
+        <img
+          src="assets/imgs/inicio/brief.svg"
+          width="100%"
+          style="max-height: 65px !important;"
+        />
+      </ion-col>
+      <ion-col col-7>
+        <span>Configuración de Campaña</span>
+      </ion-col>
+      <ion-col col-2 style="text-align: center;">
+        <ion-icon name="ios-arrow-forward" style="font-size: 4em;"></ion-icon>
+      </ion-col>
+    </ion-row>
 
-        <ion-row class="grande" (click)="presentToast()">
-            <ion-col col-3>
-                <img src="assets/imgs/inicio/brief.svg" width="100%" style="max-height: 65px !important;" />
-            </ion-col>
-            <ion-col col-7>
-                <span>Configuración de Campaña</span>
-            </ion-col>
-            <ion-col col-2 style="text-align:center">
-                <ion-icon name="ios-arrow-forward" style="font-size: 4em;"></ion-icon>
-            </ion-col>
-        </ion-row>
+    <ion-row class="grande" (click)="presentToast()">
+      <ion-col col-3>
+        <img src="assets/imgs/inicio/reporte.svg" width="100%" />
+      </ion-col>
+      <ion-col col-7>
+        <span>Reporte</span>
+      </ion-col>
+      <ion-col col-2 style="text-align: center;">
+        <ion-icon name="ios-arrow-forward" style="font-size: 4em;"></ion-icon>
+      </ion-col>
+    </ion-row>
 
-        <ion-row class="grande" (click)="presentToast()">
-            <ion-col col-3>
-                <img src="assets/imgs/inicio/reporte.svg" width="100%" />
-            </ion-col>
-            <ion-col col-7>
-                <span>Reporte</span>
-            </ion-col>
-            <ion-col col-2 style="text-align:center">
-                <ion-icon name="ios-arrow-forward" style="font-size: 4em;"></ion-icon>
-            </ion-col>
-        </ion-row>
+    <ion-row class="grande" (click)="presentToast()">
+      <ion-col col-3>
+        <img src="assets/imgs/inicio/ajustes.svg" width="100%" />
+      </ion-col>
+      <ion-col col-7>
+        <span>Ajustes</span>
+      </ion-col>
+      <ion-col col-2 style="text-align: center;">
+        <ion-icon name="ios-arrow-forward" style="font-size: 4em;"></ion-icon>
+      </ion-col>
+    </ion-row>
 
-        <ion-row class="grande" (click)="presentToast()">
-            <ion-col col-3>
-                <img src="assets/imgs/inicio/ajustes.svg" width="100%" />
-            </ion-col>
-            <ion-col col-7>
-                <span>Ajustes</span>
-            </ion-col>
-            <ion-col col-2 style="text-align:center">
-                <ion-icon name="ios-arrow-forward" style="font-size: 4em;"></ion-icon>
-            </ion-col>
-        </ion-row>
-
-        <ion-row class="grande" (click)="presentToast()">
-            <ion-col col-3 style="text-align: center;">
-                <img src="assets/imgs/inicio/membresia.svg" width="60%" />
-            </ion-col>
-            <ion-col col-7>
-                <span>Membresía</span>
-            </ion-col>
-            <ion-col col-2 style="text-align:center">
-                <ion-icon name="ios-arrow-forward" style="font-size: 4em;"></ion-icon>
-            </ion-col>
-        </ion-row>
-    </ion-grid>
+    <ion-row class="grande" (click)="presentToast()">
+      <ion-col col-3 style="text-align: center;">
+        <img src="assets/imgs/inicio/membresia.svg" width="60%" />
+      </ion-col>
+      <ion-col col-7>
+        <span>Membresía</span>
+      </ion-col>
+      <ion-col col-2 style="text-align: center;">
+        <ion-icon name="ios-arrow-forward" style="font-size: 4em;"></ion-icon>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
 
 <ion-footer>
-    <div class="footer">
-        <div class="left"></div>
-        <div class="right"></div>
-    </div>
+  <div class="footer">
+    <div class="left"></div>
+    <div class="right"></div>
+  </div>
 </ion-footer>

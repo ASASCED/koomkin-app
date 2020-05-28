@@ -1,30 +1,37 @@
-import { Component, OnInit } from '@angular/core';
-import { IonicPage, MenuController, NavController, NavParams, ModalController } from "ionic-angular";
-import { HttpClient } from '@angular/common/http';
-import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
-import { ToastController } from 'ionic-angular';
+import { Component, OnInit } from "@angular/core";
+import {
+  IonicPage,
+  MenuController,
+  NavController,
+  NavParams,
+  ModalController,
+} from "ionic-angular";
+import { HttpClient } from "@angular/common/http";
+import { AuthServiceProvider } from "../../providers/auth-service/auth-service";
+import { ToastController } from "ionic-angular";
+import { GraphProvider } from "../../providers/graph/graph";
 
 @IonicPage()
 @Component({
   selector: "page-inicio",
-  templateUrl: "inicio.html"
+  templateUrl: "inicio.html",
 })
 export class InicioPage implements OnInit {
+  rootPage: any = "LoginPage";
+  leads = "LeadsPage";
+  reporte = "ReportePage";
+  datos = "DatosPage";
+  login = "LoginPage";
+  inicio = "InicioPage";
+  eficiencia = "EficienciaPage";
+  brief = "MasBriefPage";
+  financieros = "DatosFinancierosPage";
+  crm = "CrmPage";
+  agenda = "AgendaPage";
+  freemium = "FreemiumPage";
+  flowchart = "FlowchartPage";
 
-  rootPage: any = 'LoginPage';
-  leads = 'LeadsPage';
-  reporte = 'ReportePage';
-  datos = 'DatosPage';
-  login = 'LoginPage';
-  inicio = 'InicioPage';
-  eficiencia = 'EficienciaPage';
-  brief = 'MasBriefPage';
-  financieros = 'DatosFinancierosPage';
-  crm = 'CrmPage';
-  agenda = 'AgendaPage';
-  freemium = 'FreemiumPage';
-
-  pages: Array<{ title: string, component: any }>;
+  pages: Array<{ title: string; component: any }>;
 
   public id;
   public title;
@@ -42,6 +49,8 @@ export class InicioPage implements OnInit {
   public recurrente;
   public bannerFreemium;
 
+  cotizador = true;
+
   constructor(
     private modal: ModalController,
     public navCtrl: NavController,
@@ -49,11 +58,20 @@ export class InicioPage implements OnInit {
     private menuCtrl: MenuController,
     public authService: AuthServiceProvider,
     public http: HttpClient,
-    public toastCtrl: ToastController
+    public toastCtrl: ToastController,
+    private graphService: GraphProvider
   ) {
     this.recurrente = this.authService.recurrente;
     this.id = this.authService.id;
     this.activo = this.authService.activo;
+
+    // console.log("INICIO");
+    // this.graphService.getConfBot(this.id).subscribe((data: any) => {
+    //   console.log("DATA");
+    //   console.log(data);
+    // });
+    // console.log("FIN");
+    console.log(this.cotizador);
   }
 
   ngOnInit() {
@@ -68,10 +86,11 @@ export class InicioPage implements OnInit {
 
   public getBanner() {
     return new Promise((resolve, reject) => {
-      const urlBanner = "https://www.koomkin.com.mx/api/app/getBanner/" + this.id;
+      const urlBanner =
+        "https://www.koomkin.com.mx/api/app/getBanner/" + this.id;
       let datos;
       this.http.get(urlBanner).subscribe(
-        data => {
+        (data) => {
           if (data == null) {
             this.mostrar = 0;
             this.tipoBanner = 0;
@@ -102,7 +121,7 @@ export class InicioPage implements OnInit {
             resolve();
           }
         },
-        err => {
+        (err) => {
           // console.log(err);
           reject(err);
         }
@@ -115,41 +134,51 @@ export class InicioPage implements OnInit {
       .then(() => {
         this.mostrar = 1;
       })
-      .catch(err => {
+      .catch((err) => {
         // console.log(err);
       });
   }
 
   public showFreemium() {
-    this.bannerFreemium = { active: false, gender: 'M', briefId: '' };
+    this.bannerFreemium = { active: false, gender: "M", briefId: "" };
     return new Promise((resolve, reject) => {
       // const url = `http://localhost:4859/freemiumInfo?userId=${this.id}`
-      const url =`https://www.koomkin.com.mx/api/app/freemiumInfo?userId=${this.id}`
+      const url = `https://www.koomkin.com.mx/api/app/freemiumInfo?userId=${this.id}`;
       console.log(url);
 
-      this.http.get(url).subscribe(template => {
-        console.log(template);
-        if (template['freemiumPromo'] === 1) {
-          this.bannerFreemium = { active: true, gender: template['gender'], briefId: template['fireBaseBriefId'] };
-        }
-        resolve();
-      },
-        err => {
+      this.http.get(url).subscribe(
+        (template) => {
+          console.log(template);
+          if (template["freemiumPromo"] === 1) {
+            this.bannerFreemium = {
+              active: true,
+              gender: template["gender"],
+              briefId: template["fireBaseBriefId"],
+            };
+          }
+          resolve();
+        },
+        (err) => {
           //  console.log(err);
           reject(err);
-        });
+        }
+      );
     });
   }
 
   public clickBanner() {
     return new Promise((resolve, reject) => {
-      const urlBanner = "https://www.koomkin.com.mx/api/app/clickBanner/" + this.id + '/App/' + this.tipoBanner;
+      const urlBanner =
+        "https://www.koomkin.com.mx/api/app/clickBanner/" +
+        this.id +
+        "/App/" +
+        this.tipoBanner;
       this.http.get(urlBanner).subscribe(
-        data => {
+        (data) => {
           // // console.log('registro',data);
           resolve();
         },
-        err => {
+        (err) => {
           // // console.log(err);
           reject(err);
         }
@@ -159,10 +188,10 @@ export class InicioPage implements OnInit {
 
   presentToast() {
     const toast = this.toastCtrl.create({
-      message: 'Da click en el Aviso de la parte superior para continuar.',
+      message: "Da click en el Aviso de la parte superior para continuar.",
       duration: 3000,
-      position: 'top',
-      dismissOnPageChange: true
+      position: "top",
+      dismissOnPageChange: true,
     });
     toast.present();
   }
@@ -170,10 +199,15 @@ export class InicioPage implements OnInit {
   openModal() {
     const myModal = this.modal.create(
       "ModalUpgradePage",
-      { notification: this.notification, idReportBanner: this.idReportBanner, tipoBanner: this.tipoBanner, uuidPass: this.uuidPass },
+      {
+        notification: this.notification,
+        idReportBanner: this.idReportBanner,
+        tipoBanner: this.tipoBanner,
+        uuidPass: this.uuidPass,
+      },
       { enableBackdropDismiss: true, cssClass: "Modal-comentario" }
     );
     myModal.present();
-    myModal.onDidDismiss(() => { });
+    myModal.onDidDismiss(() => {});
   }
 }

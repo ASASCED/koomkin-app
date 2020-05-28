@@ -1,6 +1,6 @@
 <ion-content class="login-content" padding>
   <ion-row>
-    <ion-col col-10 offset-1> 
+    <ion-col col-10 offset-1>
       <img src="assets/imgs/login/img_login.svg" />
     </ion-col>
   </ion-row>
@@ -16,29 +16,38 @@
   </ion-row>
   <div class="login-box">
     <form [formGroup]="loginForm" (ngSubmit)="doLogin()">
-      <ion-row>
-        <ion-col>
-          <ion-list inset>
-            <ion-item class="lower">
-              <ion-input value="{{email}}" style="text-align:center;text-transform: lowercase;" id="inputEmail"
-                type="email" name="email" placeholder="Correo Electrónico" formControlName="email" autofocus>
-              </ion-input>
-            </ion-item>
-            <ion-item>
-              <ion-input value="{{password}}" id="inputPassword" type="password" name="password"
-                formControlName="password" placeholder="Contraseña"></ion-input>
-            </ion-item>
-            <a>
-              <p class="olvidaste" (click)="showPrompt()">¿Olvidaste tu contraseña?</p>
-            </a>
-          </ion-list>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col class="signup-col">
-          <button ion-button class="submit-btn" full type="submit" [disabled]="!loginForm.valid">Iniciar Sesión</button>
-        </ion-col>
-      </ion-row>
+      <input
+        class="input-login"
+        value="{{email}}"
+        id="inputEmail"
+        type="email"
+        name="email"
+        placeholder="Correo Electrónico"
+        formControlName="email"
+      />
+      <input
+        class="input-login"
+        value="{{password}}"
+        id="inputPassword"
+        type="password"
+        name="password"
+        formControlName="password"
+        placeholder="Contraseña"
+      />
+      <a>
+        <p class="olvidaste" (click)="showPrompt()">
+          ¿Olvidaste tu contraseña?
+        </p>
+      </a>
+      <button
+        ion-button
+        class="submit-btn"
+        full
+        type="submit"
+        [disabled]="!loginForm.valid"
+      >
+        Iniciar Sesión
+      </button>
     </form>
   </div>
 </ion-content>

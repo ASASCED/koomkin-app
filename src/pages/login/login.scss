@@ -1,153 +1,214 @@
+input[type="checkbox"],
+input[type="radio"] {
+  box-sizing: border-box; /* 1 */
+  padding: 0; /* 2 */
+  *height: 13px; /* 3 */
+  *width: 13px; /* 3 */
+}
+
+/**
+   * 1. Address `appearance` set to `searchfield` in Safari 5 and Chrome.
+   * 2. Address `box-sizing` set to `border-box` in Safari 5 and Chrome
+   *    (include `-moz` to future-proof).
+   */
+
+input[type="search"] {
+  -webkit-appearance: textfield; /* 1 */
+  -moz-box-sizing: content-box;
+  -webkit-box-sizing: content-box; /* 2 */
+  box-sizing: content-box;
+}
+
+/**
+   * Remove inner padding and search cancel button in Safari 5 and Chrome
+   * on OS X.
+   */
+
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+
+/**
+   * Remove inner padding and border in Firefox 3+.
+   */
+
+button::-moz-focus-inner,
+input::-moz-focus-inner {
+  border: 0;
+  padding: 0;
+}
+
 page-login {
-    .login-content {
-        background-image: linear-gradient( #00B9BE ,#005999 40%);
-        // background:url('../../assets/imgs/login/bck_login.svg');
-        .alert-md .alert-button-group {
-            -webkit-flex-wrap: wrap-reverse;
-            -ms-flex-wrap: wrap-reverse;
-            flex-wrap: wrap-reverse;
-            -webkit-box-pack: end;
-            -webkit-justify-content: center !important;
-            -ms-flex-pack: end;
-            justify-content: center !important;
-            padding: 0px 24px 8px 24px !important;
-            text-align: center;
-        }
-         ::placeholder {
-            color: white;
-            text-align: center;
-        }
-        .bienvenido {
-            font-size: 2.4rem;
-            color: white;
-            padding: 0%;
-            margin: 0%;
-        }
-        .inicio {
-            color: white;
-            font-size: 2.6rem;
-            font-weight: bold;
-            margin: 0%;
-        }
-        .olvidaste {
-            color: white;
-            font-size: 1.5rem;
-            font-style: italic;
-            text-align: right !important;
-            margin: 2%;
-            background: none;
-            border: none;
-            margin-right: 5%;
-        }
-        .item-md {
-            padding-left: 0;
-            padding-top: 0;
-        }
-        .alert-md .alert-input:focus {
-            margin-bottom: 4px;
-            border-bottom: 2px solid #00B9BE !important;
-        }
-        .text-input-md {
-            box-shadow: none !important;
-            color: white;
-            text-align: center;
-        }
-        ion-input {
-            border: none !important;
-            box-shadow: none !important;
-            margin-left: 2% !important;
-        }
-        
-        .lower {
-            text-transform: lowercase !important;
-        }
-        ion-row {
-            align-items: center;
-            text-align: center;
-        }
-        ion-item {
-            border-radius: 15px !important;
-            margin-bottom: 10px;
-            border: 3px solid #ffffff !important;
-            background: transparent;
-            width: 90%;
-            margin-left: 5%;
-        }
-        .signup-col {
-            margin: 0px 16px 0px 16px;
-            padding-bottom: 20px;
-        }
-        .submit-btn {
-            background: #00B9BE;
-            border-radius: 15px;
-            width: 90%;
-            margin-left: 5%;
-            box-shadow: 10px 10px 13px -6px rgba(0,0,0,0.75);
-            text-transform: none;
-            font-size: 1.8rem;
-        }
-        .register-btn {
-            color: #ffffff;
-            font-size: 0.8em;
-        }
+  .login-content {
+    background-image: linear-gradient(#00b9be, #005999 40%);
+    // background:url('../../assets/imgs/login/bck_login.svg');
+    .alert-md .alert-button-group {
+      -webkit-flex-wrap: wrap-reverse;
+      -ms-flex-wrap: wrap-reverse;
+      flex-wrap: wrap-reverse;
+      -webkit-box-pack: end;
+      -webkit-justify-content: center !important;
+      -ms-flex-pack: end;
+      justify-content: center !important;
+      padding: 0px 24px 8px 24px !important;
+      text-align: center;
     }
+    ::placeholder {
+      color: white;
+      text-align: center;
+    }
+    .bienvenido {
+      font-size: 18pt !important;
+      color: white;
+      padding: 0%;
+      margin: 0%;
+    }
+    .inicio {
+      color: white;
+      font-size: 22pt !important;
+      font-weight: bold;
+      margin: 0%;
+    }
+    .olvidaste {
+      color: white;
+      font-size: 12pt;
+      font-style: italic;
+      text-align: right !important;
+      margin-top: 8%;
+      background: none;
+      border: none;
+      margin-right: 5%;
+    }
+    .item-md {
+      padding-left: 0;
+      padding-top: 0;
+    }
+    .alert-md .alert-input:focus {
+      margin-bottom: 4px;
+      border-bottom: 2px solid #00b9be !important;
+    }
+    .text-input-md {
+      box-shadow: none !important;
+      color: white;
+      text-align: center;
+    }
+    ion-input {
+      border: none !important;
+      box-shadow: none !important;
+      margin-left: 2% !important;
+    }
+
+    .lower {
+      text-transform: lowercase !important;
+    }
+    ion-row {
+      align-items: center;
+      text-align: center;
+    }
+    ion-item {
+      border-radius: 15px !important;
+      margin-bottom: 10px;
+      border: 3px solid #ffffff !important;
+      background: transparent;
+      width: 90%;
+      margin-left: 5%;
+    }
+    .signup-col {
+      margin: 0px 16px 0px 16px;
+      padding-bottom: 20px;
+    }
+    .submit-btn {
+      background: #00b9be;
+      border-radius: 15px;
+      width: 90%;
+      margin-left: 5%;
+      box-shadow: 10px 10px 13px -6px rgba(0, 0, 0, 0.75);
+      text-transform: none;
+      font-size: 1.8rem;
+    }
+    .register-btn {
+      color: #ffffff;
+      font-size: 0.8em;
+    }
+  }
 }
 
 .buttonCss2 {
-    button.alert-button.exit-button {
-        text-align: center;
-        border-radius: 5px;
-        position: relative;
-        overflow: hidden;
-        font-weight: 500;
-        text-transform: none;
-        color: white;
-        margin: 0 8px 0 0;
-        padding: 10px;
-        background: #00B9BE;
-    }
-    .alert-md .alert-button-group {
-        -webkit-flex-wrap: wrap-reverse;
-        -ms-flex-wrap: wrap-reverse;
-        flex-wrap: wrap-reverse;
-        -webkit-box-pack: end;
-        -webkit-justify-content: center !important;
-        -ms-flex-pack: end;
-        justify-content: center !important;
-        padding: 0px 24px 8px 24px !important;
-        text-align: center !important;
-    }
-    button.alert-button.cancel-button {
-        text-align: center;
-        border-radius: 5px;
-        position: relative;
-        overflow: hidden;
-        font-weight: 500;
-        text-transform: none;
-        color: white;
-        margin: 0 8px 0 0;
-        padding: 10px;
-        background: white !important;
-        border: 1px solid #00B9BE !important;
-        color: #00B9BE !important;
-    }
-    .alert-md .alert-input:focus {
-        margin-bottom: 4px;
-        border-bottom: 2px solid #00B9BE !important;
-    }
-    .alert-input {
-        padding: 10px !important;
-        border: 0;
-        background: inherit;
-    }
-    .alert-md .alert-sub-title {
-        font-size: 16px !important;
-        text-align: start !important;
-        padding: 0px 14px 0px !important;
-    }
-    .alert-md .alert-message {
-        max-height: 240px;
-        font-size: 15px;
-        text-align: justify !important;
-    }
+  button.alert-button.exit-button {
+    text-align: center;
+    border-radius: 5px;
+    position: relative;
+    overflow: hidden;
+    font-weight: 500;
+    text-transform: none;
+    color: white;
+    margin: 0 8px 0 0;
+    padding: 10px;
+    background: #00b9be;
+  }
+  .alert-md .alert-button-group {
+    -webkit-flex-wrap: wrap-reverse;
+    -ms-flex-wrap: wrap-reverse;
+    flex-wrap: wrap-reverse;
+    -webkit-box-pack: end;
+    -webkit-justify-content: center !important;
+    -ms-flex-pack: end;
+    justify-content: center !important;
+    padding: 0px 24px 8px 24px !important;
+    text-align: center !important;
+  }
+  button.alert-button.cancel-button {
+    text-align: center;
+    border-radius: 5px;
+    font-weight: 500;
+    text-transform: none;
+    color: white;
+    background: white !important;
+    border: 1px solid #00b9be !important;
+    color: #00b9be !important;
+  }
+  .alert-md .alert-input:focus {
+    margin-bottom: 4px;
+    border-bottom: 2px solid #00b9be !important;
+  }
+  .alert-input {
+    padding: 10px !important;
+    border: 0;
+    background: inherit;
+  }
+  .alert-md .alert-sub-title {
+    font-size: 16px !important;
+    text-align: start !important;
+    padding: 0px 14px 0px !important;
+  }
+  .alert-md .alert-message {
+    max-height: 240px;
+    font-size: 15px;
+    text-align: justify !important;
+  }
+}
+form {
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+
+  .input-login {
+    background-color: transparent;
+    border: 1px solid #ffffff;
+    margin: 0.5em;
+    width: 90%;
+    color: white;
+    padding: 1.2em 0;
+    text-align: center;
+  }
+
+  a {
+    width: 100%;
+  }
+
+  button {
+    margin: 0.5em 0 0 0 !important;
+  }
 }
