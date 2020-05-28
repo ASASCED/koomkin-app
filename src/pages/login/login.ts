@@ -114,7 +114,7 @@ export class LoginPage implements OnInit {
     });
     this.loginForm.valueChanges.subscribe(data => this.onValueChanged(data));
     this.onValueChanged();
-    // this.getSesion();
+    this.getSesion();
   }
 
   public saveUserdata() {
@@ -139,13 +139,12 @@ export class LoginPage implements OnInit {
 
         if (this.leads.length > 0) {
           if (this.plt.is("ios") || this.plt.is("android")) {
-            // window["plugins"].OneSignal.sendTag("email_error", "");
+            window["plugins"].OneSignal.sendTag("email_error", "");
           }
           this.id = this.leads[0].IDUSUARIO;
           if (Md5.hashStr(this.password) === this.leads[0].PASSWORD2) {
             this.restService.setUser(this.id);
             if (this.plt.is("ios") || this.plt.is("android")) {
-              /*
               window["plugins"].OneSignal.getPermissionSubscriptionState(
                 status => {
                   const deviceId = status.subscriptionStatus.userId;
@@ -155,7 +154,6 @@ export class LoginPage implements OnInit {
               window["plugins"].OneSignal.sendTag("pwd_error", "");
               window["plugins"].OneSignal.sendTag("email", "");
               window["plugins"].OneSignal.sendTag("id_usuario", this.id);
-               */
             }
 
             this.authService.setUserIsLogged(true);
@@ -163,13 +161,14 @@ export class LoginPage implements OnInit {
             this.storage.set("password", this.password);
 
             if (data[0]["uuid"]) {
-              // this.iniciarClienteChatTwilio(data[0]["uuid"]);
+              console.log("entro");
+              this.iniciarClienteChatTwilio(data[0]["uuid"]);
             }
             this.navCtrl.setRoot("InicioPage");
           } else {
             if (this.plt.is("ios") || this.plt.is("android")) {
-              // window["plugins"].OneSignal.sendTag("email", this.email);
-              // window["plugins"].OneSignal.sendTag("pwd_error", this.password);
+              window["plugins"].OneSignal.sendTag("email", this.email);
+              window["plugins"].OneSignal.sendTag("pwd_error", this.password);
             }
             this.showError(
               "Verifica tu correo y/o contraseña",
@@ -178,7 +177,7 @@ export class LoginPage implements OnInit {
           }
         } else if (this.leads.length == 0) {
           if (this.plt.is("ios") || this.plt.is("android")) {
-            // window["plugins"].OneSignal.sendTag("email_error", this.email);
+            window["plugins"].OneSignal.sendTag("email_error", this.email);
           }
           this.showError(
             "Verifica tu correo y/o contraseña",
@@ -216,7 +215,6 @@ export class LoginPage implements OnInit {
                     this.authService.setUserIsLogged(true);
                     this.restService.setUser(this.id);
                     if (this.plt.is("ios") || this.plt.is("android")) {
-                      /*
                       window[
                         "plugins"
                       ].OneSignal.getPermissionSubscriptionState(status => {
@@ -227,7 +225,6 @@ export class LoginPage implements OnInit {
                         "id_usuario",
                         this.id
                       );
-                       */
                     }
                     this.storage.set("email", this.email);
                     this.storage.set("password", this.password);
