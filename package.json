@@ -26,6 +26,7 @@
         "@angular/http": "4.4.4",
         "@angular/platform-browser": "4.4.4",
         "@angular/platform-browser-dynamic": "4.4.4",
+        "@ionic-native/call-number": "^4.20.0",
         "@ionic-native/chooser": "^4.18.0",
         "@ionic-native/clipboard": "^4.19.0",
         "@ionic-native/core": "^4.3.3",
@@ -48,6 +49,7 @@
         "@toverux/ngx-sweetalert2": "^4.0.0",
         "ajax-request": "^1.2.3",
         "body-parser": "~1.18.2",
+        "call-number": "^1.0.1",
         "connect-ensure-login": "^0.1.1",
         "cookie-parser": "~1.4.3",
         "cordova-android": "^8.0.0",
@@ -153,7 +155,8 @@
             "cordova-plugin-advanced-http": {},
             "cordova-clipboard": {},
             "cordova-custom-config": {},
-            "cordova-plugin-screen-orientation": {}
+            "cordova-plugin-screen-orientation": {},
+            "mx.ferreyra.callnumber": {}
         },
         "platforms": [
             "android",

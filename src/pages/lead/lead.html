@@ -1,549 +1,1113 @@
 <ion-header>
-    <ion-navbar style="min-height: 30px;" color="azul">
+  <ion-navbar style="min-height: 30px;" color="azul"> </ion-navbar>
 
-    </ion-navbar>
+  <ion-toolbar no-border-top color="azul">
+    <ion-segment [(ngModel)]="page" (ngModelChange)="pageChanged()">
+      <ion-segment-button value="Lead">
+        <img
+          src="assets/imgs/lead/ic_lead.svg"
+          style="
+            vertical-align: middle;
+            width: 25% !important;
+            display: inline-block;
+          "
+        />
+      </ion-segment-button>
+      <ion-segment-button value="Comentarios">
+        <img
+          src="assets/imgs/lead/ic_comentarios.svg"
+          style="
+            vertical-align: middle;
+            width: 25% !important;
+            display: inline-block;
+          "
+        />
+      </ion-segment-button>
+      <ion-segment-button value="Llamadas">
+        <img
+          src="assets/imgs/lead/ic_llamada.svg"
+          style="
+            vertical-align: middle;
+            width: 25% !important;
+            display: inline-block;
+          "
+        />
+      </ion-segment-button>
+      <ion-segment-button value="Chat">
+        <img
+          src="assets/imgs/lead/ic_chat.svg"
+          style="
+            vertical-align: middle;
+            width: 25% !important;
+            display: inline-block;
+          "
+        />
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
 
-    <ion-toolbar no-border-top color="azul">
-        <ion-segment [(ngModel)]="page" (ngModelChange)="pageChanged()">
-            <ion-segment-button value="Lead">
-                <img src="assets/imgs/lead/ic_lead.svg"
-                    style="vertical-align: middle;width: 25% !important;display: inline-block;" />
-            </ion-segment-button>
-            <ion-segment-button value="Comentarios">
-                <img src="assets/imgs/lead/ic_comentarios.svg"
-                    style="vertical-align: middle;width: 25% !important;display: inline-block;" />
-            </ion-segment-button>
-            <ion-segment-button value="Llamadas">
-                <img src="assets/imgs/lead/ic_llamada.svg"
-                    style="vertical-align: middle;width: 25% !important;display: inline-block;" />
-            </ion-segment-button>
-            <ion-segment-button value="Chat">
-                <img src="assets/imgs/lead/ic_chat.svg"
-                    style="vertical-align: middle;width: 25% !important;display: inline-block;" />
-            </ion-segment-button>
-        </ion-segment>
-    </ion-toolbar>
-
-    <ion-toolbar class="help" *ngIf="page == 'Chat'">
-        <ion-grid>
-            <ion-row style="background: white !important" align-items-center style="margin: 0">
-                <ion-col col-8 align-self-center style="display: inherit;padding-left: 5%">
-                    <p class="nombre">{{leadActual.NombreUsuarioEnvio | capitalize}}</p>
-                </ion-col>
-                <ion-col col-2 style="text-align: right">
-                    <ion-icon style="margin-left: 10% !important;font-size: 2.6em !important;color: rgb(209, 209, 209)"
-                        [ngClass]="{'like':leadActual.calificaLead === 'like','sin':leadActual.calificaLead === 'dislike'}"
-                        name="md-thumbs-up" (click)="changeLikeToggle()"></ion-icon>
-                </ion-col>
-                <ion-col col-2>
-                    <ion-icon style="margin-right: .2em !important;font-size: 2.6em !important;color: rgb(77,77,77)"
-                        class="telefono-v-chat" name="md-call" (click)="showConfirm();getInsertClickLlamar();">
-                    </ion-icon>
-                </ion-col>
-            </ion-row>
-        </ion-grid>
-    </ion-toolbar>
+  <ion-toolbar class="help" *ngIf="page == 'Chat'">
+    <ion-grid>
+      <ion-row
+        style="background: white !important;"
+        align-items-center
+        style="margin: 0;"
+      >
+        <ion-col
+          col-8
+          align-self-center
+          style="display: inherit; padding-left: 5%;"
+        >
+          <p class="nombre">{{leadActual.NombreUsuarioEnvio | capitalize}}</p>
+        </ion-col>
+        <ion-col col-2 style="text-align: right;">
+          <ion-icon
+            style="
+              margin-left: 10% !important;
+              font-size: 2.6em !important;
+              color: rgb(209, 209, 209);
+            "
+            [ngClass]="{'like':leadActual.calificaLead === 'like','sin':leadActual.calificaLead === 'dislike'}"
+            name="md-thumbs-up"
+            (click)="changeLikeToggle()"
+          ></ion-icon>
+        </ion-col>
+        <ion-col col-2>
+          <ion-icon
+            style="
+              margin-right: 0.2em !important;
+              font-size: 2.6em !important;
+              color: rgb(77, 77, 77);
+            "
+            class="telefono-v-chat"
+            name="md-call"
+            (click)="showConfirm();getInsertClickLlamar();"
+          >
+          </ion-icon>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
 </ion-header>
 
 <ion-content padding class="falling">
-
-    <div [ngSwitch]="page" swipeSegment [tabsList]="pages" [(currentTab)]="page" (tabChanged)="onTabChanged($event)"
-        class="swipe-area">
-        <ion-list *ngSwitchCase="'Lead'">
-            <ion-grid class="vista">
-                <ion-card class="dentro">
-                    <ion-card-content class="{{leadActual.clasificaLead}}">
-
-                        <ion-row align-items-center style="margin:0%">
-                            <ion-col col-10 align-self-center style="display: inherit;">
-                                <a class="rate-nombre">
-                                    <strong>{{leadActual.NombreUsuarioEnvio | capitalize}}</strong>
-                                </a>
-                                <img *ngIf="leadActual.urgencia !== 'Sí'"
-                                    src="assets/imgs/urgencia/{{leadActual.urgencia}}.svg"
-                                    style="vertical-align: middle;width: 9% !important;display: inline-block;margin-left: 2%;" />
-                                <img *ngIf="leadActual.urgencia === 'Sí'" src="assets/imgs/urgencia/Si.svg"
-                                    style="vertical-align: middle;width: 9% !important;display: inline-block;margin-left: 2%;" />&nbsp;<img *ngIf="leadActual.Canal != 'Reporte' && leadActual.Canal != 'App'"
-                                    src="assets/imgs/leads/ic_koomkinlead.svg" style="vertical-align: middle;width: 8% !important;display: inline-block;margin-left: 2%;" />
-                                    <img *ngIf="leadActual.Canal == 'Reporte' || leadActual.Canal == 'App'"
-                                    src="assets/imgs/leads/ic_leadsExternos.svg" style="vertical-align: middle;width: 9% !important;display: inline-block;margin-left: 2%;" />
-                            </ion-col>
-                            <ion-col col-1 style="text-align: right;" *ngIf="leadActual.url !== 'sinaudio'">
-                                <img src="assets/imgs/leads/audio.svg"
-                                    style="vertical-align: middle;width: 95% !important;display: inline-block;    margin-left: 15%;" />
-                            </ion-col>
-                            <ion-col col-1 style="text-align: right;" *ngIf="leadActual.url == 'sinaudio'">
-                                <img src="assets/imgs/leads/sin-audio.svg"
-                                    style="vertical-align: middle;width: 95% !important;display: inline-block;    margin-left: 15%;" />
-                            </ion-col>
-                            <ion-col col-1 *ngIf="leadActual.mensajesnoleidos > 0 && leadActual.mensajesnoleidos < 10">
-                                <!--  <p
+  <div
+    [ngSwitch]="page"
+    swipeSegment
+    [tabsList]="pages"
+    [(currentTab)]="page"
+    (tabChanged)="onTabChanged($event)"
+    class="swipe-area"
+  >
+    <ion-list *ngSwitchCase="'Lead'">
+      <ion-grid class="vista">
+        <ion-card class="dentro">
+          <ion-card-content class="{{leadActual.clasificaLead}}">
+            <ion-row align-items-center style="margin: 0%;">
+              <ion-col col-10 align-self-center style="display: inherit;">
+                <a class="rate-nombre">
+                  <strong
+                    >{{leadActual.NombreUsuarioEnvio | capitalize}}</strong
+                  >
+                </a>
+                <img
+                  *ngIf="leadActual.urgencia !== 'Sí'"
+                  src="assets/imgs/urgencia/{{leadActual.urgencia}}.svg"
+                  style="
+                    vertical-align: middle;
+                    width: 9% !important;
+                    display: inline-block;
+                    margin-left: 2%;
+                  "
+                />
+                <img
+                  *ngIf="leadActual.urgencia === 'Sí'"
+                  src="assets/imgs/urgencia/Si.svg"
+                  style="
+                    vertical-align: middle;
+                    width: 9% !important;
+                    display: inline-block;
+                    margin-left: 2%;
+                  "
+                />&nbsp;<img
+                  *ngIf="leadActual.Canal != 'Reporte' && leadActual.Canal != 'App'"
+                  src="assets/imgs/leads/ic_koomkinlead.svg"
+                  style="
+                    vertical-align: middle;
+                    width: 8% !important;
+                    display: inline-block;
+                    margin-left: 2%;
+                  "
+                />
+                <img
+                  *ngIf="leadActual.Canal == 'Reporte' || leadActual.Canal == 'App'"
+                  src="assets/imgs/leads/ic_leadsExternos.svg"
+                  style="
+                    vertical-align: middle;
+                    width: 9% !important;
+                    display: inline-block;
+                    margin-left: 2%;
+                  "
+                />
+              </ion-col>
+              <ion-col
+                col-1
+                style="text-align: right;"
+                *ngIf="leadActual.url !== 'sinaudio'"
+              >
+                <img
+                  src="assets/imgs/leads/audio.svg"
+                  style="
+                    vertical-align: middle;
+                    width: 95% !important;
+                    display: inline-block;
+                    margin-left: 15%;
+                  "
+                />
+              </ion-col>
+              <ion-col
+                col-1
+                style="text-align: right;"
+                *ngIf="leadActual.url == 'sinaudio'"
+              >
+                <img
+                  src="assets/imgs/leads/sin-audio.svg"
+                  style="
+                    vertical-align: middle;
+                    width: 95% !important;
+                    display: inline-block;
+                    margin-left: 15%;
+                  "
+                />
+              </ion-col>
+              <ion-col
+                col-1
+                *ngIf="leadActual.mensajesnoleidos > 0 && leadActual.mensajesnoleidos < 10"
+              >
+                <!--  <p
                                     style="color: white !important; position: absolute; margin-left: 57% !important; margin-top: 24% !important; font-size: 1em; font-weight: bold;">
                                     {{leadActual.mensajesnoleidos}}</p>-->
-                                <img src="assets/imgs/leads/mensajes.svg"
-                                    style="vertical-align: middle;width: 100% !important;max-width:150px !important;display: inline-block;" />
-                            </ion-col>
+                <img
+                  src="assets/imgs/leads/mensajes.svg"
+                  style="
+                    vertical-align: middle;
+                    width: 100% !important;
+                    max-width: 150px !important;
+                    display: inline-block;
+                  "
+                />
+              </ion-col>
 
-                            <ion-col col-1 *ngIf="leadActual.mensajesnoleidos > 10">
-                                <img src="assets/imgs/leads/mensajes.svg"
-                                    style="vertical-align: middle;width: 100% !important;max-width:150px !important;display: inline-block;" />
-                            </ion-col>
-                            <ion-col col-1 *ngIf="leadActual.mensajesnoleidos == null || leadActual.mensajesnoleidos == 'null'">
-                                <img src="assets/imgs/leads/sin-mensaje.svg"
-                                    style="vertical-align: middle;width: 100% !important;max-width:150px !important;display: inline-block;" />
-                            </ion-col>
-                            <ion-col col-1 *ngIf="leadActual.mensajesnoleidos == 0">
-                                <img src="assets/imgs/leads/mensaje.svg"
-                                    style="vertical-align: middle;width: 100% !important;max-width:150px !important;display: inline-block;" />
-                            </ion-col>
-                        </ion-row>
-                        <ion-row>
-                            <ion-col col-12>
-                                <a style="text-decoration: none;">
-                                    <div class="inf-correo">
-                                        <span class="inf-estado">{{leadActual.ABREVIACION}}</span>
-                                        &nbsp;&nbsp; {{leadActual.EmailUsuarioEnvio}}</div>
-                                </a>
-                            </ion-col>
-                        </ion-row>
-                        <ion-row>
-                            <ion-col col-8 style="margin-top: 1%;">
-                                <div>
-                                    <div class="rate-fecha">
-                                        {{leadActual.fechaenvio | date: 'dd-MM HH:mm' }}
-                                        <span class="inf-agenda"
-                                            [ngClass]="{'descartado-agenda':leadActual.clasificaLead == 'D','seguimiento-agenda':leadActual.clasificaLead == 'S','negociacion-agenda':leadActual.clasificaLead == 'N','vendido-agenda':leadActual.clasificaLead == 'V'}"
-                                            *ngIf="leadActual.scheduledAt !== 'Sin agenda'">&nbsp;{{leadActual.scheduledAt | date: 'dd-MM HH:mm' }}</span>
-                                        <span class="inf-agenda"
-                                            [ngClass]="{'descartado-agenda':leadActual.clasificaLead == 'D','seguimiento-agenda':leadActual.clasificaLead == 'S','negociacion-agenda':leadActual.clasificaLead == 'N','vendido-agenda':leadActual.clasificaLead == 'V'}"
-                                            *ngIf="leadActual.scheduledAt == 'Sin agenda'">&nbsp;{{leadActual.scheduledAt}}</span>
-                                        <br>
-                                        <div class="inf-valor">
-                                            Valor del Lead =
-                                            {{leadActual.ValorLead | currency: 'MXN':'symbol' : '1.0'}}
-                                        </div>
-                                    </div>
-                                </div>
-                            </ion-col>
-                            <ion-col col-1>
-                            </ion-col>
-
-                            <ion-col col-3 style="display: flex;
-                            text-align: right;
-                            justify-content: flex-end;
-                            align-items: flex-end;">
-                                <ion-icon
-                                    style="margin-right: .2em !important;font-size: 2.5em !important;color: rgb(209, 209, 209)"
-                                    [ngClass]="{'like':leadActual.calificaLead === 'like','sin':leadActual.calificaLead === 'dislike'}"
-                                    name="md-thumbs-up" (click)="changeLike('L',leadActual)"></ion-icon>
-                                <ion-icon style="font-size: 2.5em !important;color: rgb(209, 209, 209)"
-                                    [ngClass]="{'like':leadActual.calificaLead === 'dislike','sin':leadActual.calificaLead === 'like'}"
-                                    name="md-thumbs-down" (click)="changeLike('DL',leadActual)"></ion-icon>
-                            </ion-col>
-                        </ion-row>
-
-                    </ion-card-content>
-                </ion-card>
-                <br>
-                <ion-row>
-                    <ion-col>
-                        <p class="mensaje">“{{mensajeLead}}”</p>
-                    </ion-col>
-                </ion-row>
-                <ion-row>
-                    <ion-col col-12>
-                        <p class="califica">Detalles de Contacto</p>
-                    </ion-col>
-                </ion-row>
-
-                <ion-row>
-                    <ion-col col-3 class="tex">
-                        <img icon-only tooltip="Contacto" positionV="top" mobileEvent="click" hideOthers=true
-                            duration=2000 src="assets/imgs/lead/ic_cliente.svg"
-                            style="vertical-align: middle;width: 25% !important;display: inline-block;" />
-                        {{contacto}}
-                    </ion-col>
-                    <ion-col col-6 class="tex">
-                        <img icon-only tooltip="Fecha Atención" positionV="top" mobileEvent="click" hideOthers=true
-                            duration=2000 src="assets/imgs/lead/ic_fecha.svg"
-                            style="vertical-align: middle;width: 10% !important;display: inline-block;" />
-                        &nbsp; {{leadActual.fechaContacto | date: 'dd/MM/yyyy HH:mm' }}
-                    </ion-col>
-                    <ion-col col-3 class="tex">
-                        <img icon-only tooltip="No. de Intentos" positionV="top" mobileEvent="click" hideOthers=true
-                            duration=2000 src="assets/imgs/lead/ic_numintentos.svg"
-                            style="vertical-align: middle;width: 30% !important;display: inline-block;" />
-                        {{intentosExitoso}}
-                    </ion-col>
-                </ion-row>
-                <ion-row>
-                    <ion-col col-3 class="tex">
-                        <img icon-only tooltip="Canal" positionV="bottom" mobileEvent="click" hideOthers=true
-                            duration=2000 src="assets/imgs/lead/ic_canal.svg"
-                            style="vertical-align: middle;width: 25% !important;display: inline-block;" />
-                        {{leadActual.canalContacto}}
-                    </ion-col>
-                    <ion-col col-3 class="tex">
-                        <img icon-only tooltip="Velocidad" positionV="bottom" mobileEvent="click" hideOthers=true
-                            duration=2000 src="assets/imgs/lead/ic_hora.svg"
-                            style="vertical-align: middle;width: 20% !important;display: inline-block;" />
-                        &nbsp; {{attentionSpeed}}
-                    </ion-col>
-                    <ion-col col-3 class="tex">
-                        <img icon-only tooltip="Garantía" positionV="bottom" mobileEvent="click" hideOthers=true
-                            duration=2000 src="assets/imgs/lead/ic_garantia.svg"
-                            style="vertical-align: middle;width: 20% !important;display: inline-block;" />
-                        &nbsp; {{garantia}}
-                    </ion-col>
-                    <ion-col col-3 class="tex">
-                        <img icon-only tooltip="Últ. Contacto" positionV="bottom" mobileEvent="click" hideOthers=true
-                            duration=2000 src="assets/imgs/lead/ic_ultimocontacto.svg"
-                            style="vertical-align: middle;width: 20% !important;display: inline-block;" />
-                        &nbsp;{{diasContacto}}
-                    </ion-col>
-                </ion-row>
-
-                <ion-row>
-                    <ion-col col-12>
-                        <p class="califica">Estatus del Lead</p>
-                    </ion-col>
-                </ion-row>
-                <ion-row>
-                    <ion-col col-6>
-                        <button class="arribab" [ngClass]="{'descartado':leadActual.clasificaLead === 'D'}"
-                            (click)="changeClassification('D');openModal(1,'Descartado')">
-                            Descartado
-                        </button>
-                        <button class="arribab" [ngClass]="{'seguimiento':leadActual.clasificaLead === 'S'}"
-                            (click)="changeClassification('S');openModal(2,'Seguimiento')">
-                            En Seguimiento
-                        </button>
-                        <button class="arribab" [ngClass]="{'negociacion':leadActual.clasificaLead === 'N'}"
-                            (click)="changeClassification('N');openModal(2,'Negociacion')">
-                            Negociación
-                        </button>
-                        <button class="arribab" [ngClass]="{'vendido':leadActual.clasificaLead === 'V'}"
-                            (click)="changeClassification('V');openModal(3,'Vendido')">
-                            Vendido
-                        </button>
-                    </ion-col>
-                    <ion-col col-6 class="normal">
-                        <p class="razon" *ngIf="leadActual.clasificaLead === 'D'">
-                            Razón
-                        </p>
-                        <ion-row *ngIf="leadActual.clasificaLead === 'D'">
-                            <ion-col col-2 class="tex">
-                                <img src="assets/imgs/lead/ic_advertencia.svg"
-                                    style="vertical-align: middle;width: 80% !important;display: inline-block;" />
-                            </ion-col>
-                            <ion-col col-10 class="razon">
-                                <p class="descarto">
-                                    {{razonDescarto}}
-                                </p>
-                            </ion-col>
-                        </ion-row>
-
-                        <p class="razon" *ngIf="leadActual.clasificaLead === 'N' || leadActual.clasificaLead === 'S'">
-                            Próxima comunicación
-                        </p>
-                        <ion-row *ngIf="leadActual.clasificaLead === 'N' || leadActual.clasificaLead === 'S'">
-                            <ion-col col-2 class="text">
-                                <img src="assets/imgs/lead/ic_hora.svg"
-                                    style="vertical-align: middle;width: 80% !important;display: inline-block;" />
-                            </ion-col>
-                            <ion-col col-10 class="text">
-                                <span class="comunicacion" *ngIf="leadActual.scheduledAt != 'Sin agenda'">{{leadActual.scheduledAt | date: 'dd-MM-yyyy'}}</span>
-                                <span class="comunicacion" *ngIf="leadActual.scheduledAt == 'Sin agenda'">{{leadActual.scheduledAt}}</span>
-                            </ion-col>
-                        </ion-row>
-
-                        <ion-row *ngIf="leadActual.clasificaLead === 'N' || leadActual.clasificaLead === 'S'">
-                            <ion-col col-2 class="text">
-                                <img src="assets/imgs/lead/ic_fecha.svg"
-                                    style="vertical-align: middle;width: 80% !important;display: inline-block;" />
-                            </ion-col>
-                            <ion-col col-10 class="text">
-                                <span class="comunicacion" *ngIf="leadActual.scheduledAt != 'Sin agenda'">{{leadActual.scheduledAt | date: 'HH:mm'}}</span>
-                                <span class="comunicacion" *ngIf="leadActual.scheduledAt == 'Sin agenda'">{{leadActual.scheduledAt}}</span>
-                            </ion-col>
-                        </ion-row>
-
-                        <p class="razon">
-                            Valor del lead
-                        </p>
-
-                        <p class="valor">{{valorLead | currency: 'MXN':'symbol-narrow' : '1.0'}}</p>
-
-                    </ion-col>
-                </ion-row>
-                <ion-row *ngIf="show == true">
-                    <ion-col col-1>
-
-                    </ion-col>
-                    <ion-col col-10>
-                        <p class="califica">Último Comentario</p>
-                    </ion-col>
-                    <ion-col col-1>
-
-                    </ion-col>
-                </ion-row>
-
-                <ion-item *ngIf="show == true" class="tarjeta-comentario"
-                    [ngClass]="{'sold':clasificaComentario == 'Vendido','negotiation':clasificaComentario == 'Negociacion','track':clasificaComentario == 'Seguimiento' ,'discard':clasificaComentario== 'Descartado','sin-estatus':clasificaComentario == ''}"
-                    style="border-bottom: 1px solid #dedede;">
-                    <ion-row
-                        style="display: flex !important; align-content: center !important; align-items: center !important;margin-top: 1%;">
-                        <ion-col col-10>
-                            <p style="color:gray;margin-left: 5px;font-size: small;text-transform: capitalize;">
-                                {{fechaComentario | dateFormat}}
-                            </p>
-                        </ion-col>
-                        <ion-col col-1 style="text-align: center">
-                            <img src="assets/imgs/lead/ic_comentario.svg"
-                                style="vertical-align: middle;width: 70% !important;margin-left: 10%;"
-                                (click)="openModal(4,'',idComentario,comentario)" />
-                        </ion-col>
-                        <ion-col col-1 style="text-align: center">
-                            <img src="assets/imgs/lead/ic_borrar.svg"
-                                style="vertical-align: middle;width: 70% !important;margin-left: 10%;"
-                                (click)="btnDeleteComentario(idComentario)" />
-                        </ion-col>
-                    </ion-row>
-                    <ion-row
-                        style="display: flex !important; align-content: center !important; align-items: center !important;margin-bottom: 2% !important;margin-left: 5px;">
-                        <ion-col col-10>
-                            <a style="color:#606060;font-size: small;">"{{comentario}}"</a>
-                        </ion-col>
-                    </ion-row>
-                </ion-item>
-            </ion-grid>
-        </ion-list>
-
-        <ion-list *ngSwitchCase="'Comentarios'">
-            <ion-row
-                style="display: flex !important; align-content: center !important; align-items: center !important;">
-                <ion-col col-11>
-                    <span class="titulo-azul">Historial de comentarios</span>
-                </ion-col>
-                <ion-col col-1>
-                    <img src="assets/imgs/lead/ic_plus.svg"
-                        style="vertical-align: middle;width: 70% !important;margin-left: 10%;"
-                        (click)="openModal(0,'')" />
-                </ion-col>
+              <ion-col col-1 *ngIf="leadActual.mensajesnoleidos > 10">
+                <img
+                  src="assets/imgs/leads/mensajes.svg"
+                  style="
+                    vertical-align: middle;
+                    width: 100% !important;
+                    max-width: 150px !important;
+                    display: inline-block;
+                  "
+                />
+              </ion-col>
+              <ion-col
+                col-1
+                *ngIf="leadActual.mensajesnoleidos == null || leadActual.mensajesnoleidos == 'null'"
+              >
+                <img
+                  src="assets/imgs/leads/sin-mensaje.svg"
+                  style="
+                    vertical-align: middle;
+                    width: 100% !important;
+                    max-width: 150px !important;
+                    display: inline-block;
+                  "
+                />
+              </ion-col>
+              <ion-col col-1 *ngIf="leadActual.mensajesnoleidos == 0">
+                <img
+                  src="assets/imgs/leads/mensaje.svg"
+                  style="
+                    vertical-align: middle;
+                    width: 100% !important;
+                    max-width: 150px !important;
+                    display: inline-block;
+                  "
+                />
+              </ion-col>
             </ion-row>
-            <ion-item class="tarjeta-comentario" *ngFor="let registro of comentarios; let i = index;"
-                [ngClass]="{'sold':registro.ClasificaLead == 'Vendido','negotiation':registro.ClasificaLead == 'Negociacion','track':registro.ClasificaLead == 'Seguimiento' ,'discard':registro.ClasificaLead == 'Descartado','sin-estatus':registro.ClasificaLead == '' }"
-                style="border-bottom: 1px solid #dedede;">
-                <ion-row
-                    style="display: flex !important; align-content: center !important; align-items: center !important;margin-top: 1%;">
-                    <ion-col col-10>
-                        <p style="color:gray;margin-left: 5px;font-size: small;text-transform: capitalize;">
-                            {{registro.FechaRegistro | dateFormat}}
-                        </p>
-                    </ion-col>
-                    <ion-col col-1 style="text-align: center">
-                        <img src="assets/imgs/lead/ic_comentario.svg"
-                            style="vertical-align: middle;width: 70% !important;margin-left: 10%;"
-                            (click)="openModal(4,'',registro.IdComentario,registro.Comentario)" />
-                    </ion-col>
-                    <ion-col col-1 style="text-align: center">
-                        <img src="assets/imgs/lead/ic_borrar.svg"
-                            style="vertical-align: middle;width: 70% !important;margin-left: 10%;"
-                            (click)="btnDeleteComentario(registro.IdComentario)" />
-                    </ion-col>
-                </ion-row>
-                <ion-row
-                    style="display: flex !important; align-content: center !important; align-items: center !important;margin-bottom: 2% !important;margin-left: 5px;">
-                    <ion-col col-10>
-                        <a style="color:#606060;font-size: small;">"{{registro.Comentario}}"</a>
-                    </ion-col>
-                </ion-row>
-            </ion-item>
-        </ion-list>
-
-        <ion-list *ngSwitchCase="'Llamadas'">
-            <ion-item>
-                <ion-row
-                    style="display: flex !important; align-content: center !important; align-items: center !important;margin-top:2%;margin-bottom:2%;">
-                    <ion-col col-2 style="text-align: right;padding-right: 1% !important">
-                        <p class="llamadas">Llamadas<br>Entrantes</p>
-                    </ion-col>
-                    <ion-col col-2 class="llamadas-area">
-                        <img src="assets/imgs/llamadas/comprador.svg" width="40%"
-                            style="vertical-align: middle;margin-left: 5%" /> {{exitosa_c}}
-                    </ion-col>
-
-                    <ion-col col-2 style="text-align: right;padding-right: 1% !important">
-                        <p class="llamadas">Llamadas<br>Salientes</p>
-                    </ion-col>
-                    <ion-col col-2 class="llamadas-area">
-                        <img src="assets/imgs/llamadas/cliente.svg" width="40%"
-                            style="vertical-align: middle;margin-left: 5%" /> {{exitosa_v}}
-                    </ion-col>
-
-                    <ion-col col-2 style="text-align: right;padding-right: 1% !important">
-                        <p class="llamadas">Llamadas<br>Exitosas</p>
-                    </ion-col>
-                    <ion-col col-2 class="llamadas-area">
-                        <img src="assets/imgs/llamadas/cliente.svg" width="40%"
-                            style="vertical-align: middle;margin-left: 5%" /> {{exitosa}}
-                    </ion-col>
-                </ion-row>
-                <ion-row
-                    style="display: flex !important; align-content: center !important; align-items: center !important;margin-bottom:5%;">
-                    <ion-col col-2 style="text-align: right;padding-right: 1% !important">
-                        <p class="llamadas">Llamadas<br>a Buzón</p>
-                    </ion-col>
-                    <ion-col col-2 class="llamadas-area">
-                        <img src="assets/imgs/llamadas/buzon.svg" width="40%"
-                            style="vertical-align: middle;margin-left: 5%" /> {{buzon}}
-                    </ion-col>
-                    <ion-col col-2 style="text-align: right;padding-right: 1% !important">
-                        <p class="llamadas">Llamadas<br>Perdidas</p>
-                    </ion-col>
-                    <ion-col col-2 class="llamadas-area">
-                        <img src="assets/imgs/llamadas/perdida.svg" width="40%"
-                            style="vertical-align: middle;margin-left: 5%" /> {{perdida}}
-                    </ion-col>
-                    <ion-col col-2 style="text-align: right;padding-right: 1% !important">
-                        <p class="llamadas">Número<br>Inválido</p>
-                    </ion-col>
-                    <ion-col col-2 class="llamadas-area">
-                        <img src="assets/imgs/llamadas/invalido.svg" width="40%"
-                            style="vertical-align: middle;margin-left: 5%" /> {{invalido}}
-                    </ion-col>
-                </ion-row>
-                <button *ngIf="url !== 'sinaudio'" (click)="startAudio()" class="url">Escuchar Llamada</button>
-                <ion-row
-                    style="display: flex !important; align-content: center !important; align-items: center !important;">
-                    <ion-col col-12>
-                        <span class="titulo-azul">Historial</span>
-                    </ion-col>
-                </ion-row>
-            </ion-item>
-
-            <!--Listado de llamadas-->
-            <ion-item style="border-bottom: 1px solid #dedede;" *ngFor="let call of llamadas; let i = index;">
-                <ion-row
-                    style="display: flex !important; align-content: center !important; align-items: center !important;margin-top: 1%;">
-                    <ion-col col-3 *ngIf="call.CallStatus !== 'no-answer'">
-                        <p style="color:gray;">{{call.FechaLlamada}}</p>
-                    </ion-col>
-                    <ion-col col-9>
-                    </ion-col>
-                </ion-row>
-                <ion-row
-                    style="display: flex !important; align-content: center !important; align-items: center !important;margin-bottom: 2% !important;">
-                    <ion-col *ngIf="call.CallStatus !== 'no-answer'" col-1>
-                        <img src="assets/imgs/llamadas/{{call.CallStatus}}.svg" width="70%"
-                            style="vertical-align: middle;margin-left: 1%;" />
-                    </ion-col>
-                    <ion-col *ngIf="call.CallStatus !== 'no-answer'" col-7>
-                        <a style="color:#606060">{{leadActual.NombreUsuarioEnvio | capitalize}}</a>
-                    </ion-col>
-                    <ion-col *ngIf="call.CallStatus !== 'no-answer'" col-4 style="text-align: right;">
-                        <a style="color:#606060">{{call.horallamada}}</a>
-                    </ion-col>
-                </ion-row>
-            </ion-item>
-        </ion-list>
-
-        <ion-list *ngSwitchCase="'Chat'" #Chat>
-            <ion-grid *ngIf="loadingMessages">
-                <br>
-                <ion-spinner id="spinnermensajes" loadingText="Cargando más Leads..." item-start name="crescent">
-                    Cargando más Leads...
-                </ion-spinner>
-                <p class="text-spinner">Cargando Mensajes...</p>
-            </ion-grid>
-
-            <div class="message-wrap">
-
-                <div *ngFor="let msg of msgListLead;" class="message" [class.koomkin-gen]="msg.userId === 'koomkin-gen'"
-                    [class.left]=" msg.userId === leadActual.uuid || msg.userId==='system'"
-                    [class.system]="msg.userId === 'system'" [class.rightcoach]=" msg.userId === 'koomkin-coach'"
-                    [class.rightbot]="msg.userId === 'koomkin-followup' || msg.userId === 'koomkin-bot'"
-                    [class.right]="(msg.userId === clientUUID || msg.userId === 'koomkin-followup' || msg.userId === 'koomkin-bot') || ((msg.userId != 'koomkin-gen') && (msg.userId != leadActual.uuid) && (msg.userId != 'system') && (msg.userId != 'koomkin-coach'))">
-
-                    <div class="msg-detail">
-                        <div class="msg-info">
-                            <p>{{msg.userName | capitalize}}&nbsp;&nbsp;&nbsp;{{msg.time | relativeTime}}</p>
-                        </div>
-                        <div *ngIf="msg.type === 'text'" class="msg-content">
-                            <span class="triangle"></span>
-                            <p class="line-breaker ">{{msg.message}}</p>
-                        </div>
-
-                        <div *ngIf="msg.type === 'media' && msg.contentType.startsWith('image')" class="msg-content">
-                            <span class="triangle"></span>
-                            <!-- attributes {{msg.attributes.mime}} -->
-                            <img #spy class="twilioImage" style="max-width: 180px; max-height: 180px; cursor: pointer"
-                                (click)="openFile(msg.url ,msg.contentType)" [src]="msg.url['__zone_symbol__value']">
-                        </div>
-
-                        <div *ngIf="msg.type === 'media' && msg.contentType.startsWith('image') == false"
-                            class="msg-content">
-                            <span class="triangle" *ngIf="!msg.contentType.startsWith('audio')"></span>
-                            <!-- {{msg.contentType}}-->
-                            <!-- <br> not file url -->
-                            <div *ngIf="(msg.contentType.startsWith('video') || msg.contentType.startsWith('application/pdf'))"
-                                (click)="openFile(msg.url ,msg.contentType)"
-                                style=" display: flex; align-items: center; cursor: pointer;">
-                                <ion-icon style="padding-left: 4%;  font-size:24px; color:#30a3bc" name="document">
-                                </ion-icon>
-                                <p class="for-fontsize"
-                                    style=" justify-content: space-around; text-align: center; display: flex; align-items: center; text-decoration: none;">
-                                    &nbsp;&nbsp;&nbsp;{{msg.filename }}</p>
-                            </div>
-
-                            <div *ngIf="msg.contentType.startsWith('video') == false && msg.contentType.startsWith('application/pdf') == false && msg.contentType.startsWith('audio')== false"
-                                style=" cursor: pointer;">
-                                <a style="padding-left: 4%; justify-content: space-around; text-align: center; display: flex; align-items: center; text-decoration: none; color: #707070;"
-                                    (click)="launch(msg.url['__zone_symbol__value'] ,msg.contentType)" download
-                                    target="_blank"><span style="font-size:24px; color:#30a3bc"
-                                        class="fa fa-file"></span>
-                                    <ion-icon style="font-size:24px; color:#30a3bc" name="document"></ion-icon>
-                                    <p class="for-fontsize" style="">&nbsp;&nbsp;{{msg.filename}}</p>
-                                </a>
-                            </div>
-
-                            <div style="box-shadow:rgba(0, 0, 0, 0.13) 0px 0px 0px;  background: transparent">
-                                <audio #spy2 *ngIf="msg.contentType.startsWith('audio')" style="width: 67vw" controls
-                                    [src]="msg.url['__zone_symbol__value']" crossOrigin="anonymous"
-                                    controlsList="nodownload">
-                                    Tu navegador no soporta achivos de audio.
-                                </audio>
-                            </div>
-                            <p class="line-breaker "></p>
-                        </div>
+            <ion-row>
+              <ion-col col-12>
+                <a style="text-decoration: none;">
+                  <div class="inf-correo">
+                    <span class="inf-estado">{{leadActual.ABREVIACION}}</span>
+                    &nbsp;&nbsp; {{leadActual.EmailUsuarioEnvio}}
+                  </div>
+                </a>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col col-8 style="margin-top: 1%;">
+                <div>
+                  <div class="rate-fecha">
+                    {{leadActual.fechaenvio | date: 'dd-MM HH:mm' }}
+                    <span
+                      class="inf-agenda"
+                      [ngClass]="{'descartado-agenda':leadActual.clasificaLead == 'D','seguimiento-agenda':leadActual.clasificaLead == 'S','negociacion-agenda':leadActual.clasificaLead == 'N','vendido-agenda':leadActual.clasificaLead == 'V'}"
+                      *ngIf="leadActual.scheduledAt !== 'Sin agenda'"
+                      >&nbsp;{{leadActual.scheduledAt | date: 'dd-MM HH:mm'
+                      }}</span
+                    >
+                    <span
+                      class="inf-agenda"
+                      [ngClass]="{'descartado-agenda':leadActual.clasificaLead == 'D','seguimiento-agenda':leadActual.clasificaLead == 'S','negociacion-agenda':leadActual.clasificaLead == 'N','vendido-agenda':leadActual.clasificaLead == 'V'}"
+                      *ngIf="leadActual.scheduledAt == 'Sin agenda'"
+                      >&nbsp;{{leadActual.scheduledAt}}</span
+                    >
+                    <br />
+                    <div class="inf-valor">
+                      Valor del Lead = {{leadActual.ValorLead | currency:
+                      'MXN':'symbol' : '1.0'}}
                     </div>
+                  </div>
                 </div>
-            </div>
-        </ion-list>
-    </div>
+              </ion-col>
+              <ion-col col-1> </ion-col>
 
+              <ion-col
+                col-3
+                style="
+                  display: flex;
+                  text-align: right;
+                  justify-content: flex-end;
+                  align-items: flex-end;
+                "
+              >
+                <ion-icon
+                  style="
+                    margin-right: 0.2em !important;
+                    font-size: 2.5em !important;
+                    color: rgb(209, 209, 209);
+                  "
+                  [ngClass]="{'like':leadActual.calificaLead === 'like','sin':leadActual.calificaLead === 'dislike'}"
+                  name="md-thumbs-up"
+                  (click)="changeLike('L',leadActual)"
+                ></ion-icon>
+                <ion-icon
+                  style="
+                    font-size: 2.5em !important;
+                    color: rgb(209, 209, 209);
+                  "
+                  [ngClass]="{'like':leadActual.calificaLead === 'dislike','sin':leadActual.calificaLead === 'like'}"
+                  name="md-thumbs-down"
+                  (click)="changeLike('DL',leadActual)"
+                ></ion-icon>
+              </ion-col>
+            </ion-row>
+          </ion-card-content>
+        </ion-card>
+        <br />
+        <ion-row>
+          <ion-col>
+            <p class="mensaje">“{{mensajeLead}}”</p>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-12>
+            <p class="califica">Detalles de Contacto</p>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col col-3 class="tex">
+            <img
+              icon-only
+              tooltip="Contacto"
+              positionV="top"
+              mobileEvent="click"
+              hideOthers="true"
+              duration="2000"
+              src="assets/imgs/lead/ic_cliente.svg"
+              style="
+                vertical-align: middle;
+                width: 25% !important;
+                display: inline-block;
+              "
+            />
+            {{contacto}}
+          </ion-col>
+          <ion-col col-6 class="tex">
+            <img
+              icon-only
+              tooltip="Fecha Atención"
+              positionV="top"
+              mobileEvent="click"
+              hideOthers="true"
+              duration="2000"
+              src="assets/imgs/lead/ic_fecha.svg"
+              style="
+                vertical-align: middle;
+                width: 10% !important;
+                display: inline-block;
+              "
+            />
+            &nbsp; {{leadActual.fechaContacto | date: 'dd/MM/yyyy HH:mm' }}
+          </ion-col>
+          <ion-col col-3 class="tex">
+            <img
+              icon-only
+              tooltip="No. de Intentos"
+              positionV="top"
+              mobileEvent="click"
+              hideOthers="true"
+              duration="2000"
+              src="assets/imgs/lead/ic_numintentos.svg"
+              style="
+                vertical-align: middle;
+                width: 30% !important;
+                display: inline-block;
+              "
+            />
+            {{intentosExitoso}}
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-3 class="tex">
+            <img
+              icon-only
+              tooltip="Canal"
+              positionV="bottom"
+              mobileEvent="click"
+              hideOthers="true"
+              duration="2000"
+              src="assets/imgs/lead/ic_canal.svg"
+              style="
+                vertical-align: middle;
+                width: 25% !important;
+                display: inline-block;
+              "
+            />
+            {{leadActual.canalContacto}}
+          </ion-col>
+          <ion-col col-3 class="tex">
+            <img
+              icon-only
+              tooltip="Velocidad"
+              positionV="bottom"
+              mobileEvent="click"
+              hideOthers="true"
+              duration="2000"
+              src="assets/imgs/lead/ic_hora.svg"
+              style="
+                vertical-align: middle;
+                width: 20% !important;
+                display: inline-block;
+              "
+            />
+            &nbsp; {{attentionSpeed}}
+          </ion-col>
+          <ion-col col-3 class="tex">
+            <img
+              icon-only
+              tooltip="Garantía"
+              positionV="bottom"
+              mobileEvent="click"
+              hideOthers="true"
+              duration="2000"
+              src="assets/imgs/lead/ic_garantia.svg"
+              style="
+                vertical-align: middle;
+                width: 20% !important;
+                display: inline-block;
+              "
+            />
+            &nbsp; {{garantia}}
+          </ion-col>
+          <ion-col col-3 class="tex">
+            <img
+              icon-only
+              tooltip="Últ. Contacto"
+              positionV="bottom"
+              mobileEvent="click"
+              hideOthers="true"
+              duration="2000"
+              src="assets/imgs/lead/ic_ultimocontacto.svg"
+              style="
+                vertical-align: middle;
+                width: 20% !important;
+                display: inline-block;
+              "
+            />
+            &nbsp;{{diasContacto}}
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col col-12>
+            <p class="califica">Estatus del Lead</p>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-6>
+            <button
+              class="arribab"
+              [ngClass]="{'descartado':leadActual.clasificaLead === 'D'}"
+              (click)="changeClassification('D');openModal(1,'Descartado')"
+            >
+              Descartado
+            </button>
+            <button
+              class="arribab"
+              [ngClass]="{'seguimiento':leadActual.clasificaLead === 'S'}"
+              (click)="changeClassification('S');openModal(2,'Seguimiento')"
+            >
+              En Seguimiento
+            </button>
+            <button
+              class="arribab"
+              [ngClass]="{'negociacion':leadActual.clasificaLead === 'N'}"
+              (click)="changeClassification('N');openModal(2,'Negociacion')"
+            >
+              Negociación
+            </button>
+            <button
+              class="arribab"
+              [ngClass]="{'vendido':leadActual.clasificaLead === 'V'}"
+              (click)="changeClassification('V');openModal(3,'Vendido')"
+            >
+              Vendido
+            </button>
+          </ion-col>
+          <ion-col col-6 class="normal">
+            <p class="razon" *ngIf="leadActual.clasificaLead === 'D'">
+              Razón
+            </p>
+            <ion-row *ngIf="leadActual.clasificaLead === 'D'">
+              <ion-col col-2 class="tex">
+                <img
+                  src="assets/imgs/lead/ic_advertencia.svg"
+                  style="
+                    vertical-align: middle;
+                    width: 80% !important;
+                    display: inline-block;
+                  "
+                />
+              </ion-col>
+              <ion-col col-10 class="razon">
+                <p class="descarto">
+                  {{razonDescarto}}
+                </p>
+              </ion-col>
+            </ion-row>
+
+            <p
+              class="razon"
+              *ngIf="leadActual.clasificaLead === 'N' || leadActual.clasificaLead === 'S'"
+            >
+              Próxima comunicación
+            </p>
+            <ion-row
+              *ngIf="leadActual.clasificaLead === 'N' || leadActual.clasificaLead === 'S'"
+            >
+              <ion-col col-2 class="text">
+                <img
+                  src="assets/imgs/lead/ic_hora.svg"
+                  style="
+                    vertical-align: middle;
+                    width: 80% !important;
+                    display: inline-block;
+                  "
+                />
+              </ion-col>
+              <ion-col col-10 class="text">
+                <span
+                  class="comunicacion"
+                  *ngIf="leadActual.scheduledAt != 'Sin agenda'"
+                  >{{leadActual.scheduledAt | date: 'dd-MM-yyyy'}}</span
+                >
+                <span
+                  class="comunicacion"
+                  *ngIf="leadActual.scheduledAt == 'Sin agenda'"
+                  >{{leadActual.scheduledAt}}</span
+                >
+              </ion-col>
+            </ion-row>
+
+            <ion-row
+              *ngIf="leadActual.clasificaLead === 'N' || leadActual.clasificaLead === 'S'"
+            >
+              <ion-col col-2 class="text">
+                <img
+                  src="assets/imgs/lead/ic_fecha.svg"
+                  style="
+                    vertical-align: middle;
+                    width: 80% !important;
+                    display: inline-block;
+                  "
+                />
+              </ion-col>
+              <ion-col col-10 class="text">
+                <span
+                  class="comunicacion"
+                  *ngIf="leadActual.scheduledAt != 'Sin agenda'"
+                  >{{leadActual.scheduledAt | date: 'HH:mm'}}</span
+                >
+                <span
+                  class="comunicacion"
+                  *ngIf="leadActual.scheduledAt == 'Sin agenda'"
+                  >{{leadActual.scheduledAt}}</span
+                >
+              </ion-col>
+            </ion-row>
+
+            <p class="razon">
+              Valor del lead
+            </p>
+
+            <p class="valor">
+              {{valorLead | currency: 'MXN':'symbol-narrow' : '1.0'}}
+            </p>
+          </ion-col>
+        </ion-row>
+        <ion-row *ngIf="show == true">
+          <ion-col col-1> </ion-col>
+          <ion-col col-10>
+            <p class="califica">Último Comentario</p>
+          </ion-col>
+          <ion-col col-1> </ion-col>
+        </ion-row>
+
+        <ion-item
+          *ngIf="show == true"
+          class="tarjeta-comentario"
+          [ngClass]="{'sold':clasificaComentario == 'Vendido','negotiation':clasificaComentario == 'Negociacion','track':clasificaComentario == 'Seguimiento' ,'discard':clasificaComentario== 'Descartado','sin-estatus':clasificaComentario == ''}"
+          style="border-bottom: 1px solid #dedede;"
+        >
+          <ion-row
+            style="
+              display: flex !important;
+              align-content: center !important;
+              align-items: center !important;
+              margin-top: 1%;
+            "
+          >
+            <ion-col col-10>
+              <p
+                style="
+                  color: gray;
+                  margin-left: 5px;
+                  font-size: small;
+                  text-transform: capitalize;
+                "
+              >
+                {{fechaComentario | dateFormat}}
+              </p>
+            </ion-col>
+            <ion-col col-1 style="text-align: center;">
+              <img
+                src="assets/imgs/lead/ic_comentario.svg"
+                style="
+                  vertical-align: middle;
+                  width: 70% !important;
+                  margin-left: 10%;
+                "
+                (click)="openModal(4,'',idComentario,comentario)"
+              />
+            </ion-col>
+            <ion-col col-1 style="text-align: center;">
+              <img
+                src="assets/imgs/lead/ic_borrar.svg"
+                style="
+                  vertical-align: middle;
+                  width: 70% !important;
+                  margin-left: 10%;
+                "
+                (click)="btnDeleteComentario(idComentario)"
+              />
+            </ion-col>
+          </ion-row>
+          <ion-row
+            style="
+              display: flex !important;
+              align-content: center !important;
+              align-items: center !important;
+              margin-bottom: 2% !important;
+              margin-left: 5px;
+            "
+          >
+            <ion-col col-10>
+              <a style="color: #606060; font-size: small;">"{{comentario}}"</a>
+            </ion-col>
+          </ion-row>
+        </ion-item>
+      </ion-grid>
+    </ion-list>
+
+    <ion-list *ngSwitchCase="'Comentarios'">
+      <ion-row
+        style="
+          display: flex !important;
+          align-content: center !important;
+          align-items: center !important;
+        "
+      >
+        <ion-col col-11>
+          <span class="titulo-azul">Historial de comentarios</span>
+        </ion-col>
+        <ion-col col-1>
+          <img
+            src="assets/imgs/lead/ic_plus.svg"
+            style="
+              vertical-align: middle;
+              width: 70% !important;
+              margin-left: 10%;
+            "
+            (click)="openModal(0,'')"
+          />
+        </ion-col>
+      </ion-row>
+      <ion-item
+        class="tarjeta-comentario"
+        *ngFor="let registro of comentarios; let i = index;"
+        [ngClass]="{'sold':registro.ClasificaLead == 'Vendido','negotiation':registro.ClasificaLead == 'Negociacion','track':registro.ClasificaLead == 'Seguimiento' ,'discard':registro.ClasificaLead == 'Descartado','sin-estatus':registro.ClasificaLead == '' }"
+        style="border-bottom: 1px solid #dedede;"
+      >
+        <ion-row
+          style="
+            display: flex !important;
+            align-content: center !important;
+            align-items: center !important;
+            margin-top: 1%;
+          "
+        >
+          <ion-col col-10>
+            <p
+              style="
+                color: gray;
+                margin-left: 5px;
+                font-size: small;
+                text-transform: capitalize;
+              "
+            >
+              {{registro.FechaRegistro | dateFormat}}
+            </p>
+          </ion-col>
+          <ion-col col-1 style="text-align: center;">
+            <img
+              src="assets/imgs/lead/ic_comentario.svg"
+              style="
+                vertical-align: middle;
+                width: 70% !important;
+                margin-left: 10%;
+              "
+              (click)="openModal(4,'',registro.IdComentario,registro.Comentario)"
+            />
+          </ion-col>
+          <ion-col col-1 style="text-align: center;">
+            <img
+              src="assets/imgs/lead/ic_borrar.svg"
+              style="
+                vertical-align: middle;
+                width: 70% !important;
+                margin-left: 10%;
+              "
+              (click)="btnDeleteComentario(registro.IdComentario)"
+            />
+          </ion-col>
+        </ion-row>
+        <ion-row
+          style="
+            display: flex !important;
+            align-content: center !important;
+            align-items: center !important;
+            margin-bottom: 2% !important;
+            margin-left: 5px;
+          "
+        >
+          <ion-col col-10>
+            <a style="color: #606060; font-size: small;"
+              >"{{registro.Comentario}}"</a
+            >
+          </ion-col>
+        </ion-row>
+      </ion-item>
+    </ion-list>
+
+    <ion-list *ngSwitchCase="'Llamadas'">
+      <ion-item>
+        <ion-row
+          style="
+            display: flex !important;
+            align-content: center !important;
+            align-items: center !important;
+            margin-top: 2%;
+            margin-bottom: 2%;
+          "
+        >
+          <ion-col
+            col-2
+            style="text-align: right; padding-right: 1% !important;"
+          >
+            <p class="llamadas">Llamadas<br />Entrantes</p>
+          </ion-col>
+          <ion-col col-2 class="llamadas-area">
+            <img
+              src="assets/imgs/llamadas/comprador.svg"
+              width="40%"
+              style="vertical-align: middle; margin-left: 5%;"
+            />
+            {{exitosa_c}}
+          </ion-col>
+
+          <ion-col
+            col-2
+            style="text-align: right; padding-right: 1% !important;"
+          >
+            <p class="llamadas">Llamadas<br />Salientes</p>
+          </ion-col>
+          <ion-col col-2 class="llamadas-area">
+            <img
+              src="assets/imgs/llamadas/cliente.svg"
+              width="40%"
+              style="vertical-align: middle; margin-left: 5%;"
+            />
+            {{exitosa_v}}
+          </ion-col>
+
+          <ion-col
+            col-2
+            style="text-align: right; padding-right: 1% !important;"
+          >
+            <p class="llamadas">Llamadas<br />Exitosas</p>
+          </ion-col>
+          <ion-col col-2 class="llamadas-area">
+            <img
+              src="assets/imgs/llamadas/cliente.svg"
+              width="40%"
+              style="vertical-align: middle; margin-left: 5%;"
+            />
+            {{exitosa}}
+          </ion-col>
+        </ion-row>
+        <ion-row
+          style="
+            display: flex !important;
+            align-content: center !important;
+            align-items: center !important;
+            margin-bottom: 5%;
+          "
+        >
+          <ion-col
+            col-2
+            style="text-align: right; padding-right: 1% !important;"
+          >
+            <p class="llamadas">Llamadas<br />a Buzón</p>
+          </ion-col>
+          <ion-col col-2 class="llamadas-area">
+            <img
+              src="assets/imgs/llamadas/buzon.svg"
+              width="40%"
+              style="vertical-align: middle; margin-left: 5%;"
+            />
+            {{buzon}}
+          </ion-col>
+          <ion-col
+            col-2
+            style="text-align: right; padding-right: 1% !important;"
+          >
+            <p class="llamadas">Llamadas<br />Perdidas</p>
+          </ion-col>
+          <ion-col col-2 class="llamadas-area">
+            <img
+              src="assets/imgs/llamadas/perdida.svg"
+              width="40%"
+              style="vertical-align: middle; margin-left: 5%;"
+            />
+            {{perdida}}
+          </ion-col>
+          <ion-col
+            col-2
+            style="text-align: right; padding-right: 1% !important;"
+          >
+            <p class="llamadas">Número<br />Inválido</p>
+          </ion-col>
+          <ion-col col-2 class="llamadas-area">
+            <img
+              src="assets/imgs/llamadas/invalido.svg"
+              width="40%"
+              style="vertical-align: middle; margin-left: 5%;"
+            />
+            {{invalido}}
+          </ion-col>
+        </ion-row>
+        <button *ngIf="url !== 'sinaudio'" (click)="startAudio()" class="url">
+          Escuchar Llamada
+        </button>
+        <ion-row
+          style="
+            display: flex !important;
+            align-content: center !important;
+            align-items: center !important;
+          "
+        >
+          <ion-col col-12>
+            <span class="titulo-azul">Historial</span>
+          </ion-col>
+        </ion-row>
+      </ion-item>
+
+      <!--Listado de llamadas-->
+      <ion-item
+        style="border-bottom: 1px solid #dedede;"
+        *ngFor="let call of llamadas; let i = index;"
+      >
+        <ion-row
+          style="
+            display: flex !important;
+            align-content: center !important;
+            align-items: center !important;
+            margin-top: 1%;
+          "
+        >
+          <ion-col col-3 *ngIf="call.CallStatus !== 'no-answer'">
+            <p style="color: gray;">{{call.FechaLlamada}}</p>
+          </ion-col>
+          <ion-col col-9> </ion-col>
+        </ion-row>
+        <ion-row
+          style="
+            display: flex !important;
+            align-content: center !important;
+            align-items: center !important;
+            margin-bottom: 2% !important;
+          "
+        >
+          <ion-col *ngIf="call.CallStatus !== 'no-answer'" col-1>
+            <img
+              src="assets/imgs/llamadas/{{call.CallStatus}}.svg"
+              width="70%"
+              style="vertical-align: middle; margin-left: 1%;"
+            />
+          </ion-col>
+          <ion-col *ngIf="call.CallStatus !== 'no-answer'" col-7>
+            <a style="color: #606060;"
+              >{{leadActual.NombreUsuarioEnvio | capitalize}}</a
+            >
+          </ion-col>
+          <ion-col
+            *ngIf="call.CallStatus !== 'no-answer'"
+            col-4
+            style="text-align: right;"
+          >
+            <a style="color: #606060;">{{call.horallamada}}</a>
+          </ion-col>
+        </ion-row>
+      </ion-item>
+    </ion-list>
+
+    <ion-list *ngSwitchCase="'Chat'" #Chat>
+      <ion-grid *ngIf="loadingMessages">
+        <br />
+        <ion-spinner
+          id="spinnermensajes"
+          loadingText="Cargando más Leads..."
+          item-start
+          name="crescent"
+        >
+          Cargando más Leads...
+        </ion-spinner>
+        <p class="text-spinner">Cargando Mensajes...</p>
+      </ion-grid>
+
+      <div class="message-wrap">
+        <div
+          *ngFor="let msg of msgListLead;"
+          class="message"
+          [class.koomkin-gen]="msg.userId === 'koomkin-gen'"
+          [class.left]=" msg.userId === leadActual.uuid || msg.userId==='system'"
+          [class.system]="msg.userId === 'system'"
+          [class.rightcoach]=" msg.userId === 'koomkin-coach'"
+          [class.rightbot]="msg.userId === 'koomkin-followup' || msg.userId === 'koomkin-bot'"
+          [class.right]="(msg.userId === clientUUID || msg.userId === 'koomkin-followup' || msg.userId === 'koomkin-bot') || ((msg.userId != 'koomkin-gen') && (msg.userId != leadActual.uuid) && (msg.userId != 'system') && (msg.userId != 'koomkin-coach'))"
+        >
+          <div class="msg-detail">
+            <div class="msg-info">
+              <p>
+                {{msg.userName | capitalize}}&nbsp;&nbsp;&nbsp;{{msg.time |
+                relativeTime}}
+              </p>
+            </div>
+            <div *ngIf="msg.type === 'text'" class="msg-content">
+              <span class="triangle"></span>
+              <p class="line-breaker">{{msg.message}}</p>
+            </div>
+
+            <div
+              *ngIf="msg.type === 'media' && msg.contentType.startsWith('image')"
+              class="msg-content"
+            >
+              <span class="triangle"></span>
+              <!-- attributes {{msg.attributes.mime}} -->
+              <img
+                #spy
+                class="twilioImage"
+                style="max-width: 180px; max-height: 180px; cursor: pointer;"
+                (click)="openFile(msg.url ,msg.contentType)"
+                [src]="msg.url['__zone_symbol__value']"
+              />
+            </div>
+
+            <div
+              *ngIf="msg.type === 'media' && msg.contentType.startsWith('image') == false"
+              class="msg-content"
+            >
+              <span
+                class="triangle"
+                *ngIf="!msg.contentType.startsWith('audio')"
+              ></span>
+              <!-- {{msg.contentType}}-->
+              <!-- <br> not file url -->
+              <div
+                *ngIf="(msg.contentType.startsWith('video') || msg.contentType.startsWith('application/pdf'))"
+                (click)="openFile(msg.url ,msg.contentType)"
+                style="display: flex; align-items: center; cursor: pointer;"
+              >
+                <ion-icon
+                  style="padding-left: 4%; font-size: 24px; color: #30a3bc;"
+                  name="document"
+                >
+                </ion-icon>
+                <p
+                  class="for-fontsize"
+                  style="
+                    justify-content: space-around;
+                    text-align: center;
+                    display: flex;
+                    align-items: center;
+                    text-decoration: none;
+                  "
+                >
+                  &nbsp;&nbsp;&nbsp;{{msg.filename }}
+                </p>
+              </div>
+
+              <div
+                *ngIf="msg.contentType.startsWith('video') == false && msg.contentType.startsWith('application/pdf') == false && msg.contentType.startsWith('audio')== false"
+                style="cursor: pointer;"
+              >
+                <a
+                  style="
+                    padding-left: 4%;
+                    justify-content: space-around;
+                    text-align: center;
+                    display: flex;
+                    align-items: center;
+                    text-decoration: none;
+                    color: #707070;
+                  "
+                  (click)="launch(msg.url['__zone_symbol__value'] ,msg.contentType)"
+                  download
+                  target="_blank"
+                  ><span
+                    style="font-size: 24px; color: #30a3bc;"
+                    class="fa fa-file"
+                  ></span>
+                  <ion-icon
+                    style="font-size: 24px; color: #30a3bc;"
+                    name="document"
+                  ></ion-icon>
+                  <p class="for-fontsize" style="">
+                    &nbsp;&nbsp;{{msg.filename}}
+                  </p>
+                </a>
+              </div>
+
+              <div
+                style="
+                  box-shadow: rgba(0, 0, 0, 0.13) 0px 0px 0px;
+                  background: transparent;
+                "
+              >
+                <audio
+                  #spy2
+                  *ngIf="msg.contentType.startsWith('audio')"
+                  style="width: 67vw;"
+                  controls
+                  [src]="msg.url['__zone_symbol__value']"
+                  crossorigin="anonymous"
+                  controlsList="nodownload"
+                >
+                  Tu navegador no soporta achivos de audio.
+                </audio>
+              </div>
+              <p class="line-breaker"></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ion-list>
+  </div>
 </ion-content>
 <ion-footer *ngIf="page!='Chat'">
-    <button class="llamar" (click)="showConfirm();getInsertClickLlamar();">
-        <ion-icon class="telefono" name="md-call"></ion-icon>
-        <a class="phone" id="tel">Llamar a {{leadActual.NombreUsuarioEnvio | capitalize}}</a>
-    </button>
+  <button class="llamar" (click)="callLead();getInsertClickLlamar();">
+    <ion-icon class="telefono" name="md-call"></ion-icon>
+    <a class="phone" id="tel"
+      >Llamar a {{leadActual.NombreUsuarioEnvio | capitalize}}</a
+    >
+  </button>
 </ion-footer>
 
-<ion-footer class="chat-footer" *ngIf="page=='Chat'" no-border [style.height]="'55px'">
-
-    <div class="input-wrap" style="width: 100%;">
-        <button class="chat-send-message" ion-button clear icon-only item-right (click)="chooseFile()">
-            <ion-icon
-                style=" position: relative;  display: inline-block; vertical-align: middle; text-align: center; font-size: 2em; color:#37B9BB;"
-                name="add" ios="ios-add" md="md-add"></ion-icon>
-        </button>
-        <textarea id="chat_input" placeholder="Escribe un mensaje" [placeholder]="false ? '' : 'Escribe un mensaje'"
-            [(ngModel)]="editorMsg" (keyup.enter)="sendMsg()" (focusin)="onFocus()">
-      </textarea>
-        <button class="chat-send-message" ion-button clear icon-only item-right (click)="sendMsg()">
-            <ion-icon style="color:#37B9BB;" name="ios-add-circle-outline" ios="ios-send" md="md-send"></ion-icon>
-        </button>
-    </div>
-
+<ion-footer
+  class="chat-footer"
+  *ngIf="page=='Chat'"
+  no-border
+  [style.height]="'55px'"
+>
+  <div class="input-wrap" style="width: 100%;">
+    <button
+      class="chat-send-message"
+      ion-button
+      clear
+      icon-only
+      item-right
+      (click)="chooseFile()"
+    >
+      <ion-icon
+        style="
+          position: relative;
+          display: inline-block;
+          vertical-align: middle;
+          text-align: center;
+          font-size: 2em;
+          color: #37b9bb;
+        "
+        name="add"
+        ios="ios-add"
+        md="md-add"
+      ></ion-icon>
+    </button>
+    <textarea
+      id="chat_input"
+      placeholder="Escribe un mensaje"
+      [placeholder]="false ? '' : 'Escribe un mensaje'"
+      [(ngModel)]="editorMsg"
+      (keyup.enter)="sendMsg()"
+      (focusin)="onFocus()"
+    >
+    </textarea>
+    <button
+      class="chat-send-message"
+      ion-button
+      clear
+      icon-only
+      item-right
+      (click)="sendMsg()"
+    >
+      <ion-icon
+        style="color: #37b9bb;"
+        name="ios-add-circle-outline"
+        ios="ios-send"
+        md="md-send"
+      ></ion-icon>
+    </button>
+  </div>
 </ion-footer>

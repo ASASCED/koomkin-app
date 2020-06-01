@@ -26,6 +26,7 @@ import { SweetAlert2Module } from "@toverux/ngx-sweetalert2";
 import { TooltipsModule } from "ionic-tooltips";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { GraphProvider } from "../providers/graph/graph";
+import { CallNumber } from "@ionic-native/call-number";
 
 @NgModule({
   declarations: [MyApp],
@@ -94,6 +95,7 @@ import { GraphProvider } from "../providers/graph/graph";
     Transfer,
     HTTP,
     GraphProvider,
+    CallNumber,
   ],
 })
 export class AppModule {}

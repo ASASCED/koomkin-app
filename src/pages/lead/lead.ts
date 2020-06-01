@@ -1,42 +1,58 @@
-import { Component, OnInit, NgZone } from '@angular/core';
-import { IonicPage, NavController, ViewController, NavParams, Platform } from 'ionic-angular';
-import { RestProvider } from './../../providers/rest/rest';
-import { HttpClient } from '@angular/common/http';
-import { AlertController, ModalController, LoadingController } from 'ionic-angular';
+import { Component, OnInit, NgZone } from "@angular/core";
+import {
+  IonicPage,
+  NavController,
+  ViewController,
+  NavParams,
+  Platform,
+} from "ionic-angular";
+import { RestProvider } from "./../../providers/rest/rest";
+import { HttpClient } from "@angular/common/http";
+import {
+  AlertController,
+  ModalController,
+  LoadingController,
+} from "ionic-angular";
 import { AuthServiceProvider } from "../../providers/auth-service/auth-service";
-import { StreamingMedia, StreamingAudioOptions } from '@ionic-native/streaming-media';
-import { Storage } from '@ionic/storage';
-import { ElementRef, ViewChild } from '@angular/core';
-import { Content } from 'ionic-angular';
-import { ChatServiceProvider, ChatMessage } from "../../providers/chat-service/chat-service";
-import { HttpHeaders } from '@angular/common/http';
-import { FileOpener } from '@ionic-native/file-opener';
-import { File } from '@ionic-native/file';
-import { Transfer, TransferObject } from '@ionic-native/transfer';
-import * as distanceinWordsStrict from 'date-fns/distance_in_words_strict';
-import * as esLocale from 'date-fns/locale/es';
-import swal from 'sweetalert2';
-import * as moment from 'moment';
+import {
+  StreamingMedia,
+  StreamingAudioOptions,
+} from "@ionic-native/streaming-media";
+import { Storage } from "@ionic/storage";
+import { ElementRef, ViewChild } from "@angular/core";
+import { Content } from "ionic-angular";
+import {
+  ChatServiceProvider,
+  ChatMessage,
+} from "../../providers/chat-service/chat-service";
+import { HttpHeaders } from "@angular/common/http";
+import { FileOpener } from "@ionic-native/file-opener";
+import { File } from "@ionic-native/file";
+import { Transfer, TransferObject } from "@ionic-native/transfer";
+import * as distanceinWordsStrict from "date-fns/distance_in_words_strict";
+import * as esLocale from "date-fns/locale/es";
+import swal from "sweetalert2";
+import * as moment from "moment";
+
+import { CallNumber } from "@ionic-native/call-number";
 
 declare var cordova: any;
 
 @IonicPage()
 @Component({
-  selector: 'page-lead',
-  templateUrl: 'lead.html',
+  selector: "page-lead",
+  templateUrl: "lead.html",
 })
-
 export class LeadPage implements OnInit {
-
   leadActual;
-  apiUrl = 'https://www.koomkin.com.mx/api/app';
+  apiUrl = "https://www.koomkin.com.mx/api/app";
 
   public califica;
   public calificacion;
   public categoria;
   public clasifica;
   public clasificacion;
-  public color = ''
+  public color = "";
   public email;
   public estatus;
   public fechallamada;
@@ -47,14 +63,14 @@ export class LeadPage implements OnInit {
   public mensaje;
   public mensajeLead;
   public mensajeMailing;
-  public urgencia = 'No';
+  public urgencia = "No";
   public cantidad;
   public frecuencia;
-  public url = 'sinaudio';
+  public url = "sinaudio";
   public audio;
-  public mostrar
+  public mostrar;
   public urlaudio;
-  dispositivo = '';
+  dispositivo = "";
 
   //Proveedor
   public urgenciaproveedor;
@@ -66,7 +82,7 @@ export class LeadPage implements OnInit {
   public mensajeproveedor;
 
   //Servicio
-  public urgenciaservicio = 'No';
+  public urgenciaservicio = "No";
   public frecuenciaservicio;
   public usoservicio;
   public mensajeservicio;
@@ -75,7 +91,7 @@ export class LeadPage implements OnInit {
   public mensajemedico;
   public fechaCitaM;
   public horaCitaM;
-  public urgenciamedico = 'No';
+  public urgenciamedico = "No";
   public generoM;
   public edadM;
 
@@ -83,12 +99,12 @@ export class LeadPage implements OnInit {
   public mensajeprofesionista;
   public fechaCitaP;
   public horaCitaP;
-  public urgenciaprofesionista = 'No';
+  public urgenciaprofesionista = "No";
   public usoprofesionista;
 
   //PuntoVenta
   public mensajeventa;
-  public urgenciaventa = 'No';
+  public urgenciaventa = "No";
   public usoventa;
 
   //Restaurante
@@ -105,7 +121,7 @@ export class LeadPage implements OnInit {
 
   //Inmobiliaria
   public mensajeinmobiliaria;
-  public urgenciainmobiliaria = 'No';
+  public urgenciainmobiliaria = "No";
   public edadinmobiliaria;
   public personasinmobiliaria;
   public horaCitainmobiliaria;
@@ -124,25 +140,25 @@ export class LeadPage implements OnInit {
   //Estatus llamadas
   llamadas: any = [];
   public llamada;
-  public perdida = '0';
-  public exitosa = '0';
-  public exitosa_v = '0';
-  public exitosa_c = '0';
-  public buzon = '0';
-  public invalido = '0';
-  public tel: any = ' ';
+  public perdida = "0";
+  public exitosa = "0";
+  public exitosa_v = "0";
+  public exitosa_c = "0";
+  public buzon = "0";
+  public invalido = "0";
+  public tel: any = " ";
   public page: string = "Lead";
-  public pages: Array<string> = ['Lead', 'Comentarios', 'Llamadas', 'Chat'];
+  public pages: Array<string> = ["Lead", "Comentarios", "Llamadas", "Chat"];
   isAndroid: boolean = false;
   public tc: any;
   public loadingMessages: boolean;
-  public intentosExitoso: any = '-';
-  public attentionSpeed: any = '-';
-  public contacto: any = '-';
+  public intentosExitoso: any = "-";
+  public attentionSpeed: any = "-";
+  public contacto: any = "-";
   public razones;
   public razonDescarto;
-  public garantia = 'No';
-  public diasContacto = '-';
+  public garantia = "No";
+  public diasContacto = "-";
   public comentarios;
   public comentario;
   public show = false;
@@ -152,64 +168,77 @@ export class LeadPage implements OnInit {
   public valorLead;
   public fecha;
   public fechaExitoso;
-  public reagenda: any = '-';
+  public reagenda: any = "-";
   private autoScroller: MutationObserver;
 
   @ViewChild(Content) content: Content;
 
-  @ViewChild('chat_input') messageInput: ElementRef;
+  @ViewChild("chat_input") messageInput: ElementRef;
 
   private autoScroll(): MutationObserver {
     const autoScroller = new MutationObserver(this.scrollDown.bind(this));
     autoScroller.observe(this.messageContent, {
       childList: true,
-      subtree: true
+      subtree: true,
     });
     return autoScroller;
   }
 
   private get messageContent(): Element {
-    return document.querySelector('.falling');
+    return document.querySelector(".falling");
   }
 
   private scrollDown() {
-    if (this.content && this.page === 'Chat') {
+    if (this.content && this.page === "Chat") {
       this.content.resize();
-      this.content.scrollTo(0, this.content.getContentDimensions().scrollHeight, 0).then(() => {
-        if (this.content) {
-          this.content.scrollTo(0, this.content.getContentDimensions().scrollHeight, 80);
-        }
-      });
+      this.content
+        .scrollTo(0, this.content.getContentDimensions().scrollHeight, 0)
+        .then(() => {
+          if (this.content) {
+            this.content.scrollTo(
+              0,
+              this.content.getContentDimensions().scrollHeight,
+              80
+            );
+          }
+        });
     }
   }
 
   private get scroller(): Element {
-    return this.messageContent.querySelector('.scroll-content');
+    return this.messageContent.querySelector(".scroll-content");
   }
 
   public msgListLead: ChatMessage[] = [];
-  editorMsg = '';
+  editorMsg = "";
   showEmojiPicker = false;
 
   openModalFuncionalidadPrueba() {
-    const myModal = this.modal.create('ModalPage', { uuid: this.clientUUID }, { enableBackdropDismiss: false, cssClass: "Modal-prueba-chat" });
+    const myModal = this.modal.create(
+      "ModalPage",
+      { uuid: this.clientUUID },
+      { enableBackdropDismiss: false, cssClass: "Modal-prueba-chat" }
+    );
     myModal.present();
     myModal.onDidDismiss(() => {
-      this.page = 'Lead';
+      this.page = "Lead";
       this.content.resize();
     });
   }
 
   openModalIniciarConversacion() {
-
-    const myModal2 = this.modal.create('ModalPageIniciarChatPage', { uuid: this.leadActual.uuid, nombrelead: this.leadActual.NOMBRE }, { enableBackdropDismiss: false, cssClass: "Modal-iniciar-chat" });
+    const myModal2 = this.modal.create(
+      "ModalPageIniciarChatPage",
+      { uuid: this.leadActual.uuid, nombrelead: this.leadActual.NOMBRE },
+      { enableBackdropDismiss: false, cssClass: "Modal-iniciar-chat" }
+    );
     myModal2.present();
     myModal2.onDidDismiss((conversacionIniciada) => {
       if (conversacionIniciada) {
         this.leadActual.intentos = 1;
       } else {
         if (this.msgListLead.length === 0) {
-          this.page = 'Lead';
+          this.page = "Lead";
         } else {
           this.leadActual.intentos = 1;
         }
@@ -222,7 +251,10 @@ export class LeadPage implements OnInit {
     return new Promise((resolve, reject) => {
       if (this.authService.getUserIsLogged()) {
         if (this.authService.getEnableChat() === 1) {
-          if (this.leadActual.intentos === 0 || this.leadActual.intentos === null) {
+          if (
+            this.leadActual.intentos === 0 ||
+            this.leadActual.intentos === null
+          ) {
             if (this.msgListLead.length === 0) {
               this.openModalIniciarConversacion();
             }
@@ -244,42 +276,44 @@ export class LeadPage implements OnInit {
 
   pageChanged() {
     this.content.resize();
-    if (this.page === 'Chat') {
-      this.chatPageExecutelogic().then(() => {
-        //this.connectChat();
-      }, (err) => {
-      });
+    if (this.page === "Chat") {
+      this.chatPageExecutelogic().then(
+        () => {
+          //this.connectChat();
+        },
+        (err) => {}
+      );
     }
   }
 
   public leerChat() {
-    const url = 'https://www.koomkin.com.mx/chat/api/read-messages/';
+    const url = "https://www.koomkin.com.mx/chat/api/read-messages/";
     return new Promise((resolve, reject) => {
-      this.http.post(url + this.leadActual.uuid, { device: "app" })
-        .subscribe(data => {
+      this.http.post(url + this.leadActual.uuid, { device: "app" }).subscribe(
+        (data) => {
           return resolve();
-        }, err => {
+        },
+        (err) => {
           return resolve(err);
-        });
+        }
+      );
     });
   }
 
   mostrarAlertaInicioSesionRequerido() {
-
     let alert = this.alertCtrl.create({
       enableBackdropDismiss: false,
       title: "Por favor inicie sesión",
       subTitle: "",
       buttons: [
         {
-          text: 'Ok',
-          handler: data => {
-            this.page = 'Lead';
+          text: "Ok",
+          handler: (data) => {
+            this.page = "Lead";
             this.content.resize();
-          }
-        }
-      ]
-
+          },
+        },
+      ],
     });
     alert.present();
   }
@@ -293,9 +327,11 @@ export class LeadPage implements OnInit {
   sendMsg() {
     if (!this.editorMsg.trim()) return;
     if (this.chatService.tc.currentChannel) {
-      this.chatService.tc.currentChannel.sendMessage(this.editorMsg).then(() => {
-        this.editorMsg = '';
-      });
+      this.chatService.tc.currentChannel
+        .sendMessage(this.editorMsg)
+        .then(() => {
+          this.editorMsg = "";
+        });
       if (!this.showEmojiPicker) {
         this.focus();
       }
@@ -313,45 +349,42 @@ export class LeadPage implements OnInit {
   }
 
   ngOnInit() {
-
-    this.chatService.msgListActualizada.subscribe(
-      result => {
-        if (result.length === 0) {
+    this.chatService.msgListActualizada.subscribe((result) => {
+      if (result.length === 0) {
+        this.msgListLead = result;
+        console.log(this.msgListLead);
+      }
+      if (result.length > 1) {
+        this.ngz.run(() => {
           this.msgListLead = result;
           console.log(this.msgListLead);
-        }
-        if (result.length > 1) {
-          this.ngz.run(() => {
-            this.msgListLead = result;
-            console.log(this.msgListLead);
-            setTimeout(() => { this.scrollDown.bind(this) }, 5000);
-          });
-        } else {
-          var temp = result[0];
-          if (temp) {
-            if (temp.type === 'media') {
-              this.ngz.run(() => {
-                setTimeout(() => { this.scrollDown.bind(this) }, 2500);
-              });
-            } else {
-            }
+          setTimeout(() => {
+            this.scrollDown.bind(this);
+          }, 5000);
+        });
+      } else {
+        var temp = result[0];
+        if (temp) {
+          if (temp.type === "media") {
+            this.ngz.run(() => {
+              setTimeout(() => {
+                this.scrollDown.bind(this);
+              }, 2500);
+            });
+          } else {
           }
-          this.ngz.run(() => {
-            this.msgListLead = this.msgListLead.concat(result);
-            console.log(this.msgListLead);
-          });
-
         }
+        this.ngz.run(() => {
+          this.msgListLead = this.msgListLead.concat(result);
+          console.log(this.msgListLead);
+        });
       }
+    });
 
-    )
-
-    this.chatService.loadingMessagesActualizado.subscribe(
-      result => {
-        this.ngz.run(() => { });
-        this.loadingMessages = result;
-      }
-    );
+    this.chatService.loadingMessagesActualizado.subscribe((result) => {
+      this.ngz.run(() => {});
+      this.loadingMessages = result;
+    });
     this.getRazones();
     this.getComentarios();
     this.getLeadCalls();
@@ -362,9 +395,10 @@ export class LeadPage implements OnInit {
 
   ionViewDidEnter() {
     this.autoScroller = this.autoScroll();
-    if (this.leadActual['gotopage']) { // Si es notificación de Chat metelo al chat page
-      this.page = 'Chat';
-      this.chatPageExecutelogic()
+    if (this.leadActual["gotopage"]) {
+      // Si es notificación de Chat metelo al chat page
+      this.page = "Chat";
+      this.chatPageExecutelogic();
     }
     if (this.chatService.chatClientStarted === true) {
       this.chatService.connectToChatChannel(this.leadActual.uuid);
@@ -396,19 +430,33 @@ export class LeadPage implements OnInit {
     private fileOpener: FileOpener,
     private transfer: Transfer,
     public ngz: NgZone,
-    public loadingCtrl: LoadingController
+    public loadingCtrl: LoadingController,
+    private callNumber: CallNumber
   ) {
     var f = new Date();
-    this.fecha = f.getDate() + '/' + (f.getMonth() + 1) + '/' + f.getFullYear();
-    let fecha2 = f.getFullYear() + '-' + ('0' + (f.getMonth() + 1)).slice(-2) + '-' + ('0' + f.getDate()).slice(-2) + ' ' + ('0' + f.getHours()).slice(-2) + ':' + ('0' + f.getMinutes()).slice(-2);
-    this.garantia = 'No';
-    this.contacto = 'No';
-    this.intentosExitoso = '-';
-    this.diasContacto = '-';
-    this.attentionSpeed = '-';
+    this.fecha = f.getDate() + "/" + (f.getMonth() + 1) + "/" + f.getFullYear();
+    let fecha2 =
+      f.getFullYear() +
+      "-" +
+      ("0" + (f.getMonth() + 1)).slice(-2) +
+      "-" +
+      ("0" + f.getDate()).slice(-2) +
+      " " +
+      ("0" + f.getHours()).slice(-2) +
+      ":" +
+      ("0" + f.getMinutes()).slice(-2);
+    this.garantia = "No";
+    this.contacto = "No";
+    this.intentosExitoso = "-";
+    this.diasContacto = "-";
+    this.attentionSpeed = "-";
     // Obtenemos parametros de la página de LEADS
     this.leadActual = navParams.data;
-    if (this.leadActual.RazonDescartado != 'null' && this.leadActual.RazonDescartado != null && this.leadActual.RazonDescartado != undefined) {
+    if (
+      this.leadActual.RazonDescartado != "null" &&
+      this.leadActual.RazonDescartado != null &&
+      this.leadActual.RazonDescartado != undefined
+    ) {
       this.razonDescarto = this.leadActual.RazonDescartado;
     }
     if (this.leadActual.MENSAJE) {
@@ -420,17 +468,26 @@ export class LeadPage implements OnInit {
     this.intentosExitoso = this.leadActual.IntentosAntesExitoso;
 
     this.reagenda = this.leadActual.reagenda;
-    if (this.intentosExitoso == null || this.intentosExitoso == 'null') {
-      this.intentosExitoso = '-';
+    if (this.intentosExitoso == null || this.intentosExitoso == "null") {
+      this.intentosExitoso = "-";
     }
 
     this.fechaExitoso = this.leadActual.FechaExitoso;
 
-    if (this.fechaExitoso != null && this.fechaExitoso != 'null') {
+    if (this.fechaExitoso != null && this.fechaExitoso != "null") {
       this.fechaExitoso = new Date(this.fechaExitoso);
       this.fechaExitoso.setHours(this.fechaExitoso.getHours() + 5);
       // tslint:disable-next-line: max-line-length
-      this.fechaExitoso = this.fechaExitoso.getFullYear() + '-' + ('0' + (this.fechaExitoso.getMonth() + 1)).slice(-2) + '-' + ('0' + this.fechaExitoso.getDate()).slice(-2) + ' ' + ('0' + this.fechaExitoso.getHours()).slice(-2) + ':' + ('0' + this.fechaExitoso.getMinutes()).slice(-2);
+      this.fechaExitoso =
+        this.fechaExitoso.getFullYear() +
+        "-" +
+        ("0" + (this.fechaExitoso.getMonth() + 1)).slice(-2) +
+        "-" +
+        ("0" + this.fechaExitoso.getDate()).slice(-2) +
+        " " +
+        ("0" + this.fechaExitoso.getHours()).slice(-2) +
+        ":" +
+        ("0" + this.fechaExitoso.getMinutes()).slice(-2);
       this.diasContacto = distanceinWordsStrict(
         new Date(this.fechaExitoso),
         new Date(fecha2),
@@ -442,18 +499,26 @@ export class LeadPage implements OnInit {
       if (this.leadActual.comentario[0].IdComentario) {
         this.show = true;
         this.comentario = this.leadActual.comentario[0].Comentario;
-        this.fechaComentario = moment(this.leadActual.comentario[0].FechaRegistro);
+        this.fechaComentario = moment(
+          this.leadActual.comentario[0].FechaRegistro
+        );
         this.idComentario = this.leadActual.comentario[0].IdComentario;
-        if (this.leadActual.comentario[0].ClasificaLead !== 'null' && this.leadActual.comentario[0].ClasificaLead !== null) {
+        if (
+          this.leadActual.comentario[0].ClasificaLead !== "null" &&
+          this.leadActual.comentario[0].ClasificaLead !== null
+        ) {
           this.clasificaComentario = this.leadActual.comentario[0].ClasificaLead;
         }
       }
     }
 
-    if (this.leadActual.fechaContacto && this.leadActual.fechaContacto !== 'null') {
+    if (
+      this.leadActual.fechaContacto &&
+      this.leadActual.fechaContacto !== "null"
+    ) {
       this.leadActual.fechaContacto = this.leadActual.fechaContacto
         .substring(0, 16)
-        .replace(/^(\d{4})-(\d{2})-(\d{2})T(\d{5})$/g, '$3/$2/$1$4');
+        .replace(/^(\d{4})-(\d{2})-(\d{2})T(\d{5})$/g, "$3/$2/$1$4");
       const diff =
         (new Date(this.leadActual.fechaContacto).getTime() -
           new Date(this.leadActual.fechaenvio).getTime()) /
@@ -468,52 +533,73 @@ export class LeadPage implements OnInit {
         this.attentionSpeed = distanceinWordsStrict(
           new Date(this.leadActual.fechaenvio),
           new Date(this.leadActual.fechaContacto),
-          { locale: esLocale, addSuffix: false, unit: 'm' }
+          { locale: esLocale, addSuffix: false, unit: "m" }
         );
-        this.garantia = 'Sí';
+        this.garantia = "Sí";
       }
-      if (this.leadActual.canalContacto == 'chat' || this.leadActual.canalContacto == 'llamada') {
-        this.contacto = 'Sí';
+      if (
+        this.leadActual.canalContacto == "chat" ||
+        this.leadActual.canalContacto == "llamada"
+      ) {
+        this.contacto = "Sí";
       } else {
-        this.contacto = 'No';
+        this.contacto = "No";
       }
-
 
       this.fechaExitoso = this.leadActual.FechaExitoso;
 
-      if (this.fechaExitoso != null && this.fechaExitoso != 'null') {
+      if (this.fechaExitoso != null && this.fechaExitoso != "null") {
         this.fechaExitoso = new Date(this.fechaExitoso);
         this.fechaExitoso.setHours(this.fechaExitoso.getHours() + 5);
         // tslint:disable-next-line: max-line-length
-        this.fechaExitoso = this.fechaExitoso.getFullYear() + '-' + ('0' + (this.fechaExitoso.getMonth() + 1)).slice(-2) + '-' + ('0' + this.fechaExitoso.getDate()).slice(-2) + ' ' + ('0' + this.fechaExitoso.getHours()).slice(-2) + ':' + ('0' + this.fechaExitoso.getMinutes()).slice(-2);
+        this.fechaExitoso =
+          this.fechaExitoso.getFullYear() +
+          "-" +
+          ("0" + (this.fechaExitoso.getMonth() + 1)).slice(-2) +
+          "-" +
+          ("0" + this.fechaExitoso.getDate()).slice(-2) +
+          " " +
+          ("0" + this.fechaExitoso.getHours()).slice(-2) +
+          ":" +
+          ("0" + this.fechaExitoso.getMinutes()).slice(-2);
         this.diasContacto = distanceinWordsStrict(
           new Date(this.fechaExitoso),
           new Date(fecha2),
           { locale: esLocale, addSuffix: false }
         );
       }
-
     } else {
-      this.attentionSpeed = '-';
-      this.garantia = 'No';
-      this.contacto = 'No';
-      this.leadActual.canalContacto = '-';
-      this.diasContacto = '-';
-      this.leadActual.fechaContacto = '';
+      this.attentionSpeed = "-";
+      this.garantia = "No";
+      this.contacto = "No";
+      this.leadActual.canalContacto = "-";
+      this.diasContacto = "-";
+      this.leadActual.fechaContacto = "";
     }
     if (!this.leadActual.clave) {
-      this.leadActual.clave = this.leadActual.ID_LEAD;  // Por si llega el Lead por notificación.
+      this.leadActual.clave = this.leadActual.ID_LEAD; // Por si llega el Lead por notificación.
     }
-    if (this.leadActual.canalContacto == '' || this.leadActual.canalContacto == 'null' || this.leadActual.canalContacto == null) {
-      this.leadActual.canalContacto = '-'
+    if (
+      this.leadActual.canalContacto == "" ||
+      this.leadActual.canalContacto == "null" ||
+      this.leadActual.canalContacto == null
+    ) {
+      this.leadActual.canalContacto = "-";
     }
-    if (this.leadActual.fechaContacto == '' || this.leadActual.fechaContacto == 'null' || this.leadActual.fechaContacto == null) {
-      this.leadActual.fechaContacto = ''
+    if (
+      this.leadActual.fechaContacto == "" ||
+      this.leadActual.fechaContacto == "null" ||
+      this.leadActual.fechaContacto == null
+    ) {
+      this.leadActual.fechaContacto = "";
     }
-    if (this.leadActual.canalContacto == 'chat' || this.leadActual.canalContacto == 'llamada') {
-      this.contacto = 'Sí';
+    if (
+      this.leadActual.canalContacto == "chat" ||
+      this.leadActual.canalContacto == "llamada"
+    ) {
+      this.contacto = "Sí";
     } else {
-      this.contacto = 'No';
+      this.contacto = "No";
     }
     if (this.leadActual.desdeNotificacion === true) {
       this.authService.setNotificationActive(true);
@@ -525,200 +611,235 @@ export class LeadPage implements OnInit {
   }
 
   FbotonOn() {
-    let uno = document.getElementById('tel');
-    uno.innerHTML = 'Llamando a ' + this.leadActual.NOMBRE;
+    let uno = document.getElementById("tel");
+    uno.innerHTML = "Llamando a " + this.leadActual.NOMBRE;
     //  // console.log(this.leadActual);
   }
 
   public callClient() {
-
     const body = new URLSearchParams();
     body.set("uuid", this.leadActual.uuid);
-    body.set("canal", 'reporte-app');
+    body.set("canal", "reporte-app");
 
     const options = {
       headers: new HttpHeaders().set(
         "Content-Type",
         "application/x-www-form-urlencoded"
-      )
+      ),
     };
 
-    const url = 'https://koomkin.com.mx/calltracker/calling/';
+    const url = "https://koomkin.com.mx/calltracker/calling/";
 
-    return new Promise(resolve => {
-      this.http.post(url, body.toString(), options).subscribe(data => {
-        console.log(data);
-        resolve(data);
-      }, err => {
-        console.log(err);
-      });
+    return new Promise((resolve) => {
+      this.http.post(url, body.toString(), options).subscribe(
+        (data) => {
+          console.log(data);
+          resolve(data);
+        },
+        (err) => {
+          console.log(err);
+        }
+      );
     });
   }
 
   public changeClassification(classification: string) {
     switch (classification) {
-      case 'D': {
-        this.leadActual.clasificaLead = 'D';
-        this.clasifica = 'Descartado';
+      case "D": {
+        this.leadActual.clasificaLead = "D";
+        this.clasifica = "Descartado";
         break;
       }
-      case 'S': {
-        this.leadActual.clasificaLead = 'S';
-        this.clasifica = 'Seguimiento';
+      case "S": {
+        this.leadActual.clasificaLead = "S";
+        this.clasifica = "Seguimiento";
         break;
       }
-      case 'N': {
-        this.leadActual.clasificaLead = 'N';
-        this.clasifica = 'Negociacion';
+      case "N": {
+        this.leadActual.clasificaLead = "N";
+        this.clasifica = "Negociacion";
         break;
       }
-      case 'V': {
-        this.leadActual.clasificaLead = 'V';
-        this.clasifica = 'Vendido';
+      case "V": {
+        this.leadActual.clasificaLead = "V";
+        this.clasifica = "Vendido";
         //  // console.log(this.clasifica);
         break;
       }
       default:
-        this.clasifica = ''
+        this.clasifica = "";
     }
     const body = {
       clave: this.leadActual.clave,
-      classification: this.clasifica
-    }
-    this.http.get(this.apiUrl + "/clasificaLead2/" + body.clave + '/' + body.classification + '/app')
-      .subscribe(data => {
-        this.clasificacion = data[0].clasificaLead;
-        //// console.log(this.clasificacion);
-      },
-        err => {
+      classification: this.clasifica,
+    };
+    this.http
+      .get(
+        this.apiUrl +
+          "/clasificaLead2/" +
+          body.clave +
+          "/" +
+          body.classification +
+          "/app"
+      )
+      .subscribe(
+        (data) => {
+          this.clasificacion = data[0].clasificaLead;
+          //// console.log(this.clasificacion);
+        },
+        (err) => {
           // console.log("Error occured");
-        });
+        }
+      );
   }
 
   showConfirm() {
-
     let btnCancel = {
-      text: 'Cancelar',
-      role: 'cancelar',
-      cssClass: 'cancel-button',
+      text: "Cancelar",
+      role: "cancelar",
+      cssClass: "cancel-button",
       handler: () => {
         // console.log('Disagree clicked');
-      }
-    }
+      },
+    };
 
     let btnOk = {
-      text: 'Aceptar',
-      cssClass: 'exit-button',
+      text: "Aceptar",
+      cssClass: "exit-button",
       handler: () => {
         this.callClient();
         this.FbotonOn();
         // console.log('Agree clicked');
-      }
-    }
+      },
+    };
 
     let confirm = this.alertCtrl.create({
-      title: '¿Desea llamar a ' + this.leadActual.NOMBRE + '?',
-      cssClass: 'buttonCss',
-      buttons: [
-        btnCancel,
-        btnOk
-      ]
+      title: "¿Desea llamar a " + this.leadActual.NOMBRE + "?",
+      cssClass: "buttonCss",
+      buttons: [btnCancel, btnOk],
     });
     confirm.present();
   }
 
   public getLeadCalls() {
-    this.http.get(this.apiUrl + '/getLeadCalls/' + this.leadActual.clave).subscribe(data => {
-      this.llamadas = data;
-      if (this.llamadas) {
-        for (let k in this.llamadas) {
-          this.llamadas[k].CallStatus = this.llamadas[k].CallStatus;
-          // console.log(this.llamadas[k].CallStatus,this.llamadas[k].LlamadaLead);
-          if (this.llamadas[k].CallStatus == 'failed' || this.llamadas[k].CallStatus == 'completed' && this.llamadas[k].exitosa == 0) {
-            this.llamadas[k].CallStatus = 'perdida';
-          }
-          if (this.llamadas[k].CallStatus == 'inv-lead' || this.llamadas[k].CallStatus == 'inv-cliente') {
-            this.llamadas[k].CallStatus = 'invalido';
-          }
-          if (this.llamadas[k].CallStatus == 'ringing') {
-            this.llamadas[k].CallStatus = 'llamando';
-          }
-          if (this.llamadas[k].LlamadaLead == 0 && this.llamadas[k].exitosa == 1) {
-            this.llamadas[k].CallStatus = 'cliente';
-          } else if (this.llamadas[k].LlamadaLead == 1 && this.llamadas[k].exitosa == 1) {
-            this.llamadas[k].CallStatus = 'comprador';
-          }
+    this.http
+      .get(this.apiUrl + "/getLeadCalls/" + this.leadActual.clave)
+      .subscribe((data) => {
+        this.llamadas = data;
+        if (this.llamadas) {
+          for (let k in this.llamadas) {
+            this.llamadas[k].CallStatus = this.llamadas[k].CallStatus;
+            // console.log(this.llamadas[k].CallStatus,this.llamadas[k].LlamadaLead);
+            if (
+              this.llamadas[k].CallStatus == "failed" ||
+              (this.llamadas[k].CallStatus == "completed" &&
+                this.llamadas[k].exitosa == 0)
+            ) {
+              this.llamadas[k].CallStatus = "perdida";
+            }
+            if (
+              this.llamadas[k].CallStatus == "inv-lead" ||
+              this.llamadas[k].CallStatus == "inv-cliente"
+            ) {
+              this.llamadas[k].CallStatus = "invalido";
+            }
+            if (this.llamadas[k].CallStatus == "ringing") {
+              this.llamadas[k].CallStatus = "llamando";
+            }
+            if (
+              this.llamadas[k].LlamadaLead == 0 &&
+              this.llamadas[k].exitosa == 1
+            ) {
+              this.llamadas[k].CallStatus = "cliente";
+            } else if (
+              this.llamadas[k].LlamadaLead == 1 &&
+              this.llamadas[k].exitosa == 1
+            ) {
+              this.llamadas[k].CallStatus = "comprador";
+            }
 
-          this.llamadas[k].horallamada = this.llamadas[k].FechaLlamada
-          if (this.llamadas[k].horallamada != 'null' && this.llamadas[k].horallamada != null) {
-            this.llamadas[k].horallamada = this.llamadas[k].FechaLlamada.substring(11, 16);
-            this.llamadas[k].FechaLlamada = this.llamadas[k].FechaLlamada.substring(0, 10).replace(/^(\d{4})-(\d{2})-(\d{2})$/g, '$3/$2/$1');
-          }
+            this.llamadas[k].horallamada = this.llamadas[k].FechaLlamada;
+            if (
+              this.llamadas[k].horallamada != "null" &&
+              this.llamadas[k].horallamada != null
+            ) {
+              this.llamadas[k].horallamada = this.llamadas[
+                k
+              ].FechaLlamada.substring(11, 16);
+              this.llamadas[k].FechaLlamada = this.llamadas[
+                k
+              ].FechaLlamada.substring(0, 10).replace(
+                /^(\d{4})-(\d{2})-(\d{2})$/g,
+                "$3/$2/$1"
+              );
+            }
 
-          if (this.llamadas[k].FechaLlamada == this.fecha) {
-            this.llamadas[k].FechaLlamada = 'Hoy';
+            if (this.llamadas[k].FechaLlamada == this.fecha) {
+              this.llamadas[k].FechaLlamada = "Hoy";
+            }
           }
         }
-      }
-    });
+      });
   }
 
   public getCountLeadCalls() {
-    this.http.get(this.apiUrl + '/getCountLeadCalls/' + this.leadActual.clave).subscribe(data => {
-      //// console.log(data);
-      this.llamada = data;
-      if (this.llamada.length > 0) {
-        this.exitosa_c = this.llamada[0].COMPLETED_COMPRADOR;
-        if (this.exitosa_c == null) {
-          this.exitosa_c = '0';
+    this.http
+      .get(this.apiUrl + "/getCountLeadCalls/" + this.leadActual.clave)
+      .subscribe((data) => {
+        //// console.log(data);
+        this.llamada = data;
+        if (this.llamada.length > 0) {
+          this.exitosa_c = this.llamada[0].COMPLETED_COMPRADOR;
+          if (this.exitosa_c == null) {
+            this.exitosa_c = "0";
+          }
+          this.exitosa_v = this.llamada[0].COMPLETED_VENDEDOR;
+          if (this.exitosa_v == null) {
+            this.exitosa_v = "0";
+          }
+          this.exitosa = this.llamada[0].CUENTA_COMPLETED;
+          if (this.exitosa == null) {
+            this.exitosa = "0";
+          }
+          this.perdida = this.llamada[0].CUENTA_FAILED;
+          if (this.perdida == null) {
+            this.perdida = "0";
+          }
+          this.invalido = this.llamada[0].CUENTA_INVALIDO;
+          if (this.invalido == null) {
+            this.invalido = "0";
+          }
+          this.buzon = this.llamada[0].CUENTA_BUZON;
+          if (this.buzon == null) {
+            this.buzon = "0";
+          }
+          //// console.log(this.exitosa_c, this.exitosa_v, this.exitosa, this.perdida, this.buzon);
         }
-        this.exitosa_v = this.llamada[0].COMPLETED_VENDEDOR;
-        if (this.exitosa_v == null) {
-          this.exitosa_v = '0';
-        }
-        this.exitosa = this.llamada[0].CUENTA_COMPLETED;
-        if (this.exitosa == null) {
-          this.exitosa = '0';
-        }
-        this.perdida = this.llamada[0].CUENTA_FAILED;
-        if (this.perdida == null) {
-          this.perdida = '0';
-        }
-        this.invalido = this.llamada[0].CUENTA_INVALIDO;
-        if (this.invalido == null) {
-          this.invalido = '0';
-        }
-        this.buzon = this.llamada[0].CUENTA_BUZON;
-        if (this.buzon == null) {
-          this.buzon = '0';
-        }
-        //// console.log(this.exitosa_c, this.exitosa_v, this.exitosa, this.perdida, this.buzon);
-      }
-    });
+      });
   }
 
   public getCheckLeadComplement() {
-    return new Promise(resolve => {
-      const apiUrl2 = this.apiUrl + '/getLeadComplement/' + this.leadActual.clave;
-      this.http.get(apiUrl2).subscribe(data => {
-        if (data == null || Object.keys(data).length == 0) {
-          this.mensaje = this.leadActual.MENSAJE;
-          this.urgencia = "No";
-          this.cantidadproveedor = "";
-          this.frecuenciaproveedor = "";
-          this.envioproveedor = "";
-          this.usoproveedor = "";
-          this.unidadesproveedor = "";
-          this.categoria = 1;
-          //  // console.log(this.mensaje);
-        }
-        else
-          if (Object.keys(data).length > 0) {
+    return new Promise((resolve) => {
+      const apiUrl2 =
+        this.apiUrl + "/getLeadComplement/" + this.leadActual.clave;
+      this.http.get(apiUrl2).subscribe(
+        (data) => {
+          if (data == null || Object.keys(data).length == 0) {
+            this.mensaje = this.leadActual.MENSAJE;
+            this.urgencia = "No";
+            this.cantidadproveedor = "";
+            this.frecuenciaproveedor = "";
+            this.envioproveedor = "";
+            this.usoproveedor = "";
+            this.unidadesproveedor = "";
+            this.categoria = 1;
+            //  // console.log(this.mensaje);
+          } else if (Object.keys(data).length > 0) {
             this.categoria = data[0].CompanyType;
             // console.log(this.categoria);
             switch (this.categoria) {
               case 1:
-                if ((data[0] === null)) {
+                if (data[0] === null) {
                   // this.mensajeproveedor = this.leadActual.MENSAJE;
                   this.mensaje = this.leadActual.MENSAJE;
                   this.urgencia = "No";
@@ -729,9 +850,13 @@ export class LeadPage implements OnInit {
                   this.unidadesproveedor = "";
                 } else {
                   if (data) {
-
                     this.urgencia = data[0].Urgency;
-                    if (this.urgencia == "0" || this.urgencia == "null" || this.urgencia == "None" || this.urgencia == undefined) {
+                    if (
+                      this.urgencia == "0" ||
+                      this.urgencia == "null" ||
+                      this.urgencia == "None" ||
+                      this.urgencia == undefined
+                    ) {
                       this.urgencia = "No";
                     }
                     /*this.mensajeproveedor = data[0].Details;
@@ -741,24 +866,52 @@ export class LeadPage implements OnInit {
                     }*/
 
                     this.mensaje = data[0].Details;
-                    if (this.mensaje == "Escribe aquí..." || this.mensaje == "" ||
-                      this.mensaje == null || this.mensaje == undefined || this.mensaje == "null" || this.mensaje == "None") {
+                    if (
+                      this.mensaje == "Escribe aquí..." ||
+                      this.mensaje == "" ||
+                      this.mensaje == null ||
+                      this.mensaje == undefined ||
+                      this.mensaje == "null" ||
+                      this.mensaje == "None"
+                    ) {
                       this.mensaje = this.leadActual.MENSAJE;
                     }
                     this.cantidadproveedor = data[0].Quantity;
-                    if (this.cantidadproveedor == "0" || this.cantidadproveedor == "null" || this.cantidadproveedor == null || this.cantidadproveedor == "None" || this.cantidadproveedor == undefined) {
+                    if (
+                      this.cantidadproveedor == "0" ||
+                      this.cantidadproveedor == "null" ||
+                      this.cantidadproveedor == null ||
+                      this.cantidadproveedor == "None" ||
+                      this.cantidadproveedor == undefined
+                    ) {
                       this.cantidadproveedor = "";
                     }
                     this.unidadesproveedor = data[0].Unit;
-                    if (this.unidadesproveedor == "null" || this.unidadesproveedor == null || this.unidadesproveedor == undefined || this.unidadesproveedor == "None") {
+                    if (
+                      this.unidadesproveedor == "null" ||
+                      this.unidadesproveedor == null ||
+                      this.unidadesproveedor == undefined ||
+                      this.unidadesproveedor == "None"
+                    ) {
                       this.unidadesproveedor = "";
                     }
                     this.frecuenciaproveedor = data[0].Frequency;
-                    if (this.frecuenciaproveedor == "null" || this.frecuenciaproveedor == "None" || this.frecuenciaproveedor == null || this.frecuenciaproveedor == undefined) {
+                    if (
+                      this.frecuenciaproveedor == "null" ||
+                      this.frecuenciaproveedor == "None" ||
+                      this.frecuenciaproveedor == null ||
+                      this.frecuenciaproveedor == undefined
+                    ) {
                       this.frecuenciaproveedor = "";
                     }
                     this.usoproveedor = data[0].Usage;
-                    if (this.usoproveedor == "null" || this.usoproveedor == null || this.usoproveedor == "None" || this.usoproveedor == undefined || this.usoproveedor == "undefined") {
+                    if (
+                      this.usoproveedor == "null" ||
+                      this.usoproveedor == null ||
+                      this.usoproveedor == "None" ||
+                      this.usoproveedor == undefined ||
+                      this.usoproveedor == "undefined"
+                    ) {
                       this.usoproveedor = "";
                     } else if (this.uso == "0") {
                       this.usoproveedor = "Uso personal";
@@ -766,12 +919,18 @@ export class LeadPage implements OnInit {
                       this.usoproveedor = "Mi empresa";
                     }
                     this.envioproveedor = data[0].Shipping;
-                    if (this.envioproveedor == "False" || this.envioproveedor == "null" || this.envioproveedor == null || this.envioproveedor == undefined || this.mensajemedico == "null" || this.envioproveedor ==
-                      "None" || this.envioproveedor == undefined) {
+                    if (
+                      this.envioproveedor == "False" ||
+                      this.envioproveedor == "null" ||
+                      this.envioproveedor == null ||
+                      this.envioproveedor == undefined ||
+                      this.mensajemedico == "null" ||
+                      this.envioproveedor == "None" ||
+                      this.envioproveedor == undefined
+                    ) {
                       this.envioproveedor = "";
                     }
                   }
-
                 }
               case 2:
                 if (data[0] === null) {
@@ -783,7 +942,13 @@ export class LeadPage implements OnInit {
                 } else {
                   if (data) {
                     this.urgencia = data[0].Urgency;
-                    if (this.urgencia == "0" || this.urgencia == "null" || this.urgencia == undefined || this.urgencia == null || this.urgencia == "None") {
+                    if (
+                      this.urgencia == "0" ||
+                      this.urgencia == "null" ||
+                      this.urgencia == undefined ||
+                      this.urgencia == null ||
+                      this.urgencia == "None"
+                    ) {
                       this.urgencia = "No";
                     }
                     /*this.mensajeservicio = data[0].Details;
@@ -793,12 +958,23 @@ export class LeadPage implements OnInit {
                     }*/
 
                     this.mensaje = data[0].Details;
-                    if (this.mensaje == "Escribe aquí..." || this.mensaje == "" ||
-                      this.mensaje == null || this.mensaje == undefined || this.mensaje == "null" || this.mensaje == "None") {
+                    if (
+                      this.mensaje == "Escribe aquí..." ||
+                      this.mensaje == "" ||
+                      this.mensaje == null ||
+                      this.mensaje == undefined ||
+                      this.mensaje == "null" ||
+                      this.mensaje == "None"
+                    ) {
                       this.mensaje = this.leadActual.MENSAJE;
                     }
                     this.usoservicio = data[0].Usage;
-                    if (this.usoservicio == "null" || this.usoservicio == null || this.usoservicio == undefined || this.usoservicio == "None") {
+                    if (
+                      this.usoservicio == "null" ||
+                      this.usoservicio == null ||
+                      this.usoservicio == undefined ||
+                      this.usoservicio == "None"
+                    ) {
                       this.usoservicio = "";
                     } else if (this.usoservicio == "0") {
                       this.usoservicio = "Uso personal";
@@ -807,7 +983,12 @@ export class LeadPage implements OnInit {
                     }
                     // console.log(this.usoservicio);
                     this.frecuenciaservicio = data[0].Frequency;
-                    if (this.frecuenciaservicio == null || this.frecuenciaservicio == "null" || this.frecuenciaservicio == undefined || this.frecuenciaservicio == "None") {
+                    if (
+                      this.frecuenciaservicio == null ||
+                      this.frecuenciaservicio == "null" ||
+                      this.frecuenciaservicio == undefined ||
+                      this.frecuenciaservicio == "None"
+                    ) {
                       this.frecuenciaservicio = "";
                     }
                   }
@@ -835,27 +1016,53 @@ export class LeadPage implements OnInit {
                     }*/
 
                     this.mensaje = data[0].Details;
-                    if (this.mensaje == "Escribe aquí..." || this.mensaje == "" ||
-                      this.mensaje == null || this.mensaje == undefined || this.mensaje == "null" || this.mensaje == "None") {
+                    if (
+                      this.mensaje == "Escribe aquí..." ||
+                      this.mensaje == "" ||
+                      this.mensaje == null ||
+                      this.mensaje == undefined ||
+                      this.mensaje == "null" ||
+                      this.mensaje == "None"
+                    ) {
                       this.mensaje = this.leadActual.MENSAJE;
                     }
                     this.urgencia = data[0].Urgency;
-                    if (this.urgencia == "0" || this.urgencia == undefined || this.urgencia == "null" || this.urgencia == "None") {
+                    if (
+                      this.urgencia == "0" ||
+                      this.urgencia == undefined ||
+                      this.urgencia == "null" ||
+                      this.urgencia == "None"
+                    ) {
                       this.urgencia = "No";
                     }
                     this.edadM = data[0].Age;
-                    if (this.edadM == "null" || this.edadM == null || this.edadM == undefined || this.edadM == "None") {
+                    if (
+                      this.edadM == "null" ||
+                      this.edadM == null ||
+                      this.edadM == undefined ||
+                      this.edadM == "None"
+                    ) {
                       this.edadM = "0";
                     }
                     this.generoM = data[0].Gender;
-                    if (this.generoM == "null" || this.generoM == null || this.generoM == undefined || this.generoM == "None") {
+                    if (
+                      this.generoM == "null" ||
+                      this.generoM == null ||
+                      this.generoM == undefined ||
+                      this.generoM == "None"
+                    ) {
                       this.generoM = "0" + "";
                     }
 
                     if (data[0].Date) {
                       this.fechaCitaM = data[0].Date.substring(0, 10);
-                      if (this.fechaCitaM == "" || this.fechaCitaM == null || this.fechaCitaM == undefined || this.fechaCitaM == "null" ||
-                        this.fechaCitaM == "None") {
+                      if (
+                        this.fechaCitaM == "" ||
+                        this.fechaCitaM == null ||
+                        this.fechaCitaM == undefined ||
+                        this.fechaCitaM == "null" ||
+                        this.fechaCitaM == "None"
+                      ) {
                         this.fechaCitaM = "";
                       }
                     } else {
@@ -863,15 +1070,19 @@ export class LeadPage implements OnInit {
                     }
                     if (data[0].Time) {
                       this.horaCitaM = data[0].Time.substring(11, 16);
-                      if (this.horaCitaM == "" || this.horaCitaM == "null" || this.horaCitaM == null || this.horaCitaM == undefined || this.horaCita ==
-                        "None") {
+                      if (
+                        this.horaCitaM == "" ||
+                        this.horaCitaM == "null" ||
+                        this.horaCitaM == null ||
+                        this.horaCitaM == undefined ||
+                        this.horaCita == "None"
+                      ) {
                         this.horaCitaM = "";
                       }
                     } else {
                       this.horaCitaM = "";
                     }
                   }
-
                 }
               case 4:
                 if (data[0] === null) {
@@ -881,7 +1092,6 @@ export class LeadPage implements OnInit {
                   this.usoprofesionista = "";
                   this.fechaCitaP = "";
                   this.horaCitaP = "";
-
                 } else {
                   if (data) {
                     /*this.mensajeprofesionista = data[0].Details;
@@ -891,12 +1101,23 @@ export class LeadPage implements OnInit {
                     }*/
 
                     this.mensaje = data[0].Details;
-                    if (this.mensaje == "Escribe aquí..." || this.mensaje == "" ||
-                      this.mensaje == null || this.mensaje == undefined || this.mensaje == "null" || this.mensaje == "None") {
+                    if (
+                      this.mensaje == "Escribe aquí..." ||
+                      this.mensaje == "" ||
+                      this.mensaje == null ||
+                      this.mensaje == undefined ||
+                      this.mensaje == "null" ||
+                      this.mensaje == "None"
+                    ) {
                       this.mensaje = this.leadActual.MENSAJE;
                     }
                     this.usoprofesionista = data[0].Usage;
-                    if (this.usoprofesionista == null || this.usoprofesionista == "null" || this.usoprofesionista == undefined || this.usoprofesionista == "None") {
+                    if (
+                      this.usoprofesionista == null ||
+                      this.usoprofesionista == "null" ||
+                      this.usoprofesionista == undefined ||
+                      this.usoprofesionista == "None"
+                    ) {
                       this.usoprofesionista = "";
                     } else if (this.usoprofesionista == "0") {
                       this.usoprofesionista = "Uso personal";
@@ -905,25 +1126,39 @@ export class LeadPage implements OnInit {
                     }
                     if (data[0].Date) {
                       this.fechaCitaP = data[0].Date.substring(0, 10);
-                      if (this.fechaCitaP == "" || this.fechaCitaP == "null" || this.fechaCitaP == null || this.fechaCitaP == undefined ||
-                        this.fechaCitaP == "None") {
+                      if (
+                        this.fechaCitaP == "" ||
+                        this.fechaCitaP == "null" ||
+                        this.fechaCitaP == null ||
+                        this.fechaCitaP == undefined ||
+                        this.fechaCitaP == "None"
+                      ) {
                         this.fechaCitaP = "";
                       }
                     }
                     if (data[0].Time) {
                       this.horaCitaP = data[0].Time.substring(11, 16);
-                      if (this.horaCitaP == "" || this.horaCitaP == "null" || this.horaCitaP == null || this.horaCitaP == undefined || this.horaCitaP ==
-                        "None") {
+                      if (
+                        this.horaCitaP == "" ||
+                        this.horaCitaP == "null" ||
+                        this.horaCitaP == null ||
+                        this.horaCitaP == undefined ||
+                        this.horaCitaP == "None"
+                      ) {
                         this.horaCitaP = "";
                       }
                     }
                     this.urgencia = data[0].Urgency;
-                    if (this.urgencia == "0" || this.urgencia == "null" || this.urgencia == undefined || this.urgencia == null || this
-                      .urgencia == "None") {
+                    if (
+                      this.urgencia == "0" ||
+                      this.urgencia == "null" ||
+                      this.urgencia == undefined ||
+                      this.urgencia == null ||
+                      this.urgencia == "None"
+                    ) {
                       this.urgencia = "No";
                     }
                   }
-
                 }
 
               case 5:
@@ -942,12 +1177,23 @@ export class LeadPage implements OnInit {
                     }*/
 
                     this.mensaje = data[0].Details;
-                    if (this.mensaje == "Escribe aquí..." || this.mensaje == "" ||
-                      this.mensaje == null || this.mensaje == undefined || this.mensaje == "null" || this.mensaje == "None") {
+                    if (
+                      this.mensaje == "Escribe aquí..." ||
+                      this.mensaje == "" ||
+                      this.mensaje == null ||
+                      this.mensaje == undefined ||
+                      this.mensaje == "null" ||
+                      this.mensaje == "None"
+                    ) {
                       this.mensaje = this.leadActual.MENSAJE;
                     }
                     this.usoventa = data[0].Usage;
-                    if (this.usoventa == null || this.usoventa == "null" || this.usoventa == undefined || this.usoventa == "None") {
+                    if (
+                      this.usoventa == null ||
+                      this.usoventa == "null" ||
+                      this.usoventa == undefined ||
+                      this.usoventa == "None"
+                    ) {
                       this.usoventa = "";
                     } else if (this.usoventa == "0") {
                       this.usoventa = "Uso personal";
@@ -955,8 +1201,13 @@ export class LeadPage implements OnInit {
                       this.usoventa = "Mi empresa";
                     }
                     this.urgencia = data[0].Urgency;
-                    if (this.urgencia == "0" || this.urgencia == "null" || this.urgencia == undefined || this.urgencia == null || this
-                      .urgencia == "None") {
+                    if (
+                      this.urgencia == "0" ||
+                      this.urgencia == "null" ||
+                      this.urgencia == undefined ||
+                      this.urgencia == null ||
+                      this.urgencia == "None"
+                    ) {
                       this.urgencia = "No";
                     }
                   }
@@ -977,28 +1228,49 @@ export class LeadPage implements OnInit {
                     }*/
 
                     this.mensaje = data[0].RestaurantUsage;
-                    if (this.mensaje == "Escribe aquí..." || this.mensaje == "" ||
-                      this.mensaje == null || this.mensaje == undefined || this.mensaje == "null" || this.mensaje == "None") {
+                    if (
+                      this.mensaje == "Escribe aquí..." ||
+                      this.mensaje == "" ||
+                      this.mensaje == null ||
+                      this.mensaje == undefined ||
+                      this.mensaje == "null" ||
+                      this.mensaje == "None"
+                    ) {
                       this.mensaje = this.leadActual.MENSAJE;
                     }
                     if (data[0].Date) {
                       this.fechaCitarestaurante = data[0].Date.substring(0, 10);
-                      if (this.fechaCitarestaurante == " " || this.fechaCitarestaurante == "null" || this.fechaCitarestaurante == undefined || this.fechaCitarestaurante == null ||
-                        this.fechaCitarestaurante == "None") {
+                      if (
+                        this.fechaCitarestaurante == " " ||
+                        this.fechaCitarestaurante == "null" ||
+                        this.fechaCitarestaurante == undefined ||
+                        this.fechaCitarestaurante == null ||
+                        this.fechaCitarestaurante == "None"
+                      ) {
                         this.fechaCitarestaurante = "";
                       }
                     }
                     if (data[0].Time) {
                       this.horaCitarestaurante = data[0].Time.substring(11, 16);
-                      if (this.horaCitarestaurante == " " || this.horaCitarestaurante == "null" || this.horaCitarestaurante == undefined || this.horaCitarestaurante == null || this
-                        .horaCitarestaurante == "None") {
+                      if (
+                        this.horaCitarestaurante == " " ||
+                        this.horaCitarestaurante == "null" ||
+                        this.horaCitarestaurante == undefined ||
+                        this.horaCitarestaurante == null ||
+                        this.horaCitarestaurante == "None"
+                      ) {
                         this.horaCitarestaurante = "";
                       }
                     }
 
                     this.personasrestaurante = data[0].BookingFor;
-                    if (this.personasrestaurante == " " || this.personasrestaurante == "null" || this.personasrestaurante == undefined || this.personasrestaurante == null || this
-                      .personasrestaurante == "None") {
+                    if (
+                      this.personasrestaurante == " " ||
+                      this.personasrestaurante == "null" ||
+                      this.personasrestaurante == undefined ||
+                      this.personasrestaurante == null ||
+                      this.personasrestaurante == "None"
+                    ) {
                       this.personasrestaurante = "";
                     }
                   }
@@ -1019,26 +1291,47 @@ export class LeadPage implements OnInit {
                     }*/
 
                     this.mensaje = data[0].HotelUsage;
-                    if (this.mensaje == "Escribe aquí..." || this.mensaje == "" ||
-                      this.mensaje == null || this.mensaje == undefined || this.mensaje == "null" || this.mensaje == "None") {
+                    if (
+                      this.mensaje == "Escribe aquí..." ||
+                      this.mensaje == "" ||
+                      this.mensaje == null ||
+                      this.mensaje == undefined ||
+                      this.mensaje == "null" ||
+                      this.mensaje == "None"
+                    ) {
                       this.mensaje = this.leadActual.MENSAJE;
                     }
 
                     if (data[0].CheckIn) {
                       this.hotelEntrada = data[0].CheckIn.substring(0, 10);
-                      if (this.hotelEntrada == "null" || this.hotelEntrada == null || this.hotelEntrada == undefined || this.hotelEntrada == "None") {
+                      if (
+                        this.hotelEntrada == "null" ||
+                        this.hotelEntrada == null ||
+                        this.hotelEntrada == undefined ||
+                        this.hotelEntrada == "None"
+                      ) {
                         this.hotelEntrada = "";
                       }
                     }
                     if (data[0].CheckOut) {
                       this.hotelSalida = data[0].CheckOut.substring(0, 10);
-                      if (this.hotelSalida == "null" || this.hotelSalida == null || this.hotelSalida == undefined || this.hotelSalida == "None") {
+                      if (
+                        this.hotelSalida == "null" ||
+                        this.hotelSalida == null ||
+                        this.hotelSalida == undefined ||
+                        this.hotelSalida == "None"
+                      ) {
                         this.hotelSalida = "";
                       }
                     }
                     this.personashotel = data[0].BookingFor;
-                    if (this.personashotel == " " || this.personashotel == "null" || this.personashotel == null || this.personashotel == undefined || this
-                      .personashotel == "None") {
+                    if (
+                      this.personashotel == " " ||
+                      this.personashotel == "null" ||
+                      this.personashotel == null ||
+                      this.personashotel == undefined ||
+                      this.personashotel == "None"
+                    ) {
                       this.personashotel = "";
                     }
                   }
@@ -1061,36 +1354,72 @@ export class LeadPage implements OnInit {
                     }*/
 
                     this.mensaje = data[0].Details;
-                    if (this.mensaje == "Escribe aquí..." || this.mensaje == "" ||
-                      this.mensaje == null || this.mensaje == undefined || this.mensaje == "null" || this.mensaje == "None") {
+                    if (
+                      this.mensaje == "Escribe aquí..." ||
+                      this.mensaje == "" ||
+                      this.mensaje == null ||
+                      this.mensaje == undefined ||
+                      this.mensaje == "null" ||
+                      this.mensaje == "None"
+                    ) {
                       this.mensaje = this.leadActual.MENSAJE;
                     }
                     this.personasinmobiliaria = data[0].BookingFor;
-                    if (this.personasinmobiliaria == " " || this.personasinmobiliaria == "null" || this.personasinmobiliaria == undefined || this.personasinmobiliaria == null || this
-                      .personasinmobiliaria == "None") {
+                    if (
+                      this.personasinmobiliaria == " " ||
+                      this.personasinmobiliaria == "null" ||
+                      this.personasinmobiliaria == undefined ||
+                      this.personasinmobiliaria == null ||
+                      this.personasinmobiliaria == "None"
+                    ) {
                       this.personasinmobiliaria = "";
                     }
                     this.edadinmobiliaria = data[0].Age;
-                    if (this.edadinmobiliaria == "null" || this.edadinmobiliaria == null || this.edadinmobiliaria == undefined || this.edadinmobiliaria == "None") {
+                    if (
+                      this.edadinmobiliaria == "null" ||
+                      this.edadinmobiliaria == null ||
+                      this.edadinmobiliaria == undefined ||
+                      this.edadinmobiliaria == "None"
+                    ) {
                       this.edadinmobiliaria = "";
                     }
                     if (data[0].Date) {
-                      this.fechaCitainmobiliaria = data[0].Date.substring(0, 10);
-                      if (this.fechaCitainmobiliaria == " " || this.fechaCitainmobiliaria == "null" || this.fechaCitainmobiliaria == undefined || this.fechaCitainmobiliaria == null ||
-                        this.fechaCitainmobiliaria == "None") {
+                      this.fechaCitainmobiliaria = data[0].Date.substring(
+                        0,
+                        10
+                      );
+                      if (
+                        this.fechaCitainmobiliaria == " " ||
+                        this.fechaCitainmobiliaria == "null" ||
+                        this.fechaCitainmobiliaria == undefined ||
+                        this.fechaCitainmobiliaria == null ||
+                        this.fechaCitainmobiliaria == "None"
+                      ) {
                         this.fechaCitainmobiliaria = "";
                       }
                     }
                     if (data[0].Time) {
-                      this.horaCitainmobiliaria = data[0].Time.substring(11, 16);
-                      if (this.horaCitainmobiliaria == " " || this.horaCitainmobiliaria == "null" || this.horaCitainmobiliaria == undefined || this.horaCitainmobiliaria == null || this
-                        .horaCitainmobiliaria == "None") {
+                      this.horaCitainmobiliaria = data[0].Time.substring(
+                        11,
+                        16
+                      );
+                      if (
+                        this.horaCitainmobiliaria == " " ||
+                        this.horaCitainmobiliaria == "null" ||
+                        this.horaCitainmobiliaria == undefined ||
+                        this.horaCitainmobiliaria == null ||
+                        this.horaCitainmobiliaria == "None"
+                      ) {
                         this.horaCitainmobiliaria = "";
                       }
                     }
                     this.urgencia = data[0].Urgency;
-                    if (this.urgencia == "0" || this.urgencia == "null" || this.urgencia == undefined || this
-                      .urgencia == "None") {
+                    if (
+                      this.urgencia == "0" ||
+                      this.urgencia == "null" ||
+                      this.urgencia == undefined ||
+                      this.urgencia == "None"
+                    ) {
                       this.urgencia = "No";
                     }
                   }
@@ -1112,12 +1441,23 @@ export class LeadPage implements OnInit {
                   }*/
 
                   this.mensaje = data[0].Details;
-                  if (this.mensaje == "Escribe aquí..." || this.mensaje == "" ||
-                    this.mensaje == null || this.mensaje == undefined || this.mensaje == "null" || this.mensaje == "None") {
+                  if (
+                    this.mensaje == "Escribe aquí..." ||
+                    this.mensaje == "" ||
+                    this.mensaje == null ||
+                    this.mensaje == undefined ||
+                    this.mensaje == "null" ||
+                    this.mensaje == "None"
+                  ) {
                     this.mensaje = this.leadActual.MENSAJE;
                   }
                   this.uso = data[0].Usage;
-                  if (this.uso == "null" || this.uso == "None" || this.uso == undefined || this.uso == null) {
+                  if (
+                    this.uso == "null" ||
+                    this.uso == "None" ||
+                    this.uso == undefined ||
+                    this.uso == null
+                  ) {
                     this.uso = "";
                   } else if (this.uso == "0") {
                     this.uso = "Uso personal";
@@ -1125,144 +1465,183 @@ export class LeadPage implements OnInit {
                     this.uso = "Mi empresa";
                   }
                   this.frecuencia = data[0].Frequency;
-                  if (this.frecuencia == "null" || this.frecuencia == "None" || this.frecuencia == undefined || this.frecuencia == null) {
+                  if (
+                    this.frecuencia == "null" ||
+                    this.frecuencia == "None" ||
+                    this.frecuencia == undefined ||
+                    this.frecuencia == null
+                  ) {
                     this.frecuencia = "";
                   }
                   this.urgencia = data[0].Urgency;
-                  if (this.urgencia == "0" || this.urgencia == "null" || this
-                    .urgencia == "None" || this.urgencia == null || this
-                      .urgencia == undefined) {
+                  if (
+                    this.urgencia == "0" ||
+                    this.urgencia == "null" ||
+                    this.urgencia == "None" ||
+                    this.urgencia == null ||
+                    this.urgencia == undefined
+                  ) {
                     this.urgencia = "No";
                   }
                 }
-
             }
           }
-
-      }, err => {
-
-      });
+        },
+        (err) => {}
+      );
     });
   }
 
   public changeLike(classification: string, lead) {
-
     switch (classification) {
-      case 'L': {
-        this.leadActual.calificaLead = 'true';
-        this.califica = 'l';
-        this.leadActual.calificaLead = 'like';
+      case "L": {
+        this.leadActual.calificaLead = "true";
+        this.califica = "l";
+        this.leadActual.calificaLead = "like";
         break;
       }
-      case 'DL': {
-        this.leadActual.calificaLead = 'false';
-        this.califica = 'd';
-        this.leadActual.calificaLead = 'dislike';
+      case "DL": {
+        this.leadActual.calificaLead = "false";
+        this.califica = "d";
+        this.leadActual.calificaLead = "dislike";
         break;
       }
       default:
         this.califica = null;
-        lead.calificaLead = 'vacio'
+        lead.calificaLead = "vacio";
     }
 
     const body = {
       clave: this.leadActual.clave,
-      classification: this.califica
-    }
+      classification: this.califica,
+    };
 
-    this.http.get(this.apiUrl + "/calificaLead2/" + body.clave + '/' + body.classification + '/app')
-      .subscribe(data => {
-        this.calificacion = data[0].calificaLead;
-      },
-        err => {
+    this.http
+      .get(
+        this.apiUrl +
+          "/calificaLead2/" +
+          body.clave +
+          "/" +
+          body.classification +
+          "/app"
+      )
+      .subscribe(
+        (data) => {
+          this.calificacion = data[0].calificaLead;
+        },
+        (err) => {
           // console.log("Error occured");
-        });
+        }
+      );
   }
 
   public changeLikeChat(classification: string, lead) {
-
     switch (classification) {
-      case 'L': {
-        this.leadActual.calificaLead = 'true';
-        this.califica = 'l';
-        this.leadActual.calificaLead = 'like';
+      case "L": {
+        this.leadActual.calificaLead = "true";
+        this.califica = "l";
+        this.leadActual.calificaLead = "like";
         break;
       }
-      case 'DL': {
-        this.leadActual.calificaLead = 'false';
-        this.califica = 'd';
-        this.leadActual.calificaLead = 'dislike';
+      case "DL": {
+        this.leadActual.calificaLead = "false";
+        this.califica = "d";
+        this.leadActual.calificaLead = "dislike";
         break;
       }
       default:
         this.califica = null;
-        lead.calificaLead = 'vacio'
+        lead.calificaLead = "vacio";
     }
 
     const body = {
       clave: this.leadActual.clave,
-      classification: this.califica
-    }
+      classification: this.califica,
+    };
 
-    this.http.get(this.apiUrl + "/calificaLead2/" + body.clave + '/' + body.classification + '/appchat')
-      .subscribe(data => {
-        this.calificacion = data[0].calificaLead;
-      },
-        err => {
+    this.http
+      .get(
+        this.apiUrl +
+          "/calificaLead2/" +
+          body.clave +
+          "/" +
+          body.classification +
+          "/appchat"
+      )
+      .subscribe(
+        (data) => {
+          this.calificacion = data[0].calificaLead;
+        },
+        (err) => {
           // console.log("Error occured");
-        });
+        }
+      );
   }
 
   public changeLikeToggle() {
-    if (this.leadActual.calificaLead === 'like') {
-      this.changeLikeChat('DL', this.leadActual);
+    if (this.leadActual.calificaLead === "like") {
+      this.changeLikeChat("DL", this.leadActual);
     } else {
-      this.changeLikeChat('L', this.leadActual);
+      this.changeLikeChat("L", this.leadActual);
     }
   }
 
   public getUrlAudio() {
-    this.http.get(this.apiUrl + '/getUrlAudio/' + this.leadActual.clave).subscribe(data => {
-      this.audio = data;
+    this.http
+      .get(this.apiUrl + "/getUrlAudio/" + this.leadActual.clave)
+      .subscribe((data) => {
+        this.audio = data;
 
-      for (let k in this.audio) {
-        if (this.audio.length > 0) {
-          this.url = this.audio[k].recordingsid;
-          this.mostrar = this.audio[k].CallStatus;
-          this.urlaudio = 'https://storage.googleapis.com/audios-call-tracking/' + this.url + '.mp3';
-          if (this.url == null) {
-            this.url = 'sinaudio';
+        for (let k in this.audio) {
+          if (this.audio.length > 0) {
+            this.url = this.audio[k].recordingsid;
+            this.mostrar = this.audio[k].CallStatus;
+            this.urlaudio =
+              "https://storage.googleapis.com/audios-call-tracking/" +
+              this.url +
+              ".mp3";
+            if (this.url == null) {
+              this.url = "sinaudio";
+            }
+          } else {
+            this.audio = "sinaudio";
           }
-        } else {
-          this.audio = 'sinaudio';
         }
-      }
-    });
+      });
   }
 
   public getInsertClickLlamar() {
     const usuario = this.leadActual.ID;
     const id = this.leadActual.clave;
-    const acceso = 'App';
-    if (this.platform.is('ios')) {
-      this.dispositivo = 'ios';
-    } else if (this.platform.is('android')) {
-      this.dispositivo = 'android';
+    const acceso = "App";
+    if (this.platform.is("ios")) {
+      this.dispositivo = "ios";
+    } else if (this.platform.is("android")) {
+      this.dispositivo = "android";
     }
     // console.log(usuario, this.dispositivo, acceso, id);
-    this.provedor.getInsertClickLlamar(usuario, id, acceso, this.dispositivo).then((data) => {
-      this.datosenvio = data;
-    }, (err) => {
-      // console.log('error');
-    });
+    this.provedor
+      .getInsertClickLlamar(usuario, id, acceso, this.dispositivo)
+      .then(
+        (data) => {
+          this.datosenvio = data;
+        },
+        (err) => {
+          // console.log('error');
+        }
+      );
   }
 
   startAudio() {
     let options: StreamingAudioOptions = {
-      successCallback: () => { console.log() },
-      errorCallback: () => { console.log() },
+      successCallback: () => {
+        console.log();
+      },
+      errorCallback: () => {
+        console.log();
+      },
       initFullscreen: false,
-    }
+    };
     // // console.log(this.urlaudio);
     this.streamingMedia.playAudio(this.urlaudio, options);
   }
@@ -1272,49 +1651,64 @@ export class LeadPage implements OnInit {
   }
 
   chooseFile() {
-
     (async () => {
       const file = await (<any>window).chooser.getFile("");
       var formData = new FormData();
       var blob = new Blob([file.data], { type: file.mediaType });
       formData.append(file.name, blob, file.name);
       this.chatService.tc.currentChannel.sendMessage(formData).then(() => {
-        this.chatService.tc.currentChannel.getMessages().then((messagesPaginator) => {
-          const message = messagesPaginator.items[messagesPaginator.items.length - 1];
-          if (message.type === 'media') {
-            // console.log('Media attributes', message.media);
-            message.media.getContentUrl().then((url) => {
-              this.http.post('https://koomkin.com.mx/call-tracking/api/twilio-media-message', { channelsid: this.chatService.tc.currentChannel.sid, url: url, mime: file.mediaType, filename: file.name })
-                .subscribe(data => {
-                  //alert('enviado a whatsapp'+ JSON.stringify(data));
-                }, err => {
-                  //alert('not good '+ JSON.stringify(err));
-                });
-            });
-          }
-        });
+        this.chatService.tc.currentChannel
+          .getMessages()
+          .then((messagesPaginator) => {
+            const message =
+              messagesPaginator.items[messagesPaginator.items.length - 1];
+            if (message.type === "media") {
+              // console.log('Media attributes', message.media);
+              message.media.getContentUrl().then((url) => {
+                this.http
+                  .post(
+                    "https://koomkin.com.mx/call-tracking/api/twilio-media-message",
+                    {
+                      channelsid: this.chatService.tc.currentChannel.sid,
+                      url: url,
+                      mime: file.mediaType,
+                      filename: file.name,
+                    }
+                  )
+                  .subscribe(
+                    (data) => {
+                      //alert('enviado a whatsapp'+ JSON.stringify(data));
+                    },
+                    (err) => {
+                      //alert('not good '+ JSON.stringify(err));
+                    }
+                  );
+              });
+            }
+          });
       });
     })();
   }
 
   openFile(url, contentType) {
-
-    console.log(url, contentType)
+    console.log(url, contentType);
     let loading = this.loadingCtrl.create({
-      content: 'Cargando archivo multimedia...'
+      content: "Cargando archivo multimedia...",
     });
 
-    loading.present().then(() => {
-      this.fileOpener.open(url['__zone_symbol__value'], contentType
-      ).then(() => {
-        loading.dismiss();
-      }).catch(e => {
-        loading.dismiss();
-      });
-    }).catch((err) => {
-
-    });
-
+    loading
+      .present()
+      .then(() => {
+        this.fileOpener
+          .open(url["__zone_symbol__value"], contentType)
+          .then(() => {
+            loading.dismiss();
+          })
+          .catch((e) => {
+            loading.dismiss();
+          });
+      })
+      .catch((err) => {});
   }
 
   launch(url) {
@@ -1325,12 +1719,12 @@ export class LeadPage implements OnInit {
 
   getRazones() {
     this.provedor.getReasons().then(
-      data => {
+      (data) => {
         let razones = data;
         this.razones = razones;
         // console.log(this.razones);
       },
-      err => {
+      (err) => {
         // console.log('error');
       }
     );
@@ -1338,12 +1732,12 @@ export class LeadPage implements OnInit {
 
   getComentarios() {
     this.provedor.getComments(this.leadActual.uuid).then(
-      data => {
+      (data) => {
         let comentarios = data;
         this.comentarios = comentarios;
         // console.log(this.comentarios);
       },
-      err => {
+      (err) => {
         // console.log('error');
       }
     );
@@ -1351,14 +1745,14 @@ export class LeadPage implements OnInit {
 
   public btnDeleteComentario(idComentario) {
     swal({
-      title: '¿Estás seguro que deseas eliminar este comentario?',
+      title: "¿Estás seguro que deseas eliminar este comentario?",
       showCancelButton: true,
-      confirmButtonColor: '#288AC1',
-      cancelButtonColor: '#2AB4BC',
-      confirmButtonText: 'Confirmar',
-      cancelButtonText: 'Cancelar',
-      reverseButtons: true
-    }).then(result => {
+      confirmButtonColor: "#288AC1",
+      cancelButtonColor: "#2AB4BC",
+      confirmButtonText: "Confirmar",
+      cancelButtonText: "Cancelar",
+      reverseButtons: true,
+    }).then((result) => {
       if (result.value) {
         this.deleteComentario(idComentario);
       }
@@ -1366,25 +1760,24 @@ export class LeadPage implements OnInit {
   }
 
   public deleteComentario(idComentario) {
-
     const body = new URLSearchParams();
-    body.set('idComentario', idComentario);
+    body.set("idComentario", idComentario);
 
     const options = {
       headers: new HttpHeaders().set(
-        'Content-Type',
-        'application/x-www-form-urlencoded'
-      )
+        "Content-Type",
+        "application/x-www-form-urlencoded"
+      ),
     };
 
-    const url = 'https://www.koomkin.com.mx/api/app/deleteComment/';
+    const url = "https://www.koomkin.com.mx/api/app/deleteComment/";
 
     return new Promise((resolve, reject) => {
       this.http.post(url, body.toString(), options).subscribe(
-        data => {
+        (data) => {
           console.log(data);
         },
-        err => {
+        (err) => {
           return reject(err);
         }
       );
@@ -1394,12 +1787,43 @@ export class LeadPage implements OnInit {
   openModal(tipo, clasificaLead, idComentario, comentario) {
     const myModal = this.modal.create(
       "ModalComentariosPage",
-      { tipo: tipo, leadActual: this.leadActual, clasificaLead: clasificaLead, idComentario: idComentario, comentario: comentario },
+      {
+        tipo: tipo,
+        leadActual: this.leadActual,
+        clasificaLead: clasificaLead,
+        idComentario: idComentario,
+        comentario: comentario,
+      },
       { enableBackdropDismiss: false, cssClass: "Modal-comentario" }
     );
     myModal.present();
-    myModal.onDidDismiss(() => { });
+    myModal.onDidDismiss(() => {});
   }
 
+  callLead() {
+    swal({
+      title: `Contactar a ${this.leadActual.NombreUsuarioEnvio}`,
+      text:
+        "Es posible que se generen tarifas de acuerdo al operador de tu telefonia movil",
+      showCancelButton: true,
+      confirmButtonColor: "#288AC1",
+      cancelButtonColor: "#288AC1",
+      confirmButtonText: "+525525403965",
+      cancelButtonText: "Llamar Gratis",
+      imageUrl: "https://svgshare.com/i/KS9.svg",
+      imageWidth: 100,
+      imageHeight: 100,
+      showCloseButton: true,
+    }).then((result: any) => {
+      if (result.value !== undefined) {
+        this.callNumber
+          .callNumber(`+522282070301, ${this.leadActual.clave}`, true)
+          .then((res) => console.log("Launched dialer!", res))
+          .catch((err) => console.log("Error launching dialer", err));
+      } else if (result.dismiss === "cancel") {
+        this.callClient();
+        this.FbotonOn();
+      }
+    });
+  }
 }
-

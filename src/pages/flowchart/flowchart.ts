@@ -633,6 +633,8 @@ export class FlowchartPage {
           ) {
             this.idElement = el.parentNode.parentNode.parentNode["id"];
           }
+        } else {
+          this.idElement = el.parentNode.parentNode["id"];
         }
 
         let elementMirror = Array.from(

@@ -261,6 +261,11 @@ video {
   top: 3.5em;
   bottom: 0;
 
+  g,
+  rect {
+    height: 3em !important;
+  }
+
   foreignObject {
     div {
       overflow-wrap: break-word;
@@ -270,11 +275,6 @@ video {
 
       height: 1em;
     }
-  }
-
-  rect {
-    width: 1;
-    height: 1;
   }
 
   #graphDiv {
