@@ -1,0 +1,141 @@
+.Modal-upsells {
+  @media (min-width: 300px) and (min-height: 2000px) {
+    ion-backdrop {
+      visibility: visible;
+    }
+  }
+  .modal-wrapper {
+    position: absolute;
+    overflow: hidden;
+    max-width: 320px;
+    width: 80vw;
+    @media only screen and (min-width: 360px) and (max-height: 640px) {
+      height: 100%;
+      max-height: 96vh;
+      margin: -4vh auto 0 auto;
+    }
+
+    @media only screen and (min-width: 412px) and (max-height: 892px) {
+      height: 100%;
+      max-height: calc(90vh - 95px);
+      margin: 2vh auto 0 auto;
+    }
+
+    top: 40px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border: 0;
+    -webkit-box-shadow: 0 16px 20px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 16px 20px rgba(0, 0, 0, 0.4);
+    background-color: #fafafa;
+  }
+}
+
+page-modal-upsells {
+
+  .padding-0 {
+    padding: 0 !important;
+    font-size: 0.75em;
+  }
+
+  .bold-text {
+    font-weight: bold;
+  }
+
+  .info-upsells {
+    background: #233D57;
+    color: #FFFFFF;
+    padding: 13px 0 13px 0;
+    margin-top: 1.5vh;
+    @media only screen and (min-width: 360px) and (max-height: 640px) {
+      font-size: 10pt;
+    }
+
+    @media only screen and (min-width: 412px) and (max-height: 892px) {
+      font-size: 12pt;
+    }
+  }
+
+  .margin-1 {
+    margin-top: 7px !important;
+    margin-bottom: 7px !important;
+    @media only screen and (min-width: 360px) and (max-height: 640px) {
+      font-size: 10pt;
+    }
+
+    @media only screen and (min-width: 412px) and (max-height: 892px) {
+      font-size: 12pt;
+    }
+  }
+
+  .margin-2 {
+    margin-top: 14px !important;
+    margin-bottom: 14px !important;
+    @media only screen and (min-width: 360px) and (max-height: 640px) {
+      font-size: 10pt;
+    }
+
+    @media only screen and (min-width: 412px) and (max-height: 892px) {
+      font-size: 12pt;
+    }
+  }
+
+  .margin-3 {
+    margin-top: 21px !important;
+    margin-bottom: 21px !important;
+    @media only screen and (min-width: 360px) and (max-height: 640px) {
+      font-size: 10pt;
+    }
+
+    @media only screen and (min-width: 412px) and (max-height: 892px) {
+      font-size: 12pt;
+    }
+  }
+
+  .mt-2 {
+    margin-top: 2vh;
+  }
+
+  .mb-2 {
+    margin-bottom: 2vh;
+  }
+
+  .mt-4 {
+    margin-top: 4vh !important;
+  }
+
+  .color-upgrade0 {
+    color: #03B8BE;
+  }
+
+  .color-upgrade30 {
+    color: #266EB6;
+  }
+
+  .color-upgrade50 {
+    color: #233D57;
+  }
+
+  .btn-up {
+    color: #FFFFFF;
+    font-size: small;
+    height: 4.5vh;
+    margin-top: 15px;
+    margin-left: 7px;
+    margin-right: 7px;
+    border-radius: 10px;
+  }
+
+  .btn-upgrade0 {
+    background: #03B8BE;
+  }
+
+  .btn-upgrade30 {
+    background: #266EB6;
+  }
+
+  .btn-upgrade50 {
+    background: #233D57;
+  }
+}

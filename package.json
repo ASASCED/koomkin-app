@@ -52,9 +52,10 @@
         "cookie-parser": "~1.4.3",
         "cordova-android": "^8.0.0",
         "cordova-android-support-gradle-release": "^2.0.1",
+        "cordova-browser": "5.0.4",
         "cordova-clipboard": "^1.2.1",
         "cordova-custom-config": "^5.1.0",
-        "cordova-ios": "4.5.5",
+        "cordova-ios": "^5.1.1",
         "cordova-plugin-add-swift-support": "^1.7.2",
         "cordova-plugin-advanced-http": "^2.0.2",
         "cordova-plugin-chooser": "^1.2.5",
@@ -70,6 +71,7 @@
         "cordova-plugin-market": "^1.2.0",
         "cordova-plugin-nativeaudio": "^3.0.9",
         "cordova-plugin-network-information": "^2.0.1",
+        "cordova-plugin-screen-orientation": "~3.0.2",
         "cordova-plugin-splashscreen": "^5.0.2",
         "cordova-plugin-streaming-media": "^2.2.0",
         "cordova-plugin-twilio-chat": "^3.2.0",
@@ -150,10 +152,13 @@
             "cordova-plugin-market": {},
             "cordova-plugin-advanced-http": {},
             "cordova-clipboard": {},
-            "cordova-custom-config": {}
+            "cordova-custom-config": {},
+            "cordova-plugin-screen-orientation": {}
         },
         "platforms": [
-            "android"
+            "android",
+            "ios",
+            "browser"
         ]
     }
 }
