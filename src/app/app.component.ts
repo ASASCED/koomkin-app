@@ -177,11 +177,11 @@ export class MyApp {
     this.http
       .get(
         this.apiUrl +
-          "/calificaLead2/" +
-          leadID +
-          "/" +
-          calificacion +
-          "/notificacion"
+        "/calificaLead2/" +
+        leadID +
+        "/" +
+        calificacion +
+        "/notificacion"
       )
       .subscribe(
         (data) => {
