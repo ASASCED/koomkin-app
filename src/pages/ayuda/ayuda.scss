@@ -1,6 +1,9 @@
 
 .page-ayuda {
-  font-size: unset;
+
+  margin-top: -2vh;
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
 
   .background-gradient {
     background: #1C88BB;
@@ -12,11 +15,10 @@
     text-align: center !important;
     @media only screen and (min-width: 360px) and (max-height: 640px) {
       height: 20.5vh;
-      margin-top: -2vh;
     }
 
     @media only screen and (min-width: 412px) and (max-height: 892px) {
-      height: 18vh;
+      height: 20vh;
       margin-top: 0;
     }
 
@@ -40,34 +42,35 @@
   }
 
   .text-help-container {
-    margin-top: 15px;
+    margin-top: 1vh;
     text-align: center;
     font-size: 1rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    -webkit-box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.75);
-    -moz-box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.75);
-    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.75);
+    -webkit-box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.75);
+    box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.75);
     height: 7vh;
 
     .text-help {
       padding-left: 1vh;
       padding-right: 1vh;
       color: #34465B;
+      font-size: medium;
 
       @media only screen and (min-width: 360px) and (max-height: 640px) {
-        font-size: 10pt;
+        // font-size: 10pt;
       }
 
       @media only screen and (min-width: 412px) and (max-height: 892px) {
-        font-size: 12.5pt;
+        // font-size: 12.5pt;
       }
     }
   }
 
   .user_id {
-    margin-top: 15px;
+    margin-top: 1.5vh;
     text-align: center;
     color: #FFFFFF;
     border-radius: 15px;
@@ -86,7 +89,7 @@
   }
 
   .user_name {
-    margin-top: 15px;
+    margin-top: 1vh;
     color: #FFFFFF;
     font-weight: bold;
     @media only screen and (min-width: 360px) and (max-height: 640px) {
@@ -109,14 +112,8 @@
     border-radius: 15px;
     margin-top: 15px;
     width: 95%;
-    @media only screen and (min-width: 360px) and (max-height: 640px) {
-      font-size: 8pt;
-    }
-
-    @media only screen and (min-width: 412px) and (max-height: 892px) {
-      font-size: 10pt;
-    }
-    height: 6vh;
+    font-size: 7.25pt;
+    height: 5.25vh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -128,7 +125,7 @@
   }
 
   .issue-question {
-    margin-top: 15px;
+    margin-top: 1vh;
     color: #1E4D70;
     font-size: 12pt;
 
@@ -152,16 +149,12 @@
 
   .issue-button-send {
     width: 100%;
-    margin-top: 15px;
+    margin-top: 1vh;
     background: #e86f2b;
     color: #FFFFFF;
     border-radius: 15px;
-    @media only screen and (min-width: 360px) and (max-height: 640px) {
-      font-size: 12pt;
-    }
-
-    @media only screen and (min-width: 412px) and (max-height: 892px) {
-      font-size: 13pt;
-    }
+    font-size: 2.25vh;
+    padding-top: 5px;
+    padding-bottom: 5px;
   }
 }

@@ -10,22 +10,23 @@
         <hr class="header-divider"/>
         <ion-row justify-content-center="">
           <ion-col col-8>
-            <p class="header-text">Recuerda que en Koomkin estamos para ayudarte, cualquier inquietud, no dudes en
-              contactarnos.</p>
+            <p class="header-text">
+              Recuerda que en Koomkin estamos para ayudarte, cualquier inquietud, no dudes en contactarnos.
+            </p>
           </ion-col>
         </ion-row>
       </div>
     </ion-col>
     <ion-col col-11 class="text-help-container">
       <div class="text-help">
-        Selecciona el problema que tengas en el siguiente formulario
+        Selecciona en que te podemos ayudar en el siguiente formulario
       </div>
     </ion-col>
     <ion-col col-8 class="background-gradient user_id">
       ID USUARIO: {{ user_id }}
     </ion-col>
     <ion-col col-12 class="background-gradient user_name">
-      Hola {{ user_name }}, ¿Qué problema tienes?
+      Hola {{ user_name }}, ¿En qué te podemos ayudar?
     </ion-col>
     <ion-col col-11>
       <ion-row justify-content-center="">
@@ -33,7 +34,7 @@
           <button class="issue-button"
                   [ngClass]="button?.text === currentIssue?.text ? 'issue-button-selected' : ''"
                   (click)="setIssue(button)">
-            {{ button.text }}
+            <span>{{ button.text }}</span>
           </button>
         </ion-col>
       </ion-row>
@@ -46,7 +47,7 @@
         <input [(ngModel)]="issueComments"/>
       </div>
     </ion-col>
-    <ion-col col-4>
+    <ion-col col-6>
       <button class="issue-button-send" [disabled]="!checkStatusTicket()" (click)="requestTicket()">
         Crear ticket
       </button>

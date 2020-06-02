@@ -1,0 +1,77 @@
+.Modal-ayuda {
+  .modal-wrapper {
+    min-height: unset !important;
+    position: absolute;
+    overflow: hidden;
+    max-width: 320px;
+    width: 80vw;
+    top: 40px;
+    bottom: 0;
+    left: 0;
+    height: 25vh;
+    right: 0;
+    margin: auto;
+    border: 0;
+    -webkit-box-shadow: 0 16px 20px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 16px 20px rgba(0, 0, 0, 0.4);
+    background-color: rgba(0, 0, 0, 0);
+    border-radius: 20px;
+  }
+}
+
+ion-modal {
+  .grid {
+    height: 100%;
+  }
+}
+
+.modal-ayuda-body {
+  .background-gradient {
+    background: #1C88BB;
+    background: linear-gradient(90deg, #1C88BB 30%, #33b0b3 100%);
+  }
+
+  label {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    color: #FFFFFF;
+    font-size: small;
+  }
+
+  .step2-label {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    color: #1E4D70;
+    font-size: medium;
+    text-align: center;
+  }
+
+  .step2-label-1 {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    color: #1E4D70;
+    font-weight: bold;
+    font-size: smaller;
+    text-align: center;
+  }
+
+  .modal-help-button {
+    background: #FFFFFF;
+    border: 2px solid #33b0b3;
+    width: 15vw;
+    font-size: 0.75em;
+    border-radius: 10px;
+  }
+
+  .modal-help-button-left {
+    margin-right: 5vw;
+  }
+
+  .modal-help-button-right {
+    margin-left: 5vw;
+  }
+
+  .modal-help-footer {
+    height: 4vh;
+  }
+}

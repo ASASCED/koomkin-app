@@ -52,7 +52,7 @@
         "call-number": "^1.0.1",
         "connect-ensure-login": "^0.1.1",
         "cookie-parser": "~1.4.3",
-        "cordova-android": "^8.0.0",
+        "cordova-android": "8.1.0",
         "cordova-android-support-gradle-release": "^2.0.1",
         "cordova-browser": "5.0.4",
         "cordova-clipboard": "^1.2.1",
@@ -98,6 +98,7 @@
         "mermaid": "^8.5.1",
         "moment": "^2.24.0",
         "morgan": "~1.9.0",
+        "mx.ferreyra.callnumber": "0.0.2",
         "ng2-dragula": "^1.5.0",
         "ng2-google-charts": "^3.3.0",
         "ngx-toastr": "^10.0.4",
@@ -156,7 +157,8 @@
             "cordova-clipboard": {},
             "cordova-custom-config": {},
             "cordova-plugin-screen-orientation": {},
-            "mx.ferreyra.callnumber": {}
+            "mx.ferreyra.callnumber": {},
+            "call-number": {}
         },
         "platforms": [
             "android",
