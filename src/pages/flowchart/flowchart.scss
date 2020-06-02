@@ -114,6 +114,14 @@ video {
     display: flex;
     flex-wrap: wrap;
 
+    .icon-point {
+      display: none;
+
+      @media (min-width: 610px) {
+        display: inline;
+      }
+    }
+
     div:nth-child(1) {
       padding: 0.2em;
       color: #3590c4;
@@ -210,6 +218,10 @@ video {
         border: 2px solid #288ac1;
         color: white;
         padding: 0.5em 0.4em;
+
+        @media (max-width: 610px) {
+          padding: 0.5em 1.5em;
+        }
       }
     }
 
@@ -218,6 +230,26 @@ video {
         border-radius: 0 0.5em 0.5em 0;
         background-color: #288ac1;
         color: #fff;
+      }
+    }
+
+    div {
+      div {
+        span {
+          display: inline;
+
+          @media (max-width: 610px) {
+            display: none;
+          }
+        }
+
+        i {
+          display: none;
+
+          @media (max-width: 610px) {
+            display: inline;
+          }
+        }
       }
     }
   }
@@ -294,10 +326,11 @@ video {
     padding: 0.5em 1em;
     display: flex;
     justify-content: space-between;
+    align-items: center;
   }
 
   .graph {
-    top: 2.5em;
+    top: 3.5em;
     bottom: 0;
     display: flex;
     justify-content: space-around;
@@ -348,12 +381,8 @@ video {
     button {
       background-color: #243e56;
       color: white;
-      padding: 0.2em 3em;
+      padding: 0.6em 2em;
       border-radius: 0.2em;
-    }
-
-    button:last-child {
-      padding: 0.2em 1em;
     }
   }
 }
@@ -394,6 +423,22 @@ input::placeholder {
 }
 
 .prueba {
+  span:first-child {
+    display: none;
+
+    @media (min-width: 660px) {
+      display: inline;
+    }
+  }
+
+  span:last-child {
+    display: inline;
+
+    @media (min-width: 660px) {
+      display: none;
+    }
+  }
+
   .boton:active {
     border: 1px solid #288ac1;
     color: #288ac1;
@@ -407,8 +452,8 @@ input::placeholder {
 }
 
 .gu-mirror {
-  width: 15% !important;
-  height: 3% !important;
+  width: 8em !important;
+  height: 2em !important;
 
   display: flex;
   flex-direction: row;

@@ -1808,7 +1808,7 @@ export class LeadPage implements OnInit {
       showCancelButton: true,
       confirmButtonColor: "#288AC1",
       cancelButtonColor: "#288AC1",
-      confirmButtonText: "+525525403965",
+      confirmButtonText: "+522282070301",
       cancelButtonText: "Llamar Gratis",
       imageUrl: "https://svgshare.com/i/KS9.svg",
       imageWidth: 100,
