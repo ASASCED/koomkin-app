@@ -8,6 +8,7 @@
       <div class="prueba">
         <div class="boton" (click)="sendTest()">
           <span>enviar prueba</span>
+          <span>probar</span>
         </div>
       </div>
       <div class="ejemplo">
@@ -20,33 +21,35 @@
       <div class="activar">
         <div [class.btn-change]="!condition" (click)="changeBotStatus(true)">
           <span>activar</span>
+          <i class="fas fa-check"></i>
         </div>
       </div>
       <div class="desactivar">
         <div [class.btn-change]="condition" (click)="changeBotStatus(false)">
           <span>desactivar</span>
+          <i class="fas fa-times"></i>
         </div>
       </div>
     </div>
     <div class="first">
       <div [dragula]='"pregunta"'>
         <div (touchstart)="getElementHover('Q')" id="Q">
-          <i class="fas fa-ellipsis-v"></i>
-          <i class="fas fa-ellipsis-v"></i>
+          <i class="icon-point fas fa-ellipsis-v"></i>
+          <i class="icon-point fas fa-ellipsis-v"></i>
           <span>pregunta</span>
         </div>
       </div>
       <div [dragula]='"respuesta"'>
         <div (touchstart)="getElementHover('A')" id="A">
-          <i class="fas fa-ellipsis-v"></i>
-          <i class="fas fa-ellipsis-v"></i>
+          <i class="icon-point fas fa-ellipsis-v"></i>
+          <i class="icon-point fas fa-ellipsis-v"></i>
           <span>respuesta</span>
         </div>
       </div>
       <div [dragula]='"cotizacion"'>
         <div (touchstart)="getElementHover('C')" id="C">
-          <i class="fas fa-ellipsis-v"></i>
-          <i class="fas fa-ellipsis-v"></i>
+          <i class="icon-point fas fa-ellipsis-v"></i>
+          <i class="icon-point fas fa-ellipsis-v"></i>
           <span>precio</span>
         </div>
       </div>
@@ -59,8 +62,12 @@
     <div class="header">
       <span>Chatbot cotizador</span>
       <div class="zoom-btn">
-        <button (click)="zoomOut()">-</button>
-        <button (click)="zoomIn()">+</button>
+        <button (click)="zoomIn()">
+          <i class="fas fa-search-plus"></i>
+        </button>
+        <button (click)="zoomOut()">
+          <i class="fas fa-search-minus"></i>
+        </button>
         <button (click)="zoomDefault()">Default</button>
       </div>
     </div>
