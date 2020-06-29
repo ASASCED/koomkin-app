@@ -3,6 +3,30 @@
 </ion-header>
 
 <ion-content id="body">
+  <!-- <div class="example-container" #exampleContainer>
+    <img class="example" src="assets/imgs/flowchart.jpg" alt="" />
+  </div> -->
+  <div class="flowchart">
+    <div class="header">
+      <span>Chatbot cotizador</span>
+      <div class="zoom-btn">
+        <button (click)="zoomIn()">
+          <i class="fas fa-search-plus"></i>
+        </button>
+        <button (click)="zoomOut()">
+          <i class="fas fa-search-minus"></i>
+        </button>
+        <button (click)="zoomDefault()">Default</button>
+      </div>
+    </div>
+    <div class="graph" #divZoom>
+      <div class="zoomG" #mermaid></div>
+    </div>
+    <!-- <div class="foo">
+      <i class="far fa-lightbulb"></i>
+      <p><span>Consejo:</span> Agrega precio a tu respuesta 04 y 05</p>
+    </div> -->
+  </div>
   <div class="buttons">
     <div class="third">
       <div class="prueba">
@@ -11,11 +35,11 @@
           <span>probar</span>
         </div>
       </div>
-      <div class="ejemplo">
+      <!-- <div class="ejemplo">
         <div class="boton" (click)="showExample()">
           <i class="fas fa-eye eye"></i>
         </div>
-      </div>
+      </div> -->
     </div>
     <div class="second">
       <div class="activar">
@@ -54,29 +78,5 @@
         </div>
       </div>
     </div>
-  </div>
-  <div class="example-container" #exampleContainer>
-    <img class="example" src="assets/imgs/flowchart.jpg" alt="" />
-  </div>
-  <div class="flowchart">
-    <div class="header">
-      <span>Chatbot cotizador</span>
-      <div class="zoom-btn">
-        <button (click)="zoomIn()">
-          <i class="fas fa-search-plus"></i>
-        </button>
-        <button (click)="zoomOut()">
-          <i class="fas fa-search-minus"></i>
-        </button>
-        <button (click)="zoomDefault()">Default</button>
-      </div>
-    </div>
-    <div class="graph" #divZoom>
-      <div class="zoomG" #mermaid></div>
-    </div>
-    <!-- <div class="foo">
-      <i class="far fa-lightbulb"></i>
-      <p><span>Consejo:</span> Agrega precio a tu respuesta 04 y 05</p>
-    </div> -->
   </div>
 </ion-content>

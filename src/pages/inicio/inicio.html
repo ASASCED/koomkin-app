@@ -44,18 +44,6 @@
       </ion-col>
     </ion-row>
 
-    <ion-row class="grande tres" (click)="pagina(eficiencia)">
-      <ion-col col-3>
-        <img src="assets/imgs/inicio/eficiencia.svg" width="100%" />
-      </ion-col>
-      <ion-col col-7>
-        <span>Eficiencia Comercial</span>
-      </ion-col>
-      <ion-col col-2 style="text-align: center;">
-        <ion-icon name="ios-arrow-forward" style="font-size: 4em;"></ion-icon>
-      </ion-col>
-    </ion-row>
-
     <ion-row class="grande tres" (click)="pagina(flowchart)" *ngIf="cotizador">
       <ion-col col-3>
         <img src="assets/imgs/inicio/ic_cotizador.svg" width="100%" />
@@ -122,7 +110,10 @@
 
     <ion-row class="grande" (click)="pagina(ayuda)">
       <ion-col col-3 style="text-align: center;">
-        <img src="https://koomkin.s3.amazonaws.com/assets/img/svg/app/help.svg" width="60%" />
+        <img
+          src="https://koomkin.s3.amazonaws.com/assets/img/svg/app/help.svg"
+          width="60%"
+        />
       </ion-col>
       <ion-col col-7>
         <span>Ayuda</span>
@@ -167,18 +158,6 @@
       </ion-col>
       <ion-col col-7>
         <span>Agenda</span>
-      </ion-col>
-      <ion-col col-2 style="text-align: center;">
-        <ion-icon name="ios-arrow-forward" style="font-size: 4em;"></ion-icon>
-      </ion-col>
-    </ion-row>
-
-    <ion-row class="grande tres" (click)="presentToast()">
-      <ion-col col-3>
-        <img src="assets/imgs/inicio/eficiencia.svg" width="100%" />
-      </ion-col>
-      <ion-col col-7>
-        <span>Eficiencia Comercial</span>
       </ion-col>
       <ion-col col-2 style="text-align: center;">
         <ion-icon name="ios-arrow-forward" style="font-size: 4em;"></ion-icon>

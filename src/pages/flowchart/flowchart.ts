@@ -633,8 +633,6 @@ export class FlowchartPage {
           ) {
             this.idElement = el.parentNode.parentNode.parentNode["id"];
           }
-        } else {
-          this.idElement = el.parentNode.parentNode["id"];
         }
 
         let elementMirror = Array.from(
@@ -645,6 +643,13 @@ export class FlowchartPage {
 
         if (/(Q|A|C[0-9]*)/.test(this.idElement)) {
           elementMirror.style.backgroundColor = "#37c5bb";
+          if (/(Q[0-9]*)/.test(this.idElement)) {
+            const preguntas = document.getElementsByClassName("pregunta");
+
+            for (var i = 0; i < preguntas.length; i++) {
+              preguntas[i].className += "correct-box";
+            }
+          }
         } else {
           elementMirror.style.backgroundColor = "#288ac1";
         }
